@@ -1,0 +1,12 @@
+export const login = '/v1/login'    //loginIn
+export const getUserInfo = '/getUserInfo'    //获取用户信息  参数  code
+export const uploadCla = '/uploadCla'    //上传Cla  参数  claText,metaData
+export const getClaInfo = '/getClaInfo'    //获取cla
+export const getRepositoriesInfo = '/getRepositoriesInfo'    //获取仓库信息
+export const linkRepository = '/linkRepository'    //链接开源项目 参数 repositoryName,claName,email,shareGistChecked,fileNumber,lineNumber
+export const unLinkRepository = '/unLinkRepository'    //断开链接开源项目 参数 repositoryName
+export const signCla = '/signCla'    //签署协议 参数
+export const getLinkedRepositories = '/getLinkedRepositories'    //获取发布的开源项目  参数 userName
+export const getPersonalRepositories = '/getPersonalRepositories'    //获取个人签署的项目  参数 userName
+export const getCompanyRepositories = '/getCompanyRepositories'    //获取企业签署的项目  参数 userName
+export const getCompanyPersonRepositories = '/getCompanyPersonRepositories'    //获取企业个人签署的项目  参数 userName
