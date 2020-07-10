@@ -27,6 +27,7 @@ module.exports = {
         // port: 8080, // 设置默认端口
         //     https: false,
         //     hotOnly: false,
+
         proxy: {
             '/api': {     //这里最好有一个 /
                 target: 'http://159.138.58.253:8080',  // 后台接口域名

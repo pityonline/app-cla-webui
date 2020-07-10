@@ -107,7 +107,7 @@
                 switch (this.value) {
                     case '0':
                         console.log("case0");
-                        window.location.href = 'https://gitee.com/oauth/authorize?client_id=2632e89d3dfb17ce941d2d2b45efc6f235afb4941ddb67578adda83aa33ab6a2&redirect_uri=http://159.138.58.253:8080/v1/login?platform=gitee&response_type=code&scope=user_info%20groups%20emails';
+                        window.location.href = 'https://gitee.com/oauth/authorize?client_id=2632e89d3dfb17ce941d2d2b45efc6f235afb4941ddb67578adda83aa33ab6a2&redirect_uri=http://139.159.224.207:60031/api/v1/login?platform=gitee&response_type=code&scope=user_info%20groups%20emails';
                         // window.location.href='https://gitee.com/oauth/authorize?client_id=e3577b9da49965e89dd27f71041e418c176a5c6b943d0cf7ae6fd5e54f70c770&redirect_uri=http://localhost:8080/checkCLA&response_type=code'
                         // let obj = {
                         //     // code: this.code,
