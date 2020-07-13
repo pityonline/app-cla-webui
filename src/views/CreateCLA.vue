@@ -57,6 +57,7 @@
                     value: '1',
                     label: 'chinese'
                 },],
+                name:'test',
                 claText: 'test',
                 metaData: 'test',
                 createCLAClass: {
@@ -67,7 +68,7 @@
         methods: {
             /*上传cla*/
             uploadCla() {
-                let obj = {claText: this.claText, metaData: this.metaData,language:'EN'}
+                let obj = {name:this.name,claText: this.claText, metaData: this.metaData,language:'EN'}
                 this.verifyClaAndMeta() &&
                 this.$axios({
                     url: '/api'+url.uploadCla,

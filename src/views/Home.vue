@@ -1057,7 +1057,6 @@
             /*获取用户名并显示*/
             async getUserInfo() {
                 if (this.loginType === '0') {
-                    // window.location.href = `https://gitee.com/oauth/token?grant_type=authorization_code&code=${this.code}&client_id=${this.gitee_client_id}&redirect_uri=${this.gitee_redirect_uri}&client_secret=${this.gitee_client_secret}`;
                     let obj = {
                         code: this.code,
                         grant_type: 'authorization_code',
@@ -1065,103 +1064,19 @@
                         redirect_uri: this.redirect_uri,
                         client_secret: this.client_secret
                     }
-                    // await this.$axios({
-                    //     // url: 'https://gitee.com/oauth/token',
-                    //     url:'/api'+url.login,
-                    //     method: 'get',
-                    //     // headers: {'Content-Type': 'application/json'},
-                    //     headers:{CODE:this.code},
-                    //     // data: obj
-                    // }).then(res => {
-                    //     console.log(res);
-                    // }).catch(err => {
-                    //     console.log(err);            //被拦截
-                    // })
+
                 } else {
-                    // window.location.href = `https://github.com/login/oauth/access_token?code=${this.code}&client_id=${this.github_client_id}&redirect_uri=${this.github_redirect_uri}&client_secret=${this.github_client_secret}`;
-                    // await this.$axios({
-                    //     url: '/api' + url.login,
-                    //     method: 'get',
-                    //     headers: {CODE: this.code},
-                    // }).then(res => {
-                    //     console.log(res);
-                    // }).catch(err => {
-                    //     console.log(err);
-                    // })
+
                 }
-                // this.$axios({
-                //     url: '/api' + url.getUserInfo,
-                //     methods: 'get',
-                // }).then(res => {
-                //     console.log(res);
-                // }).catch(err => {
-                //     console.log(err);
-                // })
+
             },
 
 
         },
         created() {
             setTimeout(function () {
-                console.log(document);
+                console.log(document.cookie);
             },1000)
-            this.$axios.interceptors.response.use( response => {  //axios拦截器
-                console.log("拦截器");
-                if (response.status === 200) {  //响应成功后
-                    if(response.headers['Set-Cookie']){  //获取响应头里面的数据，**Authorization根据你响应头里面的数据获取，并不是唯一值**
-                        console.log(response.data, response.headers['Set-Cookie']);
-                    }
-                    return Promise.resolve(response);
-                } else {
-                    return Promise.reject(response);
-                }
-            }, error => {  //报错后的处理，这里不是重点，
-                // 服务器状态码不是200的情况
-                if (error.response.status) {
-                    switch (error.response.status) {
-                        case 401:
-                            Notification.error({
-                                title: '错误',
-                                message: '登录过期，请重新登录'
-                            });
-                            // 清除token
-                            localStorage.removeItem('token');
-                            store.commit('loginSuccess', null);
-                            setTimeout(() => {
-                                router.replace({
-                                    path: '/login',
-                                    query: {
-                                        redirect: router.currentRoute.fullPath
-                                    }
-                                });
-                            }, 1000);
-                            break;
-                        case 404:
-                            Notification.error({
-                                title: '错误',
-                                message: '网络请求不存在',
-                            });
-                            break;
-                        case 504:
-                            Notification.error({
-                                title: '错误',
-                                message: '服务器内部异常',
-                            });
-                            break;
-                        // 其他错误，直接抛出错误
-                        default:
-                            Notification.error({
-                                title: '错误',
-                                message: error.response.data.message
-                            });
-                    }
-                    return Promise.reject(error.response);
-
-                }
-            });
-            // this.getUrlCode();
-            // this.getUserInfo();
-
         },
         mounted() {
 
