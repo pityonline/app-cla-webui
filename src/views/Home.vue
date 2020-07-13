@@ -1074,9 +1074,7 @@
 
         },
         created() {
-            setTimeout(function () {
-                console.log(document.cookie);
-            },1000)
+            console.log(document.cookie);
         },
         mounted() {
 
