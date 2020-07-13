@@ -1051,7 +1051,7 @@
                 let access_token, refresh_token = '';
                 cookieArr.forEach((item, index) => {
                     let arr = item.split('=');
-                    arr[0] === 'access_token' ? access_token = arr[0] : arr[0] === 'refresh_token' ? refresh_token = arr[0] : refresh_token = '';
+                    arr[0] === 'access_token' ? access_token = arr[1] : arr[0] === 'refresh_token' ? refresh_token = arr[1] : refresh_token = '';
                     ;
                 })
                 let data = {access_token, refresh_token};
