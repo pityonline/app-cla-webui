@@ -987,13 +987,15 @@
             /*获取仓库数据*/
             getRepository() {
                 console.log("getRepository");
+                let obj={access_token:this.access_token,admin:true,page:1,per_page:10};
                 this.$axios({
                     url: url.getRepositoriesInfo,
-                    methods: 'post',
+                    methods: 'get',
+                    params:obj,
                 }).then(res => {
                     console.log(res);
-                    if (res.data.code === 200) {
-                        this.repositoryOptions = res.data.data
+                    if (res.status === 200) {
+                        // this.repositoryOptions = res.data.data
                     }
                 }).catch(err => {
                     console.log(err);
@@ -1061,7 +1063,7 @@
             getUserInfo() {
                 let obj = {access_token: this.access_token};
                 this.$axios({
-                    url: `https://gitee.com/api/v5/user`,
+                    url: url.getUserInfo,
                     method:'get',
                     params:obj,
                 }).then(res => {
