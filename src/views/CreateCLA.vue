@@ -71,7 +71,7 @@
                 let obj = {name:this.name,claText: this.claText, metaData: this.metaData,language:'EN'}
                 this.verifyClaAndMeta() &&
                 this.$axios({
-                    url: '/apis'+url.uploadCla,
+                    url: '/api'+url.uploadCla,
                     method: 'post',
                     data: obj,
                 }).then(res => {
