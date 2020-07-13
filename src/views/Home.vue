@@ -19,7 +19,7 @@
                         </div>
                         <!--选择仓库-->
                         <div style="font-size: 1.2rem;padding: .5rem">
-                            ① Choose a repository <span v-if="!user.isAuthorize" @click="authorize()"
+                            ① Choose a repository <span v-if="!isAuthorize" @click="authorize()"
                                                         style="font-size: .8rem;text-decoration: underline;cursor: pointer">(want to link an org?)</span>
                         </div>
                         <div style="padding: 0 2rem">
@@ -714,7 +714,7 @@
                 home: {
                     height: '',
                 },
-
+                isAuthorize:false,
             }
         },
         methods: {
