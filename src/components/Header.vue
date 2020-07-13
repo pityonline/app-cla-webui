@@ -4,7 +4,7 @@
             <div style="display: flex;">
                 <img class="pointer" style="width: 2rem" :src="user.userImg" alt="" @click="newWindow()">
                 <div style="display: flex;flex-direction: column;justify-content: center;margin-left: .5rem">
-                    <span>Hi, <span class="pointer" style="font-weight: bold">{{user.userName}}!</span></span>
+                    <span>Hi, <span class="pointer" style="font-weight: bold">{{this.$store.state.user.userName}}!</span></span>
                 </div>
             </div>
         </el-col>
@@ -38,6 +38,9 @@
                     isAuthorize: false,
                 },
             }
+        },
+        created(){
+            console.log(user.userName);
         },
         methods:{
             loginOut(){
