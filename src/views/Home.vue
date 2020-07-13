@@ -1040,7 +1040,7 @@
             },
             /*设置页面高度*/
             setClientHeight() {
-                console.log(until.getClientHeight());
+                // console.log(until.getClientHeight());
                 this.$nextTick(() => {
 
                     until.getClientHeight() > document.getElementById('home').offsetHeight ?
@@ -1074,7 +1074,7 @@
 
         },
         created() {
-            console.log(document.cookie);
+            // console.log(document.cookie);
         },
         mounted() {
 
