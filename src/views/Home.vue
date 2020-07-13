@@ -692,15 +692,7 @@
                 fileNumber: '',
                 lineNumber: '',
                 gistUrl: '',
-                repositoryOptions: [{
-                    value: '0',
-                    label: 'ooo/test'
-                },
-                    {
-                        value: '1',
-                        label: 'iii/test'
-                    },
-                ],
+                repositoryOptions: [],
                 repositoryValue: '',
                 showConfigForm: false,
 
@@ -996,6 +988,9 @@
                     console.log(res);
                     if (res.status === 200) {
                         // this.repositoryOptions = res.data.data
+                        res.data.forEach((item,index)=>{
+                            this.repositoryOptions.push({value:index,label:res.data[index].login});
+                        })
                     }
                 }).catch(err => {
                     console.log(err);
