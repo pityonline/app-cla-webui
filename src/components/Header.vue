@@ -33,8 +33,8 @@
         data(){
             return {
                 user: {
-                    userImg:this.$store.state.user.userName,
-                    userName: this.$store.state.user.userImg,
+                    userImg:this.$store.state.user.userImg,
+                    userName: this.$store.state.user.userName,
                     isAuthorize: false,
                 },
             }
