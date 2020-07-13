@@ -1046,6 +1046,7 @@
             },
             /*获取cookie*/
             getCookieData() {
+                console.log('getCookieData');
                 let cookieArr = document.cookie.split('; ')
                 let access_token, refresh_token = '';
                 cookieArr.forEach((item, index) => {

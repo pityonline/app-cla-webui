@@ -21,6 +21,7 @@ export default new Vuex.Store({
   },
   mutations: {
     setToken(state,data){
+      console.log(data);
       state.access_token=data.access_token;
       state.refresh_token=data.refresh_token;
       sessionStorage.setItem('access_token',data.access_token);
