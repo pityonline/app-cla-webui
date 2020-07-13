@@ -26,7 +26,8 @@
 
                 </el-input>
                 <div style="margin-top: 1rem;text-align: right">
-                    <el-button type="primary" @click="uploadCla()">create CLA</el-button>
+                    <el-input v-model="claName" placeholder="请输入cla名称"></el-input>
+                    <el-button :disabled="!(claName&&claText)" type="primary" @click="uploadCla()">create CLA</el-button>
                 </div>
             </el-col>
         </div>
@@ -49,6 +50,7 @@
         },
         data() {
             return {
+                claName:'',
                 value: "0",
                 languageOptions: [{
                     value: '0',
@@ -63,9 +65,12 @@
                 createCLAClass: {
                     height: '',
                 },
+
+
             }
         },
         methods: {
+
             /*上传cla*/
             uploadCla() {
                 let obj = {name:this.name,claText: this.claText, metaData: this.metaData,language:'EN'}
