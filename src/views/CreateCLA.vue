@@ -25,9 +25,9 @@
                 <el-input rows="10" class="textAreaClass" v-model="metaData" type="textarea">
 
                 </el-input>
-                <div style="margin-top: 1rem;text-align: right">
+                <div style="margin-top: 1rem;display: flex;justify-content: space-between">
                     <el-input v-model="claName" placeholder="请输入cla名称"></el-input>
-                    <el-button :disabled="!(claName&&claText)" type="primary" @click="uploadCla()">create CLA</el-button>
+                    <el-button :disabled="!verifyNotNull()" type="primary" @click="uploadCla()">create CLA</el-button>
                 </div>
             </el-col>
         </div>
@@ -70,7 +70,10 @@
             }
         },
         methods: {
-
+            /*验证calName和claText不为空*/
+            verifyNotNull(){
+                return this.claText.trim()&&this.claName.trim()
+            },
             /*上传cla*/
             uploadCla() {
                 let obj = {name:this.name,claText: this.claText, metaData: this.metaData,language:'EN'}
