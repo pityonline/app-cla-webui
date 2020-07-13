@@ -1061,7 +1061,10 @@
             getUserInfo() {
                 let obj = {access_token: this.access_token}
                 this.$axios({
-                    url: `https://gitee.com/api/v5/user?access_token=${this.access_token}`,
+                    // url: `https://gitee.com/api/v5/user?access_token=${this.access_token}`,
+                    url: `https://gitee.com/api/v5/user`,
+                    method:'get',
+                    params:obj,
                 }).then(res => {
                     console.log(res);
                 }).catch(err => {
