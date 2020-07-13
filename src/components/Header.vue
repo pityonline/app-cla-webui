@@ -2,7 +2,7 @@
     <div class="header">
         <el-col :span="8">
             <div style="display: flex;">
-                <img class="pointer" style="width: 2rem" src="../assets/images/userImg.jpg" alt="" @click="newWindow()">
+                <img class="pointer" style="width: 2rem" :src="user.userImg" alt="" @click="newWindow()">
                 <div style="display: flex;flex-direction: column;justify-content: center;margin-left: .5rem">
                     <span>Hi, <span class="pointer" style="font-weight: bold">{{user.userName}}!</span></span>
                 </div>
@@ -33,8 +33,8 @@
         data(){
             return {
                 user: {
-                    userImg: '',
-                    userName: 'jack',
+                    userImg:this.$store.state.user.loginUserImg,
+                    userName: this.$store.state.user.loginUser,
                     isAuthorize: false,
                 },
             }

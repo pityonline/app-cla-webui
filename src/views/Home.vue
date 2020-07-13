@@ -635,6 +635,7 @@
     import * as until from '../until/until'
     import Header from '@components/Header'
     import Footer from '@components/Footer'
+    import {mapActions} from 'vuex'
 
     window.onresize = () => {
         // console.log(until.getClientHeight());
@@ -663,7 +664,6 @@
                 currentPage: 1,
                 listCurrentPage: 1,
                 dropdownTitle: 'Linked Repositories',
-                userInfoUrl: '',
                 isEmail: false,
                 email: '',
                 code: '',
@@ -673,6 +673,8 @@
                 github_client_id: this.$store.state.github_client_id,
                 github_client_secret: this.$store.state.github_client_secret,
                 github_redirect_uri: this.$store.state.github_redirect_uri,
+                access_token: this.$store.state.access_token,
+                refresh_token: this.$store.state.refresh_token,
                 listDialogVisible: false,
                 checkClaDialogVisible: false,
                 unLinkDialogVisible: false,
@@ -712,14 +714,12 @@
                 home: {
                     height: '',
                 },
-                user: {
-                    userImg: `require('../assets/images/userImg.jpg')`,
-                    userName: 'jack',
-                    isAuthorize: false,
-                },
+
             }
         },
         methods: {
+            ...mapActions(['setLoginUserAct', 'setTokenAct']),
+
             /*获取组织权限*/
             getOrgPermission() {
                 if (this.loginType === '0') {
@@ -864,17 +864,7 @@
                     console.log(err);
                 })
             },
-            /*判断登陆方式，根据不同方式动态设置各个跳转链接*/
-            setLinkUrl() {
-                switch (this.loginType) {
-                    case 'gitee':
-                        this.userInfoUrl = 'https://gitee.com/' + this.userName;
-                        break;
-                    case 'github':
-                        this.userInfoUrl = 'https://github.com/' + this.userName;
-                        break;
-                }
-            },
+
             newWindow() {
                 // window.open('https://github.com/ouchengle/Test','_black')
                 window.open('https://github.com/ouchengle')
@@ -1054,28 +1044,38 @@
                 console.log(value);
                 this.value = value;
             },
+            /*获取cookie*/
+            getCookieData() {
+                let cookieArr = document.cookie.split('; ')
+                let access_token, refresh_token = '';
+                cookieArr.forEach((item, index) => {
+                    let arr = item.split('=');
+                    arr[0] === 'access_token' ? access_token = arr[0] : arr[0] === 'refresh_token' ? refresh_token = arr[0] : refresh_token = '';
+                    ;
+                })
+                let data = {access_token, refresh_token};
+                this.setTokenAct(data);
+            },
             /*获取用户名并显示*/
-            async getUserInfo() {
-                if (this.loginType === '0') {
-                    let obj = {
-                        code: this.code,
-                        grant_type: 'authorization_code',
-                        client_id: this.client_id,
-                        redirect_uri: this.redirect_uri,
-                        client_secret: this.client_secret
-                    }
-
-                } else {
-
-                }
-
+            getUserInfo() {
+                let obj = {access_token: this.access_token}
+                this.$axios({
+                    url: 'https://gitee.com/api/v5/user',
+                    method: 'get',
+                    params: obj,
+                }).then(res => {
+                    console.log(res);
+                }).catch(err => {
+                    console.log(err);
+                })
             },
 
 
         },
-        created() {
-            console.log(document.cookie);
-            console.log('created');
+
+        async created() {
+            await this.getCookieData();
+            await this.getUserInfo()
         },
         mounted() {
 
