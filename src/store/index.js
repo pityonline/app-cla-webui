@@ -15,8 +15,9 @@ export default new Vuex.Store({
     access_token:sessionStorage.getItem('access_token')||undefined,
     refresh_token:sessionStorage.getItem('refresh_token')||undefined,
     user:{
-      loginUser:sessionStorage.getItem('loginUser')||undefined,
-      loginUserImg:sessionStorage.getItem('loginUserImg')||undefined,
+      userName:sessionStorage.getItem('userName')||undefined,
+      userImg:sessionStorage.getItem('userImg')||undefined,
+      userEmail:sessionStorage.getItem('userEmail')||undefined,
     },
   },
   mutations: {
@@ -28,10 +29,12 @@ export default new Vuex.Store({
       sessionStorage.setItem('refresh_token',data.refresh_token);
     },
     setLoginUser(state,data){
-      state.user.loginUser=data.loginUser;
-      state.user.loginUserImg=data.loginUserImg;
-      sessionStorage.setItem('loginUser',data.loginUser);
-      sessionStorage.setItem('loginUserImg',data.loginUserImg);
+      state.user.userName=data.userName;
+      state.user.userImg=data.userImg;
+      state.user.userEmail=data.userEmail;
+      sessionStorage.setItem('userName',data.userName);
+      sessionStorage.setItem('userImg',data.userImg);
+      sessionStorage.setItem('userEmail',data.userEmail);
     },
     setLoginType(state,loginType){
       state.loginType=loginType;

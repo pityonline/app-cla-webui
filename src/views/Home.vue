@@ -1059,14 +1059,17 @@
             },
             /*获取用户名并显示*/
             getUserInfo() {
-                let obj = {access_token: this.access_token}
+                let obj = {access_token: this.access_token};
                 this.$axios({
-                    // url: `https://gitee.com/api/v5/user?access_token=${this.access_token}`,
                     url: `https://gitee.com/api/v5/user`,
                     method:'get',
                     params:obj,
                 }).then(res => {
                     console.log(res);
+                    if (res.status === 200) {
+                        let data = {userName:res.data.login,userImg:res.data.avatar_url,userEmail:res.data.email};
+                        this.setLoginUserAct(data);
+                    }
                 }).catch(err => {
                     console.log(err);
                 })
