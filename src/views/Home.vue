@@ -1074,7 +1074,8 @@
 
         },
         created() {
-            // console.log(document.cookie);
+            console.log(document.cookie);
+            console.log('created');
         },
         mounted() {
 
