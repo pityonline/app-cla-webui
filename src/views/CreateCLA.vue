@@ -26,7 +26,7 @@
 
                 </el-input>
                 <div style="margin-top: 1rem;display: flex;justify-content: space-between">
-                    <el-input v-model="claName" placeholder="请输入cla名称"></el-input>
+                    <el-input v-model="claName" placeholder="请输入cla名称" style="margin-right: 2rem"></el-input>
                     <el-button :disabled="!verifyNotNull()" type="primary" @click="uploadCla()">create CLA</el-button>
                 </div>
             </el-col>
