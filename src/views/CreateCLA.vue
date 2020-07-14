@@ -27,7 +27,7 @@
                 </el-input>
                 <div style="margin-top: 1rem;display: flex;justify-content: space-between">
                     <el-input v-model="claName" placeholder="请输入cla名称" style="margin-right: 2rem"></el-input>
-                    <el-button :disabled="!verifyNotNull()" type="primary" @click="uploadCla()">create CLA</el-button>
+                    <el-button v-loading.fullscreen.lock="fullscreenLoading" :disabled="!verifyNotNull()" type="primary" @click="uploadCla()">create CLA</el-button>
                 </div>
             </el-col>
         </div>
@@ -50,6 +50,7 @@
         },
         data() {
             return {
+                fullscreenLoading: false,
                 claName: '',
                 value: "0",
                 languageOptions: [{
@@ -78,6 +79,7 @@
             },
             /*上传cla*/
             uploadCla() {
+                this.fullscreenLoading=true;
                 let obj = {
                     name: this.claName,
                     text: this.claText,
@@ -93,6 +95,13 @@
                     data: obj,
                 }).then(res => {
                     console.log(res);
+                    if (res.status === 200) {
+                        this.fullscreenLoading=false;
+                        this.$message.success('succeed')
+                    }else{
+                        this.fullscreenLoading=false;
+                        this.$message.error('failed')
+                    }
                 }).catch(err => {
                     console.log(err);
                 })
