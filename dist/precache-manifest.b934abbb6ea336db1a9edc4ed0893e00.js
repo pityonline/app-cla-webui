@@ -1,7 +1,15 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "30d1aeff5a3efb77e44c",
+    "revision": "8eda4d554eaf8ffd9ca4",
     "url": "/css/app.fa2101f4.css"
+  },
+  {
+    "revision": "f92bdc2ff5510eeeef92",
+    "url": "/css/chunk-1068173c.64282b7d.css"
+  },
+  {
+    "revision": "bba2111e3a60e710a932",
+    "url": "/css/chunk-20932f1d.62d6deba.css"
   },
   {
     "revision": "00431bd55953612ccf1e",
@@ -12,12 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/css/chunk-454edd06.d2b80570.css"
   },
   {
-    "revision": "6bd56ad4e41611fbffe7",
-    "url": "/css/chunk-5f3ee733.c431078e.css"
-  },
-  {
-    "revision": "ba2c3af3e750bb356620",
-    "url": "/css/chunk-c75ca31a.accea04e.css"
+    "revision": "a436192825e8f43c0ede",
+    "url": "/css/chunk-b33c1870.1e82f3a7.css"
   },
   {
     "revision": "b92abe843b65c21b6a34",
@@ -40,12 +44,20 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/logo.3a1a754d.png"
   },
   {
-    "revision": "9049bc36db963a3cac932d7d02c0ef01",
+    "revision": "1c09294ea3b0e78df11c97db180dadf1",
     "url": "/index.html"
   },
   {
-    "revision": "30d1aeff5a3efb77e44c",
-    "url": "/js/app.18078557.js"
+    "revision": "8eda4d554eaf8ffd9ca4",
+    "url": "/js/app.76db13c5.js"
+  },
+  {
+    "revision": "f92bdc2ff5510eeeef92",
+    "url": "/js/chunk-1068173c.06c05d41.js"
+  },
+  {
+    "revision": "bba2111e3a60e710a932",
+    "url": "/js/chunk-20932f1d.eb62b0fb.js"
   },
   {
     "revision": "7be04addb1e020313f3d",
@@ -60,12 +72,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/js/chunk-454edd06.2c1f7fdb.js"
   },
   {
-    "revision": "6bd56ad4e41611fbffe7",
-    "url": "/js/chunk-5f3ee733.8ce734d1.js"
-  },
-  {
-    "revision": "ba2c3af3e750bb356620",
-    "url": "/js/chunk-c75ca31a.bb642731.js"
+    "revision": "a436192825e8f43c0ede",
+    "url": "/js/chunk-b33c1870.67315552.js"
   },
   {
     "revision": "b92abe843b65c21b6a34",

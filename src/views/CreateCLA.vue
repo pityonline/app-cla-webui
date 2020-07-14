@@ -78,7 +78,7 @@
                 return this.claText.trim() && this.claName.trim()
             },
             /*上传cla*/
-            uploadCla() {
+          async  uploadCla() {
                 this.fullscreenLoading=true;
                 let obj = {
                     name: this.claName,
@@ -88,7 +88,7 @@
                     // id: this.user.userId,
                     user: this.user.userName
                 }
-                this.verifyClaAndMeta() &&
+                // this.verifyClaAndMeta() &&
                 this.$axios({
                     url: '/api' + url.uploadCla,
                     method: 'post',
@@ -98,9 +98,9 @@
                     if (res.status === 200) {
                         this.fullscreenLoading=false;
                         this.$message.success('succeed')
-                        setTimeout(function () {
+                        setTimeout( ()=> {
                             this.$router.replace('/home')
-                        },1000)
+                        },2000)
                     }else{
                         this.fullscreenLoading=false;
                         this.$message.error('failed')
