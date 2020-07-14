@@ -10,8 +10,8 @@
                 </el-button>
             </div>
             <el-row>
+                <div style="padding-bottom: 1.5rem;font-size: 1.3rem">Configure CLA</div>
                 <el-col :span="10" v-if="showConfigForm">
-                    <div style="padding-bottom: 1.5rem;font-size: 1.3rem">Configure CLA</div>
                     <div style="background-color: white">
                         <div style="text-align: right;padding: 1rem">
 
@@ -659,7 +659,7 @@
         data() {
             return {
                 previewShow:true,
-                previewText: '',
+                previewText: 'previewCla',
                 loginType: this.$store.state.loginType,
                 tableTotal: 0,
                 listData: [{name: 'jack', email: '10577507@qq.com', tel: '15632486433', isUsed: true}, {
