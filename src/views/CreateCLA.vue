@@ -79,7 +79,7 @@
             /*上传cla*/
             uploadCla() {
                 let obj = {
-                    name: this.name,
+                    name: this.claName,
                     text: this.claText,
                     // metaData: this.metaData,
                     language: 'EN',
