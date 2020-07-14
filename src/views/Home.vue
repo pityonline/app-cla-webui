@@ -658,7 +658,7 @@
         },
         data() {
             return {
-                previewShow:false,
+                previewShow:true,
                 previewText: '',
                 loginType: this.$store.state.loginType,
                 tableTotal: 0,
