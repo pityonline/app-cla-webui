@@ -34,6 +34,7 @@
                                         v-for="item in repositoryOptions"
                                         :key="item.value"
                                         :label="item.label"
+
                                         :value="item.value">
                                 </el-option>
                             </el-select>
@@ -58,6 +59,7 @@
                                 <el-option
                                         v-for="item in claOptions"
                                         :key="item.value"
+                                        @mouseover="preview()"
                                         :label="item.label"
                                         :value="item.value">
                                 </el-option>
@@ -141,6 +143,11 @@
                             </div>
                         </div>
                     </div>
+                </el-col>
+                <el-col :span="12" :offset="2" v-if="previewShow">
+                    <el-input type="textarea" rows="20" v-model="previewText">
+
+                    </el-input>
                 </el-col>
             </el-row>
             <div>{{dropdownTitle}}</div>
@@ -651,6 +658,8 @@
         },
         data() {
             return {
+                previewShow:false,
+                previewText: '',
                 loginType: this.$store.state.loginType,
                 tableTotal: 0,
                 listData: [{name: 'jack', email: '10577507@qq.com', tel: '15632486433', isUsed: true}, {
@@ -683,7 +692,11 @@
                 claName: 'test',
                 repositoryName: 'ooo/test',
                 shareGistChecked: false,
-                claOptions: [{value: '0', label: 'test'}, {value: '1', label: 'share'},],
+                claOptions: [{value: '0', label: 'test', text: '来而不往非礼也'}, {
+                    value: '1',
+                    label: 'share',
+                    text: '学而不思则罔，思维不学则殆'
+                },],
                 claValue: '',
                 linkDialogVisible: false,
                 shareDialogVisible: false,
@@ -706,16 +719,21 @@
                 home: {
                     height: '',
                 },
-                user:{
-                    userName:'',
-                    userId:'',
-                    isAuthorize:false,
+                user: {
+                    userName: '',
+                    userId: '',
+                    isAuthorize: false,
 
                 },
             }
         },
         methods: {
             ...mapActions(['setLoginUserAct', 'setTokenAct']),
+            /*预览cla*/
+            preview() {
+                console.log("preview");
+                this.previewShow=true;
+            },
 
             /*获取组织权限*/
             getOrgPermission() {
@@ -980,17 +998,17 @@
             /*获取仓库数据*/
             getRepository() {
                 console.log("getRepository");
-                let obj={access_token:this.access_token,admin:true,page:1,per_page:10};
+                let obj = {access_token: this.access_token, admin: true, page: 1, per_page: 10};
                 this.$axios({
                     url: url.getRepositoriesInfo,
                     methods: 'get',
-                    params:obj,
+                    params: obj,
                 }).then(res => {
                     console.log(res);
                     if (res.status === 200) {
                         // this.repositoryOptions = res.data.data
-                        res.data.forEach((item,index)=>{
-                            this.repositoryOptions.push({value:index,label:res.data[index].login});
+                        res.data.forEach((item, index) => {
+                            this.repositoryOptions.push({value: index, label: res.data[index].login});
                         })
                     }
                 }).catch(err => {
@@ -1060,12 +1078,17 @@
                 let obj = {access_token: this.access_token};
                 this.$axios({
                     url: url.getUserInfo,
-                    method:'get',
-                    params:obj,
+                    method: 'get',
+                    params: obj,
                 }).then(res => {
                     console.log(res);
                     if (res.status === 200) {
-                        let data = {userId:res.data.id,userName:res.data.login,userImg:res.data.avatar_url,userEmail:res.data.email};
+                        let data = {
+                            userId: res.data.id,
+                            userName: res.data.login,
+                            userImg: res.data.avatar_url,
+                            userEmail: res.data.email
+                        };
                         this.setLoginUserAct(data);
                     }
                 }).catch(err => {
