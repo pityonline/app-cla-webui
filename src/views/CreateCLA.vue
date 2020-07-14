@@ -81,9 +81,9 @@
                 let obj = {
                     name: this.name,
                     text: this.claText,
-                    metaData: this.metaData,
+                    // metaData: this.metaData,
                     language: 'EN',
-                    id: this.user.userId,
+                    // id: this.user.userId,
                     user: this.user.userName
                 }
                 this.verifyClaAndMeta() &&

@@ -10,145 +10,150 @@
                 </el-button>
             </div>
             <el-row>
-                <div style="padding-bottom: 1.5rem;font-size: 1.3rem">Configure CLA</div>
-                <el-col :span="10" v-if="showConfigForm">
-                    <div style="background-color: white">
-                        <div style="text-align: right;padding: 1rem">
+                <el-row v-if="showConfigForm">
+                    <div style="padding-bottom: 1.5rem;font-size: 1.3rem">Configure CLA</div>
+                    <el-row>
+                        <el-col :span="10">
+                            <div style="background-color: white">
+                                <div style="text-align: right;padding: 1rem">
 
-                            <svg-icon @click="closeConfigForm()" icon-class="close"/>
-                        </div>
-                        <!--选择仓库-->
-                        <div style="font-size: 1.2rem;padding: .5rem">
-                            ① Choose a repository <span v-if="!isAuthorize" @click="authorize()"
-                                                        style="font-size: .8rem;text-decoration: underline;cursor: pointer">(want to link an org?)</span>
-                        </div>
-                        <div style="padding: 0 2rem">
-                            <el-select v-model="repositoryValue"
-                                       clearable
-                                       placeholder="select"
-                                       style="width: 100%"
-                                       size="medium"
-                                       @change="changeRepository"
-                                       :value="repositoryValue">
-                                <el-option
-                                        v-for="item in repositoryOptions"
-                                        :key="item.value"
-                                        :label="item.label"
+                                    <svg-icon @click="closeConfigForm()" icon-class="close"/>
+                                </div>
+                                <!--选择仓库-->
+                                <div style="font-size: 1.2rem;padding: .5rem">
+                                    ① Choose a repository <span v-if="!user.isAuthorize" @click="authorize()"
+                                                                style="font-size: .8rem;text-decoration: underline;cursor: pointer">(want to link an org?)</span>
+                                </div>
+                                <div style="padding: 0 2rem">
+                                    <el-select v-model="repositoryValue"
+                                               clearable
+                                               placeholder="select"
+                                               style="width: 100%"
+                                               size="medium"
+                                               @change="changeRepository"
+                                               :value="repositoryValue">
+                                        <el-option
+                                                v-for="item in repositoryOptions"
+                                                :key="item.value"
+                                                :label="item.label"
 
-                                        :value="item.value">
-                                </el-option>
-                            </el-select>
-                        </div>
-                        <!--选择协议-->
-                        <div style="font-size: 1.2rem;padding: .5rem">
-                            ② Choose a CLA
-                        </div>
-                        <div style="font-size: 1rem;padding: 0 2rem .5rem 2rem">
-                            Select from Gist
-                            <span @click="createCLA()"
-                                  style="font-size: .8rem;text-decoration: underline;cursor: pointer">(don't have one?)</span>
-                        </div>
-                        <div style="padding: 0 2rem">
-                            <el-select v-model="claValue"
-                                       clearable
-                                       placeholder="select"
-                                       style="width: 100%"
-                                       size="medium"
-                                       @change="changeCla"
-                                       :value="claValue">
-                                <el-option
-                                        v-for="item in claOptions"
-                                        :key="item.value"
-                                        @mouseover="preview()"
-                                        :label="item.label"
-                                        :value="item.value">
-                                </el-option>
-                            </el-select>
-                        </div>
+                                                :value="item.value">
+                                        </el-option>
+                                    </el-select>
+                                </div>
+                                <!--选择协议-->
+                                <div style="font-size: 1.2rem;padding: .5rem">
+                                    ② Choose a CLA
+                                </div>
+                                <div style="font-size: 1rem;padding: 0 2rem .5rem 2rem">
+                                    Select from Gist
+                                    <span @click="createCLA()"
+                                          style="font-size: .8rem;text-decoration: underline;cursor: pointer">(don't have one?)</span>
+                                </div>
+                                <div style="padding: 0 2rem">
+                                    <el-select v-model="claValue"
+                                               clearable
+                                               placeholder="select"
+                                               style="width: 100%"
+                                               size="medium"
+                                               @change="changeCla"
+                                               :value="claValue">
+                                        <el-option
+                                                v-for="item in claOptions"
+                                                :key="item.value"
+                                                :label="item.label"
+                                                :value="item.value">
+                                        </el-option>
+                                    </el-select>
+                                </div>
 
-                        <!--粘贴url-->
-                        <!--<div style="font-size: 1rem;padding: .5rem 2rem">-->
-                        <!-- - or - -->
-                        <!--</div>-->
-                        <!--<div style="font-size: 1rem;padding: .5rem 2rem">-->
-                        <!--Paste a URL from a Gist-->
-                        <!--</div>-->
-                        <!--<div style="padding: 0 2rem">-->
-                        <!--<el-input-->
-                        <!--:disabled="!!claValue"-->
-                        <!--size="medium"-->
-                        <!--placeholder="https://gist.github.com/<your cla gist id>"-->
-                        <!--v-model="gistUrl">-->
+                                <!--粘贴url-->
+                                <!--<div style="font-size: 1rem;padding: .5rem 2rem">-->
+                                <!-- - or - -->
+                                <!--</div>-->
+                                <!--<div style="font-size: 1rem;padding: .5rem 2rem">-->
+                                <!--Paste a URL from a Gist-->
+                                <!--</div>-->
+                                <!--<div style="padding: 0 2rem">-->
+                                <!--<el-input-->
+                                <!--:disabled="!!claValue"-->
+                                <!--size="medium"-->
+                                <!--placeholder="https://gist.github.com/<your cla gist id>"-->
+                                <!--v-model="gistUrl">-->
 
-                        <!--</el-input>-->
-                        <!--</div>-->
-                        <div style="font-size: 1rem;padding: .5rem 2rem">
-                            Email
-                        </div>
-                        <div style="padding: 0 2rem">
-                            <el-input
-                                    @input="verifyEmail"
-                                    size="medium"
-                                    placeholder="Input you email"
-                                    v-model="email">
+                                <!--</el-input>-->
+                                <!--</div>-->
+                                <div style="font-size: 1rem;padding: .5rem 2rem">
+                                    Email
+                                </div>
+                                <div style="padding: 0 2rem">
+                                    <el-input
+                                            @input="verifyEmail"
+                                            size="medium"
+                                            placeholder="Input you email"
+                                            v-model="email">
+
+                                    </el-input>
+                                </div>
+                                <!--是否分享-->
+                                <!--<div style="font-size: 1rem;padding: .5rem 2rem">-->
+                                <!--<el-checkbox v-model="shareGistChecked"/>-->
+                                <!--Share the Gist-->
+                                <!--<span style="font-size: .8rem;text-decoration: underline;cursor: pointer;"-->
+                                <!--@click="shareDialogVisible=true">(want to share?)</span>-->
+                                <!--</div>-->
+                                <!--<div style="font-size: 1.2rem;padding: .5rem">-->
+                                <!--③ CLA Requirement Settings (Optional)-->
+                                <!--</div>-->
+                                <!--&lt;!&ndash;文件修改数&ndash;&gt;-->
+                                <!--<div style="font-size: 1rem;padding: 0 2rem .5rem 2rem">-->
+                                <!--Minimum File Number Changes-->
+                                <!--</div>-->
+                                <!--<div style="padding: 0 2rem">-->
+                                <!--<el-input-->
+                                <!--type="number"-->
+                                <!--size="medium"-->
+                                <!--placeholder="number"-->
+                                <!--v-model="fileNumber">-->
+
+                                <!--</el-input>-->
+                                <!--</div>-->
+                                <!--&lt;!&ndash;行修改数&ndash;&gt;-->
+                                <!--<div style="font-size: 1rem;padding: .5rem 2rem">-->
+                                <!-- - or - -->
+                                <!--</div>-->
+                                <!--<div style="font-size: 1rem;padding: 0 2rem .5rem 2rem">-->
+                                <!--Minimum Line Number Changes-->
+                                <!--</div>-->
+                                <!--<div style="padding: 0 2rem">-->
+                                <!--<el-input-->
+                                <!--type="number"-->
+                                <!--size="medium"-->
+                                <!--placeholder="number"-->
+                                <!--v-model="lineNumber">-->
+
+                                <!--</el-input>-->
+                                <!--</div>-->
+                                <!--链接-->
+                                <div
+                                        :class="{'linkBt pointer':claValue&&repositoryValue&&isEmail,'disableClass':!(claValue&&repositoryValue&&isEmail)}"
+                                        @click="openLinkDialog()">
+                                    <div>
+                                        <svg-icon icon-class="link"></svg-icon>
+                                        LINK
+                                    </div>
+                                </div>
+                            </div>
+                        </el-col>
+                        <el-col :span="12" :offset="2">
+                            <el-input rows="16" type="textarea" v-model="previewText">
 
                             </el-input>
-                        </div>
-                        <!--是否分享-->
-                        <!--<div style="font-size: 1rem;padding: .5rem 2rem">-->
-                        <!--<el-checkbox v-model="shareGistChecked"/>-->
-                        <!--Share the Gist-->
-                        <!--<span style="font-size: .8rem;text-decoration: underline;cursor: pointer;"-->
-                        <!--@click="shareDialogVisible=true">(want to share?)</span>-->
-                        <!--</div>-->
-                        <!--<div style="font-size: 1.2rem;padding: .5rem">-->
-                        <!--③ CLA Requirement Settings (Optional)-->
-                        <!--</div>-->
-                        <!--&lt;!&ndash;文件修改数&ndash;&gt;-->
-                        <!--<div style="font-size: 1rem;padding: 0 2rem .5rem 2rem">-->
-                        <!--Minimum File Number Changes-->
-                        <!--</div>-->
-                        <!--<div style="padding: 0 2rem">-->
-                        <!--<el-input-->
-                        <!--type="number"-->
-                        <!--size="medium"-->
-                        <!--placeholder="number"-->
-                        <!--v-model="fileNumber">-->
+                        </el-col>
+                    </el-row>
 
-                        <!--</el-input>-->
-                        <!--</div>-->
-                        <!--&lt;!&ndash;行修改数&ndash;&gt;-->
-                        <!--<div style="font-size: 1rem;padding: .5rem 2rem">-->
-                        <!-- - or - -->
-                        <!--</div>-->
-                        <!--<div style="font-size: 1rem;padding: 0 2rem .5rem 2rem">-->
-                        <!--Minimum Line Number Changes-->
-                        <!--</div>-->
-                        <!--<div style="padding: 0 2rem">-->
-                        <!--<el-input-->
-                        <!--type="number"-->
-                        <!--size="medium"-->
-                        <!--placeholder="number"-->
-                        <!--v-model="lineNumber">-->
+                </el-row>
 
-                        <!--</el-input>-->
-                        <!--</div>-->
-                        <!--链接-->
-                        <div
-                                :class="{'linkBt pointer':claValue&&repositoryValue&&isEmail,'disableClass':!(claValue&&repositoryValue&&isEmail)}"
-                                @click="openLinkDialog()">
-                            <div>
-                                <svg-icon icon-class="link"></svg-icon>
-                                LINK
-                            </div>
-                        </div>
-                    </div>
-                </el-col>
-                <el-col :span="12" :offset="2" v-if="previewShow">
-                    <el-input type="textarea" rows="20" v-model="previewText">
-
-                    </el-input>
-                </el-col>
             </el-row>
             <div>{{dropdownTitle}}</div>
             <!--<el-dropdown @command="handleCommand" trigger="click" placement="bottom-start">-->
@@ -658,7 +663,7 @@
         },
         data() {
             return {
-                previewShow:true,
+                previewShow: false,
                 previewText: 'previewCla',
                 loginType: this.$store.state.loginType,
                 tableTotal: 0,
@@ -695,7 +700,16 @@
                 claOptions: [{value: '0', label: 'test', text: '来而不往非礼也'}, {
                     value: '1',
                     label: 'share',
-                    text: '学而不思则罔，思维不学则殆'
+                    text: '学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆' +
+                        '学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不' +
+                        '思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆' +
+                        '学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆' +
+                        '学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆' +
+                        '学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆' +
+                        '学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆' +
+                        '学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆' +
+                        '学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆' +
+                        '学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆'
                 },],
                 claValue: '',
                 linkDialogVisible: false,
@@ -729,10 +743,18 @@
         },
         methods: {
             ...mapActions(['setLoginUserAct', 'setTokenAct']),
+            showPreview(){
+                console.log('focus');
+                this.previewShow=true;
+            },
+            hiddenPreview(){
+                console.log('blur');
+                this.previewShow=false;
+            },
             /*预览cla*/
             preview() {
                 console.log("preview");
-                this.previewShow=true;
+                this.previewShow = true;
             },
 
             /*获取组织权限*/
@@ -976,6 +998,7 @@
             /*选择cla*/
             changeCla(value) {
                 this.claValue = value
+                this.previewText=this.claOptions[value].text;
             },
             /*弹出dialog说明框*/
             createCLA() {
