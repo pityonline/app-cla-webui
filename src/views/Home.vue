@@ -706,7 +706,12 @@
                 home: {
                     height: '',
                 },
-                isAuthorize:false,
+                user:{
+                    userName:'',
+                    userId:'',
+                    isAuthorize:false,
+
+                },
             }
         },
         methods: {
@@ -935,11 +940,7 @@
                     console.log(err);
                 })
             },
-            /*截取code*/
-            getUrlCode() {
-                console.log(window.location.href.substring(window.location.href.indexOf('=') + 1));
-                this.code = window.location.href.substring(window.location.href.indexOf('=') + 1);
-            },
+
             /*查看CLA签署状态*/
             checkCla() {
                 console.log("checkCla");
@@ -1064,7 +1065,7 @@
                 }).then(res => {
                     console.log(res);
                     if (res.status === 200) {
-                        let data = {userName:res.data.login,userImg:res.data.avatar_url,userEmail:res.data.email};
+                        let data = {userId:res.data.id,userName:res.data.login,userImg:res.data.avatar_url,userEmail:res.data.email};
                         this.setLoginUserAct(data);
                     }
                 }).catch(err => {

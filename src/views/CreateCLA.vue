@@ -50,7 +50,7 @@
         },
         data() {
             return {
-                claName:'',
+                claName: '',
                 value: "0",
                 languageOptions: [{
                     value: '0',
@@ -59,27 +59,36 @@
                     value: '1',
                     label: 'chinese'
                 },],
-                name:'test',
                 claText: 'test',
                 metaData: 'test',
                 createCLAClass: {
                     height: '',
                 },
-
+                user: {
+                    userName: this.$store.state.user.userName,
+                    userId: this.$store.state.user.userId,
+                }
 
             }
         },
         methods: {
             /*验证calName和claText不为空*/
-            verifyNotNull(){
-                return this.claText.trim()&&this.claName.trim()
+            verifyNotNull() {
+                return this.claText.trim() && this.claName.trim()
             },
             /*上传cla*/
             uploadCla() {
-                let obj = {name:this.name,claText: this.claText, metaData: this.metaData,language:'EN'}
+                let obj = {
+                    name: this.name,
+                    text: this.claText,
+                    metaData: this.metaData,
+                    language: 'EN',
+                    id: this.user.userId,
+                    user: this.user.userName
+                }
                 this.verifyClaAndMeta() &&
                 this.$axios({
-                    url: '/api'+url.uploadCla,
+                    url: '/api' + url.uploadCla,
                     method: 'post',
                     data: obj,
                 }).then(res => {

@@ -15,6 +15,7 @@ export default new Vuex.Store({
     access_token:sessionStorage.getItem('access_token')||undefined,
     refresh_token:sessionStorage.getItem('refresh_token')||undefined,
     user:{
+      userId:sessionStorage.getItem('userId')||undefined,
       userName:sessionStorage.getItem('userName')||undefined,
       userImg:sessionStorage.getItem('userImg')||undefined,
       userEmail:sessionStorage.getItem('userEmail')||undefined,
@@ -29,9 +30,11 @@ export default new Vuex.Store({
       sessionStorage.setItem('refresh_token',data.refresh_token);
     },
     setLoginUser(state,data){
+      state.user.userId=data.userId;
       state.user.userName=data.userName;
       state.user.userImg=data.userImg;
       state.user.userEmail=data.userEmail;
+      sessionStorage.setItem('userId',data.userId);
       sessionStorage.setItem('userName',data.userName);
       sessionStorage.setItem('userImg',data.userImg);
       sessionStorage.setItem('userEmail',data.userEmail);
