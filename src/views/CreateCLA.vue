@@ -98,6 +98,9 @@
                     if (res.status === 200) {
                         this.fullscreenLoading=false;
                         this.$message.success('succeed')
+                        setTimeout(function () {
+                            this.$router.replace('/home')
+                        },1000)
                     }else{
                         this.fullscreenLoading=false;
                         this.$message.error('failed')

@@ -11,7 +11,7 @@
         <el-col :span="8">
             <div>
 
-                <svg-icon  id="svg_logo" icon-class="logo_b"/>
+                <svg-icon class="pointer" @click="toHome()" id="svg_logo" icon-class="logo_b"/>
             </div>
         </el-col>
         <el-col :span="8">
@@ -43,6 +43,9 @@
             console.log(this.user.userName);
         },
         methods:{
+            toHome(){
+                this.$router.push('/home')
+            },
             loginOut(){
                 this.$router.push('/')
             },
