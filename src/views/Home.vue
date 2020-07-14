@@ -138,7 +138,7 @@
                                 <!--链接-->
 
                                 <div
-                                        :class="{'linkBt pointer':claValue&&repositoryValue&&isEmail,'disableClass':!(claValue&&repositoryValue&&isEmail)}"
+                                        :class="{'linkBt pointer':claChoose&&repositoryChoose&&isEmail,'disableClass':!(claChoose&&repositoryChoose&&isEmail)}"
                                         @click="openLinkDialog()">
                                     <div>
                                         <svg-icon icon-class="link"></svg-icon>
@@ -716,6 +716,7 @@
                         '学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆'
                 },],
                 claValue: '',
+                claChoose:false,
                 linkDialogVisible: false,
                 shareDialogVisible: false,
                 createCLADialogVisible: false,
@@ -725,6 +726,7 @@
                 gistUrl: '',
                 repositoryOptions: [],
                 repositoryValue: '',
+                repositoryChoose: '',
                 showConfigForm: false,
 
                 tableData: [{repository: 'ooo', cla: 'test', sharedGist: 'Yes', contributors: '0',}, {
@@ -1002,6 +1004,7 @@
             /*选择cla*/
             changeCla(value) {
                 this.claValue = value
+                this.claChoose=true;
                 console.log(value);
                 this.previewText=this.claOptions[value].text;
             },
@@ -1021,7 +1024,7 @@
             /*选择仓库*/
             changeRepository(value) {
                 console.log(value);
-                console.log(value);
+                this.repositoryChoose=true;
                 this.repositoryValue = value
             },
             /*获取仓库数据*/
