@@ -914,7 +914,7 @@
             },
             /*打开确认发布开源项目的弹框*/
             openLinkDialog() {
-                (this.repositoryValue && this.claValue && this.isEmail) && (this.linkDialogVisible = true)
+                (this.repositoryChoose && this.claChoose && this.isEmail) && (this.linkDialogVisible = true)
             },
 
 
