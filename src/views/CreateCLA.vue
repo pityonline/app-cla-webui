@@ -14,7 +14,7 @@
                         </el-option>
                     </el-select>
                 </div>
-                <el-input rows="10" class="textAreaClass" v-model="claText" type="textarea">
+                <el-input rows="10" class="textAreaClass" v-model="claText" type="textarea" >
 
                 </el-input>
                 <!--<el-button type="primary" @click="copy">copy</el-button>-->

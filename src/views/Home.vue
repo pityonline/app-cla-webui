@@ -95,6 +95,7 @@
 
                                     </el-input>
                                 </div>
+
                                 <!--是否分享-->
                                 <!--<div style="font-size: 1rem;padding: .5rem 2rem">-->
                                 <!--<el-checkbox v-model="shareGistChecked"/>-->
@@ -135,6 +136,7 @@
                                 <!--</el-input>-->
                                 <!--</div>-->
                                 <!--链接-->
+
                                 <div
                                         :class="{'linkBt pointer':claValue&&repositoryValue&&isEmail,'disableClass':!(claValue&&repositoryValue&&isEmail)}"
                                         @click="openLinkDialog()">
@@ -146,7 +148,7 @@
                             </div>
                         </el-col>
                         <el-col :span="12" :offset="2">
-                            <el-input rows="16" type="textarea" v-model="previewText">
+                            <el-input rows="16" type="textarea" v-model="previewText" style="white-space: pre-wrap">
 
                             </el-input>
                         </el-col>
@@ -700,12 +702,14 @@
                 claOptions: [{value: '0', label: 'test', text: '来而不往非礼也'}, {
                     value: '1',
                     label: 'share',
-                    text: '学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆' +
-                        '学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不' +
+                    text: '   学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆' +
+                        '学而不思则罔，思维不学则殆学而不思则罔，' +
+                        '    思维' +
+                        '              不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不' +
                         '思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆' +
                         '学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆' +
                         '学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆' +
-                        '学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆' +
+                        '学而不思则罔                 ，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆' +
                         '学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆' +
                         '学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆' +
                         '学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆' +
@@ -930,7 +934,7 @@
                     return false
                 }
             },
-            /*链接开源项目*/
+            /*解绑开源项目*/
             unLinkRepository() {
                 this.linkDialogVisible = false;
                 let obj = {
@@ -998,6 +1002,7 @@
             /*选择cla*/
             changeCla(value) {
                 this.claValue = value
+                console.log(value);
                 this.previewText=this.claOptions[value].text;
             },
             /*弹出dialog说明框*/
@@ -1015,6 +1020,7 @@
 
             /*选择仓库*/
             changeRepository(value) {
+                console.log(value);
                 console.log(value);
                 this.repositoryValue = value
             },
