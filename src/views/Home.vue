@@ -1120,6 +1120,7 @@
                 console.log("getCLA");
                 this.$axios({
                     url: '/api' + url.getClaInfo,
+                    headers:{access_token: this.access_token,refresh_token:this.refresh_token}
                 }).then(res => {
                     console.log(res);
                     this.claOptions = res.data
@@ -1175,7 +1176,6 @@
                 let obj = {access_token: this.access_token};
                 this.$axios({
                     url: url.getUserInfo,
-                    method: 'get',
                     params: obj,
                 }).then(res => {
                     console.log(res);
