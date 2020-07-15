@@ -1123,11 +1123,15 @@
                     headers:{access_token: this.access_token,refresh_token:this.refresh_token}
                 }).then(res => {
                     console.log(res);
-                    this.claOptions = res.data
+                    if (res.data.length) {
+                        this.claOptions=[];
+                        res.data.forEach((item,index)=>{
+                           this.claOptions.push({value:index,label:item.name,id:item.id,text:item.text})
+                       })
+                    }
                 }).catch(err => {
                     console.log(err);
                 })
-
             },
             /*关闭cla配置表单*/
             closeConfigForm() {
