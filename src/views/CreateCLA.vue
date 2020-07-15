@@ -14,7 +14,7 @@
                         </el-option>
                     </el-select>
                 </div>
-                <el-input rows="10" class="textAreaClass" v-model="claText" type="textarea" >
+                <el-input rows="10" @change="claTextChange" class="textAreaClass" v-model="claText" type="textarea" >
 
                 </el-input>
                 <!--<el-button type="primary" @click="copy">copy</el-button>-->
@@ -73,6 +73,9 @@
             }
         },
         methods: {
+            claTextChange(value){
+                console.log(value);
+            },
             /*验证calName和claText不为空*/
             verifyNotNull() {
                 return this.claText.trim() && this.claName.trim()

@@ -16,21 +16,19 @@
                 <div class="marginTop1rem">
                     <el-checkbox v-model="isRead">已经阅读过协议</el-checkbox>
                 </div>
-                <el-row class="marginTop1rem borderClass">
+                <el-row class="marginTop1rem ">
 
 
-                    <el-col :span="8">
-                        <el-radio label="0" v-model="role">个人贡献者</el-radio>
+                    <el-col :span="8" class="borderClass">
+                        <el-radio label="0"  v-model="role">个人贡献者</el-radio>
                     </el-col>
-                    <el-col :span="8">
-                        <el-radio label="1" v-model="role">企业贡献者</el-radio>
+                    <el-col :span="8" class="borderClass">
+                        <el-radio label="1"  v-model="role">企业贡献者</el-radio>
                     </el-col>
-                    <el-col :span="8">
-                        <el-radio label="2" v-model="role">企业个人贡献者</el-radio>
-                    </el-col>
+
                 </el-row>
                 <el-row class="marginTop1rem">
-                    <el-col :span="18">
+                    <el-col :span="16">
                         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="left" label-width="30%"
                                  class="demo-ruleForm">
                             <el-form-item v-for="(item,index) in metaData" :label="item.label" :required="item.required"
@@ -187,7 +185,7 @@
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         this.signCla();
-                        // this.$message.success('签署成功')
+                        this.$message.success('签署成功')
                     } else {
                         console.log('error submit!!');
                         return false;

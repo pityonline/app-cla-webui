@@ -1,11 +1,11 @@
 <template>
     <el-row class="footer">
         <el-col class="left" :span="8">
-            <span>© 2015 SAP SE</span>
+            <span>© 2020 HUAWEI SE</span>
 
         </el-col>
         <el-col :span="8" class="center">
-                <span>Made with <svg-icon icon-class="heart"/>  from the GitHub team at SAP
+                <span>Made with <svg-icon icon-class="heart"/>  from the GitHub team at HUAWEI
             </span>
         </el-col>
 

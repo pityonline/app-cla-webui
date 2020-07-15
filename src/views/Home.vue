@@ -157,7 +157,200 @@
                 </el-row>
 
             </el-row>
-            <div>{{dropdownTitle}}</div>
+
+            <div>
+                <el-tabs v-model="activeName" @tab-click="tabsHandleClick">
+                    <el-tab-pane label="Linked Repositories" name="first" style="margin-top: 1rem">
+                        <div class="tableStyle">
+                            <el-table
+                                    :data="tableData"
+                                    align="center"
+                                    style="width: 100%;">
+                                <el-table-column
+                                        prop="repository"
+                                        label="Repository"
+                                        width="180">
+                                    <template slot-scope="scope">
+                                        <svg-icon icon-class="repository"/>
+                                        <span class="pointer hoverUnderline"
+                                              @click="newWindow()"
+                                              style="margin-left: 10px;">{{ scope.row.repository }}</span>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column
+                                        prop="cla"
+                                        label="CLA"
+                                        width="180">
+                                    <template slot-scope="scope">
+                                        <span class="pointer hoverUnderline"
+                                              @click="checkCla()">{{scope.row.cla}}</span>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column
+                                        prop="gist"
+                                        label="Gist">
+                                    <template slot-scope="scope">
+                                        <svg-icon style="cursor: pointer" icon-class="github"/>
+                                    </template>
+                                </el-table-column>
+
+                                <el-table-column
+                                        prop="sharedGist"
+                                        label="Shared Gist">
+                                </el-table-column>
+                                <el-table-column
+                                        prop="contributors"
+                                        label="Contributors"
+                                        align="center">
+                                </el-table-column>
+                                <el-table-column
+                                        prop="status"
+                                        align="center"
+                                        label="Status">
+                                    <template slot-scope="scope">
+                                        <svg-icon class="pointer" icon-class="link_active"/>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column
+                                        align="center">
+
+                                    <template slot-scope="scope">
+                                        <el-tooltip class="item" effect="dark" content="Edit" placement="bottom">
+                                            <svg-icon class="pointer" style="display: inline-block;margin-right: .5rem"
+                                                      icon-class="edit" @click="editHandleClick(scope)"/>
+                                        </el-tooltip>
+
+
+                                        <el-popover
+                                                width="80"
+                                                placement="right">
+
+                                            <div class="menuBT">
+                                                <el-button type="primary" size="medium">Import</el-button>
+                                                <el-button type="primary" size="medium">ReCheck PRs</el-button>
+                                                <el-button type="primary" size="medium">Get Badge</el-button>
+                                                <el-button type="primary" size="medium"
+                                                           @click="unLinkDialogVisible=true">Unlink
+                                                </el-button>
+                                            </div>
+                                            <el-tooltip slot="reference" effect="dark" content="More.."
+                                                        placement="bottom">
+                                                <svg-icon class="pointer" icon-class="menu"/>
+                                            </el-tooltip>
+                                        </el-popover>
+                                    </template>
+                                </el-table-column>
+
+                            </el-table>
+                        </div>
+                        <div class="paginationClass">
+                            <el-pagination
+                                    background
+                                    :page-size="5"
+                                    :pager-count="5"
+                                    :hide-on-single-page="true"
+                                    :current-page="currentPage"
+                                    @current-change="changePage"
+                                    layout="prev, pager, next"
+                                    :total="tableTotal">
+                            </el-pagination>
+                        </div>
+                    </el-tab-pane>
+                    <el-tab-pane label="Signed Repositories" name="second" style="margin-top: 1rem">
+                        <el-col :offset="8" :span="8" v-if="!isVerify">
+                            <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px"
+                                     class="demo-ruleForm" style="padding: 2rem">
+                                <el-form-item label="账号" prop="account">
+                                    <el-input v-model="ruleForm.account" autocomplete="off"></el-input>
+                                </el-form-item>
+                                <el-form-item label="密码" prop="pass">
+                                    <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
+                                </el-form-item>
+                                <el-form-item>
+                                    <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
+                                    <el-button @click="resetForm('ruleForm')">重置</el-button>
+                                </el-form-item>
+                            </el-form>
+                        </el-col>
+                        <div v-else>
+                            <div class="tableStyle">
+                                <el-table
+                                        :data="tableDataOther"
+                                        align="center"
+                                        style="width: 100%;">
+                                    <el-table-column
+                                            prop="repository"
+                                            label="Repository"
+                                            width="180">
+                                        <template slot-scope="scope">
+                                            <svg-icon icon-class="repository"/>
+                                            <span class="pointer hoverUnderline"
+                                                  @click="newWindow()"
+                                                  style="margin-left: 10px;">{{ scope.row.repository }}</span>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column
+                                            prop="cla"
+                                            label="CLA"
+                                            width="180">
+                                        <template slot-scope="scope">
+                                            <span class="pointer hoverUnderline"
+                                                  @click="checkCla()">{{scope.row.cla}}</span>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column
+                                            prop="gist"
+                                            label="Gist">
+                                        <template slot-scope="scope">
+                                            <svg-icon style="cursor: pointer" icon-class="github"/>
+                                        </template>
+                                    </el-table-column>
+
+                                    <el-table-column
+                                            prop="sharedGist"
+                                            label="Shared Gist">
+                                    </el-table-column>
+                                    <el-table-column
+                                            prop="contributors"
+                                            label="Contributors"
+                                            align="center">
+                                    </el-table-column>
+                                    <el-table-column
+                                            prop="status"
+                                            align="center"
+                                            label="Status">
+                                        <template slot-scope="scope">
+                                            <svg-icon class="pointer" icon-class="link_active"/>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column
+                                            align="center">
+                                        <template slot-scope="scope">
+                                            <el-button type="primary" v-if="tableType===3" size="small"
+                                                       @click="listDialogVisible=true">白名单
+                                            </el-button>
+                                        </template>
+                                    </el-table-column>
+                                </el-table>
+                            </div>
+                            <div class="paginationClass">
+                                <el-pagination
+                                        background
+                                        :page-size="5"
+                                        :pager-count="5"
+                                        :hide-on-single-page="true"
+                                        :current-page="currentPage"
+                                        @current-change="changePage"
+                                        layout="prev, pager, next"
+                                        :total="tableTotal">
+                                </el-pagination>
+                            </div>
+                        </div>
+
+                    </el-tab-pane>
+
+                </el-tabs>
+            </div>
             <!--<el-dropdown @command="handleCommand" trigger="click" placement="bottom-start">-->
             <!--<span class="el-dropdown-link">-->
             <!--{{dropdownTitle}}<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
@@ -170,159 +363,7 @@
 
             <!--</el-dropdown-menu>-->
             <!--</el-dropdown>-->
-            <div id="tableContent" style="margin-bottom:2rem;padding: 3rem;background-color: white;">
-                <div v-if="tableShow">
-                    <el-table
-                            :data="tableData"
-                            align="center"
-                            style="width: 100%;">
-                        <el-table-column
-                                prop="repository"
-                                label="Repository"
-                                width="180">
-                            <template slot-scope="scope">
-                                <svg-icon icon-class="repository"/>
-                                <span class="pointer hoverUnderline"
-                                      @click="newWindow()"
-                                      style="margin-left: 10px;">{{ scope.row.repository }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                                prop="cla"
-                                label="CLA"
-                                width="180">
-                            <template slot-scope="scope">
-                                <span class="pointer hoverUnderline" @click="checkCla()">{{scope.row.cla}}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                                prop="gist"
-                                label="Gist">
-                            <template slot-scope="scope">
-                                <svg-icon style="cursor: pointer" icon-class="github"/>
-                            </template>
-                        </el-table-column>
 
-                        <el-table-column
-                                prop="sharedGist"
-                                label="Shared Gist">
-                        </el-table-column>
-                        <el-table-column
-                                prop="contributors"
-                                label="Contributors"
-                                align="center">
-                        </el-table-column>
-                        <el-table-column
-                                prop="status"
-                                align="center"
-                                label="Status">
-                            <template slot-scope="scope">
-                                <svg-icon class="pointer" icon-class="link_active"/>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                                align="center">
-
-                            <template slot-scope="scope">
-                                <el-tooltip class="item" effect="dark" content="Edit" placement="bottom">
-                                    <svg-icon class="pointer" style="display: inline-block;margin-right: .5rem"
-                                              icon-class="edit" @click="editHandleClick(scope)"/>
-                                </el-tooltip>
-
-
-                                <el-popover
-                                        width="80"
-                                        placement="right">
-
-                                    <div class="menuBT">
-                                        <el-button type="primary" size="medium">Import</el-button>
-                                        <el-button type="primary" size="medium">ReCheck PRs</el-button>
-                                        <el-button type="primary" size="medium">Get Badge</el-button>
-                                        <el-button type="primary" size="medium" @click="unLinkDialogVisible=true">Unlink
-                                        </el-button>
-                                    </div>
-                                    <el-tooltip slot="reference" effect="dark" content="More.." placement="bottom">
-                                        <svg-icon class="pointer" icon-class="menu"/>
-                                    </el-tooltip>
-                                </el-popover>
-                            </template>
-                        </el-table-column>
-
-                    </el-table>
-                </div>
-                <div v-else>
-                    false
-                    <el-table
-                            :data="tableDataOther"
-                            align="center"
-                            style="width: 100%;">
-                        <el-table-column
-                                prop="repository"
-                                label="Repository"
-                                width="180">
-                            <template slot-scope="scope">
-                                <svg-icon icon-class="repository"/>
-                                <span class="pointer hoverUnderline"
-                                      @click="newWindow()"
-                                      style="margin-left: 10px;">{{ scope.row.repository }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                                prop="cla"
-                                label="CLA"
-                                width="180">
-                            <template slot-scope="scope">
-                                <span class="pointer hoverUnderline" @click="checkCla()">{{scope.row.cla}}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                                prop="gist"
-                                label="Gist">
-                            <template slot-scope="scope">
-                                <svg-icon style="cursor: pointer" icon-class="github"/>
-                            </template>
-                        </el-table-column>
-
-                        <el-table-column
-                                prop="sharedGist"
-                                label="Shared Gist">
-                        </el-table-column>
-                        <el-table-column
-                                prop="contributors"
-                                label="Contributors"
-                                align="center">
-                        </el-table-column>
-                        <el-table-column
-                                prop="status"
-                                align="center"
-                                label="Status">
-                            <template slot-scope="scope">
-                                <svg-icon class="pointer" icon-class="link_active"/>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                                align="center">
-                            <template slot-scope="scope">
-                                <el-button type="primary" v-if="tableType===3" size="small"
-                                           @click="listDialogVisible=true">白名单
-                                </el-button>
-                            </template>
-                        </el-table-column>
-                    </el-table>
-                </div>
-            </div>
-            <div class="paginationClass">
-                <el-pagination
-                        background
-                        :page-size="5"
-                        :pager-count="5"
-                        :hide-on-single-page="true"
-                        :current-page="currentPage"
-                        @current-change="changePage"
-                        layout="prev, pager, next"
-                        :total="tableTotal">
-                </el-pagination>
-            </div>
         </el-col>
 
         <Footer id="footer"></Footer>
@@ -404,16 +445,20 @@
                 <p class="dialogDesc">Would you like to link this CLA
                     to your repository?</p>
                 <div>
-
-                    <svg-icon style="width: 20rem;height: 12rem" icon-class="popup_link"></svg-icon>
+                    <el-row>
+                        <svg-icon style="width: 100%;height: 100%" icon-class="popup_link"></svg-icon>
+                    </el-row>
+                    <el-row>
+                        <el-col :offset="6" :span="5">
+                            {{claOptions[claValue].label}}
+                        </el-col>
+                        <el-col :offset="2" :span="5">
+                            {{repositoryOptions[repositoryValue].label}}
+                        </el-col>
+                    </el-row>
                 </div>
                 <div style="padding: 0 3rem;color: #409EFF">
-                    <el-col :span="12">
-                        {{claName}}
-                    </el-col>
-                    <el-col :span="12">
-                        {{repositoryName}}
-                    </el-col>
+
                 </div>
                 <div style="padding: 2rem 6rem;text-align: left;font-size: 1.3rem">
                     <p style="text-align: center">CLA assistant will...</p>
@@ -664,7 +709,34 @@
             Footer,
         },
         data() {
+
+            var validateAccount = (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error('请输入账号'));
+                }
+                callback();
+            };
+            var validatePass = (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error('请输入密码'));
+                }
+                callback();
+            };
             return {
+                ruleForm: {
+                    pass: '',
+                    account: '',
+                },
+                rules: {
+                    account: [
+                        {validator: validateAccount, trigger: 'blur'}
+                    ],
+                    pass: [
+                        {validator: validatePass, trigger: 'blur'}
+                    ],
+                },
+                isVerify: false,
+                activeName: 'first',
                 previewShow: false,
                 previewText: 'previewCla',
                 loginType: this.$store.state.loginType,
@@ -715,8 +787,8 @@
                         '学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆' +
                         '学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆'
                 },],
-                claValue: '',
-                claChoose:false,
+                claValue: '0',
+                claChoose: false,
                 linkDialogVisible: false,
                 shareDialogVisible: false,
                 createCLADialogVisible: false,
@@ -724,8 +796,10 @@
                 fileNumber: '',
                 lineNumber: '',
                 gistUrl: '',
-                repositoryOptions: [],
-                repositoryValue: '',
+                orgOptions:[{value:'0',label:'myOrg'}],
+                orgValue:'0',
+                repositoryOptions: [{value: '0', label: 'test',},],
+                repositoryValue: '0',
                 repositoryChoose: '',
                 showConfigForm: false,
 
@@ -743,26 +817,27 @@
                     userName: '',
                     userId: '',
                     isAuthorize: false,
-
                 },
             }
         },
         methods: {
             ...mapActions(['setLoginUserAct', 'setTokenAct']),
-            showPreview(){
-                console.log('focus');
-                this.previewShow=true;
+            submitForm(formName) {
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        alert('submit!');
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
             },
-            hiddenPreview(){
-                console.log('blur');
-                this.previewShow=false;
+            resetForm(formName) {
+                this.$refs[formName].resetFields();
             },
-            /*预览cla*/
-            preview() {
-                console.log("preview");
-                this.previewShow = true;
+            tabsHandleClick(tab, event) {
+                console.log(tab, event);
             },
-
             /*获取组织权限*/
             getOrgPermission() {
                 if (this.loginType === '0') {
@@ -942,10 +1017,7 @@
                 let obj = {
                     repositoryValue: this.repositoryValue,
                     claValue: this.claValue,
-                    email: this.email,
-                    shareGistChecked: this.shareGistChecked,
-                    fileNumber: this.fileNumber,
-                    lineNumber: this.lineNumber
+
                 };
                 this.$axios({
                     url: url.unLinkRepository,
@@ -966,22 +1038,18 @@
             linkRepository() {
                 this.linkDialogVisible = false;
                 let obj = {
-                    repositoryValue: this.repositoryValue,
-                    claValue: this.claValue,
+                    repositoryId: this.repositoryOptions[this.repositoryValue].id,
+                    claId: this.claOptions[this.claValue].id,
                     email: this.email,
-                    shareGistChecked: this.shareGistChecked,
-                    fileNumber: this.fileNumber,
-                    lineNumber: this.lineNumber
+                    platform:this.platform,
+                    orgId:this.orgOptions[this.orgValue].id
                 };
                 this.$axios({
-                    url: url.linkRepository,
+                    url: '/api'+url.linkRepository,
                     methods: 'post',
                     data: obj,
                 }).then(res => {
                     console.log(res);
-                    if (res.data.code === 200) {
-                        this.repositoryOptions = res.data.data
-                    }
                 }).catch(err => {
                     console.log(err);
                 })
@@ -1004,9 +1072,9 @@
             /*选择cla*/
             changeCla(value) {
                 this.claValue = value
-                this.claChoose=true;
+                this.claChoose = true;
                 console.log(value);
-                this.previewText=this.claOptions[value].text;
+                this.previewText = this.claOptions[value].text;
             },
             /*弹出dialog说明框*/
             createCLA() {
@@ -1024,7 +1092,7 @@
             /*选择仓库*/
             changeRepository(value) {
                 console.log(value);
-                this.repositoryChoose=true;
+                this.repositoryChoose = true;
                 this.repositoryValue = value
             },
             /*获取仓库数据*/
@@ -1051,13 +1119,10 @@
             getCLA() {
                 console.log("getCLA");
                 this.$axios({
-                    url: url.getClaInfo,
-                    methods: 'post',
+                    url: '/api' + url.getClaInfo,
                 }).then(res => {
                     console.log(res);
-                    if (res.data.code === 200) {
-                        this.claOptions = res.data.data
-                    }
+                    this.claOptions = res.data
                 }).catch(err => {
                     console.log(err);
                 })
@@ -1144,6 +1209,12 @@
 </script>
 
 <style scoped lang="less">
+    .tableStyle {
+        margin-bottom: 2rem;
+        padding: 3rem;
+        background-color: white;
+    }
+
     .paginationClass {
         text-align: center;
         margin-bottom: 1rem;
