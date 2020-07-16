@@ -1096,7 +1096,7 @@
             },
             getRepositoriesOfOrg(org,orgPath){
                 console.log("getRepositoriesOfOrg");
-                let obj = {access_token: this.access_token, org: orgPath, page: 1, per_page: 10};
+                let obj = {access_token: this.access_token, org: orgPath, page: 1, per_page: 10,type:'all'};
                 this.$axios({
                     url: url.getRepositoriesOfOrg,
                     params: obj,
