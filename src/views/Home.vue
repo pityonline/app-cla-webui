@@ -781,7 +781,7 @@
                         '思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆' +
                         '学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆' +
                         '学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆' +
-                        '学而不思则罔                 ，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆' +
+                        '学而不思则罔              ，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆' +
                         '学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆' +
                         '学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆' +
                         '学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆' +
@@ -881,7 +881,6 @@
                         console.log(this.tableShow);
                         this.tableTotal = this.tableDataOther.length;
 
-                        // this.getPersonalRepositories();
                         break;
                     case '企业签署的项目':
                         this.tableType = 3;
@@ -926,7 +925,7 @@
                 })
             },
             /*获取个人签署的项目*/
-            getPersonalRepositories() {
+            getPersonalSigned() {
                 console.log('getPersonalRepositories');
                 let obj = {
                     userName: this.user.userName
@@ -1095,12 +1094,29 @@
                 this.repositoryChoose = true;
                 this.repositoryValue = value
             },
+            getRepositoriesOfOrg(orgPath){
+                console.log("getRepositoriesOfOrg");
+                let obj = {access_token: this.access_token, org: orgPath, page: 1, per_page: 10};
+                this.$axios({
+                    url: url.getRepositoriesOfOrg,
+                    params: obj,
+                }).then(res => {
+                    console.log(res);
+                    if (res.status === 200) {
+                        res.data.forEach((item, index) => {
+                            this.repositoryOptions.push({value: index, label: res.data[index].login});
+                        })
+                    }
+                }).catch(err => {
+                    console.log(err);
+                })
+            },
             /*获取仓库数据*/
-            getRepository() {
-                console.log("getRepository");
+            getOrgsInfo() {
+                console.log("getOrgsInfo");
                 let obj = {access_token: this.access_token, admin: true, page: 1, per_page: 10};
                 this.$axios({
-                    url: url.getRepositoriesInfo,
+                    url: url.getOrgsInfo,
                     methods: 'get',
                     params: obj,
                 }).then(res => {
@@ -1108,7 +1124,7 @@
                     if (res.status === 200) {
                         // this.repositoryOptions = res.data.data
                         res.data.forEach((item, index) => {
-                            this.repositoryOptions.push({value: index, label: res.data[index].login});
+                            this.getRepositoriesOfOrg()
                         })
                     }
                 }).catch(err => {
@@ -1144,7 +1160,7 @@
                 this.showConfigForm = true;
                 this.home.height = 'auto'
                 this.getCLA()
-                this.getRepository()
+                this.getOrgsInfo()
             },
             /*设置页面高度*/
             setClientHeight() {
