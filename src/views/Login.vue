@@ -64,6 +64,7 @@
         },
         data() {
             return {
+                platform:'',
                 loginUrl: '',
                 value: '0',
                 options: [{
@@ -91,7 +92,7 @@
             }
         },
         methods: {
-            ...mapActions(['setLoginTypeAct']),
+            ...mapActions(['setPlatformAct']),
             setClientHeight() {
                 this.login.height = until.getClientHeight() + 'px';
                 this.transparentDiv.height = until.getClientHeight() + 'px'
@@ -103,7 +104,15 @@
             loginIn() {
                 console.log(this.value);
                 console.log("loginIn");
-                this.setLoginTypeAct(this.value)
+                switch (this.value) {
+                    case '0':
+                        this.platform = 'gitee';
+                        break;
+                    case '1':
+                        this.platform = 'github';
+                        break;
+                }
+                this.setPlatformAct(this.platform)
                 switch (this.value) {
                     case '0':
                         console.log("case0");

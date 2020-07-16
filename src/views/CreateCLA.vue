@@ -65,6 +65,7 @@
                 createCLAClass: {
                     height: '',
                 },
+                platform:this.$store.state.platform,
                 user: {
                     userName: this.$store.state.user.userName,
                     userId: this.$store.state.user.userId,
@@ -89,7 +90,8 @@
                     // metaData: this.metaData,
                     language: 'EN',
                     // id: this.user.userId,
-                    user: this.user.userName
+                    submitter:`${this.platform}/${this.user.userName}`
+                    // user: this.user.userName
                 }
                 // this.verifyClaAndMeta() &&
                 this.$axios({
