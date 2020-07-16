@@ -1094,7 +1094,7 @@
                 this.repositoryChoose = true;
                 this.repositoryValue = value
             },
-            getRepositoriesOfOrg(orgPath){
+            getRepositoriesOfOrg(org,orgPath){
                 console.log("getRepositoriesOfOrg");
                 let obj = {access_token: this.access_token, org: orgPath, page: 1, per_page: 10};
                 this.$axios({
@@ -1103,8 +1103,9 @@
                 }).then(res => {
                     console.log(res);
                     if (res.status === 200) {
+                        this.repositoryOptions=[];
                         res.data.forEach((item, index) => {
-                            this.repositoryOptions.push({value: index, label: res.data[index].login});
+                            this.repositoryOptions.push({value: index, org:org,repoName:item.name,label: `${org}/${item.name}`});
                         })
                     }
                 }).catch(err => {
@@ -1123,8 +1124,10 @@
                     console.log(res);
                     if (res.status === 200) {
                         // this.repositoryOptions = res.data.data
+                        this.orgOptions=[];
                         res.data.forEach((item, index) => {
-                            this.getRepositoriesOfOrg()
+                            this.orgOptions.push({value: index, label: item.login,orgPath:item.url});
+                            this.getRepositoriesOfOrg(item.login,item.url)
                         })
                     }
                 }).catch(err => {
