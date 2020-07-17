@@ -723,8 +723,8 @@
                 callback();
             };
             return {
-                linkLoading:false,
-                platform:this.$store.state.platform,
+                linkLoading: false,
+                platform: this.$store.state.platform,
                 ruleForm: {
                     pass: '',
                     account: '',
@@ -773,7 +773,7 @@
                 claName: 'test',
                 repositoryName: 'ooo/test',
                 shareGistChecked: false,
-                claOptions: [{value: '0', label: 'test', text: '来而不往非礼也',language:''}, {
+                claOptions: [{value: '', label: '', text: '来而不往非礼也', language: ''}, {
                     value: '1',
                     label: 'share',
                     text: '   学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆' +
@@ -798,9 +798,9 @@
                 fileNumber: '',
                 lineNumber: '',
                 gistUrl: '',
-                orgOptions:[{value:'0',label:'myOrg'}],
-                orgValue:'',
-                repositoryOptions: [{value: '0', label: '',},],
+                orgOptions: [{value: '', label: ''}],
+                orgValue: '',
+                repositoryOptions: [{value: '', label: '',},],
                 repositoryValue: '',
                 repositoryChoose: '',
                 showConfigForm: false,
@@ -817,7 +817,7 @@
                 },
                 user: {
                     userName: this.$store.state.user.userName,
-                    userId:this.$store.state.user.userId,
+                    userId: this.$store.state.user.userId,
                     isAuthorize: false,
                 },
             }
@@ -1042,24 +1042,24 @@
                     repo_id: `${this.repositoryOptions[this.repositoryValue].id}`,
                     cla_id: this.claOptions[this.claValue].id,
                     org_email: this.email,
-                    platform:this.platform,
-                    org_id:`${this.orgOptions[this.orgValue].id}`,
-                    cla_language:this.claOptions[this.claValue].language,
-                    submitter:`${this.platform}/${this.user.userName}`,
-                    metadata_id:'',
+                    platform: this.platform,
+                    org_id: `${this.orgOptions[this.orgValue].id}`,
+                    cla_language: this.claOptions[this.claValue].language,
+                    submitter: `${this.platform}/${this.user.userName}`,
+                    metadata_id: '',
                 };
                 this.$axios({
-                    url: '/api'+url.linkRepository,
+                    url: '/api' + url.linkRepository,
                     method: 'post',
                     data: obj,
                 }).then(res => {
                     this.$message.success('success')
                     console.log(res);
-                    this.claValue='';
-                    this.repositoryValue='';
-                    this.email='';
-                    this.linkLoading=false;
-                    this.linkDialogVisible=false;
+                    this.claValue = '';
+                    this.repositoryValue = '';
+                    this.email = '';
+                    this.linkLoading = false;
+                    this.linkDialogVisible = false;
                 }).catch(err => {
                     console.log(err);
                 })
@@ -1105,18 +1105,24 @@
                 this.repositoryChoose = true;
                 this.repositoryValue = value
             },
-            getRepositoriesOfOrg(org){
+            getRepositoriesOfOrg(org) {
                 console.log("getRepositoriesOfOrg");
-                let obj = {access_token: this.access_token, org:org , page: 1, per_page: 10};
+                let obj = {access_token: this.access_token, org: org, page: 1, per_page: 10};
                 this.$axios({
-                    url:`https://gitee.com/api/v5/orgs/${org}/repos` ,
+                    url: `https://gitee.com/api/v5/orgs/${org}/repos`,
                     params: obj,
                 }).then(res => {
                     console.log(res);
                     if (res.status === 200) {
-                        this.repositoryOptions=[];
+                        this.repositoryOptions = [];
                         res.data.forEach((item, index) => {
-                            this.repositoryOptions.push({value: index, org:org,repoName:item.name,label: `${org}/${item.name}`,id:item.id});
+                            this.repositoryOptions.push({
+                                value: index,
+                                org: org,
+                                repoName: item.name,
+                                label: `${org}/${item.name}`,
+                                id: item.id
+                            });
                         })
                     }
                 }).catch(err => {
@@ -1135,9 +1141,9 @@
                     console.log(res);
                     if (res.status === 200) {
                         // this.repositoryOptions = res.data.data
-                        this.orgOptions=[];
+                        this.orgOptions = [];
                         res.data.forEach((item, index) => {
-                            this.orgOptions.push({value: index, label: item.login,id:item.id});
+                            this.orgOptions.push({value: index, label: item.login, id: item.id});
                             this.getRepositoriesOfOrg(item.login)
                         })
                     }
@@ -1150,14 +1156,20 @@
                 console.log("getCLA");
                 this.$axios({
                     url: '/api' + url.getClaInfo,
-                    headers:{access_token: this.access_token,refresh_token:this.refresh_token}
+                    headers: {access_token: this.access_token, refresh_token: this.refresh_token}
                 }).then(res => {
                     console.log(res);
                     if (res.data.length) {
-                        this.claOptions=[];
-                        res.data.forEach((item,index)=>{
-                           this.claOptions.push({value:index,label:item.name,id:item.id,text:item.text,language:item.language})
-                       })
+                        this.claOptions = [];
+                        res.data.forEach((item, index) => {
+                            this.claOptions.push({
+                                value: index,
+                                label: item.name,
+                                id: item.id,
+                                text: item.text,
+                                language: item.language
+                            })
+                        })
                     }
                 }).catch(err => {
                     console.log(err);
@@ -1231,15 +1243,12 @@
 
         },
 
-        async created() {
-
-            new Promise((resolve,reject)=>{
-                this.getCookieData()
-            }).then(this.getUserInfo()) ;
+        created() {
+            this.getCookieData()
+            this.getUserInfo()
 
         },
         mounted() {
-
             this.setClientHeight();
         }
     }
