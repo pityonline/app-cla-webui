@@ -1225,7 +1225,10 @@
         },
 
         async created() {
-            new Promise(this.getCookieData()).then(this.getUserInfo()) ;
+
+            new Promise((resolve,reject)=>{
+                this.getCookieData()
+            }).then(this.getUserInfo()) ;
 
         },
         mounted() {
