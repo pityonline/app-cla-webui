@@ -1038,11 +1038,11 @@
             linkRepository() {
                 this.linkDialogVisible = false;
                 let obj = {
-                    repo_id: this.repositoryOptions[this.repositoryValue].id,
+                    repo_id: `${this.repositoryOptions[this.repositoryValue].id}`,
                     cla_id: this.claOptions[this.claValue].id,
                     org_email: this.email,
                     platform:this.platform,
-                    org_id:this.orgOptions[this.orgValue].id,
+                    org_id:`${this.orgOptions[this.orgValue].id}`,
                     cla_language:this.claOptions[this.claValue].language,
                     submitter:`${this.platform}/${this.user.userName}`,
                     metadata_id:'',
