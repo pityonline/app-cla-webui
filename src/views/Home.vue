@@ -471,7 +471,7 @@
 
                 <span slot="footer" class="dialog-footer">
                     <el-button @click="linkDialogVisible = false">Cancel</el-button>
-                    <el-button type="primary" @click="linkRepository()">Yes,Let's do this!</el-button>
+                    <el-button v-loading.fullscreen.lock="linkLoading" type="primary" @click="linkRepository()">Yes,Let's do this!</el-button>
                 </span>
             </div>
 
@@ -723,6 +723,7 @@
                 callback();
             };
             return {
+                linkLoading:false,
                 platform:this.$store.state.platform,
                 ruleForm: {
                     pass: '',
@@ -788,7 +789,7 @@
                         '学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆' +
                         '学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆'
                 },],
-                claValue: '0',
+                claValue: '',
                 claChoose: false,
                 linkDialogVisible: false,
                 shareDialogVisible: false,
@@ -798,9 +799,9 @@
                 lineNumber: '',
                 gistUrl: '',
                 orgOptions:[{value:'0',label:'myOrg'}],
-                orgValue:'0',
+                orgValue:'',
                 repositoryOptions: [{value: '0', label: '',},],
-                repositoryValue: '0',
+                repositoryValue: '',
                 repositoryChoose: '',
                 showConfigForm: false,
 
@@ -1036,7 +1037,7 @@
             },
             /*链接开源项目*/
             linkRepository() {
-                this.linkDialogVisible = false;
+                this.linkLoading = true;
                 let obj = {
                     repo_id: `${this.repositoryOptions[this.repositoryValue].id}`,
                     cla_id: this.claOptions[this.claValue].id,
@@ -1052,7 +1053,13 @@
                     method: 'post',
                     data: obj,
                 }).then(res => {
+                    this.$message.success('success')
                     console.log(res);
+                    this.claValue='';
+                    this.repositoryValue='';
+                    this.email='';
+                    this.linkLoading=false;
+                    this.linkDialogVisible=false;
                 }).catch(err => {
                     console.log(err);
                 })
