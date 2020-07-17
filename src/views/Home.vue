@@ -1043,7 +1043,7 @@
                     org_email: this.email,
                     platform:this.platform,
                     org_id:this.orgOptions[this.orgValue].id,
-                    cla_language:this.this.claOptions[this.claValue].language,
+                    cla_language:this.claOptions[this.claValue].language,
                     submitter:`${this.platform}/${this.user.userName}`,
                     metadata_id:'',
                 };
