@@ -26,17 +26,14 @@
                                 </div>
                                 <div style="padding: 0 2rem">
                                     <el-select v-model="repositoryValue"
-                                               clearable
                                                placeholder="select"
                                                style="width: 100%"
                                                size="medium"
-                                               @change="changeRepository"
-                                               :value="repositoryValue">
+                                               @change="changeRepository">
                                         <el-option
                                                 v-for="item in repositoryOptions"
                                                 :key="item.value"
                                                 :label="item.label"
-
                                                 :value="item.value">
                                         </el-option>
                                     </el-select>
@@ -52,12 +49,10 @@
                                 </div>
                                 <div style="padding: 0 2rem">
                                     <el-select v-model="claValue"
-                                               clearable
                                                placeholder="select"
                                                style="width: 100%"
                                                size="medium"
-                                               @change="changeCla"
-                                               :value="claValue">
+                                               @change="changeCla">
                                         <el-option
                                                 v-for="item in claOptions"
                                                 :key="item.value"
@@ -65,24 +60,9 @@
                                                 :value="item.value">
                                         </el-option>
                                     </el-select>
+
                                 </div>
 
-                                <!--粘贴url-->
-                                <!--<div style="font-size: 1rem;padding: .5rem 2rem">-->
-                                <!-- - or - -->
-                                <!--</div>-->
-                                <!--<div style="font-size: 1rem;padding: .5rem 2rem">-->
-                                <!--Paste a URL from a Gist-->
-                                <!--</div>-->
-                                <!--<div style="padding: 0 2rem">-->
-                                <!--<el-input-->
-                                <!--:disabled="!!claValue"-->
-                                <!--size="medium"-->
-                                <!--placeholder="https://gist.github.com/<your cla gist id>"-->
-                                <!--v-model="gistUrl">-->
-
-                                <!--</el-input>-->
-                                <!--</div>-->
                                 <div style="font-size: 1rem;padding: .5rem 2rem">
                                     Email
                                 </div>
@@ -95,47 +75,6 @@
 
                                     </el-input>
                                 </div>
-
-                                <!--是否分享-->
-                                <!--<div style="font-size: 1rem;padding: .5rem 2rem">-->
-                                <!--<el-checkbox v-model="shareGistChecked"/>-->
-                                <!--Share the Gist-->
-                                <!--<span style="font-size: .8rem;text-decoration: underline;cursor: pointer;"-->
-                                <!--@click="shareDialogVisible=true">(want to share?)</span>-->
-                                <!--</div>-->
-                                <!--<div style="font-size: 1.2rem;padding: .5rem">-->
-                                <!--③ CLA Requirement Settings (Optional)-->
-                                <!--</div>-->
-                                <!--&lt;!&ndash;文件修改数&ndash;&gt;-->
-                                <!--<div style="font-size: 1rem;padding: 0 2rem .5rem 2rem">-->
-                                <!--Minimum File Number Changes-->
-                                <!--</div>-->
-                                <!--<div style="padding: 0 2rem">-->
-                                <!--<el-input-->
-                                <!--type="number"-->
-                                <!--size="medium"-->
-                                <!--placeholder="number"-->
-                                <!--v-model="fileNumber">-->
-
-                                <!--</el-input>-->
-                                <!--</div>-->
-                                <!--&lt;!&ndash;行修改数&ndash;&gt;-->
-                                <!--<div style="font-size: 1rem;padding: .5rem 2rem">-->
-                                <!-- - or - -->
-                                <!--</div>-->
-                                <!--<div style="font-size: 1rem;padding: 0 2rem .5rem 2rem">-->
-                                <!--Minimum Line Number Changes-->
-                                <!--</div>-->
-                                <!--<div style="padding: 0 2rem">-->
-                                <!--<el-input-->
-                                <!--type="number"-->
-                                <!--size="medium"-->
-                                <!--placeholder="number"-->
-                                <!--v-model="lineNumber">-->
-
-                                <!--</el-input>-->
-                                <!--</div>-->
-                                <!--链接-->
 
                                 <div
                                         :class="{'linkBt pointer':claChoose&&repositoryChoose&&isEmail,'disableClass':!(claChoose&&repositoryChoose&&isEmail)}"
@@ -351,18 +290,6 @@
 
                 </el-tabs>
             </div>
-            <!--<el-dropdown @command="handleCommand" trigger="click" placement="bottom-start">-->
-            <!--<span class="el-dropdown-link">-->
-            <!--{{dropdownTitle}}<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
-            <!--</span>-->
-            <!--<el-dropdown-menu slot="dropdown">-->
-            <!--<el-dropdown-item command="发布的开源项目">发布的开源项目</el-dropdown-item>-->
-            <!--<el-dropdown-item command="个人签署的项目">个人签署的项目</el-dropdown-item>-->
-            <!--<el-dropdown-item command="企业签署的项目">企业签署的项目</el-dropdown-item>-->
-            <!--<el-dropdown-item command="企业个人签署的项目">企业个人签署的项目</el-dropdown-item>-->
-
-            <!--</el-dropdown-menu>-->
-            <!--</el-dropdown>-->
 
         </el-col>
 
@@ -449,10 +376,10 @@
                         <svg-icon style="width: 100%;height: 100%" icon-class="popup_link"></svg-icon>
                     </el-row>
                     <el-row>
-                        <el-col :offset="6" :span="5">
+                        <el-col :offset="6" :span="5" v-if="claChoose">
                             {{claOptions[claValue].label}}
                         </el-col>
-                        <el-col :offset="2" :span="5">
+                        <el-col :offset="2" :span="5" v-if="repositoryChoose">
                             {{repositoryOptions[repositoryValue].label}}
                         </el-col>
                     </el-row>
@@ -723,6 +650,24 @@
                 callback();
             };
             return {
+                options: [{
+                    value: '选项1',
+                    label: '黄金糕'
+                }, {
+                    value: '选项2',
+                    label: '双皮奶',
+                    disabled: true
+                }, {
+                    value: '选项3',
+                    label: '蚵仔煎'
+                }, {
+                    value: '选项4',
+                    label: '龙须面'
+                }, {
+                    value: '选项5',
+                    label: '北京烤鸭'
+                }],
+                value: '',
                 linkLoading: false,
                 platform: this.$store.state.platform,
                 ruleForm: {
@@ -773,22 +718,11 @@
                 claName: 'test',
                 repositoryName: 'ooo/test',
                 shareGistChecked: false,
-                claOptions: [{value: '', label: '', text: '来而不往非礼也', language: ''}, {
+                claOptions: [{value: '0', label: 'test', text: '来而不往非礼也', language: ''}, {
                     value: '1',
                     label: 'share',
-                    text: '   学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆' +
-                        '学而不思则罔，思维不学则殆学而不思则罔，' +
-                        '    思维' +
-                        '              不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不' +
-                        '思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆' +
-                        '学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆' +
-                        '学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆' +
-                        '学而不思则罔              ，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆' +
-                        '学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆' +
-                        '学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆' +
-                        '学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆' +
-                        '学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆'
-                },],
+                    text: '   学而不思则罔，思而不学则殆则殆'
+                }],
                 claValue: '',
                 claChoose: false,
                 linkDialogVisible: false,
@@ -798,9 +732,9 @@
                 fileNumber: '',
                 lineNumber: '',
                 gistUrl: '',
-                orgOptions: [{value: '', label: ''}],
+                orgOptions: [{value: '0', label: 'test'}],
                 orgValue: '',
-                repositoryOptions: [{value: '', label: '',},],
+                repositoryOptions: [{value: '0', label: 'test',},],
                 repositoryValue: '',
                 repositoryChoose: '',
                 showConfigForm: false,
@@ -845,14 +779,6 @@
                 if (this.loginType === '0') {
                     window.location.href = 'https://github.com/login/oauth/authorize?client_id=d86f4915398dad23bffc&redirect_url=http://localhost:8080/home&scope=repo';
                 }
-                // this.$axios({
-                //     url:'/user/orgs',
-                //     methods:'get'
-                // }).then(res => {
-                //     console.log(res);
-                // }).catch(err => {
-                //     console.log(err);
-                // })
             },
 
             /*白名单列表翻页*/
@@ -863,50 +789,50 @@
             changePage(page) {
                 console.log(page);
             },
-            handleCommand(command) {
-                // this.$message('click on item ' + command);
-                this.dropdownTitle = command
-                switch (command) {
-                    case '发布的开源项目':
-                        this.tableType = 1;
-                        this.tableShow = true;
-                        this.currentPage = 1;
-                        this.tableTotal = this.tableData.length
-                        console.log(this.tableShow);
-                        // this.getLinkedRepositories();
-                        break;
-                    case '个人签署的项目':
-                        this.tableType = 2;
-                        this.currentPage = 1;
-
-                        this.tableShow = false;
-                        console.log(this.tableShow);
-                        this.tableTotal = this.tableDataOther.length;
-
-                        break;
-                    case '企业签署的项目':
-                        this.tableType = 3;
-                        this.currentPage = 1;
-
-                        this.tableShow = false;
-                        console.log(this.tableShow);
-                        this.tableTotal = this.tableDataOther.length;
-
-                        // this.getCompanyRepositories();
-                        break;
-                    case '企业个人签署的项目':
-                        this.tableType = 4;
-                        this.tableShow = false;
-                        this.currentPage = 1;
-
-                        console.log(this.tableShow);
-                        this.tableTotal = this.tableDataOther.length;
-                        // this.getCompanyPersonRepositories();
-                        break;
-
-
-                }
-            },
+            // handleCommand(command) {
+            //     // this.$message('click on item ' + command);
+            //     this.dropdownTitle = command
+            //     switch (command) {
+            //         case '发布的开源项目':
+            //             this.tableType = 1;
+            //             this.tableShow = true;
+            //             this.currentPage = 1;
+            //             this.tableTotal = this.tableData.length
+            //             console.log(this.tableShow);
+            //             // this.getLinkedRepositories();
+            //             break;
+            //         case '个人签署的项目':
+            //             this.tableType = 2;
+            //             this.currentPage = 1;
+            //
+            //             this.tableShow = false;
+            //             console.log(this.tableShow);
+            //             this.tableTotal = this.tableDataOther.length;
+            //
+            //             break;
+            //         case '企业签署的项目':
+            //             this.tableType = 3;
+            //             this.currentPage = 1;
+            //
+            //             this.tableShow = false;
+            //             console.log(this.tableShow);
+            //             this.tableTotal = this.tableDataOther.length;
+            //
+            //             // this.getCompanyRepositories();
+            //             break;
+            //         case '企业个人签署的项目':
+            //             this.tableType = 4;
+            //             this.tableShow = false;
+            //             this.currentPage = 1;
+            //
+            //             console.log(this.tableShow);
+            //             this.tableTotal = this.tableDataOther.length;
+            //             // this.getCompanyPersonRepositories();
+            //             break;
+            //
+            //
+            //     }
+            // },
             /*获取发布的开源项目*/
             getLinkedRepositories() {
                 console.log('getLinkedRepositories');
@@ -1081,9 +1007,8 @@
             },
             /*选择cla*/
             changeCla(value) {
-                this.claValue = value
                 this.claChoose = true;
-                console.log(value);
+                console.log(this.claValue);
                 this.previewText = this.claOptions[value].text;
             },
             /*弹出dialog说明框*/
@@ -1101,9 +1026,8 @@
 
             /*选择仓库*/
             changeRepository(value) {
-                console.log(value);
+                console.log(this.repositoryValue);
                 this.repositoryChoose = true;
-                this.repositoryValue = value
             },
             getRepositoriesOfOrg(org) {
                 console.log("getRepositoriesOfOrg");
@@ -1244,8 +1168,8 @@
         },
 
         created() {
-            this.getCookieData()
-            this.getUserInfo()
+            // this.getCookieData()
+            // this.getUserInfo()
 
         },
         mounted() {
