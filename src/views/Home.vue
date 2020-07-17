@@ -1049,7 +1049,7 @@
                 };
                 this.$axios({
                     url: '/api'+url.linkRepository,
-                    methods: 'post',
+                    method: 'post',
                     data: obj,
                 }).then(res => {
                     console.log(res);
