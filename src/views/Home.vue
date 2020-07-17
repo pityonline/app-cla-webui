@@ -723,6 +723,7 @@
                 callback();
             };
             return {
+                platform:this.$store.state.platform,
                 ruleForm: {
                     pass: '',
                     account: '',
@@ -771,7 +772,7 @@
                 claName: 'test',
                 repositoryName: 'ooo/test',
                 shareGistChecked: false,
-                claOptions: [{value: '0', label: 'test', text: '来而不往非礼也'}, {
+                claOptions: [{value: '0', label: 'test', text: '来而不往非礼也',language:''}, {
                     value: '1',
                     label: 'share',
                     text: '   学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆学而不思则罔，思维不学则殆' +
@@ -814,8 +815,8 @@
                     height: '',
                 },
                 user: {
-                    userName: '',
-                    userId: '',
+                    userName: this.$store.state.user.userName,
+                    userId:this.$store.state.user.userId,
                     isAuthorize: false,
                 },
             }
@@ -1037,11 +1038,14 @@
             linkRepository() {
                 this.linkDialogVisible = false;
                 let obj = {
-                    repositoryId: this.repositoryOptions[this.repositoryValue].id,
-                    claId: this.claOptions[this.claValue].id,
-                    email: this.email,
+                    repo_id: this.repositoryOptions[this.repositoryValue].id,
+                    cla_id: this.claOptions[this.claValue].id,
+                    org_email: this.email,
                     platform:this.platform,
-                    orgId:this.orgOptions[this.orgValue].id
+                    org_id:this.orgOptions[this.orgValue].id,
+                    cla_language:this.this.claOptions[this.claValue].language,
+                    submitter:`${this.platform}/${this.user.userName}`,
+                    metadata_id:'',
                 };
                 this.$axios({
                     url: '/api'+url.linkRepository,
@@ -1145,7 +1149,7 @@
                     if (res.data.length) {
                         this.claOptions=[];
                         res.data.forEach((item,index)=>{
-                           this.claOptions.push({value:index,label:item.name,id:item.id,text:item.text})
+                           this.claOptions.push({value:index,label:item.name,id:item.id,text:item.text,language:item.language})
                        })
                     }
                 }).catch(err => {
@@ -1221,8 +1225,8 @@
         },
 
         async created() {
-            await this.getCookieData();
-            await this.getUserInfo()
+            new Promise(this.getCookieData()).then(this.getUserInfo()) ;
+
         },
         mounted() {
 
