@@ -798,7 +798,7 @@
                 gistUrl: '',
                 orgOptions:[{value:'0',label:'myOrg'}],
                 orgValue:'0',
-                repositoryOptions: [{value: '0', label: 'test',},],
+                repositoryOptions: [{value: '0', label: '',},],
                 repositoryValue: '0',
                 repositoryChoose: '',
                 showConfigForm: false,
@@ -1105,7 +1105,7 @@
                     if (res.status === 200) {
                         this.repositoryOptions=[];
                         res.data.forEach((item, index) => {
-                            this.repositoryOptions.push({value: index, org:org,repoName:item.name,label: `${org}/${item.name}`});
+                            this.repositoryOptions.push({value: index, org:org,repoName:item.name,label: `${org}/${item.name}`,id:item.id});
                         })
                     }
                 }).catch(err => {
@@ -1126,7 +1126,7 @@
                         // this.repositoryOptions = res.data.data
                         this.orgOptions=[];
                         res.data.forEach((item, index) => {
-                            this.orgOptions.push({value: index, label: item.login});
+                            this.orgOptions.push({value: index, label: item.login,id:item.id});
                             this.getRepositoriesOfOrg(item.login)
                         })
                     }
@@ -1197,6 +1197,7 @@
             /*获取用户名并显示*/
             getUserInfo() {
                 let obj = {access_token: this.access_token};
+                console.log(obj);
                 this.$axios({
                     url: url.getUserInfo,
                     params: obj,
