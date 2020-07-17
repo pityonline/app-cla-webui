@@ -650,24 +650,7 @@
                 callback();
             };
             return {
-                options: [{
-                    value: '选项1',
-                    label: '黄金糕'
-                }, {
-                    value: '选项2',
-                    label: '双皮奶',
-                    disabled: true
-                }, {
-                    value: '选项3',
-                    label: '蚵仔煎'
-                }, {
-                    value: '选项4',
-                    label: '龙须面'
-                }, {
-                    value: '选项5',
-                    label: '北京烤鸭'
-                }],
-                value: '',
+
                 linkLoading: false,
                 platform: this.$store.state.platform,
                 ruleForm: {
@@ -969,11 +952,12 @@
                     cla_id: this.claOptions[this.claValue].id,
                     org_email: this.email,
                     platform: this.platform,
-                    org_id: `${this.orgOptions[this.orgValue].id}`,
+                    org_id: `${this.repositoryOptions[this.repositoryValue].org_id}`,
                     cla_language: this.claOptions[this.claValue].language,
                     submitter: `${this.platform}/${this.user.userName}`,
                     metadata_id: '',
                 };
+                console.log(obj);
                 this.$axios({
                     url: '/api' + url.linkRepository,
                     method: 'post',
@@ -988,6 +972,7 @@
                     this.linkDialogVisible = false;
                 }).catch(err => {
                     console.log(err);
+                    this.linkLoading = false;
                 })
             },
 
@@ -1028,8 +1013,9 @@
             changeRepository(value) {
                 console.log(this.repositoryValue);
                 this.repositoryChoose = true;
+
             },
-            getRepositoriesOfOrg(org) {
+            getRepositoriesOfOrg(org,org_id) {
                 console.log("getRepositoriesOfOrg");
                 let obj = {access_token: this.access_token, org: org, page: 1, per_page: 10};
                 this.$axios({
@@ -1043,6 +1029,7 @@
                             this.repositoryOptions.push({
                                 value: index,
                                 org: org,
+                                org_id:org_id,
                                 repoName: item.name,
                                 label: `${org}/${item.name}`,
                                 id: item.id
@@ -1068,7 +1055,7 @@
                         this.orgOptions = [];
                         res.data.forEach((item, index) => {
                             this.orgOptions.push({value: index, label: item.login, id: item.id});
-                            this.getRepositoriesOfOrg(item.login)
+                            this.getRepositoriesOfOrg(item.login,item.id)
                         })
                     }
                 }).catch(err => {
@@ -1168,8 +1155,8 @@
         },
 
         created() {
-            // this.getCookieData()
-            // this.getUserInfo()
+            this.getCookieData()
+            this.getUserInfo()
 
         },
         mounted() {
