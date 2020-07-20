@@ -15,11 +15,12 @@
                     </el-select>
                 </div>
                 <el-tag
-                        :key="tag"
+
+                        :key="tag.id"
                         v-for="tag in claOptions"
                         closable
                         :disable-transitions="false"
-                        @close="handleClose(tag.name)">
+                        @close="handleClose(tag)">
                     {{tag.name}}
                 </el-tag>
                 <el-input rows="10" @change="claTextChange" class="textAreaClass" v-model="claText" type="textarea">
@@ -93,7 +94,7 @@
                 console.log("getCLA");
                 this.$axios({
                     url: '/api' + url.getClaInfo,
-                    headers: {access_token: this.$store.state.access_token, refresh_token: this.refresh_token}
+                    headers: {access_token: this.$store.state.access_token, refresh_token: this.$store.state.refresh_token}
                 }).then(res => {
                     console.log(res);
                     if (res.data.length) {
