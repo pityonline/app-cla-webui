@@ -64,7 +64,7 @@
                 </div>
                 <div v-else style="display: flex;justify-content: space-between;">
                     <el-col :span="20" style="padding-right: 2rem">
-                        <el-input style="margin-bottom: 0.5rem;" size="small" v-model="newClaFileName"
+                        <el-input style="margin-bottom: 0.5rem;" size="small" v-model="newMetaFileName"
                                   placeholder="please input file name">
                         </el-input>
                     </el-col>
