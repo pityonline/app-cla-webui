@@ -5,6 +5,27 @@
             <el-col :offset="6" :span="12">
                 <div style="display: flex;justify-content: space-between;padding: 1rem 0">
                     <span>Edit your CLA</span>
+
+                </div>
+                <div>
+                    <el-tag
+                            class="pointer"
+                            :key="tag"
+                            v-for="(tag,index) in claTags"
+                            closable
+                            @click="chooseCla(index)"
+                            :disable-transitions="false"
+                            @close="handleClose(tag)">
+                        {{tag}}
+                    </el-tag>
+                </div>
+                <div v-if="!addNewFile">
+                    <el-button size="mini" @click="clickAddNewFile()">+ add new file</el-button>
+                </div>
+                <div v-else style="display: flex;justify-content: space-between;padding: 1rem 0">
+                    <el-input v-model="newClaFileName" placeholder="please input file name">
+
+                    </el-input>
                     <el-select style="width: 8rem" size="small" v-model="value" value="">
                         <el-option
                                 v-for="item in languageOptions"
@@ -14,19 +35,13 @@
                         </el-option>
                     </el-select>
                 </div>
-                <el-tag
-                        class="pointer"
-                        :key="tag"
-                        v-for="(tag,index) in claTags"
-                        closable
-                        @click="chooseCla(index)"
-                        :disable-transitions="false"
-                        @close="handleClose(tag)">
-                    {{tag}}
-                </el-tag>
-                <el-input rows="10" :readonly="!isEdit" @change="claTextChange" class="textAreaClass" v-model="claText" type="textarea">
+                <div>
+                    <el-input rows="10" :readonly="!isEdit" @change="claTextChange" class="textAreaClass"
+                              v-model="claText" type="textarea">
 
-                </el-input>
+                    </el-input>
+                </div>
+
                 <!--<el-button type="primary" @click="copy">copy</el-button>-->
                 <p>Edit your metaData</p>
                 <!--<div>-->
@@ -62,7 +77,9 @@
         },
         data() {
             return {
-                isEdit:false,
+                newClaFileName: '',
+                addNewFile: false,
+                isEdit: false,
                 claTags: [],
                 claOptions: [],
                 fullscreenLoading: false,
@@ -89,13 +106,20 @@
             }
         },
         methods: {
-            chooseCla(index){
-                console.log('chooseCla',index);
-                this.claText=this.claOptions[index].text;
-                this.isEdit=false;
+            clickAddNewFile() {
+                this.addNewFile = true;
+            },
+            chooseCla(index) {
+                console.log('chooseCla', index);
+                this.claText = this.claOptions[index].text;
+                this.isEdit = false;
+                this.addNewFile=false;
             },
             handleClose(tag) {
-                this.claOptions.splice(this.claOptions.indexOf(tag), 1);
+                /*删除cla*/
+                this.claTags.splice(this.claTags.indexOf(tag), 1);
+                /*删除cla*/
+
             },
             /*获取cla数据*/
             getCLA() {
@@ -226,6 +250,7 @@
 
         }
     }
+
     .pointer {
         cursor: pointer;
         margin-right: 1rem;
