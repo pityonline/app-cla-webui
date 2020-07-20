@@ -26,14 +26,14 @@
                     <el-input style="margin-bottom: 0.5rem;margin-right: 2rem" size="small" v-model="newClaFileName" placeholder="please input file name">
 
                     </el-input>
-                    <!--<el-select style="width: 8rem" size="small" v-model="value" value="">-->
-                        <!--<el-option-->
-                                <!--v-for="item in languageOptions"-->
-                                <!--:key="item.value"-->
-                                <!--:label="item.label"-->
-                                <!--:value="item.value">-->
-                        <!--</el-option>-->
-                    <!--</el-select>-->
+                    <el-select style="width: 8rem" size="small" v-model="value" value="">
+                        <el-option
+                                v-for="item in languageOptions"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                        </el-option>
+                    </el-select>
                 </div>
                 <div>
                     <el-input rows="10" :readonly="!isEdit" @change="claTextChange" class="textAreaClass"
@@ -62,14 +62,14 @@
                     <el-input style="margin-bottom: 0.5rem;margin-right: 2rem" size="small" v-model="newClaFileName" placeholder="please input file name">
 
                     </el-input>
-                    <el-select style="width: 8rem" size="small" v-model="value" value="">
-                        <el-option
-                                v-for="item in languageOptions"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value">
-                        </el-option>
-                    </el-select>
+                    <!--<el-select style="width: 8rem" size="small" v-model="value" value="">-->
+                        <!--<el-option-->
+                                <!--v-for="item in languageOptions"-->
+                                <!--:key="item.value"-->
+                                <!--:label="item.label"-->
+                                <!--:value="item.value">-->
+                        <!--</el-option>-->
+                    <!--</el-select>-->
                 </div>
                 <el-input rows="10" class="textAreaClass" v-model="metaData" type="textarea">
 
