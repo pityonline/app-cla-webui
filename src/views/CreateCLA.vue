@@ -24,7 +24,7 @@
                         @close="handleClose(tag)">
                     {{tag}}
                 </el-tag>
-                <el-input rows="10" :disabled="!isEdit" @change="claTextChange" class="textAreaClass" v-model="claText" type="textarea">
+                <el-input rows="10" :readonly="!isEdit" @change="claTextChange" class="textAreaClass" v-model="claText" type="textarea">
 
                 </el-input>
                 <!--<el-button type="primary" @click="copy">copy</el-button>-->

@@ -87,7 +87,7 @@
                             </div>
                         </el-col>
                         <el-col :span="12" :offset="2">
-                            <el-input rows="16" type="textarea" v-model="previewText" style="white-space: pre-wrap">
+                            <el-input rows="16" readonly type="textarea" v-model="previewText" style="white-space: pre-wrap">
 
                             </el-input>
                         </el-col>
