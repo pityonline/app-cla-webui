@@ -22,7 +22,7 @@
                         @close="handleClose(tag.name)">
                     {{tag.name}}
                 </el-tag>
-                <el-input rows="10" @change="claTextChange" class="textAreaClass" v-model="claText" type="textarea" >
+                <el-input rows="10" @change="claTextChange" class="textAreaClass" v-model="claText" type="textarea">
 
                 </el-input>
                 <!--<el-button type="primary" @click="copy">copy</el-button>-->
@@ -35,7 +35,9 @@
                 </el-input>
                 <div style="margin-top: 1rem;display: flex;justify-content: space-between">
                     <el-input v-model="claName" placeholder="请输入cla名称" style="margin-right: 2rem"></el-input>
-                    <el-button v-loading.fullscreen.lock="fullscreenLoading" :disabled="!verifyNotNull()" type="primary" @click="uploadCla()">create CLA</el-button>
+                    <el-button v-loading.fullscreen.lock="fullscreenLoading" :disabled="!verifyNotNull()" type="primary"
+                               @click="uploadCla()">create CLA
+                    </el-button>
                 </div>
             </el-col>
         </div>
@@ -58,7 +60,7 @@
         },
         data() {
             return {
-                claOptions:[],
+                claOptions: [],
                 fullscreenLoading: false,
                 claName: '',
                 value: "0",
@@ -74,7 +76,7 @@
                 createCLAClass: {
                     height: '',
                 },
-                platform:this.$store.state.platform,
+                platform: this.$store.state.platform,
                 user: {
                     userName: this.$store.state.user.userName,
                     userId: this.$store.state.user.userId,
@@ -110,7 +112,7 @@
                     console.log(err);
                 })
             },
-            claTextChange(value){
+            claTextChange(value) {
                 console.log(value);
             },
             /*验证calName和claText不为空*/
@@ -118,15 +120,15 @@
                 return this.claText.trim() && this.claName.trim()
             },
             /*上传cla*/
-          async  uploadCla() {
-                this.fullscreenLoading=true;
+            async uploadCla() {
+                this.fullscreenLoading = true;
                 let obj = {
                     name: this.claName,
                     text: this.claText,
                     // metaData: this.metaData,
                     language: 'EN',
                     // id: this.user.userId,
-                    submitter:`${this.platform}/${this.user.userName}`
+                    submitter: `${this.platform}/${this.user.userName}`
                     // user: this.user.userName
                 }
                 // this.verifyClaAndMeta() &&
@@ -137,13 +139,13 @@
                 }).then(res => {
                     console.log(res);
                     if (res.status === 200) {
-                        this.fullscreenLoading=false;
+                        this.fullscreenLoading = false;
                         this.$message.success('succeed')
-                        setTimeout( ()=> {
+                        setTimeout(() => {
                             this.$router.replace('/home')
-                        },2000)
-                    }else{
-                        this.fullscreenLoading=false;
+                        }, 2000)
+                    } else {
+                        this.fullscreenLoading = false;
                         this.$message.error('failed')
                     }
                 }).catch(err => {
@@ -179,7 +181,7 @@
 
         },
         created() {
-
+            this.getCLA()
         },
         mounted() {
             this.setClientHeight()
