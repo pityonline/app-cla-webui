@@ -47,6 +47,34 @@
                 <!--<div>-->
                 <!--<pre style="white-space: pre-wrap" id="showCla"></pre>-->
                 <!--</div>-->
+                <div>
+                    <el-tag
+                            class="pointer"
+                            :key="tag"
+                            v-for="(tag,index) in claTags"
+                            closable
+                            @click="chooseCla(index)"
+                            :disable-transitions="false"
+                            @close="handleClose(tag)">
+                        {{tag}}
+                    </el-tag>
+                </div>
+                <div v-if="!addNewFile" >
+                    <el-button class="pointer" size="mini" @click="clickAddNewFile()">+ add new file</el-button>
+                </div>
+                <div v-else style="display: flex;justify-content: space-between;">
+                    <el-input style="margin-bottom: 0.5rem;margin-right: 2rem" size="small" v-model="newClaFileName" placeholder="please input file name">
+
+                    </el-input>
+                    <el-select style="width: 8rem" size="small" v-model="value" value="">
+                        <el-option
+                                v-for="item in languageOptions"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                        </el-option>
+                    </el-select>
+                </div>
                 <el-input rows="10" class="textAreaClass" v-model="metaData" type="textarea">
 
                 </el-input>
@@ -156,9 +184,9 @@
             claTextChange(value) {
                 console.log(value);
             },
-            /*验证calName和claText不为空*/
+            /*验证newClaFileName和claText不为空*/
             verifyNotNull() {
-                return this.claText.trim() && this.claName.trim()
+                return this.addNewFile?this.newClaFileName.trim()!==''&&this.claText.trim()!=='':true;
             },
             /*上传cla*/
             async uploadCla() {
@@ -172,7 +200,7 @@
                     submitter: `${this.platform}/${this.user.userName}`
                     // user: this.user.userName
                 }
-                this.verifyClaAndMeta() &&
+                console.log(obj);
                 this.$axios({
                     url: '/api' + url.uploadCla,
                     method: 'post',
@@ -193,10 +221,7 @@
                     console.log(err);
                 })
             },
-            /*非空验证*/
-            verifyClaAndMeta() {
-                return this.addNewFile?this.newClaFileName!==''&&this.claText!=='':true;
-            },
+
             setClientHeight() {
                 this.$nextTick(() => {
                     console.log(until.getClientHeight());
