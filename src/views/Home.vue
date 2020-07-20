@@ -1164,7 +1164,7 @@
                     background: 'rgba(0, 0, 0, 0.7)'
                 });
                 setInterval(()=>{
-                    this.$store.state.access_token&&loading.close();
+                    this.$store.state.user.userName&&loading.close();
                 },200)
             }
         },
