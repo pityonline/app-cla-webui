@@ -84,12 +84,12 @@
                 claOptions: [],
                 fullscreenLoading: false,
                 claName: '',
-                value: "0",
+                value: 0,
                 languageOptions: [{
-                    value: '0',
+                    value: 0,
                     label: 'english'
                 }, {
-                    value: '1',
+                    value: 1,
                     label: 'chinese'
                 },],
                 claText: 'test',
@@ -109,6 +109,7 @@
             clickAddNewFile() {
                 this.addNewFile = true;
                 this.claText='';
+                this.isEdit=true;
             },
             chooseCla(index) {
                 console.log('chooseCla', index);
@@ -166,12 +167,12 @@
                     name: this.claName,
                     text: this.claText,
                     // metaData: this.metaData,
-                    language: 'EN',
+                    language:this.languageOptions[this.value].label,
                     // id: this.user.userId,
                     submitter: `${this.platform}/${this.user.userName}`
                     // user: this.user.userName
                 }
-                // this.verifyClaAndMeta() &&
+                this.verifyClaAndMeta() &&
                 this.$axios({
                     url: '/api' + url.uploadCla,
                     method: 'post',
@@ -194,7 +195,7 @@
             },
             /*非空验证*/
             verifyClaAndMeta() {
-                return this.claText !== "" && this.metaData !== ""
+                return this.addNewFile?this.newClaFileName!==''&&this.claText!=='':true;
             },
             setClientHeight() {
                 this.$nextTick(() => {
