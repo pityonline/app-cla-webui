@@ -22,7 +22,7 @@
                 <div v-if="!addNewFile" >
                     <el-button class="pointer" size="mini" @click="clickAddNewFile()">+ add new file</el-button>
                 </div>
-                <div v-else style="display: flex;justify-content: space-between;padding: 1rem 0">
+                <div v-else style="display: flex;justify-content: space-between;">
                     <el-input style="margin-bottom: 0.5rem;margin-right: 2rem" size="small" v-model="newClaFileName" placeholder="please input file name">
 
                     </el-input>
