@@ -26,14 +26,14 @@
                     <el-input style="margin-bottom: 0.5rem;margin-right: 2rem" size="small" v-model="newClaFileName" placeholder="please input file name">
 
                     </el-input>
-                    <el-select style="width: 8rem" size="small" v-model="value" value="">
-                        <el-option
-                                v-for="item in languageOptions"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value">
-                        </el-option>
-                    </el-select>
+                    <!--<el-select style="width: 8rem" size="small" v-model="value" value="">-->
+                        <!--<el-option-->
+                                <!--v-for="item in languageOptions"-->
+                                <!--:key="item.value"-->
+                                <!--:label="item.label"-->
+                                <!--:value="item.value">-->
+                        <!--</el-option>-->
+                    <!--</el-select>-->
                 </div>
                 <div>
                     <el-input rows="10" :readonly="!isEdit" @change="claTextChange" class="textAreaClass"
@@ -55,7 +55,7 @@
                         {{tag}}
                     </el-tag>
                 </div>
-                <div v-if="!addNewFile" >
+                <div v-if="!isAddNewMetaFile" >
                     <el-button class="pointer" size="mini" @click="clickAddNewMetaFile()">+ add new file</el-button>
                 </div>
                 <div v-else style="display: flex;justify-content: space-between;">
@@ -104,7 +104,7 @@
                 isEditMeta:false,
                 metaText:'',
                 newMetaFileName:'',
-                metaTags:['test','myMeta','test1','myTest','test2','test3','test4','test5','test6','test7'],
+                metaTags:['test','myMeta','test1','myTest','test2','test3','test4','test5','test6','test7','internationalMetadata','openLooKeng','test8'],
                 newClaFileName: '',
                 addNewFile: false,
                 isEdit: false,
