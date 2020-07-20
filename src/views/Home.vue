@@ -1159,9 +1159,9 @@
             openFullScreen() {
                 const loading = this.$loading({
                     lock: true,
-                    text: 'Loading',
-                    spinner: 'el-icon-loading',
-                    background: 'rgba(255, 255, 255, 0.5)'
+                    // text: 'Loading',
+                    // spinner: 'el-icon-loading',
+                    background: 'rgba(255, 255, 255, 0.8)'
                 });
                 setInterval(()=>{
                     this.$store.state.user.userName&&loading.close();
