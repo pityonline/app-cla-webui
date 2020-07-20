@@ -19,11 +19,11 @@
                         {{tag}}
                     </el-tag>
                 </div>
-                <div v-if="!addNewFile">
-                    <el-button size="mini" @click="clickAddNewFile()">+ add new file</el-button>
+                <div v-if="!addNewFile" >
+                    <el-button class="pointer" size="mini" @click="clickAddNewFile()">+ add new file</el-button>
                 </div>
                 <div v-else style="display: flex;justify-content: space-between;padding: 1rem 0">
-                    <el-input v-model="newClaFileName" placeholder="please input file name">
+                    <el-input style="margin-bottom: 0.5rem;margin-right: 2rem" size="small" v-model="newClaFileName" placeholder="please input file name">
 
                     </el-input>
                     <el-select style="width: 8rem" size="small" v-model="value" value="">
@@ -254,6 +254,6 @@
     .pointer {
         cursor: pointer;
         margin-right: 1rem;
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
     }
 </style>
