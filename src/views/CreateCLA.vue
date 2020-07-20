@@ -205,7 +205,7 @@
             },
             /*验证newClaFileName和claText不为空*/
             verifyNotNull() {
-                return this.addNewFile?this.newClaFileName.trim()!==''&&this.claText.trim()!=='':true;
+                return this.addNewFile?this.newClaFileName.trim()!==''&&this.claText.trim()!=='':this.claText.trim()!=='';
             },
             /*上传cla*/
             async uploadCla() {
