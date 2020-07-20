@@ -152,7 +152,7 @@
             },
             clickAddNewMetaFile() {
                 this.isAddNewMetaFile = true;
-                this.metaText = '';
+                this.metaData = '';
                 this.isEditMeta = true;
             },
             chooseMeta(index) {
@@ -221,7 +221,7 @@
             async uploadCla() {
                 this.fullscreenLoading = true;
                 let obj = {
-                    name: this.claName,
+                    name: this.newClaFileName,
                     text: this.claText,
                     // metaData: this.metaData,
                     language: this.languageOptions[this.value].label,
