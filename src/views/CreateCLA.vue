@@ -20,7 +20,7 @@
                     </el-tag>
                 </div>
                 <div v-if="!addNewFile" >
-                    <el-button class="pointer" size="mini" @click="clickAddNewFile()">+ add new file</el-button>
+                    <el-button class="pointer" size="mini" @click="clickAddNewClaFile()">+ add new file</el-button>
                 </div>
                 <div v-else style="display: flex;justify-content: space-between;">
                     <el-input style="margin-bottom: 0.5rem;margin-right: 2rem" size="small" v-model="newClaFileName" placeholder="please input file name">
@@ -38,29 +38,25 @@
                 <div>
                     <el-input rows="10" :readonly="!isEdit" @change="claTextChange" class="textAreaClass"
                               v-model="claText" type="textarea">
-
                     </el-input>
                 </div>
 
-                <!--<el-button type="primary" @click="copy">copy</el-button>-->
+
                 <p>Edit your metaData</p>
-                <!--<div>-->
-                <!--<pre style="white-space: pre-wrap" id="showCla"></pre>-->
-                <!--</div>-->
                 <div>
                     <el-tag
                             class="pointer"
                             :key="tag"
-                            v-for="(tag,index) in claTags"
+                            v-for="(tag,index) in metaTags"
                             closable
-                            @click="chooseCla(index)"
+                            @click="chooseMeta(index)"
                             :disable-transitions="false"
-                            @close="handleClose(tag)">
+                            @close="closeMetaTag(tag)">
                         {{tag}}
                     </el-tag>
                 </div>
                 <div v-if="!addNewFile" >
-                    <el-button class="pointer" size="mini" @click="clickAddNewFile()">+ add new file</el-button>
+                    <el-button class="pointer" size="mini" @click="clickAddNewMetaFile()">+ add new file</el-button>
                 </div>
                 <div v-else style="display: flex;justify-content: space-between;">
                     <el-input style="margin-bottom: 0.5rem;margin-right: 2rem" size="small" v-model="newClaFileName" placeholder="please input file name">
@@ -79,8 +75,7 @@
 
                 </el-input>
                 <div style="margin-top: 1rem;display: flex;justify-content: space-between">
-                    <el-input v-model="claName" placeholder="请输入cla名称" style="margin-right: 2rem"></el-input>
-                    <el-button v-loading.fullscreen.lock="fullscreenLoading" :disabled="!verifyNotNull()" type="primary"
+                    <el-button size="medium" v-loading.fullscreen.lock="fullscreenLoading" :disabled="!verifyNotNull()" type="primary"
                                @click="uploadCla()">create CLA
                     </el-button>
                 </div>
@@ -105,11 +100,17 @@
         },
         data() {
             return {
+                isAddNewMetaFile:false,
+                isEditMeta:false,
+                metaText:'',
+                newMetaFileName:'',
+                metaTags:['test','myMeta','test1','myTest','test2','test3','test4','test5','test6','test7'],
                 newClaFileName: '',
                 addNewFile: false,
                 isEdit: false,
                 claTags: [],
                 claOptions: [],
+                metaOptions:[{value:0,text:'{userName:{type:string,require:true},email:{type:string,require:true},}'},],
                 fullscreenLoading: false,
                 claName: '',
                 value: 0,
@@ -134,10 +135,22 @@
             }
         },
         methods: {
-            clickAddNewFile() {
+            clickAddNewClaFile() {
                 this.addNewFile = true;
                 this.claText='';
                 this.isEdit=true;
+            },
+            clickAddNewMetaFile() {
+                this.isAddNewMetaFile = true;
+                this.metaText='';
+                this.isEditMeta=true;
+            },
+            chooseMeta(index) {
+                console.log('chooseMeta', index);
+                this.metaData = this.metaOptions[0].text;
+                this.isEditMeta = false;
+                this.isAddNewMetaFile=false;
+                this.newMetaFileName='';
             },
             chooseCla(index) {
                 console.log('chooseCla', index);
@@ -149,6 +162,12 @@
             handleClose(tag) {
                 /*删除cla*/
                 this.claTags.splice(this.claTags.indexOf(tag), 1);
+                /*删除cla*/
+
+            },
+            closeMetaTag(tag) {
+                /*删除cla*/
+                this.metaTags.splice(this.metaTags.indexOf(tag), 1);
                 /*删除cla*/
 
             },
