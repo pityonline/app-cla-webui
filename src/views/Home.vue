@@ -1165,7 +1165,7 @@
                 });
                 setInterval(()=>{
                     this.$store.state.user.userName&&loading.close();
-                },500)
+                },5000)
             }
         },
 
