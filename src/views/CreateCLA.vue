@@ -108,12 +108,14 @@
         methods: {
             clickAddNewFile() {
                 this.addNewFile = true;
+                this.claText='';
             },
             chooseCla(index) {
                 console.log('chooseCla', index);
                 this.claText = this.claOptions[index].text;
                 this.isEdit = false;
                 this.addNewFile=false;
+                this.newClaFileName='';
             },
             handleClose(tag) {
                 /*删除cla*/
