@@ -14,6 +14,14 @@
                         </el-option>
                     </el-select>
                 </div>
+                <el-tag
+                        :key="tag"
+                        v-for="tag in claOptions"
+                        closable
+                        :disable-transitions="false"
+                        @close="handleClose(tag)">
+                    {{tag}}
+                </el-tag>
                 <el-input rows="10" @change="claTextChange" class="textAreaClass" v-model="claText" type="textarea" >
 
                 </el-input>
@@ -50,6 +58,7 @@
         },
         data() {
             return {
+                claOptions:[],
                 fullscreenLoading: false,
                 claName: '',
                 value: "0",
@@ -74,6 +83,33 @@
             }
         },
         methods: {
+            handleClose(tag) {
+                this.claOptions.splice(this.claOptions.indexOf(tag), 1);
+            },
+            /*获取cla数据*/
+            getCLA() {
+                console.log("getCLA");
+                this.$axios({
+                    url: '/api' + url.getClaInfo,
+                    headers: {access_token: this.$store.state.access_token, refresh_token: this.refresh_token}
+                }).then(res => {
+                    console.log(res);
+                    if (res.data.length) {
+                        this.claOptions = [];
+                        res.data.forEach((item, index) => {
+                            this.claOptions.push({
+                                value: index,
+                                label: item.name,
+                                id: item.id,
+                                text: item.text,
+                                language: item.language
+                            })
+                        })
+                    }
+                }).catch(err => {
+                    console.log(err);
+                })
+            },
             claTextChange(value){
                 console.log(value);
             },
