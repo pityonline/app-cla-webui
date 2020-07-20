@@ -15,15 +15,16 @@
                     </el-select>
                 </div>
                 <el-tag
-
+                        class="pointer"
                         :key="tag"
-                        v-for="tag in claTags"
+                        v-for="(tag,index) in claTags"
                         closable
+                        @click="chooseCla(index)"
                         :disable-transitions="false"
                         @close="handleClose(tag)">
                     {{tag}}
                 </el-tag>
-                <el-input rows="10" @change="claTextChange" class="textAreaClass" v-model="claText" type="textarea">
+                <el-input rows="10" :disabled="!isEdit" @change="claTextChange" class="textAreaClass" v-model="claText" type="textarea">
 
                 </el-input>
                 <!--<el-button type="primary" @click="copy">copy</el-button>-->
@@ -61,7 +62,8 @@
         },
         data() {
             return {
-                claTags:[],
+                isEdit:false,
+                claTags: [],
                 claOptions: [],
                 fullscreenLoading: false,
                 claName: '',
@@ -87,6 +89,11 @@
             }
         },
         methods: {
+            chooseCla(index){
+                console.log('chooseCla',index);
+                this.claText=this.claOptions[index].text;
+                this.isEdit=false;
+            },
             handleClose(tag) {
                 this.claOptions.splice(this.claOptions.indexOf(tag), 1);
             },
@@ -95,12 +102,15 @@
                 console.log("getCLA");
                 this.$axios({
                     url: '/api' + url.getClaInfo,
-                    headers: {access_token: this.$store.state.access_token, refresh_token: this.$store.state.refresh_token}
+                    headers: {
+                        access_token: this.$store.state.access_token,
+                        refresh_token: this.$store.state.refresh_token
+                    }
                 }).then(res => {
                     console.log(res);
                     if (res.data.length) {
                         this.claOptions = [];
-                        this.claTags=[];
+                        this.claTags = [];
                         res.data.forEach((item, index) => {
                             this.claTags.push(item.name);
                             this.claOptions.push({
@@ -215,5 +225,9 @@
 
 
         }
+    }
+    .pointer {
+        cursor: pointer;
+        margin-right: 1rem;
     }
 </style>
