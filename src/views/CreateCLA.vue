@@ -19,8 +19,8 @@
                         v-for="tag in claOptions"
                         closable
                         :disable-transitions="false"
-                        @close="handleClose(tag)">
-                    {{tag}}
+                        @close="handleClose(tag.name)">
+                    {{tag.name}}
                 </el-tag>
                 <el-input rows="10" @change="claTextChange" class="textAreaClass" v-model="claText" type="textarea" >
 
