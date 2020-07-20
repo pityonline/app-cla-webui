@@ -1119,19 +1119,23 @@
             /*获取cookie*/
             getCookieData() {
                 console.log('getCookieData');
-                let cookieArr = document.cookie.split('; ')
-                let access_token, refresh_token = '';
-                cookieArr.forEach((item, index) => {
-                    let arr = item.split('=');
-                    arr[0] === 'access_token' ? access_token = arr[1] : arr[0] === 'refresh_token' ? refresh_token = arr[1] : refresh_token = '';
-                    ;
-                })
-                let data = {access_token, refresh_token};
-                this.setTokenAct(data);
+                if (document.cookie!=='') {
+                    let cookieArr = document.cookie.split('; ')
+                    let access_token, refresh_token = '';
+                    cookieArr.forEach((item, index) => {
+                        let arr = item.split('=');
+                        arr[0] === 'access_token' ? access_token = arr[1] : arr[0] === 'refresh_token' ? refresh_token = arr[1] : refresh_token = '';
+                        ;
+                    })
+                    let data = {access_token, refresh_token};
+                    this.setTokenAct(data);
+                    this.getUserInfo(access_token)
+                }
+
             },
             /*获取用户名并显示*/
-            getUserInfo() {
-                let obj = {access_token: this.access_token};
+            getUserInfo(access_token) {
+                let obj = {access_token: access_token};
                 console.log(obj);
                 this.$axios({
                     url: url.getUserInfo,
@@ -1157,7 +1161,6 @@
 
         created() {
             this.getCookieData()
-            this.getUserInfo()
 
         },
         mounted() {

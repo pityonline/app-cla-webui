@@ -48,7 +48,7 @@
             }
         },
         created(){
-            console.log(this.userName);
+            console.log(this.user.userName);
         },
         methods:{
             toHome(){
