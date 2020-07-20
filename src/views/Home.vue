@@ -1043,8 +1043,8 @@
             },
             /*获取仓库数据*/
             getOrgsInfo() {
-                console.log("getOrgsInfo");
                 let obj = {access_token: this.access_token, admin: true, page: 1, per_page: 10};
+                console.log("getOrgsInfo",obj);
                 this.$axios({
                     url: url.getOrgsInfo,
                     methods: 'get',
@@ -1165,7 +1165,7 @@
                 });
                 setInterval(()=>{
                     this.$store.state.user.userName&&loading.close();
-                },5000)
+                },500)
             }
         },
 

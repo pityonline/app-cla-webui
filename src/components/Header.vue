@@ -31,24 +31,15 @@
     export default {
         name: "Header",
         computed:{
-            // userImg:()=>{
-            //     return this.$store.state.user.userImg;
-            // },
-            // userName:()=>{
-            //     return this.$store.state.user.userName;
-            // }
+
         },
         data(){
             return {
-                user: {
-                    userImg:this.$store.state.user.userImg,
-                    userName: this.$store.state.user.userName,
-                    isAuthorize: false,
-                },
+
             }
         },
         created(){
-            console.log(this.user.userName);
+
         },
         methods:{
             toHome(){
