@@ -972,7 +972,8 @@
                     this.linkDialogVisible = false;
                 }).catch(err => {
                     console.log(err);
-                    this.linkLoading = false;
+                    this.linkLoading = false
+                    this.$message.error('failed')
                 })
             },
 
