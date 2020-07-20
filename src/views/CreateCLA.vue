@@ -16,12 +16,12 @@
                 </div>
                 <el-tag
 
-                        :key="tag.id"
-                        v-for="tag in claOptions"
+                        :key="tag"
+                        v-for="tag in claTags"
                         closable
                         :disable-transitions="false"
                         @close="handleClose(tag)">
-                    {{tag.name}}
+                    {{tag}}
                 </el-tag>
                 <el-input rows="10" @change="claTextChange" class="textAreaClass" v-model="claText" type="textarea">
 
@@ -61,6 +61,7 @@
         },
         data() {
             return {
+                claTags:[],
                 claOptions: [],
                 fullscreenLoading: false,
                 claName: '',
@@ -99,7 +100,9 @@
                     console.log(res);
                     if (res.data.length) {
                         this.claOptions = [];
+                        this.claTags=[];
                         res.data.forEach((item, index) => {
+                            this.claTags.push(item.name);
                             this.claOptions.push({
                                 value: index,
                                 label: item.name,
