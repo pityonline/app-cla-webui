@@ -121,8 +121,8 @@
                     value: 1,
                     label: 'chinese'
                 },],
-                claText: 'test',
-                metaData: 'test',
+                claText: '',
+                metaData: '',
                 createCLAClass: {
                     height: '',
                 },
