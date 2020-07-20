@@ -635,6 +635,11 @@
             Header,
             Footer,
         },
+        computed:{
+            access_token:()=>{
+                return this.$store.state.access_token;
+            }
+        },
         data() {
 
             var validateAccount = (rule, value, callback) => {
@@ -1017,8 +1022,8 @@
 
             },
             getRepositoriesOfOrg(org,org_id) {
-                console.log("getRepositoriesOfOrg");
                 let obj = {access_token: this.access_token, org: org, page: 1, per_page: 10};
+                console.log("getRepositoriesOfOrg",obj);
                 this.$axios({
                     url: `https://gitee.com/api/v5/orgs/${org}/repos`,
                     params: obj,
