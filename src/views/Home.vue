@@ -970,12 +970,12 @@
                     headers: {'Access-Token': this.access_token, 'Refresh-Token': this.refresh_token,'User':`${this.platform}/${this.user.userName}`}
 
                 }).then(res => {
+                    this.linkLoading = false;
                     this.$message.success('success')
                     console.log(res);
                     this.claValue = '';
                     this.repositoryValue = '';
                     this.email = '';
-                    this.linkLoading = false;
                     this.linkDialogVisible = false;
                 }).catch(err => {
                     console.log(err);
