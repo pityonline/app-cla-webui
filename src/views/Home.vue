@@ -959,7 +959,7 @@
                     platform: this.platform,
                     org_id: `${this.repositoryOptions[this.repositoryValue].org}`,
                     cla_language: this.claOptions[this.claValue].language,
-                    submitter: `${this.platform}/${this.user.userName}`,
+                    submitter: `${this.platform}/${this.$store.state.user.userName}`,
                     metadata_id: '',
                 };
                 console.log(obj);
