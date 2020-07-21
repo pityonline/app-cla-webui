@@ -636,9 +636,7 @@
             Footer,
         },
         computed:{
-            access_token:()=>{
-                return this.$store.state.access_token;
-            }
+
         },
         data() {
 
@@ -938,7 +936,8 @@
                     url: url.unLinkRepository,
                     methods: 'post',
                     data: obj,
-                    headers: {access_token: this.$store.state.access_token, refresh_token: this.refresh_token}
+                    headers: {'Access-Token': this.access_token, 'Refresh-Token': this.refresh_token,'User':`${this.platform}/${this.user.userName}`}
+
                 }).then(res => {
                     console.log(res);
                     if (res.data.code === 200) {
@@ -968,7 +967,8 @@
                     url: '/api' + url.linkRepository,
                     method: 'post',
                     data: obj,
-                    headers: {access_token: this.$store.state.access_token, refresh_token: this.refresh_token}
+                    headers: {'Access-Token': this.access_token, 'Refresh-Token': this.refresh_token,'User':`${this.platform}/${this.user.userName}`}
+
                 }).then(res => {
                     this.$message.success('success')
                     console.log(res);
@@ -1075,7 +1075,7 @@
                 console.log("getCLA");
                 this.$axios({
                     url: '/api' + url.getClaInfo,
-                    headers: {access_token: this.$store.state.access_token, refresh_token: this.refresh_token}
+                    headers: {'Access-Token': this.access_token, 'Refresh-Token': this.refresh_token,'User':`${this.platform}/${this.user.userName}`}
                 }).then(res => {
                     console.log(res);
                     if (res.data.length) {
