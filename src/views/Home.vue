@@ -706,11 +706,7 @@
                 claName: 'test',
                 repositoryName: 'ooo/test',
                 shareGistChecked: false,
-                claOptions: [{value: '0', label: 'test', text: '来而不往非礼也', language: ''}, {
-                    value: '1',
-                    label: 'share',
-                    text: '   学而不思则罔，思而不学则殆则殆'
-                }],
+                claOptions: [],
                 claValue: '',
                 claChoose: false,
                 linkDialogVisible: false,
