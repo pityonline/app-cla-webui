@@ -1104,9 +1104,11 @@
                 this.setClientHeight()
             },
             getLinkedRepoList(access_token,refresh_token){
+                let obj ={platform:this.platform}
+                console.log(obj);
                 this.$axios({
                     url: '/api' + url.getLinkedRepoList,
-                    headers: {access_token: access_token, refresh_token: refresh_token}
+                    headers: {ACCESS_TOKEN: access_token, REFRESH_TOKEN: refresh_token,USER:`${this.platform}/${this.user.userName}`}
                 }).then(res => {
                     console.log(res);
                     if (res.data.length) {
