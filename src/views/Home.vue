@@ -951,13 +951,13 @@
             },
             /*链接开源项目*/
             linkRepository() {
-                this.linkLoading = true;
+                // this.linkLoading = true;
                 let obj = {
-                    repo_id: `${this.repositoryOptions[this.repositoryValue].id}`,
+                    repo_id: `${this.repositoryOptions[this.repositoryValue].repoName}`,
                     cla_id: this.claOptions[this.claValue].id,
                     org_email: this.email,
                     platform: this.platform,
-                    org_id: `${this.repositoryOptions[this.repositoryValue].org_id}`,
+                    org_id: `${this.repositoryOptions[this.repositoryValue].org}`,
                     cla_language: this.claOptions[this.claValue].language,
                     submitter: `${this.platform}/${this.user.userName}`,
                     metadata_id: '',
