@@ -816,24 +816,21 @@
             //     }
             // },
             /*获取发布的开源项目*/
-            getLinkedRepositories() {
-                console.log('getLinkedRepositories');
-                let obj = {
-                    userName: this.user.userName
-                };
+            getLinkedRepoList(access_token,refresh_token,userName){
+                let obj ={platform:this.platform}
+                console.log(obj,access_token,refresh_token);
                 this.$axios({
-                    url: url.getLinkedRepositories,
-                    methods: 'post',
-                    data: obj,
-                    headers: {access_token: this.$store.state.access_token, refresh_token: this.refresh_token}
+                    url: '/api' + url.getLinkedRepoList,
+                    headers: {'Access-Token': access_token, 'Refresh-Token': refresh_token, 'User':`${this.platform}/${userName}`}
                 }).then(res => {
                     console.log(res);
-                    if (res.data.code === 200) {
-                        this.tableData = res.data.data
+                    if (res.data.length) {
+
                     }
                 }).catch(err => {
                     console.log(err);
                 })
+
             },
             /*获取个人签署的项目*/
             getPersonalSigned() {
@@ -909,7 +906,6 @@
             /*邮箱验证*/
             verifyEmail() {
                 var email = this.email;
-                console.log(email);
                 var reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
                 if (reg.test(email)) {
                     this.isEmail = true
@@ -979,6 +975,7 @@
                     this.repositoryChoose=false;
                     this.email = '';
                     this.linkDialogVisible = false;
+                    this.getLinkedRepoList(this.$store.state.access_token,this.$store.state.refresh_token,this.$store.state.user.userName)
                 }).catch(err => {
                     console.log(err);
                     this.linkLoading = false
@@ -1101,22 +1098,7 @@
                 this.showConfigForm = false
                 this.setClientHeight()
             },
-            getLinkedRepoList(access_token,refresh_token,userName){
-                let obj ={platform:this.platform}
-                console.log(obj,access_token,refresh_token);
-                this.$axios({
-                    url: '/api' + url.getLinkedRepoList,
-                    headers: {'Access-Token': access_token, 'Refresh-Token': refresh_token, 'User':`${this.platform}/${userName}`}
-                }).then(res => {
-                    console.log(res);
-                    if (res.data.length) {
 
-                    }
-                }).catch(err => {
-                    console.log(err);
-                })
-
-            },
             /*点击配置cla按钮*/
             configCla() {
                 this.showConfigForm = true;
