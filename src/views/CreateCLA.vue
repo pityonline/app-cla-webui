@@ -15,7 +15,7 @@
                             closable
                             @click="chooseCla(index)"
                             :disable-transitions="false"
-                            @close="handleClose(tag)">
+                            @close="handleClose(tag,index)">
                         {{tag}}
                     </el-tag>
                 </div>
@@ -169,10 +169,19 @@
                 this.addNewFile = false;
                 this.newClaFileName = '';
             },
-            handleClose(tag) {
-                /*删除cla*/
-                this.claTags.splice(this.claTags.indexOf(tag), 1);
-                /*删除cla*/
+            handleClose(tag,index) {
+                let obj = {id:this.claOptions[index].id}
+                this.$axios({
+                    url:url.delCla,
+                    method:'delete',
+                    data:obj
+                }).then(res=>{
+                    console.log(res);
+                    this.claTags.splice(this.claTags.indexOf(tag), 1);
+                }).catch(err=>{
+                    console.log(err);
+                    this.$message.error('已有绑定关系，无法删除')
+                })
 
             },
             closeMetaTag(tag) {

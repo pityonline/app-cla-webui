@@ -46,7 +46,9 @@
                 this.$router.push('/home')
             },
             loginOut(){
+                /*清空缓存，服务器改变登录状态。成功则跳转到登录页面*/
                 this.$router.push('/')
+
             },
             newWindow(){
                 // window.open('https://github.com/ouchengle/Test','_black')
