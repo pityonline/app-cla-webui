@@ -951,7 +951,7 @@
             },
             /*链接开源项目*/
             linkRepository() {
-                // this.linkLoading = true;
+                this.linkLoading = true;
                 let obj = {
                     repo_id: `${this.repositoryOptions[this.repositoryValue].repoName}`,
                     cla_id: this.claOptions[this.claValue].id,
@@ -975,6 +975,8 @@
                     console.log(res);
                     this.claValue = '';
                     this.repositoryValue = '';
+                    this.claChoose=false;
+                    this.repositoryChoose=false;
                     this.email = '';
                     this.linkDialogVisible = false;
                 }).catch(err => {
