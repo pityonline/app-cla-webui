@@ -1177,7 +1177,7 @@
                             userEmail: res.data.email
                         };
                         this.setLoginUserAct(data);
-                        this.getLinkedRepoList(access_token,refresh_token,userName)
+                        this.getLinkedRepoList(access_token,refresh_token,res.data.login)
                     }
                 }).catch(err => {
                     console.log(err);
