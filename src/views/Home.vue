@@ -1103,7 +1103,20 @@
                 this.showConfigForm = false
                 this.setClientHeight()
             },
+            getLinkedRepoList(access_token,refresh_token){
+                this.$axios({
+                    url: '/api' + url.getLinkedRepoList,
+                    headers: {access_token: access_token, refresh_token: refresh_token}
+                }).then(res => {
+                    console.log(res);
+                    if (res.data.length) {
 
+                    }
+                }).catch(err => {
+                    console.log(err);
+                })
+
+            },
             /*点击配置cla按钮*/
             configCla() {
                 this.showConfigForm = true;
@@ -1141,6 +1154,7 @@
                     let data = {access_token, refresh_token};
                     this.setTokenAct(data);
                     this.getUserInfo(access_token)
+                    this.getLinkedRepoList(access_token,refresh_token)
                 }
 
             },
