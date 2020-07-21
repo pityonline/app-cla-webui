@@ -249,18 +249,19 @@
 
                 }).then(res => {
                     console.log(res);
-                    if (res.status === 200) {
+
                         this.fullscreenLoading = false;
                         this.$message.success('succeed')
                         setTimeout(() => {
                             this.$router.replace('/home')
                         }, 2000)
-                    } else {
-                        this.fullscreenLoading = false;
-                        this.$message.error('failed')
-                    }
+
+
+
                 }).catch(err => {
                     console.log(err);
+                    this.fullscreenLoading = false;
+                    this.$message.error('failed')
                 })
             },
 
