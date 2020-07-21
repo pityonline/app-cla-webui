@@ -1103,12 +1103,12 @@
                 this.showConfigForm = false
                 this.setClientHeight()
             },
-            getLinkedRepoList(access_token,refresh_token){
+            getLinkedRepoList(access_token,refresh_token,userName){
                 let obj ={platform:this.platform}
-                console.log(obj);
+                console.log(obj,access_token,refresh_token);
                 this.$axios({
                     url: '/api' + url.getLinkedRepoList,
-                    headers: {ACCESS_TOKEN: access_token, REFRESH_TOKEN: refresh_token,USER:`${this.platform}/${this.user.userName}`}
+                    headers: {ACCESS_TOKEN: access_token, REFRESH_TOKEN: refresh_token,USER:`${this.platform}/${userName}`}
                 }).then(res => {
                     console.log(res);
                     if (res.data.length) {
@@ -1155,13 +1155,13 @@
                     })
                     let data = {access_token, refresh_token};
                     this.setTokenAct(data);
-                    this.getUserInfo(access_token)
-                    this.getLinkedRepoList(access_token,refresh_token)
+                    this.getUserInfo(access_token,refresh_token)
+
                 }
 
             },
             /*获取用户名并显示*/
-            getUserInfo(access_token) {
+            getUserInfo(access_token,refresh_token) {
                 let obj = {access_token: access_token};
                 console.log(obj);
                 this.$axios({
@@ -1177,6 +1177,7 @@
                             userEmail: res.data.email
                         };
                         this.setLoginUserAct(data);
+                        this.getLinkedRepoList(access_token,refresh_token,userName)
                     }
                 }).catch(err => {
                     console.log(err);
