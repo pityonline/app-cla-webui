@@ -1075,7 +1075,7 @@
                 console.log("getCLA");
                 this.$axios({
                     url: '/api' + url.getClaInfo,
-                    headers: {'Access-Token': this.access_token, 'Refresh-Token': this.refresh_token,'User':`${this.platform}/${this.user.userName}`}
+                    headers: {'Access-Token': this.$store.state.access_token, 'Refresh-Token': this.$store.state.refresh_token,'User':`${this.platform}/${this.$store.state.user.userName}`}
                 }).then(res => {
                     console.log(res);
                     if (res.data.length) {
