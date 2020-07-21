@@ -107,6 +107,8 @@
         },
         data() {
             return {
+                access_token:this.$store.state.access_token,
+                refresh_token:this.$store.state.refresh_token,
                 isAddNewMetaFile: false,
                 isEditMeta: false,
                 metaText: '',
