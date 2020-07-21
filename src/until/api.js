@@ -3,6 +3,7 @@ export const getUserInfo = 'https://gitee.com/api/v5/user'    //获取用户信�
 export const uploadCla = '/v1/cla'    //上传Cla post 参数  text,name,language,user
 export const getClaInfo = '/v1/cla'    //获取cla get
 export const delCla = '/v1/cla'    //获取cla delete
+export const getCla = '/v1/getCla'    //获取cla delete
 export const getOrgsInfo = 'https://gitee.com/api/v5/user/orgs'    //获取仓库信息
 // export const getRepositoriesOfOrg = `https://gitee.com/api/v5/orgs/${org}/repos`    //获取仓库信息
 export const linkRepository = '/v1/org-repo'    //链接开源项目 参数 repositoryName,claName,email,shareGistChecked,fileNumber,lineNumber

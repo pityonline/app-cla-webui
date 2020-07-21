@@ -831,6 +831,7 @@
                     url: url.getLinkedRepositories,
                     methods: 'post',
                     data: obj,
+                    headers: {access_token: this.$store.state.access_token, refresh_token: this.refresh_token}
                 }).then(res => {
                     console.log(res);
                     if (res.data.code === 200) {
@@ -850,6 +851,7 @@
                     url: url.getPersonalRepositories,
                     methods: 'post',
                     data: obj,
+                    headers: {access_token: this.$store.state.access_token, refresh_token: this.refresh_token}
                 }).then(res => {
                     console.log(res);
                     if (res.data.code === 200) {
@@ -869,6 +871,7 @@
                     url: url.getCompanyRepositories,
                     methods: 'post',
                     data: obj,
+                    headers: {access_token: this.$store.state.access_token, refresh_token: this.refresh_token}
                 }).then(res => {
                     console.log(res);
                     if (res.data.code === 200) {
@@ -888,6 +891,7 @@
                     url: url.getCompanyPersonRepositories,
                     methods: 'post',
                     data: obj,
+                    headers: {access_token: this.$store.state.access_token, refresh_token: this.refresh_token}
                 }).then(res => {
                     console.log(res);
                     if (res.data.code === 200) {
@@ -938,6 +942,7 @@
                     url: url.unLinkRepository,
                     methods: 'post',
                     data: obj,
+                    headers: {access_token: this.$store.state.access_token, refresh_token: this.refresh_token}
                 }).then(res => {
                     console.log(res);
                     if (res.data.code === 200) {
@@ -967,6 +972,7 @@
                     url: '/api' + url.linkRepository,
                     method: 'post',
                     data: obj,
+                    headers: {access_token: this.$store.state.access_token, refresh_token: this.refresh_token}
                 }).then(res => {
                     this.$message.success('success')
                     console.log(res);

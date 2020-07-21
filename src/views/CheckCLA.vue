@@ -3,7 +3,7 @@
         <v-header></v-header>
         <div id="section">
             <el-col :offset="6" :span="12">
-                <p class="contentTitle">Please sign the CLA for <span>ooo/test</span></p>
+                <p class="contentTitle">Please sign the CLA for <span>{{repo}}</span></p>
 
                 <p class="size_s">Version: 2020-06-17</p>
 
@@ -20,10 +20,10 @@
 
 
                     <el-col :span="8" class="borderClass">
-                        <el-radio label="0"  v-model="role">个人贡献者</el-radio>
+                        <el-radio label="0" v-model="role">个人贡献者</el-radio>
                     </el-col>
                     <el-col :span="8" class="borderClass">
-                        <el-radio label="1"  v-model="role">企业贡献者</el-radio>
+                        <el-radio label="1" v-model="role">企业贡献者</el-radio>
                     </el-col>
 
                 </el-row>
@@ -94,6 +94,8 @@
                 }
             }
             return {
+                repositoryOptions: [],
+                repo: '',
                 role: '0',
                 ruleForm: {
                     name: '',
@@ -169,9 +171,9 @@
                     tel: this.ruleForm.tel
                 }
                 this.$axios({
-                    url:url.signCla,
+                    url: url.signCla,
                     methods: 'post',
-                    data:obj,
+                    data: obj,
                 }).then(res => {
                     console.log(res);
                     if (res.data.code === 200) {
@@ -192,6 +194,48 @@
                     }
                 });
             },
+            getClaAndMetadata() {
+                let obj = {access_token: this.$store.state.access_token};
+                console.log("getClaAndMetadata", obj);
+                this.$axios({
+                    url: '/api' + url.getCla,
+                    params: obj,
+                }).then(res => {
+                    console.log(res);
+                    if (res.status === 200) {
+                        this.claText = res.data.cla;
+                        this.metaData = res.data.metadata;
+                    }
+                }).catch(err => {
+                    console.log(err);
+                })
+            },
+            getRepositoriesOfOrg(org, org_id) {
+                let obj = {access_token: this.$store.state.access_token, org: org, page: 1, per_page: 10};
+                console.log("getRepositoriesOfOrg", obj);
+                this.$axios({
+                    url: `https://gitee.com/api/v5/orgs/${org}/repos`,
+                    params: obj,
+                }).then(res => {
+                    console.log(res);
+                    if (res.status === 200) {
+                        this.repositoryOptions = [];
+                        res.data.forEach((item, index) => {
+                            this.repositoryOptions.push({
+                                value: index,
+                                org: org,
+                                org_id: org_id,
+                                repoName: item.name,
+                                label: `${org}/${item.name}`,
+                                id: item.id
+                            });
+                        })
+                    }
+                }).catch(err => {
+                    console.log(err);
+                })
+            },
+
 
             resetForm(formName) {
                 this.$refs[formName].resetFields();
@@ -212,7 +256,7 @@
         },
 
         created() {
-
+            this.getClaAndMetadata();
         },
         mounted() {
             this.setClientHeight();
