@@ -1108,7 +1108,7 @@
                 console.log(obj,access_token,refresh_token);
                 this.$axios({
                     url: '/api' + url.getLinkedRepoList,
-                    headers: {ACCESS_TOKEN: access_token, REFRESH_TOKEN: refresh_token,USER:`${this.platform}/${userName}`}
+                    headers: {ACCESS_TOKEN: '0001', REFRESH_TOKEN: '1212',USER:`${this.platform}/${userName}`}
                 }).then(res => {
                     console.log(res);
                     if (res.data.length) {
