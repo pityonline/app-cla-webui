@@ -86,7 +86,7 @@
                                     </el-select>
 
                                 </div>
-                                <div style="font-size: 1rem;padding: .5rem 2rem">
+                                <div style="font-size: 1.2rem;padding: .5rem">
                                     ④ Email
                                 </div>
                                 <div style="padding: 0 2rem">

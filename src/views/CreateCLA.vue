@@ -40,7 +40,7 @@
                     </el-col>
                 </div>
                 <div>
-                    <el-input rows="10" :readonly="!isEdit" @change="claTextChange" class="textAreaClass"
+                    <el-input rows="15" :readonly="!isEdit" @change="claTextChange" class="textAreaClass"
                               v-model="claText" type="textarea">
                     </el-input>
                 </div>

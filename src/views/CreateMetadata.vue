@@ -34,7 +34,7 @@
                     </el-option>
                     </el-select>
                 </div>
-                <el-input :readonly="!isEditMeta" rows="10" class="textAreaClass" v-model="metaData" type="textarea">
+                <el-input :readonly="!isEditMeta" rows="15" class="textAreaClass" v-model="metaData" type="textarea">
 
                 </el-input>
                 <div style="margin-top: 1rem;display: flex;justify-content: space-between">
