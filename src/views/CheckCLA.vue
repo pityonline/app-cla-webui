@@ -237,9 +237,7 @@
                 this.dialogVisible = true;
                 this.isSendCode = true;
                 console.log(until.getClientHeight(), document.getElementById('checkCLA').offsetHeight);
-                until.getClientHeight() > document.getElementById('checkCLA').offsetHeight ?
-                    this.checkCLAClass.height = until.getClientHeight() + 'px' :
-                    this.checkCLAClass.height = document.getElementById('checkCLA').offsetHeight
+                this.checkCLAClass.height = until.getClientHeight() + 'px'
                 let code = `${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}`
                 let obj = {
                     code: code,
