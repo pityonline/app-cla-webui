@@ -195,6 +195,7 @@
         methods: {
             /*验证验证码*/
             verify() {
+                this.isVerify=true;
                 let obj = {code: this.verifyCode}
                 this.$axios({
                     url: '/api' + url.verifyCode,
@@ -220,6 +221,8 @@
             },
             /*发送验证码*/
             signCla() {
+                this.dialogVisible = true;
+                this.isSendCode=true;
                 let code = `${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}`
                 let obj = {
                     code: code,
