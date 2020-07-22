@@ -31,6 +31,11 @@ const routes = [
         component: () => import('../views/CreateCLA.vue')
     },
     {
+        path: '/createMetadata',
+        name: 'CreateMetadata',
+        component: () => import('../views/CreateMetadata.vue')
+    },
+    {
         path: '/checkCLA',
         name: 'CheckCLA',
         component: () => import('../views/CheckCLA.vue')

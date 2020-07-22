@@ -3,87 +3,44 @@
         <v-header></v-header>
         <div id="section">
             <el-col :offset="6" :span="12">
-                <div style="display: flex;justify-content: space-between;padding: 1rem 0">
-                    <span>Edit your CLA</span>
-
-                </div>
+                <p>Edit your metaData</p>
                 <div>
                     <el-tag
                             class="pointer"
                             :key="tag"
-                            v-for="(tag,index) in claTags"
+                            v-for="(tag,index) in metaTags"
                             closable
-                            @click="chooseCla(index)"
+                            @click="chooseMeta(index)"
                             :disable-transitions="false"
-                            @close="handleClose(tag,index)">
+                            @close="closeMetaTag(tag)">
                         {{tag}}
                     </el-tag>
                 </div>
-                <div v-if="!addNewFile">
-                    <el-button class="pointer" size="mini" @click="clickAddNewClaFile()">+ add new file</el-button>
+                <div v-if="!isAddNewMetaFile">
+                    <el-button class="pointer" size="mini" @click="clickAddNewMetaFile()">+ add new file</el-button>
                 </div>
                 <div v-else style="display: flex;justify-content: space-between;">
-                    <el-col :span="20" style="padding-right: 2rem;">
-                        <el-input style="margin-bottom: 0.5rem;" size="small" v-model="newClaFileName"
+                    <el-col :span="20" style="padding-right: 2rem">
+                        <el-input style="margin-bottom: 0.5rem;" size="small" v-model="newMetaFileName"
                                   placeholder="please input file name">
                         </el-input>
                     </el-col>
-                    <el-col :span="4" align="right">
-                        <el-select style="width: 8rem" size="small" v-model="value" value="">
-                            <el-option
-                                    v-for="item in languageOptions"
-                                    :key="item.value"
-                                    :label="item.label"
-                                    :value="item.value">
-                            </el-option>
-                        </el-select>
-                    </el-col>
+                    <el-select style="width: 8rem" size="small" v-model="value" value="">
+                    <el-option
+                    v-for="item in languageOptions"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                    </el-option>
+                    </el-select>
                 </div>
-                <div>
-                    <el-input rows="10" :readonly="!isEdit" @change="claTextChange" class="textAreaClass"
-                              v-model="claText" type="textarea">
-                    </el-input>
-                </div>
+                <el-input :readonly="!isEditMeta" rows="10" class="textAreaClass" v-model="metaData" type="textarea">
 
-
-                <!--<p>Edit your metaData</p>-->
-                <!--<div>-->
-                    <!--<el-tag-->
-                            <!--class="pointer"-->
-                            <!--:key="tag"-->
-                            <!--v-for="(tag,index) in metaTags"-->
-                            <!--closable-->
-                            <!--@click="chooseMeta(index)"-->
-                            <!--:disable-transitions="false"-->
-                            <!--@close="closeMetaTag(tag)">-->
-                        <!--{{tag}}-->
-                    <!--</el-tag>-->
-                <!--</div>-->
-                <!--<div v-if="!isAddNewMetaFile">-->
-                    <!--<el-button class="pointer" size="mini" @click="clickAddNewMetaFile()">+ add new file</el-button>-->
-                <!--</div>-->
-                <!--<div v-else style="display: flex;justify-content: space-between;">-->
-                    <!--<el-col :span="20" style="padding-right: 2rem">-->
-                        <!--<el-input style="margin-bottom: 0.5rem;" size="small" v-model="newMetaFileName"-->
-                                  <!--placeholder="please input file name">-->
-                        <!--</el-input>-->
-                    <!--</el-col>-->
-                    <!--<el-select style="width: 8rem" size="small" v-model="value" value="">-->
-                    <!--<el-option-->
-                    <!--v-for="item in languageOptions"-->
-                    <!--:key="item.value"-->
-                    <!--:label="item.label"-->
-                    <!--:value="item.value">-->
-                    <!--</el-option>-->
-                    <!--</el-select>-->
-                <!--</div>-->
-                <!--<el-input :readonly="!isEditMeta" rows="10" class="textAreaClass" v-model="metaData" type="textarea">-->
-
-                <!--</el-input>-->
+                </el-input>
                 <div style="margin-top: 1rem;display: flex;justify-content: space-between">
                     <el-button size="medium" v-loading.fullscreen.lock="fullscreenLoading" :disabled="!verifyNotNull()"
                                type="primary"
-                               @click="uploadCla()">create CLA
+                               @click="">create Metadata
                     </el-button>
                 </div>
             </el-col>
