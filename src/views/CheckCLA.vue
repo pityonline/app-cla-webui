@@ -234,6 +234,7 @@
             signCla() {
                 this.dialogVisible = true;
                 this.isSendCode = true;
+                console.log( until.getClientHeight(),document.getElementById('checkCLA').offsetHeight);
                 until.getClientHeight() > document.getElementById('checkCLA').offsetHeight ?
                     this.checkCLAClass.height = until.getClientHeight() + 'px' :
                     this.checkCLAClass.height = document.getElementById('checkCLA').offsetHeight
