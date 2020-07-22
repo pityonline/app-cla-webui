@@ -332,6 +332,7 @@
                         this.checkCLAClass.height = document.getElementById('checkCLA').offsetHeight
 
                 })
+                console.log(document.getElementById('checkCLA').offsetHeight);
             },
             setClaContent() {
                 document.getElementById('claBox').innerHTML = this.claText
