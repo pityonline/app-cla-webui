@@ -234,6 +234,9 @@
             signCla() {
                 this.dialogVisible = true;
                 this.isSendCode = true;
+                if (until.getClientHeight() > document.getElementById('checkCLA').offsetHeight) {
+                    document.getElementById("checkCLA").style.height = until.getClientHeight() + 'px'
+                }
                 let code = `${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}`
                 let obj = {
                     code: code,
@@ -256,9 +259,7 @@
                     console.log(res);
                     this.dialogVisible = true;
                     this.isSendCode = true;
-                    if (until.getClientHeight() > document.getElementById('checkCLA').offsetHeight) {
-                        document.getElementById("checkCLA").style.height = until.getClientHeight() + 'px'
-                    }
+
                 }).catch(err => {
                     console.log(err);
                 })
