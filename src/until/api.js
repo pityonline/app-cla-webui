@@ -10,6 +10,7 @@ export const linkRepository = '/v1/org-repo'    //链接开源项目  post
 export const getLinkedRepoList = '/v1/org-repo'    //链接开源项目   get
 export const unLinkRepository = '/v1/unLinkRepository'    //断开链接开源项目 参数 repositoryName
 export const signCla = '/v1/signCla'    //签署协议 参数
+export const verifyCode = '/v1/verifyCode'    //签署协议 参数
 export const getLinkedRepositories = '/v1/getLinkedRepositories'    //获取发布的开源项目  参数 userName
 export const getPersonalRepositories = '/v1/getPersonalRepositories'    //获取个人签署的项目  参数 userName
 export const getCompanyRepositories = '/v1/getCompanyRepositories'    //获取企业签署的项目  参数 userName

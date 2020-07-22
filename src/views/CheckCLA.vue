@@ -52,6 +52,31 @@
             </el-col>
         </div>
         <v-footer></v-footer>
+        <el-dialog
+                title=""
+                top="5vh"
+                :visible.sync="dialogVisible"
+                width="70%">
+            <div style="margin-bottom: 1rem">
+            请在10分钟内点击邮箱{{ruleForm.email}}中的链接进行验证
+
+            </div>
+            <div>
+                <el-button type="primary" size="medium" @click="dialogVisible=false">确定</el-button>
+            </div>
+            <div class="paginationClass">
+                <el-pagination
+                        background
+                        :page-size="5"
+                        :pager-count="5"
+                        :hide-on-single-page="true"
+                        :current-page="listCurrentPage"
+                        @current-change="listChangePage"
+                        layout="prev, pager, next"
+                        :total="listData.length">
+                </el-pagination>
+            </div>
+        </el-dialog>
     </div>
 </template>
 
@@ -94,6 +119,8 @@
                 }
             }
             return {
+                platform:this.$store.state.platform,
+                dialogVisible:false,
                 repositoryOptions: [],
                 repo: '',
                 role: '0',
@@ -164,21 +191,22 @@
         },
         methods: {
             signCla() {
+                let code=`${Math.floor(Math.random()*10)}${Math.floor(Math.random()*10)}${Math.floor(Math.random()*10)}${Math.floor(Math.random()*10)}${Math.floor(Math.random()*10)}${Math.floor(Math.random()*10)}`
                 let obj = {
+                    code:code,
                     role: this.role,
                     name: this.ruleForm.name,
                     email: this.ruleForm.email,
                     tel: this.ruleForm.tel
                 }
+                console.log(obj);
                 this.$axios({
-                    url: url.signCla,
-                    methods: 'post',
+                    url: '/api'+url.signCla,
+                    method: 'post',
                     data: obj,
+                    headers: {'Access-Token': this.$store.state.access_token, 'Refresh-Token': this.$store.state.refresh_token,'User':`${this.platform}/${this.$store.state.user.userName}`}
                 }).then(res => {
                     console.log(res);
-                    if (res.data.code === 200) {
-                        this.$message.success('签署成功')
-                    }
                 }).catch(err => {
                     console.log(err);
                 })
@@ -186,8 +214,8 @@
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
+                        this.dialogVisible=true
                         this.signCla();
-                        this.$message.success('签署成功')
                     } else {
                         console.log('error submit!!');
                         return false;
@@ -195,11 +223,12 @@
                 });
             },
             getClaAndMetadata() {
-                let obj = {access_token: this.$store.state.access_token};
+
                 console.log("getClaAndMetadata", obj);
                 this.$axios({
                     url: '/api' + url.getCla,
-                    params: obj,
+                    headers: {'Access-Token': this.$store.state.access_token, 'Refresh-Token': this.$store.state.refresh_token,'User':`${this.platform}/${this.$store.state.user.userName}`}
+
                 }).then(res => {
                     console.log(res);
                     if (res.status === 200) {
@@ -216,6 +245,7 @@
                 this.$axios({
                     url: `https://gitee.com/api/v5/orgs/${org}/repos`,
                     params: obj,
+                    headers: {'Access-Token': this.$store.state.access_token, 'Refresh-Token': this.$store.state.refresh_token,'User':`${this.platform}/${this.$store.state.user.userName}`}
                 }).then(res => {
                     console.log(res);
                     if (res.status === 200) {

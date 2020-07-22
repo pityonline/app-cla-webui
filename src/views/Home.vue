@@ -903,7 +903,7 @@
             },
 
 
-            /*邮箱验证*/
+            /*邮箱合法验证*/
             verifyEmail() {
                 var email = this.email;
                 var reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
