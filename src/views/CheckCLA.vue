@@ -52,13 +52,13 @@
 
                 </el-col>
             </div>
-            <div v-else-if="!isVerify" class="content">
-                <el-col :offset="6" :span="12">
+            <div v-else-if="!isVerify" class="content verifyClass">
+                <el-col :offset="6" :span="12" >
                     <p>请输入6位数验证码完成验证</p>
                     <el-row>
-                        <el-col :span="6">
+                        <el-col :span="6" style="margin-right: 2rem">
 
-                            <el-input v-model="verifyCode" size="medium" style="margin-right: 2rem"></el-input>
+                            <el-input v-model="verifyCode" size="medium" ></el-input>
                         </el-col>
                         <el-col :span="6">
                             <el-button type="primary" size="medium" @click="verify()">确定</el-button>
@@ -356,6 +356,10 @@
 </script>
 
 <style scoped lang="less">
+    .verifyClass{
+        padding: 5rem 0;
+
+    }
     .borderClass {
         padding: .5rem 0;
         border-bottom: 1px solid lightgray;

@@ -107,8 +107,8 @@
         },
         data() {
             return {
-                access_token:this.$store.state.access_token,
-                refresh_token:this.$store.state.refresh_token,
+                access_token: this.$store.state.access_token,
+                refresh_token: this.$store.state.refresh_token,
                 isAddNewMetaFile: false,
                 isEditMeta: false,
                 metaText: '',
@@ -171,18 +171,22 @@
                 this.addNewFile = false;
                 this.newClaFileName = '';
             },
-            handleClose(tag,index) {
-                let obj = {id:this.claOptions[index].id}
+            handleClose(tag, index) {
+                let obj = {id: this.claOptions[index].id}
                 this.$axios({
-                    url:url.delCla,
-                    method:'delete',
-                    data:obj,
-                    headers: {'Access-Token': this.access_token, 'Refresh-Token': this.refresh_token,'User':`${this.platform}/${this.user.userName}`}
+                    url: url.delCla,
+                    method: 'delete',
+                    data: obj,
+                    headers: {
+                        'Access-Token': this.access_token,
+                        'Refresh-Token': this.refresh_token,
+                        'User': `${this.platform}/${this.user.userName}`
+                    }
 
-                }).then(res=>{
+                }).then(res => {
                     console.log(res);
                     this.claTags.splice(this.claTags.indexOf(tag), 1);
-                }).catch(err=>{
+                }).catch(err => {
                     console.log(err);
                     this.$message.error('已有绑定关系，无法删除')
                 })
@@ -199,7 +203,11 @@
                 console.log("getCLA");
                 this.$axios({
                     url: '/api' + url.getClaInfo,
-                    headers: {'Access-Token': this.access_token, 'Refresh-Token': this.refresh_token,'User':`${this.platform}/${this.user.userName}`}
+                    headers: {
+                        'Access-Token': this.access_token,
+                        'Refresh-Token': this.refresh_token,
+                        'User': `${this.platform}/${this.user.userName}`
+                    }
 
                 }).then(res => {
                     console.log(res);
@@ -245,17 +253,20 @@
                     url: '/api' + url.uploadCla,
                     method: 'post',
                     data: obj,
-                    headers: {'Access-Token': this.access_token, 'Refresh-Token': this.refresh_token,'User':`${this.platform}/${this.user.userName}`}
+                    headers: {
+                        'Access-Token': this.access_token,
+                        'Refresh-Token': this.refresh_token,
+                        'User': `${this.platform}/${this.user.userName}`
+                    }
 
                 }).then(res => {
                     console.log(res);
 
-                        this.fullscreenLoading = false;
-                        this.$message.success('succeed')
-                        setTimeout(() => {
-                            this.$router.replace('/home')
-                        }, 2000)
-
+                    this.fullscreenLoading = false;
+                    this.$message.success('succeed')
+                    setTimeout(() => {
+                        this.$router.replace('/home')
+                    }, 2000)
 
 
                 }).catch(err => {
@@ -312,6 +323,11 @@
         box-sizing: border-box;
         padding-top: 4rem;
 
+        & > .header {
+            height: 4rem;
+            width: 100%;
+        }
+
         & > #section {
             padding: 1rem;
             text-align: left;
@@ -319,6 +335,10 @@
             background-color: #F5F5F5;
 
 
+        }
+        & > .footer {
+            height: 4rem;
+            width: 100%;
         }
     }
 
