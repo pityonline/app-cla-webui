@@ -1,6 +1,6 @@
 <template>
     <div id="checkCLA" :style="checkCLAClass">
-        <v-header></v-header>
+        <Header></Header>
         <div id="section">
             <div v-if="!isSendCode" class="content">
                 <el-col :offset="6" :span="12">
@@ -30,9 +30,11 @@
                     </el-row>
                     <el-row class="marginTop1rem">
                         <el-col :span="16">
-                            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="left" label-width="30%"
+                            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="left"
+                                     label-width="30%"
                                      class="demo-ruleForm">
-                                <el-form-item v-for="(item,index) in metaData" :label="item.label" :required="item.required"
+                                <el-form-item v-for="(item,index) in metaData" :label="item.label"
+                                              :required="item.required"
                                               :prop="item.prop">
                                     <el-input v-model="ruleForm[item.prop]"></el-input>
                                 </el-form-item>
@@ -58,7 +60,7 @@
                     <el-row>
                         <el-col :span="6" style="margin-right: 2rem">
 
-                            <el-input v-model="verifyCode" size="medium" ></el-input>
+                            <el-input v-model="verifyCode" size="medium"></el-input>
                         </el-col>
                         <el-col :span="6">
                             <el-button type="primary" size="medium" @click="verify()">确定</el-button>
@@ -74,7 +76,7 @@
             </div>
         </div>
 
-        <v-footer></v-footer>
+        <Footer></Footer>
         <el-dialog
                 title=""
                 top="5vh"
@@ -101,8 +103,8 @@
 
         name: "CheckCLA",
         components: {
-            'v-header': Header,
-            'v-footer': Footer
+            Header,
+            Footer
         },
         data() {
             let verifyEmail = (rule, value, callback) => {
@@ -234,7 +236,7 @@
             signCla() {
                 this.dialogVisible = true;
                 this.isSendCode = true;
-                console.log( until.getClientHeight(),document.getElementById('checkCLA').offsetHeight);
+                console.log(until.getClientHeight(), document.getElementById('checkCLA').offsetHeight);
                 until.getClientHeight() > document.getElementById('checkCLA').offsetHeight ?
                     this.checkCLAClass.height = until.getClientHeight() + 'px' :
                     this.checkCLAClass.height = document.getElementById('checkCLA').offsetHeight
@@ -362,10 +364,11 @@
 </script>
 
 <style scoped lang="less">
-    .verifyClass{
+    .verifyClass {
         padding: 5rem 0;
 
     }
+
     .borderClass {
         padding: .5rem 0;
         border-bottom: 1px solid lightgray;
@@ -389,6 +392,7 @@
         flex-direction: column;
         box-sizing: border-box;
         padding-top: 4rem;
+
         & > .header {
             height: 4rem;
             width: 100%;
@@ -405,6 +409,7 @@
 
             }
         }
+
         & > .footer {
             height: 4rem;
             width: 100%;
