@@ -72,13 +72,13 @@
                                           style="font-size: .8rem;text-decoration: underline;cursor: pointer">(don't have one?)</span>
                                 </div>
                                 <div style="padding: 0 2rem">
-                                    <el-select v-model="claValue"
+                                    <el-select v-model="metadataValue"
                                                placeholder="select"
                                                style="width: 100%"
                                                size="medium"
-                                               @change="changeCla">
+                                               @change="changeMetadata">
                                         <el-option
-                                                v-for="item in claOptions"
+                                                v-for="item in metadataOptions"
                                                 :key="item.value"
                                                 :label="item.label"
                                                 :value="item.value">
@@ -110,7 +110,8 @@
                             </div>
                         </el-col>
                         <el-col :span="12" :offset="2">
-                            <el-input rows="16" readonly type="textarea" v-model="previewText" style="white-space: pre-wrap">
+                            <el-input rows="16" readonly type="textarea" v-model="previewText"
+                                      style="white-space: pre-wrap">
 
                             </el-input>
                         </el-col>
@@ -377,8 +378,10 @@
                     enter a file name and paste
                     the content of your Metadata.</p>
                 <p class="dialogDesc">What happens if I edit the Gist file?</p>
-                <p>CLA assistant will always show you the current version of your Gist file. Users who accept your Metadata
-                    sign the current version. If you change the content of your Metadata, each contributor has to accept the
+                <p>CLA assistant will always show you the current version of your Gist file. Users who accept your
+                    Metadata
+                    sign the current version. If you change the content of your Metadata, each contributor has to accept
+                    the
                     new version when they create a new pull request.</p>
             </div>
             <span slot="footer" class="dialog-footer">
@@ -678,9 +681,7 @@
             Header,
             Footer,
         },
-        computed:{
-
-        },
+        computed: {},
         data() {
 
             var validateAccount = (rule, value, callback) => {
@@ -696,7 +697,7 @@
                 callback();
             };
             return {
-                createMetadataDialogVisible:false,
+                createMetadataDialogVisible: false,
                 linkLoading: false,
                 platform: this.$store.state.platform,
                 ruleForm: {
@@ -749,7 +750,16 @@
                 shareGistChecked: false,
                 claOptions: [],
                 claValue: '',
+                metadataOptions: [{
+                    value: 0,
+                    label: '',
+                    id: '',
+                    text: '',
+                    language: ''
+                }],
+                metadataValue: '',
                 claChoose: false,
+                metadataChoose: false,
                 linkDialogVisible: false,
                 shareDialogVisible: false,
                 createCLADialogVisible: false,
@@ -859,12 +869,16 @@
             //     }
             // },
             /*获取发布的开源项目*/
-            getLinkedRepoList(access_token,refresh_token,userName){
-                let obj ={platform:this.platform}
-                console.log(obj,access_token,refresh_token);
+            getLinkedRepoList(access_token, refresh_token, userName) {
+                let obj = {platform: this.platform}
+                console.log(obj, access_token, refresh_token);
                 this.$axios({
                     url: '/api' + url.getLinkedRepoList,
-                    headers: {'Access-Token': access_token, 'Refresh-Token': refresh_token, 'User':`${this.platform}/${userName}`}
+                    headers: {
+                        'Access-Token': access_token,
+                        'Refresh-Token': refresh_token,
+                        'User': `${this.platform}/${userName}`
+                    }
                 }).then(res => {
                     console.log(res);
                     if (res.data.length) {
@@ -975,7 +989,11 @@
                     url: url.unLinkRepository,
                     methods: 'post',
                     data: obj,
-                    headers: {'Access-Token': this.access_token, 'Refresh-Token': this.refresh_token,'User':`${this.platform}/${this.user.userName}`}
+                    headers: {
+                        'Access-Token': this.access_token,
+                        'Refresh-Token': this.refresh_token,
+                        'User': `${this.platform}/${this.user.userName}`
+                    }
 
                 }).then(res => {
                     console.log(res);
@@ -1006,7 +1024,11 @@
                     url: '/api' + url.linkRepository,
                     method: 'post',
                     data: obj,
-                    headers: {'Access-Token': this.access_token, 'Refresh-Token': this.refresh_token,'User':`${this.platform}/${this.user.userName}`}
+                    headers: {
+                        'Access-Token': this.access_token,
+                        'Refresh-Token': this.refresh_token,
+                        'User': `${this.platform}/${this.user.userName}`
+                    }
 
                 }).then(res => {
                     this.linkLoading = false;
@@ -1014,11 +1036,11 @@
                     console.log(res);
                     this.claValue = '';
                     this.repositoryValue = '';
-                    this.claChoose=false;
-                    this.repositoryChoose=false;
+                    this.claChoose = false;
+                    this.repositoryChoose = false;
                     this.email = '';
                     this.linkDialogVisible = false;
-                    this.getLinkedRepoList(this.$store.state.access_token,this.$store.state.refresh_token,this.$store.state.user.userName)
+                    this.getLinkedRepoList(this.$store.state.access_token, this.$store.state.refresh_token, this.$store.state.user.userName)
                 }).catch(err => {
                     console.log(err);
                     this.linkLoading = false
@@ -1040,14 +1062,18 @@
             toCreateCLA() {
                 this.$router.push('/createCLA')
             },
-            toCreateMetadata(){
+            toCreateMetadata() {
                 this.$router.push('/createMetadata')
             },
             /*选择cla*/
             changeCla(value) {
                 this.claChoose = true;
-                console.log(this.claValue);
                 this.previewText = this.claOptions[value].text;
+            },
+            /*选择Metadata*/
+            changeMetadata(value) {
+                this.metadataChoose = true;
+                this.previewText = this.metadataOptions[value].text;
             },
             /*弹出dialog说明框*/
             createCLA() {
@@ -1070,9 +1096,9 @@
                 this.repositoryChoose = true;
 
             },
-            getRepositoriesOfOrg(org,org_id) {
+            getRepositoriesOfOrg(org, org_id) {
                 let obj = {access_token: this.$store.state.access_token, org: org, page: 1, per_page: 10};
-                console.log("getRepositoriesOfOrg",obj);
+                console.log("getRepositoriesOfOrg", obj);
                 this.$axios({
                     url: `https://gitee.com/api/v5/orgs/${org}/repos`,
                     params: obj,
@@ -1084,7 +1110,7 @@
                             this.repositoryOptions.push({
                                 value: index,
                                 org: org,
-                                org_id:org_id,
+                                org_id: org_id,
                                 repoName: item.name,
                                 label: `${org}/${item.name}`,
                                 id: item.id
@@ -1098,7 +1124,7 @@
             /*获取仓库数据*/
             getOrgsInfo() {
                 let obj = {access_token: this.$store.state.access_token, admin: true, page: 1, per_page: 10};
-                console.log("getOrgsInfo",obj);
+                console.log("getOrgsInfo", obj);
                 this.$axios({
                     url: url.getOrgsInfo,
                     methods: 'get',
@@ -1110,7 +1136,7 @@
                         this.orgOptions = [];
                         res.data.forEach((item, index) => {
                             this.orgOptions.push({value: index, label: item.login, id: item.id});
-                            this.getRepositoriesOfOrg(item.login,item.id)
+                            this.getRepositoriesOfOrg(item.login, item.id)
                         })
                     }
                 }).catch(err => {
@@ -1122,7 +1148,11 @@
                 console.log("getCLA");
                 this.$axios({
                     url: '/api' + url.getClaInfo,
-                    headers: {'Access-Token': this.$store.state.access_token, 'Refresh-Token': this.$store.state.refresh_token,'User':`${this.platform}/${this.$store.state.user.userName}`}
+                    headers: {
+                        'Access-Token': this.$store.state.access_token,
+                        'Refresh-Token': this.$store.state.refresh_token,
+                        'User': `${this.platform}/${this.$store.state.user.userName}`
+                    }
                 }).then(res => {
                     console.log(res);
                     if (res.data.length) {
@@ -1172,7 +1202,7 @@
             /*获取cookie*/
             getCookieData() {
                 console.log('getCookieData');
-                if (document.cookie!=='') {
+                if (document.cookie !== '') {
                     let cookieArr = document.cookie.split('; ')
                     let access_token, refresh_token = '';
                     cookieArr.forEach((item, index) => {
@@ -1182,13 +1212,13 @@
                     })
                     let data = {access_token, refresh_token};
                     this.setTokenAct(data);
-                    this.getUserInfo(access_token,refresh_token)
+                    this.getUserInfo(access_token, refresh_token)
 
                 }
 
             },
             /*获取用户名并显示*/
-            getUserInfo(access_token,refresh_token) {
+            getUserInfo(access_token, refresh_token) {
                 let obj = {access_token: access_token};
                 console.log(obj);
                 this.$axios({
@@ -1204,7 +1234,7 @@
                             userEmail: res.data.email
                         };
                         this.setLoginUserAct(data);
-                        this.getLinkedRepoList(access_token,refresh_token,res.data.login)
+                        this.getLinkedRepoList(access_token, refresh_token, res.data.login)
                     }
                 }).catch(err => {
                     console.log(err);
@@ -1218,9 +1248,9 @@
                     // spinner: 'el-icon-loading',
                     background: 'rgba(255, 255, 255, 0.8)'
                 });
-                setInterval(()=>{
-                    this.$store.state.user.userName&&loading.close();
-                },500)
+                setInterval(() => {
+                    this.$store.state.user.userName && loading.close();
+                }, 500)
             }
         },
 
