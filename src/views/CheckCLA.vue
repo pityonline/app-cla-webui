@@ -383,6 +383,10 @@
         flex-direction: column;
         box-sizing: border-box;
         padding-top: 4rem;
+        & > .header {
+            height: 4rem;
+            width: 100%;
+        }
 
         & > #section {
             flex-grow: 1;
@@ -394,6 +398,10 @@
 
 
             }
+        }
+        & > .footer {
+            height: 4rem;
+            width: 100%;
         }
 
 
