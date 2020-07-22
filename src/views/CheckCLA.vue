@@ -1,68 +1,79 @@
 <template>
     <div id="checkCLA" :style="checkCLAClass">
         <v-header></v-header>
-        <div v-if="!isSendCode" class="section">
-            <el-col :offset="6" :span="12">
-                <p class="contentTitle">Please sign the CLA for <span>{{repo}}</span></p>
+        <div id="section">
+            <div v-if="!isSendCode" class="content">
+                <el-col :offset="6" :span="12">
+                    <p class="contentTitle">Please sign the CLA for <span>{{repo}}</span></p>
 
-                <p class="size_s">Version: 2020-06-17</p>
-
-
-                <div id="claBox" style="white-space: pre-wrap">
-
-                </div>
+                    <p class="size_s">Version: 2020-06-17</p>
 
 
-                <div class="marginTop1rem">
-                    <el-checkbox v-model="isRead">已经阅读过协议</el-checkbox>
-                </div>
-                <el-row class="marginTop1rem ">
+                    <div id="claBox" style="white-space: pre-wrap">
+
+                    </div>
 
 
-                    <el-col :span="8" class="borderClass">
-                        <el-radio label="0" v-model="role">个人贡献者</el-radio>
-                    </el-col>
-                    <el-col :span="8" class="borderClass">
-                        <el-radio label="1" v-model="role">企业贡献者</el-radio>
-                    </el-col>
-
-                </el-row>
-                <el-row class="marginTop1rem">
-                    <el-col :span="16">
-                        <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="left" label-width="30%"
-                                 class="demo-ruleForm">
-                            <el-form-item v-for="(item,index) in metaData" :label="item.label" :required="item.required"
-                                          :prop="item.prop">
-                                <el-input v-model="ruleForm[item.prop]"></el-input>
-                            </el-form-item>
-                            <p style="font-size: .9rem;" class="borderClass">*为必填项，请确保你的邮箱与gitee账号绑定</p>
-                            <el-form-item label-width="0">
-                                <el-button :disabled="!isRead" type="primary" @click="submitForm('ruleForm')">签署
-                                </el-button>
-                                <el-button @click="resetForm('ruleForm')">重置</el-button>
-                            </el-form-item>
-                        </el-form>
-                        <!--<div style="margin-top: 1rem;text-align: left">-->
-                        <!--<el-button style="font-size: 1rem" type="primary">Agree</el-button>-->
-                        <!--</div>-->
-                    </el-col>
-                </el-row>
+                    <div class="marginTop1rem">
+                        <el-checkbox v-model="isRead">已经阅读过协议</el-checkbox>
+                    </div>
+                    <el-row class="marginTop1rem ">
 
 
-            </el-col>
+                        <el-col :span="8" class="borderClass">
+                            <el-radio label="0" v-model="role">个人贡献者</el-radio>
+                        </el-col>
+                        <el-col :span="8" class="borderClass">
+                            <el-radio label="1" v-model="role">企业贡献者</el-radio>
+                        </el-col>
+
+                    </el-row>
+                    <el-row class="marginTop1rem">
+                        <el-col :span="16">
+                            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="left" label-width="30%"
+                                     class="demo-ruleForm">
+                                <el-form-item v-for="(item,index) in metaData" :label="item.label" :required="item.required"
+                                              :prop="item.prop">
+                                    <el-input v-model="ruleForm[item.prop]"></el-input>
+                                </el-form-item>
+                                <p style="font-size: .9rem;" class="borderClass">*为必填项，请确保你的邮箱与gitee账号绑定</p>
+                                <el-form-item label-width="0">
+                                    <el-button :disabled="!isRead" type="primary" @click="submitForm('ruleForm')">签署
+                                    </el-button>
+                                    <el-button @click="resetForm('ruleForm')">重置</el-button>
+                                </el-form-item>
+                            </el-form>
+                            <!--<div style="margin-top: 1rem;text-align: left">-->
+                            <!--<el-button style="font-size: 1rem" type="primary">Agree</el-button>-->
+                            <!--</div>-->
+                        </el-col>
+                    </el-row>
+
+
+                </el-col>
+            </div>
+            <div v-else-if="!isVerify" class="content">
+                <el-col :offset="6" :span="12">
+                    <p>请输入6位数验证码完成验证</p>
+                    <el-row>
+                        <el-col :span="6">
+
+                            <el-input v-model="verifyCode" size="medium" style="margin-right: 2rem"></el-input>
+                        </el-col>
+                        <el-col :span="6">
+                            <el-button type="primary" size="medium" @click="verify()">确定</el-button>
+                        </el-col>
+                    </el-row>
+
+                </el-col>
+            </div>
+            <div v-else class="content">
+                <el-col :offset="6" :span="12">
+                    验证成功，请注意查收邮件完成签署流程。
+                </el-col>
+            </div>
         </div>
-        <div v-else-if="!isVerify" class="section">
-            <el-col :offset="6" :span="12">
-                <p>请输入6位数验证码完成验证</p>
-                <el-input v-model="verifyCode" size="medium" style="margin-right: 2rem"></el-input>
-                <el-button type="primary" size="medium" @click="verify()">确定</el-button>
-            </el-col>
-        </div>
-        <div v-else class="section">
-            <el-col :offset="6" :span="12">
-              验证成功，请注意查收邮件完成签署流程。
-            </el-col>
-        </div>
+
         <v-footer></v-footer>
         <el-dialog
                 title=""
@@ -119,8 +130,8 @@
                 }
             }
             return {
-                isVerify:false,
-                isSendCode:false,
+                isVerify: false,
+                isSendCode: false,
                 verifyCode: '',
                 platform: this.$store.state.platform,
                 dialogVisible: false,
@@ -195,7 +206,7 @@
         methods: {
             /*验证验证码*/
             verify() {
-                this.isVerify=true;
+                this.isVerify = true;
                 let obj = {code: this.verifyCode}
                 this.$axios({
                     url: '/api' + url.verifyCode,
@@ -210,7 +221,7 @@
                 }).then(res => {
                     console.log(res);
                     if (res.data.code === 200) {
-                        this.isVerify=true;
+                        this.isVerify = true;
                     } else {
                         this.$message.error('验证码错误')
                     }
@@ -222,7 +233,7 @@
             /*发送验证码*/
             signCla() {
                 this.dialogVisible = true;
-                this.isSendCode=true;
+                this.isSendCode = true;
                 let code = `${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}`
                 let obj = {
                     code: code,
@@ -244,7 +255,7 @@
                 }).then(res => {
                     console.log(res);
                     this.dialogVisible = true;
-                    this.isSendCode=true;
+                    this.isSendCode = true;
                 }).catch(err => {
                     console.log(err);
                 })
@@ -316,8 +327,6 @@
             },
             setClientHeight() {
                 this.$nextTick(() => {
-                    console.log(until.getClientHeight());
-                    console.log(document.getElementById('checkCLA').offsetHeight);
                     until.getClientHeight() > document.getElementById('checkCLA').offsetHeight ?
                         this.checkCLAClass.height = until.getClientHeight() + 'px' :
                         this.checkCLAClass.height = document.getElementById('checkCLA').offsetHeight
@@ -371,12 +380,18 @@
         box-sizing: border-box;
         padding-top: 4rem;
 
-        & > .section {
-            padding: 1rem;
-            text-align: left;
+        & > #section {
             flex-grow: 1;
             background-color: #F5F5F5;
 
+            & > .content {
+                padding: 1rem;
+                text-align: left;
+
+
+            }
         }
+
+
     }
 </style>
