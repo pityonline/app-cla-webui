@@ -1,7 +1,7 @@
 <template>
     <div id="checkCLA" :style="checkCLAClass">
         <v-header></v-header>
-        <div id="section">
+        <div v-if="!isSendCode" class="section">
             <el-col :offset="6" :span="12">
                 <p class="contentTitle">Please sign the CLA for <span>{{repo}}</span></p>
 
@@ -51,14 +51,26 @@
 
             </el-col>
         </div>
+        <div v-else-if="!isVerify" class="section">
+            <el-col :offset="6" :span="12">
+                <p>请输入6位数验证码完成验证</p>
+                <el-input v-model="verifyCode" size="medium" style="margin-right: 2rem"></el-input>
+                <el-button type="primary" size="medium" @click="verify()">确定</el-button>
+            </el-col>
+        </div>
+        <div v-else class="section">
+            <el-col :offset="6" :span="12">
+              验证成功，请注意查收邮件完成签署流程。
+            </el-col>
+        </div>
         <v-footer></v-footer>
         <el-dialog
                 title=""
                 top="5vh"
                 :visible.sync="dialogVisible"
-                width="70%">
-            <div style="margin-bottom: 1rem">
-            请在10分钟内点击邮箱{{ruleForm.email}}中的链接进行验证
+                width="50%">
+            <div style="margin-bottom: 2rem">
+                请在5分钟内输入邮箱{{ruleForm.email}}中的验证码进行验证
 
             </div>
             <div>
@@ -107,8 +119,11 @@
                 }
             }
             return {
-                platform:this.$store.state.platform,
-                dialogVisible:false,
+                isVerify:false,
+                isSendCode:false,
+                verifyCode: '',
+                platform: this.$store.state.platform,
+                dialogVisible: false,
                 repositoryOptions: [],
                 repo: '',
                 role: '0',
@@ -178,10 +193,36 @@
             }
         },
         methods: {
+            /*验证验证码*/
+            verify() {
+                let obj = {code: this.verifyCode}
+                this.$axios({
+                    url: '/api' + url.verifyCode,
+                    method: 'post',
+                    data: obj,
+                    headers: {
+                        'Access-Token': this.$store.state.access_token,
+                        'Refresh-Token': this.$store.state.refresh_token,
+                        'User': `${this.platform}/${this.$store.state.user.userName}`
+                    }
+
+                }).then(res => {
+                    console.log(res);
+                    if (res.data.code === 200) {
+                        this.isVerify=true;
+                    } else {
+                        this.$message.error('验证码错误')
+                    }
+                }).catch(err => {
+                    console.log(err);
+
+                })
+            },
+            /*发送验证码*/
             signCla() {
-                let code=`${Math.floor(Math.random()*10)}${Math.floor(Math.random()*10)}${Math.floor(Math.random()*10)}${Math.floor(Math.random()*10)}${Math.floor(Math.random()*10)}${Math.floor(Math.random()*10)}`
+                let code = `${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}`
                 let obj = {
-                    code:code,
+                    code: code,
                     role: this.role,
                     name: this.ruleForm.name,
                     email: this.ruleForm.email,
@@ -189,12 +230,18 @@
                 }
                 console.log(obj);
                 this.$axios({
-                    url: '/api'+url.signCla,
+                    url: '/api' + url.signCla,
                     method: 'post',
                     data: obj,
-                    headers: {'Access-Token': this.$store.state.access_token, 'Refresh-Token': this.$store.state.refresh_token,'User':`${this.platform}/${this.$store.state.user.userName}`}
+                    headers: {
+                        'Access-Token': this.$store.state.access_token,
+                        'Refresh-Token': this.$store.state.refresh_token,
+                        'User': `${this.platform}/${this.$store.state.user.userName}`
+                    }
                 }).then(res => {
                     console.log(res);
+                    this.dialogVisible = true;
+                    this.isSendCode=true;
                 }).catch(err => {
                     console.log(err);
                 })
@@ -202,7 +249,7 @@
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        this.dialogVisible=true
+
                         this.signCla();
                     } else {
                         console.log('error submit!!');
@@ -213,7 +260,11 @@
             getClaAndMetadata() {
                 this.$axios({
                     url: '/api' + url.getCla,
-                    headers: {'Access-Token': this.$store.state.access_token, 'Refresh-Token': this.$store.state.refresh_token,'User':`${this.platform}/${this.$store.state.user.userName}`}
+                    headers: {
+                        'Access-Token': this.$store.state.access_token,
+                        'Refresh-Token': this.$store.state.refresh_token,
+                        'User': `${this.platform}/${this.$store.state.user.userName}`
+                    }
 
                 }).then(res => {
                     console.log(res);
@@ -231,7 +282,11 @@
                 this.$axios({
                     url: `https://gitee.com/api/v5/orgs/${org}/repos`,
                     params: obj,
-                    headers: {'Access-Token': this.$store.state.access_token, 'Refresh-Token': this.$store.state.refresh_token,'User':`${this.platform}/${this.$store.state.user.userName}`}
+                    headers: {
+                        'Access-Token': this.$store.state.access_token,
+                        'Refresh-Token': this.$store.state.refresh_token,
+                        'User': `${this.platform}/${this.$store.state.user.userName}`
+                    }
                 }).then(res => {
                     console.log(res);
                     if (res.status === 200) {
@@ -313,7 +368,7 @@
         box-sizing: border-box;
         padding-top: 4rem;
 
-        & > #section {
+        & > .section {
             padding: 1rem;
             text-align: left;
             flex-grow: 1;
