@@ -64,18 +64,6 @@
             <div>
                 <el-button type="primary" size="medium" @click="dialogVisible=false">确定</el-button>
             </div>
-            <div class="paginationClass">
-                <el-pagination
-                        background
-                        :page-size="5"
-                        :pager-count="5"
-                        :hide-on-single-page="true"
-                        :current-page="listCurrentPage"
-                        @current-change="listChangePage"
-                        layout="prev, pager, next"
-                        :total="listData.length">
-                </el-pagination>
-            </div>
         </el-dialog>
     </div>
 </template>
@@ -223,8 +211,6 @@
                 });
             },
             getClaAndMetadata() {
-
-                console.log("getClaAndMetadata", obj);
                 this.$axios({
                     url: '/api' + url.getCla,
                     headers: {'Access-Token': this.$store.state.access_token, 'Refresh-Token': this.$store.state.refresh_token,'User':`${this.platform}/${this.$store.state.user.userName}`}
