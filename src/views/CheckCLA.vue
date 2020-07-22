@@ -256,6 +256,9 @@
                     console.log(res);
                     this.dialogVisible = true;
                     this.isSendCode = true;
+                    if (until.getClientHeight() > document.getElementById('checkCLA').offsetHeight) {
+                        document.getElementById("checkCLA").style.height = until.getClientHeight() + 'px'
+                    }
                 }).catch(err => {
                     console.log(err);
                 })
