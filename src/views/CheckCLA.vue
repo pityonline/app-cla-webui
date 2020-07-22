@@ -52,8 +52,8 @@
 
                 </el-col>
             </div>
-            <div v-else-if="!isVerify" class="content verifyClass">
-                <el-col :offset="6" :span="12" >
+            <div v-else-if="!isVerify" class="content ">
+                <el-col :offset="6" :span="12" class="verifyClass">
                     <p>请输入6位数验证码完成验证</p>
                     <el-row>
                         <el-col :span="6" style="margin-right: 2rem">
@@ -68,7 +68,7 @@
                 </el-col>
             </div>
             <div v-else class="content">
-                <el-col :offset="6" :span="12">
+                <el-col :offset="6" :span="12" class="verifyClass">
                     验证成功，请注意查收邮件完成签署流程。
                 </el-col>
             </div>
