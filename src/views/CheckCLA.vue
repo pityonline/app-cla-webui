@@ -71,7 +71,9 @@
             </div>
             <div v-else class="content">
                 <el-col :offset="6" :span="12" class="verifyClass">
-                    验证成功，请注意查收邮件完成签署流程。
+                    <p style="text-align: center">
+                        验证成功，请注意查收邮件完成签署流程。
+                    </p>
                 </el-col>
             </div>
         </div>
@@ -363,7 +365,7 @@
 
 <style scoped lang="less">
     .verifyClass {
-        padding: 5rem 0;
+        padding: 10rem 0;
 
     }
 
