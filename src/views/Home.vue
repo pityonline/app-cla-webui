@@ -307,7 +307,7 @@
 
 
                 isVerify: false,
-                activeName: 'first',
+                activeName: '',
                 previewShow: false,
                 previewText: 'previewCla',
                 loginType: this.$store.state.loginType,
