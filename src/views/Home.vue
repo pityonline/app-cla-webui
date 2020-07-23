@@ -380,7 +380,7 @@
             getPath(){
                 if ( this.$route.path==='/linkedRepo'){
                     this.activeName='first';
-                }else if (this.$route.path==='/signedRepo'){
+                }else if (this.$route.path==='/signedRepo'||this.$route.path==='/signedRepoLogin'){
                     this.activeName='second';
                 }
             },
