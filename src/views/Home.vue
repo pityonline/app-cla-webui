@@ -123,10 +123,10 @@
 
             <div>
                 <el-tabs v-model="activeName" @tab-click="tabsHandleClick">
-                    <el-tab-pane @click="clickLinedRepo()" label="Linked Repositories" name="first" style="margin-top: 1rem">
+                    <el-tab-pane  label="Linked Repositories" name="first" style="margin-top: 1rem">
 
                     </el-tab-pane>
-                    <el-tab-pane @click="clickSignedRepoLogin()" label="Signed Repositories" name="second" style="margin-top: 1rem">
+                    <el-tab-pane  label="Signed Repositories" name="second" style="margin-top: 1rem">
 
 
 
@@ -499,15 +499,12 @@
         },
         methods: {
             ...mapActions(['setLoginUserAct', 'setTokenAct']),
-            clickLinedRepo(){
-                this.$router.push('/linkedRepo')
-            },
-            clickSignedRepoLogin(){
-                this.$router.push('/signedRepoLogin')
-            },
+
 
             tabsHandleClick(tab, event) {
                 console.log(tab, event);
+                tab.index === '0'? this.$router.push('/linkedRepo') : this.$router.push('/signedRepoLogin')
+
             },
             /*获取组织权限*/
             getOrgPermission() {

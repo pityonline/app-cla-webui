@@ -54,6 +54,7 @@
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         alert('submit!');
+                          this.$router.push('/signedRepo')
                     } else {
                         console.log('error submit!!');
                         return false;
