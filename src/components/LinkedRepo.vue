@@ -100,7 +100,7 @@
                 :visible.sync="unLinkDialogVisible"
                 width="35%">
             <div>
-                <p class="dialogDesc" >Are you sure you want to unlink?</p>
+                <p class="dialogDesc">Are you sure you want to unlink?</p>
                 <div style="text-align: center">
                     <svg-icon style="width: 30rem;height: 20rem;margin:0 auto" icon-class="error"></svg-icon>
                 </div>
@@ -259,7 +259,8 @@
         name: "linkedRepo",
         data() {
             return {
-                editDialogVisible:false,
+                platform: this.$store.state.platform,
+                editDialogVisible: false,
                 unLinkDialogVisible: false,
                 tableTotal: 0,
                 currentPage: 1,
@@ -272,6 +273,67 @@
             }
         },
         methods: {
+            getCookieData() {
+                console.log('getCookieData');
+                if (document.cookie !== '') {
+                    let cookieArr = document.cookie.split('; ')
+                    let access_token, refresh_token = '';
+                    cookieArr.forEach((item, index) => {
+                        let arr = item.split('=');
+                        arr[0] === 'access_token' ? access_token = arr[1] : arr[0] === 'refresh_token' ? refresh_token = arr[1] : refresh_token = '';
+                        ;
+                    })
+                    let data = {access_token, refresh_token};
+                    this.setTokenAct(data);
+                    this.getUserInfo(access_token, refresh_token)
+
+                }
+
+            },
+            /*获取用户名并显示*/
+            getUserInfo(access_token, refresh_token) {
+                let obj = {access_token: access_token};
+                console.log(obj);
+                this.$axios({
+                    url: url.getUserInfo,
+                    params: obj,
+                }).then(res => {
+                    console.log(res);
+
+                    let data = {
+                        userId: res.data.id,
+                        userName: res.data.login,
+                        userImg: res.data.avatar_url,
+                        userEmail: res.data.email
+                    }
+                    this.setLoginUserAct(data);
+                    this.getLinkedRepoList(access_token, refresh_token, res.data.login)
+
+                }).catch(err => {
+                    console.log(err);
+                })
+            },
+            /*获取发布的开源项目*/
+            getLinkedRepoList(access_token, refresh_token, userName) {
+                let obj = {platform: this.platform}
+                console.log(obj, access_token, refresh_token);
+                this.$axios({
+                    url: '/api' + url.getLinkedRepoList,
+                    headers: {
+                        'Access-Token': access_token,
+                        'Refresh-Token': refresh_token,
+                        'User': `${this.platform}/${userName}`
+                    }
+                }).then(res => {
+                    console.log(res);
+                    if (res.data.length) {
+
+                    }
+                }).catch(err => {
+                    console.log(err);
+                })
+
+            },
             /*cla条目编辑*/
             editHandleClick(index) {
                 console.log(index);

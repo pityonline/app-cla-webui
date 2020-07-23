@@ -757,46 +757,7 @@
                 this.value = value;
             },
             /*获取cookie*/
-            getCookieData() {
-                console.log('getCookieData');
-                if (document.cookie !== '') {
-                    let cookieArr = document.cookie.split('; ')
-                    let access_token, refresh_token = '';
-                    cookieArr.forEach((item, index) => {
-                        let arr = item.split('=');
-                        arr[0] === 'access_token' ? access_token = arr[1] : arr[0] === 'refresh_token' ? refresh_token = arr[1] : refresh_token = '';
-                        ;
-                    })
-                    let data = {access_token, refresh_token};
-                    this.setTokenAct(data);
-                    this.getUserInfo(access_token, refresh_token)
 
-                }
-
-            },
-            /*获取用户名并显示*/
-            getUserInfo(access_token, refresh_token) {
-                let obj = {access_token: access_token};
-                console.log(obj);
-                this.$axios({
-                    url: url.getUserInfo,
-                    params: obj,
-                }).then(res => {
-                    console.log(res);
-                    if (res.status === 200) {
-                        let data = {
-                            userId: res.data.id,
-                            userName: res.data.login,
-                            userImg: res.data.avatar_url,
-                            userEmail: res.data.email
-                        };
-                        this.setLoginUserAct(data);
-                        this.getLinkedRepoList(access_token, refresh_token, res.data.login)
-                    }
-                }).catch(err => {
-                    console.log(err);
-                })
-            },
 
             openFullScreen() {
                 const loading = this.$loading({
