@@ -295,7 +295,14 @@
         },
         computed: {},
         watch:{
-            '$route':'getPath',
+            $route(to,from){
+              let path = to.path;
+                if ( path==='/linkedRepo'){
+                    this.activeName='first';
+                }else if (path==='/signedRepo'||path==='/signedRepoLogin'){
+                    this.activeName='second';
+                }
+            },
         },
         data() {
 
@@ -307,7 +314,7 @@
 
 
                 isVerify: false,
-                activeName: '',
+                activeName: 'first',
                 previewShow: false,
                 previewText: 'previewCla',
                 loginType: this.$store.state.loginType,
@@ -804,7 +811,6 @@
         },
 
         created() {
-            this.getPath();
             this.openFullScreen();
             this.getCookieData()
         },
