@@ -297,7 +297,7 @@
         watch:{
             $route(to,from){
               let path = to.path;
-                if ( path==='/linkedRepo'){
+                if ( path==='/linkedRepo'||path==='/home'){
                     this.activeName='first';
                 }else if (path==='/signedRepo'||path==='/signedRepoLogin'){
                     this.activeName='second';
@@ -385,9 +385,10 @@
             ...mapActions(['setLoginUserAct', 'setTokenAct']),
 
             getPath(){
-                if ( this.$route.path==='/linkedRepo'){
+                let path = this.$route.path;
+                if ( path==='/linkedRepo'||path==='/home'){
                     this.activeName='first';
-                }else if (this.$route.path==='/signedRepo'||this.$route.path==='/signedRepoLogin'){
+                }else if (path==='/signedRepo'||path==='/signedRepoLogin'){
                     this.activeName='second';
                 }
             },
