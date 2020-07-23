@@ -294,6 +294,9 @@
             Footer,
         },
         computed: {},
+        watch:{
+            '$route':'getPath',
+        },
         data() {
 
 
@@ -374,7 +377,13 @@
         methods: {
             ...mapActions(['setLoginUserAct', 'setTokenAct']),
 
-
+            getPath(){
+                if ( this.$route.path==='/linkedRepo'){
+                    this.activeName='first';
+                }else if (this.$route.path==='/signedRepo'){
+                    this.activeName='second';
+                }
+            },
             tabsHandleClick(tab, event) {
                 console.log(tab, event);
                 tab.index === '0'? this.$router.push('/linkedRepo') : this.$router.push('/signedRepoLogin')
