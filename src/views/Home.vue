@@ -775,7 +775,7 @@
         created() {
             this.getPath();
             this.openFullScreen();
-            this.getCookieData()
+
         },
         mounted() {
             this.setClientHeight();

@@ -272,6 +272,9 @@
                 }],
             }
         },
+        created(){
+            this.getCookieData()
+        },
         methods: {
             getCookieData() {
                 console.log('getCookieData');
