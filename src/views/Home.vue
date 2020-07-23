@@ -314,7 +314,7 @@
 
 
                 isVerify: false,
-                activeName: 'first',
+                activeName: '',
                 previewShow: false,
                 previewText: 'previewCla',
                 loginType: this.$store.state.loginType,
@@ -811,6 +811,7 @@
         },
 
         created() {
+            this.getPath();
             this.openFullScreen();
             this.getCookieData()
         },
