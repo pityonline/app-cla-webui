@@ -100,7 +100,7 @@
                 :visible.sync="unLinkDialogVisible"
                 width="35%">
             <div>
-                <p class="dialogDesc" style="margin-top: 0">Are you sure you want to unlink?</p>
+                <p class="dialogDesc" >Are you sure you want to unlink?</p>
                 <div>
                     <svg-icon style="width: 30rem;height: 20rem;margin: auto" icon-class="error"></svg-icon>
                 </div>
@@ -395,6 +395,7 @@
 
         font-size: 1.2rem;
         margin: 2rem 0;
+        text-align: center;
     }
 
     li {
