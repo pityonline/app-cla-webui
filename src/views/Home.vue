@@ -123,196 +123,16 @@
 
             <div>
                 <el-tabs v-model="activeName" @tab-click="tabsHandleClick">
-                    <el-tab-pane label="Linked Repositories" name="first" style="margin-top: 1rem">
-                        <div class="tableStyle">
-                            <el-table
-                                    :data="tableData"
-                                    align="center"
-                                    style="width: 100%;">
-                                <el-table-column
-                                        prop="repository"
-                                        label="Repository"
-                                        width="180">
-                                    <template slot-scope="scope">
-                                        <svg-icon icon-class="repository"/>
-                                        <span class="pointer hoverUnderline"
-                                              @click="newWindow()"
-                                              style="margin-left: 10px;">{{ scope.row.repository }}</span>
-                                    </template>
-                                </el-table-column>
-                                <el-table-column
-                                        prop="cla"
-                                        label="CLA"
-                                        width="180">
-                                    <template slot-scope="scope">
-                                        <span class="pointer hoverUnderline"
-                                              @click="checkCla()">{{scope.row.cla}}</span>
-                                    </template>
-                                </el-table-column>
-                                <el-table-column
-                                        prop="gist"
-                                        label="Gist">
-                                    <template slot-scope="scope">
-                                        <svg-icon style="cursor: pointer" icon-class="github"/>
-                                    </template>
-                                </el-table-column>
-
-                                <el-table-column
-                                        prop="sharedGist"
-                                        label="Shared Gist">
-                                </el-table-column>
-                                <el-table-column
-                                        prop="contributors"
-                                        label="Contributors"
-                                        align="center">
-                                </el-table-column>
-                                <el-table-column
-                                        prop="status"
-                                        align="center"
-                                        label="Status">
-                                    <template slot-scope="scope">
-                                        <svg-icon class="pointer" icon-class="link_active"/>
-                                    </template>
-                                </el-table-column>
-                                <el-table-column
-                                        align="center">
-
-                                    <template slot-scope="scope">
-                                        <el-tooltip class="item" effect="dark" content="Edit" placement="bottom">
-                                            <svg-icon class="pointer" style="display: inline-block;margin-right: .5rem"
-                                                      icon-class="edit" @click="editHandleClick(scope)"/>
-                                        </el-tooltip>
-
-
-                                        <el-popover
-                                                width="80"
-                                                placement="right">
-
-                                            <div class="menuBT">
-                                                <el-button type="primary" size="medium">Import</el-button>
-                                                <el-button type="primary" size="medium">ReCheck PRs</el-button>
-                                                <el-button type="primary" size="medium">Get Badge</el-button>
-                                                <el-button type="primary" size="medium"
-                                                           @click="unLinkDialogVisible=true">Unlink
-                                                </el-button>
-                                            </div>
-                                            <el-tooltip slot="reference" effect="dark" content="More.."
-                                                        placement="bottom">
-                                                <svg-icon class="pointer" icon-class="menu"/>
-                                            </el-tooltip>
-                                        </el-popover>
-                                    </template>
-                                </el-table-column>
-
-                            </el-table>
-                        </div>
-                        <div class="paginationClass">
-                            <el-pagination
-                                    background
-                                    :page-size="5"
-                                    :pager-count="5"
-                                    :hide-on-single-page="true"
-                                    :current-page="currentPage"
-                                    @current-change="changePage"
-                                    layout="prev, pager, next"
-                                    :total="tableTotal">
-                            </el-pagination>
-                        </div>
-                    </el-tab-pane>
-                    <el-tab-pane label="Signed Repositories" name="second" style="margin-top: 1rem">
-                        <el-col :offset="8" :span="8" v-if="!isVerify">
-                            <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px"
-                                     class="demo-ruleForm" style="padding: 2rem">
-                                <el-form-item label="账号" prop="account">
-                                    <el-input v-model="ruleForm.account" autocomplete="off"></el-input>
-                                </el-form-item>
-                                <el-form-item label="密码" prop="pass">
-                                    <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
-                                </el-form-item>
-                                <el-form-item>
-                                    <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
-                                    <el-button @click="resetForm('ruleForm')">重置</el-button>
-                                </el-form-item>
-                            </el-form>
-                        </el-col>
-                        <div v-else>
-                            <div class="tableStyle">
-                                <el-table
-                                        :data="tableDataOther"
-                                        align="center"
-                                        style="width: 100%;">
-                                    <el-table-column
-                                            prop="repository"
-                                            label="Repository"
-                                            width="180">
-                                        <template slot-scope="scope">
-                                            <svg-icon icon-class="repository"/>
-                                            <span class="pointer hoverUnderline"
-                                                  @click="newWindow()"
-                                                  style="margin-left: 10px;">{{ scope.row.repository }}</span>
-                                        </template>
-                                    </el-table-column>
-                                    <el-table-column
-                                            prop="cla"
-                                            label="CLA"
-                                            width="180">
-                                        <template slot-scope="scope">
-                                            <span class="pointer hoverUnderline"
-                                                  @click="checkCla()">{{scope.row.cla}}</span>
-                                        </template>
-                                    </el-table-column>
-                                    <el-table-column
-                                            prop="gist"
-                                            label="Gist">
-                                        <template slot-scope="scope">
-                                            <svg-icon style="cursor: pointer" icon-class="github"/>
-                                        </template>
-                                    </el-table-column>
-
-                                    <el-table-column
-                                            prop="sharedGist"
-                                            label="Shared Gist">
-                                    </el-table-column>
-                                    <el-table-column
-                                            prop="contributors"
-                                            label="Contributors"
-                                            align="center">
-                                    </el-table-column>
-                                    <el-table-column
-                                            prop="status"
-                                            align="center"
-                                            label="Status">
-                                        <template slot-scope="scope">
-                                            <svg-icon class="pointer" icon-class="link_active"/>
-                                        </template>
-                                    </el-table-column>
-                                    <el-table-column
-                                            align="center">
-                                        <template slot-scope="scope">
-                                            <el-button type="primary" v-if="tableType===3" size="small"
-                                                       @click="listDialogVisible=true">白名单
-                                            </el-button>
-                                        </template>
-                                    </el-table-column>
-                                </el-table>
-                            </div>
-                            <div class="paginationClass">
-                                <el-pagination
-                                        background
-                                        :page-size="5"
-                                        :pager-count="5"
-                                        :hide-on-single-page="true"
-                                        :current-page="currentPage"
-                                        @current-change="changePage"
-                                        layout="prev, pager, next"
-                                        :total="tableTotal">
-                                </el-pagination>
-                            </div>
-                        </div>
+                    <el-tab-pane @click="clickLinedRepo()" label="Linked Repositories" name="first" style="margin-top: 1rem">
 
                     </el-tab-pane>
+                    <el-tab-pane @click="clickSignedRepoLogin()" label="Signed Repositories" name="second" style="margin-top: 1rem">
 
+
+
+                    </el-tab-pane>
                 </el-tabs>
+                <router-view></router-view>
             </div>
 
         </el-col>
@@ -575,89 +395,7 @@
             </div>
 
         </el-dialog>
-        <el-dialog
-                title=""
-                top="5vh"
-                :visible.sync="unLinkDialogVisible"
-                width="35%">
-            <div>
-                <p class="dialogDesc" style="margin-top: 0">Are you sure you want to unlink?</p>
-                <div>
-                    <svg-icon style="width: 30rem;height: 20rem;margin: auto" icon-class="error"></svg-icon>
-                </div>
 
-                <div style="padding: 0 6rem;text-align: left;font-size: 1.3rem">
-                    <p style="text-align: center">Unlinking will...</p>
-                    <ul>
-                        <li>Remove the CLA assistant webhook in your repository/organization
-                        </li>
-                        <li>Remove the link to your list of contributors</li>
-
-                    </ul>
-                </div>
-
-                <div class="right">
-                    <el-button @click="unLinkDialogVisible = false">Keep it</el-button>
-                    <el-button type="danger" @click="unLinkRepository()">Unlink anyway</el-button>
-                </div>
-
-            </div>
-
-        </el-dialog>
-        <el-dialog
-                title="白名单"
-                top="5vh"
-                :visible.sync="listDialogVisible"
-                width="70%">
-            <div style="margin-bottom: 1rem">
-                <el-table
-                        :data="listData"
-                        align="center"
-                        style="width: 100%;">
-                    <el-table-column
-                            prop="name"
-                            label="Name"
-                    >
-                    </el-table-column>
-                    <el-table-column
-                            prop="email"
-                            label="Email"
-                    >
-                    </el-table-column>
-                    <el-table-column
-                            prop="tel"
-                            label="Tel">
-
-                    </el-table-column>
-
-                    <el-table-column
-                            align="center">
-                        <template slot-scope="scope">
-                            <el-switch
-                                    v-model="scope.row.isUsed"
-                                    active-color="#409EFF"
-                                    inactive-color="#EBEEF5">
-                            </el-switch>
-                            <el-button style="margin-left: 1rem" type="danger" size="mini">删除
-                            </el-button>
-                        </template>
-                    </el-table-column>
-                </el-table>
-
-            </div>
-            <div class="paginationClass">
-                <el-pagination
-                        background
-                        :page-size="5"
-                        :pager-count="5"
-                        :hide-on-single-page="true"
-                        :current-page="listCurrentPage"
-                        @current-change="listChangePage"
-                        layout="prev, pager, next"
-                        :total="listData.length">
-                </el-pagination>
-            </div>
-        </el-dialog>
 
     </div>
 </template>
@@ -684,49 +422,22 @@
         computed: {},
         data() {
 
-            var validateAccount = (rule, value, callback) => {
-                if (value === '') {
-                    callback(new Error('请输入账号'));
-                }
-                callback();
-            };
-            var validatePass = (rule, value, callback) => {
-                if (value === '') {
-                    callback(new Error('请输入密码'));
-                }
-                callback();
-            };
+
             return {
                 createMetadataDialogVisible: false,
                 linkLoading: false,
                 platform: this.$store.state.platform,
-                ruleForm: {
-                    pass: '',
-                    account: '',
-                },
-                rules: {
-                    account: [
-                        {validator: validateAccount, trigger: 'blur'}
-                    ],
-                    pass: [
-                        {validator: validatePass, trigger: 'blur'}
-                    ],
-                },
+
+
                 isVerify: false,
                 activeName: 'first',
                 previewShow: false,
                 previewText: 'previewCla',
                 loginType: this.$store.state.loginType,
-                tableTotal: 0,
-                listData: [{name: 'jack', email: '10577507@qq.com', tel: '15632486433', isUsed: true}, {
-                    name: 'Rose',
-                    email: '105507@163.com',
-                    tel: '18832486437',
-                    isUsed: false
-                }],
+
                 tableType: 1,
                 tableShow: true,
-                currentPage: 1,
+
                 listCurrentPage: 1,
                 dropdownTitle: 'Linked Repositories',
                 isEmail: false,
@@ -774,13 +485,8 @@
                 repositoryChoose: '',
                 showConfigForm: false,
 
-                tableData: [{repository: 'ooo', cla: 'test', sharedGist: 'Yes', contributors: '0',}, {
-                    repository: 'ooo',
-                    cla: 'test',
-                    sharedGist: 'No',
-                    contributors: '0',
-                }],
-                tableDataOther: [{repository: 'ooo', cla: 'test', sharedGist: 'Yes', contributors: '0',},],
+
+
                 home: {
                     height: '',
                 },
@@ -793,19 +499,13 @@
         },
         methods: {
             ...mapActions(['setLoginUserAct', 'setTokenAct']),
-            submitForm(formName) {
-                this.$refs[formName].validate((valid) => {
-                    if (valid) {
-                        alert('submit!');
-                    } else {
-                        console.log('error submit!!');
-                        return false;
-                    }
-                });
+            clickLinedRepo(){
+                this.$router.push('/linkedRepo')
             },
-            resetForm(formName) {
-                this.$refs[formName].resetFields();
+            clickSignedRepoLogin(){
+                this.$router.push('/signedRepoLogin')
             },
+
             tabsHandleClick(tab, event) {
                 console.log(tab, event);
             },
@@ -820,10 +520,7 @@
             listChangePage(page) {
                 console.log(page);
             },
-            /*首页展示项目翻页*/
-            changePage(page) {
-                console.log(page);
-            },
+
             // handleCommand(command) {
             //     // this.$message('click on item ' + command);
             //     this.dropdownTitle = command
@@ -977,35 +674,7 @@
                     return false
                 }
             },
-            /*解绑开源项目*/
-            unLinkRepository() {
-                this.linkDialogVisible = false;
-                let obj = {
-                    repositoryValue: this.repositoryValue,
-                    claValue: this.claValue,
 
-                };
-                this.$axios({
-                    url: url.unLinkRepository,
-                    methods: 'post',
-                    data: obj,
-                    headers: {
-                        'Access-Token': this.access_token,
-                        'Refresh-Token': this.refresh_token,
-                        'User': `${this.platform}/${this.user.userName}`
-                    }
-
-                }).then(res => {
-                    console.log(res);
-                    if (res.data.code === 200) {
-                        this.repositoryOptions = res.data.data
-                        this.$message.success('解绑成功')
-                        this.unLinkDialogVisible = false
-                    }
-                }).catch(err => {
-                    console.log(err);
-                })
-            },
             /*链接开源项目*/
             linkRepository() {
                 this.linkLoading = true;
