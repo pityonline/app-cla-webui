@@ -275,7 +275,7 @@
                 }],
             }
         },
-        created(){
+        created() {
             this.getCookieData()
         },
         methods: {
@@ -334,7 +334,18 @@
                     }
                 }).then(res => {
                     console.log(res);
+
                     if (res.data.length) {
+                        this.tableData = [];
+                        res.data.forEach((item, index) => {
+                            this.tableData.push({
+                                repository: `${item.org_id}/${item.repo_id}`,
+                                cla: item.cla_id,
+                                sharedGist: 'Yes',
+                                contributors: '0',
+                            })
+                        })
+
 
                     }
                 }).catch(err => {
