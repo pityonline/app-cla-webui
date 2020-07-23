@@ -19,11 +19,17 @@ const routes = [
         path: '/home',
         name: 'Home',
         component: () => import('../views/Home.vue'),
-        children: [{
-            path: '/linkedRepo',
-            name: 'LinkedRepo',
-            component: () => import('../components/LinkedRepo.vue')
-        },
+        children: [
+            {
+                path: '/',
+                name: 'LinkedRepo',
+                component: () => import('../components/LinkedRepo.vue')
+            },
+            {
+                path: '/linkedRepo',
+                name: 'LinkedRepo',
+                component: () => import('../components/LinkedRepo.vue')
+            },
             {
                 path: '/signedRepoLogin',
                 name: 'SignedRepoLogin',
