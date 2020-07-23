@@ -255,6 +255,8 @@
 </template>
 
 <script>
+    import {mapActions} from 'vuex'
+
     export default {
         name: "linkedRepo",
         data() {
@@ -276,6 +278,8 @@
             this.getCookieData()
         },
         methods: {
+            ...mapActions(['setLoginUserAct', 'setTokenAct']),
+
             getCookieData() {
                 console.log('getCookieData');
                 if (document.cookie !== '') {
