@@ -95,6 +95,7 @@
             </el-pagination>
         </div>
     </div>
+
     <el-dialog
             title=""
             top="5vh"
@@ -250,7 +251,6 @@
         </div>
 
     </el-dialog>
-
 </template>
 
 <script>
@@ -258,6 +258,7 @@
         name: "linkedRepo",
         data() {
             return {
+                editDialogVisible:false,
                 unLinkDialogVisible: false,
                 tableTotal: 0,
                 currentPage: 1,
