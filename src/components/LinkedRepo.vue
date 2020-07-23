@@ -256,6 +256,7 @@
 
 <script>
     import {mapActions} from 'vuex'
+    import * as url from '../until/api'
 
     export default {
         name: "linkedRepo",
