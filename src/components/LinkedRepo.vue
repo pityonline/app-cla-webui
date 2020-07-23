@@ -143,6 +143,15 @@
             }
         },
         methods: {
+            /*查看CLA签署状态*/
+            checkCla() {
+                console.log("checkCla");
+                this.$router.push('/checkCla')
+            },
+            newWindow() {
+                // window.open('https://github.com/ouchengle/Test','_black')
+                window.open('https://github.com/ouchengle')
+            },
             /*解绑开源项目*/
             unLinkRepository() {
                 this.linkDialogVisible = false;
