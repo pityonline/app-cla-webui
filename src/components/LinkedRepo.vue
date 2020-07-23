@@ -101,7 +101,7 @@
                 width="35%">
             <div>
                 <p class="dialogDesc" >Are you sure you want to unlink?</p>
-                <div>
+                <div style="width: 100%;">
                     <svg-icon style="width: 30rem;height: 20rem;margin:0 auto" icon-class="error"></svg-icon>
                 </div>
 
