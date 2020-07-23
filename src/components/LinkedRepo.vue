@@ -102,7 +102,7 @@
             <div>
                 <p class="dialogDesc" >Are you sure you want to unlink?</p>
                 <div>
-                    <svg-icon style="width: 30rem;height: 20rem;margin: auto" icon-class="error"></svg-icon>
+                    <svg-icon style="width: 30rem;height: 20rem;margin:0 auto" icon-class="error"></svg-icon>
                 </div>
 
                 <div style="padding: 0 6rem;text-align: left;font-size: 1.3rem">
