@@ -143,6 +143,11 @@
             }
         },
         methods: {
+            /*cla条目编辑*/
+            editHandleClick(index) {
+                console.log(index);
+                this.editDialogVisible = true
+            },
             /*查看CLA签署状态*/
             checkCla() {
                 console.log("checkCla");
@@ -154,7 +159,7 @@
             },
             /*解绑开源项目*/
             unLinkRepository() {
-                this.linkDialogVisible = false;
+                this.unLinkDialogVisible = true;
                 let obj = {
                     repositoryValue: this.repositoryValue,
                     claValue: this.claValue,
