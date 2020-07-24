@@ -59,24 +59,27 @@
                                       icon-class="edit" @click="editHandleClick(scope)"/>
                         </el-tooltip>
 
+                        <el-tooltip slot="reference" effect="dark" content="delete"
+                                    placement="bottom">
+                            <svg-icon class="pointer" icon-class="delete" @click="unlinkHandleClick(scope)"/>
+                        </el-tooltip>
+                        <!--<el-popover-->
+                                <!--width="80"-->
+                                <!--placement="right">-->
 
-                        <el-popover
-                                width="80"
-                                placement="right">
-
-                            <div class="menuBT">
-                                <el-button type="primary" size="medium">Import</el-button>
-                                <el-button type="primary" size="medium">ReCheck PRs</el-button>
-                                <el-button type="primary" size="medium">Get Badge</el-button>
-                                <el-button type="primary" size="medium"
-                                           @click="unLinkDialogVisible=true">Unlink
-                                </el-button>
-                            </div>
-                            <el-tooltip slot="reference" effect="dark" content="More.."
-                                        placement="bottom">
-                                <svg-icon class="pointer" icon-class="menu"/>
-                            </el-tooltip>
-                        </el-popover>
+                            <!--<div class="menuBT">-->
+                                <!--<el-button type="primary" size="medium">Import</el-button>-->
+                                <!--<el-button type="primary" size="medium">ReCheck PRs</el-button>-->
+                                <!--<el-button type="primary" size="medium">Get Badge</el-button>-->
+                                <!--<el-button type="primary" size="medium"-->
+                                           <!--@click="unLinkDialogVisible=true">Unlink-->
+                                <!--</el-button>-->
+                            <!--</div>-->
+                            <!--<el-tooltip slot="reference" effect="dark" content="More.."-->
+                                        <!--placement="bottom">-->
+                                <!--<svg-icon class="pointer" icon-class="menu"/>-->
+                            <!--</el-tooltip>-->
+                        <!--</el-popover>-->
                     </template>
                 </el-table-column>
 
@@ -267,19 +270,14 @@
                 unLinkDialogVisible: false,
                 tableTotal: 0,
                 currentPage: 1,
-                tableData: [{repository: 'ooo', cla: 'test', sharedGist: 'Yes', contributors: '0',}, {
-                    repository: 'ooo',
-                    cla: 'test',
-                    sharedGist: 'No',
-                    contributors: '0',
-                }],
+                tableData: [],
             }
         },
         created() {
             this.getCookieData()
         },
         methods: {
-            ...mapActions(['setLoginUserAct', 'setTokenAct']),
+            ...mapActions(['setLoginUserAct', 'setTokenAct','setReadyAct']),
 
             getCookieData() {
                 console.log('getCookieData');
@@ -337,6 +335,7 @@
 
                     if (res.data.length) {
                         this.tableData = [];
+
                         res.data.forEach((item, index) => {
                             this.tableData.push({
                                 repository: `${item.org_id}/${item.repo_id}`,
@@ -357,6 +356,11 @@
             editHandleClick(index) {
                 console.log(index);
                 this.editDialogVisible = true
+            },
+            /*cla条目编辑*/
+            unlinkHandleClick(index) {
+                console.log(index);
+                this.unLinkDialogVisible = true
             },
             /*查看CLA签署状态*/
             checkCla() {

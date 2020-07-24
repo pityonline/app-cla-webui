@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    ready:sessionStorage.getItem('ready')||undefined,
     platform:sessionStorage.getItem('platform')||undefined,
     gitee_client_id: '2632e89d3dfb17ce941d2d2b45efc6f235afb4941ddb67578adda83aa33ab6a2',
     gitee_client_secret: '265ba325522a42a531649d39fa323ce0788238b1c7ea279297443eb52edd18af',
@@ -22,6 +23,11 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    setReady(state,data){
+      console.log(data);
+      state.ready=data;
+      sessionStorage.setItem('ready',data);
+    },
     setToken(state,data){
       console.log(data);
       state.access_token=data.access_token;
@@ -45,6 +51,10 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    setReadyAct({commit},ready){
+      console.log(ready);
+      commit('setReady',ready)
+    },
     setPlatformAct({commit},platform){
       console.log(platform);
       commit('setPlatform',platform)

@@ -767,7 +767,7 @@
                     background: 'rgba(255, 255, 255, 0.8)'
                 });
                 setInterval(() => {
-                    this.$store.state.user.userName && loading.close();
+                    this.$store.state.user.userName&&this.$store.state.ready && loading.close();
                 }, 500)
             }
         },
