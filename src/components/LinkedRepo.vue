@@ -56,10 +56,10 @@
                     <template slot-scope="scope">
                         <el-tooltip class="item" effect="dark" content="Edit" placement="bottom">
                             <svg-icon class="pointer" style="display: inline-block;margin-right: .5rem"
-                                      icon-class="edit" @click="editHandleClick(scope)"/>
+                                      icon-class="edit" @click="editDialogVisible = true"/>
                         </el-tooltip>
 
-                        <el-tooltip slot="reference" effect="dark" content="delete"
+                        <el-tooltip slot="reference" effect="dark" content="unlink"
                                     placement="bottom">
                             <svg-icon class="pointer" icon-class="delete" @click="unlinkHandleClick(scope)"/>
                         </el-tooltip>
