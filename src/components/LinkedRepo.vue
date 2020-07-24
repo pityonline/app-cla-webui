@@ -2,7 +2,7 @@
     <div>
         <div class="tableStyle">
             <el-table
-                    :data="tableData"
+                    :data="this.$store.state.tableData"
                     align="center"
                     style="width: 100%;">
                 <el-table-column

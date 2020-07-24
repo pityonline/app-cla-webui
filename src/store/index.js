@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
 import * as url from '../until/api'
 Vue.use(Vuex)
 
@@ -70,7 +71,7 @@ export default new Vuex.Store({
       commit('setLoginUser',data)
     },
     getLinkedRepoListAct({commit},data) {
-      this.$axios({
+      axios({
         url: '/api' + url.getLinkedRepoList,
         headers: {
           'Access-Token': data.access_token,
