@@ -55,17 +55,13 @@
 
                     <template slot-scope="scope">
                         <el-tooltip class="item" effect="dark" content="Edit" placement="bottom">
-                            <div @click="editHandleClick(scope)">
-                                <svg-icon class="pointer" style="display: inline-block;margin-right: .5rem"
-                                          icon-class="edit" />
-                            </div>
+                            <svg-icon class="pointer" style="display: inline-block;margin-right: .5rem"
+                                      icon-class="edit" @click="editHandleClick(scope)"/>
                         </el-tooltip>
 
                         <el-tooltip slot="reference" effect="dark" content="unlink"
                                     placement="bottom">
-                            <div @click="unlinkHandleClick(scope)">
-                                <svg-icon class="pointer" icon-class="delete" />
-                            </div>
+                            <svg-icon class="pointer" icon-class="delete" @click="unlinkHandleClick(scope)"/>
                         </el-tooltip>
                         <!--<el-popover-->
                         <!--width="80"-->
