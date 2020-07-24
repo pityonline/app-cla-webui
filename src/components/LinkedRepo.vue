@@ -277,7 +277,7 @@
             this.getCookieData()
         },
         methods: {
-            ...mapActions(['setLoginUserAct', 'setTokenAct', 'setReadyAct']),
+            ...mapActions(['setLoginUserAct', 'setTokenAct','getLinkedRepoListAct']),
 
             getCookieData() {
                 console.log('getCookieData');
@@ -313,46 +313,14 @@
                         userEmail: res.data.email
                     }
                     this.setLoginUserAct(data);
-                    this.getLinkedRepoList(access_token, refresh_token, res.data.login)
+                    let obj = {access_token:access_token, refresh_token:refresh_token, userName:res.data.login}
+                    this.getLinkedRepoListAct(obj);
 
                 }).catch(err => {
                     console.log(err);
                 })
             },
-            /*获取发布的开源项目*/
-            getLinkedRepoList(access_token, refresh_token, userName) {
-                let obj = {platform: this.platform}
-                console.log(obj, access_token, refresh_token);
-                this.$axios({
-                    url: '/api' + url.getLinkedRepoList,
-                    headers: {
-                        'Access-Token': access_token,
-                        'Refresh-Token': refresh_token,
-                        'User': `${this.platform}/${userName}`
-                    }
-                }).then(res => {
-                    console.log(res);
 
-                    if (res.data.length) {
-                        this.tableData = [];
-                        let num = '';
-                        res.data.forEach((item, index) => {
-                            console.log(index);
-                            num=index
-                            this.tableData.push({
-                                repository: `${item.org_id}/${item.repo_id}`,
-                                cla: item.cla_id,
-                                sharedGist: 'Yes',
-                                contributors: '0',
-                            })
-                        })
-                        this.setReadyAct(true)
-                        console.log(num);
-
-                    }
-                }).catch(err => {
-                    console.log(err);
-                })
 
             },
             /*cla条目编辑*/
@@ -407,7 +375,6 @@
             changePage(page) {
                 console.log(page);
             },
-        },
     }
 </script>
 

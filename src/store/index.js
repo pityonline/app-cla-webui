@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import * as url from '../until/api'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    tableData:sessionStorage.getItem('platform')||undefined,
     ready:Boolean(sessionStorage.getItem('ready')||undefined),
     platform:sessionStorage.getItem('platform')||undefined,
     gitee_client_id: '2632e89d3dfb17ce941d2d2b45efc6f235afb4941ddb67578adda83aa33ab6a2',
@@ -25,8 +26,10 @@ export default new Vuex.Store({
   mutations: {
     setReady(state,data){
       console.log(data);
-      state.ready=data;
-      sessionStorage.setItem('ready',data);
+      state.ready=data.ready;
+      state.tableData=data.tableData;
+      sessionStorage.setItem('ready',data.ready);
+      sessionStorage.setItem('tableData',data.tableData);
     },
     setToken(state,data){
       console.log(data);
@@ -51,10 +54,10 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    setReadyAct({commit},ready){
-      console.log(ready);
-      commit('setReady',ready)
-    },
+    // setReadyAct({commit},ready){
+    //   console.log(ready);
+    //   commit('setReady',ready)
+    // },
     setPlatformAct({commit},platform){
       console.log(platform);
       commit('setPlatform',platform)
@@ -65,7 +68,40 @@ export default new Vuex.Store({
     setLoginUserAct({commit},data){
       console.log(data);
       commit('setLoginUser',data)
-    }
+    },
+    getLinkedRepoListAct({commit},data) {
+      this.$axios({
+        url: '/api' + url.getLinkedRepoList,
+        headers: {
+          'Access-Token': data.access_token,
+          'Refresh-Token': data.refresh_token,
+          'User': `${this.platform}/${data.userName}`
+        }
+      }).then(res => {
+        console.log(res);
+
+        if (res.data.length) {
+          let tableData = [];
+          res.data.forEach((item, index) => {
+            tableData.push({
+              repository: `${item.org_id}/${item.repo_id}`,
+              cla: item.cla_id,
+              sharedGist: 'Yes',
+              contributors: '0',
+            })
+          })
+          let data={tableData:tableData,ready:true}
+          commit('setReady',data);
+
+
+
+
+        }
+      }).catch(err => {
+        console.log(err);
+      })
+
+    },
   },
   modules: {
   }

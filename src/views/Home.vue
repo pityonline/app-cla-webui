@@ -382,7 +382,7 @@
             }
         },
         methods: {
-            ...mapActions(['setLoginUserAct', 'setTokenAct']),
+            ...mapActions(['setLoginUserAct', 'setTokenAct','getLinkedRepoListAct']),
 
             getPath(){
                 let path = this.$route.path;
@@ -453,27 +453,7 @@
             //
             //     }
             // },
-            /*获取发布的开源项目*/
-            getLinkedRepoList(access_token, refresh_token, userName) {
-                let obj = {platform: this.platform}
-                console.log(obj, access_token, refresh_token);
-                this.$axios({
-                    url: '/api' + url.getLinkedRepoList,
-                    headers: {
-                        'Access-Token': access_token,
-                        'Refresh-Token': refresh_token,
-                        'User': `${this.platform}/${userName}`
-                    }
-                }).then(res => {
-                    console.log(res);
-                    if (res.data.length) {
 
-                    }
-                }).catch(err => {
-                    console.log(err);
-                })
-
-            },
             /*获取个人签署的项目*/
             getPersonalSigned() {
                 console.log('getPersonalRepositories');
@@ -597,7 +577,8 @@
                     this.repositoryChoose = false;
                     this.email = '';
                     this.linkDialogVisible = false;
-                    this.getLinkedRepoList(this.$store.state.access_token, this.$store.state.refresh_token, this.$store.state.user.userName)
+                    let data ={access_token:this.$store.state.access_token,refresh_token:this.$store.state.refresh_token,userName:this.$store.state.user.userName}
+                    this.getLinkedRepoListAct(data)
                 }).catch(err => {
                     console.log(err);
                     this.linkLoading = false
