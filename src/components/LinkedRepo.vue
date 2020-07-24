@@ -64,21 +64,21 @@
                             <svg-icon class="pointer" icon-class="delete" @click="unlinkHandleClick(scope)"/>
                         </el-tooltip>
                         <!--<el-popover-->
-                                <!--width="80"-->
-                                <!--placement="right">-->
+                        <!--width="80"-->
+                        <!--placement="right">-->
 
-                            <!--<div class="menuBT">-->
-                                <!--<el-button type="primary" size="medium">Import</el-button>-->
-                                <!--<el-button type="primary" size="medium">ReCheck PRs</el-button>-->
-                                <!--<el-button type="primary" size="medium">Get Badge</el-button>-->
-                                <!--<el-button type="primary" size="medium"-->
-                                           <!--@click="unLinkDialogVisible=true">Unlink-->
-                                <!--</el-button>-->
-                            <!--</div>-->
-                            <!--<el-tooltip slot="reference" effect="dark" content="More.."-->
-                                        <!--placement="bottom">-->
-                                <!--<svg-icon class="pointer" icon-class="menu"/>-->
-                            <!--</el-tooltip>-->
+                        <!--<div class="menuBT">-->
+                        <!--<el-button type="primary" size="medium">Import</el-button>-->
+                        <!--<el-button type="primary" size="medium">ReCheck PRs</el-button>-->
+                        <!--<el-button type="primary" size="medium">Get Badge</el-button>-->
+                        <!--<el-button type="primary" size="medium"-->
+                        <!--@click="unLinkDialogVisible=true">Unlink-->
+                        <!--</el-button>-->
+                        <!--</div>-->
+                        <!--<el-tooltip slot="reference" effect="dark" content="More.."-->
+                        <!--placement="bottom">-->
+                        <!--<svg-icon class="pointer" icon-class="menu"/>-->
+                        <!--</el-tooltip>-->
                         <!--</el-popover>-->
                     </template>
                 </el-table-column>
@@ -277,7 +277,7 @@
             this.getCookieData()
         },
         methods: {
-            ...mapActions(['setLoginUserAct', 'setTokenAct','setReadyAct']),
+            ...mapActions(['setLoginUserAct', 'setTokenAct', 'setReadyAct']),
 
             getCookieData() {
                 console.log('getCookieData');
@@ -335,8 +335,10 @@
 
                     if (res.data.length) {
                         this.tableData = [];
-
+                        let num = '';
                         res.data.forEach((item, index) => {
+                            console.log(index);
+                            num=index
                             this.tableData.push({
                                 repository: `${item.org_id}/${item.repo_id}`,
                                 cla: item.cla_id,
@@ -344,7 +346,8 @@
                                 contributors: '0',
                             })
                         })
-
+                        this.setReadyAct(true)
+                        console.log(num);
 
                     }
                 }).catch(err => {
