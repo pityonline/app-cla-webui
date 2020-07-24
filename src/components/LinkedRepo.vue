@@ -61,7 +61,7 @@
 
                         <el-tooltip slot="reference" effect="dark" content="unlink"
                                     placement="bottom">
-                            <svg-icon class="pointer" icon-class="delete" @click="unlinkHandleClick(scope)"/>
+                            <svg-icon class="pointer" icon-class="delete" @click="unLinkDialogVisible=true"/>
                         </el-tooltip>
                         <!--<el-popover-->
                         <!--width="80"-->
@@ -351,13 +351,12 @@
         unLinkRepositoryFun() {
             console.log(data);
             let obj = {
-                repositoryValue: this.repositoryValue,
-                claValue: this.claValue,
+                id: this.$store.state.tableData[0].id
 
             };
             this.$axios({
-                url: url.unLinkRepository,
-                methods: 'post',
+                url: '/api'+url.unLinkRepository,
+                methods: 'delete',
                 data: obj,
                 headers: {
                     'Access-Token': this.access_token,

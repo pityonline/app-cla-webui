@@ -82,6 +82,7 @@ export default new Vuex.Store({
           let tableData = [];
           res.data.forEach((item, index) => {
             tableData.push({
+              id:item.id,
               repository: `${item.org_id}/${item.repo_id}`,
               cla: item.cla_id,
               sharedGist: 'Yes',
