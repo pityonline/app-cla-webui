@@ -347,7 +347,7 @@
             },
             /*解绑开源项目*/
             unLinkRepositoryFun() {
-                console.log(data);
+
                 let obj = {
                     id: this.$store.state.tableData[0].id
 
