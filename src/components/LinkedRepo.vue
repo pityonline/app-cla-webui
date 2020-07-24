@@ -61,7 +61,7 @@
 
                         <el-tooltip slot="reference" effect="dark" content="unlink"
                                     placement="bottom">
-                            <svg-icon class="pointer" icon-class="delete" @click="unLinkDialogVisible=true"/>
+                            <svg-icon class="pointer" icon-class="delete" @click="unlinkHandleClick(scope)"/>
                         </el-tooltip>
                         <!--<el-popover-->
                         <!--width="80"-->
@@ -326,57 +326,57 @@
                 })
             },
 
+            /*cla条目编辑*/
+            editHandleClick(index) {
+                console.log(index);
+                this.editDialogVisible = true
+            },
 
-        },
-        /*cla条目编辑*/
-        editHandleClick(index) {
-            console.log(index);
-            this.editDialogVisible = true
+            unlinkHandleClick(index) {
+                console.log(index);
+                this.unLinkDialogVisible = true
+            },
+            /*查看CLA签署状态*/
+            checkCla() {
+                console.log("checkCla");
+                this.$router.push('/checkCla')
+            },
+            newWindow() {
+                // window.open('https://github.com/ouchengle/Test','_black')
+                window.open('https://github.com/ouchengle')
+            },
+            /*解绑开源项目*/
+            unLinkRepositoryFun() {
+                console.log(data);
+                let obj = {
+                    id: this.$store.state.tableData[0].id
+
+                };
+                this.$axios({
+                    url: '/api' + url.unLinkRepository,
+                    methods: 'delete',
+                    data: obj,
+                    headers: {
+                        'Access-Token': this.access_token,
+                        'Refresh-Token': this.refresh_token,
+                        'User': `${this.platform}/${this.user.userName}`
+                    }
+
+                }).then(res => {
+                    console.log(res);
+                    this.repositoryOptions = res.data.data
+                    this.$message.success('解绑成功')
+                    this.unLinkDialogVisible = false
+                }).catch(err => {
+                    console.log(err);
+                })
+            },
+            /*首页展示项目翻页*/
+            changePage(page) {
+                console.log(page);
+            },
         },
 
-        unlinkHandleClick(index) {
-            console.log(index);
-            this.unLinkDialogVisible = true
-        },
-        /*查看CLA签署状态*/
-        checkCla() {
-            console.log("checkCla");
-            this.$router.push('/checkCla')
-        },
-        newWindow() {
-            // window.open('https://github.com/ouchengle/Test','_black')
-            window.open('https://github.com/ouchengle')
-        },
-        /*解绑开源项目*/
-        unLinkRepositoryFun() {
-            console.log(data);
-            let obj = {
-                id: this.$store.state.tableData[0].id
-
-            };
-            this.$axios({
-                url: '/api'+url.unLinkRepository,
-                methods: 'delete',
-                data: obj,
-                headers: {
-                    'Access-Token': this.access_token,
-                    'Refresh-Token': this.refresh_token,
-                    'User': `${this.platform}/${this.user.userName}`
-                }
-
-            }).then(res => {
-                console.log(res);
-                this.repositoryOptions = res.data.data
-                this.$message.success('解绑成功')
-                this.unLinkDialogVisible = false
-            }).catch(err => {
-                console.log(err);
-            })
-        },
-        /*首页展示项目翻页*/
-        changePage(page) {
-            console.log(page);
-        },
     }
 </script>
 
