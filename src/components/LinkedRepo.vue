@@ -314,7 +314,7 @@
                     }
                     this.setLoginUserAct(data);
                     let obj = {access_token:access_token, refresh_token:refresh_token, userName:res.data.login}
-                    // this.getLinkedRepoListAct(obj);
+                    this.getLinkedRepoListAct(obj);
 
                 }).catch(err => {
                     console.log(err);

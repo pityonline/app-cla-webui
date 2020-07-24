@@ -6,7 +6,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    tableData:sessionStorage.getItem('platform')||undefined,
+    tableData:JSON.parse(sessionStorage.getItem('platform'))||undefined,
     ready:Boolean(sessionStorage.getItem('ready')||undefined),
     platform:sessionStorage.getItem('platform')||undefined,
     gitee_client_id: '2632e89d3dfb17ce941d2d2b45efc6f235afb4941ddb67578adda83aa33ab6a2',
@@ -30,7 +30,7 @@ export default new Vuex.Store({
       state.ready=data.ready;
       state.tableData=data.tableData;
       sessionStorage.setItem('ready',data.ready);
-      sessionStorage.setItem('tableData',data.tableData);
+      sessionStorage.setItem('tableData',JSON.stringify(data.tableData));
     },
     setToken(state,data){
       console.log(data);
@@ -78,23 +78,19 @@ export default new Vuex.Store({
       }).then(res => {
         console.log(res);
 
-        // if (res.data.length) {
-        //   let tableData = [];
-        //   res.data.forEach((item, index) => {
-        //     tableData.push({
-        //       repository: `${item.org_id}/${item.repo_id}`,
-        //       cla: item.cla_id,
-        //       sharedGist: 'Yes',
-        //       contributors: '0',
-        //     })
-        //   })
-        //   let data={tableData:tableData,ready:true}
-        //   commit('setReady',data);
-        //
-        //
-        //
-        //
-        // }
+        if (res.data.length) {
+          let tableData = [];
+          res.data.forEach((item, index) => {
+            tableData.push({
+              repository: `${item.org_id}/${item.repo_id}`,
+              cla: item.cla_id,
+              sharedGist: 'Yes',
+              contributors: '0',
+            })
+          })
+          let data={tableData:tableData,ready:true}
+          commit('setReady',data);
+        }
       }).catch(err => {
         console.log(err);
       })
