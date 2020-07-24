@@ -55,10 +55,7 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    // setReadyAct({commit},ready){
-    //   console.log(ready);
-    //   commit('setReady',ready)
-    // },
+
     setPlatformAct({commit},platform){
       console.log(platform);
       commit('setPlatform',platform)
@@ -81,23 +78,23 @@ export default new Vuex.Store({
       }).then(res => {
         console.log(res);
 
-        if (res.data.length) {
-          let tableData = [];
-          res.data.forEach((item, index) => {
-            tableData.push({
-              repository: `${item.org_id}/${item.repo_id}`,
-              cla: item.cla_id,
-              sharedGist: 'Yes',
-              contributors: '0',
-            })
-          })
-          let data={tableData:tableData,ready:true}
-          commit('setReady',data);
-
-
-
-
-        }
+        // if (res.data.length) {
+        //   let tableData = [];
+        //   res.data.forEach((item, index) => {
+        //     tableData.push({
+        //       repository: `${item.org_id}/${item.repo_id}`,
+        //       cla: item.cla_id,
+        //       sharedGist: 'Yes',
+        //       contributors: '0',
+        //     })
+        //   })
+        //   let data={tableData:tableData,ready:true}
+        //   commit('setReady',data);
+        //
+        //
+        //
+        //
+        // }
       }).catch(err => {
         console.log(err);
       })
