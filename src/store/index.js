@@ -73,7 +73,7 @@ export default new Vuex.Store({
         headers: {
           'Access-Token': data.access_token,
           'Refresh-Token': data.refresh_token,
-          'User': `${this.platform}/${data.userName}`
+          'User': `${data.platform}/${data.userName}`
         }
       }).then(res => {
         console.log(res);

@@ -313,7 +313,7 @@
                         userEmail: res.data.email
                     }
                     this.setLoginUserAct(data);
-                    let obj = {access_token:access_token, refresh_token:refresh_token, userName:res.data.login}
+                    let obj = {access_token:access_token, refresh_token:refresh_token, userName:res.data.login,platform:this.platform}
                     this.getLinkedRepoListAct(obj);
 
                 }).catch(err => {
