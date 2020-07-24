@@ -354,7 +354,7 @@
                 };
                 this.$axios({
                     url: '/api' + url.unLinkRepository,
-                    methods: 'delete',
+                    method: 'delete',
                     data: obj,
                     headers: {
                         'Access-Token': this.access_token,
