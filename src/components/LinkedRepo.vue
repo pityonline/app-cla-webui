@@ -56,7 +56,7 @@
                     <template slot-scope="scope">
                         <el-tooltip class="item" effect="dark" content="Edit" placement="bottom">
                             <svg-icon class="pointer" style="display: inline-block;margin-right: .5rem"
-                                      icon-class="edit" @click="editDialogVisible = true"/>
+                                      icon-class="edit" @click="editHandleClick(scope)"/>
                         </el-tooltip>
 
                         <el-tooltip slot="reference" effect="dark" content="unlink"
@@ -120,7 +120,7 @@
 
                 <div class="right">
                     <el-button @click="unLinkDialogVisible = false">Keep it</el-button>
-                    <el-button type="danger" @click="unLinkRepository()">Unlink anyway</el-button>
+                    <el-button type="danger" @click="unLinkRepositoryFun()">Unlink anyway</el-button>
                 </div>
 
             </div>
@@ -277,7 +277,7 @@
             this.getCookieData()
         },
         methods: {
-            ...mapActions(['setLoginUserAct', 'setTokenAct','getLinkedRepoListAct']),
+            ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
 
             getCookieData() {
                 console.log('getCookieData');
@@ -313,7 +313,12 @@
                         userEmail: res.data.email
                     }
                     this.setLoginUserAct(data);
-                    let obj = {access_token:access_token, refresh_token:refresh_token, userName:res.data.login,platform:this.platform}
+                    let obj = {
+                        access_token: access_token,
+                        refresh_token: refresh_token,
+                        userName: res.data.login,
+                        platform: this.platform
+                    }
                     this.getLinkedRepoListAct(obj);
 
                 }).catch(err => {
@@ -322,59 +327,57 @@
             },
 
 
-            },
-            /*cla条目编辑*/
-            editHandleClick(index) {
-                console.log(index);
-                this.editDialogVisible = true
-            },
-            /*cla条目编辑*/
-            unlinkHandleClick(index) {
-                console.log(index);
-                this.unLinkDialogVisible = true
-            },
-            /*查看CLA签署状态*/
-            checkCla() {
-                console.log("checkCla");
-                this.$router.push('/checkCla')
-            },
-            newWindow() {
-                // window.open('https://github.com/ouchengle/Test','_black')
-                window.open('https://github.com/ouchengle')
-            },
-            /*解绑开源项目*/
-            unLinkRepository() {
-                this.unLinkDialogVisible = true;
-                let obj = {
-                    repositoryValue: this.repositoryValue,
-                    claValue: this.claValue,
+        },
+        /*cla条目编辑*/
+        editHandleClick(index) {
+            console.log(index);
+            this.editDialogVisible = true
+        },
 
-                };
-                this.$axios({
-                    url: url.unLinkRepository,
-                    methods: 'post',
-                    data: obj,
-                    headers: {
-                        'Access-Token': this.access_token,
-                        'Refresh-Token': this.refresh_token,
-                        'User': `${this.platform}/${this.user.userName}`
-                    }
+        unlinkHandleClick(index) {
+            console.log(index);
+            this.unLinkDialogVisible = true
+        },
+        /*查看CLA签署状态*/
+        checkCla() {
+            console.log("checkCla");
+            this.$router.push('/checkCla')
+        },
+        newWindow() {
+            // window.open('https://github.com/ouchengle/Test','_black')
+            window.open('https://github.com/ouchengle')
+        },
+        /*解绑开源项目*/
+        unLinkRepositoryFun() {
+            console.log(data);
+            let obj = {
+                repositoryValue: this.repositoryValue,
+                claValue: this.claValue,
 
-                }).then(res => {
-                    console.log(res);
-                    if (res.data.code === 200) {
-                        this.repositoryOptions = res.data.data
-                        this.$message.success('解绑成功')
-                        this.unLinkDialogVisible = false
-                    }
-                }).catch(err => {
-                    console.log(err);
-                })
-            },
-            /*首页展示项目翻页*/
-            changePage(page) {
-                console.log(page);
-            },
+            };
+            this.$axios({
+                url: url.unLinkRepository,
+                methods: 'post',
+                data: obj,
+                headers: {
+                    'Access-Token': this.access_token,
+                    'Refresh-Token': this.refresh_token,
+                    'User': `${this.platform}/${this.user.userName}`
+                }
+
+            }).then(res => {
+                console.log(res);
+                this.repositoryOptions = res.data.data
+                this.$message.success('解绑成功')
+                this.unLinkDialogVisible = false
+            }).catch(err => {
+                console.log(err);
+            })
+        },
+        /*首页展示项目翻页*/
+        changePage(page) {
+            console.log(page);
+        },
     }
 </script>
 
