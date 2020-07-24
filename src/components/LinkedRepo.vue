@@ -357,8 +357,8 @@
                     method: 'delete',
                     data: obj,
                     headers: {
-                        'Access-Token': this.access_token,
-                        'Refresh-Token': this.refresh_token,
+                        'Access-Token': this.$store.state.access_token,
+                        'Refresh-Token': this.$store.state.refresh_token,
                         'User': `${this.platform}/${this.$store.state.user.userName}`
                     }
 
