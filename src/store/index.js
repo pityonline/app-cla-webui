@@ -6,7 +6,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    tableData:JSON.parse(sessionStorage.getItem('platform'))||undefined,
+    tableData:JSON.parse(sessionStorage.getItem('tableData'))||undefined,
     ready:Boolean(sessionStorage.getItem('ready')||undefined),
     platform:sessionStorage.getItem('platform')||undefined,
     gitee_client_id: '2632e89d3dfb17ce941d2d2b45efc6f235afb4941ddb67578adda83aa33ab6a2',
