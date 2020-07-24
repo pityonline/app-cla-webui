@@ -359,12 +359,11 @@
                     headers: {
                         'Access-Token': this.access_token,
                         'Refresh-Token': this.refresh_token,
-                        'User': `${this.platform}/${this.user.userName}`
+                        'User': `${this.platform}/${this.$store.state.user.userName}`
                     }
 
                 }).then(res => {
                     console.log(res);
-                    this.repositoryOptions = res.data.data
                     this.$message.success('解绑成功')
                     this.unLinkDialogVisible = false
                 }).catch(err => {
