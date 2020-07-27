@@ -174,9 +174,9 @@
             handleClose(tag, index) {
                 let obj = {id: this.claOptions[index].id}
                 this.$axios({
-                    url: url.delCla,
+                    url: "api"+url.delCla,
                     method: 'delete',
-                    data: obj,
+                    params: obj,
                     headers: {
                         'Access-Token': this.access_token,
                         'Refresh-Token': this.refresh_token,

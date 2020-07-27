@@ -356,7 +356,7 @@
                 this.$axios({
                     url: '/api' + url.unLinkRepository,
                     method: 'delete',
-                    data: obj,
+                    params: obj,
                     headers: {
                         'Access-Token': this.$store.state.access_token,
                         'Refresh-Token': this.$store.state.refresh_token,
