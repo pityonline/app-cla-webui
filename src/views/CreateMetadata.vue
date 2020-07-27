@@ -116,7 +116,6 @@
             },
 
             closeMetaTag(tag,index) {
-                console.log(this.metaOptions,index);
                 this.$axios({
                     url: `/api${url.delMeta}/${this.metaOptions[index].id}`,
                     method: 'delete',

@@ -67,6 +67,30 @@ export default new Vuex.Store({
       console.log(data);
       commit('setLoginUser',data)
     },
+    /*获取指定cla数据*/
+    getClaAct(id,index,data) {
+      console.log("getClaAct");
+      this.$axios({
+        url: '/api' + url.getClaInfo,
+        params:{
+          id:id,
+        },
+        headers: {
+          'Access-Token': data.access_token,
+          'Refresh-Token': data.refresh_token,
+          'User': `${data.platform}/${data.userName}`
+        }
+      }).then(res => {
+        console.log(res);
+        if (res.data.length) {
+            this.tableData[index].assign({
+              cla:res.data,
+            })
+        }
+      }).catch(err => {
+        console.log(err);
+      })
+    },
     getLinkedRepoListAct({commit},data) {
       axios({
         url: '/api' + url.getLinkedRepoList,
@@ -88,6 +112,7 @@ export default new Vuex.Store({
               sharedGist: 'Yes',
               contributors: '0',
             })
+            this.getClaAct(item.id,index,data)
           })
           let data={tableData:tableData,ready:true}
           commit('setReady',data);
