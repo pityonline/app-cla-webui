@@ -174,9 +174,8 @@
             handleClose(tag, index) {
                 let obj = {id: this.claOptions[index].id}
                 this.$axios({
-                    url: "api"+url.delCla,
+                    url: `/api${url.delCla}/${this.claOptions[index].id}`,
                     method: 'delete',
-                    params: obj,
                     headers: {
                         'Access-Token': this.access_token,
                         'Refresh-Token': this.refresh_token,
@@ -192,12 +191,7 @@
                 })
 
             },
-            closeMetaTag(tag) {
-                /*删除cla*/
-                this.metaTags.splice(this.metaTags.indexOf(tag), 1);
-                /*删除cla*/
 
-            },
             /*获取cla数据*/
             getCLA() {
                 console.log("getCLA");
