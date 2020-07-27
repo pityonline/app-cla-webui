@@ -148,6 +148,7 @@
             }
         },
         methods: {
+
             clickAddNewClaFile() {
                 this.addNewFile = true;
                 this.claText = '';
@@ -189,6 +190,7 @@
                     if (this.currentIndex === index) {
                         this.claText='';
                     }
+                    this.getCLA();
                 }).catch(err => {
                     console.log(err);
                     this.$message.error('已有绑定关系，无法删除')

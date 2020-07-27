@@ -40,7 +40,7 @@
                 <div style="margin-top: 1rem;display: flex;justify-content: space-between">
                     <el-button size="medium" v-loading.fullscreen.lock="fullscreenLoading" :disabled="!verifyNotNull()"
                                type="primary"
-                               @click="">create Metadata
+                               @click="uploadMeta()">create Metadata
                     </el-button>
                 </div>
             </el-col>
@@ -127,14 +127,13 @@
                 }).then(res => {
                     console.log(res);
                     this.metaTags.splice(this.metaTags.indexOf(tag), 1);
+                    this.getMeta();
                 }).catch(err => {
                     console.log(err);
                     this.$message.error('已有绑定关系，无法删除')
                 })
-                this.metaTags.splice(this.metaTags.indexOf(tag), 1);
-                /*删除cla*/
-
             },
+
             /*获取cla数据*/
             getMeta() {
                 console.log("getMeta");
@@ -166,7 +165,7 @@
                     console.log(err);
                 })
             },
-            claTextChange(value) {
+            metaTextChange(value) {
                 console.log(value);
             },
             /*验证newClaFileName和claText不为空*/
@@ -174,7 +173,7 @@
                 return this.addNewFile ? this.newMetaFileName.trim() !== '' && this.metaText.trim() !== '' : this.metaText.trim() !== '';
             },
             /*上传cla*/
-            async uploadCla() {
+            async uploadMeta() {
                 this.fullscreenLoading = true;
                 let obj = {
                     name: this.newMetaFileName,
