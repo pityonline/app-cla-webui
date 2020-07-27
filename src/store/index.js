@@ -112,23 +112,23 @@ export default new Vuex.Store({
               sharedGist: 'Yes',
               contributors: '0',
             })
-            axios({
-              url:`/api${url.getClaInfo}/${item.id}`,
-              headers: {
-                'Access-Token': data.access_token,
-                'Refresh-Token': data.refresh_token,
-                'User': `${data.platform}/${data.userName}`
-              }
-            }).then(res => {
-              console.log(res);
-              if (res.data.length) {
-                Object.assign(tableData[index],{
-                  cla:res.data,
-                })
-              }
-            }).catch(err => {
-              console.log(err);
-            })
+            // axios({
+            //   url:`/api${url.getClaInfo}/${item.id}`,
+            //   headers: {
+            //     'Access-Token': data.access_token,
+            //     'Refresh-Token': data.refresh_token,
+            //     'User': `${data.platform}/${data.userName}`
+            //   }
+            // }).then(res => {
+            //   console.log(res);
+            //   if (res.data.length) {
+            //     Object.assign(tableData[index],{
+            //       cla:res.data,
+            //     })
+            //   }
+            // }).catch(err => {
+            //   console.log(err);
+            // })
           })
           let obj={tableData:tableData,ready:true}
           commit('setReady',obj);
