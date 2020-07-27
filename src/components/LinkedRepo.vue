@@ -364,6 +364,8 @@
                     console.log(res);
                     this.$message.success('解绑成功')
                     this.unLinkDialogVisible = false
+                    let data ={access_token:this.$store.state.access_token,refresh_token:this.$store.state.refresh_token,userName:this.$store.state.user.userName,platform:this.platform}
+                    this.getLinkedRepoListAct(data)
                 }).catch(err => {
                     console.log(err);
                 })
