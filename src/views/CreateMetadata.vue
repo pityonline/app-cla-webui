@@ -12,7 +12,7 @@
                             closable
                             @click="chooseMeta(index)"
                             :disable-transitions="false"
-                            @close="closeMetaTag(tag)">
+                            @close="closeMetaTag(tag,index)">
                         {{tag}}
                     </el-tag>
                 </div>
