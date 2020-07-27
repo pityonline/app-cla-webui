@@ -349,8 +349,9 @@
             unLinkRepositoryFun() {
 
                 let obj = {
-                    id: this.$store.state.tableData[0].id
-
+                    id: this.$store.state.tableData[0].id,
+                    platform:this.platform,
+                    submitter: `${this.platform}/${this.$store.state.user.userName}`
                 };
                 this.$axios({
                     url: '/api' + url.unLinkRepository,
