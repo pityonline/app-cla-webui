@@ -70,7 +70,7 @@
                 isEditMeta: false,
                 metaText: '',
                 newMetaFileName: '',
-                metaTags: ['test', 'myMeta', 'test1', 'myTest', 'test2', 'test3', 'test4', 'test5', 'test6', 'test7', 'internationalMetadata', 'openLooKeng', 'test8'],
+                metaTags: [],
                 addNewFile: false,
                 isEdit: false,
                 metaOptions: [{
