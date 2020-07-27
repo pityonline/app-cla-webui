@@ -177,7 +177,7 @@
                 this.fullscreenLoading = true;
                 let obj = {
                     name: this.newMetaFileName,
-                    text: this.metaText,
+                    text: this.metaData,
                     // metaData: this.metaData,
                     language: this.languageOptions[this.value].label,
                     // id: this.user.userId,
