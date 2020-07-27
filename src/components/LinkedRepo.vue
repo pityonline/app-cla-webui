@@ -350,13 +350,10 @@
 
                 let obj = {
                     id: this.$store.state.tableData[0].id,
-                    platform:this.platform,
-                    submitter: `${this.platform}/${this.$store.state.user.userName}`
                 };
                 this.$axios({
-                    url: '/api' + url.unLinkRepository,
+                    url: `/api${url.unLinkRepository}/${this.$store.state.tableData[0].id}`,
                     method: 'delete',
-                    params: obj,
                     headers: {
                         'Access-Token': this.$store.state.access_token,
                         'Refresh-Token': this.$store.state.refresh_token,

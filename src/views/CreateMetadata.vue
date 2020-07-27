@@ -74,14 +74,12 @@
                 newClaFileName: '',
                 addNewFile: false,
                 isEdit: false,
-                claTags: [],
-                claOptions: [],
                 metaOptions: [{
                     value: 0,
                     text: '{userName:{type:string,require:true},email:{type:string,require:true},}'
                 },],
                 fullscreenLoading: false,
-                claName: '',
+                metaName: '',
                 value: 0,
                 languageOptions: [{
                     value: 0,
@@ -90,7 +88,6 @@
                     value: 1,
                     label: 'chinese'
                 },],
-                claText: '',
                 metaData: '',
                 createCLAClass: {
                     height: '',
@@ -104,11 +101,6 @@
             }
         },
         methods: {
-            clickAddNewClaFile() {
-                this.addNewFile = true;
-                this.claText = '';
-                this.isEdit = true;
-            },
             clickAddNewMetaFile() {
                 this.isAddNewMetaFile = true;
                 this.metaData = '';
@@ -120,13 +112,6 @@
                 this.isEditMeta = false;
                 this.isAddNewMetaFile = false;
                 this.newMetaFileName = '';
-            },
-            chooseCla(index) {
-                console.log('chooseCla', index);
-                this.claText = this.claOptions[index].text;
-                this.isEdit = false;
-                this.addNewFile = false;
-                this.newClaFileName = '';
             },
             handleClose(tag, index) {
                 let obj = {id: this.claOptions[index].id}
@@ -149,8 +134,25 @@
                 })
 
             },
-            closeMetaTag(tag) {
-                /*删除cla*/
+            closeMetaTag(tag,index) {
+                let obj = {id: this.claOptions[index].id}
+                this.$axios({
+                    url: url.delCla,
+                    method: 'delete',
+                    data: obj,
+                    headers: {
+                        'Access-Token': this.access_token,
+                        'Refresh-Token': this.refresh_token,
+                        'User': `${this.platform}/${this.user.userName}`
+                    }
+
+                }).then(res => {
+                    console.log(res);
+                    this.claTags.splice(this.claTags.indexOf(tag), 1);
+                }).catch(err => {
+                    console.log(err);
+                    this.$message.error('已有绑定关系，无法删除')
+                })
                 this.metaTags.splice(this.metaTags.indexOf(tag), 1);
                 /*删除cla*/
 
