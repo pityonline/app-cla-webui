@@ -750,13 +750,59 @@
                 setInterval(() => {
                     this.$store.state.user.userName&&this.$store.state.ready && loading.close();
                 }, 500)
-            }
+            },
+            getCookieData() {
+                console.log('getCookieData');
+                if (document.cookie !== '') {
+                    let cookieArr = document.cookie.split('; ')
+                    let access_token, refresh_token = '';
+                    cookieArr.forEach((item, index) => {
+                        let arr = item.split('=');
+                        arr[0] === 'access_token' ? access_token = arr[1] : arr[0] === 'refresh_token' ? refresh_token = arr[1] : refresh_token = '';
+                        ;
+                    })
+                    let data = {access_token, refresh_token};
+                    this.setTokenAct(data);
+                    this.getUserInfo(access_token, refresh_token)
+
+                }
+
+            },
+            /*获取用户名并显示*/
+            getUserInfo(access_token, refresh_token) {
+                let obj = {access_token: access_token};
+                console.log(obj);
+                this.$axios({
+                    url: url.getUserInfo,
+                    params: obj,
+                }).then(res => {
+                    console.log(res);
+
+                    let data = {
+                        userId: res.data.id,
+                        userName: res.data.login,
+                        userImg: res.data.avatar_url,
+                        userEmail: res.data.email
+                    }
+                    this.setLoginUserAct(data);
+                    let obj = {
+                        access_token: access_token,
+                        refresh_token: refresh_token,
+                        userName: res.data.login,
+                        platform: this.platform
+                    }
+                    this.getLinkedRepoListAct(obj);
+
+                }).catch(err => {
+                    console.log(err);
+                })
+            },
         },
 
         created() {
             this.getPath();
             this.openFullScreen();
-
+            this.getCookieData()
         },
         mounted() {
             this.setClientHeight();
