@@ -22,7 +22,7 @@
                         width="220">
                     <template slot-scope="scope">
                                         <span class="pointer hoverUnderline"
-                                              @click="checkCla()">{{scope.row.cla}}</span>
+                                              @click="checkCla()">{{scope.row.claName}}</span>
                     </template>
                 </el-table-column>
                 <el-table-column

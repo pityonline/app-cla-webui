@@ -123,7 +123,7 @@ export default new Vuex.Store({
               console.log(res);
               if (res.data.length) {
                 Object.assign(tableData[index],{
-                  cla:res.data,
+                  claName:res.data.name,
                 })
               }
             }).catch(err => {
