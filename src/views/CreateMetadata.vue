@@ -108,7 +108,7 @@
             },
             chooseMeta(index) {
                 console.log('chooseMeta', index);
-                this.metaData = this.metaOptions[0].text;
+                this.metaData = this.metaOptions[index].text;
                 this.isEditMeta = false;
                 this.isAddNewMetaFile = false;
                 this.newMetaFileName = '';
