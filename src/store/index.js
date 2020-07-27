@@ -113,7 +113,7 @@ export default new Vuex.Store({
               contributors: '0',
             })
             axios({
-              url:`/api${url.getClaInfo}/${item.id}`,
+              url:`/api${url.getClaInfo}/${item.cla_id}`,
               headers: {
                 'Access-Token': data.access_token,
                 'Refresh-Token': data.refresh_token,
