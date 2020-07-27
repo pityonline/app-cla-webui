@@ -189,6 +189,7 @@
                     this.claTags.splice(this.claTags.indexOf(tag), 1);
                     if (this.currentIndex === index) {
                         this.claText='';
+                        this.currentIndex='';
                     }
                     this.getCLA();
                 }).catch(err => {

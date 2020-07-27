@@ -64,6 +64,7 @@
         },
         data() {
             return {
+                currentIndex:'',
                 access_token: this.$store.state.access_token,
                 refresh_token: this.$store.state.refresh_token,
                 isAddNewMetaFile: false,
@@ -111,6 +112,7 @@
                 this.isEditMeta = false;
                 this.isAddNewMetaFile = false;
                 this.newMetaFileName = '';
+                this.currentIndex=index;
             },
 
             closeMetaTag(tag,index) {
@@ -128,6 +130,10 @@
                     console.log(res);
                     this.metaTags.splice(this.metaTags.indexOf(tag), 1);
                     this.getMeta();
+                    if (this.currentIndex === index) {
+                        this.metaData='';
+                        this.currentIndex='';
+                    }
                 }).catch(err => {
                     console.log(err);
                     this.$message.error('已有绑定关系，无法删除')
