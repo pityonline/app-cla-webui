@@ -112,6 +112,7 @@
                 isAddNewMetaFile: false,
                 isEditMeta: false,
                 metaText: '',
+                currentIndex:'',
                 newMetaFileName: '',
                 metaTags: ['test', 'myMeta', 'test1', 'myTest', 'test2', 'test3', 'test4', 'test5', 'test6', 'test7', 'internationalMetadata', 'openLooKeng', 'test8'],
                 newClaFileName: '',
@@ -168,11 +169,11 @@
                 console.log('chooseCla', index);
                 this.claText = this.claOptions[index].text;
                 this.isEdit = false;
+                this.currentIndex=index;
                 this.addNewFile = false;
                 this.newClaFileName = '';
             },
             handleClose(tag, index) {
-                let obj = {id: this.claOptions[index].id}
                 this.$axios({
                     url: `/api${url.delCla}/${this.claOptions[index].id}`,
                     method: 'delete',
@@ -185,6 +186,9 @@
                 }).then(res => {
                     console.log(res);
                     this.claTags.splice(this.claTags.indexOf(tag), 1);
+                    if (this.currentIndex === index) {
+                        this.claText='';
+                    }
                 }).catch(err => {
                     console.log(err);
                     this.$message.error('已有绑定关系，无法删除')

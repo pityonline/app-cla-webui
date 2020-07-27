@@ -71,7 +71,6 @@
                 metaText: '',
                 newMetaFileName: '',
                 metaTags: ['test', 'myMeta', 'test1', 'myTest', 'test2', 'test3', 'test4', 'test5', 'test6', 'test7', 'internationalMetadata', 'openLooKeng', 'test8'],
-                newClaFileName: '',
                 addNewFile: false,
                 isEdit: false,
                 metaOptions: [{
@@ -113,33 +112,12 @@
                 this.isAddNewMetaFile = false;
                 this.newMetaFileName = '';
             },
-            handleClose(tag, index) {
-                let obj = {id: this.claOptions[index].id}
-                this.$axios({
-                    url: url.delCla,
-                    method: 'delete',
-                    data: obj,
-                    headers: {
-                        'Access-Token': this.access_token,
-                        'Refresh-Token': this.refresh_token,
-                        'User': `${this.platform}/${this.user.userName}`
-                    }
 
-                }).then(res => {
-                    console.log(res);
-                    this.claTags.splice(this.claTags.indexOf(tag), 1);
-                }).catch(err => {
-                    console.log(err);
-                    this.$message.error('已有绑定关系，无法删除')
-                })
-
-            },
             closeMetaTag(tag,index) {
-                let obj = {id: this.claOptions[index].id}
+
                 this.$axios({
-                    url: url.delCla,
+                    url: `/api${url.delMeta}/${this.metaOptions[index].id}`,
                     method: 'delete',
-                    data: obj,
                     headers: {
                         'Access-Token': this.access_token,
                         'Refresh-Token': this.refresh_token,
@@ -148,7 +126,7 @@
 
                 }).then(res => {
                     console.log(res);
-                    this.claTags.splice(this.claTags.indexOf(tag), 1);
+                    this.metaTags.splice(this.metaTags.indexOf(tag), 1);
                 }).catch(err => {
                     console.log(err);
                     this.$message.error('已有绑定关系，无法删除')
@@ -158,10 +136,10 @@
 
             },
             /*获取cla数据*/
-            getCLA() {
-                console.log("getCLA");
+            getMeta() {
+                console.log("getMeta");
                 this.$axios({
-                    url: '/api' + url.getClaInfo,
+                    url: '/api' + url.getMeta,
                     headers: {
                         'Access-Token': this.access_token,
                         'Refresh-Token': this.refresh_token,
@@ -171,11 +149,11 @@
                 }).then(res => {
                     console.log(res);
                     if (res.data.length) {
-                        this.claOptions = [];
-                        this.claTags = [];
+                        this.metaOptions = [];
+                        this.metaTags = [];
                         res.data.forEach((item, index) => {
-                            this.claTags.push(item.name);
-                            this.claOptions.push({
+                            this.metaTags.push(item.name);
+                            this.metaOptions.push({
                                 value: index,
                                 label: item.name,
                                 id: item.id,
@@ -193,14 +171,14 @@
             },
             /*验证newClaFileName和claText不为空*/
             verifyNotNull() {
-                return this.addNewFile ? this.newClaFileName.trim() !== '' && this.claText.trim() !== '' : this.claText.trim() !== '';
+                return this.addNewFile ? this.newMetaFileName.trim() !== '' && this.metaText.trim() !== '' : this.metaText.trim() !== '';
             },
             /*上传cla*/
             async uploadCla() {
                 this.fullscreenLoading = true;
                 let obj = {
-                    name: this.newClaFileName,
-                    text: this.claText,
+                    name: this.newMetaFileName,
+                    text: this.metaText,
                     // metaData: this.metaData,
                     language: this.languageOptions[this.value].label,
                     // id: this.user.userId,
@@ -209,7 +187,7 @@
                 }
                 console.log(obj);
                 this.$axios({
-                    url: '/api' + url.uploadCla,
+                    url: '/api' + url.uploadMeta,
                     method: 'post',
                     data: obj,
                     headers: {
@@ -260,7 +238,7 @@
 
         },
         created() {
-            this.getCLA()
+            this.getMeta()
         },
         mounted() {
             this.setClientHeight()
