@@ -112,10 +112,29 @@ export default new Vuex.Store({
               sharedGist: 'Yes',
               contributors: '0',
             })
-            this.getClaAct(item.id,index,data)
+            axios({
+              url: '/api' + url.getClaInfo,
+              params:{
+                id:item.id,
+              },
+              headers: {
+                'Access-Token': data.access_token,
+                'Refresh-Token': data.refresh_token,
+                'User': `${data.platform}/${data.userName}`
+              }
+            }).then(res => {
+              console.log(res);
+              if (res.data.length) {
+                tableData[index].assign({
+                  cla:res.data,
+                })
+              }
+            }).catch(err => {
+              console.log(err);
+            })
           })
-          let data={tableData:tableData,ready:true}
-          commit('setReady',data);
+          let obj={tableData:tableData,ready:true}
+          commit('setReady',obj);
         }
       }).catch(err => {
         console.log(err);
