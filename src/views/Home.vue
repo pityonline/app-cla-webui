@@ -409,50 +409,6 @@
                 console.log(page);
             },
 
-            // handleCommand(command) {
-            //     // this.$message('click on item ' + command);
-            //     this.dropdownTitle = command
-            //     switch (command) {
-            //         case '发布的开源项目':
-            //             this.tableType = 1;
-            //             this.tableShow = true;
-            //             this.currentPage = 1;
-            //             this.tableTotal = this.tableData.length
-            //             console.log(this.tableShow);
-            //             // this.getLinkedRepositories();
-            //             break;
-            //         case '个人签署的项目':
-            //             this.tableType = 2;
-            //             this.currentPage = 1;
-            //
-            //             this.tableShow = false;
-            //             console.log(this.tableShow);
-            //             this.tableTotal = this.tableDataOther.length;
-            //
-            //             break;
-            //         case '企业签署的项目':
-            //             this.tableType = 3;
-            //             this.currentPage = 1;
-            //
-            //             this.tableShow = false;
-            //             console.log(this.tableShow);
-            //             this.tableTotal = this.tableDataOther.length;
-            //
-            //             // this.getCompanyRepositories();
-            //             break;
-            //         case '企业个人签署的项目':
-            //             this.tableType = 4;
-            //             this.tableShow = false;
-            //             this.currentPage = 1;
-            //
-            //             console.log(this.tableShow);
-            //             this.tableTotal = this.tableDataOther.length;
-            //             // this.getCompanyPersonRepositories();
-            //             break;
-            //
-            //
-            //     }
-            // },
 
             /*获取个人签署的项目*/
             getPersonalSigned() {
@@ -721,6 +677,36 @@
                 this.home.height = 'auto'
                 this.getCLA()
                 this.getOrgsInfo()
+                this.getMeta();
+            },
+            /*获取metadata数据*/
+            getMeta() {
+                console.log("getMeta");
+                this.$axios({
+                    url: '/api' + url.getMeta,
+                    headers: {
+                        'Access-Token': this.access_token,
+                        'Refresh-Token': this.refresh_token,
+                        'User': `${this.platform}/${this.user.userName}`
+                    }
+
+                }).then(res => {
+                    console.log(res);
+                    if (res.data.length) {
+                        this.metadataOptions = [];
+                        res.data.forEach((item, index) => {
+                            this.metadataOptions.push({
+                                value: index,
+                                label: item.name,
+                                id: item.id,
+                                text: item.text,
+                                language: item.language
+                            })
+                        })
+                    }
+                }).catch(err => {
+                    console.log(err);
+                })
             },
             /*设置页面高度*/
             setClientHeight() {

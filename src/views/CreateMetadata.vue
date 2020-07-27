@@ -134,7 +134,7 @@
                 })
             },
 
-            /*获取cla数据*/
+            /*获取metadata数据*/
             getMeta() {
                 console.log("getMeta");
                 this.$axios({
