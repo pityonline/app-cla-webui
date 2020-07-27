@@ -125,7 +125,7 @@ export default new Vuex.Store({
             }).then(res => {
               console.log(res);
               if (res.data.length) {
-                tableData[index].assign({
+                Object.assign(tableData[index],{
                   cla:res.data,
                 })
               }
