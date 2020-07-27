@@ -170,7 +170,7 @@
             },
             /*验证newClaFileName和claText不为空*/
             verifyNotNull() {
-                return this.addNewFile ? this.newMetaFileName.trim() !== '' && this.metaText.trim() !== '' : this.metaText.trim() !== '';
+                return this.isAddNewMetaFile ? this.newMetaFileName.trim() !== '' && this.metaText.trim() !== '' : this.metaText.trim() !== '';
             },
             /*上传cla*/
             async uploadMeta() {
