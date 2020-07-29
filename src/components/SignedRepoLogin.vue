@@ -4,10 +4,10 @@
             <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px"
                      class="demo-ruleForm" style="padding: 2rem">
                 <el-form-item label="账号" prop="account">
-                    <el-input v-model="ruleForm.account" autocomplete="off"></el-input>
+                    <el-input v-model="ruleForm.userName" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="密码" prop="pass">
-                    <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
+                    <el-input type="password" v-model="ruleForm.pwd" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
@@ -19,6 +19,7 @@
 </template>
 
 <script>
+    import * as url from '../until/api'
     export default {
         name: "SignedRepoLogin",
         data(){
@@ -36,25 +37,42 @@
             };
             return{
                 rules: {
-                    account: [
+                    userName: [
                         {validator: validateAccount, trigger: 'blur'}
                     ],
-                    pass: [
+                    pwd: [
                         {validator: validatePass, trigger: 'blur'}
                     ],
                 },
                 ruleForm: {
-                    pass: '',
-                    account: '',
+                    userName: '',
+                    pwd: '',
                 },
             }
         },
         methods:{
+            login(userName,pwd){
+                this.$router.push('/rootManager')
+                let obj={userName:userName,pwd:pwd};
+                this.$axios({
+                    url:'/api'+url.relogin,
+                    method:'post',
+                    data:obj,
+                }).then(res=>{
+                    console.log(res);
+                    if (res.data.role === 'root') {
+                        this.$router.push('/rootManager')
+                    }else{
+                        this.$router.push('/signedRepo')
+                    }
+                }).catch(err=>{
+                    console.log(err);
+                })
+            },
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        alert('submit!');
-                          this.$router.push('/signedRepo')
+                        this.login(this.ruleForm.userName,this.ruleForm.pwd)
                     } else {
                         console.log('error submit!!');
                         return false;

@@ -17,3 +17,4 @@ export const getLinkedRepositories = '/v1/getLinkedRepositories'    //获取发�
 export const getPersonalRepositories = '/v1/getPersonalRepositories'    //获取个人签署的项目  参数 userName
 export const getCompanyRepositories = '/v1/getCompanyRepositories'    //获取企业签署的项目  参数 userName
 export const getCompanyPersonRepositories = '/v1/getCompanyPersonRepositories'    //获取企业个人签署的项目  参数 userName
+export const relogin = '/v1/relogin'    //企业管理员登陆  参数 userName pwd
