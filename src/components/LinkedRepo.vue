@@ -253,16 +253,19 @@
 
         </el-dialog>
     </div>
+    <script>
+        import {mapActions} from 'vuex'
+        import * as url from '../until/api'
 
+        export default {
+            name: "linkedRepo",
+            computed:{
+                table:function () {
+                    console.log(this.$store.state.tableData);
+                    return this.$store.state.tableData;
+                }
 
-</template>
-
-<script>
-    import {mapActions} from 'vuex'
-    import * as url from '../until/api'
-
-    export default {
-        name: "linkedRepo",
+        },
         data() {
             return {
                 platform: this.$store.state.platform,
@@ -276,9 +279,9 @@
             // this.getCookieData()
         },
         methods: {
-            ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
+        ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
 
-            getCookieData() {
+                getCookieData() {
                 console.log('getCookieData');
                 if (document.cookie !== '') {
                     let cookieArr = document.cookie.split('; ')
@@ -375,8 +378,12 @@
             },
         },
 
-    }
-</script>
+        }
+    </script>
+
+
+</template>
+
 
 <style scoped lang="less">
     .tableStyle {
