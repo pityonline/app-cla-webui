@@ -17,7 +17,7 @@
                     </template>
                 </el-table-column>
                 <el-table-column
-                        prop="cla"
+                        prop="claName"
                         label="CLA"
                         width="220">
                     <template slot-scope="scope">
