@@ -5,7 +5,7 @@
                    create user
                </el-button>
            </el-row>
-            <el-row class="marginTop1rem">
+            <el-row class="marginTop1rem tableStyle">
                 <el-table :data="tableData">
                     <el-table-column
                             prop="userName"
@@ -19,13 +19,12 @@
                             prop="class"
                             label='部门'>
                     </el-table-column>
-                    <el-table-column>
+                    <el-table-column
+                    width="100">
                         <template slot-scope="scope">
                             <el-button type="danger" size="mini" @click="deleteUser(scope.row.id)">删除</el-button>
                         </template>
-                        <template>
 
-                        </template>
                     </el-table-column>
                 </el-table>
             </el-row>
@@ -54,6 +53,11 @@
 <style scoped lang="less">
     .pointer{
         cursor: pointer;
+    }
+    .tableStyle {
+        margin-bottom: 2rem;
+        padding: 3rem;
+        background-color: white;
     }
     .borderClass {
         padding: .5rem 0;
