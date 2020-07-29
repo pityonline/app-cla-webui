@@ -119,13 +119,15 @@ export default new Vuex.Store({
                 'Refresh-Token': data.refresh_token,
                 'User': `${data.platform}/${data.userName}`
               }
-            }).then(res => {
-              console.log(res);
+            }).then(resp => {
+              console.log(resp);
                 Object.assign(tableData[index],{
-                  claName:res.data.name,
+                  claName:resp.data.name,
                 })
-              let obj={tableData:tableData,ready:true}
-              commit('setReady',obj);
+                if (index === res.data.length - 1) {
+                  let obj={tableData:tableData,ready:true}
+                  commit('setReady',obj);
+                }
               console.log(tableData);
             }).catch(err => {
               console.log(err);
