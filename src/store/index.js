@@ -124,6 +124,7 @@ export default new Vuex.Store({
                 Object.assign(tableData[index],{
                   claName:res.data.name,
                 })
+              console.log(tableData);
             }).catch(err => {
               console.log(err);
             })

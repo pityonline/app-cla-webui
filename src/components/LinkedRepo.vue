@@ -270,7 +270,6 @@
                 unLinkDialogVisible: false,
                 tableTotal: 0,
                 currentPage: 1,
-                tableData: [],
             }
         },
         created() {
