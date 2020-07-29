@@ -259,13 +259,6 @@
 
         export default {
             name: "linkedRepo",
-            computed:{
-                table:function () {
-                    console.log(this.$store.state.tableData);
-                    return this.$store.state.tableData;
-                }
-
-        },
         data() {
             return {
                 platform: this.$store.state.platform,

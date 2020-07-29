@@ -124,13 +124,14 @@ export default new Vuex.Store({
                 Object.assign(tableData[index],{
                   claName:res.data.name,
                 })
+              let obj={tableData:tableData,ready:true}
+              commit('setReady',obj);
               console.log(tableData);
             }).catch(err => {
               console.log(err);
             })
           })
-          let obj={tableData:tableData,ready:true}
-          commit('setReady',obj);
+
         }
       }).catch(err => {
         console.log(err);
