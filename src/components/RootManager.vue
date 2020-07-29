@@ -5,27 +5,23 @@
                    create user
                </el-button>
            </el-row>
-            <el-row>
+            <el-row class="marginTop1rem">
                 <el-table :data="tableData">
                     <el-table-column
                             prop="userName"
-                            label="用户名"
-                            width="220">
+                            label="用户名">
                     </el-table-column>
                     <el-table-column
                             prop="email"
-                            label="邮箱"
-                            width="220">
+                            label="邮箱">
                     </el-table-column>
                     <el-table-column
                             prop="class"
-                            label='部门'
-                            width="220">
-                    </el-table-column>
-                    <el-table-column
                             label='部门'>
+                    </el-table-column>
+                    <el-table-column>
                         <template slot-scope="scope">
-                            <el-button type="danger" size="small" @click="deleteUser(scope.row.id)">删除</el-button>
+                            <el-button type="danger" size="mini" @click="deleteUser(scope.row.id)">删除</el-button>
                         </template>
                         <template>
 
@@ -38,7 +34,6 @@
 </template>
 
 <script>
-    import * as until from '../until/until'
     import * as url from '../until/api'
     export default {
         name: "rootManager",
