@@ -61,6 +61,11 @@ const routes = [
         name: 'CheckCLA',
         component: () => import('../views/CheckCLA.vue')
     },
+    {
+        path: '/verifyPage',
+        name: 'VerifyPage',
+        component: () => import('../views/verifyPage.vue')
+    },
 
 ]
 

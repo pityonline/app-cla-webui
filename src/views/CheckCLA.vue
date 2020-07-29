@@ -1,6 +1,17 @@
 <template>
     <div id="checkCLA" :style="checkCLAClass">
-        <Header></Header>
+        <!--<Header></Header>-->
+        <div class="header">
+
+            <el-col :offset="8" :span="8">
+                <div>
+
+                    <svg-icon class="pointer" @click="toHome()" id="svg_logo" icon-class="logo_b"/>
+                </div>
+            </el-col>
+
+
+        </div>
         <div id="section">
             <div v-if="!isSendCode" class="content">
                 <el-col :offset="6" :span="12">
@@ -14,17 +25,15 @@
                     </div>
 
 
-                    <div class="marginTop1rem">
-                        <el-checkbox v-model="isRead">已经阅读过协议</el-checkbox>
-                    </div>
+
                     <el-row class="marginTop1rem ">
 
 
                         <el-col :span="8" class="borderClass">
-                            <el-radio label="0" v-model="role">个人贡献者</el-radio>
+                            <el-radio label="0" @change="roleChange()" v-model="role">个人贡献者</el-radio>
                         </el-col>
-                        <el-col :span="8" class="borderClass">
-                            <el-radio label="1" v-model="role">企业贡献者</el-radio>
+                        <el-col :span="8"  class="borderClass">
+                            <el-radio label="1" @change="roleChange()" v-model="role">企业贡献者</el-radio>
                         </el-col>
 
                     </el-row>
@@ -33,13 +42,17 @@
                             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="left"
                                      label-width="30%"
                                      class="demo-ruleForm">
-                                <el-form-item v-for="(item,index) in metaData" :label="item.label"
+                                <el-form-item v-for="(item,index) in metadataArr"
+                                              :label="item.title"
                                               :required="item.required"
-                                              :prop="item.prop">
-                                    <el-input v-model="ruleForm[item.prop]"></el-input>
+                                              :prop="item.githubKey">
+                                    <el-input v-model="ruleForm[item.githubKey]" size="small"></el-input>
                                 </el-form-item>
                                 <p style="font-size: .9rem;" class="borderClass">*为必填项，请确保你的邮箱与gitee账号绑定</p>
-                                <el-form-item label-width="0">
+                                <div class="marginTop1rem">
+                                    <el-checkbox v-model="isRead">{{metadata['category'].title}}</el-checkbox>
+                                </div>
+                                <el-form-item label-width="0" class="marginTop1rem">
                                     <el-button :disabled="!isRead" type="primary" @click="submitForm('ruleForm')">签署
                                     </el-button>
                                     <el-button @click="resetForm('ruleForm')">重置</el-button>
@@ -72,7 +85,7 @@
             <div v-else class="content">
                 <el-col :offset="6" :span="12" class="verifyClass">
                     <p style="text-align: center">
-                        验证成功，请注意查收邮件完成签署流程。
+                        {{passContent}}
                     </p>
                 </el-col>
             </div>
@@ -85,7 +98,7 @@
                 :visible.sync="dialogVisible"
                 width="50%">
             <div style="margin-bottom: 2rem">
-                请在5分钟内输入邮箱{{ruleForm.email}}中的验证码进行验证
+                请在48小时内输入邮箱{{ruleForm.email}}中的验证码进行验证
 
             </div>
             <div>
@@ -117,23 +130,36 @@
                     callback();
                 } else {
                     callback(new Error('邮箱格式有误'))
-
-
                 }
             }
             let verifyTel = (rule, value, callback) => {
-                let tel = value;
-                console.log(tel);
-                let reg = /^1[3456789]\d{9}$/;
-                if (reg.test(tel)) {
+                if (!value) {
                     callback();
-                } else {
-                    callback(new Error('电话号码有误'))
+                }else{
 
-
+                    let reg = /^1[3456789]\d{9}$/;
+                    if (reg.test(value)) {
+                        callback();
+                    } else {
+                        callback(new Error('电话号码有误'))
+                    }
+                    callback();
                 }
             }
+            let verifyAddr = (rule, value, callback) => {
+                if (!value) {
+                    callback(new Error('请输入地址'))
+                }
+                callback();
+            }
+            let verifyDate = (rule, value, callback) => {
+                if (!value) {
+                    callback(new Error('请输入日期'))
+                }
+                callback();
+            }
             return {
+                passContent:'',
                 isVerify: false,
                 isSendCode: false,
                 verifyCode: '',
@@ -158,14 +184,19 @@
                         {required: true, message: '请输入邮箱', trigger: 'blur'},
                         {validator: verifyEmail, trigger: 'blur'}
                     ],
-                    date1: [
-                        {type: 'date', required: true, message: '请选择日期', trigger: 'change'}
-                    ],
 
-                    tel: [
-                        {required: true, message: '请输入电话号码', trigger: 'blur'},
+
+                    phone: [
                         {validator: verifyTel, trigger: 'blur'}
                     ],
+                    address: [
+                        {validator: verifyAddr, trigger: 'blur'}
+                    ],
+                    date: [
+                        {validator: verifyDate, trigger: 'blur'}
+                    ],
+
+
 
                 },
                 isRead: false,
@@ -198,16 +229,109 @@
                     {
                         label: '电话',
                         prop: 'tel',
-                        required: true,
+                        required: false,
                     },
 
                 ],
+                metadata:{
+                    "name":{
+                        "title":"Name",
+                        "type":"string",
+                        "githubKey":"name",
+                        "required":true
+                    },
+                    "email":{
+                        "title":"E-Mail",
+                        "type":"string",
+                        "githubKey":"email",
+                        "required":true
+                    },
+                    "phone":{
+                        "title":"Telephone",
+                        "type":"string",
+                        "required":false
+                    },
+                    "faxnumber":{
+                        "title":"Fax",
+                        "type":"string",
+                        "required": false
+                    },
+                    "address":{
+                        "title":"Address",
+                        "type":"string",
+                        "required":true
+                    },
+                    "date":{
+                        "title":"Date",
+                        "type":"string",
+                        "required":true
+                    },
+                    "category":{
+                        "title":"I have read the Privacy Policy and hereby consent to the processing of my data by openLooKeng in Hong Kong",
+                        "type":"boolean",
+                        "required":true
+                    }
+                },
+                metadataArr:[],
                 checkCLAClass: {
                     height: '',
                 },
             }
         },
         methods: {
+            /*获取个人签署的metadata*/
+            getPersonalMetaAndCla() {
+                this.$axios({
+                    url: '/api' + url.getClaInfo,
+                    headers: {
+                        'Access-Token': this.$store.state.access_token,
+                        'Refresh-Token': this.$store.state.refresh_token,
+                        'User': `${this.platform}/${this.$store.state.user.userName}`
+                    }
+
+                }).then(res => {
+                    console.log(res);
+                    if (res.status === 200) {
+                        this.claText = res.data.cla;
+                        this.metaData = res.data.metadata;
+                    }
+                }).catch(err => {
+                    console.log(err);
+                })
+            },
+            /*获取企业签署的metadata*/
+            getCompanyMetaAndCla() {
+                this.$axios({
+                    url: '/api' + url.getClaInfo,
+                    headers: {
+                        'Access-Token': this.$store.state.access_token,
+                        'Refresh-Token': this.$store.state.refresh_token,
+                        'User': `${this.platform}/${this.$store.state.user.userName}`
+                    }
+
+                }).then(res => {
+                    console.log(res);
+                    if (res.status === 200) {
+                        this.claText = res.data.cla;
+                        this.metaData = res.data.metadata;
+                    }
+                }).catch(err => {
+                    console.log(err);
+                })
+            },
+            roleChange(){
+                console.log(this.role);
+                switch (this.role) {
+                    case '0':this.getPersonalMetaAndCla();
+                    break;
+                    case '1':this.getCompanyMetaAndCla();
+                    break;
+
+                }
+            },
+            toHome(){
+                this.$router.push('/home')
+            },
             /*验证验证码*/
             verify() {
                 this.isVerify = true;
@@ -236,6 +360,7 @@
             },
             /*发送验证码*/
             signCla() {
+                this.$router.push('/verifyPage?role=1')
                 this.dialogVisible = true;
                 this.isSendCode = true;
                 console.log(until.getClientHeight(), document.getElementById('checkCLA').offsetHeight);
@@ -270,32 +395,12 @@
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-
                         this.signCla();
                     } else {
                         console.log('error submit!!');
                         return false;
                     }
                 });
-            },
-            getClaAndMetadata() {
-                this.$axios({
-                    url: '/api' + url.getCla,
-                    headers: {
-                        'Access-Token': this.$store.state.access_token,
-                        'Refresh-Token': this.$store.state.refresh_token,
-                        'User': `${this.platform}/${this.$store.state.user.userName}`
-                    }
-
-                }).then(res => {
-                    console.log(res);
-                    if (res.status === 200) {
-                        this.claText = res.data.cla;
-                        this.metaData = res.data.metadata;
-                    }
-                }).catch(err => {
-                    console.log(err);
-                })
             },
             getRepositoriesOfOrg(org, org_id) {
                 let obj = {access_token: this.$store.state.access_token, org: org, page: 1, per_page: 10};
@@ -344,10 +449,24 @@
             setClaContent() {
                 document.getElementById('claBox').innerHTML = this.claText
             },
+            loadMetadata(){
+                console.log(this.metadata);
+                this.metadataArr=[]
+                for(let item in this.metadata){
+                    console.log(item);
+                    if ( item!=='category'){
+                        Object.assign(this.metadata[item],{githubKey:item});
+                        this.metadataArr.push(this.metadata[item])
+                    }
+                }
+                console.log(this.metadataArr);
+            },
+
         },
 
         created() {
-            this.getClaAndMetadata();
+            this.getPersonalMetaAndCla();
+            this.loadMetadata()
         },
         mounted() {
             this.setClientHeight();
@@ -364,6 +483,41 @@
 </script>
 
 <style scoped lang="less">
+    .pointer{
+        cursor: pointer;
+    }
+    .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: white;
+        height: 4rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        z-index: 1;
+        width: 100%;
+
+
+        & > div:nth-of-type(1) {
+            display: flex;
+            justify-content: center;
+
+            & > div {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+                #svg_logo {
+                    height: 4rem;
+                    width: 4rem;
+                }
+            }
+
+        }
+
+
+    }
     .verifyClass {
         padding: 10rem 0;
 
