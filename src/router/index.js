@@ -39,6 +39,11 @@ const routes = [
                 path: '/signedRepo',
                 name: 'SignedRepo',
                 component: () => import('../components/SignedRepo.vue')
+            },
+            {
+                path: '/rootManager',
+                name: 'RootManager',
+                component: () => import('../components/RootManager.vue')
             },]
     },
     {
@@ -64,7 +69,7 @@ const routes = [
     {
         path: '/verifyPage',
         name: 'VerifyPage',
-        component: () => import('../views/verifyPage.vue')
+        component: () => import('../views/VerifyPage.vue')
     },
 
 ]
