@@ -45,7 +45,7 @@
                 </el-form-item>
                 <el-form-item label="密码" prop="pwd">
                     <el-input
-                            type="password" size="medium" v-model="ruleForm.pwd">
+                        show-password    size="medium" v-model="ruleForm.pwd">
                     </el-input>
                 </el-form-item>
                 <el-form-item label="邮箱" prop="email">
