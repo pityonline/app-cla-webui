@@ -483,6 +483,9 @@
 </script>
 
 <style scoped lang="less">
+    .el-button.is-disabled:hover{
+        cursor:pointer;
+    }
     .pointer{
         cursor: pointer;
     }
