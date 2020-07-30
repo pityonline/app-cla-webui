@@ -236,6 +236,8 @@
         font-size: 1.2rem;
     }
 
+
+
     .mySwitch .el-switch__label {
         position: absolute;
         display: none;
@@ -259,7 +261,7 @@
         display: block;
     }
 
-    .mySwitch.el-switch .el-switch__core,
+    .el-switch .el-switch__core,
     .el-switch .el-switch__label {
         width: 50px !important;
     }
