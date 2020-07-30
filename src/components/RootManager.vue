@@ -32,37 +32,38 @@
                 </el-table-column>
             </el-table>
         </el-row>
+        <el-dialog
+                width="50%"
+                title="新增管理员"
+                :visible.sync="addUserVisible">
+            <el-form :model="ruleForm" :rules="rules" ref="ruleForm">
+                <el-form-item label="用户名" prop="userName">
+                    <el-input
+                            size="medium" v-model="ruleForm.userName">
+                    </el-input>
+                </el-form-item>
+                <el-form-item label="密码" prop="pwd">
+                    <el-input
+                            size="medium" v-model="ruleForm.pwd">
+                    </el-input>
+                </el-form-item>
+                <el-form-item label="邮箱" prop="email">
+                    <el-input
+                            size="medium" v-model="ruleForm.email">
+                    </el-input>
+                </el-form-item>
+                <el-form-item>
+                    <el-row>
+                        <el-button type="primary" size="medium" @click="submit()">确定</el-button>
+                        <el-button size="medium" @click="reset()">重置</el-button>
+                    </el-row>
+                </el-form-item>
+            </el-form>
+
+
+        </el-dialog>
     </div>
-    <el-dialog
-            width="50%"
-            title="新增管理员"
-            :visible.sync="addUserVisible">
-        <el-form :model="ruleForm" :rules="rules" ref="ruleForm">
-            <el-form-item label="用户名" prop="userName">
-                <el-input
-                        size="medium" v-model="ruleForm.userName">
-                </el-input>
-            </el-form-item>
-            <el-form-item label="密码" prop="pwd">
-                <el-input
-                        size="medium" v-model="ruleForm.pwd">
-                </el-input>
-            </el-form-item>
-            <el-form-item label="邮箱" prop="email">
-                <el-input
-                        size="medium" v-model="ruleForm.email">
-                </el-input>
-            </el-form-item>
-            <el-form-item>
-                <el-row>
-                    <el-button type="primary" size="medium" @click="submit()">确定</el-button>
-                    <el-button size="medium" @click="reset()">重置</el-button>
-                </el-row>
-            </el-form-item>
-        </el-form>
 
-
-    </el-dialog>
 </template>
 
 <script>
