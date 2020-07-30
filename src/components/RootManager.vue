@@ -53,7 +53,7 @@
                             size="medium" v-model="ruleForm.email">
                     </el-input>
                 </el-form-item>
-                <el-form-item>
+                <el-form-item label-width="0">
                     <el-row align="center">
 
                         <el-button type="primary" size="medium" @click="submit()">确定</el-button>
