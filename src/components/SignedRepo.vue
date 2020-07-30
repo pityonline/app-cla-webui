@@ -251,7 +251,7 @@
     /*关闭时文字位置设置*/
     .mySwitch .el-switch__label--left {
         z-index: 1;
-        left: 19px;
+        left: 1.5rem;
     }
 
     /*显示文字*/
