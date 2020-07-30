@@ -35,8 +35,9 @@
         <el-dialog
                 width="50%"
                 title="新增管理员"
+                align="center"
                 :visible.sync="addUserVisible">
-            <el-form :model="ruleForm" :rules="rules" ref="ruleForm">
+            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="10rem">
                 <el-form-item label="用户名" prop="userName">
                     <el-input
                             size="medium" v-model="ruleForm.userName">
@@ -53,7 +54,8 @@
                     </el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-row>
+                    <el-row align="center">
+
                         <el-button type="primary" size="medium" @click="submit()">确定</el-button>
                         <el-button size="medium" @click="reset()">重置</el-button>
                     </el-row>
