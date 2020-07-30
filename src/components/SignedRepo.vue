@@ -245,13 +245,13 @@
     /*打开时文字位置设置*/
     .mySwitch .el-switch__label--right {
         z-index: 1;
-        right: -3px;
+        right: 0;
     }
 
     /*关闭时文字位置设置*/
     .mySwitch .el-switch__label--left {
         z-index: 1;
-        left: 1.5rem;
+        left: 1rem;
     }
 
     /*显示文字*/
