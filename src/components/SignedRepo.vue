@@ -210,7 +210,7 @@
     }
 </script>
 
-<style scoped lang="less">
+<style  lang="less">
     .tableStyle {
         margin-bottom: 2rem;
         padding: 3rem;
@@ -236,32 +236,30 @@
         font-size: 1.2rem;
     }
 
-
-
-     .el-switch__label {
+    .mySwitch .el-switch__label {
         position: absolute;
         display: none;
         color: #fff;
     }
 
     /*打开时文字位置设置*/
-     .el-switch__label--right {
+    .mySwitch .el-switch__label--right {
         z-index: 1;
         right: -3px;
     }
 
     /*关闭时文字位置设置*/
-     .el-switch__label--left {
+    .mySwitch .el-switch__label--left {
         z-index: 1;
         left: 19px;
     }
 
     /*显示文字*/
-    .el-switch__label.is-active {
+    .mySwitch .el-switch__label.is-active {
         display: block;
     }
 
-    .el-switch .el-switch__core,
+    .mySwitch.el-switch .el-switch__core,
     .el-switch .el-switch__label {
         width: 50px !important;
     }
