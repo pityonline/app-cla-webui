@@ -72,61 +72,62 @@
                     :total="tableTotal">
             </el-pagination>
         </div>
+        <el-dialog
+                title="白名单"
+                top="5vh"
+                :visible.sync="listDialogVisible"
+                width="70%">
+            <div style="margin-bottom: 1rem">
+                <el-table
+                        :data="listData"
+                        align="center"
+                        style="width: 100%;">
+                    <el-table-column
+                            prop="name"
+                            label="Name"
+                    >
+                    </el-table-column>
+                    <el-table-column
+                            prop="email"
+                            label="Email"
+                    >
+                    </el-table-column>
+                    <el-table-column
+                            prop="tel"
+                            label="Tel">
+
+                    </el-table-column>
+
+                    <el-table-column
+                            align="center">
+                        <template slot-scope="scope">
+                            <el-switch
+                                    v-model="scope.row.isUsed"
+                                    active-color="#409EFF"
+                                    inactive-color="#EBEEF5">
+                            </el-switch>
+                            <el-button style="margin-left: 1rem" type="danger" size="mini">删除
+                            </el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
+
+            </div>
+            <div class="paginationClass">
+                <el-pagination
+                        background
+                        :page-size="5"
+                        :pager-count="5"
+                        :hide-on-single-page="true"
+                        :current-page="listCurrentPage"
+                        @current-change="listChangePage"
+                        layout="prev, pager, next"
+                        :total="listData.length">
+                </el-pagination>
+            </div>
+        </el-dialog>
     </div>
-    <el-dialog
-            title="白名单"
-            top="5vh"
-            :visible.sync="listDialogVisible"
-            width="70%">
-        <div style="margin-bottom: 1rem">
-            <el-table
-                    :data="listData"
-                    align="center"
-                    style="width: 100%;">
-                <el-table-column
-                        prop="name"
-                        label="Name"
-                >
-                </el-table-column>
-                <el-table-column
-                        prop="email"
-                        label="Email"
-                >
-                </el-table-column>
-                <el-table-column
-                        prop="tel"
-                        label="Tel">
 
-                </el-table-column>
-
-                <el-table-column
-                        align="center">
-                    <template slot-scope="scope">
-                        <el-switch
-                                v-model="scope.row.isUsed"
-                                active-color="#409EFF"
-                                inactive-color="#EBEEF5">
-                        </el-switch>
-                        <el-button style="margin-left: 1rem" type="danger" size="mini">删除
-                        </el-button>
-                    </template>
-                </el-table-column>
-            </el-table>
-
-        </div>
-        <div class="paginationClass">
-            <el-pagination
-                    background
-                    :page-size="5"
-                    :pager-count="5"
-                    :hide-on-single-page="true"
-                    :current-page="listCurrentPage"
-                    @current-change="listChangePage"
-                    layout="prev, pager, next"
-                    :total="listData.length">
-            </el-pagination>
-        </div>
-    </el-dialog>
 </template>
 
 <script>
