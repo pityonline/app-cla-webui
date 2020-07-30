@@ -253,12 +253,15 @@
 
         </el-dialog>
     </div>
-    <script>
-        import {mapActions} from 'vuex'
-        import * as url from '../until/api'
 
-        export default {
-            name: "linkedRepo",
+
+</template>
+<script>
+    import {mapActions} from 'vuex'
+    import * as url from '../until/api'
+
+    export default {
+        name: "linkedRepo",
         data() {
             return {
                 platform: this.$store.state.platform,
@@ -272,9 +275,9 @@
             // this.getCookieData()
         },
         methods: {
-        ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
+            ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
 
-                getCookieData() {
+            getCookieData() {
                 console.log('getCookieData');
                 if (document.cookie !== '') {
                     let cookieArr = document.cookie.split('; ')
@@ -359,7 +362,12 @@
                     console.log(res);
                     this.$message.success('解绑成功')
                     this.unLinkDialogVisible = false
-                    let data ={access_token:this.$store.state.access_token,refresh_token:this.$store.state.refresh_token,userName:this.$store.state.user.userName,platform:this.platform}
+                    let data = {
+                        access_token: this.$store.state.access_token,
+                        refresh_token: this.$store.state.refresh_token,
+                        userName: this.$store.state.user.userName,
+                        platform: this.platform
+                    }
                     this.getLinkedRepoListAct(data)
                 }).catch(err => {
                     console.log(err);
@@ -371,12 +379,8 @@
             },
         },
 
-        }
-    </script>
-
-
-</template>
-
+    }
+</script>
 
 <style scoped lang="less">
     .tableStyle {
