@@ -75,7 +75,7 @@
         <el-dialog
                 :close-on-click-modal="false"
                 title="白名单"
-                top="5vh"
+                top="10vh"
                 align="center"
                 :visible.sync="listDialogVisible"
                 width="70%">
