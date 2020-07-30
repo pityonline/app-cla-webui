@@ -36,7 +36,7 @@
     <el-dialog
             width="50%"
             title="新增管理员"
-            :visible="addUserVisible">
+            :visible.sync="addUserVisible">
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm">
             <el-form-item label="用户名" prop="userName">
                 <el-input
