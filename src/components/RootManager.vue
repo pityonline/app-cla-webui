@@ -172,6 +172,7 @@
             },
             deleteUser(id) {
                 console.log(id);
+                this.deleteUserVisible=true
             },
             clickAddUser() {
                 this.addUserVisible = true;
