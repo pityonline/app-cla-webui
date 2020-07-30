@@ -107,6 +107,7 @@
                                     @change="changeActive(scope.row.id,scope.row.isUsed)"
                                     v-model="scope.row.isUsed"
                                     class="mySwitch"
+                                    width="3rem"
                                     active-color="#409EFF"
                                     active-text="启用"
                                     inactive-text="停用"
@@ -245,13 +246,13 @@
     /*打开时文字位置设置*/
     .mySwitch .el-switch__label--right {
         z-index: 1;
-        right: 0;
+        right: -0.2rem;
     }
 
     /*关闭时文字位置设置*/
     .mySwitch .el-switch__label--left {
         z-index: 1;
-        left: 1rem;
+        left: .5rem;
     }
 
     /*显示文字*/
