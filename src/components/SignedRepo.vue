@@ -107,6 +107,8 @@
                                     @change="changeActive(scope.row.id,scope.row.isUsed)"
                                     v-model="scope.row.isUsed"
                                     active-color="#409EFF"
+                                    active-text="启用"
+                                    inactive-text="停用"
                                     inactive-color="#EBEEF5">
                             </el-switch>
                             <el-button style="margin-left: 1rem" type="danger" size="mini"

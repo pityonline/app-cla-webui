@@ -348,4 +348,7 @@
         margin-right: 1rem;
         margin-bottom: 0.5rem;
     }
+    .el-button.is-disabled, .el-button.is-disabled:focus, .el-button.is-disabled:hover {
+        cursor:pointer;
+    }
 </style>
