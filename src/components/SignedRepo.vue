@@ -106,6 +106,7 @@
                             <el-switch
                                     @change="changeActive(scope.row.id,scope.row.isUsed)"
                                     v-model="scope.row.isUsed"
+                                    class="mySwitch"
                                     active-color="#409EFF"
                                     active-text="启用"
                                     inactive-text="停用"
@@ -158,8 +159,8 @@
         name: "SignedRepo",
         data() {
             return {
-                deleteId:'',
-                deleteUserVisible:false,
+                deleteId: '',
+                deleteUserVisible: false,
                 listDialogVisible: false,
                 tableDataOther: [{repository: 'ooo', cla: 'test', sharedGist: 'Yes', contributors: '0',},],
                 tableTotal: 0,
@@ -174,21 +175,21 @@
             }
         },
         methods: {
-            changeActive(id,active) {
-                console.log('changeActive',id,active);
-                let data ={id:id,active:active}
+            changeActive(id, active) {
+                console.log('changeActive', id, active);
+                let data = {id: id, active: active}
                 this.$axios({
                     url: `/api${url.changeActive}`,
                     method: 'post',
-                    data:data,
+                    data: data,
                 }).then(res => {
                     console.log(res);
                 }).catch(err => {
                     console.log(err);
                 })
             },
-            clickDelete(id){
-                this.deleteUserVisible=true;
+            clickDelete(id) {
+                this.deleteUserVisible = true;
                 this.deleteId = id
             },
             deleteContributor() {
@@ -227,12 +228,39 @@
     }
 
 
-
     .marginTop1rem {
         margin-top: 1rem;
     }
 
     .contentTitle {
         font-size: 1.2rem;
+    }
+
+    .mySwitch .el-switch__label {
+        position: absolute;
+        display: none;
+        color: #fff;
+    }
+
+    /*打开时文字位置设置*/
+    .mySwitch .el-switch__label--right {
+        z-index: 1;
+        right: -3px;
+    }
+
+    /*关闭时文字位置设置*/
+    .mySwitch .el-switch__label--left {
+        z-index: 1;
+        left: 19px;
+    }
+
+    /*显示文字*/
+    .mySwitch .el-switch__label.is-active {
+        display: block;
+    }
+
+    .mySwitch.el-switch .el-switch__core,
+    .el-switch .el-switch__label {
+        width: 50px !important;
     }
 </style>
