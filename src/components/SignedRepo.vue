@@ -1,5 +1,5 @@
 <template>
-    <div >
+    <div>
         <div class="tableStyle">
             <el-table
                     :data="tableDataOther"
@@ -53,7 +53,7 @@
                 <el-table-column
                         align="center">
                     <template slot-scope="scope">
-                        <el-button type="primary"  size="small"
+                        <el-button type="primary" size="small"
                                    @click="listDialogVisible=true">白名单
                         </el-button>
                     </template>
@@ -73,6 +73,7 @@
             </el-pagination>
         </div>
         <el-dialog
+                close-on-click-modal="false"
                 title="白名单"
                 top="5vh"
                 :visible.sync="listDialogVisible"
@@ -102,11 +103,13 @@
                             align="center">
                         <template slot-scope="scope">
                             <el-switch
+                                    @change="changeActive(scope.row.id,scope.row.isUsed)"
                                     v-model="scope.row.isUsed"
                                     active-color="#409EFF"
                                     inactive-color="#EBEEF5">
                             </el-switch>
-                            <el-button style="margin-left: 1rem" type="danger" size="mini">删除
+                            <el-button style="margin-left: 1rem" type="danger" size="mini"
+                                       @click="deleteContributor(scope.row.id)">删除
                             </el-button>
                         </template>
                     </el-table-column>
@@ -131,15 +134,18 @@
 </template>
 
 <script>
+    import * as url from '../until/api'
+
     export default {
         name: "SignedRepo",
-        data(){
-            return{
-                listDialogVisible:false,
+        data() {
+            return {
+                listDialogVisible: false,
                 tableDataOther: [{repository: 'ooo', cla: 'test', sharedGist: 'Yes', contributors: '0',},],
                 tableTotal: 0,
                 currentPage: 1,
-                listData: [{name: 'jack', email: '10577507@qq.com', tel: '15632486433', isUsed: true}, {
+                listData: [{id: 0, name: 'jack', email: '10577507@qq.com', tel: '15632486433', isUsed: true}, {
+                    id: 1,
                     name: 'Rose',
                     email: '105507@163.com',
                     tel: '18832486437',
@@ -147,7 +153,31 @@
                 }],
             }
         },
-        methods:{
+        methods: {
+            changeActive(id,active) {
+                console.log('changeActive',id,active);
+                let data ={id:id,active:active}
+                this.$axios({
+                    url: `/api${url.changeActive}`,
+                    method: 'post',
+                    data:data,
+                }).then(res => {
+                    console.log(res);
+                }).catch(err => {
+                    console.log(err);
+                })
+            },
+            deleteContributor(id) {
+                console.log('deleteContributor');
+                this.$axios({
+                    url: `/api${url.deleteCon}/${id}`,
+                    method: 'delete',
+                }).then(res => {
+                    console.log(res);
+                }).catch(err => {
+                    console.log(err);
+                })
+            },
             changePage(page) {
                 console.log(page);
             },

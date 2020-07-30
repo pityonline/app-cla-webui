@@ -19,3 +19,5 @@ export const getCompanyRepositories = '/v1/getCompanyRepositories'    //获取�
 export const getCompanyPersonRepositories = '/v1/getCompanyPersonRepositories'    //获取企业个人签署的项目  参数 userName
 export const relogin = '/v1/relogin'    //企业管理员登陆  参数 userName pwd
 export const addUser = '/v1/addUser'    //新增企业管理员  参数 userName pwd email
+export const deleteCon = '/v1/deleteContributor'    //删除企业白名单
+export const changeActive = '/v1/changeActive'    //修改企业白名单人员状态
