@@ -1,7 +1,7 @@
 <template>
     <div id="section">
         <el-row>
-            <el-button type="primary" size="small" @click="addUser()">
+            <el-button type="primary" size="small" @click="clickAddUser()">
                 create user
             </el-button>
         </el-row>
@@ -45,7 +45,7 @@
                 </el-form-item>
                 <el-form-item label="密码" prop="pwd">
                     <el-input
-                        show-password    size="medium" v-model="ruleForm.pwd">
+                            show-password size="medium" v-model="ruleForm.pwd">
                     </el-input>
                 </el-form-item>
                 <el-form-item label="邮箱" prop="email">
@@ -62,6 +62,21 @@
                 </el-form-item>
             </el-form>
 
+
+        </el-dialog>
+        <el-dialog
+                width="30%"
+                title=""
+                align="center"
+                :visible.sync="deleteUserVisible">
+            <el-row align="center">
+                确定删除？
+            </el-row>
+            <el-row align="center">
+
+                <el-button type="primary" size="medium" @click="submit()">确定</el-button>
+                <el-button size="medium" @click="deleteUserVisible=false">取消</el-button>
+            </el-row>
 
         </el-dialog>
     </div>
@@ -102,6 +117,7 @@
                 callback();
             };
             return {
+                deleteUserVisible:false,
                 rules: {
                     userName: [
                         {require: true, validator: validateAccount, trigger: 'blur'}
@@ -129,6 +145,18 @@
             }
         },
         methods: {
+            addUser() {
+                let data = {}
+                this.$axios({
+                    url: '/api' + url.addUser,
+                    method: 'post',
+                    data: data,
+                }).then(res => {
+                    console.log(res);
+                }).catch(err => {
+                    console.log(err);
+                })
+            },
             submit(formName) {
                 this.$refs[formName].validate((valid => {
                     if (valid) {
@@ -145,7 +173,7 @@
             deleteUser(id) {
                 console.log(id);
             },
-            addUser() {
+            clickAddUser() {
                 this.addUserVisible = true;
             },
         },
