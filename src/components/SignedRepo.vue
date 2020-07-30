@@ -110,7 +110,7 @@
                                     inactive-color="#EBEEF5">
                             </el-switch>
                             <el-button style="margin-left: 1rem" type="danger" size="mini"
-                                       @click="deleteContributor(scope.row.id)">删除
+                                       @click="clickDelete(scope.row.id)">删除
                             </el-button>
                         </template>
                     </el-table-column>
@@ -130,6 +130,21 @@
                 </el-pagination>
             </div>
         </el-dialog>
+        <el-dialog
+                width="20%"
+                title=""
+                align="center"
+                :visible.sync="deleteUserVisible">
+            <el-row align="center">
+                确定删除？
+            </el-row>
+            <el-row align="center" class="marginTop1rem contentTitle">
+
+                <el-button type="primary" size="medium" @click="deleteContributor()">确定</el-button>
+                <el-button size="medium" @click="deleteUserVisible=false">取消</el-button>
+            </el-row>
+
+        </el-dialog>
     </div>
 
 </template>
@@ -141,6 +156,8 @@
         name: "SignedRepo",
         data() {
             return {
+                deleteId:'',
+                deleteUserVisible:false,
                 listDialogVisible: false,
                 tableDataOther: [{repository: 'ooo', cla: 'test', sharedGist: 'Yes', contributors: '0',},],
                 tableTotal: 0,
@@ -168,10 +185,14 @@
                     console.log(err);
                 })
             },
-            deleteContributor(id) {
+            clickDelete(id){
+                this.deleteUserVisible=true;
+                this.deleteId = id
+            },
+            deleteContributor() {
                 console.log('deleteContributor');
                 this.$axios({
-                    url: `/api${url.deleteCon}/${id}`,
+                    url: `/api${url.deleteCon}/${this.deleteId}`,
                     method: 'delete',
                 }).then(res => {
                     console.log(res);
