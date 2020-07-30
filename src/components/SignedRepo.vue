@@ -238,26 +238,26 @@
 
 
 
-    .mySwitch .el-switch__label {
+     .el-switch__label {
         position: absolute;
         display: none;
         color: #fff;
     }
 
     /*打开时文字位置设置*/
-    .mySwitch .el-switch__label--right {
+     .el-switch__label--right {
         z-index: 1;
         right: -3px;
     }
 
     /*关闭时文字位置设置*/
-    .mySwitch .el-switch__label--left {
+     .el-switch__label--left {
         z-index: 1;
         left: 19px;
     }
 
     /*显示文字*/
-    .mySwitch .el-switch__label.is-active {
+    .el-switch__label.is-active {
         display: block;
     }
 
