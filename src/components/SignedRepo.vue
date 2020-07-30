@@ -246,7 +246,7 @@
     /*打开时文字位置设置*/
     .mySwitch .el-switch__label--right {
         z-index: 1;
-        right: -0.2rem;
+        right: 0.5rem;
     }
 
     /*关闭时文字位置设置*/
