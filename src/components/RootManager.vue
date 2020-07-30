@@ -45,7 +45,7 @@
                 </el-form-item>
                 <el-form-item label="密码" prop="pwd">
                     <el-input
-                            size="medium" v-model="ruleForm.pwd">
+                            type="password" size="medium" v-model="ruleForm.pwd">
                     </el-input>
                 </el-form-item>
                 <el-form-item label="邮箱" prop="email">
@@ -56,8 +56,8 @@
                 <el-form-item label-width="0">
                     <el-row align="center">
 
-                        <el-button type="primary" size="medium" @click="submit()">确定</el-button>
-                        <el-button size="medium" @click="reset()">重置</el-button>
+                        <el-button type="primary" size="medium" @click="submit('ruleForm')">确定</el-button>
+                        <el-button size="medium" @click="reset('ruleForm')">重置</el-button>
                     </el-row>
                 </el-form-item>
             </el-form>
@@ -129,11 +129,18 @@
             }
         },
         methods: {
-            submit() {
-
+            submit(formName) {
+                this.$refs[formName].validate((valid => {
+                    if (valid) {
+                        alert('submit!')
+                    } else {
+                        console.log('error submit');
+                        return false;
+                    }
+                }))
             },
-            reset() {
-
+            reset(formName) {
+                this.$refs[formName].resetFields();
             },
             deleteUser(id) {
                 console.log(id);
