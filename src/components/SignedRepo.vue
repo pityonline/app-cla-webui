@@ -73,9 +73,10 @@
             </el-pagination>
         </div>
         <el-dialog
-                close-on-click-modal="false"
+                :close-on-click-modal="false"
                 title="白名单"
                 top="5vh"
+                align="center"
                 :visible.sync="listDialogVisible"
                 width="70%">
             <div style="margin-bottom: 1rem">
