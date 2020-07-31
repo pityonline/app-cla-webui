@@ -9,9 +9,10 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 //引入svg组件
 import './icons'
-Vue.prototype.$axios=axios;
-Vue.prototype.$resetMessage=message;
 Vue.use(ElementUI);
+Vue.use(message);
+Vue.prototype.$axios=axios;
+Vue.prototype.$message=message;
 
 Vue.config.productionTip = false
 
