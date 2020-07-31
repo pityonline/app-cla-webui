@@ -11,7 +11,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 import './icons'
 Vue.use(ElementUI);
 Vue.prototype.$axios=axios;
-Vue.prototype.$message=message;
+Vue.prototype.$resetMessage=message;
 
 Vue.config.productionTip = false
 
