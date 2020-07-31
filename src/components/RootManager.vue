@@ -178,7 +178,7 @@
             },
             clickAddUser() {
 
-                this.tableData.length===this.maxUser?message.warning(`最多新增${this.maxUser}个管理账号`):this.addUserVisible = true;
+                this.tableData.length===this.maxUser?message(`最多新增${this.maxUser}个管理账号`):this.addUserVisible = true;
             },
         },
     }
