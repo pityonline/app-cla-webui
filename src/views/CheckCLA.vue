@@ -17,10 +17,10 @@
                 <el-col :offset="6" :span="12">
                     <p class="contentTitle">Please sign the CLA for <span>{{repo}}</span></p>
 
-                    <el-row class="marginTop1rem">
+                    <el-row >
                         <span class="size_s">Version: 2020-06-17</span>
                         <el-select
-                                style="width: 6rem"
+                                style="width: 6rem;margin-left: 2rem"
                                 size="small"
                                 v-model="value"
                                 value=""
@@ -35,7 +35,7 @@
                     </el-row>
 
 
-                    <div id="claBox" style="white-space: pre-wrap">
+                    <div class="marginTop1rem" id="claBox" style="white-space: pre-wrap">
 
                     </div>
 
@@ -213,7 +213,7 @@
 
                 },
                 isRead: false,
-                value: "0",
+                value: 0,
                 languageOptions: [{
                     value: 0,
                     label: 'english'
