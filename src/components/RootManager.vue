@@ -85,7 +85,6 @@
 
 <script>
     import * as url from '../until/api'
-    import message from '../until/RewriteMessage'
 
     export default {
         name: "rootManager",
@@ -178,7 +177,7 @@
             },
             clickAddUser() {
 
-                this.tableData.length===this.maxUser?message(`最多新增${this.maxUser}个管理账号`):this.addUserVisible = true;
+                this.tableData.length===this.maxUser?this.$message(`最多新增${this.maxUser}个管理账号`):this.addUserVisible = true;
             },
         },
     }
