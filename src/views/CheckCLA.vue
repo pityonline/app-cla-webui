@@ -17,9 +17,14 @@
                 <el-col :offset="6" :span="12">
                     <p class="contentTitle">Please sign the CLA for <span>{{repo}}</span></p>
 
-                    <el-row>
+                    <el-row class="marginTop1rem">
                         <span class="size_s">Version: 2020-06-17</span>
-                        <el-select style="width: 8rem" size="small" v-model="value" value="">
+                        <el-select
+                                style="width: 6rem"
+                                size="small"
+                                v-model="value"
+                                value=""
+                                @change="changeLanguage">
                             <el-option
                                     v-for="item in languageOptions"
                                     :key="item.value"
@@ -35,7 +40,7 @@
                     </div>
 
 
-                    <el-row class="marginTop1rem ">
+                    <el-row class="marginTop1rem">
 
 
                         <el-col :span="8" class="borderClass">
@@ -210,10 +215,10 @@
                 isRead: false,
                 value: "0",
                 languageOptions: [{
-                    value: '0',
+                    value: 0,
                     label: 'english'
                 }, {
-                    value: '1',
+                    value: 1,
                     label: 'chinese'
                 },],
                 claText: '          通过签署贡献协议（“本协议”），签署的“贡献者”同意接受“本协议”并受“本协议”约束。“本协议”适用于“贡献者”提交给openEuler社区 （“社区”）的全部项目（后称“项目”）的“贡献”，无论“贡献”是在签署日期之前，签署时还是之后提供。\n' +
@@ -287,6 +292,26 @@
             }
         },
         methods: {
+            changeLanguage() {
+                this.$axios({
+                    url: '/api' + url.getClaInfo,
+                    method: 'post',
+                    data: {language: this.languageOptions[this.value].label},
+                    headers: {
+                        'Access-Token': this.$store.state.access_token,
+                        'Refresh-Token': this.$store.state.refresh_token,
+                        'User': `${this.platform}/${this.$store.state.user.userName}`
+                    }
+
+                }).then(res => {
+                    console.log(res);
+                    this.claText = res.data.cla;
+                    this.metaData = res.data.metadata;
+
+                }).catch(err => {
+                    console.log(err);
+                })
+            },
             /*获取个人签署的metadata*/
             getPersonalMetaAndCla() {
                 this.$axios({
@@ -299,10 +324,8 @@
 
                 }).then(res => {
                     console.log(res);
-                    if (res.status === 200) {
-                        this.claText = res.data.cla;
-                        this.metaData = res.data.metadata;
-                    }
+                    this.claText = res.data.cla;
+                    this.metaData = res.data.metadata;
                 }).catch(err => {
                     console.log(err);
                 })
