@@ -175,7 +175,8 @@
                 this.deleteUserVisible=true
             },
             clickAddUser() {
-                this.addUserVisible = true;
+
+                this.tableData.length===5?this.$message('最多能新增5个管理账号'):this.addUserVisible = true;
             },
         },
     }
