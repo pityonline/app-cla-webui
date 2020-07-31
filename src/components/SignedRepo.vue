@@ -104,6 +104,7 @@
                             align="center">
                         <template slot-scope="scope">
                             <el-switch
+                                    v-if="!scope.row.isUsed"
                                     @change="changeActive(scope.row.id,scope.row.isUsed)"
                                     v-model="scope.row.isUsed"
                                     class="mySwitch"
@@ -178,6 +179,7 @@
         methods: {
             changeActive(id, active) {
                 console.log('changeActive', id, active);
+                this.listData[id].isUsed=false
                 let data = {id: id, active: active}
                 this.$axios({
                     url: `/api${url.changeActive}`,
