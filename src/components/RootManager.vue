@@ -178,7 +178,8 @@
             clickAddUser() {
 
                 this.tableData.length === this.maxUser ?
-                    document.getElementsByClassName('el-message')[0] ? console.log(this.maxUser) : this.$message(`最多新增${this.maxUser}个管理账号`) :
+                    // document.getElementsByClassName('el-message')[0] ? console.log(this.maxUser) : this.$message(`最多新增${this.maxUser}个管理账号`) :
+                    this.$message.closeAll()&&this.$message(`最多新增${this.maxUser}个管理账号`) :
                     this.addUserVisible = true;
             },
         },
