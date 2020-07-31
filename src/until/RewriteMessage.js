@@ -1,21 +1,35 @@
-import {Message} from 'element-ui';
-
+/**重置message，防止重复点击重复弹出message弹框 */
+import {
+    Message
+} from 'element-ui';
+const showMessage = Symbol('showMessage');
 let messageInstance = null;
-const resetMessage = (options) => {
-        if (messageInstance) {
+class DoneMessage {
+    [showMessage](type, options, single) {
+        if (messageInstance && single) {
             messageInstance.close()
         }
-        messageInstance = Message(options)
+        messageInstance = Message[type](options)
+        // if (single) {
+        //     if (document.getElementsByClassName('el-message').length === 0) {
+        //         Message[type](options)
+        //     }
+        // } else {
+        //     Message[type](options)
+        // }
+
     }
-;['error', 'success', 'info', 'warning'].forEach(type => {
-    resetMessage[type] = options => {
-        if (typeof options === 'string') {
-            options = {
-                message: options
-            }
-        }
-        options.type = type
-        return resetMessage(options)
+    info(options, single = true) {
+        this[showMessage]('info', options, single)
     }
-})
-export const message = resetMessage
+    warning(options, single = true) {
+        this[showMessage]('warning', options, single)
+    }
+    error(options, single = true) {
+        this[showMessage]('error', options, single)
+    }
+    success(options, single = true) {
+        this[showMessage]('success', options, single)
+    }
+}
+export const message = new DoneMessage();
