@@ -4,7 +4,7 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 import axios from 'axios'
-import message from './until/RewriteMessage.js'
+import message from './until/RewriteMessage'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 //引入svg组件
