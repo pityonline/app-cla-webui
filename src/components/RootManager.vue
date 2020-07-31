@@ -117,6 +117,7 @@
                 callback();
             };
             return {
+                maxUser:2,
                 deleteUserVisible:false,
                 rules: {
                     userName: [
@@ -176,7 +177,7 @@
             },
             clickAddUser() {
 
-                this.tableData.length===5?this.$message('最多能新增5个管理账号'):this.addUserVisible = true;
+                this.tableData.length===this.maxUser?this.$message('最多能新增5个管理账号'):this.addUserVisible = true;
             },
         },
     }
