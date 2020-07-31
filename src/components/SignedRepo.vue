@@ -103,20 +103,28 @@
                     <el-table-column
                             align="center">
                         <template slot-scope="scope">
-                            <el-switch
-                                    v-show="!scope.row.isUsed"
-                                    @change="changeActive(scope.row.id,scope.row.isUsed)"
-                                    v-model="scope.row.isUsed"
-                                    class="mySwitch"
-                                    width="3rem"
-                                    active-color="#409EFF"
-                                    active-text="启用"
-                                    inactive-text="停用"
-                                    inactive-color="#EBEEF5">
-                            </el-switch>
-                            <el-button style="margin-left: 1rem" type="danger" size="mini"
-                                       @click="clickDelete(scope.row.id)">删除
-                            </el-button>
+                            <el-row>
+                                <el-col align="right" :span="12">
+                                    <el-switch
+
+                                            v-show="!scope.row.isUsed"
+                                            @change="changeActive(scope.row.id,scope.row.isUsed)"
+                                            v-model="scope.row.isUsed"
+                                            class="mySwitch"
+                                            width="3rem"
+                                            active-color="#409EFF"
+                                            active-text="启用"
+                                            inactive-text="停用"
+                                            inactive-color="#EBEEF5">
+                                    </el-switch>
+                                </el-col>
+                                <el-col align="left" :span="12">
+                                    <el-button style="margin-left: 1rem" type="danger" size="mini"
+                                               @click="clickDelete(scope.row.id)">删除
+                                    </el-button>
+                                </el-col>
+                            </el-row>
+
                         </template>
                     </el-table-column>
                 </el-table>
