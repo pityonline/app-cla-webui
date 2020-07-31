@@ -17,13 +17,22 @@
                 <el-col :offset="6" :span="12">
                     <p class="contentTitle">Please sign the CLA for <span>{{repo}}</span></p>
 
-                    <p class="size_s">Version: 2020-06-17</p>
+                    <el-row>
+                        <span class="size_s">Version: 2020-06-17</span>
+                        <el-select style="width: 8rem" size="small" v-model="value" value="">
+                            <el-option
+                                    v-for="item in languageOptions"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </el-row>
 
 
                     <div id="claBox" style="white-space: pre-wrap">
 
                     </div>
-
 
 
                     <el-row class="marginTop1rem ">
@@ -32,7 +41,7 @@
                         <el-col :span="8" class="borderClass">
                             <el-radio label="0" @change="roleChange()" v-model="role">个人贡献者</el-radio>
                         </el-col>
-                        <el-col :span="8"  class="borderClass">
+                        <el-col :span="8" class="borderClass">
                             <el-radio label="1" @change="roleChange()" v-model="role">企业贡献者</el-radio>
                         </el-col>
 
@@ -135,7 +144,7 @@
             let verifyTel = (rule, value, callback) => {
                 if (!value) {
                     callback();
-                }else{
+                } else {
 
                     let reg = /^1[3456789]\d{9}$/;
                     if (reg.test(value)) {
@@ -159,7 +168,7 @@
                 callback();
             }
             return {
-                passContent:'',
+                passContent: '',
                 isVerify: false,
                 isSendCode: false,
                 verifyCode: '',
@@ -197,7 +206,6 @@
                     ],
 
 
-
                 },
                 isRead: false,
                 value: "0",
@@ -233,46 +241,46 @@
                     },
 
                 ],
-                metadata:{
-                    "name":{
-                        "title":"Name",
-                        "type":"string",
-                        "githubKey":"name",
-                        "required":true
+                metadata: {
+                    "name": {
+                        "title": "Name",
+                        "type": "string",
+                        "githubKey": "name",
+                        "required": true
                     },
-                    "email":{
-                        "title":"E-Mail",
-                        "type":"string",
-                        "githubKey":"email",
-                        "required":true
+                    "email": {
+                        "title": "E-Mail",
+                        "type": "string",
+                        "githubKey": "email",
+                        "required": true
                     },
-                    "phone":{
-                        "title":"Telephone",
-                        "type":"string",
-                        "required":false
-                    },
-                    "faxnumber":{
-                        "title":"Fax",
-                        "type":"string",
+                    "phone": {
+                        "title": "Telephone",
+                        "type": "string",
                         "required": false
                     },
-                    "address":{
-                        "title":"Address",
-                        "type":"string",
-                        "required":true
+                    "faxnumber": {
+                        "title": "Fax",
+                        "type": "string",
+                        "required": false
                     },
-                    "date":{
-                        "title":"Date",
-                        "type":"string",
-                        "required":true
+                    "address": {
+                        "title": "Address",
+                        "type": "string",
+                        "required": true
                     },
-                    "category":{
-                        "title":"I have read the Privacy Policy and hereby consent to the processing of my data by openLooKeng in Hong Kong",
-                        "type":"boolean",
-                        "required":true
+                    "date": {
+                        "title": "Date",
+                        "type": "string",
+                        "required": true
+                    },
+                    "category": {
+                        "title": "I have read the Privacy Policy and hereby consent to the processing of my data by openLooKeng in Hong Kong",
+                        "type": "boolean",
+                        "required": true
                     }
                 },
-                metadataArr:[],
+                metadataArr: [],
                 checkCLAClass: {
                     height: '',
                 },
@@ -319,17 +327,19 @@
                     console.log(err);
                 })
             },
-            roleChange(){
+            roleChange() {
                 console.log(this.role);
                 switch (this.role) {
-                    case '0':this.getPersonalMetaAndCla();
-                    break;
-                    case '1':this.getCompanyMetaAndCla();
-                    break;
+                    case '0':
+                        this.getPersonalMetaAndCla();
+                        break;
+                    case '1':
+                        this.getCompanyMetaAndCla();
+                        break;
 
                 }
             },
-            toHome(){
+            toHome() {
                 this.$router.push('/home')
             },
             /*验证验证码*/
@@ -449,13 +459,13 @@
             setClaContent() {
                 document.getElementById('claBox').innerHTML = this.claText
             },
-            loadMetadata(){
+            loadMetadata() {
                 console.log(this.metadata);
-                this.metadataArr=[]
-                for(let item in this.metadata){
+                this.metadataArr = []
+                for (let item in this.metadata) {
                     console.log(item);
-                    if ( item!=='category'){
-                        Object.assign(this.metadata[item],{githubKey:item});
+                    if (item !== 'category') {
+                        Object.assign(this.metadata[item], {githubKey: item});
                         this.metadataArr.push(this.metadata[item])
                     }
                 }
@@ -484,11 +494,13 @@
 
 <style scoped lang="less">
     .el-button.is-disabled, .el-button.is-disabled:focus, .el-button.is-disabled:hover {
-        cursor:pointer;
-    }
-    .pointer{
         cursor: pointer;
     }
+
+    .pointer {
+        cursor: pointer;
+    }
+
     .header {
         position: fixed;
         top: 0;
@@ -521,6 +533,7 @@
 
 
     }
+
     .verifyClass {
         padding: 10rem 0;
 
