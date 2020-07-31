@@ -117,8 +117,8 @@
                 callback();
             };
             return {
-                maxUser:2,
-                deleteUserVisible:false,
+                maxUser: 2,
+                deleteUserVisible: false,
                 rules: {
                     userName: [
                         {require: true, validator: validateAccount, trigger: 'blur'}
@@ -173,11 +173,13 @@
             },
             deleteUser(id) {
                 console.log(id);
-                this.deleteUserVisible=true
+                this.deleteUserVisible = true
             },
             clickAddUser() {
 
-                this.tableData.length===this.maxUser?this.$message.success(`最多新增${this.maxUser}个管理账号`):this.addUserVisible = true;
+                this.tableData.length === this.maxUser ?
+                    document.getElementsByClassName('el-message')[0] ? console.log(this.maxUser) : this.$message(`最多新增${this.maxUser}个管理账号`) :
+                    this.addUserVisible = true;
             },
         },
     }
