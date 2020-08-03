@@ -566,6 +566,7 @@
                 this.$router.push('/createMetadata')
             },
             claFoucs(){
+                console.log('claFoucs', this.claValue);
                 this.previewText = this.claOptions[this.claValue].text;
 
             },
@@ -576,6 +577,8 @@
                 this.previewText = this.claOptions[value].text;
             },
             metaFoucs(){
+
+                console.log('metaFoucs', this.metadataValue);
                 this.previewText = this.metadataOptions[this.metadataValue].text;
             },
             /*选择Metadata*/
