@@ -308,11 +308,7 @@
         },
         methods: {
             changeLanguage() {
-                if (this.value === 0) {
-                    this.desc=this.enDesc;
-                }else if (this.value === 1) {
-                    this.desc=this.cnDesc;
-                }
+                this.changeDesc();
                 this.$axios({
                     url: '/api' + url.getClaInfo,
                     method: 'post',
@@ -332,8 +328,16 @@
                     console.log(err);
                 })
             },
+            changeDesc(){
+                if (this.value === 0) {
+                    this.desc=this.enDesc;
+                }else if (this.value === 1) {
+                    this.desc=this.cnDesc;
+                }
+            },
             /*获取个人签署的metadata*/
             getPersonalMetaAndCla() {
+              this.changeDesc();
                 this.$axios({
                     url: '/api' + url.getClaInfo,
                     headers: {
