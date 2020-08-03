@@ -53,6 +53,7 @@
                                                placeholder="select"
                                                style="width: 100%"
                                                size="medium"
+                                               @foucs="claFoucs"
                                                filterable
                                                @change="changeCla">
                                         <el-option
@@ -78,6 +79,7 @@
                                                placeholder="select"
                                                style="width: 100%"
                                                filterable
+                                               @foucs="metaFoucs"
                                                size="medium"
                                                @change="changeMetadata">
                                         <el-option
@@ -563,11 +565,18 @@
             toCreateMetadata() {
                 this.$router.push('/createMetadata')
             },
+            claFoucs(){
+                this.previewText = this.claOptions[this.claValue].text;
+
+            },
             /*选择cla*/
             changeCla(value) {
                 this.showPreviewCla=true
                 this.claChoose = true;
                 this.previewText = this.claOptions[value].text;
+            },
+            metaFoucs(){
+                this.previewText = this.metadataOptions[this.metadataValue].text;
             },
             /*选择Metadata*/
             changeMetadata(value) {
