@@ -53,6 +53,7 @@
                                                placeholder="select"
                                                style="width: 100%"
                                                size="medium"
+                                               filterable
                                                @change="changeCla">
                                         <el-option
                                                 v-for="item in claOptions"
@@ -76,6 +77,7 @@
                                     <el-select v-model="metadataValue"
                                                placeholder="select"
                                                style="width: 100%"
+                                               filterable
                                                size="medium"
                                                @change="changeMetadata">
                                         <el-option
