@@ -44,10 +44,10 @@
 
 
                         <el-col :span="8" class="borderClass">
-                            <el-radio label="0" @change="roleChange()" v-model="role">个人贡献者</el-radio>
+                            <el-radio label="0" @change="roleChange()" v-model="role">{{desc.personalContributor}}</el-radio>
                         </el-col>
                         <el-col :span="8" class="borderClass">
-                            <el-radio label="1" @change="roleChange()" v-model="role">企业贡献者</el-radio>
+                            <el-radio label="1" @change="roleChange()" v-model="role">{{desc.comContributor}}</el-radio>
                         </el-col>
 
                     </el-row>
@@ -62,14 +62,14 @@
                                               :prop="item.githubKey">
                                     <el-input v-model="ruleForm[item.githubKey]" size="small"></el-input>
                                 </el-form-item>
-                                <p style="font-size: .9rem;" class="borderClass">*为必填项，请确保你的邮箱与gitee账号绑定</p>
+                                <p style="font-size: .9rem;" class="borderClass">{{desc.metadataDesc}}</p>
                                 <div class="marginTop1rem">
                                     <el-checkbox v-model="isRead">{{metadata['category'].title}}</el-checkbox>
                                 </div>
                                 <el-form-item label-width="0" class="marginTop1rem">
-                                    <el-button :disabled="!isRead" type="primary" @click="submitForm('ruleForm')">签署
+                                    <el-button :disabled="!isRead" type="primary" @click="submitForm('ruleForm')">{{desc.sign}}
                                     </el-button>
-                                    <el-button @click="resetForm('ruleForm')">重置</el-button>
+                                    <el-button @click="resetForm('ruleForm')">{{desc.reset}}</el-button>
                                 </el-form-item>
                             </el-form>
                             <!--<div style="margin-top: 1rem;text-align: left">-->
@@ -173,6 +173,21 @@
                 callback();
             }
             return {
+                desc:'',
+                enDesc:{
+                    personalContributor:'Individual Contributor',
+                    comContributor:'Legal Entity Contributor',
+                    metadataDesc:'* require field. Please make sure the E-Mail is related with your gitee account.',
+                    sign:'SIGN',
+                    reset:'RESET',
+                },
+                cnDesc:{
+                    personalContributor:'个人贡献者',
+                    comContributor:'企业贡献者',
+                    metadataDesc:'*为必填项，请确保你的邮箱与gitee账号绑定',
+                    sign:'签署',
+                    reset:'重置',
+                },
                 passContent: '',
                 isVerify: false,
                 isSendCode: false,
@@ -293,6 +308,11 @@
         },
         methods: {
             changeLanguage() {
+                if (this.value === 0) {
+                    this.desc=this.enDesc;
+                }else if (this.value === 1) {
+                    this.desc=this.cnDesc;
+                }
                 this.$axios({
                     url: '/api' + url.getClaInfo,
                     method: 'post',
