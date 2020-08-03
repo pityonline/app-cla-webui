@@ -3,15 +3,15 @@
         <el-col :offset="8" :span="8" >
             <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px"
                      class="demo-ruleForm" style="padding: 2rem">
-                <el-form-item label="账号" prop="account">
+                <el-form-item label="account" prop="account">
                     <el-input v-model="ruleForm.userName" autocomplete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="密码" prop="pass">
+                <el-form-item label="password" prop="pass">
                     <el-input type="password" v-model="ruleForm.pwd" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
-                    <el-button @click="resetForm('ruleForm')">重置</el-button>
+                    <el-button type="primary" @click="submitForm('ruleForm')">SUBMIT</el-button>
+                    <el-button @click="resetForm('ruleForm')">RESET</el-button>
                 </el-form-item>
             </el-form>
         </el-col>
@@ -25,13 +25,13 @@
         data(){
             var validateAccount = (rule, value, callback) => {
                 if (value === '') {
-                    callback(new Error('请输入账号'));
+                    callback(new Error('please input account number'));
                 }
                 callback();
             };
             var validatePass = (rule, value, callback) => {
                 if (value === '') {
-                    callback(new Error('请输入密码'));
+                    callback(new Error('please input password'));
                 }
                 callback();
             };
