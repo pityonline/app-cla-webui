@@ -109,8 +109,8 @@
                                 </div>
                             </div>
                         </el-col>
-                        <el-col :span="12" :offset="2">
-                            <el-input rows="16" readonly type="textarea" v-model="previewText"
+                        <el-col :span="12" :offset="2" v-if="showPreviewCla">
+                            <el-input rows="16" readonly type="textarea" placeholder="preview cla" v-model="previewText"
                                       style="white-space: pre-wrap">
 
                             </el-input>
@@ -316,7 +316,7 @@
                 isVerify: false,
                 activeName: '',
                 previewShow: false,
-                previewText: 'previewCla',
+                previewText: '',
                 loginType: this.$store.state.loginType,
 
                 tableType: 1,
@@ -353,6 +353,7 @@
                     language: ''
                 }],
                 metadataValue: '',
+                showPreviewCla:false,
                 claChoose: false,
                 metadataChoose: false,
                 linkDialogVisible: false,
@@ -561,6 +562,7 @@
             },
             /*选择cla*/
             changeCla(value) {
+                this.showPreviewCla=true
                 this.claChoose = true;
                 this.previewText = this.claOptions[value].text;
             },
