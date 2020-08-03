@@ -29,6 +29,7 @@
                                                placeholder="select"
                                                style="width: 100%"
                                                size="medium"
+                                               filterable
                                                @change="changeRepository">
                                         <el-option
                                                 v-for="item in repositoryOptions"
