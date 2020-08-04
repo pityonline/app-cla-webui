@@ -555,7 +555,7 @@
                 }).catch(err => {
                     console.log(err);
                     this.linkLoading = false
-                    this.$message.error('failed')
+                    this.$message.error('already linked')
                 })
             },
 
