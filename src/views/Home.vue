@@ -578,7 +578,8 @@
             },
             claVisibleChange(){
                 console.log('claVisibleChange');
-                this.previewText = this.claOptions[this.claValue].text;
+                this.claValue!==''?
+                this.previewText = this.claOptions[this.claValue].text:'';
 
             },
             claFoucs() {
@@ -597,7 +598,8 @@
             },
             mataVisibleChange(){
                 console.log('visibleChange');
-                this.previewText = this.metadataOptions[this.metadataValue].text;
+                this.metadataValue!==''?
+                this.previewText = this.metadataOptions[this.metadataValue].text:'';
 
             },
             clickMetaSelect(){
