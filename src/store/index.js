@@ -89,7 +89,7 @@ export default new Vuex.Store({
               sharedGist: 'Yes',
               contributors: '0',
             })
-            tableData[index]=((index,item,length)=>{
+            tableData[index]=((index,item,length,{commit},tableData)=>{
               axios({
                 url:`/api${url.getClaInfo}/${item.cla_id}`,
                 headers: {
@@ -111,7 +111,7 @@ export default new Vuex.Store({
               }).catch(err => {
                 console.log(err);
               })
-            })(index,item,res.data.length)
+            })(index,item,res.data.length,{commit},tableData)
             // axios({
             //   url:`/api${url.getClaInfo}/${item.cla_id}`,
             //   headers: {
