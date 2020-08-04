@@ -578,6 +578,8 @@
             },
             claVisibleChange(){
                 console.log('claVisibleChange');
+                this.previewText = this.claOptions[this.claValue].text;
+
             },
             claFoucs() {
                 console.log('claFoucs', this.claValue);
@@ -595,6 +597,8 @@
             },
             mataVisibleChange(){
                 console.log('visibleChange');
+                this.previewText = this.metadataOptions[this.metadataValue].text;
+
             },
             clickMetaSelect(){
                 console.log('clickMetaSelect');
