@@ -81,6 +81,7 @@ export default new Vuex.Store({
         if (res.data.length) {
           let tableData = [];
           res.data.forEach((item, index) => {
+            console.log(index);
             tableData.push({
               id:item.id,
               repository: `${item.org_id}/${item.repo_id}`,
@@ -88,26 +89,7 @@ export default new Vuex.Store({
               sharedGist: 'Yes',
               contributors: '0',
             })
-            axios({
-              url:`/api${url.getClaInfo}/${item.cla_id}`,
-              headers: {
-                'Access-Token': data.access_token,
-                'Refresh-Token': data.refresh_token,
-                'User': `${data.platform}/${data.userName}`
-              }
-            }).then(resp => {
-              console.log(resp);
-                Object.assign(tableData[index],{
-                  claName:resp.data.name,
-                })
-                if (index === res.data.length - 1) {
-                  let obj={tableData:tableData,ready:true}
-                  commit('setReady',obj);
-                }
-              console.log(tableData);
-            }).catch(err => {
-              console.log(err);
-            })
+            this.getClaName({commit},index,data,item.cla_id,res.data.length,tableData)
           })
 
         }
@@ -115,6 +97,29 @@ export default new Vuex.Store({
         console.log(err);
       })
 
+    },
+    getClaName({commit},index,data,cla_id,length,tableData){
+      axios({
+        url:`/api${url.getClaInfo}/${cla_id}`,
+        headers: {
+          'Access-Token': data.access_token,
+          'Refresh-Token': data.refresh_token,
+          'User': `${data.platform}/${data.userName}`
+        }
+      }).then(resp => {
+        console.log(resp);
+        console.log(index);
+        Object.assign(tableData[index],{
+          claName:resp.data.name,
+        })
+        if (index === length - 1) {
+          let obj={tableData:tableData,ready:true}
+          commit('setReady',obj);
+        }
+        console.log(tableData);
+      }).catch(err => {
+        console.log(err);
+      })
     },
   },
   modules: {
