@@ -81,7 +81,7 @@
 
                                     <el-select v-model="metadataValue"
                                                ref="metaSelect"
-
+                                               @visible-change="mataVisibleChange"
                                                placeholder="select"
                                                style="width: 100%"
                                                filterable
@@ -589,12 +589,15 @@
             clickClaSelect(){
                 console.log('clickClaSelect');
             },
+            mataVisibleChange(){
+                console.log('visibleChange');
+            },
             clickMetaSelect(){
                 console.log('clickMetaSelect');
 
             },
-            metaFoucs() {
-
+            metaFoucs(e) {
+                console.log(e);
                 console.log('metaFoucs', this.metadataValue);
                 this.previewText = this.metadataOptions[this.metadataValue].text;
             },
