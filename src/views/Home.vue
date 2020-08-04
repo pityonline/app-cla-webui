@@ -79,7 +79,7 @@
                                                placeholder="select"
                                                style="width: 100%"
                                                filterable
-                                               @foucs="metaFoucs"
+                                               @foucs="metaFoucs()"
                                                size="medium"
                                                @change="changeMetadata">
                                         <el-option
@@ -345,8 +345,8 @@
                 unLinkDialogVisible: false,
                 editDialogVisible: false,
                 menuVisible: false,
-                claName: 'test',
-                repositoryName: 'ooo/test',
+                claName: '',
+                repositoryName: '',
                 shareGistChecked: false,
                 claOptions: [],
                 claValue: '',
@@ -368,9 +368,9 @@
                 fileNumber: '',
                 lineNumber: '',
                 gistUrl: '',
-                orgOptions: [{value: '0', label: 'test'}],
+                orgOptions: [],
                 orgValue: '',
-                repositoryOptions: [{value: '0', label: 'test',},],
+                repositoryOptions: [],
                 repositoryValue: '',
                 repositoryChoose: '',
                 showConfigForm: false,
