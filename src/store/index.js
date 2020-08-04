@@ -89,7 +89,27 @@ export default new Vuex.Store({
               sharedGist: 'Yes',
               contributors: '0',
             })
-            this.getClaName({commit},index,data,item.cla_id,res.data.length,tableData)
+            axios({
+              url:`/api${url.getClaInfo}/${item.cla_id}`,
+              headers: {
+                'Access-Token': data.access_token,
+                'Refresh-Token': data.refresh_token,
+                'User': `${data.platform}/${data.userName}`
+              }
+            }).then(resp => {
+              console.log(resp);
+              console.log(index);
+              Object.assign(tableData[index],{
+                  claName:resp.data.name,
+                })
+                if (index === res.data.length - 1) {
+                  let obj={tableData:tableData,ready:true}
+                  commit('setReady',obj);
+                }
+              console.log(tableData);
+            }).catch(err => {
+              console.log(err);
+            })
           })
 
         }
@@ -98,29 +118,7 @@ export default new Vuex.Store({
       })
 
     },
-    getClaName({commit},index,data,cla_id,length,tableData){
-      axios({
-        url:`/api${url.getClaInfo}/${cla_id}`,
-        headers: {
-          'Access-Token': data.access_token,
-          'Refresh-Token': data.refresh_token,
-          'User': `${data.platform}/${data.userName}`
-        }
-      }).then(resp => {
-        console.log(resp);
-        console.log(index);
-        Object.assign(tableData[index],{
-          claName:resp.data.name,
-        })
-        if (index === length - 1) {
-          let obj={tableData:tableData,ready:true}
-          commit('setReady',obj);
-        }
-        console.log(tableData);
-      }).catch(err => {
-        console.log(err);
-      })
-    },
+
   },
   modules: {
   }
