@@ -6,6 +6,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+
     tableData:JSON.parse(sessionStorage.getItem('tableData'))||undefined,
     ready:Boolean(sessionStorage.getItem('ready')||undefined),
     platform:sessionStorage.getItem('platform')||undefined,
@@ -57,40 +58,15 @@ export default new Vuex.Store({
   actions: {
 
     setPlatformAct({commit},platform){
-      console.log(platform);
       commit('setPlatform',platform)
     },
     setTokenAct({commit},data){
       commit('setToken',data);
     },
     setLoginUserAct({commit},data){
-      console.log(data);
       commit('setLoginUser',data)
     },
-    /*获取指定cla数据*/
-    getClaAct(id,index,data) {
-      console.log("getClaAct");
-      this.$axios({
-        url: '/api' + url.getClaInfo,
-        params:{
-          id:id,
-        },
-        headers: {
-          'Access-Token': data.access_token,
-          'Refresh-Token': data.refresh_token,
-          'User': `${data.platform}/${data.userName}`
-        }
-      }).then(res => {
-        console.log(res);
-        if (res.data.length) {
-            this.tableData[index].assign({
-              cla:res.data,
-            })
-        }
-      }).catch(err => {
-        console.log(err);
-      })
-    },
+
     getLinkedRepoListAct({commit},data) {
       axios({
         url: '/api' + url.getLinkedRepoList,
