@@ -540,8 +540,10 @@
                     this.$message.success('success')
                     console.log(res);
                     this.claValue = '';
+                    this.metadataValue=''
                     this.repositoryValue = '';
                     this.claChoose = false;
+                    this.metadataChoose = false;
                     this.repositoryChoose = false;
                     this.email = '';
                     this.linkDialogVisible = false;
