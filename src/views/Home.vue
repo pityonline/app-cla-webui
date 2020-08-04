@@ -577,14 +577,8 @@
                 this.$router.push('/createMetadata')
             },
             claVisibleChange(visible){
-                console.log(visible,'claVisibleChange');
-                this.claValue!==''?
+                this.claValue!==''&&visible?
                 this.previewText = this.claOptions[this.claValue].text:'';
-
-            },
-            claFoucs() {
-                console.log('claFoucs', this.claValue);
-                this.previewText = this.claOptions[this.claValue].text;
 
             },
             /*选择cla*/
@@ -593,24 +587,13 @@
                 this.claChoose = true;
                 this.previewText = this.claOptions[value].text;
             },
-            clickClaSelect(){
-                console.log('clickClaSelect');
-            },
+
             mataVisibleChange(visible){
-                console.log(visible,'visibleChange');
-                this.metadataValue!==''?
+                this.metadataValue!==''&&visible?
                 this.previewText = this.metadataOptions[this.metadataValue].text:'';
 
             },
-            clickMetaSelect(){
-                console.log('clickMetaSelect');
 
-            },
-            metaFoucs(e) {
-                console.log(e);
-                console.log('metaFoucs', this.metadataValue);
-                this.previewText = this.metadataOptions[this.metadataValue].text;
-            },
             /*选择Metadata*/
             changeMetadata(value) {
                 this.metadataChoose = true;
