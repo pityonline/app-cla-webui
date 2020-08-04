@@ -99,7 +99,7 @@ export default new Vuex.Store({
                 }
               }).then(resp => {
                 console.log(resp);
-                console.log(index);
+                console.log(index,tableData,item);
                 Object.assign(tableData[index],{
                   claName:resp.data.name,
                 })
