@@ -576,8 +576,8 @@
             toCreateMetadata() {
                 this.$router.push('/createMetadata')
             },
-            claVisibleChange(){
-                console.log('claVisibleChange');
+            claVisibleChange(visible){
+                console.log(visible,'claVisibleChange');
                 this.claValue!==''?
                 this.previewText = this.claOptions[this.claValue].text:'';
 
@@ -596,8 +596,8 @@
             clickClaSelect(){
                 console.log('clickClaSelect');
             },
-            mataVisibleChange(){
-                console.log('visibleChange');
+            mataVisibleChange(visible){
+                console.log(visible,'visibleChange');
                 this.metadataValue!==''?
                 this.previewText = this.metadataOptions[this.metadataValue].text:'';
 
