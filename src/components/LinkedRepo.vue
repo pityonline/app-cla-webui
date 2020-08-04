@@ -12,8 +12,8 @@
                     <template slot-scope="scope">
                         <svg-icon icon-class="repository"/>
                         <span class="pointer hoverUnderline"
-                              @click="newWindow()"
-                              style="margin-left: 10px;">{{ scope.row.repository }}</span>
+                              @click="newWindow(scope.row.repository)"
+                              style="margin-left: 10px;">{{scope.row.repository}}</span>
                     </template>
                 </el-table-column>
                 <el-table-column
@@ -339,9 +339,8 @@
                 console.log("checkCla");
                 this.$router.push('/checkCla')
             },
-            newWindow() {
-                // window.open('https://github.com/ouchengle/Test','_black')
-                window.open('https://github.com/ouchengle')
+            newWindow(repo) {
+                window.open(`https://gitee.com/${repo}`)
             },
             /*解绑开源项目*/
             unLinkRepositoryFun() {
