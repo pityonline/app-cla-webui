@@ -53,6 +53,7 @@
                                             ref="claSelect"
                                             v-model="claValue"
                                             placeholder="select"
+                                            @visible-change="claVisibleChange"
                                             style="width: 100%"
                                             size="medium"
                                             @foucs="claFoucs"
@@ -574,6 +575,9 @@
             },
             toCreateMetadata() {
                 this.$router.push('/createMetadata')
+            },
+            claVisibleChange(){
+                console.log('claVisibleChange');
             },
             claFoucs() {
                 console.log('claFoucs', this.claValue);
