@@ -49,13 +49,16 @@
                                           style="font-size: .8rem;text-decoration: underline;cursor: pointer">(don't have one?)</span>
                                 </div>
                                 <div style="padding: 0 2rem">
-                                    <el-select v-model="claValue"
-                                               placeholder="select"
-                                               style="width: 100%"
-                                               size="medium"
-                                               @foucs="claFoucs"
-                                               filterable
-                                               @change="changeCla">
+                                    <el-select
+                                            ref="claSelect"
+                                            v-model="claValue"
+                                            placeholder="select"
+                                            style="width: 100%"
+                                            size="medium"
+                                            @foucs="claFoucs"
+                                            @click="clickClaSelect"
+                                            filterable
+                                            @change="changeCla">
                                         <el-option
                                                 v-for="item in claOptions"
                                                 :key="item.value"
@@ -75,11 +78,15 @@
                                           style="font-size: .8rem;text-decoration: underline;cursor: pointer">(don't have one?)</span>
                                 </div>
                                 <div style="padding: 0 2rem">
+
                                     <el-select v-model="metadataValue"
+                                               ref="metaSelect"
+
                                                placeholder="select"
                                                style="width: 100%"
                                                filterable
-                                               @foucs="metaFoucs()"
+                                               @click="clickMetaSelect"
+                                               @foucs="metaFoucs"
                                                size="medium"
                                                @change="changeMetadata">
                                         <el-option
@@ -128,11 +135,10 @@
 
             <div>
                 <el-tabs v-model="activeName" @tab-click="tabsHandleClick">
-                    <el-tab-pane  label="Linked Repositories" name="first" style="margin-top: 1rem">
+                    <el-tab-pane label="Linked Repositories" name="first" style="margin-top: 1rem">
 
                     </el-tab-pane>
-                    <el-tab-pane  label="Signed Repositories" name="second" style="margin-top: 1rem">
-
+                    <el-tab-pane label="Signed Repositories" name="second" style="margin-top: 1rem">
 
 
                     </el-tab-pane>
@@ -299,13 +305,13 @@
             Footer,
         },
         computed: {},
-        watch:{
-            $route(to,from){
-              let path = to.path;
-                if ( path==='/linkedRepo'||path==='/home'){
-                    this.activeName='first';
-                }else if (path==='/signedRepo'||path==='/signedRepoLogin'){
-                    this.activeName='second';
+        watch: {
+            $route(to, from) {
+                let path = to.path;
+                if (path === '/linkedRepo' || path === '/home') {
+                    this.activeName = 'first';
+                } else if (path === '/signedRepo' || path === '/signedRepoLogin') {
+                    this.activeName = 'second';
                 }
             },
         },
@@ -358,7 +364,7 @@
                     language: ''
                 }],
                 metadataValue: '',
-                showPreviewCla:false,
+                showPreviewCla: false,
                 claChoose: false,
                 metadataChoose: false,
                 linkDialogVisible: false,
@@ -376,7 +382,6 @@
                 showConfigForm: false,
 
 
-
                 home: {
                     height: '',
                 },
@@ -388,19 +393,19 @@
             }
         },
         methods: {
-            ...mapActions(['setLoginUserAct', 'setTokenAct','getLinkedRepoListAct']),
+            ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
 
-            getPath(){
+            getPath() {
                 let path = this.$route.path;
-                if ( path==='/linkedRepo'||path==='/home'){
-                    this.activeName='first';
-                }else if (path==='/signedRepo'||path==='/signedRepoLogin'){
-                    this.activeName='second';
+                if (path === '/linkedRepo' || path === '/home') {
+                    this.activeName = 'first';
+                } else if (path === '/signedRepo' || path === '/signedRepoLogin') {
+                    this.activeName = 'second';
                 }
             },
             tabsHandleClick(tab, event) {
                 console.log(tab, event);
-                tab.index === '0'? this.$router.push('/linkedRepo') : this.$router.push('/signedRepoLogin')
+                tab.index === '0' ? this.$router.push('/linkedRepo') : this.$router.push('/signedRepoLogin')
 
             },
             /*获取组织权限*/
@@ -539,7 +544,12 @@
                     this.repositoryChoose = false;
                     this.email = '';
                     this.linkDialogVisible = false;
-                    let data ={access_token:this.$store.state.access_token,refresh_token:this.$store.state.refresh_token,userName:this.$store.state.user.userName,platform:this.platform}
+                    let data = {
+                        access_token: this.$store.state.access_token,
+                        refresh_token: this.$store.state.refresh_token,
+                        userName: this.$store.state.user.userName,
+                        platform: this.platform
+                    }
                     this.getLinkedRepoListAct(data)
                 }).catch(err => {
                     console.log(err);
@@ -565,18 +575,25 @@
             toCreateMetadata() {
                 this.$router.push('/createMetadata')
             },
-            claFoucs(){
+            claFoucs() {
                 console.log('claFoucs', this.claValue);
                 this.previewText = this.claOptions[this.claValue].text;
 
             },
             /*选择cla*/
             changeCla(value) {
-                this.showPreviewCla=true
+                this.showPreviewCla = true
                 this.claChoose = true;
                 this.previewText = this.claOptions[value].text;
             },
-            metaFoucs(){
+            clickClaSelect(){
+                console.log('clickClaSelect');
+            },
+            clickMetaSelect(){
+                console.log('clickMetaSelect');
+
+            },
+            metaFoucs() {
 
                 console.log('metaFoucs', this.metadataValue);
                 this.previewText = this.metadataOptions[this.metadataValue].text;
@@ -751,7 +768,7 @@
                     background: 'rgba(255, 255, 255, 0.8)'
                 });
                 setInterval(() => {
-                    this.$store.state.user.userName&&this.$store.state.ready && loading.close();
+                    this.$store.state.user.userName && this.$store.state.ready && loading.close();
                 }, 500)
             },
             getCookieData() {
