@@ -89,7 +89,7 @@ export default new Vuex.Store({
               sharedGist: 'Yes',
               contributors: '0',
             })
-            axios({
+            (axios({
               url:`/api${url.getClaInfo}/${item.cla_id}`,
               headers: {
                 'Access-Token': data.access_token,
@@ -109,7 +109,7 @@ export default new Vuex.Store({
               console.log(tableData);
             }).catch(err => {
               console.log(err);
-            })
+            }))(index)
           })
 
         }
