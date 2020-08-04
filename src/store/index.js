@@ -89,27 +89,50 @@ export default new Vuex.Store({
               sharedGist: 'Yes',
               contributors: '0',
             })
-            (axios({
-              url:`/api${url.getClaInfo}/${item.cla_id}`,
-              headers: {
-                'Access-Token': data.access_token,
-                'Refresh-Token': data.refresh_token,
-                'User': `${data.platform}/${data.userName}`
-              }
-            }).then(resp => {
-              console.log(resp);
-              console.log(index);
-              Object.assign(tableData[index],{
+            tableData[index]=((index,item,length)=>{
+              axios({
+                url:`/api${url.getClaInfo}/${item.cla_id}`,
+                headers: {
+                  'Access-Token': data.access_token,
+                  'Refresh-Token': data.refresh_token,
+                  'User': `${data.platform}/${data.userName}`
+                }
+              }).then(resp => {
+                console.log(resp);
+                console.log(index);
+                Object.assign(tableData[index],{
                   claName:resp.data.name,
                 })
-                if (index === res.data.length - 1) {
+                if (index === length - 1) {
                   let obj={tableData:tableData,ready:true}
                   commit('setReady',obj);
                 }
-              console.log(tableData);
-            }).catch(err => {
-              console.log(err);
-            }))(index)
+                console.log(tableData);
+              }).catch(err => {
+                console.log(err);
+              })
+            })(index,item,res.data.length)
+            // axios({
+            //   url:`/api${url.getClaInfo}/${item.cla_id}`,
+            //   headers: {
+            //     'Access-Token': data.access_token,
+            //     'Refresh-Token': data.refresh_token,
+            //     'User': `${data.platform}/${data.userName}`
+            //   }
+            // }).then(resp => {
+            //   console.log(resp);
+            //   console.log(index);
+            //   Object.assign(tableData[index],{
+            //       claName:resp.data.name,
+            //     })
+            //     if (index === res.data.length - 1) {
+            //       let obj={tableData:tableData,ready:true}
+            //       commit('setReady',obj);
+            //     }
+            //   console.log(tableData);
+            // }).catch(err => {
+            //   console.log(err);
+            // })
           })
 
         }
