@@ -51,6 +51,14 @@
                     </template>
                 </el-table-column>
                 <el-table-column
+                        prop="status"
+                        align="center"
+                        label="Status">
+                    <template slot-scope="scope">
+                        <svg-icon class="pointer" icon-class="pdf"/>
+                    </template>
+                </el-table-column>
+                <el-table-column
                         align="center">
                     <template slot-scope="scope">
                         <el-button type="primary" size="small"

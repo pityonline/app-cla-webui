@@ -89,7 +89,7 @@ export default new Vuex.Store({
               sharedGist: 'Yes',
               contributors: '0',
             })
-            tableData[index]=((index,item,length,{commit},tableData)=>{
+           ((index,item,length,{commit},tableData)=>{
               axios({
                 url:`/api${url.getClaInfo}/${item.cla_id}`,
                 headers: {
@@ -99,7 +99,7 @@ export default new Vuex.Store({
                 }
               }).then(resp => {
                 console.log(resp);
-                console.log(index,tableData,item);
+                console.log(index,tableData,item,length);
                 Object.assign(tableData[index],{
                   claName:resp.data.name,
                 })
