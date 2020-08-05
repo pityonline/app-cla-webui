@@ -51,9 +51,9 @@
                     </template>
                 </el-table-column>
                 <el-table-column
-                        prop="status"
+                        prop="pdf"
                         align="center"
-                        label="Status">
+                        label="PDF">
                     <template slot-scope="scope">
                         <svg-icon class="pointer" icon-class="pdf"/>
                     </template>
