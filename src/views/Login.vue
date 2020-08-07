@@ -141,6 +141,7 @@
 <style scoped lang="less">
     #header {
         height: 10%;
+        min-height: 4rem;
         border-bottom: 2px solid white;
         box-sizing: border-box;
         margin: 0 4rem;

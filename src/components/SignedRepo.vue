@@ -55,7 +55,7 @@
                         align="center"
                         label="PDF">
                     <template slot-scope="scope">
-                        <svg-icon class="pointer" icon-class="pdf"/>
+                        <svg-icon class="pointer" @click="checkPdf()" icon-class="pdf"/>
                     </template>
                 </el-table-column>
                 <el-table-column
@@ -191,6 +191,9 @@
             }
         },
         methods: {
+            checkPdf(){
+                console.log('checkPdf');
+            },
             changeActive(id, active) {
                 console.log('changeActive', id, active);
                 let data = {id: id, active: active}
