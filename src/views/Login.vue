@@ -78,6 +78,18 @@
             Select
         },
         data() {
+            var validateAccount = (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error('please input account number'));
+                }
+                callback();
+            };
+            var validatePass = (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error('please input password'));
+                }
+                callback();
+            };
             return {
                 rules: {
                     userName: [
