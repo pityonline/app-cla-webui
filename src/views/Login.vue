@@ -14,6 +14,21 @@
                     <svg-icon class="logText" icon-class="CLA_text"></svg-icon>
 
                 </div>
+                <el-col :offset="8" :span="8" >
+                    <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px"
+                             class="demo-ruleForm" style="padding: 2rem">
+                        <el-form-item label="account" prop="account">
+                            <el-input v-model="ruleForm.userName" autocomplete="off"></el-input>
+                        </el-form-item>
+                        <el-form-item label="password" prop="pass">
+                            <el-input type="password" v-model="ruleForm.pwd" autocomplete="off"></el-input>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-button type="primary" @click="submitForm('ruleForm')">SUBMIT</el-button>
+                            <el-button @click="resetForm('ruleForm')">RESET</el-button>
+                        </el-form-item>
+                    </el-form>
+                </el-col>
                 <div>Easily handle Contributor License Agreements (CLAs)</div>
                 <div>
                     <label>
@@ -64,6 +79,18 @@
         },
         data() {
             return {
+                rules: {
+                    userName: [
+                        {validator: validateAccount, trigger: 'blur'}
+                    ],
+                    pwd: [
+                        {validator: validatePass, trigger: 'blur'}
+                    ],
+                },
+                ruleForm: {
+                    userName: '',
+                    pwd: '',
+                },
                 platform:'',
                 loginUrl: '',
                 value: '0',
@@ -93,6 +120,37 @@
         },
         methods: {
             ...mapActions(['setPlatformAct']),
+            login(userName,pwd){
+                this.$router.push('/rootManager')
+                let obj={userName:userName,pwd:pwd};
+                this.$axios({
+                    url:'/api'+url.relogin,
+                    method:'post',
+                    data:obj,
+                }).then(res=>{
+                    console.log(res);
+                    if (res.data.role === 'root') {
+                        this.$router.push('/rootManager')
+                    }else{
+                        this.$router.push('/signedRepo')
+                    }
+                }).catch(err=>{
+                    console.log(err);
+                })
+            },
+            submitForm(formName) {
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        this.login(this.ruleForm.userName,this.ruleForm.pwd)
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
+            },
+            resetForm(formName) {
+                this.$refs[formName].resetFields();
+            },
             setClientHeight() {
                 this.login.height = until.getClientHeight() + 'px';
                 this.transparentDiv.height = until.getClientHeight() + 'px'
