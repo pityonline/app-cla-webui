@@ -14,21 +14,23 @@
                     <svg-icon class="logText" icon-class="CLA_text"></svg-icon>
 
                 </div>
-                <el-col :offset="10" :span="4" >
-                    <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px"
-                             class="demo-ruleForm" style="padding: 2rem">
-                        <el-form-item label="account" prop="account">
-                            <el-input v-model="ruleForm.userName" autocomplete="off"></el-input>
-                        </el-form-item>
-                        <el-form-item label="password" prop="pass">
-                            <el-input type="password" v-model="ruleForm.pwd" autocomplete="off"></el-input>
-                        </el-form-item>
-                        <el-form-item>
-                            <el-button type="primary" @click="submitForm('ruleForm')">SUBMIT</el-button>
-                            <el-button @click="resetForm('ruleForm')">RESET</el-button>
-                        </el-form-item>
-                    </el-form>
-                </el-col>
+                <el-row>
+                    <el-col :offset="9" :span="6" >
+                        <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px"
+                                 class="demo-ruleForm" style="padding: 2rem">
+                            <el-form-item label="account" prop="account">
+                                <el-input v-model="ruleForm.userName" autocomplete="off"></el-input>
+                            </el-form-item>
+                            <el-form-item label="password" prop="pass">
+                                <el-input type="password" v-model="ruleForm.pwd" autocomplete="off"></el-input>
+                            </el-form-item>
+                            <el-form-item>
+                                <el-button type="primary" @click="submitForm('ruleForm')">SUBMIT</el-button>
+                                <el-button @click="resetForm('ruleForm')">RESET</el-button>
+                            </el-form-item>
+                        </el-form>
+                    </el-col>
+                </el-row>
                 <div>Easily handle Contributor License Agreements (CLAs)</div>
                 <div>
                   <p>通过其他方式登陆</p>
@@ -230,9 +232,6 @@
         height: 90%;
         color: white;
 
-        div:nth-of-type(2) {
-            padding: 2rem 0;
-        }
     }
 
     #title {
