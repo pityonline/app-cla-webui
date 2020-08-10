@@ -14,7 +14,7 @@
                     <svg-icon class="logText" icon-class="CLA_text"></svg-icon>
 
                 </div>
-                <el-col :offset="8" :span="8" >
+                <el-col :offset="10" :span="4" >
                     <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px"
                              class="demo-ruleForm" style="padding: 2rem">
                         <el-form-item label="account" prop="account">
@@ -31,23 +31,10 @@
                 </el-col>
                 <div>Easily handle Contributor License Agreements (CLAs)</div>
                 <div>
-                    <label>
-                        <el-select
-                                size="medium"
-                                value=""
-                                v-model="value"
-                                @change="change">
-                            <el-option
-                                    v-for="item in options"
-                                    :key="item.value"
-                                    :label="item.label"
-                                    :value="item.value">
+                  <p>通过其他方式登陆</p>
+                    <svg-icon  icon-class="gitee-fill-round"></svg-icon>
+                    <svg-icon  icon-class="github"></svg-icon>
 
-                            </el-option>
-                        </el-select>
-                    </label>
-                    <!--<span>通过Gitee账号登陆</span>-->
-                    <el-button type="primary" class="loginBt" @click="loginIn" size="medium">登 录</el-button>
                 </div>
 
             </div>
