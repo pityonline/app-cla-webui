@@ -203,9 +203,7 @@
     }
 </script>
 <style scoped lang="less">
-    .el-form-item__label{
-        color:white;
-    }
+
     .loginIcon {
         width: 2rem;
         height: 2rem;
@@ -244,7 +242,9 @@
     #section {
         height: 90%;
         color: white;
-
+        .el-form-item__label{
+            color:white;
+        }
     }
 
     #title {
