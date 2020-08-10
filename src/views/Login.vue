@@ -153,6 +153,7 @@
             },
             setClientHeight() {
                 this.$nextTick(() => {
+                    console.log(until.getClientHeight(), document.getElementById('login').offsetHeight);
                     until.getClientHeight() > document.getElementById('login').offsetHeight ?
                         this.transparentDiv.height = until.getClientHeight() + 'px':
                         this.transparentDiv.height = document.getElementById('login').offsetHeight
