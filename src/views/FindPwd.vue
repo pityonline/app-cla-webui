@@ -1,5 +1,5 @@
 <template>
-    <div id="findPwd">
+    <div id="findPwd" :class="findPwdClass">
         <div class="header">
             <el-col :offset="8" :span="8">
                 <div>
@@ -21,15 +21,23 @@
         name: "FindPwd",
         components: {
             Footer
-        },methods:{
+        },
+        data(){
+            return{
+                findPwdClass:{
+                    height:'',
+                }
+            }
+        },
+        methods:{
             toHome() {
                 this.$router.push('/home')
             },
             setClientHeight() {
                 this.$nextTick(() => {
                     until.getClientHeight() > document.getElementById('findPwd').offsetHeight ?
-                        this.checkCLAClass.height = until.getClientHeight() + 'px' :
-                        this.checkCLAClass.height = document.getElementById('findPwd').offsetHeight
+                        this.findPwdClass.height = until.getClientHeight() + 'px' :
+                        this.findPwdClass.height = document.getElementById('findPwd').offsetHeight
 
                 })
                 console.log(document.getElementById('findPwd').offsetHeight);
