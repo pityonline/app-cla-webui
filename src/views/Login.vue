@@ -203,7 +203,9 @@
     }
 </script>
 <style scoped lang="less">
-
+    .el-form-item__label{
+        color:white;
+    }
     .loginIcon {
         width: 2rem;
         height: 2rem;
