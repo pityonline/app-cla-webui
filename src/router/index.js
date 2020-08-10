@@ -71,6 +71,11 @@ const routes = [
         name: 'VerifyPage',
         component: () => import('../views/VerifyPage.vue')
     },
+    {
+        path: '/findPwd',
+        name: 'FindPwd',
+        component: () => import('../views/FindPwd.vue')
+    },
 
 ]
 
