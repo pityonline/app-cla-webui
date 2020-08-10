@@ -157,7 +157,7 @@
                     until.getClientHeight() > document.getElementById('transparentDiv').offsetHeight ?
                         (this.loginStyle.height = until.getClientHeight() + 'px')&&
                         (this.transparentDiv.height=until.getClientHeight() + 'px'):
-                        this.loginStyle.height = document.getElementById('transparentDiv').offsetHeight
+                        this.loginStyle.height = document.getElementById('transparentDiv').offsetHeight+'px'
 
                 })
             },
