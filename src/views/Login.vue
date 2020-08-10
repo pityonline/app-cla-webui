@@ -202,7 +202,7 @@
         }
     }
 </script>
-<style scoped lang="less">
+<style  lang="less">
 
     .loginIcon {
         width: 2rem;
