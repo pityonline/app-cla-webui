@@ -14,8 +14,9 @@
                     <svg-icon class="logText" icon-class="CLA_text"></svg-icon>
 
                 </div>
+                <div>Easily handle Contributor License Agreements (CLAs)</div>
                 <el-row>
-                    <el-col :offset="9" :span="6" >
+                    <el-col :offset="9" :span="6">
                         <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px"
                                  class="demo-ruleForm" style="padding: 2rem">
                             <el-form-item label="account" prop="account">
@@ -24,19 +25,17 @@
                             <el-form-item label="password" prop="pass">
                                 <el-input type="password" v-model="ruleForm.pwd" autocomplete="off"></el-input>
                             </el-form-item>
-                            <el-form-item>
+                            <el-form-item label-width="0">
                                 <el-button type="primary" @click="submitForm('ruleForm')">SUBMIT</el-button>
                                 <el-button @click="resetForm('ruleForm')">RESET</el-button>
                             </el-form-item>
                         </el-form>
                     </el-col>
                 </el-row>
-                <div>Easily handle Contributor License Agreements (CLAs)</div>
-                <div>
-                  <p>通过其他方式登陆</p>
-                    <svg-icon  icon-class="gitee-fill-round"></svg-icon>
-                    <svg-icon  icon-class="github"></svg-icon>
-
+                <p>通过其他方式登陆</p>
+                <div class="loginIconDiv">
+                    <svg-icon class="loginIcon" icon-class="gitee-fill-round"></svg-icon>
+                    <svg-icon class="loginIcon" icon-class="github"></svg-icon>
                 </div>
 
             </div>
@@ -92,7 +91,7 @@
                     userName: '',
                     pwd: '',
                 },
-                platform:'',
+                platform: '',
                 loginUrl: '',
                 value: '0',
                 options: [{
@@ -121,28 +120,28 @@
         },
         methods: {
             ...mapActions(['setPlatformAct']),
-            login(userName,pwd){
+            login(userName, pwd) {
                 this.$router.push('/rootManager')
-                let obj={userName:userName,pwd:pwd};
+                let obj = {userName: userName, pwd: pwd};
                 this.$axios({
-                    url:'/api'+url.relogin,
-                    method:'post',
-                    data:obj,
-                }).then(res=>{
+                    url: '/api' + url.relogin,
+                    method: 'post',
+                    data: obj,
+                }).then(res => {
                     console.log(res);
                     if (res.data.role === 'root') {
                         this.$router.push('/rootManager')
-                    }else{
+                    } else {
                         this.$router.push('/signedRepo')
                     }
-                }).catch(err=>{
+                }).catch(err => {
                     console.log(err);
                 })
             },
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        this.login(this.ruleForm.userName,this.ruleForm.pwd)
+                        this.login(this.ruleForm.userName, this.ruleForm.pwd)
                     } else {
                         console.log('error submit!!');
                         return false;
@@ -198,6 +197,14 @@
     }
 </script>
 <style scoped lang="less">
+    .loginIconDiv{
+
+    }
+    .loginIcon {
+        width: 2rem;
+        height: 2rem;
+        margin-right: 2rem;
+    }
     #header {
         height: 10%;
         min-height: 4rem;
