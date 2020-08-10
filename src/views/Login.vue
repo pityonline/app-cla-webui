@@ -25,8 +25,8 @@
                             <el-form-item label="password" prop="pass">
                                 <el-input type="password" v-model="ruleForm.pwd" autocomplete="off"></el-input>
                             </el-form-item>
-                            <el-form-item label="password" prop="pass">
-                                <span @click="findPwd" id="forgetPwd">忘记密码？</span>
+                            <el-form-item>
+                                <span class="pointer" @click="findPwd" id="forgetPwd">忘记密码？</span>
                             </el-form-item>
                             <el-form-item label-width="0">
                                 <el-button type="primary" @click="submitForm('ruleForm')">SUBMIT</el-button>
