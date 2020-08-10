@@ -34,8 +34,8 @@
                 </el-row>
                 <p>通过其他方式登陆</p>
                 <div class="loginIconDiv">
-                    <svg-icon class="loginIcon" icon-class="gitee-fill-round"></svg-icon>
-                    <svg-icon class="loginIcon" icon-class="github"></svg-icon>
+                    <svg-icon class="loginIcon" icon-class="giteelogin"></svg-icon>
+                    <svg-icon class="loginIcon" icon-class="githublogin"></svg-icon>
                 </div>
 
             </div>
@@ -207,7 +207,7 @@
     .loginIcon {
         width: 2rem;
         height: 2rem;
-        margin-right: 2rem;
+        margin: 0 1rem;
     }
     #header {
         height: 10%;
