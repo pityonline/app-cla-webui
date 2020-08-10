@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div id="login" :style="login"></div>
+        <div id="login" :style="loginStyle"></div>
         <div id="transparentDiv" :style="transparentDiv">
             <div id="header">
                 <div>
@@ -55,7 +55,7 @@
     window.onresize = () => {
         console.log(until.getClientHeight());
         console.log(document.getElementById('login').offsetHeight);
-        if (until.getClientHeight() > document.getElementById('login').offsetHeight) {
+        if (until.getClientHeight() > document.getElementById('transparentDiv').offsetHeight) {
             document.getElementById("login").style.height = until.getClientHeight() + 'px';
             document.getElementById("transparentDiv").style.height = until.getClientHeight() + 'px';
         }
@@ -101,7 +101,7 @@
                     value: '1',
                     label: '通过Github账号登陆'
                 }],
-                login: {
+                loginStyle: {
                     position: 'fixed',
                     top: 0,
                     left: 0,
@@ -154,9 +154,10 @@
             setClientHeight() {
                 this.$nextTick(() => {
                     console.log(until.getClientHeight(), document.getElementById('transparentDiv').offsetHeight);
-                    until.getClientHeight() > document.getElementById('login').offsetHeight ?
-                        this.transparentDiv.height = until.getClientHeight() + 'px':
-                        this.transparentDiv.height = document.getElementById('login').offsetHeight
+                    until.getClientHeight() > document.getElementById('transparentDiv').offsetHeight ?
+                        (this.loginStyle.height = until.getClientHeight() + 'px')&&
+                        (this.transparentDiv.height=until.getClientHeight() + 'px'):
+                        this.loginStyle.height = document.getElementById('transparentDiv').offsetHeight
 
                 })
             },
