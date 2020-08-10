@@ -25,9 +25,11 @@
                             <el-form-item label="password" prop="pass">
                                 <el-input type="password" v-model="ruleForm.pwd" autocomplete="off"></el-input>
                             </el-form-item>
+                            <el-form-item label="password" prop="pass">
+                                <span @click="findPwd" id="forgetPwd">忘记密码？</span>
+                            </el-form-item>
                             <el-form-item label-width="0">
                                 <el-button type="primary" @click="submitForm('ruleForm')">SUBMIT</el-button>
-                                <el-button @click="resetForm('ruleForm')">RESET</el-button>
                             </el-form-item>
                         </el-form>
                     </el-col>
@@ -120,6 +122,9 @@
         },
         methods: {
             ...mapActions(['setPlatformAct']),
+            findPwd(){
+                this.$router.push('/findPwd')
+            },
             login(userName, pwd) {
                 this.$router.push('/rootManager')
                 let obj = {userName: userName, pwd: pwd};
@@ -156,9 +161,9 @@
                 this.$nextTick(() => {
                     console.log(until.getClientHeight(), document.getElementById('transparentDiv').offsetHeight);
                     until.getClientHeight() > document.getElementById('transparentDiv').offsetHeight ?
-                        (this.loginStyle.height = until.getClientHeight() + 'px')&&
-                        (this.transparentDiv.height=until.getClientHeight() + 'px'):
-                        this.loginStyle.height = document.getElementById('transparentDiv').offsetHeight+'px'
+                        (this.loginStyle.height = until.getClientHeight() + 'px') &&
+                        (this.transparentDiv.height = until.getClientHeight() + 'px') :
+                        this.loginStyle.height = document.getElementById('transparentDiv').offsetHeight + 'px'
 
                 })
             },
@@ -203,13 +208,17 @@
         }
     }
 </script>
-<style  lang="less">
+<style lang="less">
+    #forgetPwd:hover {
+        text-underline: white;
+    }
 
     .loginIcon {
         width: 2rem;
         height: 2rem;
         margin: 0 1rem;
     }
+
     #header {
         height: 10%;
         min-height: 4rem;
@@ -243,8 +252,9 @@
     #section {
         height: 90%;
         color: white;
-        .el-form-item__label{
-            color:white;
+
+        .el-form-item__label {
+            color: white;
         }
     }
 
