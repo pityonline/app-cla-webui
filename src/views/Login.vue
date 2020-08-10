@@ -28,7 +28,7 @@
                             <el-form-item style="text-align: left">
                                 <span class="pointer" @click="findPwd" id="forgetPwd">忘记密码？</span>
                             </el-form-item>
-                            <el-form-item label-width="0">
+                            <el-form-item >
                                 <el-button style="width: 100%" type="primary" @click="submitForm('ruleForm')">SUBMIT</el-button>
                             </el-form-item>
                         </el-form>
@@ -211,8 +211,7 @@
 <style lang="less">
 
     #forgetPwd:hover {
-        text-underline: white;
-        color: red;
+        text-decoration: white;
     }
 
     .loginIcon {
