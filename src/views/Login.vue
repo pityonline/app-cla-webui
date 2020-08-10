@@ -149,6 +149,7 @@
                 });
             },
             resetForm(formName) {
+                console.log('reset');
                 this.$refs[formName].resetFields();
             },
             setClientHeight() {
