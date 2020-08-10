@@ -152,8 +152,12 @@
                 this.$refs[formName].resetFields();
             },
             setClientHeight() {
-                this.login.height = until.getClientHeight() + 'px';
-                this.transparentDiv.height = until.getClientHeight() + 'px'
+                this.$nextTick(() => {
+                    until.getClientHeight() > document.getElementById('login').offsetHeight ?
+                        this.transparentDiv.height = until.getClientHeight() + 'px':
+                        this.transparentDiv.height = document.getElementById('login').offsetHeight
+
+                })
             },
             change(value) {
                 console.log(value);
@@ -197,9 +201,7 @@
     }
 </script>
 <style scoped lang="less">
-    .loginIconDiv{
 
-    }
     .loginIcon {
         width: 2rem;
         height: 2rem;
