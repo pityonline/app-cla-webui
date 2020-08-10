@@ -18,7 +18,7 @@
                 <el-row>
                     <el-col :offset="9" :span="6">
                         <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px"
-                                 class="demo-ruleForm" style="padding: 2rem">
+                                 class="demo-ruleForm" style="padding: 2rem 2rem 0 2rem">
                             <el-form-item label="account" prop="account">
                                 <el-input v-model="ruleForm.userName" autocomplete="off"></el-input>
                             </el-form-item>
@@ -260,7 +260,6 @@
     }
 
     #title {
-        padding-top: 5rem;
         display: flex;
         justify-content: center;
     }
