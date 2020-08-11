@@ -47,35 +47,10 @@
 
 
                 <p>Edit your metaData</p>
-                <div>
-                    <el-tag
-                            class="pointer"
-                            :key="tag"
-                            v-for="(tag,index) in metaTags"
-                            closable
-                            @click="chooseMeta(index)"
-                            :disable-transitions="false"
-                            @close="closeMetaTag(tag)">
-                        {{tag}}
-                    </el-tag>
-                </div>
-                <div v-if="!isAddNewMetaFile">
-                    <el-button class="pointer" size="mini" @click="clickAddNewMetaFile()">+ add new file</el-button>
-                </div>
+
+
                 <div v-else style="display: flex;justify-content: space-between;">
-                    <el-col :span="20" style="padding-right: 2rem">
-                        <el-input style="margin-bottom: 0.5rem;" size="small" v-model="newMetaFileName"
-                                  placeholder="please input file name">
-                        </el-input>
-                    </el-col>
-                    <el-select style="width: 8rem" size="small" v-model="value" value="">
-                    <el-option
-                    v-for="item in languageOptions"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value">
-                    </el-option>
-                    </el-select>
+
                 </div>
                 <el-input :readonly="!isEditMeta" rows="10" class="textAreaClass" v-model="metaData" type="textarea">
 
@@ -112,7 +87,7 @@
                 isAddNewMetaFile: false,
                 isEditMeta: false,
                 metaText: '',
-                currentIndex:'',
+                currentIndex: '',
                 newMetaFileName: '',
                 metaTags: ['test', 'myMeta', 'test1', 'myTest', 'test2', 'test3', 'test4', 'test5', 'test6', 'test7', 'internationalMetadata', 'openLooKeng', 'test8'],
                 newClaFileName: '',
@@ -170,7 +145,7 @@
                 console.log('chooseCla', index);
                 this.claText = this.claOptions[index].text;
                 this.isEdit = false;
-                this.currentIndex=index;
+                this.currentIndex = index;
                 this.addNewFile = false;
                 this.newClaFileName = '';
             },
@@ -188,8 +163,8 @@
                     console.log(res);
                     this.claTags.splice(this.claTags.indexOf(tag), 1);
                     if (this.currentIndex === index) {
-                        this.claText='';
-                        this.currentIndex='';
+                        this.claText = '';
+                        this.currentIndex = '';
                     }
                     this.getCLA();
                 }).catch(err => {
@@ -337,6 +312,7 @@
 
 
         }
+
         & > .footer {
             height: 4rem;
             width: 100%;
@@ -348,7 +324,8 @@
         margin-right: 1rem;
         margin-bottom: 0.5rem;
     }
+
     .el-button.is-disabled, .el-button.is-disabled:focus, .el-button.is-disabled:hover {
-        cursor:pointer;
+        cursor: pointer;
     }
 </style>
