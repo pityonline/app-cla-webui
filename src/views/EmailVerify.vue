@@ -90,8 +90,8 @@
         methods:{
             /*设置页面高度*/
             setClientHeight() {
-                console.log(until.getClientHeight(),document.getElementById('home').offsetHeight);
                 this.$nextTick(() => {
+                    console.log(until.getClientHeight(),document.getElementById('home').offsetHeight);
                     until.getClientHeight() > document.getElementById('home').offsetHeight ?
                         this.homeClass.height = until.getClientHeight() + 'px' :
                         this.homeClass.height = document.getElementById('home').offsetHeight
@@ -110,8 +110,10 @@
             },
         },
          created() {
+         },
+        mounted() {
             this.setClientHeight();
-         }
+        }
     }
 </script>
 
