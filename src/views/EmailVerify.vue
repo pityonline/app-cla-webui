@@ -16,7 +16,7 @@
                     <el-input placeholder="language"></el-input>
                 </el-form-item>
                 <el-form-item >
-                   <el-button>SUBMIT</el-button>
+                   <el-button @click="submit('ruleForm')">SUBMIT</el-button>
                 </el-form-item>
             </el-form>
         </div>
@@ -32,6 +32,28 @@
         components: {
             HeaderPure,
             Footer,
+        },
+        data(){
+            return{
+                ruleForm:{
+                    email:'',
+                    name:'',
+                    country:'',
+                    language:'',
+                },
+            }
+        },
+        methods:{
+            submit(formName){
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        console.log('发邮件');;
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
+            },
         },
     }
 </script>
