@@ -165,6 +165,7 @@
                 this.addNewFile = true;
                 this.claText = '';
                 this.isEdit = true;
+                this.newClaFileName='';
             },
             clickAddNewMetaFile() {
                 this.isAddNewMetaFile = true;
@@ -184,7 +185,7 @@
                 this.isEdit = false;
                 this.currentIndex = index;
                 this.addNewFile = false;
-                this.newClaFileName = '';
+                this.newClaFileName = this.claTags[index];
             },
             handleClose(tag, index) {
                 this.$axios({
