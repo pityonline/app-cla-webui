@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <div id="home">
         <HeaderPure></HeaderPure>
-        <el-row style="padding: 5rem 0">
-            <el-col :offset="8" :span="8">
-                <el-form :model="ruleForm" ref="ruleForm" :rules="rules"  label-width="30%">
+        <el-row id="section">
+            <el-col :offset="9" :span="6">
+                <el-form :model="ruleForm" ref="ruleForm" :rules="rules"  label-width="20%">
                     <el-form-item label="email" prop="email">
                         <el-input placeholder="email"></el-input>
                     </el-form-item>
@@ -29,6 +29,14 @@
 <script>
     import HeaderPure from '@components/HeaderPure'
     import Footer from '@components/Footer'
+    import * as url from '../until/api'
+    import * as until from '../until/until'
+    window.onresize = () => {
+        // console.log(until.getClientHeight());
+        if (until.getClientHeight() > document.getElementById('home').offsetHeight) {
+            document.getElementById("home").style.height = until.getClientHeight() + 'px'
+        }
+    }
     export default {
         name: "EmailVerify",
         components: {
@@ -53,18 +61,40 @@
                     country:'',
                     language:'',
                 },
-                name: [
-                    {required: true, message: '请输入姓名', trigger: 'blur'},
-                    {min: 2, max: 10, message: '长度在 2 到 10 个字符', trigger: 'blur'}
-                ],
-                email: [
-                    {required: true, message: '请输入邮箱', trigger: 'blur'},
-                    {validator: verifyEmail, trigger: 'blur'}
-                ],
+                rules:{
+                    name: [
+                        {required: true, message: '请输入姓名', trigger: 'blur'},
+                        {min: 2, max: 10, message: '长度在 2 到 10 个字符', trigger: 'blur'}
+                    ],
+                    email: [
+                        {required: true, message: '请输入邮箱', trigger: 'blur'},
+                        {validator: verifyEmail, trigger: 'blur'}
+                    ],
+                    country: [
+                        {required: true, message: '请选择国家', trigger: 'blur'},
+
+                    ],
+                    language: [
+                        {required: true, message: '请选择语言', trigger: 'blur'},
+
+                    ],
+
+                },
+
 
             }
         },
         methods:{
+            /*设置页面高度*/
+            setClientHeight() {
+                // console.log(until.getClientHeight());
+                this.$nextTick(() => {
+                    until.getClientHeight() > document.getElementById('home').offsetHeight ?
+                        this.home.height = until.getClientHeight() + 'px' :
+                        this.home.height = document.getElementById('home').offsetHeight
+
+                })
+            },
             submit(formName){
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
@@ -81,7 +111,7 @@
 
 <style scoped lang="less">
     #section {
-        padding: 5rem 0;
+        padding: 10rem 0;
         background-color: #F5F5F5;
     }
 </style>
