@@ -1,5 +1,5 @@
 <template>
-    <div id="home" :style="homeClass">
+    <div id="emailVerify" :style="homeClass">
         <HeaderPure></HeaderPure>
         <el-row id="section">
             <el-col :offset="9" :span="6">
@@ -33,8 +33,8 @@
     import * as until from '../until/until'
     window.onresize = () => {
         // console.log(until.getClientHeight());
-        if (until.getClientHeight() > document.getElementById('home').offsetHeight) {
-            document.getElementById("home").style.height = until.getClientHeight() + 'px'
+        if (until.getClientHeight() > document.getElementById('emailVerify').offsetHeight) {
+            document.getElementById("emailVerify").style.height = until.getClientHeight() + 'px'
         }
     }
     export default {
@@ -91,11 +91,11 @@
             /*设置页面高度*/
             setClientHeight() {
                 this.$nextTick(() => {
-                    console.log(until.getClientHeight(),document.getElementById('home').offsetHeight);
-                    until.getClientHeight() > document.getElementById('home').offsetHeight ?
+                    console.log(until.getClientHeight(),document.getElementById('emailVerify').offsetHeight);
+                    until.getClientHeight() > document.getElementById('emailVerify').offsetHeight ?
                         this.homeClass.height = until.getClientHeight() + 'px' :
-                        this.homeClass.height = document.getElementById('home').offsetHeight
-                    console.log(until.getClientHeight(),document.getElementById('home').offsetHeight);
+                        this.homeClass.height = document.getElementById('emailVerify').offsetHeight
+                    console.log(until.getClientHeight(),document.getElementById('emailVerify').offsetHeight);
 
 
                 })
