@@ -95,6 +95,8 @@
                     until.getClientHeight() > document.getElementById('home').offsetHeight ?
                         this.homeClass.height = until.getClientHeight() + 'px' :
                         this.homeClass.height = document.getElementById('home').offsetHeight
+                    console.log(until.getClientHeight(),document.getElementById('home').offsetHeight);
+
 
                 })
             },
