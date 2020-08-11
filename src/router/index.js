@@ -84,7 +84,7 @@ const routes = [
     {
         path: '/createCLA2',
         name: 'CreateCLA2',
-        component: () => import('../views/CreateCLA.vue')
+        component: () => import('../views/CreateCLA2.vue')
     },
 
 ]
