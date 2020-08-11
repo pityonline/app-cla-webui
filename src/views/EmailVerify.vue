@@ -56,7 +56,7 @@
             }
             return{
                 homeClass:{
-                    height:'',
+                    height:'700',
                 },
                 ruleForm:{
                     email:'',
