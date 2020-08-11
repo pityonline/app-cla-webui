@@ -56,7 +56,7 @@
             }
             return{
                 homeClass:{
-                    height:'700px',
+                    height:'',
                 },
                 ruleForm:{
                     email:'',
@@ -122,8 +122,14 @@
 </script>
 
 <style scoped lang="less">
-    #section {
-        padding: 10rem 0;
-        background-color: #F5F5F5;
+    #emailVerify{
+        display: flex;
+        flex-direction: column;
+        #section {
+            flex-grow: 1;
+            padding: 10rem 0;
+            background-color: #F5F5F5;
+        }
     }
+
 </style>
