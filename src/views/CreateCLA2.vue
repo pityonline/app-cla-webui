@@ -50,34 +50,31 @@
 
 
                 <div>
-                    <el-row align="middle" >
-                        <el-col :span="6" class="metadata">
-                            <el-input size="medium" placeholder="please input title">
+                    <el-row style="padding: 0.5rem 0;" type="flex" align="middle" :gutter="20" v-for="(item,index) in metadataArr">
+                        <el-col :span="6">
+                            <el-input v-model="item.title" size="medium" placeholder="please input title">
 
                             </el-input>
                         </el-col>
-                        <el-col :span="6" class="metadata">
-                            <el-select  v-model="dataType" placeholder="select dataType" size="medium">
+                        <el-col :span="6" >
+                            <el-select  v-model="item.type" placeholder="select dataType" size="medium">
                                 <el-option
-                                        v-for="item in dataTypeOptions"
-                                        :key="item.value"
-                                        :label="item.label"
-                                        :value="item.value">
+                                        v-for="i in dataTypeOptions"
+                                        :key="i.value"
+                                        :label="i.label"
+                                        :value="i.value">
                                 </el-option>
                             </el-select>
                         </el-col>
-                        <el-col :span="6" class="metadata">
-                        <el-checkbox v-model="required">required</el-checkbox>
+                        <el-col :span="6" style="height: 100%">
+                                <el-checkbox v-model="item.required">required</el-checkbox>
                         </el-col>
-                        <el-col :span="6" class="metadata">
-                        <el-button size="medium">+</el-button>
-                        <el-button size="medium">-</el-button>
+                        <el-col :span="6" >
+                        <el-button @click="addRow(index)"  size="medium">+</el-button>
+                        <el-button @click="myDeleteRow(index)" size="medium">-</el-button>
                         </el-col>
                     </el-row>
                 </div>
-                <!--<el-input :readonly="!isEditMeta" rows="10" class="textAreaClass" v-model="metaData" type="textarea">-->
-
-                <!--</el-input>-->
                 <div style="margin-top: 1rem;display: flex;justify-content: space-between">
                     <el-button size="medium" v-loading.fullscreen.lock="fullscreenLoading" :disabled="!verifyNotNull()"
                                type="primary"
@@ -105,8 +102,12 @@
         },
         data() {
             return {
-                dataType:'',
-                required:true,
+                metadataArr:[{
+                    title:'',
+                    type:'',
+                    required:true,
+                }],
+
                 dataTypeOptions: [{label: 'string', value: 0}, {label: 'date', value: 1}, {
                     label: 'number',
                     value: 2
@@ -152,7 +153,14 @@
             }
         },
         methods: {
-
+            addRow(index){
+                this.metadataArr.splice(index+1,0 ,{  title:'',
+                    type:'',
+                    required:true,})
+            },
+            myDeleteRow(index){
+                this.metadataArr.splice(index,1)
+            },
             clickAddNewClaFile() {
                 this.addNewFile = true;
                 this.claText = '';
@@ -247,11 +255,10 @@
                 let obj = {
                     name: this.newClaFileName,
                     text: this.claText,
-                    // metaData: this.metaData,
                     language: this.languageOptions[this.value].label,
-                    // id: this.user.userId,
-                    submitter: `${this.platform}/${this.user.userName}`
-                    // user: this.user.userName
+                    submitter: `${this.platform}/${this.user.userName}`,
+                    fields:this.metadataArr,
+
                 }
                 console.log(obj);
                 this.$axios({
@@ -322,9 +329,7 @@
 </script>
 
 <style scoped lang="less">
-    .metadata{
-        padding: .5rem 2rem;
-    }
+
     #createCLA {
         display: flex;
         flex-direction: column;
