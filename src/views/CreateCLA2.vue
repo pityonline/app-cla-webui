@@ -49,12 +49,35 @@
                 <p>Edit your metaData</p>
 
 
-                <div v-else style="display: flex;justify-content: space-between;">
+                <div>
+                    <el-row>
+                        <el-col :span="6">
+                            <el-input size="medium" placeholder="please input title">
 
+                            </el-input>
+                        </el-col>
+                        <el-col :span="6">
+                            <el-select v-model="dataType" placeholder="select">
+                                <el-option
+                                        v-for="item in dataTypeOptions"
+                                        :key="item.value"
+                                        :label="item.label"
+                                        :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </el-col>
+                        <el-col :span="6">
+                        <el-checkbox v-model="required">required</el-checkbox>
+                        </el-col>
+                        <el-col :span="6">
+                        <el-button>+</el-button>
+                        <el-button>-</el-button>
+                        </el-col>
+                    </el-row>
                 </div>
-                <el-input :readonly="!isEditMeta" rows="10" class="textAreaClass" v-model="metaData" type="textarea">
+                <!--<el-input :readonly="!isEditMeta" rows="10" class="textAreaClass" v-model="metaData" type="textarea">-->
 
-                </el-input>
+                <!--</el-input>-->
                 <div style="margin-top: 1rem;display: flex;justify-content: space-between">
                     <el-button size="medium" v-loading.fullscreen.lock="fullscreenLoading" :disabled="!verifyNotNull()"
                                type="primary"
@@ -82,6 +105,11 @@
         },
         data() {
             return {
+                required:true,
+                dataTypeOptions: [{label: 'string', value: 0}, {label: 'date', value: 1}, {
+                    label: 'number',
+                    value: 2
+                }, {label: 'tel', value: 3}, {label: 'email', value: 4}, {label: 'boolean', value: 5}],
                 access_token: this.$store.state.access_token,
                 refresh_token: this.$store.state.refresh_token,
                 isAddNewMetaFile: false,
