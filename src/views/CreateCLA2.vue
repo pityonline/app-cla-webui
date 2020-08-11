@@ -251,13 +251,19 @@
             },
             /*上传cla*/
             async uploadCla() {
+                let fields=[];
+                this.metadataArr.forEach((item,index)=>{
+                    fields.push({    title:item.title,
+                        type:this.dataTypeOptions[item.type],
+                        required:item.required,})
+                })
                 this.fullscreenLoading = true;
                 let obj = {
                     name: this.newClaFileName,
                     text: this.claText,
                     language: this.languageOptions[this.value].label,
                     submitter: `${this.platform}/${this.user.userName}`,
-                    fields:this.metadataArr,
+                    fields:fields,
 
                 }
                 console.log(obj);
