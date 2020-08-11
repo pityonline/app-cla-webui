@@ -81,6 +81,11 @@ const routes = [
         name: 'EmailVerify',
         component: () => import('../views/EmailVerify.vue')
     },
+    {
+        path: '/createCLA2',
+        name: 'CreateCLA2',
+        component: () => import('../views/CreateCLA.vue')
+    },
 
 ]
 
