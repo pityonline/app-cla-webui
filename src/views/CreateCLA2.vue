@@ -50,14 +50,14 @@
 
 
                 <div>
-                    <el-row>
+                    <el-row align="center">
                         <el-col :span="6">
                             <el-input size="medium" placeholder="please input title">
 
                             </el-input>
                         </el-col>
-                        <el-col :span="6">
-                            <el-select v-model="dataType" placeholder="select">
+                        <el-col :span="6" class="metadata">
+                            <el-select  v-model="dataType" placeholder="select dataType" size="medium">
                                 <el-option
                                         v-for="item in dataTypeOptions"
                                         :key="item.value"
@@ -105,6 +105,7 @@
         },
         data() {
             return {
+                dataType:'',
                 required:true,
                 dataTypeOptions: [{label: 'string', value: 0}, {label: 'date', value: 1}, {
                     label: 'number',
@@ -321,6 +322,9 @@
 </script>
 
 <style scoped lang="less">
+    .metadata{
+        padding: 1rem 2rem;
+    }
     #createCLA {
         display: flex;
         flex-direction: column;
