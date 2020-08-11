@@ -95,7 +95,7 @@
                     console.log(until.getClientHeight(),document.getElementById('emailVerify').offsetHeight);
                     if ( until.getClientHeight() > document.getElementById('emailVerify').offsetHeight ) {
                         console.log('>>>');
-                        this.homeClass.height = until.getClientHeight() + 'px'
+                        Object.assign(this.homeClass,{height:`${until.getClientHeight()}px`})
                     }
 
                     console.log(until.getClientHeight(),document.getElementById('emailVerify').offsetHeight);
