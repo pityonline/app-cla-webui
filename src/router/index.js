@@ -76,6 +76,11 @@ const routes = [
         name: 'FindPwd',
         component: () => import('../views/FindPwd.vue')
     },
+    {
+        path: '/emailVerify',
+        name: 'EmailVerify',
+        component: () => import('../views/EmailVerify.vue')
+    },
 
 ]
 
