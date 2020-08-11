@@ -1,5 +1,5 @@
 <template>
-    <div id="home">
+    <div id="home" :class="homeClass">
         <HeaderPure></HeaderPure>
         <el-row id="section">
             <el-col :offset="9" :span="6">
@@ -17,7 +17,7 @@
                         <el-input placeholder="language"></el-input>
                     </el-form-item>
                     <el-form-item >
-                        <el-button type="primary"  @click="submit('ruleForm')">SUBMIT</el-button>
+                        <el-button style="width: 100%;" type="primary"  @click="submit('ruleForm')">SUBMIT</el-button>
                     </el-form-item>
                 </el-form>
             </el-col>
@@ -55,6 +55,9 @@
                 }
             }
             return{
+                homeClass:{
+                    height:'',
+                },
                 ruleForm:{
                     email:'',
                     name:'',
@@ -90,8 +93,8 @@
                 // console.log(until.getClientHeight());
                 this.$nextTick(() => {
                     until.getClientHeight() > document.getElementById('home').offsetHeight ?
-                        this.home.height = until.getClientHeight() + 'px' :
-                        this.home.height = document.getElementById('home').offsetHeight
+                        this.homeClass.height = until.getClientHeight() + 'px' :
+                        this.homeClass.height = document.getElementById('home').offsetHeight
 
                 })
             },
