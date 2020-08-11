@@ -254,7 +254,7 @@
                 let fields=[];
                 this.metadataArr.forEach((item,index)=>{
                     fields.push({    title:item.title,
-                        type:this.dataTypeOptions[item.type],
+                        type:this.dataTypeOptions[item.type].label,
                         required:item.required,})
                 })
                 this.fullscreenLoading = true;
