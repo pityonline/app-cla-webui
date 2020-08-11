@@ -109,6 +109,9 @@
                 });
             },
         },
+         created() {
+            this.setClientHeight();
+         }
     }
 </script>
 
