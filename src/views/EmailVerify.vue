@@ -89,17 +89,19 @@
         },
         methods:{
             /*设置页面高度*/
+
             setClientHeight() {
                 this.$nextTick(() => {
                     console.log(until.getClientHeight(),document.getElementById('emailVerify').offsetHeight);
-                    until.getClientHeight() > document.getElementById('emailVerify').offsetHeight ?
-                        this.homeClass.height = until.getClientHeight() + 'px' :
-                        this.homeClass.height = document.getElementById('emailVerify').offsetHeight
+                    if ( until.getClientHeight() > document.getElementById('emailVerify').offsetHeight ) {
+                        console.log('>>>');
+                        this.homeClass.height = until.getClientHeight() + 'px'
+                    }
+
                     console.log(until.getClientHeight(),document.getElementById('emailVerify').offsetHeight);
 
 
-                })
-            },
+                })},
             submit(formName){
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
