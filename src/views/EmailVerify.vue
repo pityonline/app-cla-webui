@@ -1,7 +1,7 @@
 <template>
     <div>
         <HeaderPure></HeaderPure>
-        <el-row style="padding: 3rem 0">
+        <el-row style="padding: 5rem 0">
             <el-col :offset="8" :span="8">
                 <el-form :model="ruleForm" ref="ruleForm" :rules="rules"  label-width="30%">
                     <el-form-item label="email" prop="email">
@@ -79,6 +79,9 @@
     }
 </script>
 
-<style scoped>
-
+<style scoped lang="less">
+    #section {
+        padding: 5rem 0;
+        background-color: #F5F5F5;
+    }
 </style>
