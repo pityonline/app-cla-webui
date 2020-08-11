@@ -50,8 +50,8 @@
 
 
                 <div>
-                    <el-row align="center">
-                        <el-col :span="6">
+                    <el-row align="middle" >
+                        <el-col :span="6" class="metadata">
                             <el-input size="medium" placeholder="please input title">
 
                             </el-input>
@@ -66,12 +66,12 @@
                                 </el-option>
                             </el-select>
                         </el-col>
-                        <el-col :span="6">
+                        <el-col :span="6" class="metadata">
                         <el-checkbox v-model="required">required</el-checkbox>
                         </el-col>
-                        <el-col :span="6">
-                        <el-button>+</el-button>
-                        <el-button>-</el-button>
+                        <el-col :span="6" class="metadata">
+                        <el-button size="medium">+</el-button>
+                        <el-button size="medium">-</el-button>
                         </el-col>
                     </el-row>
                 </div>
@@ -323,7 +323,7 @@
 
 <style scoped lang="less">
     .metadata{
-        padding: 1rem 2rem;
+        padding: .5rem 2rem;
     }
     #createCLA {
         display: flex;
