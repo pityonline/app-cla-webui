@@ -1,5 +1,5 @@
 <template>
-    <div id="home" :class="homeClass">
+    <div id="home" :style="homeClass">
         <HeaderPure></HeaderPure>
         <el-row id="section">
             <el-col :offset="9" :span="6">
