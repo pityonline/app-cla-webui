@@ -66,7 +66,7 @@
         position: fixed;
         top: 0;
         left: 0;
-        background-color: #F5F0F0;
+        background-color: #ececec;
         height: 4rem;
         display: flex;
         flex-direction: row;

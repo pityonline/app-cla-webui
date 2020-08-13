@@ -34,6 +34,7 @@
         height: 4rem;
         display: flex;
         justify-content: space-between;
+        background-color: #ececec;
 
 
         & > .left {
