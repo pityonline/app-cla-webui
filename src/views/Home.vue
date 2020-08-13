@@ -331,6 +331,7 @@
 
 
             return {
+                activeNames: ['1'],
                 claLanguageValue:'',
                 claTypeValue:'',
                 claTypeOptions:[{label:'individual',value:0},{label:'corporation',value:1}],
@@ -410,7 +411,9 @@
         },
         methods: {
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
-
+            handleChange(val){
+                console.log(val);
+            },
             getPath() {
                 let path = this.$route.path;
                 if (path === '/linkedRepo' || path === '/home') {
