@@ -319,7 +319,7 @@
             checkMetadata() {
                 let newArr = this.customMetadataArr.concat(this.metadataArr);
                 for (let i = 0; i < newArr.length; i++) {
-                    for (let j = i; j < newArr.length; j++) {
+                    for (let j = i+1; j < newArr.length; j++) {
                         if (newArr[i].title === newArr[j].title) {
                             return false;
                         }
