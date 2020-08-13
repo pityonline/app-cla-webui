@@ -16,25 +16,25 @@
                 </div>
                 <div>Easily handle Contributor License Agreements (CLAs)</div>
                 <el-row>
-                    <el-col :offset="9" :span="6">
-                        <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px"
+                    <el-col :offset="10" :span="4">
+                        <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="0"
                                  class="demo-ruleForm" style="padding: 2rem 2rem 0 2rem">
-                            <el-form-item label="account" prop="account">
-                                <el-input v-model="ruleForm.userName" autocomplete="off"></el-input>
+                            <el-form-item label="" prop="account">
+                                <el-input v-model="ruleForm.userName" autocomplete="off" placeholder="account"></el-input>
                             </el-form-item>
-                            <el-form-item label="password" prop="pass">
-                                <el-input type="password" v-model="ruleForm.pwd" autocomplete="off"></el-input>
+                            <el-form-item label="" prop="pass">
+                                <el-input type="password" v-model="ruleForm.pwd" autocomplete="off" placeholder="password"></el-input>
                             </el-form-item>
                             <el-form-item style="text-align: left">
-                                <span class="pointer" @click="findPwd" id="forgetPwd">忘记密码？</span>
+                                <span class="pointer" @click="findPwd" id="forgetPwd">Forget the password?</span>
                             </el-form-item>
                             <el-form-item >
-                                <el-button style="width: 100%" type="primary" @click="submitForm('ruleForm')">SUBMIT</el-button>
+                                <el-button style="width: 100%" type="primary" @click="submitForm('ruleForm')">LOG IN</el-button>
                             </el-form-item>
                         </el-form>
                     </el-col>
                 </el-row>
-                <p>通过其他方式登陆</p>
+                <p>Login by other means</p>
                 <div class="loginIconDiv">
                     <svg-icon @click="loginByGitee" class="loginIcon" icon-class="giteelogin"></svg-icon>
                     <svg-icon @click="loginByGithub" class="loginIcon" icon-class="githublogin"></svg-icon>
