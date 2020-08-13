@@ -48,32 +48,34 @@
                                     <span @click="createCLA()"
                                           style="font-size: .8rem;text-decoration: underline;cursor: pointer">(don't have one?)</span>
                                 </div>
-                                <el-collapse v-model="activeNames" @change="handleChange">
-                                    <el-collapse-item title="cla filter" name="1">
-                                        <el-select
-                                                v-model="claTypeValue"
-                                                placeholder="select"
-                                                size="medium">
-                                            <el-option
-                                                    v-for="item in claTypeOptions"
-                                                    :key="item.value"
-                                                    :label="item.label"
-                                                    :value="item.value">
-                                            </el-option>
-                                        </el-select>
-                                        <el-select
-                                                v-model="claLanguageValue"
-                                                placeholder="select"
-                                                size="medium">
-                                            <el-option
-                                                    v-for="item in languageOptions"
-                                                    :key="item.value"
-                                                    :label="item.label"
-                                                    :value="item.value">
-                                            </el-option>
-                                        </el-select>
-                                    </el-collapse-item>
-                                </el-collapse>
+                                <div>
+                                    <el-collapse v-model="activeNames" @change="handleChange">
+                                        <el-collapse-item title="cla filter" name="1">
+                                            <el-select
+                                                    v-model="claTypeValue"
+                                                    placeholder="select"
+                                                    size="medium">
+                                                <el-option
+                                                        v-for="item in claTypeOptions"
+                                                        :key="item.value"
+                                                        :label="item.label"
+                                                        :value="item.value">
+                                                </el-option>
+                                            </el-select>
+                                            <el-select
+                                                    v-model="claLanguageValue"
+                                                    placeholder="select"
+                                                    size="medium">
+                                                <el-option
+                                                        v-for="item in languageOptions"
+                                                        :key="item.value"
+                                                        :label="item.label"
+                                                        :value="item.value">
+                                                </el-option>
+                                            </el-select>
+                                        </el-collapse-item>
+                                    </el-collapse>
+                                </div>
                                 <div style="padding: 0 2rem">
                                      <el-select
                                             ref="claSelect"
@@ -423,7 +425,9 @@
         },
         methods: {
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
-
+            handleChange(val){
+                console.log(val);
+            },
             getPath() {
                 let path = this.$route.path;
                 if (path === '/linkedRepo' || path === '/home') {
