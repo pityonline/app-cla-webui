@@ -39,18 +39,18 @@
 
                     </div>
 
+                    <el-divider></el-divider>
+                    <!--<el-row class="marginTop1rem">-->
 
-                    <el-row class="marginTop1rem">
 
+                        <!--<el-col :span="8" class="borderClass">-->
+                            <!--<el-radio label="0" @change="roleChange()" v-model="role">{{desc.personalContributor}}</el-radio>-->
+                        <!--</el-col>-->
+                        <!--<el-col :span="8" class="borderClass">-->
+                            <!--<el-radio label="1" @change="roleChange()" v-model="role">{{desc.comContributor}}</el-radio>-->
+                        <!--</el-col>-->
 
-                        <el-col :span="8" class="borderClass">
-                            <el-radio label="0" @change="roleChange()" v-model="role">{{desc.personalContributor}}</el-radio>
-                        </el-col>
-                        <el-col :span="8" class="borderClass">
-                            <el-radio label="1" @change="roleChange()" v-model="role">{{desc.comContributor}}</el-radio>
-                        </el-col>
-
-                    </el-row>
+                    <!--</el-row>-->
                     <el-row class="marginTop1rem">
                         <el-col :span="16">
                             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="left"
@@ -552,7 +552,7 @@
         position: fixed;
         top: 0;
         left: 0;
-        background-color: white;
+        background-color: #ececec;
         height: 4rem;
         display: flex;
         flex-direction: row;

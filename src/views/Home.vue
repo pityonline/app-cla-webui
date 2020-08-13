@@ -358,10 +358,10 @@
                 filterChange: true,
                 claLanguageValue: '',
                 claTypeValue: '',
-                claTypeOptions: [{label: 'individual', value: 0}, {label: 'corporation', value: 1}],
-                languageOptions: [{label: 'english', value: 0}, {label: 'chinese', value: 1}, {
+                claTypeOptions: [{label: 'individual', value: 'individual'}, {label: 'corporation', value: 'corporation'}],
+                languageOptions: [{label: 'english', value: 'english'}, {label: 'chinese', value: 'chinese'}, {
                     label: 'japanese',
-                    value: 2
+                    value: 'japanese'
                 }],
                 createMetadataDialogVisible: false,
                 linkLoading: false,
@@ -438,13 +438,13 @@
         },
         methods: {
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
-            claTypeChange(val){
+            claTypeChange(val) {
                 console.log(val);
-                this.filterChange=true
+                this.filterChange = true
             },
-            claLanguageChange(val){
+            claLanguageChange(val) {
                 console.log(val);
-                this.filterChange=true
+                this.filterChange = true
             },
             handleChange(val) {
                 console.log(val);
@@ -635,7 +635,7 @@
             claVisibleChange(visible) {
                 this.claValue !== '' && visible ?
                     this.previewText = this.claOptions[this.claValue].text : '';
-                if (visible&&this.filterChange) {
+                if (visible && this.filterChange) {
                     this.getCLA();
                     this.filterChange = false;
                 }
@@ -732,6 +732,7 @@
                 console.log("getCLA");
                 this.$axios({
                     url: '/api' + url.getClaInfo,
+                    params:{language:this.claLanguageValue,apply_to:this.claTypeValue},
                     headers: {
                         'Access-Token': this.$store.state.access_token,
                         'Refresh-Token': this.$store.state.refresh_token,
@@ -1009,50 +1010,6 @@
         overflow: hidden;
         background-color: #F5F5F5;
 
-        /*& > .header {*/
-            /*position: fixed;*/
-            /*top: 0;*/
-            /*left: 0;*/
-            /*display: flex;*/
-            /*flex-direction: row;*/
-            /*justify-content: space-between;*/
-            /*z-index: 1;*/
-            /*width: 100%;*/
-
-            /*& > div:nth-of-type(1) {*/
-                /*display: flex;*/
-                /*flex-direction: column;*/
-                /*justify-content: center;*/
-                /*text-align: left;*/
-                /*padding-left: 3rem;*/
-            /*}*/
-
-            /*& > div:nth-of-type(2) {*/
-                /*display: flex;*/
-                /*justify-content: center;*/
-
-                /*& > div {*/
-                    /*display: flex;*/
-                    /*flex-direction: column;*/
-                    /*justify-content: center;*/
-
-                    /*#svg_logo {*/
-                        /*height: 4rem;*/
-                        /*width: 4rem;*/
-                    /*}*/
-                /*}*/
-
-            /*}*/
-
-            /*& > div:nth-of-type(3) {*/
-                /*display: flex;*/
-                /*flex-direction: column;*/
-                /*justify-content: center;*/
-                /*text-align: right;*/
-                /*padding-right: 3rem;*/
-            /*}*/
-        /*}*/
-
         & > div:nth-of-type(2) {
             flex-grow: 1;
             background-color: #F5F5F5;
@@ -1064,44 +1021,6 @@
                 font-size: 1.3rem;
                 color: #2C3E50;
             }
-
         }
-
-        /*& > .footer {*/
-            /*display: flex;*/
-            /*justify-content: space-between;*/
-
-            /*& > .left {*/
-                /*text-align: left;*/
-                /*padding-left: 2rem;*/
-                /*display: flex;*/
-                /*flex-direction: column;*/
-                /*justify-content: center;*/
-            /*}*/
-
-            /*& > .center {*/
-                /*text-align: center;*/
-                /*display: flex;*/
-                /*flex-direction: column;*/
-                /*justify-content: center;*/
-            /*}*/
-
-            /*& > .right {*/
-                /*text-align: right;*/
-                /*padding-right: 2rem;*/
-                /*display: flex;*/
-                /*flex-direction: column;*/
-                /*justify-content: center;*/
-
-                /*span:nth-of-type(1) {*/
-                    /*margin-right: 1rem;*/
-                /*}*/
-
-                /*#github_logo {*/
-                    /*width: 1.1rem;*/
-                    /*height: 1.1rem;*/
-                /*}*/
-            /*}*/
-        /*}*/
     }
 </style>

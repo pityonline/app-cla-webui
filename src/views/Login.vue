@@ -29,12 +29,12 @@
                                 <span class="pointer" @click="findPwd" id="forgetPwd">Forget the password?</span>
                             </el-form-item>
                             <el-form-item >
-                                <el-button style="width: 100%" type="primary" @click="submitForm('ruleForm')">LOG IN</el-button>
+                                <el-button style="width: 100%" type="primary" @click="submitForm('ruleForm')">SIGN IN</el-button>
                             </el-form-item>
                         </el-form>
                     </el-col>
                 </el-row>
-                <p>Login by other means</p>
+                <p>Sign in by other means</p>
                 <div class="loginIconDiv">
                     <svg-icon @click="loginByGitee" class="loginIcon" icon-class="giteelogin"></svg-icon>
                     <svg-icon @click="loginByGithub" class="loginIcon" icon-class="githublogin"></svg-icon>
