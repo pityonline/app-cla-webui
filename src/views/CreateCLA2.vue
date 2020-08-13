@@ -337,7 +337,7 @@
                         fields.push({
                             id:index+'',
                             title: item.title,
-                            type: this.dataTypeOptions[item.type].label,
+                            type: item.type,
                             description: item.description,
                             required: item.required,
                         })
