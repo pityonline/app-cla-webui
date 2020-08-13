@@ -751,6 +751,8 @@
                                 language: item.language
                             })
                         })
+                    }else {
+                        this.claOptions = [];
                     }
                 }).catch(err => {
                     console.log(err);
