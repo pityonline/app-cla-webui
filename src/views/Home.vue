@@ -184,7 +184,7 @@
 
         </el-col>
 
-        <Footer id="footer"></Footer>
+        <Footer></Footer>
         <el-dialog
                 top="5vh"
                 title=""
@@ -355,7 +355,7 @@
 
 
             return {
-                filterChange: false,
+                filterChange: true,
                 claLanguageValue: '',
                 claTypeValue: '',
                 claTypeOptions: [{label: 'individual', value: 0}, {label: 'corporation', value: 1}],
@@ -1013,8 +1013,6 @@
             position: fixed;
             top: 0;
             left: 0;
-            background-color: white;
-            height: 4rem;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
@@ -1070,10 +1068,8 @@
         }
 
         & > .footer {
-            height: 4rem;
             display: flex;
             justify-content: space-between;
-            background-color: white;
 
             & > .left {
                 text-align: left;
