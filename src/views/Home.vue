@@ -1009,49 +1009,49 @@
         overflow: hidden;
         background-color: #F5F5F5;
 
-        & > .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            z-index: 1;
-            width: 100%;
+        /*& > .header {*/
+            /*position: fixed;*/
+            /*top: 0;*/
+            /*left: 0;*/
+            /*display: flex;*/
+            /*flex-direction: row;*/
+            /*justify-content: space-between;*/
+            /*z-index: 1;*/
+            /*width: 100%;*/
 
-            & > div:nth-of-type(1) {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                text-align: left;
-                padding-left: 3rem;
-            }
+            /*& > div:nth-of-type(1) {*/
+                /*display: flex;*/
+                /*flex-direction: column;*/
+                /*justify-content: center;*/
+                /*text-align: left;*/
+                /*padding-left: 3rem;*/
+            /*}*/
 
-            & > div:nth-of-type(2) {
-                display: flex;
-                justify-content: center;
+            /*& > div:nth-of-type(2) {*/
+                /*display: flex;*/
+                /*justify-content: center;*/
 
-                & > div {
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
+                /*& > div {*/
+                    /*display: flex;*/
+                    /*flex-direction: column;*/
+                    /*justify-content: center;*/
 
-                    #svg_logo {
-                        height: 4rem;
-                        width: 4rem;
-                    }
-                }
+                    /*#svg_logo {*/
+                        /*height: 4rem;*/
+                        /*width: 4rem;*/
+                    /*}*/
+                /*}*/
 
-            }
+            /*}*/
 
-            & > div:nth-of-type(3) {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                text-align: right;
-                padding-right: 3rem;
-            }
-        }
+            /*& > div:nth-of-type(3) {*/
+                /*display: flex;*/
+                /*flex-direction: column;*/
+                /*justify-content: center;*/
+                /*text-align: right;*/
+                /*padding-right: 3rem;*/
+            /*}*/
+        /*}*/
 
         & > div:nth-of-type(2) {
             flex-grow: 1;
@@ -1067,41 +1067,41 @@
 
         }
 
-        & > .footer {
-            display: flex;
-            justify-content: space-between;
+        /*& > .footer {*/
+            /*display: flex;*/
+            /*justify-content: space-between;*/
 
-            & > .left {
-                text-align: left;
-                padding-left: 2rem;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-            }
+            /*& > .left {*/
+                /*text-align: left;*/
+                /*padding-left: 2rem;*/
+                /*display: flex;*/
+                /*flex-direction: column;*/
+                /*justify-content: center;*/
+            /*}*/
 
-            & > .center {
-                text-align: center;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-            }
+            /*& > .center {*/
+                /*text-align: center;*/
+                /*display: flex;*/
+                /*flex-direction: column;*/
+                /*justify-content: center;*/
+            /*}*/
 
-            & > .right {
-                text-align: right;
-                padding-right: 2rem;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
+            /*& > .right {*/
+                /*text-align: right;*/
+                /*padding-right: 2rem;*/
+                /*display: flex;*/
+                /*flex-direction: column;*/
+                /*justify-content: center;*/
 
-                span:nth-of-type(1) {
-                    margin-right: 1rem;
-                }
+                /*span:nth-of-type(1) {*/
+                    /*margin-right: 1rem;*/
+                /*}*/
 
-                #github_logo {
-                    width: 1.1rem;
-                    height: 1.1rem;
-                }
-            }
-        }
+                /*#github_logo {*/
+                    /*width: 1.1rem;*/
+                    /*height: 1.1rem;*/
+                /*}*/
+            /*}*/
+        /*}*/
     }
 </style>
