@@ -48,20 +48,31 @@
                                     <span @click="createCLA()"
                                           style="font-size: .8rem;text-decoration: underline;cursor: pointer">(don't have one?)</span>
                                 </div>
+                                <el-collapse v-model="activeNames" @change="handleChange">
+                                    <el-collapse-item title="cla filter" name="1">
+                                        <el-select
+                                                v-model="claTypeValue"
+                                                placeholder="select"
+                                                size="medium"
+                                                @change="changeCla">
+                                            <el-option
+                                                    v-for="item in claTypeOptions"
+                                                    :key="item.value"
+                                                    :label="item.label"
+                                                    :value="item.value">
+                                            </el-option>
+                                        </el-select>
+
+                                    </el-collapse-item>
+                                </el-collapse>
                                 <div style="padding: 0 2rem">
-                                    <el-select
-                                            ref="claSelect"
-                                            v-model="claValue"
+                                     <el-select
+                                            v-model="claLanguageValue"
                                             placeholder="select"
-                                            @visible-change="claVisibleChange"
-                                            style="width: 100%"
                                             size="medium"
-                                            @foucs="claFoucs"
-                                            @click="clickClaSelect"
-                                            filterable
                                             @change="changeCla">
                                         <el-option
-                                                v-for="item in claOptions"
+                                                v-for="item in languageOptions"
                                                 :key="item.value"
                                                 :label="item.label"
                                                 :value="item.value">
@@ -100,7 +111,7 @@
 
                                 <!--</div>-->
                                 <div style="font-size: 1.2rem;padding: .5rem">
-                                    ④ Email
+                                    ③ Email
                                 </div>
                                 <div style="padding: 0 2rem">
                                     <el-input
@@ -320,6 +331,10 @@
 
 
             return {
+                claLanguageValue:'',
+                claTypeValue:'',
+                claTypeOptions:[{label:'individual',value:0},{label:'corporation',value:1}],
+                languageOptions:[{label:'english',value:0},{label:'chinese',value:1},{label:'japanese',value:2}],
                 createMetadataDialogVisible: false,
                 linkLoading: false,
                 platform: this.$store.state.platform,

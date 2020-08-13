@@ -272,7 +272,7 @@
             }
         },
         created() {
-            // this.getCookieData()
+            this.getCookieData()
         },
         methods: {
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
