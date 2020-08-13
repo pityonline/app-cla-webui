@@ -214,7 +214,7 @@
         }
     }
 </script>
-<style lang="less">
+<style scoped lang="less">
 
     #forgetPwd:hover {
         text-decoration: underline;

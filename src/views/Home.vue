@@ -70,35 +70,35 @@
 
                                 </div>
                                 <!--选择metadata-->
-                                <div style="font-size: 1.2rem;padding: .5rem">
-                                    ③ Choose a Metadata
-                                </div>
-                                <div style="font-size: 1rem;padding: 0 2rem .5rem 2rem">
-                                    Select from Gist
-                                    <span @click="createMetadata()"
-                                          style="font-size: .8rem;text-decoration: underline;cursor: pointer">(don't have one?)</span>
-                                </div>
-                                <div style="padding: 0 2rem">
+                                <!--<div style="font-size: 1.2rem;padding: .5rem">-->
+                                    <!--③ Choose a Metadata-->
+                                <!--</div>-->
+                                <!--<div style="font-size: 1rem;padding: 0 2rem .5rem 2rem">-->
+                                    <!--Select from Gist-->
+                                    <!--<span @click="createMetadata()"-->
+                                          <!--style="font-size: .8rem;text-decoration: underline;cursor: pointer">(don't have one?)</span>-->
+                                <!--</div>-->
+                                <!--<div style="padding: 0 2rem">-->
 
-                                    <el-select v-model="metadataValue"
-                                               ref="metaSelect"
-                                               @visible-change="mataVisibleChange"
-                                               placeholder="select"
-                                               style="width: 100%"
-                                               filterable
-                                               @click="clickMetaSelect"
-                                               @foucs="metaFoucs"
-                                               size="medium"
-                                               @change="changeMetadata">
-                                        <el-option
-                                                v-for="item in metadataOptions"
-                                                :key="item.value"
-                                                :label="item.label"
-                                                :value="item.value">
-                                        </el-option>
-                                    </el-select>
+                                    <!--<el-select v-model="metadataValue"-->
+                                               <!--ref="metaSelect"-->
+                                               <!--@visible-change="mataVisibleChange"-->
+                                               <!--placeholder="select"-->
+                                               <!--style="width: 100%"-->
+                                               <!--filterable-->
+                                               <!--@click="clickMetaSelect"-->
+                                               <!--@foucs="metaFoucs"-->
+                                               <!--size="medium"-->
+                                               <!--@change="changeMetadata">-->
+                                        <!--<el-option-->
+                                                <!--v-for="item in metadataOptions"-->
+                                                <!--:key="item.value"-->
+                                                <!--:label="item.label"-->
+                                                <!--:value="item.value">-->
+                                        <!--</el-option>-->
+                                    <!--</el-select>-->
 
-                                </div>
+                                <!--</div>-->
                                 <div style="font-size: 1.2rem;padding: .5rem">
                                     ④ Email
                                 </div>
@@ -198,28 +198,28 @@
 
   </span>
         </el-dialog>
-        <el-dialog
-                top="5vh"
-                title=""
-                :visible.sync="createMetadataDialogVisible"
-                width="35%">
-            <div style="text-align: left">
-                <p class="dialogDesc">How can I create a Metadata Gist?</p>
+        <!--<el-dialog-->
+                <!--top="5vh"-->
+                <!--title=""-->
+                <!--:visible.sync="createMetadataDialogVisible"-->
+                <!--width="35%">-->
+            <!--<div style="text-align: left">-->
+                <!--<p class="dialogDesc">How can I create a Metadata Gist?</p>-->
 
-                <p>To <span @click="toCreateMetadata()" style="cursor: pointer;text-decoration: underline;color: blue">createMetadata</span>
-                    enter a file name and paste
-                    the content of your Metadata.</p>
-                <p class="dialogDesc">What happens if I edit the Gist file?</p>
-                <p>CLA assistant will always show you the current version of your Gist file. Users who accept your
-                    Metadata
-                    sign the current version. If you change the content of your Metadata, each contributor has to accept
-                    the
-                    new version when they create a new pull request.</p>
-            </div>
-            <span slot="footer" class="dialog-footer">
+                <!--<p>To <span @click="toCreateMetadata()" style="cursor: pointer;text-decoration: underline;color: blue">createMetadata</span>-->
+                    <!--enter a file name and paste-->
+                    <!--the content of your Metadata.</p>-->
+                <!--<p class="dialogDesc">What happens if I edit the Gist file?</p>-->
+                <!--<p>CLA assistant will always show you the current version of your Gist file. Users who accept your-->
+                    <!--Metadata-->
+                    <!--sign the current version. If you change the content of your Metadata, each contributor has to accept-->
+                    <!--the-->
+                    <!--new version when they create a new pull request.</p>-->
+            <!--</div>-->
+            <!--<span slot="footer" class="dialog-footer">-->
 
-  </span>
-        </el-dialog>
+  <!--</span>-->
+        <!--</el-dialog>-->
         <el-dialog
                 top="5vh"
                 title=""
