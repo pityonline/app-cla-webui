@@ -53,8 +53,7 @@
                                         <el-select
                                                 v-model="claTypeValue"
                                                 placeholder="select"
-                                                size="medium"
-                                                @change="changeCla">
+                                                size="medium">
                                             <el-option
                                                     v-for="item in claTypeOptions"
                                                     :key="item.value"
@@ -62,17 +61,31 @@
                                                     :value="item.value">
                                             </el-option>
                                         </el-select>
-
+                                        <el-select
+                                                v-model="claLanguageValue"
+                                                placeholder="select"
+                                                size="medium">
+                                            <el-option
+                                                    v-for="item in languageOptions"
+                                                    :key="item.value"
+                                                    :label="item.label"
+                                                    :value="item.value">
+                                            </el-option>
+                                        </el-select>
                                     </el-collapse-item>
                                 </el-collapse>
                                 <div style="padding: 0 2rem">
                                      <el-select
-                                            v-model="claLanguageValue"
+                                            ref="claSelect"
+                                            v-model="claValue"
                                             placeholder="select"
+                                            @visible-change="claVisibleChange"
+                                            style="width: 100%"
                                             size="medium"
+                                            filterable
                                             @change="changeCla">
                                         <el-option
-                                                v-for="item in languageOptions"
+                                                v-for="item in claOptions"
                                                 :key="item.value"
                                                 :label="item.label"
                                                 :value="item.value">
@@ -331,7 +344,6 @@
 
 
             return {
-                activeNames: ['1'],
                 claLanguageValue:'',
                 claTypeValue:'',
                 claTypeOptions:[{label:'individual',value:0},{label:'corporation',value:1}],
@@ -411,9 +423,7 @@
         },
         methods: {
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
-            handleChange(val){
-                console.log(val);
-            },
+
             getPath() {
                 let path = this.$route.path;
                 if (path === '/linkedRepo' || path === '/home') {
