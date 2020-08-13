@@ -48,31 +48,38 @@
                                     <span @click="createCLA()"
                                           style="font-size: .8rem;text-decoration: underline;cursor: pointer">(don't have one?)</span>
                                 </div>
-                                <div>
+                                <div style="padding: 0 2rem 1rem 2rem">
                                     <el-collapse v-model="activeNames" @change="handleChange">
                                         <el-collapse-item title="cla filter" name="1">
-                                            <el-select
-                                                    v-model="claTypeValue"
-                                                    placeholder="select"
-                                                    size="medium">
-                                                <el-option
-                                                        v-for="item in claTypeOptions"
-                                                        :key="item.value"
-                                                        :label="item.label"
-                                                        :value="item.value">
-                                                </el-option>
-                                            </el-select>
-                                            <el-select
-                                                    v-model="claLanguageValue"
-                                                    placeholder="select"
-                                                    size="medium">
-                                                <el-option
-                                                        v-for="item in languageOptions"
-                                                        :key="item.value"
-                                                        :label="item.label"
-                                                        :value="item.value">
-                                                </el-option>
-                                            </el-select>
+                                            <el-row :gutter="10">
+                                                <el-col :span="12">
+                                                    <el-select
+                                                            v-model="claTypeValue"
+                                                            placeholder="select"
+                                                            size="medium">
+                                                        <el-option
+                                                                v-for="item in claTypeOptions"
+                                                                :key="item.value"
+                                                                :label="item.label"
+                                                                :value="item.value">
+                                                        </el-option>
+                                                    </el-select>
+                                                </el-col>
+                                                <el-col :span="12">
+                                                    <el-select
+                                                            v-model="claLanguageValue"
+                                                            placeholder="select"
+                                                            size="medium">
+                                                        <el-option
+                                                                v-for="item in languageOptions"
+                                                                :key="item.value"
+                                                                :label="item.label"
+                                                                :value="item.value">
+                                                        </el-option>
+                                                    </el-select>
+                                                </el-col>
+                                            </el-row>
+
                                         </el-collapse-item>
                                     </el-collapse>
                                 </div>
