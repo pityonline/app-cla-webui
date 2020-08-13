@@ -198,7 +198,11 @@
                 }, {
                     value: 1,
                     label: 'chinese'
-                },],
+                },
+                    {
+                        value: 2,
+                        label: 'japanese'
+                    },],
                 claText: '',
                 metaData: '',
                 createCLAClass: {

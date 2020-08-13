@@ -56,7 +56,8 @@
                                                     <el-select
                                                             v-model="claTypeValue"
                                                             placeholder="select"
-                                                            size="medium">
+                                                            size="medium"
+                                                            @change="claTypeChange">
                                                         <el-option
                                                                 v-for="item in claTypeOptions"
                                                                 :key="item.value"
@@ -69,7 +70,8 @@
                                                     <el-select
                                                             v-model="claLanguageValue"
                                                             placeholder="select"
-                                                            size="medium">
+                                                            size="medium"
+                                                            @change="claLanguageChange">
                                                         <el-option
                                                                 v-for="item in languageOptions"
                                                                 :key="item.value"
@@ -84,7 +86,7 @@
                                     </el-collapse>
                                 </div>
                                 <div style="padding: 0 2rem">
-                                     <el-select
+                                    <el-select
                                             ref="claSelect"
                                             v-model="claValue"
                                             placeholder="select"
@@ -104,32 +106,32 @@
                                 </div>
                                 <!--选择metadata-->
                                 <!--<div style="font-size: 1.2rem;padding: .5rem">-->
-                                    <!--③ Choose a Metadata-->
+                                <!--③ Choose a Metadata-->
                                 <!--</div>-->
                                 <!--<div style="font-size: 1rem;padding: 0 2rem .5rem 2rem">-->
-                                    <!--Select from Gist-->
-                                    <!--<span @click="createMetadata()"-->
-                                          <!--style="font-size: .8rem;text-decoration: underline;cursor: pointer">(don't have one?)</span>-->
+                                <!--Select from Gist-->
+                                <!--<span @click="createMetadata()"-->
+                                <!--style="font-size: .8rem;text-decoration: underline;cursor: pointer">(don't have one?)</span>-->
                                 <!--</div>-->
                                 <!--<div style="padding: 0 2rem">-->
 
-                                    <!--<el-select v-model="metadataValue"-->
-                                               <!--ref="metaSelect"-->
-                                               <!--@visible-change="mataVisibleChange"-->
-                                               <!--placeholder="select"-->
-                                               <!--style="width: 100%"-->
-                                               <!--filterable-->
-                                               <!--@click="clickMetaSelect"-->
-                                               <!--@foucs="metaFoucs"-->
-                                               <!--size="medium"-->
-                                               <!--@change="changeMetadata">-->
-                                        <!--<el-option-->
-                                                <!--v-for="item in metadataOptions"-->
-                                                <!--:key="item.value"-->
-                                                <!--:label="item.label"-->
-                                                <!--:value="item.value">-->
-                                        <!--</el-option>-->
-                                    <!--</el-select>-->
+                                <!--<el-select v-model="metadataValue"-->
+                                <!--ref="metaSelect"-->
+                                <!--@visible-change="mataVisibleChange"-->
+                                <!--placeholder="select"-->
+                                <!--style="width: 100%"-->
+                                <!--filterable-->
+                                <!--@click="clickMetaSelect"-->
+                                <!--@foucs="metaFoucs"-->
+                                <!--size="medium"-->
+                                <!--@change="changeMetadata">-->
+                                <!--<el-option-->
+                                <!--v-for="item in metadataOptions"-->
+                                <!--:key="item.value"-->
+                                <!--:label="item.label"-->
+                                <!--:value="item.value">-->
+                                <!--</el-option>-->
+                                <!--</el-select>-->
 
                                 <!--</div>-->
                                 <div style="font-size: 1.2rem;padding: .5rem">
@@ -232,26 +234,26 @@
   </span>
         </el-dialog>
         <!--<el-dialog-->
-                <!--top="5vh"-->
-                <!--title=""-->
-                <!--:visible.sync="createMetadataDialogVisible"-->
-                <!--width="35%">-->
-            <!--<div style="text-align: left">-->
-                <!--<p class="dialogDesc">How can I create a Metadata Gist?</p>-->
+        <!--top="5vh"-->
+        <!--title=""-->
+        <!--:visible.sync="createMetadataDialogVisible"-->
+        <!--width="35%">-->
+        <!--<div style="text-align: left">-->
+        <!--<p class="dialogDesc">How can I create a Metadata Gist?</p>-->
 
-                <!--<p>To <span @click="toCreateMetadata()" style="cursor: pointer;text-decoration: underline;color: blue">createMetadata</span>-->
-                    <!--enter a file name and paste-->
-                    <!--the content of your Metadata.</p>-->
-                <!--<p class="dialogDesc">What happens if I edit the Gist file?</p>-->
-                <!--<p>CLA assistant will always show you the current version of your Gist file. Users who accept your-->
-                    <!--Metadata-->
-                    <!--sign the current version. If you change the content of your Metadata, each contributor has to accept-->
-                    <!--the-->
-                    <!--new version when they create a new pull request.</p>-->
-            <!--</div>-->
-            <!--<span slot="footer" class="dialog-footer">-->
+        <!--<p>To <span @click="toCreateMetadata()" style="cursor: pointer;text-decoration: underline;color: blue">createMetadata</span>-->
+        <!--enter a file name and paste-->
+        <!--the content of your Metadata.</p>-->
+        <!--<p class="dialogDesc">What happens if I edit the Gist file?</p>-->
+        <!--<p>CLA assistant will always show you the current version of your Gist file. Users who accept your-->
+        <!--Metadata-->
+        <!--sign the current version. If you change the content of your Metadata, each contributor has to accept-->
+        <!--the-->
+        <!--new version when they create a new pull request.</p>-->
+        <!--</div>-->
+        <!--<span slot="footer" class="dialog-footer">-->
 
-  <!--</span>-->
+        <!--</span>-->
         <!--</el-dialog>-->
         <el-dialog
                 top="5vh"
@@ -353,10 +355,14 @@
 
 
             return {
-                claLanguageValue:'',
-                claTypeValue:'',
-                claTypeOptions:[{label:'individual',value:0},{label:'corporation',value:1}],
-                languageOptions:[{label:'english',value:0},{label:'chinese',value:1},{label:'japanese',value:2}],
+                filterChange: false,
+                claLanguageValue: '',
+                claTypeValue: '',
+                claTypeOptions: [{label: 'individual', value: 0}, {label: 'corporation', value: 1}],
+                languageOptions: [{label: 'english', value: 0}, {label: 'chinese', value: 1}, {
+                    label: 'japanese',
+                    value: 2
+                }],
                 createMetadataDialogVisible: false,
                 linkLoading: false,
                 platform: this.$store.state.platform,
@@ -432,7 +438,13 @@
         },
         methods: {
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
-            handleChange(val){
+            claTypeChange(val){
+                console.log(val);
+            },
+            claLanguageChange(val){
+                console.log(val);
+            },
+            handleChange(val) {
                 console.log(val);
             },
             getPath() {
@@ -579,7 +591,7 @@
                     this.$message.success('success')
                     console.log(res);
                     this.claValue = '';
-                    this.metadataValue=''
+                    this.metadataValue = ''
                     this.repositoryValue = '';
                     this.claChoose = false;
                     this.metadataChoose = false;
@@ -618,9 +630,13 @@
             toCreateMetadata() {
                 this.$router.push('/createMetadata')
             },
-            claVisibleChange(visible){
-                this.claValue!==''&&visible?
-                this.previewText = this.claOptions[this.claValue].text:'';
+            claVisibleChange(visible) {
+                this.claValue !== '' && visible ?
+                    this.previewText = this.claOptions[this.claValue].text : '';
+                if (visible&&this.filterChange) {
+                    this.getCLA();
+                    this.filterChange = false;
+                }
 
             },
             /*选择cla*/
@@ -630,9 +646,9 @@
                 this.previewText = this.claOptions[value].text;
             },
 
-            mataVisibleChange(visible){
-                this.metadataValue!==''&&visible?
-                this.previewText = this.metadataOptions[this.metadataValue].text:'';
+            mataVisibleChange(visible) {
+                this.metadataValue !== '' && visible ?
+                    this.previewText = this.metadataOptions[this.metadataValue].text : '';
 
             },
 
@@ -747,9 +763,9 @@
             configCla() {
                 this.showConfigForm = true;
                 this.home.height = 'auto'
-                this.getCLA()
+                // this.getCLA()
                 this.getOrgsInfo()
-                this.getMeta();
+                // this.getMeta();
             },
             /*获取metadata数据*/
             getMeta() {
