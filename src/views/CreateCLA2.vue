@@ -335,7 +335,7 @@
 
                     this.metadataArr.forEach((item, index) => {
                         fields.push({
-                            id:index+'',
+                            id:index,
                             title: item.title,
                             type: item.type,
                             description: item.description,
@@ -344,7 +344,7 @@
                     })
                     this.customMetadataArr.forEach((item, index) => {
                         fields.push({
-                            id:this.metadataArr.length+index+'',
+                            id:this.metadataArr.length+index,
                             title: item.title,
                             type: this.dataTypeOptions[item.type].label,
                             description: item.description,
