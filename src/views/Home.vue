@@ -440,9 +440,11 @@
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
             claTypeChange(val){
                 console.log(val);
+                this.filterChange=true
             },
             claLanguageChange(val){
                 console.log(val);
+                this.filterChange=true
             },
             handleChange(val) {
                 console.log(val);
