@@ -66,14 +66,13 @@
         position: fixed;
         top: 0;
         left: 0;
-        background-color: white;
+        background-color: #F5F0F0;
         height: 4rem;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         z-index: 1;
         width: 100%;
-
         & > div:nth-of-type(1) {
             display: flex;
             flex-direction: column;
