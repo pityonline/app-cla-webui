@@ -80,7 +80,7 @@ export default new Vuex.Store({
 
         if (res.data.length) {
           let tableData = [];
-          res.data.forEach((item, index) => {
+          res.data.forEach((item, index,tableData) => {
             console.log(index);
             tableData.push({
               id:item.id,
