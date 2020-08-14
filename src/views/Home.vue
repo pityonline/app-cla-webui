@@ -831,7 +831,6 @@
                 }, 500)
             },
             getCookieData() {
-                console.log('getCookieData');
                 if (document.cookie !== '') {
                     let cookieArr = document.cookie.split('; ')
                     let access_token, refresh_token = '';
@@ -842,7 +841,7 @@
                     })
                     let data = {access_token, refresh_token};
                     this.setTokenAct(data);
-                    this.getUserInfo(access_token, refresh_token)
+                    // this.getUserInfo(access_token, refresh_token)
 
                 }
 
