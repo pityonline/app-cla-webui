@@ -84,13 +84,13 @@ export default new Vuex.Store({
                     let tableData = [];
                     res.data.forEach((item, index) => {
                         console.log(index);
-                        // tableData.push({
-                        //     id: item.id,
-                        //     repository: `${item.org_id}/${item.repo_id}`,
-                        //     cla: item.cla_id,
-                        //     sharedGist: 'Yes',
-                        //     contributors: '0',
-                        // });
+                        tableData.push({
+                            id: item.id,
+                            repository: `${item.org_id}/${item.repo_id}`,
+                            cla: item.cla_id,
+                            sharedGist: 'Yes',
+                            contributors: '0',
+                        });
                         ((index, item, length, {commit}, tableData) => {
                             console.log(index, tableData, item, length);
 
