@@ -742,8 +742,8 @@
                     }
                 }).then(res => {
                     console.log(res);
+                    this.claOptions = [];
                     if (res.data.length) {
-                        this.claOptions = [];
                         res.data.forEach((item, index) => {
                             this.claOptions.push({
                                 value: index,
@@ -753,8 +753,6 @@
                                 language: item.language
                             })
                         })
-                    }else {
-                        this.claOptions = [];
                     }
                 }).catch(err => {
                     console.log(err);
