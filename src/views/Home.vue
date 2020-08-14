@@ -57,6 +57,7 @@
                                                             v-model="claTypeValue"
                                                             placeholder="select"
                                                             size="medium"
+                                                            clearable=""
                                                             @change="claTypeChange">
                                                         <el-option
                                                                 v-for="item in claTypeOptions"
@@ -71,6 +72,7 @@
                                                             v-model="claLanguageValue"
                                                             placeholder="select"
                                                             size="medium"
+                                                            clearable=""
                                                             @change="claLanguageChange">
                                                         <el-option
                                                                 v-for="item in languageOptions"
@@ -829,6 +831,7 @@
                 setInterval(() => {
                     this.$store.state.user.userName && this.$store.state.ready && loading.close();
                 }, 500)
+
             },
             getCookieData() {
                 if (document.cookie !== '') {
@@ -841,8 +844,6 @@
                     })
                     let data = {access_token, refresh_token};
                     this.setTokenAct(data);
-                    // this.getUserInfo(access_token, refresh_token)
-
                 }
 
             },
