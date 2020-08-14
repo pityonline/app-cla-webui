@@ -613,7 +613,7 @@
                     console.log(err);
                     this.linkLoading = false
                     this.$message.closeAll();
-                    this.$message.error('already linked')
+                    this.$message.error('failed')
                 })
             },
 

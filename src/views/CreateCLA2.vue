@@ -168,10 +168,10 @@
                     description: '',
                     required: true,
                 }],
-                dataTypeOptions: [{label: 'string', value: 0}, {label: 'date', value: 1}, {
+                dataTypeOptions: [{label: 'string', value:  'string'}, {label: 'date', value: 'date'}, {
                     label: 'number',
-                    value: 2
-                }, {label: 'telephone', value: 3}, {label: 'email', value: 4}, {label: 'boolean', value: 5}],
+                    value: 'number'
+                }, {label: 'telephone', value:  'telephone'}, {label: 'email', value: 'email'}, {label: 'boolean', value: 'boolean'}],
                 access_token: this.$store.state.access_token,
                 refresh_token: this.$store.state.refresh_token,
                 isAddNewMetaFile: false,
@@ -350,7 +350,7 @@
                         fields.push({
                             id:this.metadataArr.length+index+'',
                             title: item.title,
-                            type: this.dataTypeOptions[item.type].label,
+                            type: item.type,
                             description: item.description,
                             required: item.required,
                         })
