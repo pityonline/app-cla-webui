@@ -296,6 +296,7 @@
             },
             /*获取用户名并显示*/
             getUserInfo(access_token, refresh_token) {
+                console.log('getUserInfo');
                 let obj = {access_token: access_token};
                 console.log(obj);
                 this.$axios({
