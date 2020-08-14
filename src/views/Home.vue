@@ -635,8 +635,7 @@
                 this.$router.push('/createMetadata')
             },
             claVisibleChange(visible) {
-                this.claValue !== '' && visible ?
-                    this.previewText = this.claOptions[this.claValue].text : '';
+                this.claValue=''
                 if (visible && this.filterChange) {
                     this.getCLA();
                     this.filterChange = false;
