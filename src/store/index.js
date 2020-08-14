@@ -92,6 +92,8 @@ export default new Vuex.Store({
                         //     contributors: '0',
                         // });
                         ((index, item, length, {commit}, tableData) => {
+                            console.log(index, tableData, item, length);
+
                             axios({
                                 url: `/api${url.getClaInfo}/${item.cla_id}`,
                                 headers: {
