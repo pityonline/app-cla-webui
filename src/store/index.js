@@ -69,6 +69,7 @@ export default new Vuex.Store({
         },
 
         getLinkedRepoListAct({commit}, data) {
+            console.log('getLinkedRepoListAct');
             axios({
                 url: '/api' + url.getLinkedRepoList,
                 headers: {
@@ -81,7 +82,6 @@ export default new Vuex.Store({
 
                 if (res.data.length) {
                     let tableData = [];
-                    tableData.push({id: 2, cla: 'test'})
                     res.data.forEach((item, index) => {
                         console.log(index);
                         // tableData.push({
@@ -114,27 +114,7 @@ export default new Vuex.Store({
                                 console.log(err);
                             })
                         })(index, item, res.data.length, {commit}, tableData)
-                        // axios({
-                        //   url:`/api${url.getClaInfo}/${item.cla_id}`,
-                        //   headers: {
-                        //     'Access-Token': data.access_token,
-                        //     'Refresh-Token': data.refresh_token,
-                        //     'User': `${data.platform}/${data.userName}`
-                        //   }
-                        // }).then(resp => {
-                        //   console.log(resp);
-                        //   console.log(index);
-                        //   Object.assign(tableData[index],{
-                        //       claName:resp.data.name,
-                        //     })
-                        //     if (index === res.data.length - 1) {
-                        //       let obj={tableData:tableData,ready:true}
-                        //       commit('setReady',obj);
-                        //     }
-                        //   console.log(tableData);
-                        // }).catch(err => {
-                        //   console.log(err);
-                        // })
+
                     })
 
                 }
