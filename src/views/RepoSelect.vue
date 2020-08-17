@@ -8,6 +8,7 @@
                                 v-model="platform"
                                 clearable=""
                                 filterable=""
+                                @change="changePlatform"
                                 value="">
                             <el-option
                                     v-for="item in platformOption"
@@ -65,6 +66,8 @@
 </template>
 
 <script>
+    import * as url from '../until/api'
+
     export default {
         name: "RepoSelect",
         data(){
@@ -78,11 +81,26 @@
             };
         },
         methods:{
+            changePlatform(){
+                    this.getOrg(this.platform)
+            },
             submit(){
                 console.log('submit',this.platform,this.org,this.repo);
             },
-            getOrg(){
-                console.log(this.platform);
+            getOrg(platform){
+                console.log(platform);
+                if (platform==='gitee'){
+                    this.$axios({
+                        url:'/api' +url.getOrg,
+                        params:{
+
+                        }
+                    }).then(res=>{
+                        console.log(res);
+                    }).catch(err=>{
+                        console.log(err);
+                    })
+                }
             },
             getRepo(){
                 console.log(this.org);

@@ -21,3 +21,4 @@ export const relogin = '/v1/relogin'    //企业管理员登陆  参数 userName
 export const addUser = '/v1/addUser'    //新增企业管理员  参数 userName pwd email
 export const deleteCon = '/v1/deleteContributor'    //删除企业白名单
 export const changeActive = '/v1/changeActive'    //修改企业白名单人员状态
+export const getSignPage = '/v1/cla-org/signing-page'    //获取已绑定cla的组织   方式get   参数platform、org_id、apply_to

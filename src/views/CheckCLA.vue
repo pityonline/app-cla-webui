@@ -336,14 +336,14 @@
                 }
             },
             /*获取个人签署的metadata*/
-            getPersonalMetaAndCla() {
+            getSignPage() {
               this.changeDesc();
                 this.$axios({
-                    url: '/api' + url.getClaInfo,
-                    headers: {
-                        'Access-Token': this.$store.state.access_token,
-                        'Refresh-Token': this.$store.state.refresh_token,
-                        'User': `${this.platform}/${this.$store.state.user.userName}`
+                    url: '/api' + url.getSignPage,
+                    params:{
+                        platform:'gitee',
+                        org_id:'cla-test',
+                        apply_to:''
                     }
 
                 }).then(res => {
@@ -378,7 +378,7 @@
                 console.log(this.role);
                 switch (this.role) {
                     case '0':
-                        this.getPersonalMetaAndCla();
+                        // this.getPersonalMetaAndCla();
                         break;
                     case '1':
                         this.getCompanyMetaAndCla();
@@ -522,7 +522,7 @@
         },
 
         created() {
-            this.getPersonalMetaAndCla();
+            this.getSignPage();
             this.loadMetadata()
         },
         mounted() {
