@@ -100,12 +100,17 @@
                         console.log(res);
                         this.orgOption=[];
                         if (res.data.length) {
+                            let arr =[]
                             res.data.forEach(item=>{
-                                this.orgOption.push(item.org_id)
+                                arr.push(item.org_id)
                             })
-                            let newSet = new Set(this.orgOption)
+                            let newSet = new Set(arr)
                             console.log(newSet);
-                            this.orgOption = [...newSet];
+                            arr = [...newSet];
+                            arr.forEach(item=>{
+                                this.orgOption.push({label:item,value:item})
+                            })
+
                             console.log(this.orgOption);
                         }
                     }).catch(err=>{
