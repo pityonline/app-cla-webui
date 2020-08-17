@@ -52,6 +52,7 @@ export default new Vuex.Store({
             sessionStorage.setItem('userEmail', data.userEmail);
         },
         setPlatform(state, platform) {
+            console.log(platform);
             state.platform = platform;
             sessionStorage.setItem('platform', platform);
         },
