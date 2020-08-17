@@ -343,7 +343,7 @@
                     url: '/api' + url.getSignPage,
                     params:{
                         platform:'gitee',
-                        org_id:'cla-test',
+                        org_id:'',
                         apply_to:''
                     }
 
