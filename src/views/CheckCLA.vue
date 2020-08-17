@@ -337,7 +337,8 @@
             },
             /*获取个人签署的metadata*/
             getSignPage() {
-              this.changeDesc();
+                console.log('getSignPage');
+                this.changeDesc();
                 this.$axios({
                     url: '/api' + url.getSignPage,
                     params:{
