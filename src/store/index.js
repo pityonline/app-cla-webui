@@ -60,6 +60,7 @@ export default new Vuex.Store({
     actions: {
 
         setPlatformAct({commit}, platform) {
+            console.log(platform);
             commit('setPlatform', platform)
         },
         setTokenAct({commit}, data) {
