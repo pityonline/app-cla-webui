@@ -69,7 +69,7 @@ export default new Vuex.Store({
         },
 
         getLinkedRepoListAct({commit}, data) {
-            console.log('getLinkedRepoListAct');
+            console.log('getLinkedRepoListAct',data);
             axios({
                 url: '/api' + url.getLinkedRepoList,
                 headers: {
