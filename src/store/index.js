@@ -7,7 +7,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-
+        loginType:sessionStorage.getItem('loginType') || undefined,
         tableData: JSON.parse(sessionStorage.getItem('tableData')) || undefined,
         ready: Boolean(sessionStorage.getItem('ready') || undefined),
         platform: sessionStorage.getItem('platform') || undefined,
@@ -56,9 +56,18 @@ export default new Vuex.Store({
             state.platform = platform;
             sessionStorage.setItem('platform', platform);
         },
+        setLoginType(state, loginType) {
+            console.log(loginType);
+            state.loginType = loginType;
+            sessionStorage.setItem('loginType', loginType);
+        },
     },
     actions: {
+        setLoginTypeAct({commit}, loginType) {
+            console.log(loginType);
+            commit('setLoginType', loginType)
 
+        },
         setPlatformAct({commit}, platform) {
             console.log(platform);
             commit('setPlatform', platform)

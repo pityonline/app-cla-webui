@@ -24,6 +24,7 @@
                                 clearable=""
                                 filterable=""
                                 v-model="org"
+                                @change="changeOrg"
                                 value="">
                             <el-option
                                     v-for="item in orgOption"
@@ -67,7 +68,7 @@
 
 <script>
     import * as url from '../until/api'
-
+import {mapActions} from 'vuex'
     export default {
         name: "RepoSelect",
         data(){
@@ -81,6 +82,10 @@
             };
         },
         methods:{
+            ...mapActions(['setLoginTypeAct']),
+            changeOrg(){
+                this.getRepo()
+            },
             changePlatform(){
                     this.getOrg(this.platform)
             },
@@ -94,11 +99,12 @@
                         params:{
                             platform:platform,
                             org_id:'',
-                            apply_to:''
+                            apply_to:this.$store.state.loginType
                         }
                     }).then(res=>{
                         console.log(res);
                         this.orgOption=[];
+                        this.repoOption=[]
                         if (res.data.length) {
                             let arr =[]
                             res.data.forEach(item=>{
@@ -120,6 +126,33 @@
             },
             getRepo(){
                 console.log(this.org);
+                this.$axios({
+                    url:'/api' +url.getSignPage,
+                    params: {
+                        platform: this.platform,
+                        org_id: this.org,
+                        apply_to: this.$store.state.loginType
+                    }
+                }).then(res=>{
+                    console.log(res);
+                    this.repoOption=[];
+                    if (res.data.length) {
+                        let arr =[]
+                        res.data.forEach(item=>{
+                            arr.push(item.repo_id)
+                        })
+                        let newSet = new Set(arr)
+                        console.log(newSet);
+                        arr = [...newSet];
+                        arr.forEach(item=>{
+                            this.repoOption.push({label:item,value:item})
+                        })
+
+                        console.log(this.repoOption);
+                    }
+                }).catch(err=>{
+                    console.log(err);
+                })
             },
         },
         created() {
