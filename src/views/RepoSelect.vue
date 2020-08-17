@@ -105,6 +105,8 @@ import {mapActions} from 'vuex'
                         console.log(res);
                         this.orgOption=[];
                         this.repoOption=[]
+                        this.org=''
+                        this.repo=''
                         if (res.data.length) {
                             let arr =[]
                             res.data.forEach(item=>{
@@ -136,6 +138,7 @@ import {mapActions} from 'vuex'
                 }).then(res=>{
                     console.log(res);
                     this.repoOption=[];
+                    this.repo=''
                     if (res.data.length) {
                         let arr =[]
                         res.data.forEach(item=>{
