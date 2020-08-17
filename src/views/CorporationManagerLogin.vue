@@ -56,6 +56,9 @@
             };
         },
         methods:{
+            findPwd(){
+                this.$router.push('/findPwd')
+            },
             login(userName, pwd) {
                 this.$router.push('/rootManager')
                 let obj = {userName: userName, pwd: pwd};
@@ -89,6 +92,11 @@
     }
 </script>
 
-<style scoped>
-
+<style scoped lang="less">
+    .pointer {
+        cursor: pointer;
+    }
+    #forgetPwd:hover {
+        text-decoration: underline;
+    }
 </style>

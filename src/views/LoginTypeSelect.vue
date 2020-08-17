@@ -2,19 +2,19 @@
     <div >
         <el-row>
             <el-col :span="4" :offset="10" style="padding:3rem ">
-                <el-button type="primary" style="width: 100%;margin: 1rem 0" @click="submit('Individual')">
+                <el-button type="primary" size="medium" style="width: 100%;margin: 1rem 0;" @click="submit('Individual')">
                     Individual
                 </el-button>
-                <el-button type="primary" style="width: 100%;margin: 1rem 0" @click="submit('Corporation')">
+                <el-button type="primary" size="medium" style="width: 100%;margin: 1rem 0" @click="submit('Corporation')">
                     Corporation
                 </el-button>
-                <el-button type="primary" style="width: 100%;margin: 1rem 0" @click="submit('Employee')">
+                <el-button type="primary" size="medium" style="width: 100%;margin: 1rem 0" @click="submit('Employee')">
                     Employee
                 </el-button>
-                <el-button type="primary" style="width: 100%;margin: 1rem 0" @click="submit('RogManager')">
+                <el-button type="primary" size="medium" style="width: 100%;margin: 1rem 0" @click="submit('RogManager')">
                     RogManager
                 </el-button>
-                <el-button type="primary" style="width: 100%;margin: 1rem 0" @click="submit('CorporationManager')">
+                <el-button type="primary" size="medium" style="width: 100%;margin: 1rem 0" @click="submit('CorporationManager')">
                     CorporationManager
                 </el-button>
 
