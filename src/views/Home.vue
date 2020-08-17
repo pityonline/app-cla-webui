@@ -176,10 +176,10 @@
                     <el-tab-pane label="Linked Repositories" name="first" style="margin-top: 1rem">
 
                     </el-tab-pane>
-                    <el-tab-pane label="Signed Repositories" name="second" style="margin-top: 1rem">
+                    <!--<el-tab-pane label="Signed Repositories" name="second" style="margin-top: 1rem">-->
 
 
-                    </el-tab-pane>
+                    <!--</el-tab-pane>-->
                 </el-tabs>
                 <router-view></router-view>
             </div>
@@ -826,7 +826,8 @@
                     background: 'rgba(255, 255, 255, 0.8)'
                 });
                 setInterval(() => {
-                    this.$store.state.user.userName && this.$store.state.ready && loading.close();
+                    loading.close()
+                    // this.$store.state.user.userName && this.$store.state.ready && loading.close();
                 }, 500)
 
             },

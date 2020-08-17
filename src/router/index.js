@@ -7,13 +7,41 @@ const routes = [
     {
         path: '/',
         name: 'Login',
+        redirect:'/index',
         /*组件懒加载*/
-        component: () => import('../views/Login.vue')
+        // component: () => import('../views/Index.vue')
     },
     {
         path: '/login',
         /*组件懒加载*/
         component: () => import('../views/Login.vue')
+    },
+    {
+        path: '/index',
+        /*组件懒加载*/
+        component: () => import('../views/Index.vue'),
+        children: [
+            {
+                path: '/',
+                name: 'LoginTypeSelect',
+                component: () => import('../views/LoginTypeSelect.vue')
+            },
+            {
+                path: '/repoSelect',
+                name: 'RepoSelect',
+                component: () => import('../views/RepoSelect.vue')
+            },
+            {
+                path: '/platformSelect',
+                name: 'PlatformSelect',
+                component: () => import('../views/PlatformSelect.vue')
+            },
+            {
+                path: '/corporationManagerLogin',
+                name: 'CorporationManagerLogin',
+                component: () => import('../views/CorporationManagerLogin.vue')
+            },
+            ]
     },
     {
         path: '/home',
