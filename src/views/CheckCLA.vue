@@ -349,6 +349,13 @@
 
                 }).then(res => {
                     console.log(res);
+                    if (res.data.length) {
+                        res.data.forEach(item=>{
+
+                        })
+                    }else{
+
+                    }
                     this.claText = res.data.cla;
                     this.metaData = res.data.metadata;
                 }).catch(err => {

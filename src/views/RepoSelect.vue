@@ -75,9 +75,9 @@
                 platform: '',
                 platformOption: [{value: 'gitee', label: 'gitee'}, {value: 'github', label: 'github'},],
                 org:'',
-                orgOption: [{value: 'gitee', label: 'gitee'}, {value: 'github', label: 'github'},],
+                orgOption: [],
                 repo:'',
-                repoOption: [{value: 'gitee', label: 'gitee'}, {value: 'github', label: 'github'},],
+                repoOption: [],
             };
         },
         methods:{
@@ -89,18 +89,29 @@
             },
             getOrg(platform){
                 console.log(platform);
-                if (platform==='gitee'){
                     this.$axios({
-                        url:'/api' +url.getOrg,
+                        url:'/api' +url.getSignPage,
                         params:{
-
+                            platform:platform,
+                            org_id:'',
+                            apply_to:''
                         }
                     }).then(res=>{
                         console.log(res);
+                        this.orgOption=[];
+                        if (res.data.length) {
+                            res.data.forEach(item=>{
+                                this.orgOption.push(item.org_id)
+                            })
+                            let newSet = new Set(this.orgOption)
+                            console.log(newSet);
+                            this.orgOption = [...newSet];
+                            console.log(this.orgOption);
+                        }
                     }).catch(err=>{
                         console.log(err);
                     })
-                }
+
             },
             getRepo(){
                 console.log(this.org);
