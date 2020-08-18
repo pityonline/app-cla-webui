@@ -611,7 +611,7 @@
             },
             /*选择cla*/
             changeCla(value) {
-                console.log(claOptions, this.claValue);
+                console.log(this.claOptions, this.claValue);
                 this.showPreviewCla = true
                 this.claChoose = true;
                 this.previewText = this.claOptions[value].text;
