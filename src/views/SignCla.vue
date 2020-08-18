@@ -364,6 +364,11 @@
                     console.log(resp);
                     document.getElementById('claBox').innerHTML=resp.data.text
                     this.fields=resp.data.fields
+                    this.ruleForm={};
+                    this.fields.forEach(item=>{
+                        Object.assign(this.ruleForm,{[item.type]:''})
+                    })
+                    console.log(this.ruleForm);
 
                 }).catch(err => {
                     console.log(err);
@@ -446,7 +451,7 @@
                 let obj ={
                     cla_org_id:this.claOrgIdArr[this.value],
                     email:this.ruleForm.email,
-                    info:{}
+                    info:this.ruleForm,
                 }
                 this.$axios({
                     url: '/api' + url.individual_signing,
