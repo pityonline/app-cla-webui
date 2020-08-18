@@ -175,6 +175,7 @@
                 callback();
             }
             return {
+                fields:[],
                 claIdArr:[],
                 desc:'',
                 enDesc:{
@@ -401,7 +402,8 @@
                     // }
                 }).then(resp => {
                     console.log(resp);
-
+                    document.getElementById('claBox').innerHTML=resp.data.text
+                    this.fields=resp.data.fields
 
                 }).catch(err => {
                     console.log(err);
