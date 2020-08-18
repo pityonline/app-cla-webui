@@ -259,7 +259,7 @@
                     </el-row>
                     <el-row>
                         <el-col :offset="6" :span="5" v-if="claChoose">
-                            <!--{{claOptions[claValue].label}}-->
+                            {{claOptions[claValue].label}}
                         </el-col>
                         <el-col :offset="2" :span="5" v-if="repositoryChoose">
                             {{repositoryOptions[repositoryValue].label}}
@@ -602,7 +602,10 @@
                 this.$router.push('/createMetadata')
             },
             claVisibleChange(visible) {
-                this.claValue=''
+                if (this.filterChange) {
+                    this.claValue=''
+                }
+
                 if (visible && this.filterChange) {
                     this.getCLA();
                     this.filterChange = false;
@@ -611,6 +614,7 @@
             },
             /*选择cla*/
             changeCla(value) {
+                this.claValue=value
                 console.log(this.claOptions, this.claValue);
                 this.showPreviewCla = true
                 this.claChoose = true;
