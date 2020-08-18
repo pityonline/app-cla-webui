@@ -338,7 +338,7 @@
             /*查看CLA签署状态*/
             checkCla() {
                 console.log("checkCla");
-                this.$router.push('/checkCla')
+                this.$router.push('/signCla')
             },
             newWindow(repo) {
                 window.open(`https://gitee.com/${repo}`)

@@ -120,13 +120,13 @@
                         if (this.$store.state.loginType==='individual'||this.$store.state.loginType==='employee') {
                             window.location.href = 'https://gitee.com/oauth/authorize?client_id=2632e89d3dfb17ce941d2d2b45efc6f235afb4941ddb67578adda83aa33ab6a2&redirect_uri=http://139.159.224.207:60031/api/v1/login?platform=gitee&response_type=code';
                         }else{
-                            this.$router.push('/checkCla')
+                            this.$router.push('/signCla')
                         }
                     }else if(this.$store.state.platform === 'github'){
                         if (this.$store.state.loginType==='individual'||this.$store.state.loginType==='employee') {
                             window.location.href = 'https://github.com/login/oauth/authorize?client_id=d86f4915398dad23bffc&redirect_uri=http://localhost:8080/home&scope=user,user:email'  //逗号分隔多个权限
                         }else{
-                            this.$router.push('/checkCla')
+                            this.$router.push('/signCla')
                         }
                     }
 
