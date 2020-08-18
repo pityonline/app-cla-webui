@@ -737,7 +737,7 @@
                     headers: {
                         'Access-Token': this.$store.state.access_token,
                         'Refresh-Token': this.$store.state.refresh_token,
-                        'User': `${this.platform}/${this.$store.state.user.userName}`
+                        'User': `${this.$store.state.platform}/${this.$store.state.user.userName}`
                     }
                 }).then(res => {
                     console.log(res);

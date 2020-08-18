@@ -127,6 +127,8 @@
     import Footer from '@components/Footer'
     import * as until from '../until/until'
     import * as url from '../until/api'
+    import {mapActions} from 'vuex'
+
 
     export default {
 
@@ -307,16 +309,31 @@
             }
         },
         methods: {
+            ...mapActions(['setTokenAct','setRepoInfoAct']),
+
+            getCookieData() {
+                if (document.cookie !== '') {
+                    let cookieArr = document.cookie.split('; ')
+                    let access_token, refresh_token = '';
+                    cookieArr.forEach((item, index) => {
+                        let arr = item.split('=');
+                        arr[0] === 'access_token' ? access_token = arr[1] : arr[0] === 'refresh_token' ? refresh_token = arr[1] : refresh_token = '';
+                        ;
+                    })
+                    let data = {access_token, refresh_token};
+                    this.setTokenAct(data);
+                }
+
+            },
             changeLanguage() {
                 this.changeDesc();
                 this.$axios({
                     url: '/api' + url.getClaInfo,
-                    method: 'post',
-                    data: {language: this.languageOptions[this.value].label},
+                    params: {language: this.languageOptions[this.value].label},
                     headers: {
                         'Access-Token': this.$store.state.access_token,
                         'Refresh-Token': this.$store.state.refresh_token,
-                        'User': `${this.platform}/${this.$store.state.user.userName}`
+                        'User': `${this.$store.state.platform}/${this.$store.state.user.userName}`
                     }
 
                 }).then(res => {
@@ -530,8 +547,10 @@
         },
 
         created() {
+            this.getCookieData()
             this.getSignPage();
             this.loadMetadata()
+
         },
         mounted() {
             this.setClientHeight();

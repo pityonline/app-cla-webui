@@ -7,6 +7,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
+        repoInfo:JSON.parse(sessionStorage.getItem('repoInfo')) || undefined,
         loginType:sessionStorage.getItem('loginType') || undefined,
         tableData: JSON.parse(sessionStorage.getItem('tableData')) || undefined,
         ready: Boolean(sessionStorage.getItem('ready') || undefined),
@@ -61,8 +62,19 @@ export default new Vuex.Store({
             state.loginType = loginType;
             sessionStorage.setItem('loginType', loginType);
         },
+        setRepoInfo(state, obj) {
+            console.log(obj);
+            state.repoInfo = obj;
+            sessionStorage.setItem('repoInfo', obj);
+        },
     },
     actions: {
+        setRepoInfoAct({commit}, obj) {
+            console.log(obj);
+            commit('setRepoInfo', obj);
+
+
+},
         setLoginTypeAct({commit}, loginType) {
             console.log(loginType);
             commit('setLoginType', loginType)

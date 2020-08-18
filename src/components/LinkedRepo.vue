@@ -316,7 +316,7 @@
                         access_token: access_token,
                         refresh_token: refresh_token,
                         userName: res.data.login,
-                        platform: this.platform
+                        platform: this.$store.state.platform
                     }
                     this.getLinkedRepoListAct(obj);
 
@@ -366,7 +366,7 @@
                         access_token: this.$store.state.access_token,
                         refresh_token: this.$store.state.refresh_token,
                         userName: this.$store.state.user.userName,
-                        platform: this.platform
+                        platform: this.$store.state.platform
                     }
                     this.getLinkedRepoListAct(data)
                 }).catch(err => {

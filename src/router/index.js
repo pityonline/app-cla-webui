@@ -92,7 +92,7 @@ const routes = [
     {
         path: '/checkCLA',
         name: 'CheckCLA',
-        component: () => import('../views/CheckCLA.vue')
+        component: () => import('../views/SignCla.vue')
     },
     {
         path: '/verifyPage',
