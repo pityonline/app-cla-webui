@@ -60,6 +60,8 @@
                                               :label="item.title"
                                               :required="item.required"
                                               :prop="item.type">
+                                    <el-input v-if="item.type==='email'" readonly="" type="email" v-model="ruleForm[item.type]" size="small"></el-input>
+                                    <el-input v-if="item.type==='date'" readonly="" type="date" v-model="ruleForm[item.type]" size="small"></el-input>
                                     <el-input v-model="ruleForm[item.type]" size="small"></el-input>
                                 </el-form-item>
                                 <p style="font-size: .9rem;" class="borderClass">{{desc.metadataDesc}}</p>
@@ -433,7 +435,7 @@
                 })
             },
             /*发送验证码*/
-            signCla() {
+            signCla(url) {
                 // this.$router.push('/verifyPage?role=1')
                 // this.dialogVisible = true;
                 // this.isSendCode = true;
@@ -462,7 +464,7 @@
                     info:info,
                 }
                 this.$axios({
-                    url: '/api' + url.individual_signing,
+                    url: '/api' + url,
                     method: 'post',
                     data: obj,
                     headers: {
@@ -472,8 +474,8 @@
                     }
                 }).then(res => {
                     console.log(res);
-                    this.dialogVisible = true;
-                    this.isSendCode = true;
+                    // this.dialogVisible = true;
+                    // this.isSendCode = true;
 
                 }).catch(err => {
                     console.log(err);
@@ -482,7 +484,13 @@
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        this.signCla();
+                        if (this.$store.state.loginType === 'individual') {
+                            this.signCla(url.individual_signing);
+                        }else if (this.$store.state.loginType === 'corporation') {
+                            this.signCla(url.corporation_signing);
+                        }else if (this.$store.state.loginType === 'employee'){
+                            this.signCla(url.employee_signing);
+                        }
                     } else {
                         console.log('error submit!!');
                         return false;
