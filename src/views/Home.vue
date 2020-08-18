@@ -106,36 +106,7 @@
                                     </el-select>
 
                                 </div>
-                                <!--选择metadata-->
-                                <!--<div style="font-size: 1.2rem;padding: .5rem">-->
-                                <!--③ Choose a Metadata-->
-                                <!--</div>-->
-                                <!--<div style="font-size: 1rem;padding: 0 2rem .5rem 2rem">-->
-                                <!--Select from Gist-->
-                                <!--<span @click="createMetadata()"-->
-                                <!--style="font-size: .8rem;text-decoration: underline;cursor: pointer">(don't have one?)</span>-->
-                                <!--</div>-->
-                                <!--<div style="padding: 0 2rem">-->
 
-                                <!--<el-select v-model="metadataValue"-->
-                                <!--ref="metaSelect"-->
-                                <!--@visible-change="mataVisibleChange"-->
-                                <!--placeholder="select"-->
-                                <!--style="width: 100%"-->
-                                <!--filterable-->
-                                <!--@click="clickMetaSelect"-->
-                                <!--@foucs="metaFoucs"-->
-                                <!--size="medium"-->
-                                <!--@change="changeMetadata">-->
-                                <!--<el-option-->
-                                <!--v-for="item in metadataOptions"-->
-                                <!--:key="item.value"-->
-                                <!--:label="item.label"-->
-                                <!--:value="item.value">-->
-                                <!--</el-option>-->
-                                <!--</el-select>-->
-
-                                <!--</div>-->
                                 <div style="font-size: 1.2rem;padding: .5rem">
                                     ③ Email
                                 </div>
@@ -176,10 +147,6 @@
                     <el-tab-pane label="Linked Repositories" name="first" style="margin-top: 1rem">
 
                     </el-tab-pane>
-                    <!--<el-tab-pane label="Signed Repositories" name="second" style="margin-top: 1rem">-->
-
-
-                    <!--</el-tab-pane>-->
                 </el-tabs>
                 <router-view></router-view>
             </div>
@@ -644,6 +611,7 @@
             },
             /*选择cla*/
             changeCla(value) {
+                console.log(claOptions, this.claValue);
                 this.showPreviewCla = true
                 this.claChoose = true;
                 this.previewText = this.claOptions[value].text;
