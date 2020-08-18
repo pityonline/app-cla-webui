@@ -11,7 +11,7 @@
                 <el-button type="primary" size="medium" style="width: 100%;margin: 1rem 0" @click="submit('employee')">
                     Employee
                 </el-button>
-                <el-button type="primary" size="medium" style="width: 100%;margin: 1rem 0" @click="submit('rogManager')">
+                <el-button type="primary" size="medium" style="width: 100%;margin: 1rem 0" @click="submit('orgManager')">
                     OrgManager
                 </el-button>
                 <el-button type="primary" size="medium" style="width: 100%;margin: 1rem 0" @click="submit('corporationManager')">
@@ -41,7 +41,7 @@
             submit(loginType){
                 console.log(loginType);
                 this.setLoginTypeAct(loginType)
-                if (loginType==='rogManager') {
+                if (loginType==='orgManager') {
                     this.$router.push('/platformSelect')
                 }else if (loginType === 'corporationManager') {
                     this.$router.push('/CorporationManagerLogin')
