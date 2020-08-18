@@ -12,7 +12,7 @@
                     Employee
                 </el-button>
                 <el-button type="primary" size="medium" style="width: 100%;margin: 1rem 0" @click="submit('rogManager')">
-                    RogManager
+                    OrgManager
                 </el-button>
                 <el-button type="primary" size="medium" style="width: 100%;margin: 1rem 0" @click="submit('corporationManager')">
                     CorporationManager
@@ -41,9 +41,9 @@
             submit(loginType){
                 console.log(loginType);
                 this.setLoginTypeAct(loginType)
-                if (loginType==='RogManager') {
+                if (loginType==='rogManager') {
                     this.$router.push('/platformSelect')
-                }else if (loginType === 'CorporationManager') {
+                }else if (loginType === 'corporationManager') {
                     this.$router.push('/CorporationManagerLogin')
                 }else{
                     this.$router.push('/repoSelect')
