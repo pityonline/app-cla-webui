@@ -175,6 +175,7 @@
                 callback();
             }
             return {
+                claIdArr:[],
                 desc:'',
                 enDesc:{
                     personalContributor:'Individual Contributor',
@@ -367,14 +368,41 @@
                 }).then(res => {
                     console.log(res);
                     if (res.data.length) {
-                        res.data.forEach(item=>{
+                        this.languageOptions=[]
+                        this.claIdArr=[]
+                        res.data.forEach((item,index)=>{
+                            if (item.cla_language === 'english') {
+                                this.value=index;
+                                console.log('查找clatext');
+                                this.getClaText(item.cla_id)
 
+                            }
+                            this.languageOptions.push({value:index,label:item.cla_language})
+                            this.claIdArr.push(item.cla_id)
                         })
+
                     }else{
 
                     }
                     this.claText = res.data.cla;
                     this.metaData = res.data.metadata;
+                }).catch(err => {
+                    console.log(err);
+                })
+            },
+            /*查找clatext*/
+            getClaText(cla_id){
+                this.$axios({
+                    url: `/api${url.getClaInfo}/${cla_id}`,
+                    // headers: {
+                    //     'Access-Token': data.access_token,
+                    //     'Refresh-Token': data.refresh_token,
+                    //     'User': `${data.platform}/${data.userName}`
+                    // }
+                }).then(resp => {
+                    console.log(resp);
+
+
                 }).catch(err => {
                     console.log(err);
                 })
