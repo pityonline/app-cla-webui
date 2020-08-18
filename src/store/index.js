@@ -65,13 +65,13 @@ export default new Vuex.Store({
         setRepoInfo(state, obj) {
             console.log(obj);
             state.repoInfo = obj;
-            sessionStorage.setItem('repoInfo', obj);
+            sessionStorage.setItem('repoInfo', JSON.stringify(obj));
         },
     },
     actions: {
         setRepoInfoAct({commit}, obj) {
             console.log(obj);
-            commit('setRepoInfo', JSON.stringify(obj));
+            commit('setRepoInfo', obj);
 
 
 },
