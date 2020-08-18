@@ -324,6 +324,7 @@
                     params:{
                         platform:'gitee',
                         org_id:this.$store.state.repoInfo.org_id,
+                        repo_id:this.$store.state.repoInfo.repo_id,
                         apply_to: this.$store.state.loginType
                     }
 

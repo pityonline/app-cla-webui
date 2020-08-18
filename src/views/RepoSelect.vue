@@ -140,7 +140,8 @@
                         params:{
                             platform:platform,
                             org_id:'',
-                            apply_to:this.$store.state.loginType
+                            repo_id:'',
+                            apply_to:this.$store.state.loginType,
                         }
                     }).then(res=>{
                         console.log(res);
@@ -174,6 +175,7 @@
                     params: {
                         platform: this.platform,
                         org_id: this.org,
+                        repo_id:'',
                         apply_to: this.$store.state.loginType
                     }
                 }).then(res=>{
