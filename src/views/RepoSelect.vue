@@ -114,7 +114,7 @@
 
             },
             toSignCla(){
-                    this.setRepoInfoAct({platform:this.platform,org:this.org,repo:this.repo});
+                    this.setRepoInfoAct({platform:this.platform,org_id:this.org,repo_id:this.repo});
                 if (this.platform === 'gitee') {
                     console.log('gitee');
 
