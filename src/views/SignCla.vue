@@ -360,8 +360,8 @@
                     url: '/api' + url.getSignPage,
                     params:{
                         platform:'gitee',
-                        org_id:'',
-                        apply_to:''
+                        org_id:this.$store.state.repoInfo.org_id,
+                        apply_to: this.$store.state.loginType
                     }
 
                 }).then(res => {
