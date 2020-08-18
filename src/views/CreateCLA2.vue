@@ -168,10 +168,10 @@
                     description: '',
                     required: true,
                 }],
-                dataTypeOptions: [{label: 'string', value:  'string'}, {label: 'date', value: 'date'}, {
-                    label: 'number',
-                    value: 'number'
-                }, {label: 'telephone', value:  'telephone'}, {label: 'email', value: 'email'}, {label: 'boolean', value: 'boolean'}],
+                dataTypeOptions: [{label: 'name', value:  'name'}, {label: 'date', value: 'date'}, {
+                    label: 'telephone',
+                    value: 'telephone'
+                }, {label: 'address', value:  'address'}, {label: 'email', value: 'email'}, {label: 'fax', value: 'fax'}],
                 access_token: this.$store.state.access_token,
                 refresh_token: this.$store.state.refresh_token,
                 isAddNewMetaFile: false,
@@ -179,7 +179,6 @@
                 metaText: '',
                 currentIndex: '',
                 newMetaFileName: '',
-                metaTags: ['test', 'myMeta', 'test1', 'myTest', 'test2', 'test3', 'test4', 'test5', 'test6', 'test7', 'internationalMetadata', 'openLooKeng', 'test8'],
                 newClaFileName: '',
                 addNewFile: false,
                 isEdit: false,

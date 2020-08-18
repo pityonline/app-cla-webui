@@ -56,15 +56,15 @@
                             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="left"
                                      label-width="30%"
                                      class="demo-ruleForm">
-                                <el-form-item v-for="(item,index) in metadataArr"
+                                <el-form-item v-for="(item,index) in fields"
                                               :label="item.title"
                                               :required="item.required"
                                               :prop="item.githubKey">
-                                    <el-input v-model="ruleForm[item.githubKey]" size="small"></el-input>
+                                    <el-input v-model="ruleForm[item.type]" size="small"></el-input>
                                 </el-form-item>
                                 <p style="font-size: .9rem;" class="borderClass">{{desc.metadataDesc}}</p>
                                 <div class="marginTop1rem">
-                                    <el-checkbox v-model="isRead">{{metadata['category'].title}}</el-checkbox>
+                                    <el-checkbox v-model="isRead">I have read the Privacy Policy and hereby consent to the processing of my data by openLooKeng in Hong Kong"</el-checkbox>
                                 </div>
                                 <el-form-item label-width="0" class="marginTop1rem">
                                     <el-button :disabled="!isRead" type="primary" @click="submitForm('ruleForm')">{{desc.sign}}
@@ -204,8 +204,10 @@
                 ruleForm: {
                     name: '',
                     email: '',
-                    tel: '',
-                    date1: '',
+                    telephone: '',
+                    date: '',
+                    fax:'',
+                    address:'',
 
                 },
                 rules: {
@@ -219,7 +221,7 @@
                     ],
 
 
-                    phone: [
+                    telephone: [
                         {validator: verifyTel, trigger: 'blur'}
                     ],
                     address: [
@@ -247,24 +249,6 @@
                     '       “贡献者”或“我”是指下面签名栏中标明的个人或法人实体。对于法人实体，做出“贡献”的实体以及由该实体控制、受其控制或受其共同控制的所有其他实体均被视为“贡献者”。就本定义而言，“控制”是指有受控方或共同受控方至少50%直接或间接的投票权，资金或其他有价证券。\n' +
                     '\n' +
                     '       “贡献者”授予“社区”管理方和由“项目”所分发的软件的每个接收者一个永久性的、全球性的、免费的、非独占的、不可撤销的、有分许可权的版权许可，供其复制、使用、修改、分发其“贡献”，不论修改与否。',
-                metaData: [
-                    {
-                        label: '姓名',
-                        prop: 'name',
-                        required: true,
-                    },
-                    {
-                        label: '邮箱',
-                        prop: 'email',
-                        required: true,
-                    },
-                    {
-                        label: '电话',
-                        prop: 'tel',
-                        required: false,
-                    },
-
-                ],
                 metadata: {
                     "name": {
                         "title": "Name",
@@ -327,30 +311,14 @@
                 }
 
             },
-            changeLanguage() {
-                this.changeDesc();
-                this.$axios({
-                    url: '/api' + url.getClaInfo,
-                    params: {language: this.languageOptions[this.value].label},
-                    headers: {
-                        'Access-Token': this.$store.state.access_token,
-                        'Refresh-Token': this.$store.state.refresh_token,
-                        'User': `${this.$store.state.platform}/${this.$store.state.user.userName}`
-                    }
-
-                }).then(res => {
-                    console.log(res);
-                    this.claText = res.data.cla;
-                    this.metaData = res.data.metadata;
-
-                }).catch(err => {
-                    console.log(err);
-                })
+            changeLanguage(value) {
+                this.changeDesc(this.languageOptions[this.value].label);
+                this.getClaText(this.claIdArr[value])
             },
-            changeDesc(){
-                if (this.value === 0) {
+            changeDesc(language){
+                if (language === 'english') {
                     this.desc=this.enDesc;
-                }else if (this.value === 1) {
+                }else if (language === 'chinese') {
                     this.desc=this.cnDesc;
                 }
             },
@@ -385,8 +353,7 @@
                     }else{
 
                     }
-                    this.claText = res.data.cla;
-                    this.metaData = res.data.metadata;
+
                 }).catch(err => {
                     console.log(err);
                 })
@@ -421,10 +388,7 @@
 
                 }).then(res => {
                     console.log(res);
-                    if (res.status === 200) {
-                        this.claText = res.data.cla;
-                        this.metaData = res.data.metadata;
-                    }
+
                 }).catch(err => {
                     console.log(err);
                 })
