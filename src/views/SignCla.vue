@@ -325,7 +325,7 @@
             /*获取个人签署的metadata*/
             getSignPage() {
                 console.log('getSignPage');
-                this.changeDesc();
+                this.changeDesc('english');
                 this.$axios({
                     url: '/api' + url.getSignPage,
                     params:{
