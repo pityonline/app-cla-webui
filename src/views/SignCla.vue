@@ -448,13 +448,18 @@
                 //     tel: this.ruleForm.tel
                 // }
                 // console.log(obj);
+                let info={}
                 for(let key in this.ruleForm){
                     console.log(key);
+                    if (this.ruleForm[key] !== '') {
+                        Object.assign(info,{[key]:this.ruleForm[key]})
+                    }
                 }
+                console.log(info);
                 let obj ={
                     cla_org_id:this.claOrgIdArr[this.value],
                     email:this.ruleForm.email,
-                    info:this.ruleForm,
+                    info:info,
                 }
                 this.$axios({
                     url: '/api' + url.individual_signing,
