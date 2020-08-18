@@ -71,7 +71,7 @@ export default new Vuex.Store({
     actions: {
         setRepoInfoAct({commit}, obj) {
             console.log(obj);
-            commit('setRepoInfo', obj);
+            commit('setRepoInfo', JSON.stringify(obj));
 
 
 },
