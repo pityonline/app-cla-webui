@@ -118,7 +118,9 @@
                     this.setRepoInfoAct({platform:this.platform,org:this.org,repo:this.repo});
                     if (this.$store.state.platform === 'gitee') {
                         if (this.$store.state.loginType==='individual'||this.$store.state.loginType==='employee') {
-                            window.location.href = 'https://gitee.com/oauth/authorize?client_id=2632e89d3dfb17ce941d2d2b45efc6f235afb4941ddb67578adda83aa33ab6a2&redirect_uri=http://139.159.224.207:60031/api/v1/login?platform=gitee&response_type=code';
+                            // window.location.href = 'https://gitee.com/oauth/authorize?client_id=2632e89d3dfb17ce941d2d2b45efc6f235afb4941ddb67578adda83aa33ab6a2&redirect_uri=http://139.159.224.207:60031/api/v1/login?platform=gitee&response_type=code';
+                            this.$router.push('/signCla')
+
                         }else{
                             this.$router.push('/signCla')
                         }
