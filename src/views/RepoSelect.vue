@@ -115,9 +115,7 @@
             },
             toSignCla(){
                     this.setRepoInfoAct({platform:this.platform,org:this.org,repo:this.repo});
-                console.log('toSignCla');
-                console.log(this.$store.state.repoInfo.platform);
-                if (this.$store.state.repoInfo.platform === 'gitee') {
+                if (this.platform === 'gitee') {
                     console.log('gitee');
 
                     if (this.$store.state.loginType==='individual'||this.$store.state.loginType==='employee') {
@@ -129,7 +127,7 @@
                         }else{
                             this.$router.push('/signCla')
                         }
-                    }else if(this.$store.state.repoInfo.platform === 'github'){
+                    }else if(this.platform === 'github'){
                     console.log('github');
 
                     if (this.$store.state.loginType==='individual'||this.$store.state.loginType==='employee') {
