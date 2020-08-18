@@ -6,7 +6,7 @@
             <el-col :offset="8" :span="8">
                 <div>
 
-                    <svg-icon class="pointer" @click="toHome()" id="svg_logo" icon-class="logo_b"/>
+                    <svg-icon class="pointer" @click="" id="svg_logo" icon-class="logo_b"/>
                 </div>
             </el-col>
 
@@ -484,6 +484,7 @@
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
+                        console.log(this.$store.state.loginType);
                         if (this.$store.state.loginType === 'individual') {
                             this.signCla(url.individual_signing);
                         }else if (this.$store.state.loginType === 'corporation') {
