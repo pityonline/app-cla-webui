@@ -364,11 +364,11 @@
                     console.log(resp);
                     document.getElementById('claBox').innerHTML=resp.data.text
                     this.fields=resp.data.fields
-                    this.ruleForm={};
-                    this.fields.forEach(item=>{
-                        Object.assign(this.ruleForm,{[item.type]:''})
-                    })
-                    console.log(this.ruleForm);
+                    // this.ruleForm={};
+                    // this.fields.forEach(item=>{
+                    //     Object.assign(this.ruleForm,{[item.type]:''})
+                    // })
+                    // console.log(this.ruleForm);
 
                 }).catch(err => {
                     console.log(err);
@@ -448,6 +448,9 @@
                 //     tel: this.ruleForm.tel
                 // }
                 // console.log(obj);
+                for(let key in this.ruleForm){
+                    console.log(key);
+                }
                 let obj ={
                     cla_org_id:this.claOrgIdArr[this.value],
                     email:this.ruleForm.email,

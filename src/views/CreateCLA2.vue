@@ -147,7 +147,7 @@
             return {
                 metadataArr: [{
                     title: 'Name',
-                    type: 'string',
+                    type: 'name',
                     description: 'your name',
                     required: true,
                 }, {
