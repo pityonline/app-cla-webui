@@ -60,7 +60,7 @@
                                               :label="item.title"
                                               :required="item.required"
                                               :prop="item.type">
-                                    <el-input v-model="ruleForm[item.title]" size="small"></el-input>
+                                    <el-input v-model="ruleForm[item.type]" size="small"></el-input>
                                 </el-form-item>
                                 <p style="font-size: .9rem;" class="borderClass">{{desc.metadataDesc}}</p>
                                 <div class="marginTop1rem">
@@ -175,6 +175,7 @@
                 callback();
             }
             return {
+                claOrgIdArr:[],
                 fields:[],
                 claIdArr:[],
                 desc:'',
@@ -333,6 +334,7 @@
                     if (res.data.length) {
                         this.languageOptions=[]
                         this.claIdArr=[]
+                        this.claOrgIdArr=[]
                         res.data.forEach((item,index)=>{
                             if (item.cla_language === 'english') {
                                 this.value=index;
@@ -342,6 +344,7 @@
                             }
                             this.languageOptions.push({value:index,label:item.cla_language})
                             this.claIdArr.push(item.cla_id)
+                            this.claOrgIdArr.push(item.id)
                         })
 
                     }else{
@@ -356,11 +359,7 @@
             getClaText(cla_id){
                 this.$axios({
                     url: `/api${url.getClaInfo}/${cla_id}`,
-                    // headers: {
-                    //     'Access-Token': data.access_token,
-                    //     'Refresh-Token': data.refresh_token,
-                    //     'User': `${data.platform}/${data.userName}`
-                    // }
+
                 }).then(resp => {
                     console.log(resp);
                     document.getElementById('claBox').innerHTML=resp.data.text
@@ -430,22 +429,27 @@
             },
             /*发送验证码*/
             signCla() {
-                this.$router.push('/verifyPage?role=1')
-                this.dialogVisible = true;
-                this.isSendCode = true;
-                console.log(until.getClientHeight(), document.getElementById('checkCLA').offsetHeight);
-                this.checkCLAClass.height = until.getClientHeight() + 'px'
-                let code = `${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}`
-                let obj = {
-                    code: code,
-                    role: this.role,
-                    name: this.ruleForm.name,
-                    email: this.ruleForm.email,
-                    tel: this.ruleForm.tel
+                // this.$router.push('/verifyPage?role=1')
+                // this.dialogVisible = true;
+                // this.isSendCode = true;
+                // console.log(until.getClientHeight(), document.getElementById('checkCLA').offsetHeight);
+                // this.checkCLAClass.height = until.getClientHeight() + 'px'
+                // let code = `${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}`
+                // let obj = {
+                //     code: code,
+                //     role: this.role,
+                //     name: this.ruleForm.name,
+                //     email: this.ruleForm.email,
+                //     tel: this.ruleForm.tel
+                // }
+                // console.log(obj);
+                let obj ={
+                    cla_org_id:this.claOrgIdArr[this.value],
+                    email:this.ruleForm.email,
+                    info:{}
                 }
-                console.log(obj);
                 this.$axios({
-                    url: '/api' + url.signCla,
+                    url: '/api' + url.individual_signing,
                     method: 'post',
                     data: obj,
                     headers: {
