@@ -116,7 +116,7 @@
             toSignCla(){
                     this.setRepoInfoAct({platform:this.platform,org:this.org,repo:this.repo});
                 console.log('toSignCla');
-                console.log('toSignCla');
+                console.log(this.$store.state.repoInfo.platform);
                 if (this.$store.state.repoInfo.platform === 'gitee') {
                     console.log('gitee');
 
