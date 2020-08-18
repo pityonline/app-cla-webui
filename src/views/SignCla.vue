@@ -59,8 +59,8 @@
                                 <el-form-item v-for="(item,index) in fields"
                                               :label="item.title"
                                               :required="item.required"
-                                              :prop="item.githubKey">
-                                    <el-input v-model="ruleForm[item.type]" size="small"></el-input>
+                                              :prop="item.type">
+                                    <el-input v-model="ruleForm[item.title]" size="small"></el-input>
                                 </el-form-item>
                                 <p style="font-size: .9rem;" class="borderClass">{{desc.metadataDesc}}</p>
                                 <div class="marginTop1rem">
