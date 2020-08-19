@@ -21,23 +21,43 @@
                                 </div>
                                 <!--选择仓库-->
                                 <div style="font-size: 1.2rem;padding: .5rem">
-                                    ① Choose a repository <span v-if="!user.isAuthorize" @click="authorize()"
+                                    ① Choose a org or repository <span v-if="!user.isAuthorize" @click="authorize()"
                                                                 style="font-size: .8rem;text-decoration: underline;cursor: pointer">(want to link an org?)</span>
                                 </div>
                                 <div style="padding: 0 2rem">
-                                    <el-select v-model="repositoryValue"
-                                               placeholder="select"
-                                               style="width: 100%"
-                                               size="medium"
-                                               filterable
-                                               @change="changeRepository">
-                                        <el-option
-                                                v-for="item in repositoryOptions"
-                                                :key="item.value"
-                                                :label="item.label"
-                                                :value="item.value">
-                                        </el-option>
-                                    </el-select>
+                                    <el-row :gutter="10">
+                                        <el-col :span="12">
+                                            <el-select v-model="orgValue"
+                                                       placeholder="select"
+                                                       style="width: 100%"
+                                                       size="medium"
+                                                       filterable
+                                                       @change="changeOrg">
+                                                <el-option
+                                                        v-for="item in orgOptions"
+                                                        :key="item.value"
+                                                        :label="item.label"
+                                                        :value="item.value">
+                                                </el-option>
+                                            </el-select>
+                                        </el-col>
+                                        <el-col :span="12">
+                                            <el-select v-model="repositoryValue"
+                                                       placeholder="select"
+                                                       style="width: 100%"
+                                                       size="medium"
+                                                       filterable
+                                                       @change="changeRepository">
+                                                <el-option
+                                                        v-for="item in repositoryOptions"
+                                                        :key="item.value"
+                                                        :label="item.label"
+                                                        :value="item.value">
+                                                </el-option>
+                                            </el-select>
+                                        </el-col>
+                                    </el-row>
+
                                 </div>
                                 <!--选择协议-->
                                 <div style="font-size: 1.2rem;padding: .5rem">
@@ -389,6 +409,7 @@
                 gistUrl: '',
                 orgOptions: [],
                 orgValue: '',
+                orgChoose:false,
                 repositoryOptions: [],
                 repositoryValue: '',
                 repositoryChoose: '',
@@ -649,7 +670,13 @@
                 /*弹出dialog说明框，点击授权跳转到授权页面，点击确认授权，跳转至输入密码验证，成功之后自动跳转回配置页面*/
 
             },
+            /*选择组织*/
+            changeOrg(value) {
 
+                console.log(this.orgValue);
+                this.orgChoose = true;
+                this.getRepositoriesOfOrg(this.orgOptions[this.orgValue].login, this.orgOptions[this.orgValue].id)
+            },
             /*选择仓库*/
             changeRepository(value) {
                 console.log(this.repositoryValue);
@@ -672,7 +699,7 @@
                                 org: org,
                                 org_id: org_id,
                                 repoName: item.name,
-                                label: `${org}/${item.name}`,
+                                label: item.name,
                                 id: item.id
                             });
                         })
@@ -696,13 +723,14 @@
                         this.orgOptions = [];
                         res.data.forEach((item, index) => {
                             this.orgOptions.push({value: index, label: item.login, id: item.id});
-                            this.getRepositoriesOfOrg(item.login, item.id)
+
                         })
                     }
                 }).catch(err => {
                     console.log(err);
                 })
             },
+
             /*获取cla数据*/
             getCLA() {
                 console.log("getCLA");
