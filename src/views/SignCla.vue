@@ -61,7 +61,7 @@
                                               :required="item.required"
                                               :prop="item.type">
                                     <el-input v-if="item.type==='email'"  type="email" v-model="ruleForm[item.type]" size="small"></el-input>
-                                    <el-input v-else-if="item.type==='date'" readonly=""  type="date" v-model="ruleForm[item.type]" size="small"></el-input>
+                                    <el-input v-else-if="item.type==='date'" readonly=""   v-model="ruleForm[item.type]" size="small"></el-input>
                                     <el-input v-else v-model="ruleForm[item.type]" size="small"></el-input>
                                 </el-form-item>
                                 <p style="font-size: .9rem;" class="borderClass">{{desc.metadataDesc}}</p>
