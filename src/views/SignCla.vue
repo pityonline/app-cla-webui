@@ -446,7 +446,7 @@
                 })
             },
             /*发送验证码*/
-            signCla(url) {
+            signCla() {
                 // this.$router.push('/verifyPage?role=1')
                 // this.dialogVisible = true;
                 // this.isSendCode = true;
@@ -462,6 +462,8 @@
                 // }
                 // console.log(obj);
                 let info={}
+                let myUrl='';
+                let obj={};
                 for(let key in this.ruleForm){
                     console.log(key);
                     if (this.ruleForm[key] !== '') {
@@ -469,11 +471,30 @@
                     }
                 }
                 console.log(info);
-                let obj ={
-                    cla_org_id:this.claOrgIdArr[this.value],
-                    email:this.ruleForm.email,
-                    info:info,
+                if (this.$store.state.loginType === 'individual') {
+                    myUrl=url.individual_signing;
+                    obj ={
+                        cla_org_id:this.claOrgIdArr[this.value],
+                        email:this.ruleForm.email,
+                        info:info,
+                    }
+                }else if (this.$store.state.loginType === 'corporation') {
+                    myUrl=url.corporation_signing;
+                    obj ={
+                        cla_org_id:this.claOrgIdArr[this.value],
+                        email:this.ruleForm.email,
+                        AdminEmail:this.ruleForm.adminEmail,
+                        info:info,
+                    }
+                }else if (this.$store.state.loginType === 'employee'){
+                    myUrl=url.employee_signing;
+                    obj ={
+                        cla_org_id:this.claOrgIdArr[this.value],
+                        email:this.ruleForm.email,
+                        info:info,
+                    }
                 }
+
                 this.$axios({
                     url: '/api' + url,
                     method: 'post',
@@ -495,14 +516,9 @@
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
+                        this.signCla();
                         console.log(this.$store.state.loginType);
-                        if (this.$store.state.loginType === 'individual') {
-                            this.signCla(url.individual_signing);
-                        }else if (this.$store.state.loginType === 'corporation') {
-                            this.signCla(url.corporation_signing);
-                        }else if (this.$store.state.loginType === 'employee'){
-                            this.signCla(url.employee_signing);
-                        }
+
                     } else {
                         console.log('error submit!!');
                         return false;
