@@ -682,7 +682,13 @@
             /*选择仓库*/
             changeRepository(value) {
                 console.log(this.repositoryValue);
-                this.repositoryChoose = true;
+                if (this.repositoryValue !== '') {
+                    this.repositoryChoose = true;
+                }else {
+                    this.repositoryChoose = false;
+
+                }
+
 
             },
             getRepositoriesOfOrg(org, org_id) {
