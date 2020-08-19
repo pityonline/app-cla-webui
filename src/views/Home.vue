@@ -407,13 +407,19 @@
         },
         methods: {
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
+            resetCla(){
+                this.filterChange = true
+                this.claValue=''
+                this.previewText=''
+                this.getCLA()
+            },
             claTypeChange(val) {
                 console.log(val);
-                this.filterChange = true
+                this.resetCla()
             },
             claLanguageChange(val) {
                 console.log(val);
-                this.filterChange = true
+                this.resetCla()
             },
             handleChange(val) {
                 console.log(val);
@@ -602,10 +608,6 @@
                 this.$router.push('/createMetadata')
             },
             claVisibleChange(visible) {
-                if (this.filterChange) {
-                    this.claValue=''
-                }
-
                 if (visible && this.filterChange) {
                     this.getCLA();
                     this.filterChange = false;
