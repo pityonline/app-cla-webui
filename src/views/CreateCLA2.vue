@@ -277,6 +277,8 @@
 
             },
             myDeleteRow(index) {
+                console.log(index);
+
                 this.customMetadataArr.splice(index, 1)
 
             },
