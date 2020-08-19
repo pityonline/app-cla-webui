@@ -395,57 +395,61 @@
                             required: item.required,
                         })
                     })
-                    this.customMetadataArr.forEach((item, index) => {
-                        if (item.title === '' || item.type === '') {
+                    for(let i ;i<this.customMetadataArr.length;i++) {
+                        if (this.customMetadataArr[i].title === '' || this.customMetadataArr[i].type === '') {
                             this.$message.closeAll()
                             this.$message.error('Please fill in the complete field information')
-                        }else{
+                            break;
+                        }else {
                             fields.push({
-                                id:this.metadataArr.length+index+'',
-                                title: item.title,
-                                type: item.type,
-                                description: item.description,
-                                required: item.required,
+                                id: this.metadataArr.length + i + '',
+                                title: this.customMetadataArr[i].title,
+                                type: this.customMetadataArr[i].type,
+                                description: this.customMetadataArr[i].description,
+                                required: this.customMetadataArr[i].required,
                             })
-                            this.fullscreenLoading = true;
-                            let obj = {
-                                name: this.newClaFileName,
-                                text: this.claText,
-                                language: this.languageOptions[this.value].label,
-                                submitter: `${this.platform}/${this.user.userName}`,
-                                apply_to: this.metadataType,
-                                fields: fields,
+                            if (i===this.customMetadataArr.length-1){
+                                this.fullscreenLoading = true;
+                                let obj = {
+                                    name: this.newClaFileName,
+                                    text: this.claText,
+                                    language: this.languageOptions[this.value].label,
+                                    submitter: `${this.platform}/${this.user.userName}`,
+                                    apply_to: this.metadataType,
+                                    fields: fields,
 
-                            }
-                            console.log(obj);
-                            this.$axios({
-                                url: '/api' + url.uploadCla,
-                                method: 'post',
-                                data: obj,
-                                headers: {
-                                    'Access-Token': this.access_token,
-                                    'Refresh-Token': this.refresh_token,
-                                    'User': `${this.platform}/${this.user.userName}`
                                 }
+                                console.log(obj);
+                                this.$axios({
+                                    url: '/api' + url.uploadCla,
+                                    method: 'post',
+                                    data: obj,
+                                    headers: {
+                                        'Access-Token': this.access_token,
+                                        'Refresh-Token': this.refresh_token,
+                                        'User': `${this.platform}/${this.user.userName}`
+                                    }
 
-                            }).then(res => {
-                                console.log(res);
+                                }).then(res => {
+                                    console.log(res);
 
-                                this.fullscreenLoading = false;
-                                this.$message.success('succeed')
-                                setTimeout(() => {
-                                    this.$router.replace('/home')
-                                }, 2000)
+                                    this.fullscreenLoading = false;
+                                    this.$message.success('succeed')
+                                    setTimeout(() => {
+                                        this.$router.replace('/home')
+                                    }, 2000)
 
 
-                            }).catch(err => {
-                                console.log(err);
-                                this.fullscreenLoading = false;
-                                this.$message.error('failed')
-                            })
+                                }).catch(err => {
+                                    console.log(err);
+                                    this.fullscreenLoading = false;
+                                    this.$message.error('failed')
+                                })
+                            }
                         }
 
-                    })
+
+                    }
 
                 } else {
                     this.$message.closeAll();
