@@ -333,13 +333,20 @@
             getSignPage() {
                 console.log('getSignPage');
                 this.changeDesc('english');
+                let applyTo='';
+                if (this.$store.state.loginType === 'individual' || this.$store.state.loginType === 'employee') {
+                    applyTo='individual';
+                }else{
+                    applyTo='corporation';
+
+                }
                 this.$axios({
                     url: '/api' + url.getSignPage,
                     params:{
                         platform:'gitee',
                         org_id:this.$store.state.repoInfo.org_id,
                         repo_id:this.$store.state.repoInfo.repo_id,
-                        apply_to: this.$store.state.loginType
+                        apply_to: applyTo
                     }
 
                 }).then(res => {
