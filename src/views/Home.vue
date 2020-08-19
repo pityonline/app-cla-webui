@@ -25,12 +25,13 @@
                                                                 style="font-size: .8rem;text-decoration: underline;cursor: pointer">(want to link an org?)</span>
                                 </div>
                                 <div style="padding: 0 2rem">
-                                    <el-row :gutter="10">
+                                    <el-row :gutter="20">
                                         <el-col :span="12">
                                             <el-select v-model="orgValue"
                                                        placeholder="select"
                                                        style="width: 100%"
                                                        size="medium"
+                                                       clearable=""
                                                        filterable
                                                        @change="changeOrg">
                                                 <el-option
@@ -46,6 +47,7 @@
                                                        placeholder="select"
                                                        style="width: 100%"
                                                        size="medium"
+                                                       clearable=""
                                                        filterable
                                                        @change="changeRepository">
                                                 <el-option
@@ -141,7 +143,7 @@
                                 </div>
 
                                 <div
-                                        :class="{'linkBt pointer':claChoose&&repositoryChoose&&isEmail,'disableClass':!(claChoose&&repositoryChoose&&isEmail)}"
+                                        :class="{'linkBt pointer':claChoose&&orgChoose&&isEmail,'disableClass':!(claChoose&&repositoryChoose&&isEmail)}"
                                         @click="openLinkDialog()">
                                     <div>
                                         <svg-icon icon-class="link"></svg-icon>
