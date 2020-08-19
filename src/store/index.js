@@ -105,8 +105,9 @@ export default new Vuex.Store({
 
                 if (res.data.length) {
                     let tableData = [];
+                    let count = res.data.length
                     res.data.forEach((item, index) => {
-                        console.log(index);
+                       this.claChoose = true; console.log(index);
                         tableData.push({
                             id: item.id,
                             repository: `${item.org_id}/${item.repo_id}`,
@@ -130,7 +131,7 @@ export default new Vuex.Store({
                                 Object.assign(tableData[index], {
                                     claName: resp.data.name,
                                 })
-                                if (index === length - 1) {
+                                if (--count===0) {
                                     let obj = {tableData: tableData, ready: true}
                                     commit('setReady', obj);
                                 }
