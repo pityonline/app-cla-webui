@@ -296,8 +296,12 @@
             ...mapActions(['setTokenAct','setRepoInfoAct']),
             getNowDate() {
                 let date = new Date();
-
+                let year,month,day
+                year=date.getFullYear()
                 console.log(date.getFullYear(),date.getMonth() + 1, date.getDate());
+                date.getMonth() < 9?month=`0${date.getMonth()+1}`:month=date.getMonth()+1;
+                date.getDate()<10?day=`0${date.getDate()}`:day=date.getDate()
+                this.ruleForm.date=year+'-'+month+'-'+day
 
             },
             getCookieData() {
