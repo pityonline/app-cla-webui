@@ -264,6 +264,7 @@
         name: "linkedRepo",
         data() {
             return {
+                unlinkId:'',
                 platform: this.$store.state.platform,
                 editDialogVisible: false,
                 unLinkDialogVisible: false,
@@ -331,8 +332,9 @@
                 this.editDialogVisible = true
             },
 
-            unlinkHandleClick(index) {
-                console.log(index);
+            unlinkHandleClick(scope) {
+                console.log(scope);
+                this.unlinkId = scope.row.id;
                 this.unLinkDialogVisible = true
             },
             /*查看CLA签署状态*/
@@ -346,11 +348,8 @@
             /*解绑开源项目*/
             unLinkRepositoryFun() {
 
-                let obj = {
-                    id: this.$store.state.tableData[0].id,
-                };
                 this.$axios({
-                    url: `/api${url.unLinkRepository}/${this.$store.state.tableData[0].id}`,
+                    url: `/api${url.unLinkRepository}/${this.unlinkId}`,
                     method: 'delete',
                     headers: {
                         'Access-Token': this.$store.state.access_token,
@@ -360,7 +359,7 @@
 
                 }).then(res => {
                     console.log(res);
-                    this.$message.success('解绑成功')
+                    this.$message.success('success')
                     this.unLinkDialogVisible = false
                     let data = {
                         access_token: this.$store.state.access_token,

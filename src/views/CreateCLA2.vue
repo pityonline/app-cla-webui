@@ -48,7 +48,7 @@
 
                 <p>Edit your metaData
                     <el-tooltip class="item" effect="dark"
-                                content="The information you want contributors to fill in when they sign the cla"
+                                content="The information you want contributors to fill in when they sign the cla.Title and type are required, otherwise the field will fail to be added"
                                 placement="right">
                         <svg-icon icon-class="bangzhu"></svg-icon>
                     </el-tooltip>
@@ -278,8 +278,13 @@
             },
             myDeleteRow(index) {
                 console.log(index);
-
-                this.customMetadataArr.splice(index, 1)
+                if (this.customMetadataArr.length===1) {
+                    this.customMetadataArr[0].type=''
+                    this.customMetadataArr[0].title=''
+                    this.customMetadataArr[0].description=''
+                }else{
+                    this.customMetadataArr.splice(index, 1);
+                }
 
             },
             clickAddNewClaFile() {
@@ -398,11 +403,7 @@
                         })
                     })
                     for(let i=0 ;i<this.customMetadataArr.length;i++) {
-                        if (this.customMetadataArr[i].title === '' || this.customMetadataArr[i].type === '') {
-                            this.$message.closeAll()
-                            this.$message.error('Please fill in the complete field information')
-                            break;
-                        }else {
+                        if (this.customMetadataArr[i].title !== '' && this.customMetadataArr[i].type !== '') {
                             fields.push({
                                 id: this.metadataArr.length + i + '',
                                 title: this.customMetadataArr[i].title,
@@ -410,7 +411,8 @@
                                 description: this.customMetadataArr[i].description,
                                 required: this.customMetadataArr[i].required,
                             })
-                            if (i===this.customMetadataArr.length-1){
+                        }
+                        if (i===this.customMetadataArr.length-1) {
                                 this.fullscreenLoading = true;
                                 let obj = {
                                     name: this.newClaFileName,
@@ -448,7 +450,7 @@
                                     this.$message.error('failed')
                                 })
                             }
-                        }
+
 
 
                     }
