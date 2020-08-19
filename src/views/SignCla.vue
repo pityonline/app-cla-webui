@@ -486,6 +486,7 @@
                         corporation_name:this.ruleForm.corporationName,
                         admin_name:this.ruleForm.name,
                         admin_email:this.ruleForm.adminEmail,
+                        enabled:true,
                         info:info,
                     }
                 }else if (this.$store.state.loginType === 'employee'){
