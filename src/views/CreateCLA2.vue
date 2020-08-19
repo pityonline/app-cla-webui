@@ -395,7 +395,7 @@
                             required: item.required,
                         })
                     })
-                    for(let i ;i<this.customMetadataArr.length;i++) {
+                    for(let i=0 ;i<this.customMetadataArr.length;i++) {
                         if (this.customMetadataArr[i].title === '' || this.customMetadataArr[i].type === '') {
                             this.$message.closeAll()
                             this.$message.error('Please fill in the complete field information')
