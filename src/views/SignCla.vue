@@ -479,11 +479,13 @@
                         info:info,
                     }
                 }else if (this.$store.state.loginType === 'corporation') {
+
                     myUrl=url.corporation_signing;
                     obj ={
                         cla_org_id:this.claOrgIdArr[this.value],
-                        email:this.ruleForm.email,
-                        AdminEmail:this.ruleForm.adminEmail,
+                        corporation_name:this.ruleForm.corporationName,
+                        admin_name:this.ruleForm.name,
+                        admin_email:this.ruleForm.adminEmail,
                         info:info,
                     }
                 }else if (this.$store.state.loginType === 'employee'){
