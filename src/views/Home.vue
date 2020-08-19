@@ -408,6 +408,7 @@
         methods: {
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
             resetCla(){
+                this.claChoose = false;
                 this.filterChange = true
                 this.claValue=''
                 this.previewText=''
