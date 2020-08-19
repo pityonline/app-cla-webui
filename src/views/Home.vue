@@ -675,7 +675,7 @@
 
                 console.log(this.orgValue);
                 this.orgChoose = true;
-                this.getRepositoriesOfOrg(this.orgOptions[this.orgValue].login, this.orgOptions[this.orgValue].id)
+                this.getRepositoriesOfOrg(this.orgOptions[this.orgValue].label, this.orgOptions[this.orgValue].id)
             },
             /*选择仓库*/
             changeRepository(value) {
@@ -714,7 +714,6 @@
                 console.log("getOrgsInfo", obj);
                 this.$axios({
                     url: url.getOrgsInfo,
-                    methods: 'get',
                     params: obj,
                 }).then(res => {
                     console.log(res);
