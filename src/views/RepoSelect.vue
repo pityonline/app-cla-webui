@@ -182,13 +182,20 @@
             },
             getRepo(){
                 console.log(this.org);
+                let applyTo='';
+                if (this.$store.state.loginType === 'individual' || this.$store.state.loginType === 'employee') {
+                    applyTo='individual';
+                }else{
+                    applyTo='corporation';
+
+                }
                 this.$axios({
                     url:'/api' +url.getSignPage,
                     params: {
                         platform: this.platform,
                         org_id: this.org,
                         repo_id:'',
-                        apply_to: this.$store.state.loginType
+                        apply_to: applyTo
                     }
                 }).then(res=>{
                     console.log(res);
