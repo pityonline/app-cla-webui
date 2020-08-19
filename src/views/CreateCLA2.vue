@@ -396,13 +396,19 @@
                         })
                     })
                     this.customMetadataArr.forEach((item, index) => {
-                        fields.push({
-                            id:this.metadataArr.length+index+'',
-                            title: item.title,
-                            type: item.type,
-                            description: item.description,
-                            required: item.required,
-                        })
+                        if (item.title === '' || item.type === '') {
+                            this.$message.closeAll()
+                            this.$message.error('Please fill in the complete field information')
+                        }else{
+                            fields.push({
+                                id:this.metadataArr.length+index+'',
+                                title: item.title,
+                                type: item.type,
+                                description: item.description,
+                                required: item.required,
+                            })
+                        }
+
                     })
                     this.fullscreenLoading = true;
                     let obj = {
