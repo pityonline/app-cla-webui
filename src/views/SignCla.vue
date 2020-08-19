@@ -519,9 +519,7 @@
                     this.$message.closeAll()
                     this.$message.success('sign successfully')
                     // this.dialogVisible = true;
-                    for(let key in this.ruleForm){
-                        this.ruleForm[key]=''
-                    }
+                    this.resetForm('ruleForm')
                     this.isRead = false;
                     // this.isSendCode = true;
 
