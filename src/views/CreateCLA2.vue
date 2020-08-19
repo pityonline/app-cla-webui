@@ -407,45 +407,46 @@
                                 description: item.description,
                                 required: item.required,
                             })
+                            this.fullscreenLoading = true;
+                            let obj = {
+                                name: this.newClaFileName,
+                                text: this.claText,
+                                language: this.languageOptions[this.value].label,
+                                submitter: `${this.platform}/${this.user.userName}`,
+                                apply_to: this.metadataType,
+                                fields: fields,
+
+                            }
+                            console.log(obj);
+                            this.$axios({
+                                url: '/api' + url.uploadCla,
+                                method: 'post',
+                                data: obj,
+                                headers: {
+                                    'Access-Token': this.access_token,
+                                    'Refresh-Token': this.refresh_token,
+                                    'User': `${this.platform}/${this.user.userName}`
+                                }
+
+                            }).then(res => {
+                                console.log(res);
+
+                                this.fullscreenLoading = false;
+                                this.$message.success('succeed')
+                                setTimeout(() => {
+                                    this.$router.replace('/home')
+                                }, 2000)
+
+
+                            }).catch(err => {
+                                console.log(err);
+                                this.fullscreenLoading = false;
+                                this.$message.error('failed')
+                            })
                         }
 
                     })
-                    this.fullscreenLoading = true;
-                    let obj = {
-                        name: this.newClaFileName,
-                        text: this.claText,
-                        language: this.languageOptions[this.value].label,
-                        submitter: `${this.platform}/${this.user.userName}`,
-                        apply_to: this.metadataType,
-                        fields: fields,
 
-                    }
-                    console.log(obj);
-                    this.$axios({
-                        url: '/api' + url.uploadCla,
-                        method: 'post',
-                        data: obj,
-                        headers: {
-                            'Access-Token': this.access_token,
-                            'Refresh-Token': this.refresh_token,
-                            'User': `${this.platform}/${this.user.userName}`
-                        }
-
-                    }).then(res => {
-                        console.log(res);
-
-                        this.fullscreenLoading = false;
-                        this.$message.success('succeed')
-                        setTimeout(() => {
-                            this.$router.replace('/home')
-                        }, 2000)
-
-
-                    }).catch(err => {
-                        console.log(err);
-                        this.fullscreenLoading = false;
-                        this.$message.error('failed')
-                    })
                 } else {
                     this.$message.closeAll();
                     this.$message.error('The title is repeated')
