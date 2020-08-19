@@ -283,8 +283,11 @@
                         <el-col :offset="6" :span="5" v-if="claChoose">
                             {{claOptions[claValue].label}}
                         </el-col>
-                        <el-col :offset="2" :span="5" v-if="orgChoose">
+                        <el-col :offset="2" :span="5" v-if="orgChoose&&repositoryChoose">
                             {{orgOptions[orgValue].label/repositoryOptions[repositoryValue].label}}
+                        </el-col>
+                        <el-col :offset="2" :span="5" v-else>
+                            {{orgOptions[orgValue].label}}
                         </el-col>
                     </el-row>
                 </div>
