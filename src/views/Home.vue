@@ -286,7 +286,7 @@
                         <el-col :offset="2" :span="5" v-if="orgChoose&&repositoryChoose">
                             {{orgOptions[orgValue].label/repositoryOptions[repositoryValue].label}}
                         </el-col>
-                        <el-col :offset="2" :span="5" v-else>
+                        <el-col :offset="2" :span="5" v-if="orgChoose&&!repositoryChoose">
                             {{orgOptions[orgValue].label}}
                         </el-col>
                     </el-row>
