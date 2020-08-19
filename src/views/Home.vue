@@ -676,13 +676,22 @@
             changeOrg(value) {
 
                 console.log(this.orgValue);
-                this.orgChoose = true;
-                this.getRepositoriesOfOrg(this.orgOptions[this.orgValue].label, this.orgOptions[this.orgValue].id)
+                if(this.orgValue !== '') {
+                    this.orgChoose = true;
+                    this.getRepositoriesOfOrg(this.orgOptions[this.orgValue].label, this.orgOptions[this.orgValue].id)
+                }else {
+                    this.orgChoose = false;
+                    this.repositoryOptions=[];
+                    this.repositoryValue=''
+                    this.repositoryChoose=false
+
+                }
+
             },
             /*选择仓库*/
             changeRepository(value) {
                 console.log(this.repositoryValue);
-                if (this.repositoryValue !== '') {
+                if(this.repositoryValue !== '') {
                     this.repositoryChoose = true;
                 }else {
                     this.repositoryChoose = false;
