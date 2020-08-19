@@ -496,7 +496,7 @@
                 }
 
                 this.$axios({
-                    url: '/api' + url,
+                    url: '/api' + myUrl,
                     method: 'post',
                     data: obj,
                     headers: {
