@@ -61,7 +61,7 @@
                                               :required="item.required"
                                               :prop="item.type">
                                     <el-input v-if="item.type==='email'"  type="email" v-model="ruleForm[item.type]" size="small"></el-input>
-                                    <el-input v-else-if="item.type==='date'"  type="date" v-model="ruleForm[item.type]" size="small"></el-input>
+                                    <el-input v-else-if="item.type==='date'" readonly=""  type="date" v-model="ruleForm[item.type]" size="small"></el-input>
                                     <el-input v-else v-model="ruleForm[item.type]" size="small"></el-input>
                                 </el-form-item>
                                 <p style="font-size: .9rem;" class="borderClass">{{desc.metadataDesc}}</p>
@@ -294,7 +294,12 @@
         },
         methods: {
             ...mapActions(['setTokenAct','setRepoInfoAct']),
+            getNowDate() {
+                let date = new Date();
 
+                console.log(date.getFullYear(),date.getMonth() + 1, date.getDate());
+
+            },
             getCookieData() {
                 if (document.cookie !== '') {
                     let cookieArr = document.cookie.split('; ')
@@ -564,6 +569,7 @@
             this.getCookieData()
             this.getSignPage();
             this.loadMetadata()
+            this.getNowDate()
 
         },
         mounted() {
