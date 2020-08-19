@@ -205,6 +205,8 @@
                 repo: '',
                 role: '0',
                 ruleForm: {
+                    adminEmail:'',
+                    corporationName:'',
                     name: '',
                     email: '',
                     telephone: '',
