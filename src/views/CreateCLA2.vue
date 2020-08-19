@@ -162,7 +162,14 @@
                     required: true,
                 },],
                 metadataType: 'individual',
-                customMetadataArr: [{
+                customMetadataArr:'',
+                individualCustomMetadataArr: [{
+                    title: '',
+                    type: '',
+                    description: '',
+                    required: true,
+                }],
+                corporationCustomMetadataArr: [{
                     title: '',
                     type: '',
                     description: '',
@@ -234,6 +241,7 @@
                        description: 'the date of today',
                        required: true,
                    },]
+                   this.customMetadataArr=this.individualCustomMetadataArr;
                } else if(this.metadataType==='corporation'){
                    this.metadataArr = [
                        {
@@ -242,12 +250,7 @@
                            description: 'your corporation email',
                            required: true,
                        },
-                       {
-                           title: 'E-Mail',
-                           type: 'email',
-                           description: 'your corporation email',
-                           required: true,
-                       },
+
                        {
                            title: 'Name',
                            type: 'name',
@@ -255,7 +258,7 @@
                            required: true,
                        },
                        {
-                           title: 'AdminEmail',
+                           title: 'E-Mail',
                            type: 'adminEmail',
                            description: 'your email',
                            required: true,
@@ -265,6 +268,8 @@
                            description: 'the date of today',
                            required: true,
                        },];
+                   this.customMetadataArr=this.corporationCustomMetadataArr;
+
                }
             },
             addRow(index) {
@@ -274,6 +279,24 @@
                     description: '',
                     required: true,
                 })
+                if (this.metadataType==='individual'){
+                    this.individualCustomMetadataArr.splice(index + 1, 0, {
+                        title: '',
+                        type: '',
+                        description: '',
+                        required: true,
+                    })
+                }
+                else if (this.metadataType==='corporation') {
+                    this.corporationCustomMetadataArr.splice(index + 1, 0, {
+                        title: '',
+                        type: '',
+                        description: '',
+                        required: true,
+                    })
+                }
+
+
 
             },
             myDeleteRow(index) {
@@ -285,6 +308,27 @@
                 }else{
                     this.customMetadataArr.splice(index, 1);
                 }
+                if (this.metadataType==='individual'){
+                    if (this.individualCustomMetadataArr.length===1) {
+                        this.individualCustomMetadataArr[0].type=''
+                        this.individualCustomMetadataArr[0].title=''
+                        this.individualCustomMetadataArr[0].description=''
+                    }else{
+                        this.individualCustomMetadataArr.splice(index, 1);
+                    }
+                }
+                else if (this.metadataType==='corporation') {
+                    if (this.corporationCustomMetadataArr.length===1) {
+                        this.corporationCustomMetadataArr[0].type=''
+                        this.corporationCustomMetadataArr[0].title=''
+                        this.corporationCustomMetadataArr[0].description=''
+                    }else{
+                        this.corporationCustomMetadataArr.splice(index, 1);
+                    }
+                }
+
+
+
 
             },
             clickAddNewClaFile() {
