@@ -71,7 +71,7 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        z-index: 1;
+        z-index: 10;
         width: 100%;
         & > div:nth-of-type(1) {
             display: flex;
