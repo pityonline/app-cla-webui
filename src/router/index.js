@@ -68,11 +68,12 @@ const routes = [
                 name: 'SignedRepo',
                 component: () => import('../components/SignedRepo.vue')
             },
-            {
-                path: '/rootManager',
-                name: 'RootManager',
-                component: () => import('../components/RootManager.vue')
-            },]
+           ]
+    },
+    {
+        path: '/rootManager',
+        name: 'RootManager',
+        component: () => import('../views/RootManager.vue')
     },
     {
         path: '/config',

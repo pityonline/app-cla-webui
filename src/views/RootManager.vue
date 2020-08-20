@@ -1,5 +1,12 @@
 <template>
     <div id="section">
+
+        <HeaderPure></HeaderPure>
+        <el-tabs >
+            <el-tab-pane label="user management" name="first" style="margin-top: 1rem">
+
+            </el-tab-pane>
+        </el-tabs>
         <el-row>
             <el-button type="primary" size="small" @click="clickAddUser()">
                 create user
@@ -32,6 +39,7 @@
                 </el-table-column>
             </el-table>
         </el-row>
+        <Footer></Footer>
         <el-dialog
                 width="50%"
                 title="新增管理员"
@@ -85,10 +93,17 @@
 
 <script>
     import * as url from '../until/api'
+    import HeaderPure from '@components/HeaderPure'
+    import Footer from '@components/Footer'
+
 
     export default {
         name: "rootManager",
+        components: {
+            HeaderPure,
+            Footer
 
+        },
         data() {
             let validateAccount = (rule, value, callback) => {
                 if (value === '') {

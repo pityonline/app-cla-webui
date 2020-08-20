@@ -56,9 +56,7 @@
             };
         },
         methods:{
-            findPwd(){
-                this.$router.push('/findPwd')
-            },
+
             login(userName, pwd) {
                 this.$router.push('/rootManager')
                 let obj = {userName: userName, pwd: pwd};
