@@ -211,6 +211,9 @@
 </script>
 
 <style scoped lang="less">
+    #section{
+        padding-top: 4rem;
+    }
     .pointer {
         cursor: pointer;
     }

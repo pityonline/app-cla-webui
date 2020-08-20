@@ -24,7 +24,7 @@
         position: fixed;
         top: 0;
         left: 0;
-        background-color: white;
+        background-color: #ececec;
         height: 4rem;
         display: flex;
         flex-direction: row;
