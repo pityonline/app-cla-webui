@@ -28,7 +28,7 @@
                                     <el-row :gutter="20">
                                         <el-col :span="12">
                                             <el-select v-model="orgValue"
-                                                       placeholder="select"
+                                                       placeholder="select org"
                                                        style="width: 100%"
                                                        size="medium"
                                                        clearable=""
@@ -44,7 +44,7 @@
                                         </el-col>
                                         <el-col :span="12">
                                             <el-select v-model="repositoryValue"
-                                                       placeholder="select"
+                                                       placeholder="select repo"
                                                        style="width: 100%"
                                                        size="medium"
                                                        clearable=""
@@ -77,7 +77,7 @@
                                                 <el-col :span="12">
                                                     <el-select
                                                             v-model="claTypeValue"
-                                                            placeholder="select"
+                                                            placeholder="cla type"
                                                             size="medium"
                                                             clearable=""
                                                             @change="claTypeChange">
@@ -92,7 +92,7 @@
                                                 <el-col :span="12">
                                                     <el-select
                                                             v-model="claLanguageValue"
-                                                            placeholder="select"
+                                                            placeholder="language"
                                                             size="medium"
                                                             clearable=""
                                                             @change="claLanguageChange">
@@ -113,7 +113,7 @@
                                     <el-select
                                             ref="claSelect"
                                             v-model="claValue"
-                                            placeholder="select"
+                                            placeholder="select cla"
                                             @visible-change="claVisibleChange"
                                             style="width: 100%"
                                             size="medium"
@@ -284,7 +284,7 @@
                             {{claOptions[claValue].label}}
                         </el-col>
                         <el-col :offset="2" :span="5" v-if="orgChoose&&repositoryChoose">
-                            {{orgOptions[orgValue].label/repositoryOptions[repositoryValue].label}}
+                            {{orgOptions[orgValue].label}}/{{repositoryOptions[repositoryValue].label}}
                         </el-col>
                         <el-col :offset="2" :span="5" v-if="orgChoose&&!repositoryChoose">
                             {{orgOptions[orgValue].label}}
@@ -542,9 +542,9 @@
                 // window.open('https://github.com/ouchengle/Test','_black')
                 window.open('https://github.com/ouchengle')
             },
-            /*打开确认发布开源项目的弹框*/
+            /*打开确认绑定开源项目的弹框*/
             openLinkDialog() {
-                (this.repositoryChoose && this.claChoose && this.isEmail) && (this.linkDialogVisible = true)
+                (this.orgChoose && this.claChoose && this.isEmail) && (this.linkDialogVisible = true)
             },
 
 
