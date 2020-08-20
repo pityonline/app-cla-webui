@@ -2,43 +2,49 @@
     <div id="section">
 
         <HeaderPure></HeaderPure>
-        <el-tabs >
-            <el-tab-pane label="user management" name="first" style="margin-top: 1rem">
-
-            </el-tab-pane>
-        </el-tabs>
         <el-row>
-            <el-button type="primary" size="small" @click="clickAddUser()">
-                create user
-            </el-button>
-        </el-row>
-        <el-row class="marginTop1rem tableStyle">
-            <el-table :data="tableData">
-                <el-table-column
-                        prop="userName"
-                        label="用户名">
-                </el-table-column>
-                <el-table-column
-                        prop="pwd"
-                        label="密码">
-                </el-table-column>
-                <el-table-column
-                        prop="email"
-                        label="邮箱">
-                </el-table-column>
-                <el-table-column
-                        prop="class"
-                        label='部门'>
-                </el-table-column>
-                <el-table-column
-                        width="100">
-                    <template slot-scope="scope">
-                        <el-button type="danger" size="mini" @click="deleteUser(scope.row.id)">删除</el-button>
-                    </template>
+            <el-col :offset="4" :span="16">
+                <el-tabs>
+                    <el-tab-pane label="User Management" name="first" style="margin-top: 1rem">
 
-                </el-table-column>
-            </el-table>
+                    </el-tab-pane>
+                </el-tabs>
+
+                <el-row>
+                    <el-button type="primary" size="small" @click="clickAddUser()">
+                        create user
+                    </el-button>
+                </el-row>
+                <el-row class="marginTop1rem tableStyle">
+                    <el-table :data="tableData">
+                        <el-table-column
+                                prop="userName"
+                                label="用户名">
+                        </el-table-column>
+                        <el-table-column
+                                prop="pwd"
+                                label="密码">
+                        </el-table-column>
+                        <el-table-column
+                                prop="email"
+                                label="邮箱">
+                        </el-table-column>
+                        <el-table-column
+                                prop="class"
+                                label='部门'>
+                        </el-table-column>
+                        <el-table-column
+                                width="100">
+                            <template slot-scope="scope">
+                                <el-button type="danger" size="mini" @click="deleteUser(scope.row.id)">删除</el-button>
+                            </template>
+
+                        </el-table-column>
+                    </el-table>
+                </el-row>
+            </el-col>
         </el-row>
+
         <Footer></Footer>
         <el-dialog
                 width="50%"
