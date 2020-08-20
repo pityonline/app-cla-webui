@@ -363,7 +363,7 @@
 
 
                 isVerify: false,
-                activeName: '',
+                activeName: 'first',
                 previewShow: false,
                 previewText: '',
                 loginType: this.$store.state.loginType,

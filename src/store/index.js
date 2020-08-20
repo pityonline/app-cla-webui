@@ -113,11 +113,39 @@ export default new Vuex.Store({
                             id: item.id,
                             repository: `${item.org_id}/${item.repo_id}`,
                             cla: item.cla_id,
+                            org_id:item.org_id,
+                            repo_id:item.repo_id,
+                            apply_to:item.apply_to,
+                            cla_language:item.cla_language,
+                            platform:item.platform,
                             contributors: '0',
                         });
                         ((index, item, length, {commit}, tableData) => {
                             console.log(index, tableData, item, length);
-
+                            if (item.apply_to === 'corporation') {
+                                count++
+                                axios({
+                                    url: `/api${url.corporation_signing}/${item.platform}/${item.org_id}/${item.repo_id}/${item.cla_language}`,
+                                    headers: {
+                                        'Access-Token': data.access_token,
+                                        'Refresh-Token': data.refresh_token,
+                                        'User': `${data.platform}/${data.userName}`
+                                    }
+                                }).then(resp => {
+                                    console.log(resp);
+                                    console.log(index, tableData, item, length);
+                                    Object.assign(tableData[index], {
+                                        claName: resp.data.name,
+                                    })
+                                    if (--count===0) {
+                                        let obj = {tableData: tableData, ready: true}
+                                        commit('setReady', obj);
+                                    }
+                                    console.log(tableData);
+                                }).catch(err => {
+                                    console.log(err);
+                                })
+                            }
                             axios({
                                 url: `/api${url.getClaInfo}/${item.cla_id}`,
                                 headers: {

@@ -17,17 +17,16 @@
 
                 <el-table-column
                         prop="email"
-                        label="Email"
-                        align="center">
+                        label="Email">
                 </el-table-column>
                 <el-table-column
                         prop="date"
-                        label="Date"
-                        align="center">
+                        label="Date">
 
                 </el-table-column>
 
                 <el-table-column
+                        label="PDF"
                         align="center">
 
                     <template slot-scope="scope">
@@ -241,7 +240,7 @@
             }
         },
         created() {
-            this.getCookieData()
+            // this.getCookieData()
         },
         methods: {
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
