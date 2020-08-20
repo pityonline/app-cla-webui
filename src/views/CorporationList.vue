@@ -6,23 +6,18 @@
                     align="center"
                     style="width: 100%;">
                 <el-table-column
-                        prop="corporationName"
+                        prop="corporation_name"
                         label="CorporationName">
 
                 </el-table-column>
                 <el-table-column
-                        prop="adminName"
+                        prop="admin_name"
                         label="AdminName">
                 </el-table-column>
 
                 <el-table-column
-                        prop="email"
+                        prop="admin_email"
                         label="Email">
-                </el-table-column>
-                <el-table-column
-                        prop="date"
-                        label="Date">
-
                 </el-table-column>
 
                 <el-table-column
@@ -230,7 +225,7 @@
         name: "CorporationList",
         data() {
             return {
-                tableData:[{corporationName:'ooo',adminName:'ocl',email:'666@qq.com',date:'2020-08-18'},{corporationName:'oco',adminName:'oll',email:'555@qq.com',date:'2020-08-19'},],
+                tableData:[{corporation_name:'ooo',admin_name:'ocl',admin_email:'666@qq.com',date:'2020-08-18'},{corporation_name:'oco',admin_name:'oll',email:'555@qq.com',date:'2020-08-19'},],
                 unlinkId:'',
                 platform: this.$store.state.platform,
                 editDialogVisible: false,
