@@ -1,19 +1,22 @@
 <template>
-    <div id="section">
+    <div id="section" :style="section">
 
         <HeaderPure></HeaderPure>
-        <el-row>
+        <el-row style="margin-top: 2rem">
             <el-col :offset="4" :span="16">
-                <el-tabs>
+                <el-tabs v-model="active">
                     <el-tab-pane label="User Management" name="first" style="margin-top: 1rem">
 
                     </el-tab-pane>
                 </el-tabs>
 
                 <el-row>
-                    <el-button type="primary" size="small" @click="clickAddUser()">
-                        create user
-                    </el-button>
+                    <el-col align="left">
+                        <el-button type="primary" size="small" @click="clickAddUser()">
+                            create user
+                        </el-button>
+                    </el-col>
+
                 </el-row>
                 <el-row class="marginTop1rem tableStyle">
                     <el-table :data="tableData">
@@ -101,8 +104,14 @@
     import * as url from '../until/api'
     import HeaderPure from '@components/HeaderPure'
     import Footer from '@components/Footer'
+    import * as until from '../until/until'
 
-
+    window.onresize = () => {
+        // console.log(until.getClientHeight());
+        if (until.getClientHeight() > document.getElementById('section').offsetHeight) {
+            document.getElementById("section").style.height = until.getClientHeight() + 'px'
+        }
+    }
     export default {
         name: "rootManager",
         components: {
@@ -138,6 +147,10 @@
                 callback();
             };
             return {
+                section:{
+                    height:'',
+                },
+                active:'first',
                 maxUser: 2,
                 deleteUserVisible: false,
                 rules: {
@@ -166,7 +179,21 @@
                 },],
             }
         },
+        created(){
+            this.setClientHeight()
+        },
+
         methods: {
+            /*设置页面高度*/
+            setClientHeight() {
+                // console.log(until.getClientHeight());
+                this.$nextTick(() => {
+                    until.getClientHeight() > document.getElementById('section').offsetHeight ?
+                        this.section.height = until.getClientHeight() + 'px' :
+                        this.section.height = document.getElementById('section').offsetHeight
+
+                })
+            },
             addUser() {
                 let data = {}
                 this.$axios({
@@ -213,6 +240,13 @@
 <style scoped lang="less">
     #section{
         padding-top: 4rem;
+        background-color: #F5F5F5;
+        display: flex;
+        box-sizing: border-box;
+        flex-direction: column;
+        &>div:nth-of-type(2){
+        flex-grow: 1;
+    }
     }
     .pointer {
         cursor: pointer;
