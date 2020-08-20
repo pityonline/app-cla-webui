@@ -325,7 +325,7 @@
             /*查看该组织企业签署列表*/
             checkCorporationList(corporationInfo){
                 console.log('checkCorporationList',corporationInfo);
-                this.$router.push({path:'/corporationList',params:{corporationInfo:corporationInfo}})
+                this.$router.push({path:'/corporationList',query:{corporationInfo:corporationInfo}})
             },
             /*查看CLA签署状态*/
             checkCla() {
