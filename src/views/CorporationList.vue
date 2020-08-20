@@ -27,7 +27,7 @@
                     <template slot-scope="scope">
                         <el-tooltip slot="reference" effect="dark" content="pdf"
                                     placement="bottom">
-                            <svg-icon class="pointer" icon-class="pdf" @click="unlinkHandleClick(scope)"/>
+                            <svg-icon class="pointer" icon-class="pdf" @click=""/>
                         </el-tooltip>
 
                     </template>
@@ -38,7 +38,17 @@
                     <template slot-scope="scope">
                         <el-tooltip slot="reference" effect="dark" content="activation"
                                     placement="bottom">
-                            <svg-icon class="pointer" icon-class="delete" @click="unlinkHandleClick(scope)"/>
+                            <el-switch
+                                    @change="changeActive(scope.row.cla_org_id,scope.row.admin_email,true)"
+                                    v-model="scope.row.isUsed"
+                                    class="mySwitch"
+                                    :disabled="scope.row.isUsed"
+                                    width="3rem"
+                                    active-color="#409EFF"
+                                    active-text="激活"
+                                    inactive-text="停用"
+                                    inactive-color="#EBEEF5">
+                            </el-switch>
                         </el-tooltip>
 
                     </template>
@@ -241,7 +251,19 @@
         },
         methods: {
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
-
+            changeActive(cla_org_id, email) {
+                console.log('changeActive', cla_org_id, email);
+                let data = {id: cla_org_id, email: email}
+                this.$axios({
+                    url: `/api${url.corporationManager}`,
+                    method: 'post',
+                    data: data,
+                }).then(res => {
+                    console.log(res);
+                }).catch(err => {
+                    console.log(err);
+                })
+            },
             getCookieData() {
                 console.log('getCookieData');
                 if (document.cookie !== '') {
@@ -349,7 +371,34 @@
     }
 </script>
 
-<style scoped lang="less">
+<style  lang="less">
+    .mySwitch .el-switch__label {
+        position: absolute;
+        display: none;
+        color: #fff;
+    }
+
+    /*打开时文字位置设置*/
+    .mySwitch .el-switch__label--right {
+        z-index: 1;
+        right: 0.5rem;
+    }
+
+    /*关闭时文字位置设置*/
+    .mySwitch .el-switch__label--left {
+        z-index: 1;
+        left: .5rem;
+    }
+
+    /*显示文字*/
+    .mySwitch .el-switch__label.is-active {
+        display: block;
+    }
+
+    .mySwitch.el-switch .el-switch__core,
+    .el-switch .el-switch__label {
+        width: 50px !important;
+    }
     .tableStyle {
         margin-bottom: 2rem;
         padding: 3rem;
