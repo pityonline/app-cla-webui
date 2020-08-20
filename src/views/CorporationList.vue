@@ -241,6 +241,8 @@
         },
         created() {
             // this.getCookieData()
+            console.log(this.$route.params.corporationInfo);
+            this.tableData=this.$route.params.corporationInfo
         },
         methods: {
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),

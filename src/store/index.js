@@ -141,6 +141,7 @@ export default new Vuex.Store({
                                     console.log(resp);
                                     Object.assign(tableData[index], {
                                         contributors: resp.data.length,
+                                        corporationInfo:resp.data,
                                     })
                                     if (--count===0) {
                                         let obj = {tableData: tableData, ready: true}
