@@ -125,7 +125,13 @@ export default new Vuex.Store({
                             if (item.apply_to === 'corporation') {
                                 count++
                                 axios({
-                                    url: `/api${url.corporation_signing}/${item.platform}/${item.org_id}/${item.repo_id}/${item.cla_language}`,
+                                    url: `/api${url.corporation_signing}`,
+                                    params:{
+                                        platform:item.platform,
+                                        org_id:item.org_id,
+                                        repo_id:item.repo_id,
+                                        cla_language:item.cla_language
+                                    },
                                     headers: {
                                         'Access-Token': data.access_token,
                                         'Refresh-Token': data.refresh_token,
