@@ -7,8 +7,7 @@
                     style="width: 100%;">
                 <el-table-column
                         prop="repository"
-                        label="Repository"
-                        width="300">
+                        label="Repository">
                     <template slot-scope="scope">
                         <svg-icon icon-class="repository"/>
                         <span class="pointer hoverUnderline"
@@ -18,8 +17,7 @@
                 </el-table-column>
                 <el-table-column
                         prop="claName"
-                        label="CLA"
-                        width="180">
+                        label="CLA">
                     <template slot-scope="scope">
                                         <span class="pointer hoverUnderline"
                                               @click="checkCla()">{{scope.row.claName}}</span>
