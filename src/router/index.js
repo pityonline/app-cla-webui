@@ -51,12 +51,17 @@ const routes = [
             {
                 path: '/',
                 name: 'LinkedRepo',
-                component: () => import('../components/LinkedRepo.vue')
+                component: () => import('../views/LinkedRepo.vue')
             },
             {
                 path: '/linkedRepo',
                 name: 'LinkedRepo',
-                component: () => import('../components/LinkedRepo.vue')
+                component: () => import('../views/LinkedRepo.vue')
+            },
+            {
+                path: '/corporationList',
+                name: 'CorporationList',
+                component: () => import('../views/CorporationList.vue')
             },
             {
                 path: '/signedRepoLogin',

@@ -2,64 +2,51 @@
     <div>
         <div class="tableStyle">
             <el-table
-                    :data="this.$store.state.tableData"
+                    :data="tableData"
                     align="center"
                     style="width: 100%;">
                 <el-table-column
-                        prop="repository"
-                        label="Repository">
-                    <template slot-scope="scope">
-                        <svg-icon icon-class="repository"/>
-                        <span class="pointer hoverUnderline"
-                              @click="newWindow(scope.row.repository)"
-                              style="margin-left: 10px;">{{scope.row.repository}}</span>
-                    </template>
+                        prop="corporationName"
+                        label="CorporationName">
+
                 </el-table-column>
                 <el-table-column
-                        prop="claName"
-                        label="CLA">
-                    <template slot-scope="scope">
-                                        <span class="pointer hoverUnderline"
-                                              @click="checkCla()">{{scope.row.claName}}</span>
-                    </template>
+                        prop="adminName"
+                        label="AdminName">
                 </el-table-column>
 
                 <el-table-column
-                        prop="contributors"
-                        label="Corporation Contributors"
+                        prop="email"
+                        label="Email"
                         align="center">
+                </el-table-column>
+                <el-table-column
+                        prop="date"
+                        label="Date"
+                        align="center">
+
                 </el-table-column>
 
                 <el-table-column
                         align="center">
 
                     <template slot-scope="scope">
-                        <!--<el-tooltip class="item" effect="dark" content="Edit" placement="bottom">-->
-                            <!--<svg-icon class="pointer" style="display: inline-block;margin-right: .5rem"-->
-                                      <!--icon-class="edit" @click="editHandleClick(scope)"/>-->
-                        <!--</el-tooltip>-->
+                        <el-tooltip slot="reference" effect="dark" content="pdf"
+                                    placement="bottom">
+                            <svg-icon class="pointer" icon-class="pdf" @click="unlinkHandleClick(scope)"/>
+                        </el-tooltip>
 
-                        <el-tooltip slot="reference" effect="dark" content="unlink"
+                    </template>
+                </el-table-column>
+                <el-table-column
+                        align="center">
+
+                    <template slot-scope="scope">
+                        <el-tooltip slot="reference" effect="dark" content="activation"
                                     placement="bottom">
                             <svg-icon class="pointer" icon-class="delete" @click="unlinkHandleClick(scope)"/>
                         </el-tooltip>
-                        <!--<el-popover-->
-                        <!--width="80"-->
-                        <!--placement="right">-->
 
-                        <!--<div class="menuBT">-->
-                        <!--<el-button type="primary" size="medium">Import</el-button>-->
-                        <!--<el-button type="primary" size="medium">ReCheck PRs</el-button>-->
-                        <!--<el-button type="primary" size="medium">Get Badge</el-button>-->
-                        <!--<el-button type="primary" size="medium"-->
-                        <!--@click="unLinkDialogVisible=true">Unlink-->
-                        <!--</el-button>-->
-                        <!--</div>-->
-                        <!--<el-tooltip slot="reference" effect="dark" content="More.."-->
-                        <!--placement="bottom">-->
-                        <!--<svg-icon class="pointer" icon-class="menu"/>-->
-                        <!--</el-tooltip>-->
-                        <!--</el-popover>-->
                     </template>
                 </el-table-column>
 
@@ -241,9 +228,10 @@
     import * as url from '../until/api'
 
     export default {
-        name: "linkedRepo",
+        name: "CorporationList",
         data() {
             return {
+                tableData:[{corporationName:'ooo',adminName:'ocl',email:'666@qq.com',date:'2020-08-18'},{corporationName:'oco',adminName:'oll',email:'555@qq.com',date:'2020-08-19'},],
                 unlinkId:'',
                 platform: this.$store.state.platform,
                 editDialogVisible: false,
@@ -316,6 +304,10 @@
                 console.log(scope);
                 this.unlinkId = scope.row.id;
                 this.unLinkDialogVisible = true
+            },
+            /*查看该组织企业签署列表*/
+            checkCorporationList(){
+                console.log('checkCorporationList');
             },
             /*查看CLA签署状态*/
             checkCla() {
