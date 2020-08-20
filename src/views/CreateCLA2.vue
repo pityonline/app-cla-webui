@@ -349,7 +349,8 @@
                     this.getCLA();
                 }).catch(err => {
                     console.log(err);
-                    this.$message.error('已有绑定关系，无法删除')
+                    this.$message.closeAll();
+                    this.$message.error('Binding relationship already exists, unable to delete')
                 })
 
             },

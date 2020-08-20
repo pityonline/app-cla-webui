@@ -113,7 +113,6 @@ export default new Vuex.Store({
                             id: item.id,
                             repository: `${item.org_id}/${item.repo_id}`,
                             cla: item.cla_id,
-                            sharedGist: 'Yes',
                             contributors: '0',
                         });
                         ((index, item, length, {commit}, tableData) => {

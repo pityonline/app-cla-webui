@@ -25,39 +25,21 @@
                                               @click="checkCla()">{{scope.row.claName}}</span>
                     </template>
                 </el-table-column>
-                <el-table-column
-                        prop="gist"
-                        label="Gist">
-                    <template slot-scope="scope">
-                        <svg-icon style="cursor: pointer" icon-class="github"/>
-                    </template>
-                </el-table-column>
 
-                <el-table-column
-                        prop="sharedGist"
-                        label="Shared Gist">
-                </el-table-column>
                 <el-table-column
                         prop="contributors"
-                        label="Contributors"
+                        label="Corporation Contributors"
                         align="center">
                 </el-table-column>
-                <el-table-column
-                        prop="status"
-                        align="center"
-                        label="Status">
-                    <template slot-scope="scope">
-                        <svg-icon class="pointer" icon-class="link_active"/>
-                    </template>
-                </el-table-column>
+
                 <el-table-column
                         align="center">
 
                     <template slot-scope="scope">
-                        <el-tooltip class="item" effect="dark" content="Edit" placement="bottom">
-                            <svg-icon class="pointer" style="display: inline-block;margin-right: .5rem"
-                                      icon-class="edit" @click="editHandleClick(scope)"/>
-                        </el-tooltip>
+                        <!--<el-tooltip class="item" effect="dark" content="Edit" placement="bottom">-->
+                            <!--<svg-icon class="pointer" style="display: inline-block;margin-right: .5rem"-->
+                                      <!--icon-class="edit" @click="editHandleClick(scope)"/>-->
+                        <!--</el-tooltip>-->
 
                         <el-tooltip slot="reference" effect="dark" content="unlink"
                                     placement="bottom">

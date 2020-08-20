@@ -185,12 +185,12 @@
                 <p class="dialogDesc">Why link organizations?</p>
                 <!--<p>At <a href="https://gist.github.com/" target="_blank">gist.github.com</a> enter a file name and paste-->
                 <!--the content of your CLA.</p>-->
-                <p>If you link an organization with your CLA, CLA assistant sets a web hook on your organization and
+                <p>If you link an organization with your CLA, CLA system sets a web hook on your organization and
                     listens to Pull Requests of all repositories in the organization. That means that your CLA becomes
                     active for each existing and future repositories of your organization.</p>
                 <p class="dialogDesc">How can I link an organization?</p>
-                <p>CLA assistant needs an additional authorization from you to be able to create web hooks for
-                    organizations. To grant CLA assistant appropriate rights just click on the button below. For more
+                <p>CLA system needs an additional authorization from you to be able to create web hooks for
+                    organizations. To grant CLA system appropriate rights just click on the button below. For more
                     information on Authorization scopes see github documentation</p>
                 <div
                         class="linkBt pointer"
@@ -216,7 +216,7 @@
                     enter a file name and paste
                     the content of your CLA.</p>
                 <p class="dialogDesc">What happens if I edit the Gist file?</p>
-                <p>CLA assistant will always show you the current version of your Gist file. Users who accept your CLA
+                <p>CLA system will always show you the current version of your Gist file. Users who accept your CLA
                     sign the current version. If you change the content of your CLA, each contributor has to accept the
                     new version when they create a new pull request.</p>
             </div>
@@ -236,7 +236,7 @@
         <!--enter a file name and paste-->
         <!--the content of your Metadata.</p>-->
         <!--<p class="dialogDesc">What happens if I edit the Gist file?</p>-->
-        <!--<p>CLA assistant will always show you the current version of your Gist file. Users who accept your-->
+        <!--<p>CLA system will always show you the current version of your Gist file. Users who accept your-->
         <!--Metadata-->
         <!--sign the current version. If you change the content of your Metadata, each contributor has to accept-->
         <!--the-->
@@ -295,7 +295,7 @@
 
                 </div>
                 <div style="padding: 2rem 6rem;text-align: left;font-size: 1.3rem">
-                    <p style="text-align: center">CLA assistant will...</p>
+                    <p style="text-align: center">CLA system will...</p>
                     <ul>
                         <li>Create a webhook in your repository and listen for pull requests</li>
                         <li>Set a pull request CLA status</li>
