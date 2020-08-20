@@ -253,7 +253,7 @@
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
             changeActive(cla_org_id, email) {
                 console.log('changeActive', cla_org_id, email);
-                let data = {id: cla_org_id, email: email}
+                let data = {cla_org_id: cla_org_id, email: email}
                 this.$axios({
                     url: `/api${url.corporationManager}`,
                     method: 'post',
