@@ -36,8 +36,6 @@
                         align="center">
 
                     <template slot-scope="scope">
-                        <el-tooltip slot="reference" effect="dark" content="activation"
-                                    placement="bottom">
                             <div class="mySwitch" style="display: inline-block">
                                 <el-switch
                                         @change="changeActive(scope.row.cla_org_id,scope.row.corporation_name,scope.row.admin_email,true)"
@@ -51,7 +49,6 @@
                                         inactive-color="#EBEEF5">
                                 </el-switch>
                             </div>
-                        </el-tooltip>
                         <el-button style="margin-left: 1rem" type="primary" size="mini"
                                    @click="createRoot(scope.row.cla_org_id,scope.row.admin_email)">Create Root
                         </el-button>
@@ -184,10 +181,10 @@
     .el-switch .el-switch__label {
         width: 4rem !important;
     }
-    .mySwitch .el-switch.is-disabled .el-switch__core, .el-switch.is-disabled .el-switch__label
-    .tableStyle {
-       cursor: pointer;
+    .mySwitch .el-switch.is-disabled .el-switch__core,.mySwitch .el-switch.is-disabled .el-switch__label,.tableStyle{
+        cursor: pointer;
     }
+
 
     .paginationClass {
         text-align: center;
