@@ -265,14 +265,17 @@
         methods: {
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
             getTableData() {
-                 let tableData=this.$store.state.tableData
+                let tableData = this.$store.state.tableData
                 console.log(tableData);
-                for(let i=0;i<tableData.length;i++){
-                    for (let j = i + 1;j<tableData.length; j++){
-                        if (tableData[i].repository===tableData[j].repository){
-                         Object.assign(tableData[i],{children:tableData[j]})
-                         tableData.splice(j,1)
-                         j--;
+                for (let i = 0; i < tableData.length; i++) {
+                    for (let j = i + 1; j < tableData.length; j++) {
+                        if (tableData[i].repository === tableData[j].repository) {
+                            if (!tableData[i].children) {
+                                Object.assign(tableData[i], {children: []})
+                            }
+                            tableData[i].children.push(tableData[j])
+                            tableData.splice(j, 1)
+                            j--;
                         }
                     }
                 }
