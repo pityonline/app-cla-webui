@@ -276,6 +276,8 @@
                         }
                     }
                 }
+
+                console.log(this.$store.state.tableData);
                 console.log(tableData);
             },
             getCookieData() {
