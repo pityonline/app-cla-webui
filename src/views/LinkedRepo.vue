@@ -40,8 +40,8 @@
 
                     <template slot-scope="scope">
                         <!--<el-tooltip class="item" effect="dark" content="Edit" placement="bottom">-->
-                            <!--<svg-icon class="pointer" style="display: inline-block;margin-right: .5rem"-->
-                                      <!--icon-class="edit" @click="editHandleClick(scope)"/>-->
+                        <!--<svg-icon class="pointer" style="display: inline-block;margin-right: .5rem"-->
+                        <!--icon-class="edit" @click="editHandleClick(scope)"/>-->
                         <!--</el-tooltip>-->
 
                         <el-tooltip slot="reference" effect="dark" content="unlink"
@@ -249,7 +249,7 @@
         name: "linkedRepo",
         data() {
             return {
-                unlinkId:'',
+                unlinkId: '',
                 platform: this.$store.state.platform,
                 editDialogVisible: false,
                 unLinkDialogVisible: false,
@@ -257,12 +257,27 @@
                 currentPage: 1,
             }
         },
+
         created() {
             this.getCookieData()
+            this.getTableData()
         },
         methods: {
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
-
+            getTableData() {
+                 let tableData=this.$store.state.tableData
+                console.log(tableData);
+                for(let i=0;i<tableData.length;i++){
+                    for (let j = i + 1;j<tableData.length; j++){
+                        if (tableData[i].repository===tableData[j].repository){
+                         Object.assign(tableData[i],{children:tableData[j]})
+                         tableData.splice(j,1)
+                         j--;
+                        }
+                    }
+                }
+                console.log(tableData);
+            },
             getCookieData() {
                 console.log('getCookieData');
                 if (document.cookie !== '') {
@@ -323,9 +338,9 @@
                 this.unLinkDialogVisible = true
             },
             /*查看该组织企业签署列表*/
-            checkCorporationList(item){
-                console.log('checkCorporationList',item);
-                this.$router.push({path:'/corporationList',query:{item:item}})
+            checkCorporationList(item) {
+                console.log('checkCorporationList', item);
+                this.$router.push({path: '/corporationList', query: {item: item}})
             },
             /*查看CLA签署状态*/
             checkCla() {
