@@ -124,9 +124,11 @@
                         // window.location.href = 'https://gitee.com/oauth/authorize?client_id=2632e89d3dfb17ce941d2d2b45efc6f235afb4941ddb67578adda83aa33ab6a2&redirect_uri=http://139.159.224.207:60031/api/v1/login?platform=gitee&response_type=code';
                             this.$router.push('/signCla')
 
-                        }else{
+                        }else if (this.$store.state.loginType === 'corporation') {
                             this.$router.push('/signCla')
-                        }
+                        }else{
+                        this.$router.push('/corporationManagerLogin')
+                    }
                     }else if(this.platform === 'github'){
                     console.log('github');
 
