@@ -4,6 +4,7 @@
             <el-table
                     :data="tableData"
                     align="center"
+                    row-key="id"
                     :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
                     style="width: 100%;">
                 <el-table-column
@@ -36,6 +37,7 @@
                 <el-table-column
                         prop="contributors"
                         label="Corporation Contributors"
+                        min-width="300"
                         align="center">
                     <template slot-scope="scope">
                         <span class="pointer hoverUnderline"
@@ -45,6 +47,7 @@
                 </el-table-column>
 
                 <el-table-column
+                        width="100"
                         align="center">
 
                     <template slot-scope="scope">
@@ -300,8 +303,7 @@
                     }
                 })
                 this.tableData = tableData
-                console.log(this.$store.state.tableData);
-                console.log(tableData);
+                console.log(this.tableData);
             },
             getCookieData() {
                 console.log('getCookieData');
