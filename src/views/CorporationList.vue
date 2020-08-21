@@ -96,9 +96,12 @@
 
             console.log(this.$route.query.item, 'created');
             if (JSON.parse(sessionStorage.getItem('item'))) {
+                console.log('if');
                 this.item=JSON.parse(sessionStorage.getItem('item'))
                 this.getCorporationInfo()
             }else{
+                console.log('else');
+
                 this.tableData = this.$route.query.item.corporationInfo
                 this.item = this.$route.query.item
                 sessionStorage.setItem('item',JSON.stringify(this.$route.query.item))
