@@ -94,7 +94,7 @@
         },
         created() {
 
-            console.log(this.$route.query.item, 'created');
+            console.log(this.$route.query.item, 'created',sessionStorage.getItem('item'),JSON.parse(sessionStorage.getItem('item')));
             if (JSON.parse(sessionStorage.getItem('item'))) {
                 console.log('if');
                 this.item=JSON.parse(sessionStorage.getItem('item'))
