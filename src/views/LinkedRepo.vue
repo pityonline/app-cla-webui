@@ -14,7 +14,7 @@
                     <template slot-scope="scope">
                         <svg-icon icon-class="repository"/>
                         <span class="pointer hoverUnderline"
-                              @click="newWindow(scope.row.repository)"
+                              @click="checkCorporationList(scope.row)"
                               style="margin-left: 10px;">{{scope.row.repository}}</span>
                     </template>
                 </el-table-column>
@@ -34,17 +34,17 @@
                         prop="cla_language"
                         label="Language">
                 </el-table-column>
-                <el-table-column
-                        prop="contributors"
-                        label="Corporation Contributors"
-                        width="260"
-                        align="center">
-                    <template slot-scope="scope">
-                        <span class="pointer hoverUnderline"
-                              @click="checkCorporationList(scope.row)"
-                              style="margin-left: 10px;">{{scope.row.contributors}}</span>
-                    </template>
-                </el-table-column>
+                <!--<el-table-column-->
+                        <!--prop="contributors"-->
+                        <!--label="Corporation Contributors"-->
+                        <!--width="260"-->
+                        <!--align="center">-->
+                    <!--<template slot-scope="scope">-->
+                        <!--<span class="pointer hoverUnderline"-->
+                              <!--@click="checkCorporationList(scope.row)"-->
+                              <!--style="margin-left: 10px;">{{scope.row.contributors}}</span>-->
+                    <!--</template>-->
+                <!--</el-table-column>-->
 
                 <el-table-column
                         width="100"
