@@ -211,7 +211,11 @@
         cursor: pointer;
     }
 
-
+    .tableStyle{
+        margin-bottom: 2rem;
+        padding: 3rem;
+        background-color: white;
+    }
     .paginationClass {
         text-align: center;
         margin-bottom: 1rem;
