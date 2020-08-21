@@ -59,7 +59,7 @@
         methods:{
 
             login(userName, pwd) {
-                this.$router.push('/rootManager')
+                // this.$router.push('/rootManager')
                 let obj = {platform:this.$store.state.repoInfo.platform,org_id:this.$store.state.repoInfo.org_id,repo_id:this.$store.state.repoInfo.repo_id,user: userName, password: pwd};
                 this.$axios({
                     url: '/api' + url.corporationManagerAuth,
