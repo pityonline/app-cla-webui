@@ -26,3 +26,4 @@ export const deleteCon = '/v1/deleteContributor'                                
 export const changeActive = '/v1/changeActive'                                         //修改企业白名单人员状态
 export const getSignPage = '/v1/cla-org/signing-page'                                  //获取已绑定cla的组织   方式get   参数platform、org_id、apply_to
 export const corporationManager = '/v1/corporation-manager'                            //激活企业发送root账号   方式post   参数cla_org_id、email
+export const corporationManagerAuth = '/v1/corporation-manager/auth'                   //企业管理员登陆      方式post   参数org_id、repo_id,platform,user,password
