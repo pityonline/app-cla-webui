@@ -2,7 +2,7 @@
     <div>
         <div class="tableStyle">
             <el-table
-                    :data="this.$store.state.tableData"
+                    :data="tableData"
                     align="center"
                     style="width: 100%;">
                 <el-table-column
@@ -23,7 +23,14 @@
                                               @click="checkCla()">{{scope.row.claName}}</span>
                     </template>
                 </el-table-column>
-
+                <el-table-column
+                        prop="apply_to"
+                        label="Apply">
+                </el-table-column>
+                <el-table-column
+                        prop="cla_language"
+                        label="Language">
+                </el-table-column>
                 <el-table-column
                         prop="contributors"
                         label="Corporation Contributors"
@@ -39,11 +46,6 @@
                         align="center">
 
                     <template slot-scope="scope">
-                        <!--<el-tooltip class="item" effect="dark" content="Edit" placement="bottom">-->
-                        <!--<svg-icon class="pointer" style="display: inline-block;margin-right: .5rem"-->
-                        <!--icon-class="edit" @click="editHandleClick(scope)"/>-->
-                        <!--</el-tooltip>-->
-
                         <el-tooltip slot="reference" effect="dark" content="unlink"
                                     placement="bottom">
                             <svg-icon class="pointer" icon-class="delete" @click="unlinkHandleClick(scope)"/>
@@ -249,6 +251,7 @@
         name: "linkedRepo",
         data() {
             return {
+                tableData:[],
                 unlinkId: '',
                 platform: this.$store.state.platform,
                 editDialogVisible: false,
@@ -279,7 +282,22 @@
                         }
                     }
                 }
-
+                tableData.forEach(item=>{
+                    if (item.children) {
+                        item.children.forEach((it,index)=>{
+                            for (let i = index+1; i < item.children.length;i++)
+                            if (it.apply_to===item.children[i].apply_to){
+                                if (!it.children){
+                                    Object.assign(it,{children:[]})
+                                }
+                                it.children.push(item.children[i])
+                                item.children.splice(i,1)
+                                i--
+                            }
+                        })
+                    }
+                })
+                this.tableData=tableData
                 console.log(this.$store.state.tableData);
                 console.log(tableData);
             },
