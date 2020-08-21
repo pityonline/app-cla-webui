@@ -95,8 +95,12 @@
 
         watch:{
             // 监听,当路由发生变化的时候执行
-            $route(to,from){
-                console.log(from.path);
+            $route: {
+                handler: function(val, oldVal){
+                    console.log(val);
+                },
+                // 深度观察监听
+                deep: true
             }
         },
         created() {
@@ -116,6 +120,9 @@
             },
 
         methods: {
+            getPath(){
+                console.log(this.$route.path);
+            },
             getCorporationInfo() {
                 this.$axios({
                     url: `/api${url.corporation_signing}`,
