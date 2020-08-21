@@ -93,11 +93,18 @@
             }
         },
         created() {
-            // this.getCookieData()
+
             console.log(this.$route.query.item, 'created');
-            this.tableData = this.$route.query.item.corporationInfo
-            this.item = this.$route.query.item
-        },
+            if (JSON.parse(sessionStorage.getItem('item'))) {
+                this.item=JSON.parse(sessionStorage.getItem('item'))
+                this.getCorporationInfo()
+            }else{
+                this.tableData = this.$route.query.item.corporationInfo
+                this.item = this.$route.query.item
+                sessionStorage.setItem('item',JSON.stringify(this.$route.query.item))
+            }
+            },
+
         methods: {
             getCorporationInfo() {
                 this.$axios({
@@ -123,9 +130,13 @@
                     data: data,
                 }).then(res => {
                     console.log(res);
+                    this.$message.closeAll()
+                    this.$message.success('success')
                     this.getCorporationInfo()
                 }).catch(err => {
                     console.log(err);
+                    this.$message.closeAll()
+                    this.$message.error('failed')
                 })
             },
             changeActive(cla_org_id, corporation_name, admin_email, enabled) {
