@@ -4,10 +4,12 @@
             <el-table
                     :data="tableData"
                     align="center"
+                    :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
                     style="width: 100%;">
                 <el-table-column
                         prop="repository"
-                        label="Repository">
+                        label="Repository"
+                        width="300">
                     <template slot-scope="scope">
                         <svg-icon icon-class="repository"/>
                         <span class="pointer hoverUnderline"
@@ -251,7 +253,7 @@
         name: "linkedRepo",
         data() {
             return {
-                tableData:[],
+                tableData: [],
                 unlinkId: '',
                 platform: this.$store.state.platform,
                 editDialogVisible: false,
@@ -282,22 +284,22 @@
                         }
                     }
                 }
-                tableData.forEach(item=>{
+                tableData.forEach(item => {
                     if (item.children) {
-                        item.children.forEach((it,index)=>{
-                            for (let i = index+1; i < item.children.length;i++)
-                            if (it.apply_to===item.children[i].apply_to){
-                                if (!it.children){
-                                    Object.assign(it,{children:[]})
+                        item.children.forEach((it, index) => {
+                            for (let i = index + 1; i < item.children.length; i++)
+                                if (it.apply_to === item.children[i].apply_to) {
+                                    if (!it.children) {
+                                        Object.assign(it, {children: []})
+                                    }
+                                    it.children.push(item.children[i])
+                                    item.children.splice(i, 1)
+                                    i--
                                 }
-                                it.children.push(item.children[i])
-                                item.children.splice(i,1)
-                                i--
-                            }
                         })
                     }
                 })
-                this.tableData=tableData
+                this.tableData = tableData
                 console.log(this.$store.state.tableData);
                 console.log(tableData);
             },
