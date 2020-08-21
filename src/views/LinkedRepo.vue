@@ -37,7 +37,7 @@
                 <el-table-column
                         prop="contributors"
                         label="Corporation Contributors"
-                        min-width="300"
+                        min-width="220"
                         align="center">
                     <template slot-scope="scope">
                         <span class="pointer hoverUnderline"
