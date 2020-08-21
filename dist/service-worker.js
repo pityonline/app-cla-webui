@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.d26f448f5c1834b8b0aa1d768e24cc30.js"
+  "/precache-manifest.132124b78817f6c76e33da6959b2d79d.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "cla"});

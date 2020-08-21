@@ -145,6 +145,7 @@ export default new Vuex.Store({
                                     })
                                     if (--count===0) {
                                         let obj = {tableData: tableData, ready: true}
+                                        console.log(tableData);
                                         commit('setReady', obj);
                                     }
                                     console.log(tableData);
@@ -161,15 +162,15 @@ export default new Vuex.Store({
                                 }
                             }).then(resp => {
                                 console.log(resp);
-                                console.log(index, tableData, item, length);
                                 Object.assign(tableData[index], {
                                     claName: resp.data.name,
                                 })
                                 if (--count===0) {
                                     let obj = {tableData: tableData, ready: true}
+                                    console.log(tableData);
                                     commit('setReady', obj);
                                 }
-                                console.log(tableData);
+
                             }).catch(err => {
                                 console.log(err);
                             })
