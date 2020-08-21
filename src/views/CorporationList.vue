@@ -92,6 +92,13 @@
                 tableTotal: 0,
             }
         },
+
+        watch:{
+            // 监听,当路由发生变化的时候执行
+            $route(to,from){
+                console.log(from.path);
+            }
+        },
         created() {
 
             console.log(this.$route.query.item, 'created',sessionStorage.getItem('item'),JSON.parse(sessionStorage.getItem('item')));
