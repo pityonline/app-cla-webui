@@ -52,7 +52,9 @@
                                 </el-switch>
                             </div>
                         </el-tooltip>
-                        <el-button style="margin-left: 1rem" type="primary" size="mini" @click="createRoot(scope.row.cla_org_id,scope.row.admin_email)">Create Root</el-button>
+                        <el-button style="margin-left: 1rem" type="primary" size="mini"
+                                   @click="createRoot(scope.row.cla_org_id,scope.row.admin_email)">Create Root
+                        </el-button>
 
                     </template>
                 </el-table-column>
@@ -76,45 +78,75 @@
 
 </template>
 <script>
-    import {mapActions} from 'vuex'
     import * as url from '../until/api'
 
     export default {
         name: "CorporationList",
         data() {
             return {
-                tableData:[{corporation_name:'ooo',admin_name:'ocl',admin_email:'666@qq.com',date:'2020-08-18'},{corporation_name:'oco',admin_name:'oll',email:'555@qq.com',date:'2020-08-19'},],
-                currentPage:1,
-                tableTotal:0,
+                item: '',
+                tableData: [{
+                    corporation_name: 'ooo',
+                    admin_name: 'ocl',
+                    admin_email: '666@qq.com',
+                    date: '2020-08-18'
+                }, {corporation_name: 'oco', admin_name: 'oll', email: '555@qq.com', date: '2020-08-19'},],
+                currentPage: 1,
+                tableTotal: 0,
             }
         },
         created() {
             // this.getCookieData()
-            console.log(this.$route.query.corporationInfo,'created');
-            this.tableData=this.$route.query.corporationInfo
+            console.log(this.$route.query.item, 'created');
+            this.tableData = this.$route.query.item.corporationInfo
+            this.item = this.$route.query.item
         },
         methods: {
-            createRoot(cla_org_id,email){
-                let data = {cla_org_id: cla_org_id,email: email}
+            getCorporationInfo() {
+                this.$axios({
+                    url: `/api${url.corporation_signing}`,
+                    params: {
+                        platform: this.item.platform,
+                        org_id: this.item.org_id,
+                        repo_id: this.item.repo_id,
+                        cla_language: this.item.cla_language
+                    },
+                }).then(resp => {
+                    console.log(resp);
+                    this.tableData = resp.data;
+                }).catch(err => {
+                    console.log(err);
+                })
+            },
+            createRoot(cla_org_id, email) {
+                let data = {cla_org_id: cla_org_id, email: email}
                 this.$axios({
                     url: `/api${url.corporationManager}`,
                     method: 'post',
                     data: data,
                 }).then(res => {
                     console.log(res);
+                    this.getCorporationInfo()
                 }).catch(err => {
                     console.log(err);
                 })
             },
-            changeActive(cla_org_id, corporation_name,admin_email,enabled) {
+            changeActive(cla_org_id, corporation_name, admin_email, enabled) {
                 console.log('changeActive', cla_org_id, admin_email);
-                let data = {cla_org_id: cla_org_id,corporation_name:corporation_name, admin_email: admin_email,enabled:enabled}
+                let data = {
+                    cla_org_id: cla_org_id,
+                    corporation_name: corporation_name,
+                    admin_email: admin_email,
+                    enabled: enabled
+                }
                 this.$axios({
                     url: `/api${url.active_corporation}`,
                     method: 'put',
                     data: data,
                 }).then(res => {
                     console.log(res);
+                    this.getCorporationInfo()
+
                 }).catch(err => {
                     console.log(err);
                 })
@@ -124,7 +156,7 @@
     }
 </script>
 
-<style  lang="less">
+<style lang="less">
     .mySwitch .el-switch__label {
         position: absolute;
         display: none;
@@ -152,6 +184,7 @@
     .el-switch .el-switch__label {
         width: 4rem !important;
     }
+
     .tableStyle {
         margin-bottom: 2rem;
         padding: 3rem;
