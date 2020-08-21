@@ -184,11 +184,9 @@
     .el-switch .el-switch__label {
         width: 4rem !important;
     }
-
+    .mySwitch .el-switch.is-disabled .el-switch__core, .el-switch.is-disabled .el-switch__label
     .tableStyle {
-        margin-bottom: 2rem;
-        padding: 3rem;
-        background-color: white;
+       cursor: pointer;
     }
 
     .paginationClass {
