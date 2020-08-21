@@ -97,6 +97,9 @@
             // 不！能！获取组件实例 `this`
             // 因为当钩子执行前，组件实例还没被创建
             console.log(from.path,to.path,this);
+            if (from.path!=='/') {
+                sessionStorage.removeItem('item')
+            }
             next();
         },
         beforeRouteUpdate (to, from, next) {
