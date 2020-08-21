@@ -39,17 +39,18 @@
                         <el-tooltip slot="reference" effect="dark" content="activation"
                                     placement="bottom">
                             <el-switch
-                                    @change="changeActive(scope.row.cla_org_id,scope.row.admin_email,true)"
-                                    v-model="scope.row.isUsed"
+                                    @change="changeActive(scope.row.cla_org_id,scope.row.corporation_name,scope.row.admin_email,true)"
+                                    v-model="scope.row.enabled"
                                     class="mySwitch"
-                                    :disabled="scope.row.isUsed"
+                                    :disabled="scope.row.enabled"
                                     width="3rem"
                                     active-color="#409EFF"
-                                    active-text="激活"
-                                    inactive-text="停用"
+                                    active-text="active"
+                                    inactive-text="inactive"
                                     inactive-color="#EBEEF5">
                             </el-switch>
                         </el-tooltip>
+                        <el-button type="primary" size="small" @click="createRoot(scope.row.cla_org_id,scope.row.admin_email)">Create Root</el-button>
 
                     </template>
                 </el-table-column>
@@ -68,161 +69,6 @@
                     :total="tableTotal">
             </el-pagination>
         </div>
-        <el-dialog
-                title=""
-                top="5vh"
-                :visible.sync="unLinkDialogVisible"
-                width="35%">
-            <div>
-                <p class="dialogDesc">Are you sure you want to unlink?</p>
-                <div style="text-align: center">
-                    <svg-icon style="width: 30rem;height: 20rem;margin:0 auto" icon-class="error"></svg-icon>
-                </div>
-
-                <div style="padding: 0 6rem;text-align: left;font-size: 1.3rem">
-                    <p style="text-align: center">Unlinking will...</p>
-                    <ul>
-                        <li>Remove the CLA assistant webhook in your repository/organization
-                        </li>
-                        <li>Remove the link to your list of contributors</li>
-
-                    </ul>
-                </div>
-
-                <div class="right">
-                    <el-button @click="unLinkDialogVisible = false">Keep it</el-button>
-                    <el-button type="danger" @click="unLinkRepositoryFun()">Unlink anyway</el-button>
-                </div>
-
-            </div>
-
-        </el-dialog>
-        <el-dialog
-                title=""
-                top="5vh"
-                :visible.sync="editDialogVisible"
-                width="35%">
-            <div>
-                <p class="size_b">Edit ooo/Test</p>
-                <div class="left">
-                    <div>
-                        <span class="size_m">Choose a CLA</span>
-                    </div>
-                    <div>
-                        <span>(please note that changing the CLA results in a new request to sign the CLA from the contributors!)</span>
-                    </div>
-                    <p class="size_m" style="margin-bottom: .2rem">Select from Gist</p>
-                    <el-select v-model="claValue"
-                               clearable
-                               placeholder="select"
-                               style="width: 100%"
-                               size="medium"
-                               @change="changeCla"
-                               :value="claValue">
-                        <el-option
-                                v-for="item in claOptions"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value">
-                        </el-option>
-                    </el-select>
-                    <div class="dialogDec">
-                        Email
-                    </div>
-                    <el-input
-                            size="medium"
-                            placeholder="Input your email"
-                            v-model="email">
-
-                    </el-input>
-                    <div class="dialogDec">
-                        - or -
-                    </div>
-                    <div class="dialogDec">
-                        Paste a URL from a Gist
-                    </div>
-                    <div>
-                        <el-input
-                                size="medium"
-                                placeholder="https://gist.github.com/<your cla gist id>"
-                                v-model="gistUrl">
-
-                        </el-input>
-                    </div>
-                    <!--是否分享-->
-                    <div class="dialogDec">
-                        <el-checkbox v-model="shareGistChecked"/>
-                        Share the Gist
-                        <span class="qusLink"
-                              @click="shareDialogVisible=true">(want to share?)</span>
-                    </div>
-
-                    <!--文件修改数-->
-                    <div class="dialogDec">
-                        Minimum File Number Changes
-                    </div>
-                    <div>
-                        <el-input
-                                type="number"
-                                size="medium"
-                                placeholder="number"
-                                v-model="fileNumber">
-
-                        </el-input>
-                    </div>
-                    <!--行修改数-->
-                    <div class="dialogDec">
-                        - or -
-                    </div>
-                    <div class="dialogDec">
-                        Minimum Line Number Changes
-                    </div>
-                    <div>
-                        <el-input
-                                type="number"
-                                size="medium"
-                                placeholder="number"
-                                v-model="lineNumber">
-
-                        </el-input>
-                    </div>
-
-                    <div class="dialogDec">Specify usernames to be whitelisted <span class="qusLink">(how does this work?)</span>
-                    </div>
-                    <span>(you can also use wildcard *)</span>
-                    <div class="dialogDec">
-                        <el-input
-                                size="medium"
-                                placeholder="user1,user2,*[bot]"
-                                v-model="gistUrl">
-
-                        </el-input>
-                    </div>
-                    <div class="dialogDec">
-                    <span>Request the user's consent to the use of personal data in accordance with your privacy policy.
-                        Please, provide a link to your Privacy Policy here</span>
-                    </div>
-                    <div class="dialogDec">
-                        <el-input
-                                size="medium"
-                                placeholder="https://..."
-                                v-model="gistUrl">
-
-                        </el-input>
-                    </div>
-
-                </div>
-
-
-                <div class="right" style="margin: 1rem 0">
-                <span slot="footer" class="dialog-footer">
-                    <el-button @click="editDialogVisible = false">Cancel</el-button>
-                    <el-button type="primary" @click="editDialogVisible = false">Save</el-button>
-                </span>
-                </div>
-            </div>
-
-        </el-dialog>
     </div>
 
 
@@ -236,12 +82,8 @@
         data() {
             return {
                 tableData:[{corporation_name:'ooo',admin_name:'ocl',admin_email:'666@qq.com',date:'2020-08-18'},{corporation_name:'oco',admin_name:'oll',email:'555@qq.com',date:'2020-08-19'},],
-                unlinkId:'',
-                platform: this.$store.state.platform,
-                editDialogVisible: false,
-                unLinkDialogVisible: false,
-                tableTotal: 0,
-                currentPage: 1,
+                currentPage:1,
+                tableTotal:0,
             }
         },
         created() {
@@ -250,10 +92,8 @@
             this.tableData=this.$route.query.corporationInfo
         },
         methods: {
-            ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
-            changeActive(cla_org_id, email) {
-                console.log('changeActive', cla_org_id, email);
-                let data = {cla_org_id: cla_org_id, email: email}
+            createRoot(cla_org_id,email){
+                let data = {cla_org_id: cla_org_id,email: email}
                 this.$axios({
                     url: `/api${url.corporationManager}`,
                     method: 'post',
@@ -264,107 +104,18 @@
                     console.log(err);
                 })
             },
-            getCookieData() {
-                console.log('getCookieData');
-                if (document.cookie !== '') {
-                    let cookieArr = document.cookie.split('; ')
-                    let access_token, refresh_token = '';
-                    cookieArr.forEach((item, index) => {
-                        let arr = item.split('=');
-                        arr[0] === 'access_token' ? access_token = arr[1] : arr[0] === 'refresh_token' ? refresh_token = arr[1] : refresh_token = '';
-                        ;
-                    })
-                    let data = {access_token, refresh_token};
-                    this.setTokenAct(data);
-                    this.getUserInfo(access_token, refresh_token)
-
-                }
-
-            },
-            /*获取用户名并显示*/
-            getUserInfo(access_token, refresh_token) {
-                console.log('getUserInfo');
-                let obj = {access_token: access_token};
-                console.log(obj);
+            changeActive(cla_org_id, corporation_name,admin_email,enabled) {
+                console.log('changeActive', cla_org_id, email);
+                let data = {cla_org_id: cla_org_id,corporation_name:corporation_name, admin_email: admin_email,enabled:enabled}
                 this.$axios({
-                    url: url.getUserInfo,
-                    params: obj,
+                    url: `/api${url.active_corporation}`,
+                    method: 'put',
+                    data: data,
                 }).then(res => {
                     console.log(res);
-
-                    let data = {
-                        userId: res.data.id,
-                        userName: res.data.login,
-                        userImg: res.data.avatar_url,
-                        userEmail: res.data.email
-                    }
-                    this.setLoginUserAct(data);
-                    let obj = {
-                        access_token: access_token,
-                        refresh_token: refresh_token,
-                        userName: res.data.login,
-                        platform: this.$store.state.platform
-                    }
-                    this.getLinkedRepoListAct(obj);
-
                 }).catch(err => {
                     console.log(err);
                 })
-            },
-
-            /*cla条目编辑*/
-            editHandleClick(index) {
-                console.log(index);
-                this.editDialogVisible = true
-            },
-
-            unlinkHandleClick(scope) {
-                console.log(scope);
-                this.unlinkId = scope.row.id;
-                this.unLinkDialogVisible = true
-            },
-            /*查看该组织企业签署列表*/
-            checkCorporationList(){
-                console.log('checkCorporationList');
-            },
-            /*查看CLA签署状态*/
-            checkCla() {
-                console.log("checkCla");
-                this.$router.push('/signCla')
-            },
-            newWindow(repo) {
-                window.open(`https://gitee.com/${repo}`)
-            },
-            /*解绑开源项目*/
-            unLinkRepositoryFun() {
-
-                this.$axios({
-                    url: `/api${url.unLinkRepository}/${this.unlinkId}`,
-                    method: 'delete',
-                    headers: {
-                        'Access-Token': this.$store.state.access_token,
-                        'Refresh-Token': this.$store.state.refresh_token,
-                        'User': `${this.platform}/${this.$store.state.user.userName}`
-                    }
-
-                }).then(res => {
-                    console.log(res);
-                    this.$message.success('success')
-                    this.unLinkDialogVisible = false
-                    let data = {
-                        access_token: this.$store.state.access_token,
-                        refresh_token: this.$store.state.refresh_token,
-                        userName: this.$store.state.user.userName,
-                        platform: this.$store.state.platform
-                    }
-                    this.getLinkedRepoListAct(data)
-                }).catch(err => {
-                    console.log(err);
-                })
-            },
-            /*首页展示项目翻页*/
-            changePage(page) {
-                console.log(page);
             },
         },
 
