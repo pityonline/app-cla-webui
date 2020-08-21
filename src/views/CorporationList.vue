@@ -38,7 +38,7 @@
                     <template slot-scope="scope">
                         <el-tooltip slot="reference" effect="dark" content="activation"
                                     placement="bottom">
-                            <div class="mySwitch">
+                            <div class="mySwitch" style="display: inline-block">
                                 <el-switch
                                         @change="changeActive(scope.row.cla_org_id,scope.row.corporation_name,scope.row.admin_email,true)"
                                         v-model="scope.row.enabled"
