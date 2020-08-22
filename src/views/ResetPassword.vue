@@ -64,8 +64,13 @@
                     data:obj,
                 }).then(res => {
                     console.log(res);
+                    this.$message.closeAll()
+                    this.$message.success('success')
+                    this.$router.push('/userList')
                 }).catch(err => {
                     console.log(err);
+                    this.$message.closeAll()
+                    this.$message.error('Please enter the correct old password')
                 })
             },
             submit(formName) {
