@@ -1,7 +1,7 @@
 <template>
     <div id="section" :style="section">
 
-        <CorporationHeader :userName="user"></CorporationHeader>
+        <CorporationHeader @clickItem="clickItem" :userName="user"></CorporationHeader>
         <el-row style="margin-top: 2rem">
             <el-col :offset="4" :span="16">
                 <el-tabs v-model="active">
@@ -182,6 +182,9 @@
         },
 
         methods: {
+            clickItem(command){
+                console.log(command);
+            },
             /*设置页面高度*/
             setClientHeight() {
                 // console.log(until.getClientHeight());

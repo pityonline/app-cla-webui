@@ -17,14 +17,14 @@
         <el-col :span="8">
             <div>
 
-                <el-dropdown>
+                <el-dropdown @command="handleCommand">
   <span class="el-dropdown-link">
     {{userName}}<i class="el-icon-arrow-down el-icon--right"></i>
   </span>
                     <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item>create user</el-dropdown-item>
-                        <el-dropdown-item>reset password</el-dropdown-item>
-                        <el-dropdown-item>login out</el-dropdown-item>
+                        <el-dropdown-item command="a">create user</el-dropdown-item>
+                        <el-dropdown-item command="b">reset password</el-dropdown-item>
+                        <el-dropdown-item command="c">login out</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
             </div>
@@ -47,6 +47,9 @@
 
         },
         methods: {
+            handleCommand(command) {
+                this.$emit('clickItem' ,command);
+            },
             toHome() {
                 this.$router.push('/home')
             },
