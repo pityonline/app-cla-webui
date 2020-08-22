@@ -37,7 +37,7 @@
 <script>
     export default {
         name: "CorporationHeader",
-        computed: {user:()=>{return this.userName}},
+        computed: {user:{get:()=>{return this.userName}}},
         props:['userName'],
 
         data() {
