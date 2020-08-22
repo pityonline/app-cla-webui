@@ -11,13 +11,14 @@
                 </el-tabs>
 
                 <!--<el-row>-->
-                    <!--<el-col align="left">-->
-                        <!--<el-button type="primary" size="small" @click="clickAddUser()">-->
-                            <!--create user-->
-                        <!--</el-button>-->
-                    <!--</el-col>-->
+                <!--<el-col align="left">-->
+                <!--<el-button type="primary" size="small" @click="clickAddUser()">-->
+                <!--create user-->
+                <!--</el-button>-->
+                <!--</el-col>-->
 
                 <!--</el-row>-->
+                <router-view></router-view>
                 <el-row class="marginTop1rem tableStyle">
                     <el-table :data="tableData">
                         <el-table-column
@@ -143,11 +144,11 @@
                 callback();
             };
             return {
-                user:'',
-                section:{
-                    height:'',
+                user: '',
+                section: {
+                    height: '',
                 },
-                active:'first',
+                active: 'first',
                 maxUser: 2,
                 deleteUserVisible: false,
                 rules: {
@@ -176,14 +177,29 @@
                 },],
             }
         },
-        created(){
+        created() {
             this.setClientHeight()
-            this.user=this.$route.query.userName
+            this.user = this.$route.query.userName
         },
 
         methods: {
-            clickItem(command){
+            clickItem(command) {
                 console.log(command);
+                switch (command) {
+                    case 'a':
+                        this.$router.push('/createUser');
+                        break;
+                    case 'b':
+                        this.$router.push('/resetPassword');
+                        break;
+                    case 'c':
+                        this.loginOut()
+                        break;
+                }
+            },
+            loginOut() {
+                console.log('删除账号信息');
+                this.$router.push('/')
             },
             /*设置页面高度*/
             setClientHeight() {
@@ -239,16 +255,18 @@
 </script>
 
 <style scoped lang="less">
-    #section{
+    #section {
         padding-top: 4rem;
         background-color: #F5F5F5;
         display: flex;
         box-sizing: border-box;
         flex-direction: column;
-        &>div:nth-of-type(2){
-        flex-grow: 1;
+
+        & > div:nth-of-type(2) {
+            flex-grow: 1;
+        }
     }
-    }
+
     .pointer {
         cursor: pointer;
     }

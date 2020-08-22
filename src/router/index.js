@@ -7,7 +7,7 @@ const routes = [
     {
         path: '/',
         name: 'Login',
-        redirect:'/index',
+        redirect: '/index',
         /*组件懒加载*/
         // component: () => import('../views/Index.vue')
     },
@@ -41,7 +41,7 @@ const routes = [
                 name: 'CorporationManagerLogin',
                 component: () => import('../views/CorporationManagerLogin.vue')
             },
-            ]
+        ]
     },
     {
         path: '/home',
@@ -73,12 +73,33 @@ const routes = [
                 name: 'SignedRepo',
                 component: () => import('../components/SignedRepo.vue')
             },
-           ]
+        ]
     },
     {
         path: '/rootManager',
         name: 'RootManager',
-        component: () => import('../views/RootManager.vue')
+        component: () => import('../views/RootManager.vue'),
+        children: [
+            {
+                path: '/',
+                name: 'UserList',
+                redirect: '/userList',
+            },
+            {
+                path: '/userList',
+                name: 'UserList',
+                component: () => import('../views/UserList.vue'),
+            },
+            {
+                path: '/createUser',
+                name: 'CreateUser',
+                component: () => import('../views/CreateUser.vue'),
+            },
+            {
+                path: '/resetPassword',
+                name: 'ResetPassword',
+                component: () => import('../views/ResetPassword.vue'),
+            },]
     },
     {
         path: '/config',
