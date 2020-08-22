@@ -22,9 +22,10 @@
     {{userName}}<i class="el-icon-arrow-down el-icon--right"></i>
   </span>
                     <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item command="a">create user</el-dropdown-item>
-                        <el-dropdown-item command="b">reset password</el-dropdown-item>
-                        <el-dropdown-item command="c">login out</el-dropdown-item>
+                        <el-dropdown-item command="a">user manager</el-dropdown-item>
+                        <el-dropdown-item command="b">create user</el-dropdown-item>
+                        <el-dropdown-item command="c">reset password</el-dropdown-item>
+                        <el-dropdown-item command="d">login out</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
             </div>

@@ -19,29 +19,6 @@
 
                 <!--</el-row>-->
                 <router-view></router-view>
-                <el-row class="marginTop1rem tableStyle">
-                    <el-table :data="tableData">
-                        <el-table-column
-                                prop="userName"
-                                label="用户名">
-                        </el-table-column>
-                        <el-table-column
-                                prop="email"
-                                label="邮箱">
-                        </el-table-column>
-                        <el-table-column
-                                prop="class"
-                                label='部门'>
-                        </el-table-column>
-                        <el-table-column
-                                width="100">
-                            <template slot-scope="scope">
-                                <el-button type="danger" size="mini" @click="deleteUser(scope.row.id)">删除</el-button>
-                            </template>
-
-                        </el-table-column>
-                    </el-table>
-                </el-row>
             </el-col>
         </el-row>
 
@@ -187,12 +164,16 @@
                 console.log(command);
                 switch (command) {
                     case 'a':
-                        this.$router.push('/createUser');
+                        this.$router.push('/');
                         break;
                     case 'b':
-                        this.$router.push('/resetPassword');
+                        this.$router.push('/createUser');
                         break;
                     case 'c':
+                        this.$router.push('/resetPassword');
+                        break;
+
+                    case 'd':
                         this.loginOut()
                         break;
                 }
