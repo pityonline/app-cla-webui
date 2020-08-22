@@ -38,6 +38,8 @@
                 }
             };
             return {
+                cla_org_id:this.$store.state.loginInfo.cla_org_id,
+                email:this.$store.state.loginInfo.email,
                 ruleForm: {
                     oldPassword: '',
                     newPassword: '',
