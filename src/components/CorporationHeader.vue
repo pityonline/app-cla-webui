@@ -66,7 +66,7 @@
 <style  lang="less">
     .el-dropdown-link {
         cursor: pointer;
-        color: #409EFF;
+        color: rgba(54, 54, 54, 0.91);
     }
     .el-icon-arrow-down {
         font-size: 12px;
