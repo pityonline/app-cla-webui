@@ -27,3 +27,5 @@ export const changeActive = '/v1/changeActive'                                  
 export const getSignPage = '/v1/cla-org/signing-page'                                  //获取已绑定cla的组织   方式get   参数platform、org_id、apply_to
 export const corporationManager = '/v1/corporation-manager'                            //激活企业发送root账号   方式post   参数cla_org_id、email
 export const corporationManagerAuth = '/v1/corporation-manager/auth'                   //企业管理员登陆      方式post   参数org_id、repo_id,platform,user,password
+export const resetPassword = '/v1/corporation-manager'                                 //企业管理员重置密码      方式put   参数cla_org_id、email,old_password,new_password
+export const addEmployeeManager = '/v1/employee-manager'                               //添加企业个人签署者管理员   方式post   参数cla_org_id、emails

@@ -121,7 +121,7 @@
                 callback();
             };
             return {
-                user: '',
+                user:this.$store.state.loginInfo.userName,
                 section: {
                     height: '',
                 },
@@ -156,7 +156,7 @@
         },
         created() {
             this.setClientHeight()
-            this.user = this.$route.query.userName
+            // this.user = this.$route.query.userName
         },
 
         methods: {

@@ -7,6 +7,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
+        loginInfo:JSON.parse(sessionStorage.getItem('loginInfo')) || undefined,
         repoInfo:JSON.parse(sessionStorage.getItem('repoInfo')) || undefined,
         loginType:sessionStorage.getItem('loginType') || undefined,
         tableData: JSON.parse(sessionStorage.getItem('tableData')) || undefined,
@@ -67,8 +68,17 @@ export default new Vuex.Store({
             state.repoInfo = obj;
             sessionStorage.setItem('repoInfo', JSON.stringify(obj));
         },
+        setLoginInfo(state, obj) {
+            console.log(obj);
+            state.loginInfo = obj;
+            sessionStorage.setItem('loginInfo', JSON.stringify(obj));
+        },
     },
     actions: {
+        setLoginInfoAct({commit}, obj){
+            console.log(obj);
+            commit('setLoginInfo', obj);
+        },
         setRepoInfoAct({commit}, obj) {
             console.log(obj);
             commit('setRepoInfo', obj);
