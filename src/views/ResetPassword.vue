@@ -3,9 +3,9 @@
         <el-col :offset="8" :span="8">
             <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
                 <el-form-item label="" prop="oldPassword" label-width="0">
-                    <el-input placeholder="please input old password" type="password" v-model="ruleForm.oldPassword" autocomplete="off"></el-input>
+                    <el-input @blur="checkNewPwd" placeholder="please input old password" type="password" v-model="ruleForm.oldPassword" autocomplete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="" prop="newPassword" label-width="0">
+                <el-form-item @blur="checkOldPwd" label="" prop="newPassword" label-width="0">
                     <el-input placeholder="please input new password" type="password" v-model="ruleForm.newPassword" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="" prop="checkPwd" label-width="0">
@@ -29,14 +29,18 @@
             var validatePass = (rule, value, callback) => {
                 if (value === '') {
                     callback(new Error('please input old password'));
-                } else {
+                } else if (value === this.ruleForm.newPassword) {
+                    callback(new Error('The new password cannot be the same as the old password'));
+                }else{
                     callback();
                 }
             };
             var validatePass2 = (rule, value, callback) => {
                 if (value === '') {
                     callback(new Error('please input new password'));
-                } else {
+                } else if (value === this.ruleForm.oldPassword) {
+                    callback(new Error('The new password cannot be the same as the old password'));
+                }else {
                     callback();
                 }
             };
@@ -72,6 +76,12 @@
             }
         },
         methods: {
+            checkNewPwd(){
+
+            },
+            checkOldPwd(){
+
+            },
             resetPassword() {
                 let obj ={cla_org_id:this.cla_org_id,email:this.email,old_password:this.ruleForm.oldPassword,new_password:this.ruleForm.newPassword}
                 this.$axios({
