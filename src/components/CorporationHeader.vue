@@ -19,7 +19,7 @@
 
                 <el-dropdown>
   <span class="el-dropdown-link">
-    {{user}}<i class="el-icon-arrow-down el-icon--right"></i>
+    {{userName}}<i class="el-icon-arrow-down el-icon--right"></i>
   </span>
                     <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item>create user</el-dropdown-item>
@@ -37,7 +37,7 @@
 <script>
     export default {
         name: "CorporationHeader",
-        computed: {user:{get:()=>{return this.userName}}},
+        // computed: {user:{get:()=>{return this.userName}}},
         props:['userName'],
 
         data() {
