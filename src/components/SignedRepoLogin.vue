@@ -1,6 +1,6 @@
 <template>
     <el-row>
-        <el-col :offset="8" :span="8" >
+        <el-col :offset="8" :span="8">
             <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px"
                      class="demo-ruleForm" style="padding: 2rem">
                 <el-form-item label="account" prop="account">
@@ -20,9 +20,10 @@
 
 <script>
     import * as url from '../until/api'
+
     export default {
         name: "SignedRepoLogin",
-        data(){
+        data() {
             var validateAccount = (rule, value, callback) => {
                 if (value === '') {
                     callback(new Error('please input account number'));
@@ -35,7 +36,7 @@
                 }
                 callback();
             };
-            return{
+            return {
                 rules: {
                     userName: [
                         {validator: validateAccount, trigger: 'blur'}
@@ -50,29 +51,28 @@
                 },
             }
         },
-        methods:{
-            login(userName,pwd){
+        methods: {
+            login(userName, pwd) {
                 this.$router.push('/rootManager')
-                let obj={userName:userName,pwd:pwd};
+                let obj = {userName: userName, pwd: pwd};
                 this.$axios({
-                    url:'/api'+url.relogin,
-                    method:'post',
-                    data:obj,
-                }).then(res=>{
+                    url: '/api' + url.relogin,
+                    method: 'post',
+                    data: obj,
+                }).then(res => {
                     console.log(res);
-                    if (res.data.role === 'root') {
-                        this.$router.push('/rootManager')
-                    }else{
-                        this.$router.push('/signedRepo')
-                    }
-                }).catch(err=>{
+                    this.$router.push('/rootManager')
+
+                    // this.$router.push('/signedRepo')
+
+                }).catch(err => {
                     console.log(err);
                 })
             },
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        this.login(this.ruleForm.userName,this.ruleForm.pwd)
+                        this.login(this.ruleForm.userName, this.ruleForm.pwd)
                     } else {
                         console.log('error submit!!');
                         return false;

@@ -69,11 +69,11 @@
                     data: obj,
                 }).then(res => {
                     console.log(res);
-                    if (res.data.role === 'root') {
-                        this.$router.push('/rootManager')
-                    } else {
-                        this.$router.push('/signedRepo')
-                    }
+                    // if (res.data.role === 'root') {
+                    //     this.$router.push('/rootManager')
+                    // } else {
+                    //     this.$router.push('/signedRepo')
+                    // }
                 }).catch(err => {
                     console.log(err);
                 })
