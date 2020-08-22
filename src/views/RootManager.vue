@@ -164,7 +164,7 @@
                 console.log(command);
                 switch (command) {
                     case 'a':
-                        this.$router.push('/');
+                        this.$router.push('/userList');
                         break;
                     case 'b':
                         this.$router.push('/createUser');
