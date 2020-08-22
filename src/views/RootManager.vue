@@ -164,13 +164,19 @@
                 console.log(command);
                 switch (command) {
                     case 'a':
-                        this.$router.push('/userList');
+                        if (this.$route.path !== '/userList') {
+                            this.$router.push('/userList');
+                        }
                         break;
                     case 'b':
-                        this.$router.push('/createUser');
+                        if (this.$route.path !== '/createUser') {
+                            this.$router.push('/createUser');
+                        }
                         break;
                     case 'c':
-                        this.$router.push('/resetPassword');
+                        if (this.$route.path !== '/resetPassword') {
+                            this.$router.push('/resetPassword');
+                        }
                         break;
 
                     case 'd':
