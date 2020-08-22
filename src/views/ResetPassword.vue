@@ -8,6 +8,9 @@
                 <el-form-item label="" prop="newPassword" label-width="0">
                     <el-input placeholder="please input new password" type="password" v-model="ruleForm.newPassword" autocomplete="off"></el-input>
                 </el-form-item>
+                <el-form-item label="" prop="checkPwd" label-width="0">
+                    <el-input placeholder="Please enter the new password again" type="password" v-model="ruleForm.checkPwd" autocomplete="off"></el-input>
+                </el-form-item>
                 <el-form-item label-width="0">
                     <el-button type="primary" @click="submit('ruleForm')">提交</el-button>
                     <el-button @click="reset('ruleForm')">重置</el-button>
@@ -37,12 +40,22 @@
                     callback();
                 }
             };
+            var validatePass3 = (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error('please input the new password again'));
+                } else if (value !== this.ruleForm.newPassword) {
+                    callback(new Error('The two passwords are not the same'));
+                }else{
+                    callback();
+                }
+            };
             return {
                 cla_org_id:this.$store.state.loginInfo.cla_org_id,
                 email:this.$store.state.loginInfo.email,
                 ruleForm: {
                     oldPassword: '',
                     newPassword: '',
+                    checkPwd:'',
                 },
                 rules: {
                     oldPassword: [
@@ -50,6 +63,9 @@
                     ],
                     newPassword: [
                         {require: true, validator: validatePass2, trigger: 'blur'}
+                    ],
+                    checkPwd: [
+                        {require: true, validator: validatePass3, trigger: 'blur'}
                     ],
 
                 }
