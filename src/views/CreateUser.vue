@@ -1,20 +1,11 @@
 <template>
     <el-row>
-        <el-col>
+        <el-col :offset="7" :span="10">
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="10rem">
-                <el-form-item label="用户名" prop="userName">
+
+                <el-form-item label-width="0" label="" prop="email">
                     <el-input
-                            size="medium" v-model="ruleForm.userName">
-                    </el-input>
-                </el-form-item>
-                <el-form-item label="密码" prop="pwd">
-                    <el-input
-                            show-password size="medium" v-model="ruleForm.pwd">
-                    </el-input>
-                </el-form-item>
-                <el-form-item label="邮箱" prop="email">
-                    <el-input
-                            size="medium" v-model="ruleForm.email">
+                           placeholder="please input email" size="medium" v-model="ruleForm.email">
                     </el-input>
                 </el-form-item>
                 <el-form-item label-width="0">
@@ -30,6 +21,7 @@
 </template>
 
 <script>
+    import * as url from '../until/api'
     export default {
         name: "CreateUser",
         data(){
@@ -47,19 +39,20 @@
             };
             let validateEmail = (rule, value, callback) => {
                 if (value === '') {
-                    callback(new Error('请输入邮箱'));
+                    callback(new Error('please input email'));
                 } else {
                     let reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
                     if (reg.test(value)) {
                         callback();
                     } else {
-                        callback(new Error('邮箱格式有误'))
+                        callback(new Error('Email format error '))
                     }
                     callback();
                 }
                 callback();
             };
             return{
+                cla_org_id:this.$store.state.loginInfo.cla_org_id,
                 rules: {
                     userName: [
                         {require: true, validator: validateAccount, trigger: 'blur'}
@@ -74,15 +67,32 @@
                 ruleForm: {
                     userName: '',
                     pwd: '',
-                    email: '',
+                    emails: '',
                 },
             }
         },
         methods:{
+            createUser(){
+                let obj ={cla_org_id:this.cla_org_id,emails:['ocl@163.com']}
+                this.$axios({
+                    url:'/api'+url.addEmployeeManager,
+                    method:'post',
+                    data:obj,
+                }).then(res => {
+                    console.log(res);
+                    this.$message.closeAll()
+                    this.$message.success('success')
+
+                }).catch(err => {
+                    console.log(err);
+                    this.$message.closeAll()
+                    // this.$message.error('Please enter the correct old password')
+                })
+            },
             submit(formName) {
                 this.$refs[formName].validate((valid => {
                     if (valid) {
-                        alert('submit!')
+                       this.createUser();
                     } else {
                         console.log('error submit');
                         return false;
