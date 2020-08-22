@@ -9,8 +9,8 @@
                     <el-input placeholder="please input new password" type="password" v-model="ruleForm.newPassword" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item label-width="0">
-                    <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
-                    <el-button @click="resetForm('ruleForm')">重置</el-button>
+                    <el-button type="primary" @click="submit('ruleForm')">提交</el-button>
+                    <el-button @click="reset('ruleForm')">重置</el-button>
                 </el-form-item>
             </el-form>
         </el-col>
