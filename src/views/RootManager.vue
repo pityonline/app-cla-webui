@@ -1,7 +1,7 @@
 <template>
     <div id="section" :style="section">
 
-        <HeaderPure></HeaderPure>
+        <CorporationHeader :userName="user"></CorporationHeader>
         <el-row style="margin-top: 2rem">
             <el-col :offset="4" :span="16">
                 <el-tabs v-model="active">
@@ -10,23 +10,19 @@
                     </el-tab-pane>
                 </el-tabs>
 
-                <el-row>
-                    <el-col align="left">
-                        <el-button type="primary" size="small" @click="clickAddUser()">
-                            create user
-                        </el-button>
-                    </el-col>
+                <!--<el-row>-->
+                    <!--<el-col align="left">-->
+                        <!--<el-button type="primary" size="small" @click="clickAddUser()">-->
+                            <!--create user-->
+                        <!--</el-button>-->
+                    <!--</el-col>-->
 
-                </el-row>
+                <!--</el-row>-->
                 <el-row class="marginTop1rem tableStyle">
                     <el-table :data="tableData">
                         <el-table-column
                                 prop="userName"
                                 label="用户名">
-                        </el-table-column>
-                        <el-table-column
-                                prop="pwd"
-                                label="密码">
                         </el-table-column>
                         <el-table-column
                                 prop="email"
@@ -102,7 +98,7 @@
 
 <script>
     import * as url from '../until/api'
-    import HeaderPure from '@components/HeaderPure'
+    import CorporationHeader from '@components/CorporationHeader'
     import Footer from '@components/Footer'
     import * as until from '../until/until'
 
@@ -115,7 +111,7 @@
     export default {
         name: "rootManager",
         components: {
-            HeaderPure,
+            CorporationHeader,
             Footer
 
         },
@@ -147,6 +143,7 @@
                 callback();
             };
             return {
+                user:'',
                 section:{
                     height:'',
                 },
@@ -181,6 +178,7 @@
         },
         created(){
             this.setClientHeight()
+            this.user=this.$route.query.userName
         },
 
         methods: {

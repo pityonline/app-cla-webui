@@ -70,7 +70,7 @@
                 }).then(res => {
                     console.log(res);
 
-                        this.$router.push('/rootManager')
+                        this.$router.push({path:'/rootManager',query:{userName:userName}})
 
                     //     this.$router.push('/signedRepo')
 
