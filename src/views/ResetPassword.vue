@@ -1,6 +1,6 @@
 <template>
     <el-row>
-        <el-col :offset="8" :span="8">
+        <el-col :offset="7" :span="10">
             <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
                 <el-form-item label="" prop="oldPassword" label-width="0">
                     <el-input @blur="checkNewPwd" placeholder="please input old password" type="password" v-model="ruleForm.oldPassword" autocomplete="off"></el-input>
