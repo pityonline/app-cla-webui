@@ -59,7 +59,7 @@
             }
         },
         created(){
-            this.getEmployeeManageer();
+            this.getEmployeeManager();
         },
         methods:{
             deleteUser(row) {
@@ -67,7 +67,7 @@
                 this.row = row
                 this.deleteUserVisible = true
             },
-            getEmployeeManageer(){
+            getEmployeeManager(){
                 let obj = {
                     cla_org_id:this.$store.state.loginInfo.cla_org_id,email:this.$store.state.loginInfo.email
                 }
