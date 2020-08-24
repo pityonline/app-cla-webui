@@ -136,7 +136,7 @@
                                     <el-input
                                             @input="verifyEmail"
                                             size="medium"
-                                            placeholder="Input you email"
+                                            placeholder="Input email"
                                             v-model="email">
 
                                     </el-input>
