@@ -44,10 +44,11 @@
 
         data() {
             return {
+                userInfo:this.user,
             }
         },
         created() {
-            console.log(this.user);
+            console.log(this.userInfo);
         },
         methods: {
             handleCommand(command) {
