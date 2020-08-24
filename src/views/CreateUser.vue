@@ -25,18 +25,7 @@
     export default {
         name: "CreateUser",
         data(){
-            let validateAccount = (rule, value, callback) => {
-                if (value === '') {
-                    callback(new Error('请输入账号'));
-                }
-                callback();
-            };
-            let validatePass = (rule, value, callback) => {
-                if (value === '') {
-                    callback(new Error('请输入密码'));
-                }
-                callback();
-            };
+
             let validateEmail = (rule, value, callback) => {
                 if (value === '') {
                     callback(new Error('please input email'));
@@ -54,19 +43,11 @@
             return{
                 cla_org_id:this.$store.state.loginInfo.cla_org_id,
                 rules: {
-                    userName: [
-                        {require: true, validator: validateAccount, trigger: 'blur'}
-                    ],
-                    pwd: [
-                        {require: true, validator: validatePass, trigger: 'blur'}
-                    ],
                     email: [
                         {require: true, validator: validateEmail, trigger: 'blur'}
                     ],
                 },
                 ruleForm: {
-                    userName: '',
-                    pwd: '',
                     emails: '',
                 },
             }
@@ -82,6 +63,7 @@
                     console.log(res);
                     this.$message.closeAll()
                     this.$message.success('success')
+                    this.$refs.ruleForm.resetFields();
 
                 }).catch(err => {
                     console.log(err);
