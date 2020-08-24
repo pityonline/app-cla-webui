@@ -83,7 +83,7 @@
                     new Promise((resolve, reject) => {
                         Object.assign(res.data,{userName:userName})
                         this.setLoginInfoAct(res.data)
-                        resolve('completed');
+                        resolve('completed',res.data);
                     }).then(res => {
                         console.log(res);
 
