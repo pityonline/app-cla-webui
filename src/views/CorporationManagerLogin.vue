@@ -87,11 +87,7 @@
                         resolve('completed');
                     }).then(res => {
                         console.log(res);
-                        if (res.data.role === 'admin') {
-                            this.$router.push('/rootManager')
-                        }else{
-                            this.$router.push('/signedRepo')
-                        }
+
                         // this.$router.push({
                         //     path: '/rootManager',
                         //     query: {userName: userName, cla_org_id: res.data.cla_org_id, email: res.data.email}
@@ -99,7 +95,11 @@
                     }, err => {
                         console.log(err);
                     })
-
+                    if (res.data.role === 'admin') {
+                        this.$router.push('/rootManager')
+                    }else{
+                        this.$router.push('/signedRepo')
+                    }
 
 
                     //     this.$router.push('/signedRepo')

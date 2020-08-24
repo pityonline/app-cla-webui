@@ -33,7 +33,6 @@
 
     window.onresize = () => {
         console.log(until.getClientHeight());
-        console.log(document.getElementById('login').offsetHeight);
         if (until.getClientHeight() > document.getElementById('transparentDiv').offsetHeight) {
             document.getElementById("login").style.height = until.getClientHeight() + 'px';
             document.getElementById("transparentDiv").style.height = until.getClientHeight() + 'px';
