@@ -56,6 +56,7 @@
                         </div>
                     </el-tab-pane>
                     <el-tab-pane label="active" name="second" style="margin-top: 1rem">
+                        <div style="margin-bottom: 1rem" class="tableStyle">
                         <el-table
                                 :data="activeData"
                                 align="center"
@@ -102,6 +103,7 @@
                                 </template>
                             </el-table-column>
                         </el-table>
+                        </div>
                     </el-tab-pane>
                 </el-tabs>
 
