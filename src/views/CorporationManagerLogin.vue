@@ -81,7 +81,7 @@
                 }).then(res => {
                     console.log(res);
                     new Promise((resolve, reject) => {
-                        let obj = {userName: userName, cla_org_id: res.data.cla_org_id, email: res.data.email}
+                        let obj = {user: res.data, userName:userName}
 
                         this.setLoginInfoAct(obj)
                         resolve('completed');

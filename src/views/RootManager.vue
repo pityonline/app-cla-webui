@@ -1,7 +1,7 @@
 <template>
     <div id="section" :style="section">
 
-        <CorporationHeader @clickItem="clickItem" :userName="user"></CorporationHeader>
+        <CorporationHeader @clickItem="clickItem" :userInfo="user"></CorporationHeader>
         <el-row style="margin-top: 2rem">
             <el-col :offset="4" :span="16">
                 <el-tabs v-model="active">
@@ -121,7 +121,7 @@
                 callback();
             };
             return {
-                user:this.$store.state.loginInfo.userName,
+                user:this.$store.state.loginInfo,
                 section: {
                     height: '',
                 },

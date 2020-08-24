@@ -66,7 +66,7 @@ const routes = [
             {
                 path: '/signedRepoLogin',
                 name: 'SignedRepoLogin',
-                component: () => import('../components/SignedRepoLogin.vue')
+                component: () => import('../views/SignedRepoLogin.vue')
             },
 
         ]
@@ -74,7 +74,23 @@ const routes = [
     {
         path: '/signedRepo',
         name: 'SignedRepo',
-        component: () => import('../components/SignedRepo.vue')
+        component: () => import('../views/SignedRepo.vue'),
+        children: [
+            {
+                path: '/',
+                name: 'EmployeeList',
+                redirect: '/employeeList',
+            },
+            {
+                path: '/employeeList',
+                name: 'EmployeeList',
+                component: () => import('../views/EmployeeList.vue'),
+            },
+            {
+                path: '/resetPassword',
+                name: 'ResetPassword',
+                component: () => import('../views/ResetPassword.vue'),
+            },]
     },
     {
         path: '/rootManager',

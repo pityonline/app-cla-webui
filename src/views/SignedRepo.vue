@@ -3,109 +3,7 @@
         <CorporationHeader @clickItem="clickItem" :userName="user"></CorporationHeader>
         <el-row style="margin-top: 2rem">
             <el-col :offset="4" :span="16">
-                <el-tabs v-model="active">
-                    <el-tab-pane label="inactive" name="first" style="margin-top: 1rem">
-                        <div style="margin-bottom: 1rem" class="tableStyle">
-                            <el-table
-                                    :data="inactiveData"
-                                    align="center"
-                                    style="width: 100%;">
-                                <el-table-column
-                                        prop="name"
-                                        label="Name"
-                                >
-                                </el-table-column>
-                                <el-table-column
-                                        prop="email"
-                                        label="Email"
-                                >
-                                </el-table-column>
-                                <el-table-column
-                                        prop="tel"
-                                        label="Tel">
-
-                                </el-table-column>
-
-                                <el-table-column
-                                        align="center">
-                                    <template slot-scope="scope">
-                                        <el-row>
-
-                                            <el-switch
-                                                    @change="changeActive(scope.row.id,scope.row.isUsed)"
-                                                    v-model="scope.row.isUsed"
-                                                    class="mySwitch"
-                                                    :disabled="scope.row.isUsed"
-                                                    width="3rem"
-                                                    active-color="#409EFF"
-                                                    active-text="active"
-                                                    inactive-text="inactive"
-                                                    inactive-color="#EBEEF5">
-                                            </el-switch>
-
-                                            <!--<el-button style="margin-left: 1rem" type="danger" size="mini"-->
-                                            <!--@click="clickDelete(scope.row.id)">删除-->
-                                            <!--</el-button>-->
-
-                                        </el-row>
-
-                                    </template>
-                                </el-table-column>
-                            </el-table>
-
-                        </div>
-                    </el-tab-pane>
-                    <el-tab-pane label="active" name="second" style="margin-top: 1rem">
-                        <div style="margin-bottom: 1rem" class="tableStyle">
-                        <el-table
-                                :data="activeData"
-                                align="center"
-                                style="width: 100%;">
-                            <el-table-column
-                                    prop="name"
-                                    label="Name"
-                            >
-                            </el-table-column>
-                            <el-table-column
-                                    prop="email"
-                                    label="Email"
-                            >
-                            </el-table-column>
-                            <el-table-column
-                                    prop="tel"
-                                    label="Tel">
-
-                            </el-table-column>
-
-                            <el-table-column
-                                    align="center">
-                                <template slot-scope="scope">
-                                    <el-row>
-
-                                        <el-switch
-                                                @change="changeActive(scope.row.id,scope.row.isUsed)"
-                                                v-model="scope.row.isUsed"
-                                                class="mySwitch"
-                                                :disabled="scope.row.isUsed"
-                                                width="3rem"
-                                                active-color="#409EFF"
-                                                active-text="active"
-                                                inactive-text="inactive"
-                                                inactive-color="#EBEEF5">
-                                        </el-switch>
-
-                                        <!--<el-button style="margin-left: 1rem" type="danger" size="mini"-->
-                                        <!--@click="clickDelete(scope.row.id)">删除-->
-                                        <!--</el-button>-->
-
-                                    </el-row>
-
-                                </template>
-                            </el-table-column>
-                        </el-table>
-                        </div>
-                    </el-tab-pane>
-                </el-tabs>
+                <router-view></router-view>
 
             </el-col>
         </el-row>
@@ -239,8 +137,8 @@
                 console.log(command);
                 switch (command) {
                     case 'a':
-                        if (this.$route.path !== '/userList') {
-                            this.$router.push('/userList');
+                        if (this.$route.path !== '/employeeList') {
+                            this.$router.push('/employeeList');
                         }
                         break;
                     case 'b':
