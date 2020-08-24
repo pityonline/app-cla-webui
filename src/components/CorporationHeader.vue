@@ -19,7 +19,7 @@
 
                 <el-dropdown @command="handleCommand">
   <span class="el-dropdown-link">
-    {{userInfo.userName}}<i class="el-icon-arrow-down el-icon--right"></i>
+    {{user}}<i class="el-icon-arrow-down el-icon--right"></i>
   </span>
                     <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item v-if="userInfo.role==='admin'" command="a">user manager</el-dropdown-item>
@@ -40,11 +40,10 @@
     export default {
         name: "CorporationHeader",
         // computed: {user:{get:()=>{return this.userName}}},
-        props:['userInfo'],
+        props:['user'],
 
         data() {
             return {
-                userInfo:this.userInfo,
             }
         },
         created() {
