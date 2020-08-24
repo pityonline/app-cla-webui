@@ -3,16 +3,16 @@
     <el-row class="marginTop1rem tableStyle">
         <el-table :data="tableData">
             <el-table-column
-                    prop="userName"
-                    label="用户名">
+                    prop="name"
+                    label="userName">
             </el-table-column>
             <el-table-column
                     prop="email"
-                    label="邮箱">
+                    label="email">
             </el-table-column>
             <el-table-column
-                    prop="class"
-                    label='部门'>
+                    prop="role"
+                    label='role'>
             </el-table-column>
             <el-table-column
                     width="100">
@@ -76,13 +76,14 @@
                     params:obj
                 }).then(res=>{
                     console.log(res);
+                    this.tableData=res.data;
                 }).catch(err=>{
                     console.log(err);
                 })
             },
             submit(){
                 let obj = {
-                    cla_org_id:this.row.cla_org_id,emails:[this.row.email]
+                    cla_org_id:this.$store.state.loginInfo.cla_org_id,emails:[this.row.email]
                 }
                 this.$axios({
                     url:'/api'+url.deleteEmployeeManager,
