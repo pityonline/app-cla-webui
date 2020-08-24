@@ -22,9 +22,9 @@
     {{user}}<i class="el-icon-arrow-down el-icon--right"></i>
   </span>
                     <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item v-if="userInfo.role==='admin'" command="a">user manager</el-dropdown-item>
+                        <el-dropdown-item v-if="user.role==='admin'" command="a">user manager</el-dropdown-item>
                         <el-dropdown-item v-else command="a">employee manager</el-dropdown-item>
-                        <el-dropdown-item v-if="userInfo.role==='admin'" command="b">create user</el-dropdown-item>
+                        <el-dropdown-item v-if="user.role==='admin'" command="b">create user</el-dropdown-item>
                         <el-dropdown-item command="c">reset password</el-dropdown-item>
                         <el-dropdown-item command="d">login out</el-dropdown-item>
                     </el-dropdown-menu>
@@ -47,7 +47,7 @@
             }
         },
         created() {
-            console.log(this.userInfo);
+            console.log(this.user);
         },
         methods: {
             handleCommand(command) {
