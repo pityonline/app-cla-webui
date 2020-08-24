@@ -48,7 +48,7 @@
             }
         },
         created() {
-
+            console.log(this.userInfo);
         },
         methods: {
             handleCommand(command) {
