@@ -137,7 +137,7 @@
                 let obj = {
                     platform:this.$store.state.repoInfo.platform,
                     repo_id:this.$store.state.repoInfo.repo_id,
-                    org_id:this.$store.state.repoInfo.cla_org_id,
+                    org_id:this.$store.state.repoInfo.org_id,
                     corporation_email:this.$store.state.loginInfo.email
                 }
                 this.$axios({
