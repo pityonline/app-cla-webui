@@ -31,3 +31,4 @@ export const resetPassword = '/v1/corporation-manager'                          
 export const addEmployeeManager = '/v1/employee-manager'                               //添加企业个人签署者管理员   方式post   参数cla_org_id、emails
 export const deleteEmployeeManager = '/v1/employee-manager'                             //删除企业个人签署者管理员   方式delete   参数cla_org_id、emails
 export const queryEmployeeManager = '/v1/employee-manager'                              //获取企业个人签署者管理员   方式get   参数cla_org_id、email
+export const queryEmployee = '/v1/employee-signing'                                     //获取企业个人签署者   方式get   参数platform、org_id,repo_id,corporation_email

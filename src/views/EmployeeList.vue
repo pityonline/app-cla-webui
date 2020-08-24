@@ -109,6 +109,8 @@
 </template>
 
 <script>
+    import * as url from '../until/api'
+
     export default {
         name: "EmployeeList",
         data(){
@@ -130,6 +132,28 @@
                 }]
             }
         },
+        methods:{
+            getEmployee(){
+                let obj = {
+                    platform:this.$store.state.repoInfo.platform,
+                    repo_id:this.$store.state.repoInfo.repo_id,
+                    org_id:this.$store.state.repoInfo.cla_org_id,
+                    corporation_email:this.$store.state.loginInfo.email
+                }
+                this.$axios({
+                    url:'/api'+url.queryEmployee,
+                    params:obj
+                }).then(res=>{
+                    console.log(res);
+                    this.tableData=res.data;
+                }).catch(err=>{
+                    console.log(err);
+                })
+            },
+        },
+        created() {
+            this.getEmployee();
+        }
     }
 </script>
 
