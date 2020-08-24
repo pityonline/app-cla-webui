@@ -91,6 +91,9 @@
                     data:obj
                 }).then(res=>{
                     console.log(res);
+                    this.getEmployeeManager();
+                    this.deleteUserVisible=false
+
                 }).catch(err=>{
                     console.log(err);
                 })

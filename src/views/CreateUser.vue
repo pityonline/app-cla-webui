@@ -48,13 +48,13 @@
                     ],
                 },
                 ruleForm: {
-                    emails: '',
+                    email: '',
                 },
             }
         },
         methods:{
             createUser(){
-                let obj ={cla_org_id:this.cla_org_id,emails:['ocl@163.com']}
+                let obj ={cla_org_id:this.cla_org_id,emails:[this.ruleForm.email]}
                 this.$axios({
                     url:'/api'+url.addEmployeeManager,
                     method:'post',
