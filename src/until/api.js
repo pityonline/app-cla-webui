@@ -29,3 +29,5 @@ export const corporationManager = '/v1/corporation-manager'                     
 export const corporationManagerAuth = '/v1/corporation-manager/auth'                   //企业管理员登陆      方式post   参数org_id、repo_id,platform,user,password
 export const resetPassword = '/v1/corporation-manager'                                 //企业管理员重置密码      方式put   参数cla_org_id、email,old_password,new_password
 export const addEmployeeManager = '/v1/employee-manager'                               //添加企业个人签署者管理员   方式post   参数cla_org_id、emails
+export const deleteEmployeeManager = '/v1/employee-manager'                             //删除企业个人签署者管理员   方式delete   参数cla_org_id、emails
+export const queryEmployeeManager = '/v1/employee-manager'                              //获取企业个人签署者管理员   方式get   参数cla_org_id、email

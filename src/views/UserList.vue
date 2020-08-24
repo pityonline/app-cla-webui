@@ -17,20 +17,38 @@
             <el-table-column
                     width="100">
                 <template slot-scope="scope">
-                    <el-button type="danger" size="mini" @click="deleteUser(scope.row.id)">删除</el-button>
+                    <el-button type="danger" size="mini" @click="deleteUser(scope.row)">删除</el-button>
                 </template>
 
             </el-table-column>
         </el-table>
+        <el-dialog
+                width="20%"
+                title=""
+                align="center"
+                :visible.sync="deleteUserVisible">
+            <el-row align="center">
+                确定删除？
+            </el-row>
+            <el-row align="center" class="marginTop1rem contentTitle">
+
+                <el-button type="primary" size="medium" @click="submit()">确定</el-button>
+                <el-button size="medium" @click="deleteUserVisible=false">取消</el-button>
+            </el-row>
+
+        </el-dialog>
     </el-row>
 
 </template>
 
 <script>
+    import * as url from '../until/api'
     export default {
         name: "UserList",
         data() {
             return {
+                row:'',
+                deleteUserVisible:false,
                 tableData: [{id: 0, userName: '001', pwd: '001', email: '969707751@qq.com', class: '法务'}, {
                     id: 1,
                     userName: '002',
@@ -39,6 +57,43 @@
                     class: '开发部'
                 },],
             }
+        },
+        created(){
+            this.getEmployeeManageer();
+        },
+        methods:{
+            deleteUser(row) {
+                console.log(row);
+                this.row = row
+                this.deleteUserVisible = true
+            },
+            getEmployeeManageer(){
+                let obj = {
+                    cla_org_id:this.$store.state.loginInfo.cla_org_id,email:this.$store.state.loginInfo.email
+                }
+                this.$axios({
+                    url:'/api'+url.queryEmployeeManager,
+                    params:obj
+                }).then(res=>{
+                    console.log(res);
+                }).catch(err=>{
+                    console.log(err);
+                })
+            },
+            submit(){
+                let obj = {
+                    cla_org_id:this.row.cla_org_id,emails:[this.row.email]
+                }
+                this.$axios({
+                    url:'/api'+url.deleteEmployeeManager,
+                    method:'delete',
+                    data:obj
+                }).then(res=>{
+                    console.log(res);
+                }).catch(err=>{
+                    console.log(err);
+                })
+            },
         },
     }
 </script>

@@ -55,21 +55,7 @@
 
 
         </el-dialog>
-        <el-dialog
-                width="20%"
-                title=""
-                align="center"
-                :visible.sync="deleteUserVisible">
-            <el-row align="center">
-                确定删除？
-            </el-row>
-            <el-row align="center" class="marginTop1rem contentTitle">
 
-                <el-button type="primary" size="medium" @click="submit()">确定</el-button>
-                <el-button size="medium" @click="deleteUserVisible=false">取消</el-button>
-            </el-row>
-
-        </el-dialog>
     </div>
 
 </template>
@@ -225,10 +211,7 @@
             reset(formName) {
                 this.$refs[formName].resetFields();
             },
-            deleteUser(id) {
-                console.log(id);
-                this.deleteUserVisible = true
-            },
+
             clickAddUser() {
 
                 if (this.tableData.length === this.maxUser) {
