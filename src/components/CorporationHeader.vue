@@ -19,7 +19,7 @@
 
                 <el-dropdown @command="handleCommand">
   <span class="el-dropdown-link">
-    {{user}}<i class="el-icon-arrow-down el-icon--right"></i>
+    {{user.userName}}<i class="el-icon-arrow-down el-icon--right"></i>
   </span>
                     <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item v-if="user.role==='admin'" command="a">user manager</el-dropdown-item>
