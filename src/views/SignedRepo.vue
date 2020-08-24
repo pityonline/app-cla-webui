@@ -1,6 +1,6 @@
 <template>
     <div id="section" :style="section">
-        <CorporationHeader @clickItem="clickItem" :userName="user"></CorporationHeader>
+        <CorporationHeader @clickItem="clickItem" :user="user"></CorporationHeader>
         <el-row style="margin-top: 2rem">
             <el-col :offset="4" :span="16">
                 <router-view></router-view>
@@ -59,7 +59,7 @@
         },
         data() {
             return {
-                user:this.$store.state.loginInfo.userName,
+                user:this.$store.state.loginInfo,
 
                 active:'first',
                 section: {
