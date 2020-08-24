@@ -505,7 +505,7 @@
                         info:info,
                     }
                 }
-
+                console.log(myUrl, obj);
                 this.$axios({
                     url: '/api' + myUrl,
                     method: 'post',
