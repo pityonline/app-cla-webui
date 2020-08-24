@@ -55,7 +55,7 @@
 
                         </div>
                     </el-tab-pane>
-                    <el-tab-pane label="active" name="first" style="margin-top: 1rem">
+                    <el-tab-pane label="active" name="second" style="margin-top: 1rem">
                         <el-table
                                 :data="activeData"
                                 align="center"
@@ -159,6 +159,9 @@
         },
         data() {
             return {
+                user:this.$store.state.loginInfo.userName,
+
+                active:'first',
                 section: {
                     height: '',
                 },
@@ -205,6 +208,7 @@
                 this.deleteUserVisible = true;
                 this.deleteId = id
             },
+
             deleteContributor() {
                 console.log('deleteContributor');
                 this.$axios({
@@ -229,8 +233,34 @@
 
                 })
             },
+            clickItem(command) {
+                console.log(command);
+                switch (command) {
+                    case 'a':
+                        if (this.$route.path !== '/userList') {
+                            this.$router.push('/userList');
+                        }
+                        break;
+                    case 'b':
+                        if (this.$route.path !== '/createUser') {
+                            this.$router.push('/createUser');
+                        }
+                        break;
+                    case 'c':
+                        if (this.$route.path !== '/resetPassword') {
+                            this.$router.push('/resetPassword');
+                        }
+                        break;
+
+                    case 'd':
+                        this.loginOut()
+                        break;
+                }
+            },
         },
         created() {
+        },
+        mounted() {
             this.setClientHeight();
         }
     }

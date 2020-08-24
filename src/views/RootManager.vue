@@ -155,8 +155,10 @@
             }
         },
         created() {
-            this.setClientHeight()
-            // this.user = this.$route.query.userName
+
+        },
+        mounted() {
+            this.setClientHeight();
         },
 
         methods: {
