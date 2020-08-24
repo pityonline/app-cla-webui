@@ -1,55 +1,112 @@
 <template>
-    <div>
+    <div id="section" :style="section">
         <CorporationHeader @clickItem="clickItem" :userName="user"></CorporationHeader>
-            <div style="margin-bottom: 1rem" class="tableStyle">
-                <el-table
-                        :data="listData"
-                        align="center"
-                        style="width: 100%;">
-                    <el-table-column
-                            prop="name"
-                            label="Name"
-                    >
-                    </el-table-column>
-                    <el-table-column
-                            prop="email"
-                            label="Email"
-                    >
-                    </el-table-column>
-                    <el-table-column
-                            prop="tel"
-                            label="Tel">
+        <el-row style="margin-top: 2rem">
+            <el-col :offset="4" :span="16">
+                <el-tabs v-model="active">
+                    <el-tab-pane label="inactive" name="first" style="margin-top: 1rem">
+                        <div style="margin-bottom: 1rem" class="tableStyle">
+                            <el-table
+                                    :data="inactiveData"
+                                    align="center"
+                                    style="width: 100%;">
+                                <el-table-column
+                                        prop="name"
+                                        label="Name"
+                                >
+                                </el-table-column>
+                                <el-table-column
+                                        prop="email"
+                                        label="Email"
+                                >
+                                </el-table-column>
+                                <el-table-column
+                                        prop="tel"
+                                        label="Tel">
 
-                    </el-table-column>
+                                </el-table-column>
 
-                    <el-table-column
-                            align="center">
-                        <template slot-scope="scope">
-                            <el-row>
+                                <el-table-column
+                                        align="center">
+                                    <template slot-scope="scope">
+                                        <el-row>
 
-                                <el-switch
-                                        @change="changeActive(scope.row.id,scope.row.isUsed)"
-                                        v-model="scope.row.isUsed"
-                                        class="mySwitch"
-                                        :disabled="scope.row.isUsed"
-                                        width="3rem"
-                                        active-color="#409EFF"
-                                        active-text="active"
-                                        inactive-text="inactive"
-                                        inactive-color="#EBEEF5">
-                                </el-switch>
+                                            <el-switch
+                                                    @change="changeActive(scope.row.id,scope.row.isUsed)"
+                                                    v-model="scope.row.isUsed"
+                                                    class="mySwitch"
+                                                    :disabled="scope.row.isUsed"
+                                                    width="3rem"
+                                                    active-color="#409EFF"
+                                                    active-text="active"
+                                                    inactive-text="inactive"
+                                                    inactive-color="#EBEEF5">
+                                            </el-switch>
 
-                                <!--<el-button style="margin-left: 1rem" type="danger" size="mini"-->
-                                           <!--@click="clickDelete(scope.row.id)">删除-->
-                                <!--</el-button>-->
+                                            <!--<el-button style="margin-left: 1rem" type="danger" size="mini"-->
+                                            <!--@click="clickDelete(scope.row.id)">删除-->
+                                            <!--</el-button>-->
 
-                            </el-row>
+                                        </el-row>
 
-                        </template>
-                    </el-table-column>
-                </el-table>
+                                    </template>
+                                </el-table-column>
+                            </el-table>
 
-            </div>
+                        </div>
+                    </el-tab-pane>
+                    <el-tab-pane label="active" name="first" style="margin-top: 1rem">
+                        <el-table
+                                :data="activeData"
+                                align="center"
+                                style="width: 100%;">
+                            <el-table-column
+                                    prop="name"
+                                    label="Name"
+                            >
+                            </el-table-column>
+                            <el-table-column
+                                    prop="email"
+                                    label="Email"
+                            >
+                            </el-table-column>
+                            <el-table-column
+                                    prop="tel"
+                                    label="Tel">
+
+                            </el-table-column>
+
+                            <el-table-column
+                                    align="center">
+                                <template slot-scope="scope">
+                                    <el-row>
+
+                                        <el-switch
+                                                @change="changeActive(scope.row.id,scope.row.isUsed)"
+                                                v-model="scope.row.isUsed"
+                                                class="mySwitch"
+                                                :disabled="scope.row.isUsed"
+                                                width="3rem"
+                                                active-color="#409EFF"
+                                                active-text="active"
+                                                inactive-text="inactive"
+                                                inactive-color="#EBEEF5">
+                                        </el-switch>
+
+                                        <!--<el-button style="margin-left: 1rem" type="danger" size="mini"-->
+                                        <!--@click="clickDelete(scope.row.id)">删除-->
+                                        <!--</el-button>-->
+
+                                    </el-row>
+
+                                </template>
+                            </el-table-column>
+                        </el-table>
+                    </el-tab-pane>
+                </el-tabs>
+
+            </el-col>
+        </el-row>
 
         <div class="paginationClass">
             <el-pagination
@@ -85,8 +142,15 @@
 
 <script>
     import * as url from '../until/api'
+    import * as until from '../until/until'
     import CorporationHeader from '@components/CorporationHeader'
     import Footer from '@components/Footer'
+    window.onresize = () => {
+        // console.log(until.getClientHeight());
+        if (until.getClientHeight() > document.getElementById('section').offsetHeight) {
+            document.getElementById("section").style.height = until.getClientHeight() + 'px'
+        }
+    }
     export default {
         name: "SignedRepo",
         components:{
@@ -95,19 +159,29 @@
         },
         data() {
             return {
+                section: {
+                    height: '',
+                },
                 deleteId: '',
                 deleteUserVisible: false,
                 listDialogVisible: false,
                 tableDataOther: [{repository: 'ooo', cla: 'test', sharedGist: 'Yes', contributors: '0',},],
                 tableTotal: 0,
                 currentPage: 1,
-                listData: [{id: 0, name: 'jack', email: '10577507@qq.com', tel: '15632486433', isUsed: true}, {
+                inactiveData: [{id: 0, name: 'jack', email: '10577507@qq.com', tel: '15632486433', isUsed: false}, {
                     id: 1,
                     name: 'Rose',
                     email: '105507@163.com',
                     tel: '18832486437',
                     isUsed: false
                 }],
+                activeData:[{id: 0, name: 'tom', email: '10577507@qq.com', tel: '15632486433', isUsed: true}, {
+                    id: 1,
+                    name: 'helen',
+                    email: '105507@163.com',
+                    tel: '18832486437',
+                    isUsed: true
+                }]
             }
         },
         methods: {
@@ -145,6 +219,19 @@
             changePage(page) {
                 console.log(page);
             },
+            /*设置页面高度*/
+            setClientHeight() {
+                // console.log(until.getClientHeight());
+                this.$nextTick(() => {
+                    until.getClientHeight() > document.getElementById('section').offsetHeight ?
+                        this.section.height = until.getClientHeight() + 'px' :
+                        this.section.height = document.getElementById('section').offsetHeight
+
+                })
+            },
+        },
+        created() {
+            this.setClientHeight();
         }
     }
 </script>
