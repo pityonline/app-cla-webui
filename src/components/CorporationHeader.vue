@@ -43,7 +43,9 @@
         props:['userInfo'],
 
         data() {
-            return {}
+            return {
+                userInfo:this.userInfo,
+            }
         },
         created() {
 
