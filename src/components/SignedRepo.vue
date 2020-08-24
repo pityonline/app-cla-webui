@@ -1,92 +1,6 @@
 <template>
     <div>
         <div class="tableStyle">
-            <el-table
-                    :data="tableDataOther"
-                    align="center"
-                    style="width: 100%;">
-                <el-table-column
-                        prop="repository"
-                        label="Repository"
-                        width="220">
-                    <template slot-scope="scope">
-                        <svg-icon icon-class="repository"/>
-                        <span class="pointer hoverUnderline"
-                              @click="newWindow()"
-                              style="margin-left: 10px;">{{ scope.row.repository }}</span>
-                    </template>
-                </el-table-column>
-                <el-table-column
-                        prop="cla"
-                        label="CLA"
-                        width="220">
-                    <template slot-scope="scope">
-                                            <span class="pointer hoverUnderline"
-                                                  @click="checkCla()">{{scope.row.cla}}</span>
-                    </template>
-                </el-table-column>
-                <el-table-column
-                        prop="gist"
-                        label="Gist">
-                    <template slot-scope="scope">
-                        <svg-icon style="cursor: pointer" icon-class="github"/>
-                    </template>
-                </el-table-column>
-
-                <el-table-column
-                        prop="sharedGist"
-                        label="Shared Gist">
-                </el-table-column>
-                <el-table-column
-                        prop="contributors"
-                        label="Contributors"
-                        align="center">
-                </el-table-column>
-                <el-table-column
-                        prop="status"
-                        align="center"
-                        label="Status">
-                    <template slot-scope="scope">
-                        <svg-icon class="pointer" icon-class="link_active"/>
-                    </template>
-                </el-table-column>
-                <el-table-column
-                        prop="pdf"
-                        align="center"
-                        label="PDF">
-                    <template slot-scope="scope">
-                        <svg-icon class="pointer" @click="checkPdf()" icon-class="pdf"/>
-                    </template>
-                </el-table-column>
-                <el-table-column
-                        align="center">
-                    <template slot-scope="scope">
-                        <el-button type="primary" size="small"
-                                   @click="listDialogVisible=true">白名单
-                        </el-button>
-                    </template>
-                </el-table-column>
-            </el-table>
-        </div>
-        <div class="paginationClass">
-            <el-pagination
-                    background
-                    :page-size="5"
-                    :pager-count="5"
-                    :hide-on-single-page="true"
-                    :current-page="currentPage"
-                    @current-change="changePage"
-                    layout="prev, pager, next"
-                    :total="tableTotal">
-            </el-pagination>
-        </div>
-        <el-dialog
-                :close-on-click-modal="false"
-                title="白名单"
-                top="10vh"
-                align="center"
-                :visible.sync="listDialogVisible"
-                width="70%">
             <div style="margin-bottom: 1rem">
                 <el-table
                         :data="listData"
@@ -120,14 +34,14 @@
                                         :disabled="scope.row.isUsed"
                                         width="3rem"
                                         active-color="#409EFF"
-                                        active-text="启用"
-                                        inactive-text="停用"
+                                        active-text="active"
+                                        inactive-text="inactive"
                                         inactive-color="#EBEEF5">
                                 </el-switch>
 
-                                <el-button style="margin-left: 1rem" type="danger" size="mini"
-                                           @click="clickDelete(scope.row.id)">删除
-                                </el-button>
+                                <!--<el-button style="margin-left: 1rem" type="danger" size="mini"-->
+                                           <!--@click="clickDelete(scope.row.id)">删除-->
+                                <!--</el-button>-->
 
                             </el-row>
 
@@ -136,19 +50,19 @@
                 </el-table>
 
             </div>
-            <div class="paginationClass">
-                <el-pagination
-                        background
-                        :page-size="5"
-                        :pager-count="5"
-                        :hide-on-single-page="true"
-                        :current-page="listCurrentPage"
-                        @current-change="listChangePage"
-                        layout="prev, pager, next"
-                        :total="listData.length">
-                </el-pagination>
-            </div>
-        </el-dialog>
+        </div>
+        <div class="paginationClass">
+            <el-pagination
+                    background
+                    :page-size="5"
+                    :pager-count="5"
+                    :hide-on-single-page="true"
+                    :current-page="currentPage"
+                    @current-change="changePage"
+                    layout="prev, pager, next"
+                    :total="tableTotal">
+            </el-pagination>
+        </div>
         <el-dialog
                 width="20%"
                 title=""
@@ -280,6 +194,6 @@
 
     .mySwitch.el-switch .el-switch__core,
     .el-switch .el-switch__label {
-        width: 50px !important;
+        width: 4rem !important;
     }
 </style>
