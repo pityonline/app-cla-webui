@@ -155,7 +155,7 @@
             }
         },
         created() {
-
+            console.log(this.$store.state.loginInfo);
         },
         mounted() {
             this.setClientHeight();
