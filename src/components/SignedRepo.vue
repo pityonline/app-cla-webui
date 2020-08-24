@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div class="tableStyle">
-            <div style="margin-bottom: 1rem">
+        <CorporationHeader @clickItem="clickItem" :userName="user"></CorporationHeader>
+            <div style="margin-bottom: 1rem" class="tableStyle">
                 <el-table
                         :data="listData"
                         align="center"
@@ -50,7 +50,7 @@
                 </el-table>
 
             </div>
-        </div>
+
         <div class="paginationClass">
             <el-pagination
                     background
@@ -78,15 +78,21 @@
             </el-row>
 
         </el-dialog>
+        <Footer></Footer>
     </div>
 
 </template>
 
 <script>
     import * as url from '../until/api'
-
+    import CorporationHeader from '@components/CorporationHeader'
+    import Footer from '@components/Footer'
     export default {
         name: "SignedRepo",
+        components:{
+            CorporationHeader,
+            Footer,
+        },
         data() {
             return {
                 deleteId: '',
