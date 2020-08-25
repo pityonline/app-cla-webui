@@ -475,7 +475,9 @@
                     this.signCla()
                     this.dialogVisible=false
                 } else {
-                    console.log('verifyCode error');
+                    this.$message.closeAll()
+                    this.$message.error('verifyCode error')
+
                 }
 
             },

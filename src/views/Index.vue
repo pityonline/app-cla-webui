@@ -11,7 +11,7 @@
             </div>
             <div id="section">
                 <div id="title">
-                    <svg-icon class="logText" icon-class="CLA_text"></svg-icon>
+                    <svg-icon class="logText" icon-class="CLA_SYSTEM_WHITE"></svg-icon>
 
                 </div>
                 <div>Easily handle Contributor License Agreements (CLAs)</div>
