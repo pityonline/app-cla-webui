@@ -466,7 +466,7 @@
             },
             /*获取组织权限*/
             getOrgPermission() {
-                if (this.loginType === 'gitee') {
+                if (this.platform === 'gitee') {
                     window.location.href = 'https://gitee.com/oauth/authorize?client_id=2632e89d3dfb17ce941d2d2b45efc6f235afb4941ddb67578adda83aa33ab6a2&redirect_uri=http://139.159.224.207:60031/api/v1/login?platform=gitee&response_type=code&scope=user_info%20groups%20emails%groups';
 
                 }else {
