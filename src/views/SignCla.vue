@@ -114,17 +114,17 @@
 
         <Footer></Footer>
         <el-dialog
-                title=""
+                title="To sign the mailbox to complete"
                 top="5vh"
                 :visible.sync="dialogVisible"
                 width="20%">
             <el-row style="margin-bottom: 2rem">
                 <el-col :span="16">
-                    <el-input v-model="verifyCode">
+                    <el-input size="medium" v-model="verifyCode">
                     </el-input>
                 </el-col>
                 <el-col :span="8">
-                    <el-button @click="createAndSendCode" type="primary" style="width: 100%" size="medium">send code</el-button>
+                    <el-button @click="createAndSendCode" disabled="sendBtText!=='send code'" type="primary" style="width: 100%" size="medium">{{sendBtText}}</el-button>
                 </el-col>
 
             </el-row>
@@ -189,6 +189,7 @@
                 callback();
             }
             return {
+                sendBtText:'send code',
                 claOrgIdArr: [],
                 fields: [],
                 claIdArr: [],
@@ -438,9 +439,18 @@
             toHome() {
                 this.$router.push('/home')
             },
+
             /*生成验证码*/
             createAndSendCode() {
-                this.dialogVisible = true
+                this.sendBtText=60
+                let codeInterval = setInterval(()=>{
+                    if (this.sendBtText !== 0) {
+                        this.sendBtText--
+                    }else{
+                        this.sendBtText='send code'
+                        clearInterval(codeInterval)
+                    }
+                },1000)
                 let code = `${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}`;
                 sessionStorage.setItem('code', code)
                 let obj = {code: code}
@@ -540,7 +550,7 @@
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        this.createAndSendCode();
+                        this.dialogVisible = true
                         console.log(this.$store.state.loginType);
 
                     } else {
