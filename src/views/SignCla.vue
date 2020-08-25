@@ -487,7 +487,7 @@
                     myUrl=url.employee_signing;
                     obj ={
                         // name:this.ruleForm.name,
-                        name:'ocl1',
+                        name:'ocl2',
                         cla_org_id:this.claOrgIdArr[this.value],
                         email:this.ruleForm.email,
                         info:info,
