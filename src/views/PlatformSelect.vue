@@ -37,6 +37,7 @@
                 console.log('submit');
             },
             login(platform){
+
                 this.setPlatformAct(platform)
                 console.log(platform);
                 if (platform === 'gitee') {

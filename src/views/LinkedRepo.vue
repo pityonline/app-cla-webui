@@ -35,15 +35,15 @@
                         label="Language">
                 </el-table-column>
                 <!--<el-table-column-->
-                        <!--prop="contributors"-->
-                        <!--label="Corporation Contributors"-->
-                        <!--width="260"-->
-                        <!--align="center">-->
-                    <!--<template slot-scope="scope">-->
-                        <!--<span class="pointer hoverUnderline"-->
-                              <!--@click="checkCorporationList(scope.row)"-->
-                              <!--style="margin-left: 10px;">{{scope.row.contributors}}</span>-->
-                    <!--</template>-->
+                <!--prop="contributors"-->
+                <!--label="Corporation Contributors"-->
+                <!--width="260"-->
+                <!--align="center">-->
+                <!--<template slot-scope="scope">-->
+                <!--<span class="pointer hoverUnderline"-->
+                <!--@click="checkCorporationList(scope.row)"-->
+                <!--style="margin-left: 10px;">{{scope.row.contributors}}</span>-->
+                <!--</template>-->
                 <!--</el-table-column>-->
 
                 <el-table-column
@@ -267,47 +267,51 @@
         },
 
         created() {
-            new Promise((resolve,reject)=>{
-                this.getCookieData()
-            }).then(
-                this.getTableData()
-
-            )
+            this.getCookieData()
+            this.getTableData()
         },
         methods: {
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
+
             getTableData() {
-                let tableData = this.$store.state.tableData
-                console.log(tableData);
-                for (let i = 0; i < tableData.length; i++) {
-                    for (let j = i + 1; j < tableData.length; j++) {
-                        if (tableData[i].repository === tableData[j].repository) {
-                            if (!tableData[i].children) {
-                                Object.assign(tableData[i], {children: []})
-                            }
-                            tableData[i].children.push(tableData[j])
-                            tableData.splice(j, 1)
-                            j--;
-                        }
-                    }
-                }
-                tableData.forEach(item => {
-                    if (item.children) {
-                        item.children.forEach((it, index) => {
-                            for (let i = index + 1; i < item.children.length; i++)
-                                if (it.apply_to === item.children[i].apply_to) {
-                                    if (!it.children) {
-                                        Object.assign(it, {children: []})
+
+                let interval = setInterval(() => {
+                    if (this.$store.state.tableData) {
+                        let tableData = this.$store.state.tableData
+                        console.log(tableData);
+                        for (let i = 0; i < tableData.length; i++) {
+                            for (let j = i + 1; j < tableData.length; j++) {
+                                if (tableData[i].repository === tableData[j].repository) {
+                                    if (!tableData[i].children) {
+                                        Object.assign(tableData[i], {children: []})
                                     }
-                                    it.children.push(item.children[i])
-                                    item.children.splice(i, 1)
-                                    i--
+                                    tableData[i].children.push(tableData[j])
+                                    tableData.splice(j, 1)
+                                    j--;
                                 }
+                            }
+                        }
+                        tableData.forEach(item => {
+                            if (item.children) {
+                                item.children.forEach((it, index) => {
+                                    for (let i = index + 1; i < item.children.length; i++)
+                                        if (it.apply_to === item.children[i].apply_to) {
+                                            if (!it.children) {
+                                                Object.assign(it, {children: []})
+                                            }
+                                            it.children.push(item.children[i])
+                                            item.children.splice(i, 1)
+                                            i--
+                                        }
+                                })
+                            }
                         })
+                        this.tableData = tableData
+                        console.log(this.tableData);
+                        clearInterval(interval)
                     }
-                })
-                this.tableData = tableData
-                console.log(this.tableData);
+                }, 100)
+
             },
             getCookieData() {
                 console.log('getCookieData');
