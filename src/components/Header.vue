@@ -11,7 +11,7 @@
         <el-col :span="8">
             <div>
 
-                <svg-icon class="pointer" style="height: 100%;width: 3rem" @click="toHome()" id="CLA_SYSTEM_BLACK" icon-class="logo_b"/>
+                <svg-icon class="pointer" style="height: 100%;width: 3rem" @click="toHome()" id="svg_logo" icon-class="CLA_SYSTEM_BLACK"/>
             </div>
         </el-col>
         <el-col :span="8">
