@@ -77,10 +77,10 @@
                                 <el-row class="mySwitch">
 
                                     <el-switch
-                                            @change="changeActive(scope.row.id,scope.row.isUsed)"
-                                            v-model="scope.row.isUsed"
+                                            @change="changeActtive(scope.row.cla_org_id,scope.row.email,scope.row.enabled)"
+                                            v-model="scope.row.enabled"
                                             class="mySwitch"
-                                            :disabled="scope.row.isUsed"
+                                            :disabled="scope.row.enabled"
                                             width="3rem"
                                             active-color="#409EFF"
                                             active-text="active"
@@ -108,9 +108,9 @@
 
     export default {
         name: "EmployeeList",
-        data(){
-            return{
-                active:'first',
+        data() {
+            return {
+                active: 'first',
                 inactiveData: [{id: 0, name: 'jack', email: '10577507@qq.com', tel: '15632486433', isUsed: false}, {
                     id: 1,
                     name: 'Rose',
@@ -118,7 +118,7 @@
                     tel: '18832486437',
                     isUsed: false
                 }],
-                activeData:[{id: 0, name: 'tom', email: '10577507@qq.com', tel: '15632486433', isUsed: true}, {
+                activeData: [{id: 0, name: 'tom', email: '10577507@qq.com', tel: '15632486433', isUsed: true}, {
                     id: 1,
                     name: 'helen',
                     email: '105507@163.com',
@@ -127,7 +127,7 @@
                 }]
             }
         },
-        methods:{
+        methods: {
             changeActtive(cla_org_id, email, enabled) {
                 let data = {
                     cla_org_id: cla_org_id,
@@ -140,30 +140,30 @@
                     data: data,
                 }).then(res => {
                     console.log(res);
-
+                    this.getEmployee()
                 }).catch(err => {
                     console.log(err);
                 })
             },
 
-            getEmployee(){
+            getEmployee() {
                 let obj = {
-                    platform:this.$store.state.repoInfo.platform,
-                    repo_id:this.$store.state.repoInfo.repo_id,
-                    org_id:this.$store.state.repoInfo.org_id,
-                    corporation_email:this.$store.state.loginInfo.email
+                    platform: this.$store.state.repoInfo.platform,
+                    repo_id: this.$store.state.repoInfo.repo_id,
+                    org_id: this.$store.state.repoInfo.org_id,
+                    corporation_email: this.$store.state.loginInfo.email
                 }
                 this.$axios({
-                    url:'/api'+url.queryEmployee,
-                    params:obj
-                }).then(res=>{
-                    this.inactiveData=[];
-                    this.activeData=[];
+                    url: '/api' + url.queryEmployee,
+                    params: obj
+                }).then(res => {
+                    this.inactiveData = [];
+                    this.activeData = [];
                     console.log(res);
-                    res.data.forEach((item,index)=>{
-                        item.enabled===false?this.inactiveData.push(item):this.activeData.push(item)
+                    res.data.forEach((item, index) => {
+                        item.enabled === false ? this.inactiveData.push(item) : this.activeData.push(item)
                     })
-                }).catch(err=>{
+                }).catch(err => {
                     console.log(err);
                 })
             },
@@ -180,6 +180,7 @@
         padding: 3rem;
         background-color: white;
     }
+
     .mySwitch .el-switch__label {
         position: absolute;
         display: none;
@@ -207,7 +208,8 @@
     .el-switch .el-switch__label {
         width: 4rem !important;
     }
-    .mySwitch .el-switch.is-disabled .el-switch__core,.mySwitch .el-switch.is-disabled .el-switch__label,.tableStyle{
+
+    .mySwitch .el-switch.is-disabled .el-switch__core, .mySwitch .el-switch.is-disabled .el-switch__label, .tableStyle {
         cursor: pointer;
     }
 </style>
