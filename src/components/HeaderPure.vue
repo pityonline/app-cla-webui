@@ -2,7 +2,7 @@
     <div class="header">
         <el-col :offset="8" :span="8">
             <div>
-                <svg-icon class="pointer" @click="toHome()" id="svg_logo" icon-class="logo_b"/>
+                <svg-icon class="pointer" @click="toHome()" id="svg_logo" icon-class="CLA_SYSTEM_BLACK"/>
             </div>
         </el-col>
     </div>
