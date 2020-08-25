@@ -17,7 +17,7 @@
                 <el-col :offset="6" :span="12">
                     <p class="contentTitle">Please sign the CLA for <span>{{repo}}</span></p>
 
-                    <el-row >
+                    <el-row>
                         <span class="size_s">Version: 2020-06-17</span>
                         <el-select
                                 style="width: 6rem;margin-left: 2rem"
@@ -43,12 +43,12 @@
                     <!--<el-row class="marginTop1rem">-->
 
 
-                        <!--<el-col :span="8" class="borderClass">-->
-                            <!--<el-radio label="0" @change="roleChange()" v-model="role">{{desc.personalContributor}}</el-radio>-->
-                        <!--</el-col>-->
-                        <!--<el-col :span="8" class="borderClass">-->
-                            <!--<el-radio label="1" @change="roleChange()" v-model="role">{{desc.comContributor}}</el-radio>-->
-                        <!--</el-col>-->
+                    <!--<el-col :span="8" class="borderClass">-->
+                    <!--<el-radio label="0" @change="roleChange()" v-model="role">{{desc.personalContributor}}</el-radio>-->
+                    <!--</el-col>-->
+                    <!--<el-col :span="8" class="borderClass">-->
+                    <!--<el-radio label="1" @change="roleChange()" v-model="role">{{desc.comContributor}}</el-radio>-->
+                    <!--</el-col>-->
 
                     <!--</el-row>-->
                     <el-row class="marginTop1rem">
@@ -60,16 +60,21 @@
                                               :label="item.title"
                                               :required="item.required"
                                               :prop="item.type">
-                                    <el-input v-if="item.type==='email'"  type="email" v-model="ruleForm[item.type]" size="small"></el-input>
-                                    <el-input v-else-if="item.type==='date'" readonly=""   v-model="ruleForm[item.type]" size="small"></el-input>
+                                    <el-input v-if="item.type==='email'" type="email" v-model="ruleForm[item.type]"
+                                              size="small"></el-input>
+                                    <el-input v-else-if="item.type==='date'" readonly="" v-model="ruleForm[item.type]"
+                                              size="small"></el-input>
                                     <el-input v-else v-model="ruleForm[item.type]" size="small"></el-input>
                                 </el-form-item>
                                 <p style="font-size: .9rem;" class="borderClass">{{desc.metadataDesc}}</p>
                                 <div class="marginTop1rem">
-                                    <el-checkbox v-model="isRead">I have read the Privacy Policy and hereby consent to the processing of my data by openLooKeng in Hong Kong"</el-checkbox>
+                                    <el-checkbox v-model="isRead">I have read the Privacy Policy and hereby consent to
+                                        the processing of my data by openLooKeng in Hong Kong"
+                                    </el-checkbox>
                                 </div>
                                 <el-form-item label-width="0" class="marginTop1rem">
-                                    <el-button :disabled="!isRead" type="primary" @click="submitForm('ruleForm')">{{desc.sign}}
+                                    <el-button :disabled="!isRead" type="primary" @click="submitForm('ruleForm')">
+                                        {{desc.sign}}
                                     </el-button>
                                     <el-button @click="resetForm('ruleForm')">{{desc.reset}}</el-button>
                                 </el-form-item>
@@ -114,13 +119,16 @@
                 :visible.sync="dialogVisible"
                 width="50%">
             <div style="margin-bottom: 2rem">
-                请在48小时内输入邮箱{{ruleForm.email}}中的验证码进行验证
+                <el-input v-model="verifyCode">
+
+                </el-input><el-button @click="createAndSendCode" type="primary" size="medium">send code</el-button>
 
             </div>
             <div>
-                <el-button type="primary" size="medium" @click="dialogVisible=false">确定</el-button>
+                <el-button type="primary" size="medium" @click="verify">确定</el-button>
             </div>
         </el-dialog>
+
     </div>
 </template>
 
@@ -177,23 +185,23 @@
                 callback();
             }
             return {
-                claOrgIdArr:[],
-                fields:[],
-                claIdArr:[],
-                desc:'',
-                enDesc:{
-                    personalContributor:'Individual Contributor',
-                    comContributor:'Legal Entity Contributor',
-                    metadataDesc:'* require field. Please make sure the E-Mail is related with your gitee account.',
-                    sign:'SIGN',
-                    reset:'RESET',
+                claOrgIdArr: [],
+                fields: [],
+                claIdArr: [],
+                desc: '',
+                enDesc: {
+                    personalContributor: 'Individual Contributor',
+                    comContributor: 'Legal Entity Contributor',
+                    metadataDesc: '* require field. Please make sure the E-Mail is related with your gitee account.',
+                    sign: 'SIGN',
+                    reset: 'RESET',
                 },
-                cnDesc:{
-                    personalContributor:'个人贡献者',
-                    comContributor:'企业贡献者',
-                    metadataDesc:'*为必填项，请确保你的邮箱与gitee账号绑定',
-                    sign:'签署',
-                    reset:'重置',
+                cnDesc: {
+                    personalContributor: '个人贡献者',
+                    comContributor: '企业贡献者',
+                    metadataDesc: '*为必填项，请确保你的邮箱与gitee账号绑定',
+                    sign: '签署',
+                    reset: '重置',
                 },
                 passContent: '',
                 isVerify: false,
@@ -205,14 +213,14 @@
                 repo: '',
                 role: '0',
                 ruleForm: {
-                    adminEmail:'',
-                    corporationName:'',
+                    adminEmail: '',
+                    corporationName: '',
                     name: '',
                     email: '',
                     telephone: '',
                     date: '',
-                    fax:'',
-                    address:'',
+                    fax: '',
+                    address: '',
 
                 },
                 rules: {
@@ -293,15 +301,15 @@
             }
         },
         methods: {
-            ...mapActions(['setTokenAct','setRepoInfoAct']),
+            ...mapActions(['setTokenAct', 'setRepoInfoAct']),
             getNowDate() {
                 let date = new Date();
-                let year,month,day
-                year=date.getFullYear()
-                console.log(date.getFullYear(),date.getMonth() + 1, date.getDate());
-                date.getMonth() < 9?month=`0${date.getMonth()+1}`:month=date.getMonth()+1;
-                date.getDate()<10?day=`0${date.getDate()}`:day=date.getDate()
-                this.ruleForm.date=year+'-'+month+'-'+day
+                let year, month, day
+                year = date.getFullYear()
+                console.log(date.getFullYear(), date.getMonth() + 1, date.getDate());
+                date.getMonth() < 9 ? month = `0${date.getMonth() + 1}` : month = date.getMonth() + 1;
+                date.getDate() < 10 ? day = `0${date.getDate()}` : day = date.getDate()
+                this.ruleForm.date = year + '-' + month + '-' + day
 
             },
             getCookieData() {
@@ -322,52 +330,52 @@
                 this.changeDesc(this.languageOptions[this.value].label);
                 this.getClaText(this.claIdArr[value])
             },
-            changeDesc(language){
+            changeDesc(language) {
                 if (language === 'english') {
-                    this.desc=this.enDesc;
-                }else if (language === 'chinese') {
-                    this.desc=this.cnDesc;
+                    this.desc = this.enDesc;
+                } else if (language === 'chinese') {
+                    this.desc = this.cnDesc;
                 }
             },
             /*获取个人签署的metadata*/
             getSignPage() {
                 console.log('getSignPage');
                 this.changeDesc('english');
-                let applyTo='';
+                let applyTo = '';
                 if (this.$store.state.loginType === 'individual' || this.$store.state.loginType === 'employee') {
-                    applyTo='individual';
-                }else{
-                    applyTo='corporation';
+                    applyTo = 'individual';
+                } else {
+                    applyTo = 'corporation';
 
                 }
                 this.$axios({
                     url: '/api' + url.getSignPage,
-                    params:{
-                        platform:'gitee',
-                        org_id:this.$store.state.repoInfo.org_id,
-                        repo_id:this.$store.state.repoInfo.repo_id,
+                    params: {
+                        platform: 'gitee',
+                        org_id: this.$store.state.repoInfo.org_id,
+                        repo_id: this.$store.state.repoInfo.repo_id,
                         apply_to: applyTo
                     }
 
                 }).then(res => {
                     console.log(res);
                     if (res.data.length) {
-                        this.languageOptions=[]
-                        this.claIdArr=[]
-                        this.claOrgIdArr=[]
-                        res.data.forEach((item,index)=>{
+                        this.languageOptions = []
+                        this.claIdArr = []
+                        this.claOrgIdArr = []
+                        res.data.forEach((item, index) => {
                             if (item.cla_language === 'english') {
-                                this.value=index;
+                                this.value = index;
                                 console.log('查找clatext');
                                 this.getClaText(item.cla_id)
 
                             }
-                            this.languageOptions.push({value:index,label:item.cla_language})
+                            this.languageOptions.push({value: index, label: item.cla_language})
                             this.claIdArr.push(item.cla_id)
                             this.claOrgIdArr.push(item.id)
                         })
 
-                    }else{
+                    } else {
 
                     }
 
@@ -376,14 +384,14 @@
                 })
             },
             /*查找clatext*/
-            getClaText(cla_id){
+            getClaText(cla_id) {
                 this.$axios({
                     url: `/api${url.getClaInfo}/${cla_id}`,
 
                 }).then(resp => {
                     console.log(resp);
-                    document.getElementById('claBox').innerHTML=resp.data.text
-                    this.fields=resp.data.fields
+                    document.getElementById('claBox').innerHTML = resp.data.text
+                    this.fields = resp.data.fields
                     // this.ruleForm={};
                     // this.fields.forEach(item=>{
                     //     Object.assign(this.ruleForm,{[item.type]:''})
@@ -426,72 +434,82 @@
             toHome() {
                 this.$router.push('/home')
             },
-            /*验证验证码*/
-            verify() {
-                this.isVerify = true;
-                let obj = {code: this.verifyCode}
+            /*生成验证码*/
+            createAndSendCode() {
+                this.dialogVisible = true
+                let code = `${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}`;
+                sessionStorage.setItem('code', code)
+                let obj = {code: code}
                 this.$axios({
-                    url: '/api' + url.verifyCode,
+                    url: '/api' + url.sendCode,
                     method: 'post',
                     data: obj,
-                    headers: {
-                        'Access-Token': this.$store.state.access_token,
-                        'Refresh-Token': this.$store.state.refresh_token,
-                        'User': `${this.platform}/${this.$store.state.user.userName}`
-                    }
-
                 }).then(res => {
                     console.log(res);
-                    if (res.data.code === 200) {
-                        this.isVerify = true;
-                    } else {
-                        this.$message.error('验证码错误')
-                    }
+
                 }).catch(err => {
                     console.log(err);
 
                 })
             },
+
+            /*验证验证码*/
+            verify() {
+                let code = sessionStorage.getItem('code')
+                if (this.verifyCode === code) {
+                    this.signCla()
+                    this.dialogVisible=false
+                } else {
+                    console.log('verifyCode error');
+                }
+
+            },
             /*发送验证码*/
             signCla() {
 
-                let info={}
-                let myUrl='';
-                let obj={};
-                for(let key in this.ruleForm){
+                let info = {}
+                let myUrl = '';
+                let obj = {};
+                for (let key in this.ruleForm) {
                     console.log(key);
                     if (this.ruleForm[key] !== '') {
-                        Object.assign(info,{[key]:this.ruleForm[key]})
+                        Object.assign(info, {[key]: this.ruleForm[key]})
                     }
                 }
                 console.log(info);
                 if (this.$store.state.loginType === 'individual') {
-                    myUrl=url.individual_signing;
-                    obj ={
-                        cla_org_id:this.claOrgIdArr[this.value],
-                        email:this.ruleForm.email,
-                        info:info,
+                    myUrl = url.individual_signing;
+                    obj = {
+                        cla_org_id: this.claOrgIdArr[this.value],
+                        email: this.ruleForm.email,
+                        info: info,
                     }
-                }else if (this.$store.state.loginType === 'corporation') {
 
-                    myUrl=url.corporation_signing;
-                    obj ={
-                        cla_org_id:this.claOrgIdArr[this.value],
-                        corporation_name:this.ruleForm.corporationName,
-                        admin_name:this.ruleForm.name,
-                        admin_email:this.ruleForm.adminEmail,
-                        enabled:true,
-                        info:info,
+                } else if (this.$store.state.loginType === 'corporation') {
+
+                    myUrl = url.corporation_signing;
+                    obj = {
+                        cla_org_id: this.claOrgIdArr[this.value],
+                        corporation_name: this.ruleForm.corporationName,
+                        admin_name: this.ruleForm.name,
+                        admin_email: this.ruleForm.adminEmail,
+                        enabled: true,
+                        info: info,
                     }
-                }else if (this.$store.state.loginType === 'employee'){
-                    myUrl=url.employee_signing;
-                    obj ={
-                        name:this.ruleForm.name,
-                        cla_org_id:this.claOrgIdArr[this.value],
-                        email:this.ruleForm.email,
-                        info:info,
+                } else if (this.$store.state.loginType === 'employee') {
+                    myUrl = url.employee_signing;
+                    obj = {
+                        name: this.ruleForm.name,
+                        cla_org_id: this.claOrgIdArr[this.value],
+                        email: this.ruleForm.email,
+                        info: info,
                     }
                 }
+
+                this.sign(myUrl, obj)
+            },
+
+            sign(myUrl, obj) {
                 console.log(myUrl, obj);
                 this.$axios({
                     url: '/api' + myUrl,
@@ -518,7 +536,7 @@
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        this.signCla();
+                        this.createAndSendCode();
                         console.log(this.$store.state.loginType);
 
                     } else {
@@ -590,7 +608,6 @@
         created() {
             this.getCookieData()
             this.getSignPage();
-            this.loadMetadata()
             this.getNowDate()
 
         },
