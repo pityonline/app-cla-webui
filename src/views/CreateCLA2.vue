@@ -157,11 +157,6 @@
                     required: true,
                 },
                     {
-                        title: 'E-Mail1',
-                        type: 'email',
-                        description: 'your email',
-                        required: true,
-                    }, {
                     title: 'Date',
                     type: 'date',
                     description: 'the date of today',

@@ -454,20 +454,7 @@
             },
             /*发送验证码*/
             signCla() {
-                // this.$router.push('/verifyPage?role=1')
-                // this.dialogVisible = true;
-                // this.isSendCode = true;
-                // console.log(until.getClientHeight(), document.getElementById('checkCLA').offsetHeight);
-                // this.checkCLAClass.height = until.getClientHeight() + 'px'
-                // let code = `${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}`
-                // let obj = {
-                //     code: code,
-                //     role: this.role,
-                //     name: this.ruleForm.name,
-                //     email: this.ruleForm.email,
-                //     tel: this.ruleForm.tel
-                // }
-                // console.log(obj);
+
                 let info={}
                 let myUrl='';
                 let obj={};
@@ -499,7 +486,8 @@
                 }else if (this.$store.state.loginType === 'employee'){
                     myUrl=url.employee_signing;
                     obj ={
-                        name:this.ruleForm.name,
+                        // name:this.ruleForm.name,
+                        name:'ocl1',
                         cla_org_id:this.claOrgIdArr[this.value],
                         email:this.ruleForm.email,
                         info:info,
