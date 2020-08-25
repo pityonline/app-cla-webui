@@ -118,13 +118,16 @@
                 top="5vh"
                 :visible.sync="dialogVisible"
                 width="20%">
-            <div style="margin-bottom: 2rem">
-                <el-input v-model="verifyCode">
+            <el-row style="margin-bottom: 2rem">
+                <el-col :span="16">
+                    <el-input v-model="verifyCode">
+                    </el-input>
+                </el-col>
+                <el-col :span="8">
+                    <el-button @click="createAndSendCode" type="primary" style="width: 100%" size="medium">send code</el-button>
+                </el-col>
 
-                </el-input>
-                <el-button @click="createAndSendCode" type="primary" size="medium">send code</el-button>
-
-            </div>
+            </el-row>
             <div>
                 <el-button type="primary" style="width: 100%" size="medium" @click="verify">确定</el-button>
             </div>
