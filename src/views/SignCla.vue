@@ -486,8 +486,7 @@
                 }else if (this.$store.state.loginType === 'employee'){
                     myUrl=url.employee_signing;
                     obj ={
-                        // name:this.ruleForm.name,
-                        name:'ocl3',
+                        name:this.ruleForm.name,
                         cla_org_id:this.claOrgIdArr[this.value],
                         email:this.ruleForm.email,
                         info:info,

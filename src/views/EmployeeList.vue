@@ -64,11 +64,6 @@
                                 label="Email"
                         >
                         </el-table-column>
-                        <el-table-column
-                                prop="tel"
-                                label="Tel">
-
-                        </el-table-column>
 
                         <el-table-column
                                 label="status"
@@ -111,18 +106,16 @@
         data() {
             return {
                 active: 'first',
-                inactiveData: [{id: 0, name: 'jack', email: '10577507@qq.com', tel: '15632486433', isUsed: false}, {
+                inactiveData: [{id: 0, name: 'jack', email: '10577507@qq.com', isUsed: false}, {
                     id: 1,
                     name: 'Rose',
                     email: '105507@163.com',
-                    tel: '18832486437',
                     isUsed: false
                 }],
-                activeData: [{id: 0, name: 'tom', email: '10577507@qq.com', tel: '15632486433', isUsed: true}, {
+                activeData: [{id: 0, name: 'tom', email: '10577507@qq.com', isUsed: true}, {
                     id: 1,
                     name: 'helen',
                     email: '105507@163.com',
-                    tel: '18832486437',
                     isUsed: true
                 }]
             }
