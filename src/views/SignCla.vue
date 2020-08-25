@@ -118,7 +118,7 @@
                 top="5vh"
                 :visible.sync="dialogVisible"
                 width="20%">
-            <el-row style="margin-bottom: 2rem">
+            <el-row style="margin-bottom: 2rem" class="codeBox">
                 <el-col :span="16">
                     <el-input size="medium" v-model="verifyCode">
                     </el-input>
@@ -442,10 +442,11 @@
 
             /*生成验证码*/
             createAndSendCode() {
-                this.sendBtText=60
+                let second=60
                 let codeInterval = setInterval(()=>{
-                    if (this.sendBtText !== 0) {
-                        this.sendBtText--
+                    if (second !== 0) {
+                        second--
+                        this.sendBtText=second+'s'
                     }else{
                         this.sendBtText='send code'
                         clearInterval(codeInterval)
@@ -638,6 +639,12 @@
 </script>
 
 <style scoped lang="less">
+    .codeBox .el-button--medium,.codeBox .el-button {
+        border-radius: 0 4px 4px 0;
+    }
+    .codeBox .el-input__inner{
+        border-radius: 4px 0 0 4px;
+    }
     .el-button.is-disabled, .el-button.is-disabled:focus, .el-button.is-disabled:hover {
         cursor: pointer;
     }
