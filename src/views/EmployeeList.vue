@@ -17,23 +17,18 @@
                                 label="Email"
                         >
                         </el-table-column>
-                        <el-table-column
-                                prop="tel"
-                                label="Tel">
-
-                        </el-table-column>
 
                         <el-table-column
                                 label="status"
                                 align="center">
                             <template slot-scope="scope">
-                                <el-row>
+                                <el-row class="mySwitch">
 
                                     <el-switch
-                                            @change="changeActive(scope.row.id,scope.row.isUsed)"
-                                            v-model="scope.row.isUsed"
+                                            @change="changeActtive(scope.row.cla_org_id,scope.row.email,scope.row.enabled)"
+                                            v-model="scope.row.enabled"
                                             class="mySwitch"
-                                            :disabled="scope.row.isUsed"
+                                            :disabled="scope.row.enabled"
                                             width="3rem"
                                             active-color="#409EFF"
                                             active-text="active"
@@ -79,7 +74,7 @@
                                 label="status"
                                 align="center">
                             <template slot-scope="scope">
-                                <el-row>
+                                <el-row class="mySwitch">
 
                                     <el-switch
                                             @change="changeActive(scope.row.id,scope.row.isUsed)"
@@ -133,6 +128,24 @@
             }
         },
         methods:{
+            changeActtive(cla_org_id, email, enabled) {
+                let data = {
+                    cla_org_id: cla_org_id,
+                    email: email,
+                    enabled: enabled
+                }
+                this.$axios({
+                    url: `/api${url.enableEmployee}`,
+                    method: 'put',
+                    data: data,
+                }).then(res => {
+                    console.log(res);
+
+                }).catch(err => {
+                    console.log(err);
+                })
+            },
+
             getEmployee(){
                 let obj = {
                     platform:this.$store.state.repoInfo.platform,
@@ -144,8 +157,12 @@
                     url:'/api'+url.queryEmployee,
                     params:obj
                 }).then(res=>{
+                    this.inactiveData=[];
+                    this.activeData=[];
                     console.log(res);
-                    this.tableData=res.data;
+                    res.data.forEach((item,index)=>{
+                        item.enabled===false?this.inactiveData.push(item):this.activeData.push(item)
+                    })
                 }).catch(err=>{
                     console.log(err);
                 })
@@ -162,5 +179,35 @@
         margin-bottom: 2rem;
         padding: 3rem;
         background-color: white;
+    }
+    .mySwitch .el-switch__label {
+        position: absolute;
+        display: none;
+        color: #fff;
+    }
+
+    /*打开时文字位置设置*/
+    .mySwitch .el-switch__label--right {
+        z-index: 1;
+        right: 0.5rem;
+    }
+
+    /*关闭时文字位置设置*/
+    .mySwitch .el-switch__label--left {
+        z-index: 1;
+        left: .5rem;
+    }
+
+    /*显示文字*/
+    .mySwitch .el-switch__label.is-active {
+        display: block;
+    }
+
+    .mySwitch.el-switch .el-switch__core,
+    .el-switch .el-switch__label {
+        width: 4rem !important;
+    }
+    .mySwitch .el-switch.is-disabled .el-switch__core,.mySwitch .el-switch.is-disabled .el-switch__label,.tableStyle{
+        cursor: pointer;
     }
 </style>
