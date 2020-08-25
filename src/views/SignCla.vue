@@ -124,7 +124,7 @@
                     </el-input>
                 </el-col>
                 <el-col :span="8">
-                    <el-button @click="createAndSendCode" disabled="sendBtText!=='send code'" type="primary" style="width: 100%" size="medium">{{sendBtText}}</el-button>
+                    <el-button @click="createAndSendCode" :disabled="sendBtText!=='send code'" type="primary" style="width: 100%" size="medium">{{sendBtText}}</el-button>
                 </el-col>
 
             </el-row>
