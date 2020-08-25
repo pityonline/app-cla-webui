@@ -267,8 +267,12 @@
         },
 
         created() {
-            this.getCookieData()
-            this.getTableData()
+            new Promise((resolve,reject)=>{
+                this.getCookieData()
+            }).then(
+                this.getTableData()
+
+            )
         },
         methods: {
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
