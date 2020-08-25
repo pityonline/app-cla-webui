@@ -117,15 +117,16 @@
                 title=""
                 top="5vh"
                 :visible.sync="dialogVisible"
-                width="50%">
+                width="20%">
             <div style="margin-bottom: 2rem">
                 <el-input v-model="verifyCode">
 
-                </el-input><el-button @click="createAndSendCode" type="primary" size="medium">send code</el-button>
+                </el-input>
+                <el-button @click="createAndSendCode" type="primary" size="medium">send code</el-button>
 
             </div>
             <div>
-                <el-button type="primary" size="medium" @click="verify">确定</el-button>
+                <el-button type="primary" style="width: 100%" size="medium" @click="verify">确定</el-button>
             </div>
         </el-dialog>
 
