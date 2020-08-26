@@ -142,7 +142,7 @@
     import * as until from '../until/until'
     import * as url from '../until/api'
     import {mapActions} from 'vuex'
-
+    import md5 from 'js-md5'
 
     export default {
 
@@ -453,8 +453,15 @@
                     }
                 },1000)
                 let code = `${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}`;
-                sessionStorage.setItem('code', code)
-                let obj = {code: code}
+                console.log(Math.random());
+                console.log(md5(code));
+                localStorage.setItem('code', md5(code))
+                let obj={};
+                if (this.$store.state.loginType === 'corporation') {
+                    obj = {code: code,email:this.ruleForm.adminEmail}
+                }else{
+                    obj = {code: code,email:this.ruleForm.email}
+                }
                 this.$axios({
                     url: '/api' + url.sendCode,
                     method: 'post',
