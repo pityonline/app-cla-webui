@@ -267,7 +267,7 @@
         },
 
         created() {
-            this.getCookieData()
+            // this.getCookieData()
             this.getTableData()
         },
         methods: {

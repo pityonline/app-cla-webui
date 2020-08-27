@@ -167,7 +167,7 @@
     }
 </script>
 
-<style scoped lang="less">
+<style  lang="less">
     .tableStyle {
         margin-bottom: 2rem;
         padding: 3rem;
