@@ -26,18 +26,18 @@
 
                     <template slot-scope="scope">
                         <el-popover
-                        width="80"
-                        placement="right">
+                                width="80"
+                                placement="right">
 
-                        <div class="menuBT">
-                        <el-button type="" size="mini">upload</el-button>
-                        <el-button type="" size="mini">download</el-button>
-                        <el-button type="" size="mini">preview</el-button>
-                        </div>
-                        <el-tooltip slot="reference" effect="dark" content="pdf"
-                        placement="bottom">
-                            <svg-icon class="pointer" icon-class="pdf" @click=""/>
-                        </el-tooltip>
+                            <div class="menuBT">
+                                <el-button type="" size="mini">upload</el-button>
+                                <el-button type="" size="mini">download</el-button>
+                                <el-button type="" size="mini">preview</el-button>
+                            </div>
+                            <el-tooltip slot="reference" effect="dark" content="pdf"
+                                        placement="bottom">
+                                <svg-icon class="pointer" icon-class="pdf" @click=""/>
+                            </el-tooltip>
                         </el-popover>
                     </template>
                 </el-table-column>
@@ -45,19 +45,19 @@
                         align="center">
 
                     <template slot-scope="scope">
-                            <div class="mySwitch" style="display: inline-block">
-                                <el-switch
-                                        @change="changeActive(scope.row.cla_org_id,scope.row.corporation_name,scope.row.admin_email,true)"
-                                        v-model="scope.row.enabled"
-                                        class="mySwitch"
-                                        :disabled="scope.row.enabled"
-                                        width="3rem"
-                                        active-color="#409EFF"
-                                        active-text="active"
-                                        inactive-text="inactive"
-                                        inactive-color="#EBEEF5">
-                                </el-switch>
-                            </div>
+                        <div class="mySwitch" style="display: inline-block">
+                            <el-switch
+                                    @change="changeActive(scope.row.cla_org_id,scope.row.corporation_name,scope.row.admin_email,true)"
+                                    v-model="scope.row.enabled"
+                                    class="mySwitch"
+                                    :disabled="scope.row.enabled"
+                                    width="3rem"
+                                    active-color="#409EFF"
+                                    active-text="active"
+                                    inactive-text="inactive"
+                                    inactive-color="#EBEEF5">
+                            </el-switch>
+                        </div>
                         <el-button style="margin-left: 1rem" type="primary" size="mini"
                                    @click="createRoot(scope.row.cla_org_id,scope.row.admin_email)">Create Root
                         </el-button>
@@ -101,12 +101,12 @@
                 tableTotal: 0,
             }
         },
-        beforeRouteEnter (to, from, next) {
+        beforeRouteEnter(to, from, next) {
             // 在渲染该组件的对应路由被 confirm 前调用
             // 不！能！获取组件实例 `this`
             // 因为当钩子执行前，组件实例还没被创建
-            console.log(from.path,to.path,this);
-            if (from.path!=='/') {
+            console.log(from.path, to.path, this);
+            if (from.path !== '/') {
                 sessionStorage.removeItem('item')
             }
             next();
@@ -114,19 +114,19 @@
 
         created() {
 
-            console.log(this.$route.query.item, 'created',sessionStorage.getItem('item'),JSON.parse(sessionStorage.getItem('item')));
+            console.log(this.$route.query.item, 'created', sessionStorage.getItem('item'), JSON.parse(sessionStorage.getItem('item')));
             if (JSON.parse(sessionStorage.getItem('item'))) {
                 console.log('if');
-                this.item=JSON.parse(sessionStorage.getItem('item'))
+                this.item = JSON.parse(sessionStorage.getItem('item'))
                 this.getCorporationInfo()
-            }else{
+            } else {
                 console.log('else');
 
                 this.tableData = this.$route.query.item.corporationInfo
                 this.item = this.$route.query.item
-                sessionStorage.setItem('item',JSON.stringify(this.$route.query.item))
+                sessionStorage.setItem('item', JSON.stringify(this.$route.query.item))
             }
-            },
+        },
 
         methods: {
 
@@ -216,15 +216,17 @@
     .el-switch .el-switch__label {
         width: 4rem !important;
     }
-    .mySwitch .el-switch.is-disabled .el-switch__core,.mySwitch .el-switch.is-disabled .el-switch__label,.tableStyle{
+
+    .mySwitch .el-switch.is-disabled .el-switch__core, .mySwitch .el-switch.is-disabled .el-switch__label, .tableStyle {
         cursor: pointer;
     }
 
-    .tableStyle{
+    .tableStyle {
         margin-bottom: 2rem;
         padding: 3rem;
         background-color: white;
     }
+
     .paginationClass {
         text-align: center;
         margin-bottom: 1rem;
@@ -238,16 +240,18 @@
     .el-icon-arrow-down {
         font-size: 12px;
     }
+
     .menuBT {
         display: flex;
         flex-direction: column;
 
         & > * {
-
+            width: 6rem;
             margin: .2rem 0;
             text-align: center;
         }
     }
+
     .hoverUnderline:hover {
         text-decoration: underline;
     }
