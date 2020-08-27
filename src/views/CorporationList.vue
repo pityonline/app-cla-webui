@@ -146,7 +146,7 @@
                 msg: 'Welcome to Your Vue.js App',
                 docInfo: {
                     type: "pdf",
-                    href: "/static/pdf/test.pdf"},
+                    href: "/static/pdf/merge.pdf"},
                 previewDialogVisible: false,
                 fileList: [{
                     name: 'food.jpeg',
