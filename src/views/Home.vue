@@ -22,7 +22,7 @@
                                 <!--选择仓库-->
                                 <div style="font-size: 1.2rem;padding: .5rem">
                                     ① Choose a org or repository <span v-if="!user.isAuthorize" @click="authorize()"
-                                                                style="font-size: .8rem;text-decoration: underline;cursor: pointer">(want to link an org?)</span>
+                                                                       style="font-size: .8rem;text-decoration: underline;cursor: pointer">(want to link an org?)</span>
                                 </div>
                                 <div style="padding: 0 2rem">
                                     <el-row :gutter="20">
@@ -64,12 +64,11 @@
                                 <!--选择协议-->
                                 <div style="font-size: 1.2rem;padding: .5rem">
                                     ② Choose a CLA
-                                </div>
-                                <div style="font-size: 1rem;padding: 0 2rem .5rem 2rem">
-                                    Select from Gist
                                     <span @click="createCLA()"
-                                          style="font-size: .8rem;text-decoration: underline;cursor: pointer">(don't have one?)</span>
+                                          style="font-size: .8rem;text-decoration: underline;cursor: pointer">(don't have one?)
+                                    </span>
                                 </div>
+
                                 <div style="padding: 0 2rem 1rem 2rem">
                                     <el-collapse v-model="activeNames" @change="handleChange">
                                         <el-collapse-item title="cla filter" name="1">
@@ -131,12 +130,16 @@
 
                                 <div style="font-size: 1.2rem;padding: .5rem">
                                     ③ Email
+                                    <span @click="toAuthorizedEmail()"
+                                          style="font-size: .8rem;text-decoration: underline;cursor: pointer">(click to grant authorized email)
+                                    </span>
                                 </div>
                                 <div style="padding: 0 2rem">
                                     <el-input
+                                            readonly=""
                                             @input="verifyEmail"
                                             size="medium"
-                                            placeholder="Input email"
+                                            placeholder="authorization email"
                                             v-model="email">
 
                                     </el-input>
@@ -166,10 +169,10 @@
 
             <div>
                 <el-tabs v-model="activeName" @tab-click="tabsHandleClick">
-                <el-tab-pane label="Linked Repositories" name="first" style="margin-top: 1rem">
+                    <el-tab-pane label="Linked Repositories" name="first" style="margin-top: 1rem">
 
-                </el-tab-pane>
-            </el-tabs>
+                    </el-tab-pane>
+                </el-tabs>
                 <router-view></router-view>
             </div>
 
@@ -224,28 +227,6 @@
 
   </span>
         </el-dialog>
-        <!--<el-dialog-->
-        <!--top="5vh"-->
-        <!--title=""-->
-        <!--:visible.sync="createMetadataDialogVisible"-->
-        <!--width="35%">-->
-        <!--<div style="text-align: left">-->
-        <!--<p class="dialogDesc">How can I create a Metadata Gist?</p>-->
-
-        <!--<p>To <span @click="toCreateMetadata()" style="cursor: pointer;text-decoration: underline;color: blue">createMetadata</span>-->
-        <!--enter a file name and paste-->
-        <!--the content of your Metadata.</p>-->
-        <!--<p class="dialogDesc">What happens if I edit the Gist file?</p>-->
-        <!--<p>CLA system will always show you the current version of your Gist file. Users who accept your-->
-        <!--Metadata-->
-        <!--sign the current version. If you change the content of your Metadata, each contributor has to accept-->
-        <!--the-->
-        <!--new version when they create a new pull request.</p>-->
-        <!--</div>-->
-        <!--<span slot="footer" class="dialog-footer">-->
-
-        <!--</span>-->
-        <!--</el-dialog>-->
         <el-dialog
                 top="5vh"
                 title=""
@@ -310,6 +291,54 @@
             </div>
 
         </el-dialog>
+        <el-dialog
+                top="5vh"
+                title=""
+                :visible.sync="emailDialogVisible"
+                width="35%">
+            <div>
+                <p class="dialogDesc">You need to select an email address for your organization to contact</p>
+                <div>
+
+                    <el-row>
+                        <el-col :offset="6" :span="12">
+
+                            <el-select
+                                    placeholder="Select email type"
+                                    size="medium"
+                                    filterable
+                                    v-model="emailType"
+                                    @change="changeEmailType">
+                                <el-option
+                                        v-for="item in emailTypeArr"
+                                        :key="item.value"
+                                        :value="item.value"
+                                        :label="item.label">
+
+                                </el-option>
+                            </el-select>
+                        </el-col>
+
+                    </el-row>
+                </div>
+                <div style="padding: 0 3rem;color: #409EFF">
+
+                </div>
+                <div style="padding: 2rem 6rem;text-align: left;font-size: 1.3rem">
+                    <p style="text-align: center">CLA system will...</p>
+                    <ul>
+                        <li>Send the white list management account number to the enterprise through the mailbox</li>
+                        <li>Send PDF signature documents to the signer through this email address</li>
+                    </ul>
+                </div>
+
+                <span slot="footer" class="dialog-footer">
+                    <el-button @click="emailDialogVisible = false">Cancel</el-button>
+                    <el-button v-loading.fullscreen.lock="linkLoading" type="primary" @click="authorizeEmail()">Yes,Let's do this!</el-button>
+                </span>
+            </div>
+
+        </el-dialog>
 
 
     </div>
@@ -346,13 +375,17 @@
             },
         },
         data() {
-
-
             return {
+                emailTypeArr: [{value:'gmail',label:'gmail'},{value:'qq',label:'qq'},{value:'163',label:'163'},],
+                emailType: '',
+                emailDialogVisible: false,
                 filterChange: true,
                 claLanguageValue: '',
                 claTypeValue: '',
-                claTypeOptions: [{label: 'individual', value: 'individual'}, {label: 'corporation', value: 'corporation'}],
+                claTypeOptions: [{label: 'individual', value: 'individual'}, {
+                    label: 'corporation',
+                    value: 'corporation'
+                }],
                 languageOptions: [{label: 'english', value: 'english'}, {label: 'chinese', value: 'chinese'}, {
                     label: 'japanese',
                     value: 'japanese'
@@ -414,7 +447,7 @@
                 gistUrl: '',
                 orgOptions: [],
                 orgValue: '',
-                orgChoose:false,
+                orgChoose: false,
                 repositoryOptions: [],
                 repositoryValue: '',
                 repositoryChoose: '',
@@ -432,12 +465,34 @@
             }
         },
         methods: {
+
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
-            resetCla(){
+            authorizeEmail(){
+                console.log('authorizeEmail');
+            },
+            changeEmailType(value) {
+                console.log('changeEmailType', value);
+            },
+            getEmailTypeArr() {
+
+                this.$axios({
+                    url: '/api' + url.getEmailTypeArr,
+                }).then(res => {
+                    console.log(res);
+                    this.emailTypeArr = res.data
+                }).catch(err => {
+                    console.log(err);
+                })
+            },
+            toAuthorizedEmail() {
+                this.getEmailTypeArr()
+                this.emailDialogVisible = true
+            },
+            resetCla() {
                 this.claChoose = false;
                 this.filterChange = true
-                this.claValue=''
-                this.previewText=''
+                this.claValue = ''
+                this.previewText = ''
                 this.getCLA()
             },
             claTypeChange(val) {
@@ -469,7 +524,7 @@
                 if (this.platform === 'gitee') {
                     window.location.href = 'https://gitee.com/oauth/authorize?client_id=2632e89d3dfb17ce941d2d2b45efc6f235afb4941ddb67578adda83aa33ab6a2&redirect_uri=http://139.159.224.207:60031/api/v1/login?platform=gitee&response_type=code&scope';
 
-                }else {
+                } else {
                     window.location.href = 'https://github.com/login/oauth/authorize?client_id=d86f4915398dad23bffc&redirect_url=http://localhost:8080/home&scope=repo';
                 }
             },
@@ -646,7 +701,7 @@
             },
             /*选择cla*/
             changeCla(value) {
-                this.claValue=value
+                this.claValue = value
                 console.log(this.claOptions, this.claValue);
                 this.showPreviewCla = true
                 this.claChoose = true;
@@ -682,14 +737,14 @@
             changeOrg(value) {
 
                 console.log(this.orgValue);
-                if(this.orgValue !== '') {
+                if (this.orgValue !== '') {
                     this.orgChoose = true;
                     this.getRepositoriesOfOrg(this.orgOptions[this.orgValue].label, this.orgOptions[this.orgValue].id)
-                }else {
+                } else {
                     this.orgChoose = false;
-                    this.repositoryOptions=[];
-                    this.repositoryValue=''
-                    this.repositoryChoose=false
+                    this.repositoryOptions = [];
+                    this.repositoryValue = ''
+                    this.repositoryChoose = false
 
                 }
 
@@ -697,9 +752,9 @@
             /*选择仓库*/
             changeRepository(value) {
                 console.log(this.repositoryValue);
-                if(this.repositoryValue !== '') {
+                if (this.repositoryValue !== '') {
                     this.repositoryChoose = true;
-                }else {
+                } else {
                     this.repositoryChoose = false;
 
                 }
@@ -758,7 +813,7 @@
                 console.log("getCLA");
                 this.$axios({
                     url: '/api' + url.getClaInfo,
-                    params:{language:this.claLanguageValue,apply_to:this.claTypeValue},
+                    params: {language: this.claLanguageValue, apply_to: this.claTypeValue},
                     headers: {
                         'Access-Token': this.$store.state.access_token,
                         'Refresh-Token': this.$store.state.refresh_token,
@@ -909,7 +964,7 @@
         mounted() {
             this.setClientHeight();
         }
-    }
+    };
 
 </script>
 
