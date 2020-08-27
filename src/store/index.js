@@ -107,8 +107,8 @@ export default new Vuex.Store({
                 url: '/api' + url.getLinkedRepoList,
                 params:{enabled:true},
                 headers: {
-                    // 'Access-Token': data.access_token,
-                    // 'Refresh-Token': data.refresh_token,
+                    'Access-Token': data.access_token,
+                    'Refresh-Token': data.refresh_token,
                     'User': `${data.platform}/${data.userName}`
                 }
             }).then(res => {
