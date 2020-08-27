@@ -27,17 +27,19 @@
                     <template slot-scope="scope">
                         <el-popover
                                 width="80"
+                                trigger="hover"
                                 placement="right">
 
                             <div class="menuBT">
-                                <el-button type="" size="mini">upload</el-button>
-                                <el-button type="" size="mini">download</el-button>
-                                <el-button type="" size="mini">preview</el-button>
+                                <el-button @click="uploadClaFile(scope.row)" style="margin-left: 10px" type=""
+                                           size="mini">upload
+                                </el-button>
+                                <el-button @click="downloadClaFile(scope.row)" type="" size="mini">download</el-button>
+                                <el-button @click="previewClaFile(scope.row)" type="" size="mini">preview</el-button>
                             </div>
-                            <el-tooltip slot="reference" effect="dark" content="pdf"
-                                        placement="bottom">
-                                <svg-icon class="pointer" icon-class="pdf" @click=""/>
-                            </el-tooltip>
+
+                            <svg-icon slot="reference" class="pointer" icon-class="pdf" @click=""/>
+
                         </el-popover>
                     </template>
                 </el-table-column>
@@ -51,7 +53,7 @@
                                     v-model="scope.row.enabled"
                                     class="mySwitch"
                                     :disabled="scope.row.enabled"
-                                    width="3rem"
+                                    width="100"
                                     active-color="#409EFF"
                                     active-text="active"
                                     inactive-text="inactive"
@@ -67,29 +69,92 @@
 
             </el-table>
         </div>
-        <div class="paginationClass">
-            <el-pagination
-                    background
-                    :page-size="5"
-                    :pager-count="5"
-                    :hide-on-single-page="true"
-                    :current-page="currentPage"
-                    @current-change="changePage"
-                    layout="prev, pager, next"
-                    :total="tableTotal">
-            </el-pagination>
-        </div>
+        <!--<div class="paginationClass">-->
+        <!--<el-pagination-->
+        <!--background-->
+        <!--:page-size="5"-->
+        <!--:pager-count="5"-->
+        <!--:hide-on-single-page="true"-->
+        <!--:current-page="currentPage"-->
+        <!--@current-change="changePage"-->
+        <!--layout="prev, pager, next"-->
+        <!--:total="tableTotal">-->
+        <!--</el-pagination>-->
+        <!--</div>-->
+        <el-dialog
+                title="upload cla file"
+                top="5vh"
+                :visible.sync="uploadDialogVisible"
+                width="35%">
+            <div>
+
+                <div class="left">
+                    <el-upload
+                            class="upload-demo"
+                            action="https://jsonplaceholder.typicode.com/posts/"
+                            :on-preview="handlePreview"
+                            :on-remove="handleRemove"
+                            :on-success="handleSuccess"
+                            :before-remove="beforeRemove"
+                            auto-upload="false"
+                            multiple
+                            :limit="3"
+                            :on-exceed="handleExceed"
+                            :file-list="fileList">
+                        <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
+                        <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器
+                        </el-button>
+                        <div slot="tip" class="el-upload__tip">文件不超过500kb</div>
+                    </el-upload>
+
+                </div>
+            </div>
+
+        </el-dialog>
+        <el-dialog
+                title="pdf-reader"
+                top="5vh"
+                :visible.sync="previewDialogVisible"
+                width="50%">
+            <div>
+                <pdfReader
+                        v-if="docInfo.type === 'pdf'"
+                        :doctype="docInfo.type"
+                        :dochref="docInfo.href">
+
+                </pdfReader>
+
+            </div>
+
+        </el-dialog>
     </div>
 
 
 </template>
 <script>
     import * as url from '../until/api'
+    import pdfReader from "@components/PdfReader";
 
     export default {
         name: "CorporationList",
+        components: {
+            pdfReader,
+        },
         data() {
             return {
+                msg: 'Welcome to Your Vue.js App',
+                docInfo: {
+                    type: "pdf",
+                    href: "../assets/pdf/test.pdf"},
+                previewDialogVisible: false,
+                fileList: [{
+                    name: 'food.jpeg',
+                    url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
+                }, {
+                    name: 'food2.jpeg',
+                    url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
+                }],
+                uploadDialogVisible: false,
                 item: '',
                 tableData: [{
                     corporation_name: 'ooo',
@@ -129,7 +194,37 @@
         },
 
         methods: {
+            previewClaFile(row) {
+                this.previewDialogVisible = true
+                console.log('previewClaFil', row);
+            },
 
+            downloadClaFile(row) {
+                console.log('downloadClaFile', row);
+            },
+            uploadClaFile(row) {
+                console.log('uploadClaFile', row);
+                this.uploadDialogVisible = true
+            },
+            submitUpload() {
+                this.$refs.upload.submit();
+            },
+            handleSuccess(file, fileList) {
+                console.log(file, fileList);
+
+            },
+            handleRemove(file, fileList) {
+                console.log(file, fileList);
+            },
+            handlePreview(file) {
+                console.log(file);
+            },
+            handleExceed(files, fileList) {
+                this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+            },
+            beforeRemove(file, fileList) {
+                return this.$confirm(`确定移除 ${file.name}？`);
+            },
             getCorporationInfo() {
                 this.$axios({
                     url: `/api${url.corporation_signing}`,
@@ -189,6 +284,10 @@
 </script>
 
 <style lang="less">
+    .el-popover {
+        min-width: 7rem;
+    }
+
     .mySwitch .el-switch__label {
         position: absolute;
         display: none;
@@ -247,7 +346,7 @@
 
         & > * {
             width: 6rem;
-            margin: .2rem 0;
+            margin: .2rem 1rem;
             text-align: center;
         }
     }
