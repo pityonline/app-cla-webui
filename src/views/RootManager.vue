@@ -2,6 +2,7 @@
     <div id="section" :style="section">
 
         <CorporationHeader @clickItem="clickItem" :user="user"></CorporationHeader>
+
         <el-row style="margin-top: 2rem">
             <el-col :offset="4" :span="16">
                 <el-tabs v-model="active">
@@ -66,6 +67,7 @@
     import Footer from '@components/Footer'
     import * as until from '../until/until'
 
+
     window.onresize = () => {
         // console.log(until.getClientHeight());
         if (until.getClientHeight() > document.getElementById('section').offsetHeight) {
@@ -76,7 +78,8 @@
         name: "rootManager",
         components: {
             CorporationHeader,
-            Footer
+            Footer,
+
 
         },
         data() {
@@ -107,6 +110,7 @@
                 callback();
             };
             return {
+
                 user:this.$store.state.loginInfo,
                 section: {
                     height: '',
@@ -148,6 +152,7 @@
         },
 
         methods: {
+
             clickItem(command) {
                 console.log(command);
                 switch (command) {
@@ -234,7 +239,7 @@
         box-sizing: border-box;
         flex-direction: column;
 
-        & > div:nth-of-type(2) {
+        & > div:nth-of-type(1) {
             flex-grow: 1;
         }
     }

@@ -1,5 +1,5 @@
 <template>
-    <div class="show-pdf"  >
+    <div class="show-pdf">
         <div>
             <pdf
                     :src="dochref"
@@ -10,7 +10,7 @@
             ></pdf>
         </div>
 
-        <p class="pageClass" >
+        <p class="pageClass">
             <span @click="changePdfPage(0)" :class="{grey: currentPage===1}">previous</span>
             {{currentPage}} / {{pageCount}}
             <span
@@ -57,15 +57,15 @@
             },
             // pdf加载时
             loadPdfHandler(e) {
-                console.log(this.pdfSrc,this.typeValue);
+                console.log(this.pdfSrc, this.typeValue);
 
                 this.currentPage = 1; // 加载的时候先加载第一页
             }
         },
-        mounted: function () {
-            this.pdfSrc = "";
-            this.pdfSrc = this.dochref;
-            console.log(this.pdfSrc,this.doctype);
+        mounted: ()=> {
+            pdf.createLoadingTask("/static/pdf/test.pdf").then((res) => {
+                console.log(res);
+            });
         }
     };
 </script>
@@ -87,13 +87,16 @@
             background-color: #409EFF;
             color: white;
         }
+        & >.grey:hover {
+            background-color: #DCDFE6;
+            border: 1px solid gray;
+            color: #606266;
+        }
     }
 
     .grey {
         background-color: #DCDFE6;
     }
 
-    .grey:hover {
-        background-color: #DCDFE6;
-    }
+
 </style>

@@ -112,6 +112,7 @@
 
         </el-dialog>
         <el-dialog
+                style="background-color: #3C3C3C"
                 title="pdf-reader"
                 top="5vh"
                 :visible.sync="previewDialogVisible"
@@ -145,7 +146,7 @@
                 msg: 'Welcome to Your Vue.js App',
                 docInfo: {
                     type: "pdf",
-                    href: "../assets/pdf/test.pdf"},
+                    href: "/static/pdf/test.pdf"},
                 previewDialogVisible: false,
                 fileList: [{
                     name: 'food.jpeg',
@@ -181,12 +182,9 @@
 
             console.log(this.$route.query.item, 'created', sessionStorage.getItem('item'), JSON.parse(sessionStorage.getItem('item')));
             if (JSON.parse(sessionStorage.getItem('item'))) {
-                console.log('if');
                 this.item = JSON.parse(sessionStorage.getItem('item'))
                 this.getCorporationInfo()
             } else {
-                console.log('else');
-
                 this.tableData = this.$route.query.item.corporationInfo
                 this.item = this.$route.query.item
                 sessionStorage.setItem('item', JSON.stringify(this.$route.query.item))
