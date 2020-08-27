@@ -115,7 +115,7 @@
                 style="background-color: #3C3C3C"
                 title="pdf-reader"
                 top="5vh"
-                close-on-click-modal="false"
+                :close-on-click-modal="false"
                 :visible.sync="previewDialogVisible"
                 width="50%">
             <div>
