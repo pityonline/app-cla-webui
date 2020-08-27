@@ -922,6 +922,7 @@
                     })
                     let data = {access_token, refresh_token};
                     this.setTokenAct(data);
+                    this.getUserInfo(access_token, refresh_token)
                 }
 
             },
