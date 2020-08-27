@@ -42,43 +42,23 @@
             </el-row>
 
         </el-dialog>
-        <el-dialog
-                style="background-color: #3C3C3C"
-                title="pdf-reader"
-                top="5vh"
-                :visible.sync="previewDialogVisible"
-                width="50%">
-            <div>
-                <pdfReader
-                        v-if="docInfo.type === 'pdf'"
-                        :doctype="docInfo.type"
-                        :dochref="docInfo.href">
 
-                </pdfReader>
-
-            </div>
-
-        </el-dialog>
     </el-row>
 
 </template>
 
 <script>
     import * as url from '../until/api'
-    import pdfReader from "@components/PdfReader";
+
 
     export default {
         name: "UserList",
         components: {
-            pdfReader
+
         },
         data() {
             return {
-                docInfo: {
-                    type: "pdf",
-                    href: "/static/pdf/test.pdf"
-                },
-                previewDialogVisible: false,
+
                 row: '',
                 deleteUserVisible: false,
                 tableData: [{id: 0, userName: '001', pwd: '001', email: '969707751@qq.com', class: '法务'}, {
@@ -94,9 +74,7 @@
             this.getEmployeeManager();
         },
         methods: {
-            previewPdf() {
-                this.previewDialogVisible = true
-            },
+
             deleteUser(row) {
                 console.log(row);
                 this.row = row

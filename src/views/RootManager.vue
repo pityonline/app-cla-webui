@@ -56,7 +56,23 @@
 
 
         </el-dialog>
+        <el-dialog
+                style="background-color: #3C3C3C"
+                title="pdf-reader"
+                top="5vh"
+                :visible.sync="previewDialogVisible"
+                width="50%">
+            <div>
+                <pdfReader
+                        v-if="docInfo.type === 'pdf'"
+                        :doctype="docInfo.type"
+                        :dochref="docInfo.href">
 
+                </pdfReader>
+
+            </div>
+
+        </el-dialog>
     </div>
 
 </template>
@@ -66,7 +82,7 @@
     import CorporationHeader from '@components/CorporationHeader'
     import Footer from '@components/Footer'
     import * as until from '../until/until'
-
+    import pdfReader from "@components/PdfReader";
 
     window.onresize = () => {
         // console.log(until.getClientHeight());
@@ -79,7 +95,7 @@
         components: {
             CorporationHeader,
             Footer,
-
+            pdfReader
 
         },
         data() {
@@ -110,7 +126,11 @@
                 callback();
             };
             return {
-
+                docInfo: {
+                    type: "pdf",
+                    href: "/static/pdf/merge.pdf"
+                },
+                previewDialogVisible: false,
                 user:this.$store.state.loginInfo,
                 section: {
                     height: '',
@@ -171,8 +191,13 @@
                             this.$router.push('/resetPassword');
                         }
                         break;
-
                     case 'd':
+                        if (this.$route.path !== '/resetPassword') {
+                            this.previewDialogVisible=true
+                        }
+                        break;
+
+                    case 'e':
                         this.loginOut()
                         break;
                 }
