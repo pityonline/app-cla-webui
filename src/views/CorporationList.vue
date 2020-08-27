@@ -30,9 +30,9 @@
                         placement="right">
 
                         <div class="menuBT">
-                        <el-button type="primary" size="medium">upload</el-button>
-                        <el-button type="primary" size="medium">download</el-button>
-                        <el-button type="primary" size="medium">preview</el-button>
+                        <el-button type="" size="mini">upload</el-button>
+                        <el-button type="" size="mini">download</el-button>
+                        <el-button type="" size="mini">preview</el-button>
                         </div>
                         <el-tooltip slot="reference" effect="dark" content="pdf"
                         placement="bottom">
