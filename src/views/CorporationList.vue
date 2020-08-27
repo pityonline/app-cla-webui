@@ -25,11 +25,20 @@
                         align="center">
 
                     <template slot-scope="scope">
+                        <el-popover
+                        width="80"
+                        placement="right">
+
+                        <div class="menuBT">
+                        <el-button type="primary" size="medium">upload</el-button>
+                        <el-button type="primary" size="medium">download</el-button>
+                        <el-button type="primary" size="medium">preview</el-button>
+                        </div>
                         <el-tooltip slot="reference" effect="dark" content="pdf"
-                                    placement="bottom">
+                        placement="bottom">
                             <svg-icon class="pointer" icon-class="pdf" @click=""/>
                         </el-tooltip>
-
+                        </el-popover>
                     </template>
                 </el-table-column>
                 <el-table-column
@@ -229,7 +238,16 @@
     .el-icon-arrow-down {
         font-size: 12px;
     }
+    .menuBT {
+        display: flex;
+        flex-direction: column;
 
+        & > * {
+
+            margin: .2rem 0;
+            text-align: center;
+        }
+    }
     .hoverUnderline:hover {
         text-decoration: underline;
     }
