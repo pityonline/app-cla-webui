@@ -79,6 +79,7 @@
         },
         data() {
             return {
+                emails:[],
                 multipleChoice:false,
                 multipleSelection:[],
                 row: '',
@@ -105,11 +106,16 @@
                 this.multipleSelection = val;
             },
             deleteUser(row) {
-                if (row) {
-
+                this.emails=[];
+                if (multipleChoice) {
+                    this.multipleSelection.forEach(item=>{
+                        this.emails.push(item.email)
+                    })
+                }else{
+                    this.emails.push(row.email)
                 }
                 console.log(row);
-                this.row = row
+
                 console.log(this.multipleSelection);
                 this.deleteUserVisible = true
 
@@ -130,7 +136,7 @@
             },
             submit() {
                 let obj = {
-                    cla_org_id: this.$store.state.loginInfo.cla_org_id, emails: [this.row.email]
+                    cla_org_id: this.$store.state.loginInfo.cla_org_id, emails: this.emails
                 }
                 this.$axios({
                     url: '/api' + url.deleteEmployeeManager,
