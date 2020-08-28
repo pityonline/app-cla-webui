@@ -33,16 +33,16 @@
                     <el-table-column
                             width="100">
                         <template slot-scope="scope">
-                            <el-button type="danger" size="mini" @click="deleteUser(scope.row)">删除</el-button>
+                            <el-button v-if="!multipleChoice" type="danger" size="mini" @click="deleteUser(scope.row)">删除</el-button>
                         </template>
 
                     </el-table-column>
                 </el-table>
             </el-row>
             <el-row style="margin-top: 20px" v-if="multipleChoice">
-                <el-col>
-                    <el-button @click="deleteUser()">Delete</el-button>
-                    <el-button @click="cancel()">Cancel</el-button>
+                <el-col align="left">
+                    <el-button size="medium" type="danger" @click="deleteUser()">Delete</el-button>
+                    <el-button size="medium" @click="cancel()">Cancel</el-button>
                 </el-col>
             </el-row>
         </el-col>
@@ -105,9 +105,13 @@
                 this.multipleSelection = val;
             },
             deleteUser(row) {
-                console.log(row);
-                this.row = row
+                if (row) {
+                    console.log(row);
+                    this.row = row
+                    console.log(this.multipleSelection);
+                }
                 this.deleteUserVisible = true
+
             },
             getEmployeeManager() {
                 let obj = {

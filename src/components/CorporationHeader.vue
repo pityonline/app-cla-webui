@@ -22,8 +22,8 @@
     {{user.userName}}<i class="el-icon-arrow-down el-icon--right"></i>
   </span>
                     <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item v-if="user.role==='admin'" command="a">user manager</el-dropdown-item>
-                        <el-dropdown-item v-else command="a">employee manager</el-dropdown-item>
+                        <el-dropdown-item v-if="user.role==='admin'" command="a">user</el-dropdown-item>
+                        <el-dropdown-item v-else command="a">employee</el-dropdown-item>
                         <el-dropdown-item v-if="user.role==='admin'" command="b">create user</el-dropdown-item>
                         <el-dropdown-item command="c">reset password</el-dropdown-item>
                         <el-dropdown-item v-if="user.role==='admin'" command="d">my cla</el-dropdown-item>
