@@ -264,7 +264,7 @@
         box-sizing: border-box;
         flex-direction: column;
 
-        & > div:nth-of-type(1) {
+        & > div:nth-of-type(2) {
             flex-grow: 1;
         }
     }
