@@ -3,27 +3,48 @@
     <el-row class="marginTop1rem tableStyle">
 
         <el-col>
-            <el-table :data="tableData">
-                <el-table-column
-                        prop="name"
-                        label="userName">
-                </el-table-column>
-                <el-table-column
-                        prop="email"
-                        label="email">
-                </el-table-column>
-                <el-table-column
-                        prop="role"
-                        label='role'>
-                </el-table-column>
-                <el-table-column
-                        width="100">
-                    <template slot-scope="scope">
-                        <el-button type="danger" size="mini" @click="deleteUser(scope.row)">删除</el-button>
-                    </template>
+            <el-row>
+                <el-col align="right">
+                    <el-button @click="multipleChoice=true" size="medium">Multiple choice</el-button>
+                </el-col>
+            </el-row>
+            <el-row>
+                <el-table
+                        @selection-change="handleSelectionChange"
+                        ref="multipleTable"
+                        :data="tableData">
+                    <el-table-column
+                            v-if="multipleChoice"
+                            type="selection"
+                            width="55">
+                    </el-table-column>
+                    <el-table-column
+                            prop="name"
+                            label="userName">
+                    </el-table-column>
+                    <el-table-column
+                            prop="email"
+                            label="email">
+                    </el-table-column>
+                    <el-table-column
+                            prop="role"
+                            label='role'>
+                    </el-table-column>
+                    <el-table-column
+                            width="100">
+                        <template slot-scope="scope">
+                            <el-button type="danger" size="mini" @click="deleteUser(scope.row)">删除</el-button>
+                        </template>
 
-                </el-table-column>
-            </el-table>
+                    </el-table-column>
+                </el-table>
+            </el-row>
+            <el-row style="margin-top: 20px" v-if="multipleChoice">
+                <el-col>
+                    <el-button @click="deleteUser()">Delete</el-button>
+                    <el-button @click="cancel()">Cancel</el-button>
+                </el-col>
+            </el-row>
         </el-col>
 
 
@@ -58,7 +79,8 @@
         },
         data() {
             return {
-
+                multipleChoice:false,
+                multipleSelection:[],
                 row: '',
                 deleteUserVisible: false,
                 tableData: [{id: 0, userName: '001', pwd: '001', email: '969707751@qq.com', class: '法务'}, {
@@ -74,7 +96,14 @@
             this.getEmployeeManager();
         },
         methods: {
+            cancel() {
+                    this.$refs.multipleTable.clearSelection();
+                    this.multipleChoice=false
 
+            },
+            handleSelectionChange(val) {
+                this.multipleSelection = val;
+            },
             deleteUser(row) {
                 console.log(row);
                 this.row = row
