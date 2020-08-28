@@ -106,10 +106,11 @@
             },
             deleteUser(row) {
                 if (row) {
-                    console.log(row);
-                    this.row = row
-                    console.log(this.multipleSelection);
+
                 }
+                console.log(row);
+                this.row = row
+                console.log(this.multipleSelection);
                 this.deleteUserVisible = true
 
             },
