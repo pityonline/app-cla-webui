@@ -60,7 +60,7 @@
                                               :label="item.title"
                                               :required="item.required"
                                               :prop="item.type">
-                                    <el-input v-if="item.type==='email'" type="email" v-model="ruleForm[item.type]"
+                                    <el-input v-if="item.type==='email'" readonly="" type="email" v-model="ruleForm[item.type]"
                                               size="small"></el-input>
                                     <el-input v-else-if="item.type==='date'" readonly="" v-model="ruleForm[item.type]"
                                               size="small"></el-input>
@@ -124,7 +124,9 @@
                     </el-input>
                 </el-col>
                 <el-col :span="8">
-                    <el-button @click="createAndSendCode" :disabled="sendBtText!=='send code'" type="primary" style="width: 100%" size="medium">{{sendBtText}}</el-button>
+                    <el-button @click="createAndSendCode" :disabled="sendBtText!=='send code'" type="primary"
+                               style="width: 100%" size="medium">{{sendBtText}}
+                    </el-button>
                 </el-col>
 
             </el-row>
@@ -189,7 +191,7 @@
                 callback();
             }
             return {
-                sendBtText:'send code',
+                sendBtText: 'send code',
                 claOrgIdArr: [],
                 fields: [],
                 claIdArr: [],
@@ -317,13 +319,13 @@
                 this.ruleForm.date = year + '-' + month + '-' + day
 
             },
-            getEmail(access_token, refresh_token){
+            getEmail(access_token, refresh_token) {
                 this.$axios({
-                    url:url.getAuthEmails,
-                    params:{access_token:access_token}
+                    url: url.getAuthEmails,
+                    params: {access_token: access_token}
                 }).then(res => {
                     console.log(res);
-
+                    this.ruleForm.email = res.data[0].email
 
                 }).catch(err => {
                     console.log(err);
@@ -340,7 +342,7 @@
                     })
                     let data = {access_token, refresh_token};
                     this.setTokenAct(data);
-                    this.getEmail(access_token,refresh_token)
+                    this.getEmail(access_token, refresh_token)
                 }
 
             },
@@ -455,25 +457,25 @@
 
             /*生成验证码*/
             createAndSendCode() {
-                let second=60
-                let codeInterval = setInterval(()=>{
+                let second = 60
+                let codeInterval = setInterval(() => {
                     if (second !== 0) {
                         second--
-                        this.sendBtText=second+'s'
-                    }else{
-                        this.sendBtText='send code'
+                        this.sendBtText = second + 's'
+                    } else {
+                        this.sendBtText = 'send code'
                         clearInterval(codeInterval)
                     }
-                },1000)
+                }, 1000)
                 let code = `${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}`;
                 console.log(Math.random());
                 console.log(md5(code));
                 localStorage.setItem('code', md5(code))
-                let obj={};
+                let obj = {};
                 if (this.$store.state.loginType === 'corporation') {
-                    obj = {code: code,email:this.ruleForm.adminEmail}
-                }else{
-                    obj = {code: code,email:this.ruleForm.email}
+                    obj = {code: code, email: this.ruleForm.adminEmail}
+                } else {
+                    obj = {code: code, email: this.ruleForm.email}
                 }
                 this.$axios({
                     url: '/api' + url.sendCode,
@@ -493,7 +495,7 @@
                 let code = sessionStorage.getItem('code')
                 if (this.verifyCode === code) {
                     this.signCla()
-                    this.dialogVisible=false
+                    this.dialogVisible = false
                 } else {
                     this.$message.closeAll()
                     this.$message.error('verifyCode error')
@@ -660,13 +662,15 @@
     }
 </script>
 
-<style  lang="less">
-    .codeBox .el-button--medium,.codeBox .el-button {
+<style lang="less">
+    .codeBox .el-button--medium, .codeBox .el-button {
         border-radius: 0 4px 4px 0;
     }
-    .codeBox .el-input__inner{
+
+    .codeBox .el-input__inner {
         border-radius: 4px 0 0 4px;
     }
+
     .el-button.is-disabled, .el-button.is-disabled:focus, .el-button.is-disabled:hover {
         cursor: pointer;
     }
