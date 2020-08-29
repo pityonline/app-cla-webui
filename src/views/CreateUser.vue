@@ -1,10 +1,16 @@
 <template>
     <el-row>
         <el-col :offset="7" :span="10">
-            <el-row>
-                <el-input
-                        placeholder="please input email" clearable="" size="medium" v-model="ruleForm.email">
-                </el-input>
+            <el-row gutter="20" v-for="(item,index) in emails">
+                <el-col :span="20">
+                    <el-input
+                            placeholder="please input email" clearable="" size="medium" v-model="item">
+                    </el-input>
+                </el-col>
+                <el-col :span="4">
+                    <el-button @click="addRow(index)" size="medium">+</el-button>
+                    <el-button @click="myDeleteRow(index)" size="medium">-</el-button>
+                </el-col>
             </el-row>
 
             <el-row align="center">
@@ -27,10 +33,24 @@
             return {
                 cla_org_id: this.$store.state.loginInfo.cla_org_id,
 
-                emails: [],
+                emails: ['',],
             }
         },
         methods: {
+            addRow(index) {
+                this.emails.splice(index + 1, 0,'')
+
+            },
+            myDeleteRow(index) {
+                console.log(index);
+                if (this.emails.length===1) {
+                    this.emails[0]=''
+
+                }else{
+                    this.emails.splice(index, 1);
+                }
+
+            },
             createUser() {
                 let obj = {cla_org_id: this.cla_org_id, emails: this.emails}
                 this.$axios({
