@@ -7,6 +7,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
+        userLimit:sessionStorage.getItem('userLimit') || undefined,
         loginInfo:JSON.parse(sessionStorage.getItem('loginInfo')) || undefined,
         repoInfo:JSON.parse(sessionStorage.getItem('repoInfo')) || undefined,
         loginType:sessionStorage.getItem('loginType') || undefined,
@@ -73,8 +74,17 @@ export default new Vuex.Store({
             state.loginInfo = obj;
             sessionStorage.setItem('loginInfo', JSON.stringify(obj));
         },
+        setUserLimit(state, userLimit){
+            console.log(userLimit);
+            state.userLimit = userLimit;
+            sessionStorage.setItem('userLimit',userLimit);
+        },
     },
     actions: {
+        setUserLimitAct({commit}, userLimit){
+            console.log(userLimit);
+            commit('userLimit', userLimit);
+        },
         setLoginInfoAct({commit}, obj){
             console.log(obj);
             commit('setLoginInfo', obj);

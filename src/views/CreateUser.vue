@@ -4,7 +4,7 @@
             <el-row class="emailRow" gutter="20" v-for="(item,index) in emails">
                 <el-col :span="16">
                     <el-input
-                            placeholder="please input email" clearable="" size="medium" v-model="item">
+                            placeholder="please input email" clearable="" size="medium" v-model="item.email">
                     </el-input>
                 </el-col>
                 <el-col :span="8" align="right">
@@ -17,8 +17,6 @@
                 <el-col align="center">
                     <el-button type="primary" size="medium" @click="createUser()">Submit</el-button>
                 </el-col>
-
-
             </el-row>
 
         </el-col>
@@ -34,14 +32,18 @@
 
             return {
                 cla_org_id: this.$store.state.loginInfo.cla_org_id,
-
-                emails: ['',],
+                emails: [{email:''}],
+                limit:5,
             }
         },
         methods: {
             addRow(index) {
-                this.emails.splice(index + 1, 0, '')
-
+                if (this.$store.state.userLimit + this.emails.length === this.limit) {
+                    this.$message.closeAll()
+                    this.$message.error(`Create up to ${this.limit} users`)
+                }else {
+                    this.emails.splice(index + 1, 0, '')
+                }
             },
             myDeleteRow(index) {
                 console.log(index);

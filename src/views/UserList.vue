@@ -33,7 +33,9 @@
                     <el-table-column
                             width="100">
                         <template slot-scope="scope">
-                            <el-button v-if="!multipleChoice" type="danger" size="mini" @click="deleteUser(scope.row)">删除</el-button>
+                            <el-button v-if="!multipleChoice" type="danger" size="mini" @click="deleteUser(scope.row)">
+                                删除
+                            </el-button>
                         </template>
 
                     </el-table-column>
@@ -70,18 +72,16 @@
 
 <script>
     import * as url from '../until/api'
-
+    import {mapActions} from 'vuex'
 
     export default {
         name: "UserList",
-        components: {
-
-        },
+        components: {},
         data() {
             return {
-                emails:[],
-                multipleChoice:false,
-                multipleSelection:[],
+                emails: [],
+                multipleChoice: false,
+                multipleSelection: [],
                 row: '',
                 deleteUserVisible: false,
                 tableData: [{id: 0, userName: '001', pwd: '001', email: '969707751@qq.com', class: '法务'}, {
@@ -97,21 +97,22 @@
             this.getEmployeeManager();
         },
         methods: {
+            ...mapActions(['setUserLimitAct']),
             cancel() {
-                    this.$refs.multipleTable.clearSelection();
-                    this.multipleChoice=false
+                this.$refs.multipleTable.clearSelection();
+                this.multipleChoice = false
 
             },
             handleSelectionChange(val) {
                 this.multipleSelection = val;
             },
             deleteUser(row) {
-                this.emails=[];
+                this.emails = [];
                 if (this.multipleChoice) {
-                    this.multipleSelection.forEach(item=>{
+                    this.multipleSelection.forEach(item => {
                         this.emails.push(item.email)
                     })
-                }else{
+                } else {
                     this.emails.push(row.email)
                 }
                 console.log(row);
@@ -130,6 +131,7 @@
                 }).then(res => {
                     console.log(res);
                     this.tableData = res.data;
+                    this.setUserLimitAct(res.data.length)
                 }).catch(err => {
                     console.log(err);
                 })
