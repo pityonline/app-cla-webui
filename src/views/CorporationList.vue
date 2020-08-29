@@ -60,7 +60,7 @@
                                     inactive-color="#EBEEF5">
                             </el-switch>
                         </div>
-                        <el-button :disabled="scope.row" style="margin-left: 1rem" type="primary" size="mini"
+                        <el-button :disabled="scope.row.administrator_enabled" style="margin-left: 1rem" type="primary" size="mini"
                                    @click="createRoot(scope.row.cla_org_id,scope.row.admin_email)">Create Root
                         </el-button>
 
