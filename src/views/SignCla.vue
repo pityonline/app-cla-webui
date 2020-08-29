@@ -317,6 +317,18 @@
                 this.ruleForm.date = year + '-' + month + '-' + day
 
             },
+            getEmail(access_token, refresh_token){
+                this.$axios({
+                    url:url.getAuthEmails,
+                    params:{access_token:access_token}
+                }).then(res => {
+                    console.log(res);
+
+
+                }).catch(err => {
+                    console.log(err);
+                })
+            },
             getCookieData() {
                 if (document.cookie !== '') {
                     let cookieArr = document.cookie.split('; ')
@@ -328,6 +340,7 @@
                     })
                     let data = {access_token, refresh_token};
                     this.setTokenAct(data);
+                    this.getEmail(access_token,refresh_token)
                 }
 
             },
