@@ -48,6 +48,8 @@
                             params:{platform:platform,purpose:'login'}
                         }).then(res=>{
                             console.log(res);
+                                window.location.href =res.data.url
+
                         }).catch(err=>{
                             console.log(err);
                         })

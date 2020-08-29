@@ -4,7 +4,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/bdd0211e92f6f1aabbec.worker.js"
   },
   {
-    "revision": "50baaaa2f9d6eed9a4c2",
+    "revision": "664d1354ec94c466dccc",
     "url": "/css/app.fa2101f4.css"
   },
   {
@@ -18,10 +18,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "444993e71b3a1e175760",
     "url": "/css/chunk-092e532d.dc08d759.css"
-  },
-  {
-    "revision": "647c9e2d425aba85e819",
-    "url": "/css/chunk-0a1de969.2f7d4161.css"
   },
   {
     "revision": "e8bb5725ea0e8b2d345a",
@@ -76,6 +72,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/css/chunk-ba7f532e.10550a0d.css"
   },
   {
+    "revision": "84ce169d6832cddcf8d0",
+    "url": "/css/chunk-be2ce3d2.621968be.css"
+  },
+  {
     "revision": "4d070c85ebba569f5080",
     "url": "/css/chunk-c818f51e.c8672826.css"
   },
@@ -108,12 +108,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/logo.3a1a754d.png"
   },
   {
-    "revision": "de49be4129590feaa781975e7b8636eb",
+    "revision": "2ce7d9e6f1af5f4dfe64bde48724b08a",
     "url": "/index.html"
   },
   {
-    "revision": "50baaaa2f9d6eed9a4c2",
-    "url": "/js/app.8a2843a4.js"
+    "revision": "664d1354ec94c466dccc",
+    "url": "/js/app.5a987d0d.js"
   },
   {
     "revision": "4611d12fbc74d8ee157b",
@@ -126,10 +126,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "444993e71b3a1e175760",
     "url": "/js/chunk-092e532d.76ddc691.js"
-  },
-  {
-    "revision": "647c9e2d425aba85e819",
-    "url": "/js/chunk-0a1de969.4c3a50f7.js"
   },
   {
     "revision": "df356a80e1b25780d6e4",
@@ -206,6 +202,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "a1a5af9bed22da5c115f",
     "url": "/js/chunk-ba7f532e.cd4c625d.js"
+  },
+  {
+    "revision": "84ce169d6832cddcf8d0",
+    "url": "/js/chunk-be2ce3d2.5ae929be.js"
   },
   {
     "revision": "4d070c85ebba569f5080",
