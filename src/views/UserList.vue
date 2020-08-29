@@ -107,7 +107,7 @@
             },
             deleteUser(row) {
                 this.emails=[];
-                if (multipleChoice) {
+                if (this.multipleChoice) {
                     this.multipleSelection.forEach(item=>{
                         this.emails.push(item.email)
                     })
