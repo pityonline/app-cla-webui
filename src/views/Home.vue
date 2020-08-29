@@ -376,7 +376,7 @@
         },
         data() {
             return {
-                emailTypeArr: [{value:'gmail',label:'gmail'},{value:'qq',label:'qq'},{value:'163',label:'163'},],
+                emailTypeArr: [{value:'Gmail',label:'Gmail'}],
                 emailType: '',
                 emailDialogVisible: false,
                 filterChange: true,
