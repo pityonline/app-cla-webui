@@ -7,15 +7,17 @@
                             placeholder="please input email" clearable="" size="medium" v-model="item">
                     </el-input>
                 </el-col>
-                <el-col :span="8">
+                <el-col :span="8" align="right">
                     <el-button @click="addRow(index)" size="medium">+</el-button>
                     <el-button @click="myDeleteRow(index)" size="medium">-</el-button>
                 </el-col>
             </el-row>
 
-            <el-row align="center">
+            <el-row align="middle">
+                <el-col align="center">
+                    <el-button type="primary" size="medium" @click="createUser()">Submit</el-button>
+                </el-col>
 
-                <el-button type="primary" size="medium" @click="createUser()">Submit</el-button>
 
             </el-row>
 
