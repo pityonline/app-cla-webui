@@ -2,12 +2,12 @@
     <el-row>
         <el-col :offset="7" :span="10">
             <el-row gutter="20" v-for="(item,index) in emails">
-                <el-col :span="20">
+                <el-col :span="16">
                     <el-input
                             placeholder="please input email" clearable="" size="medium" v-model="item">
                     </el-input>
                 </el-col>
-                <el-col :span="4">
+                <el-col :span="8">
                     <el-button @click="addRow(index)" size="medium">+</el-button>
                     <el-button @click="myDeleteRow(index)" size="medium">-</el-button>
                 </el-col>
