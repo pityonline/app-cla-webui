@@ -485,7 +485,7 @@
                 })
             },
             toAuthorizedEmail() {
-                this.getEmailTypeArr()
+                // this.getEmailTypeArr()
                 this.emailDialogVisible = true
             },
             resetCla() {
