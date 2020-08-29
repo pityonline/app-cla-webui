@@ -1,7 +1,7 @@
 <template>
     <el-row>
         <el-col :offset="7" :span="10">
-            <el-row gutter="20" v-for="(item,index) in emails">
+            <el-row class="emailRow" gutter="20" v-for="(item,index) in emails">
                 <el-col :span="16">
                     <el-input
                             placeholder="please input email" clearable="" size="medium" v-model="item">
@@ -38,15 +38,15 @@
         },
         methods: {
             addRow(index) {
-                this.emails.splice(index + 1, 0,'')
+                this.emails.splice(index + 1, 0, '')
 
             },
             myDeleteRow(index) {
                 console.log(index);
-                if (this.emails.length===1) {
-                    this.emails[0]=''
+                if (this.emails.length === 1) {
+                    this.emails[0] = ''
 
-                }else{
+                } else {
                     this.emails.splice(index, 1);
                 }
 
@@ -73,6 +73,8 @@
     }
 </script>
 
-<style scoped>
-
+<style scoped lang="less">
+    .emailRow {
+        margin-bottom: 1rem;
+    }
 </style>
