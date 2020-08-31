@@ -479,6 +479,7 @@
                     url:'/api'+myUrl
                 }).then(res=>{
                     console.log(res);
+                    this.location.href=res.data.url;
                 }).catch(err=>{
                     console.log(err);
                 })
