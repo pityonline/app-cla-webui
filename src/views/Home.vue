@@ -467,9 +467,9 @@
         methods: {
 
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
-            authorizeEmail(value){
+            authorizeEmail(){
                 let myUrl=''
-                switch (value) {
+                switch (this.emailType) {
                     case 'Gmail':
                         myUrl=url.getAuthEmail;
                         break;
@@ -479,7 +479,7 @@
                     url:'/api'+myUrl
                 }).then(res=>{
                     console.log(res);
-                    this.location.href=res.data.url;
+                    window.location.href=res.data.url;
                 }).catch(err=>{
                     console.log(err);
                 })
@@ -487,7 +487,6 @@
             },
             changeEmailType(value) {
                 console.log('changeEmailType', value);
-               this.authorizeEmail(value);
 
             },
             getEmailTypeArr() {
