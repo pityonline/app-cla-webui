@@ -236,7 +236,7 @@
                         {min: 2, max: 10, message: '长度在 2 到 10 个字符', trigger: 'blur'}
                     ],
                     email: [
-                        {required: true, message: '请输入邮箱', trigger: 'blur'},
+                        // {required: true, message: '请输入邮箱', trigger: 'blur'},
                         {validator: verifyEmail, trigger: 'blur'}
                     ],
 
@@ -262,45 +262,6 @@
                     value: 1,
                     label: 'chinese'
                 },],
-                metadata: {
-                    "name": {
-                        "title": "Name",
-                        "type": "string",
-                        "githubKey": "name",
-                        "required": true
-                    },
-                    "email": {
-                        "title": "E-Mail",
-                        "type": "string",
-                        "githubKey": "email",
-                        "required": true
-                    },
-                    "phone": {
-                        "title": "Telephone",
-                        "type": "string",
-                        "required": false
-                    },
-                    "faxnumber": {
-                        "title": "Fax",
-                        "type": "string",
-                        "required": false
-                    },
-                    "address": {
-                        "title": "Address",
-                        "type": "string",
-                        "required": true
-                    },
-                    "date": {
-                        "title": "Date",
-                        "type": "string",
-                        "required": true
-                    },
-                    "category": {
-                        "title": "I have read the Privacy Policy and hereby consent to the processing of my data by openLooKeng in Hong Kong",
-                        "type": "boolean",
-                        "required": true
-                    }
-                },
                 metadataArr: [],
                 checkCLAClass: {
                     height: '',
@@ -629,18 +590,6 @@
                 console.log(document.getElementById('checkCLA').offsetHeight);
             },
 
-            loadMetadata() {
-                console.log(this.metadata);
-                this.metadataArr = []
-                for (let item in this.metadata) {
-                    console.log(item);
-                    if (item !== 'category') {
-                        Object.assign(this.metadata[item], {githubKey: item});
-                        this.metadataArr.push(this.metadata[item])
-                    }
-                }
-                console.log(this.metadataArr);
-            },
 
         },
 
