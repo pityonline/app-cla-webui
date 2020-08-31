@@ -184,12 +184,7 @@
                 }
                 callback();
             }
-            let verifyDate = (rule, value, callback) => {
-                if (!value) {
-                    callback(new Error('请输入日期'))
-                }
-                callback();
-            }
+
             return {
                 sendBtText: 'send code',
                 claOrgIdArr: [],
@@ -235,20 +230,12 @@
                         {required: true, message: '请输入姓名', trigger: 'blur'},
                         {min: 2, max: 10, message: '长度在 2 到 10 个字符', trigger: 'blur'}
                     ],
-                    email: [
-                        // {required: true, message: '请输入邮箱', trigger: 'blur'},
-                        {validator: verifyEmail, trigger: 'blur'}
-                    ],
-
 
                     telephone: [
                         {validator: verifyTel, trigger: 'blur'}
                     ],
                     address: [
                         {validator: verifyAddr, trigger: 'blur'}
-                    ],
-                    date: [
-                        {validator: verifyDate, trigger: 'blur'}
                     ],
 
 
