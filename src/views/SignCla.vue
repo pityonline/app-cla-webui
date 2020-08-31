@@ -60,7 +60,7 @@
                                               :label="item.title"
                                               :required="item.required"
                                               :prop="item.type">
-                                    <el-input v-if="item.type==='email'" readonly="" type="email" v-model="ruleForm[item.type]"
+                                    <el-input v-if="item.type==='email'" readonly=""  v-model="ruleForm[item.type]"
                                               size="small"></el-input>
                                     <el-input v-else-if="item.type==='date'" readonly="" v-model="ruleForm[item.type]"
                                               size="small"></el-input>
