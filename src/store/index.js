@@ -83,7 +83,7 @@ export default new Vuex.Store({
     actions: {
         setUserLimitAct({commit}, userLimit){
             console.log(userLimit);
-            commit('userLimit', userLimit);
+            commit('setUserLimit', userLimit);
         },
         setLoginInfoAct({commit}, obj){
             console.log(obj);
