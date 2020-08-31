@@ -57,9 +57,7 @@
                                      label-width="30%"
                                      class="demo-ruleForm">
                                 <el-form-item v-for="(item,index) in fields"
-                                              :label="item.title"
-                                              v-if="item.type==='email'"
-                                              :prop="item.type">
+                                              :label="item.title">
                                     <el-input v-if="item.type==='email'" readonly=""  v-model="ruleForm[item.type]"
                                               size="small"></el-input>
                                     <el-input v-else-if="item.type==='date'" readonly="" v-model="ruleForm[item.type]"
