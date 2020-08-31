@@ -58,7 +58,7 @@
                                      class="demo-ruleForm">
                                 <el-form-item v-for="(item,index) in fields"
                                               :label="item.title"
-                                              :required="item.required"
+                                              v-if="item.type==='email'"
                                               :prop="item.type">
                                     <el-input v-if="item.type==='email'" readonly=""  v-model="ruleForm[item.type]"
                                               size="small"></el-input>
@@ -269,7 +269,7 @@
             },
             getEmail(access_token, refresh_token) {
                 this.$axios({
-                    url: url.getAuthEmails,
+                    url: url.getEmail,
                     params: {access_token: access_token}
                 }).then(res => {
                     console.log(res);

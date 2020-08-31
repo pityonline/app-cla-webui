@@ -467,11 +467,27 @@
         methods: {
 
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
-            authorizeEmail(){
+            authorizeEmail(value){
+                let myUrl=''
+                switch (value) {
+                    case 'Gmail':
+                        myUrl=url.getAuthEmail;
+                        break;
+
+                }
+                this.$axios({
+                    url:'/api'+myUrl
+                }).then(res=>{
+                    console.log(res);
+                }).catch(err=>{
+                    console.log(err);
+                })
                 console.log('authorizeEmail');
             },
             changeEmailType(value) {
                 console.log('changeEmailType', value);
+               this.authorizeEmail(value);
+
             },
             getEmailTypeArr() {
 

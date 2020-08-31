@@ -35,4 +35,5 @@ export const queryEmployeeManager = '/v1/employee-manager'                      
 export const queryEmployee = '/v1/employee-signing'                                    //获取企业个人签署者   方式get   参数platform、org_id,repo_id,corporation_email
 export const enableEmployee = '/v1/employee-signing'                                   //激活企业个人签署者   方式put   参数cla_org_id,email,enabled
 export const getAuthCodeUrl = '/v1/auth/authcodeurl'                                   //获取授权登陆的链接   方式get   参数/platform,/purpose
-export const getAuthEmails = 'https://gitee.com/api/v5/emails'                         //获取授权用户的邮箱   方式get   参数access_token
+export const getEmail = 'https://gitee.com/api/v5/emails'                              //获取授权用户的邮箱   方式get   参数access_token
+export const getAuthEmail = '/v1/auth/authcodeurl/gmail'                               //邮箱授权             方式get
