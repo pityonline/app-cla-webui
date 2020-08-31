@@ -44,8 +44,7 @@
                 let interval = setInterval(() => {
                     if (this.$store.state.platform) {
                         this.$axios({
-                            url:'/api'+url.getAuthCodeUrl,
-                            params:{platform:platform,purpose:'login'}
+                            url: `/api${url.getAuthCodeUrl}/${this.platform}/login`,
                         }).then(res=>{
                             console.log(res);
                                 window.location.href =res.data.url

@@ -124,8 +124,7 @@
                         // window.location.href = 'https://gitee.com/oauth/authorize?client_id=2632e89d3dfb17ce941d2d2b45efc6f235afb4941ddb67578adda83aa33ab6a2&redirect_uri=http://139.159.224.207:60031/api/v1/login?platform=gitee&response_type=code';
                         //     this.$router.push('/signCla')
                         this.$axios({
-                            url:'/api'+url.getAuthCodeUrl,
-                            params:{platform:this.platform,purpose:'sign'}
+                            url:`/api${url.getAuthCodeUrl}/${this.platform}/sign`,
                         }).then(res=>{
                             console.log(res);
                             window.location.href =res.data.url
