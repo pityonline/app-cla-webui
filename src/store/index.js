@@ -115,7 +115,7 @@ export default new Vuex.Store({
             console.log('getLinkedRepoListAct',data);
             axios({
                 url: '/api' + url.getLinkedRepoList,
-                params:{enabled:true},
+                params:{platform:data.platform,enabled:true},
                 headers: {
                     'Access-Token': data.access_token,
                     'Refresh-Token': data.refresh_token,
