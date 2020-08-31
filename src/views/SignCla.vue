@@ -58,8 +58,9 @@
                                      class="demo-ruleForm">
                                 <el-form-item v-for="(item,index) in fields"
                                               :label="item.title"
+                                              :required="item.required"
                                               :prop="item.type">
-                                    <el-input v-if="item.type==='email'" readonly=""  v-model="ruleForm[item.type]"
+                                    <el-input v-if="item.type==='email'" readonly="" v-model="ruleForm[item.type]"
                                               size="small"></el-input>
                                     <el-input v-else-if="item.type==='date'" readonly="" v-model="ruleForm[item.type]"
                                               size="small"></el-input>
@@ -226,10 +227,11 @@
                 },
                 rules: {
                     name: [
-                        {required: true, message: '请输入姓名', trigger: 'blur'},
-                        {min: 2, max: 10, message: '长度在 2 到 10 个字符', trigger: 'blur'}
+                        {required: true, message: 'please input name', trigger: 'blur'},
+                        {min: 2, max: 10, message: 'The length is between 2 and 10 characters', trigger: 'blur'}
                     ],
-
+                    email: [{required: true, message: 'please input email', trigger: 'blur'}],
+                    date: [{required: true, message: 'please input date', trigger: 'blur'}],
                     telephone: [
                         {validator: verifyTel, trigger: 'blur'}
                     ],
