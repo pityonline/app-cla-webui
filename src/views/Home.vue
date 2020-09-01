@@ -383,6 +383,12 @@
             repositoryOptions(){
                 return this.$store.state.repositoryOptions
             },
+            claOptions(){
+                return this.$store.state.claOptions
+            },
+            claValue(){
+                return this.$store.state.claValue
+            },
             repositoryValue(){
                 return this.$store.state.repositoryValue
             },
