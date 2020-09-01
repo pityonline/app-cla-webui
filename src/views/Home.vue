@@ -353,12 +353,10 @@
     import {mapActions} from 'vuex'
 
     window.onresize = () => {
-        // console.log(until.getClientHeight());
-        this.$nextTick(()=>{
-            if (until.getClientHeight() > document.getElementById('home').offsetHeight) {
-                document.getElementById("home").style.height = until.getClientHeight() + 'px'
-            }
-        })
+        console.log(until.getClientHeight(),document.getElementById('home'));
+        if (until.getClientHeight() > document.getElementById('home').offsetHeight) {
+            document.getElementById("home").style.height = until.getClientHeight() + 'px'
+        }
 
     }
     export default {
@@ -368,34 +366,37 @@
             Footer,
         },
         computed: {
-            orgOptions(){
-               return this.$store.state.orgOptions
-            } ,
-            orgValue(){
+            orgOptions() {
+                return this.$store.state.orgOptions
+            },
+            orgValue() {
                 return this.$store.state.orgValue
             },
-            orgChoose(){
+            orgChoose() {
                 return this.$store.state.orgChoose === 'true';
             },
-            isEmail(){
+            claChoose() {
+                return this.$store.state.claChoose === 'true';
+            },
+            isEmail() {
                 return this.$store.state.isEmail === 'true';
             },
-            repositoryChoose(){
-                return this.$store.state.repositoryChoose==='true'
+            repositoryChoose() {
+                return this.$store.state.repositoryChoose === 'true'
             },
-            repositoryOptions(){
+            repositoryOptions() {
                 return this.$store.state.repositoryOptions
             },
-            claOptions(){
+            claOptions() {
                 return this.$store.state.claOptions
             },
-            claValue(){
+            claValue() {
                 return this.$store.state.claValue
             },
-            repositoryValue(){
+            repositoryValue() {
                 return this.$store.state.repositoryValue
             },
-            showConfigForm(){
+            showConfigForm() {
                 return this.$store.state.showConfigForm
             },
 
@@ -469,7 +470,6 @@
                 }],
                 metadataValue: '',
                 showPreviewCla: false,
-                claChoose: false,
                 metadataChoose: false,
                 linkDialogVisible: false,
                 shareDialogVisible: false,
@@ -478,7 +478,6 @@
                 fileNumber: '',
                 lineNumber: '',
                 gistUrl: '',
-
 
 
                 home: {
@@ -532,9 +531,9 @@
                 this.emailDialogVisible = true
             },
             resetCla() {
-                this.claChoose = false;
+                this.$store.commit('setClaChoose',false)
                 this.filterChange = true
-                this.claValue = ''
+                this.$store.commit('setClaValue','')
                 this.previewText = ''
                 this.getCLA()
             },
