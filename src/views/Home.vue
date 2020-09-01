@@ -737,12 +737,10 @@
             },
             /*选择cla*/
             changeCla(value) {
-                this.claValue = value
-                console.log(this.claOptions, this.claValue);
+                this.$store.commit('setClaValue', value)
+                this.$store.commit('setClaChoose', true)
                 this.showPreviewCla = true
-                this.claChoose = true;
                 this.previewText = this.claOptions[value].text;
-                this.$store.commit('setClaValue',value)
             },
 
             mataVisibleChange(visible) {
@@ -790,16 +788,12 @@
             /*选择仓库*/
             changeRepository(value) {
                 console.log(this.repositoryValue);
-                let repositoryValue=''
-                if (this.repositoryValue !== '') {
-                    this.repositoryChoose = true;
-                } else {
-                    this.repositoryChoose = false;
-
-                }
                 this.$store.commit('setRepositoryValue', value)
-
-
+                if (value !== '') {
+                    this.$store.commit('setRepositoryChoose', true)
+                } else {
+                    this.$store.commit('setRepositoryChoose', false)
+                }
             },
             getRepositoriesOfOrg(org, org_id) {
                 let obj = {access_token: this.$store.state.access_token, org: org, page: 1, per_page: 10};
