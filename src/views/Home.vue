@@ -742,7 +742,7 @@
                 this.showPreviewCla = true
                 this.claChoose = true;
                 this.previewText = this.claOptions[value].text;
-                this.$store.commit('setClaValue',this.claValue)
+                this.$store.commit('setClaValue',value)
             },
 
             mataVisibleChange(visible) {
@@ -779,24 +779,25 @@
                     this.getRepositoriesOfOrg(this.orgOptions[this.orgValue].label, this.orgOptions[this.orgValue].id)
                 } else {
                     this.orgChoose = false;
-                    this.repositoryOptions = [];
+                    let repositoryOptions = [];
                     this.repositoryValue = ''
                     this.repositoryChoose = false
-                    this.$store.commit('setRepositoryOptions', this.repositoryOptions)
+                    this.$store.commit('setRepositoryOptions', repositoryOptions)
                 }
-                this.$store.commit('setOrgValue', this.orgValue)
+                this.$store.commit('setOrgValue', value)
 
             },
             /*选择仓库*/
             changeRepository(value) {
                 console.log(this.repositoryValue);
+                let repositoryValue=''
                 if (this.repositoryValue !== '') {
                     this.repositoryChoose = true;
                 } else {
                     this.repositoryChoose = false;
 
                 }
-                this.$store.commit('setRepositoryValue', this.repositoryValue)
+                this.$store.commit('setRepositoryValue', value)
 
 
             },
@@ -861,10 +862,10 @@
                     }
                 }).then(res => {
                     console.log(res);
-                    this.claOptions = [];
+                    let claOptions = [];
                     if (res.data.length) {
                         res.data.forEach((item, index) => {
-                            this.claOptions.push({
+                            claOptions.push({
                                 value: index,
                                 label: item.name,
                                 id: item.id,
@@ -872,7 +873,7 @@
                                 language: item.language
                             })
                         })
-                        this.$store.commit('setClaOptions', this.claOptions)
+                        this.$store.commit('setClaOptions', claOptions)
                     }
                 }).catch(err => {
                     console.log(err);
