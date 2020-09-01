@@ -836,12 +836,12 @@
                 }).then(res => {
                     console.log(res);
                     if (res.status === 200) {
-                        this.orgOptions = [];
+                        let orgOptions = [];
                         res.data.forEach((item, index) => {
-                            this.orgOptions.push({value: index, label: item.login, id: item.id});
+                            orgOptions.push({value: index, label: item.login, id: item.id});
 
                         })
-                        this.$store.commit('setOrgOption', this.orgOptions)
+                        this.$store.commit('setOrgOption', orgOptions)
                     }
                 }).catch(err => {
                     console.log(err);
