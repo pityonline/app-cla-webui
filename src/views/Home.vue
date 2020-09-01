@@ -354,9 +354,12 @@
 
     window.onresize = () => {
         // console.log(until.getClientHeight());
-        if (until.getClientHeight() > document.getElementById('home').offsetHeight) {
-            document.getElementById("home").style.height = until.getClientHeight() + 'px'
-        }
+        this.$nextTick(()=>{
+            if (until.getClientHeight() > document.getElementById('home').offsetHeight) {
+                document.getElementById("home").style.height = until.getClientHeight() + 'px'
+            }
+        })
+
     }
     export default {
         name: "Home",
