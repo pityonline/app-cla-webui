@@ -457,8 +457,6 @@
                 claName: '',
                 repositoryName: '',
                 shareGistChecked: false,
-                claOptions: this.$store.state.claOptions,
-                claValue:this.$store.state.claValue,
                 metadataOptions: [{
                     value: 0,
                     label: '',
