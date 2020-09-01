@@ -445,11 +445,11 @@
                 fileNumber: '',
                 lineNumber: '',
                 gistUrl: '',
-                orgOptions: [],
-                orgValue: '',
+                orgOptions: this.$store.state.orgOptions,
+                orgValue:this.$store.state.orgValue,
                 orgChoose: false,
-                repositoryOptions: [],
-                repositoryValue: '',
+                repositoryOptions: this.$store.state.repositoryOptions,
+                repositoryValue: this.$store.state.repositoryValue,
                 repositoryChoose: '',
                 showConfigForm: this.$store.state.showConfigForm,
 
@@ -761,6 +761,10 @@
                     this.repositoryOptions = [];
                     this.repositoryValue = ''
                     this.repositoryChoose = false
+                    this.$store.commit('setRepositoryOptions',this.repositoryOptions)
+                    this.$store.commit('setOrgValue',this.orgValue)
+
+
 
                 }
 
@@ -774,6 +778,8 @@
                     this.repositoryChoose = false;
 
                 }
+                this.$store.commit('setRepositoryValue',this.repositoryValue)
+
 
 
             },
@@ -797,6 +803,7 @@
                                 id: item.id
                             });
                         })
+                        this.$store.commit('setRepositoryOptions',this.repositoryOptions)
                     }
                 }).catch(err => {
                     console.log(err);
@@ -812,12 +819,12 @@
                 }).then(res => {
                     console.log(res);
                     if (res.status === 200) {
-                        // this.repositoryOptions = res.data.data
                         this.orgOptions = [];
                         res.data.forEach((item, index) => {
                             this.orgOptions.push({value: index, label: item.login, id: item.id});
 
                         })
+                        this.$store.commit('setOrgOption',this.orgOptions)
                     }
                 }).catch(err => {
                     console.log(err);

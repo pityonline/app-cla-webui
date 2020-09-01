@@ -7,11 +7,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        showConfigForm:sessionStorage.getItem('showConfigForm') || undefined,
-        userLimit:sessionStorage.getItem('userLimit') || undefined,
-        loginInfo:JSON.parse(sessionStorage.getItem('loginInfo')) || undefined,
-        repoInfo:JSON.parse(sessionStorage.getItem('repoInfo')) || undefined,
-        loginType:sessionStorage.getItem('loginType') || undefined,
+        repositoryValue: sessionStorage.getItem('repositoryValue') || undefined,
+        orgValue: sessionStorage.getItem('orgValue') || undefined,
+        repositoryOptions: JSON.parse(sessionStorage.getItem('repositoryOptions')) || undefined,
+        orgOptions: JSON.parse(sessionStorage.getItem('orgOptions')) || undefined,
+        showConfigForm: sessionStorage.getItem('showConfigForm') || undefined,
+        userLimit: sessionStorage.getItem('userLimit') || undefined,
+        loginInfo: JSON.parse(sessionStorage.getItem('loginInfo')) || undefined,
+        repoInfo: JSON.parse(sessionStorage.getItem('repoInfo')) || undefined,
+        loginType: sessionStorage.getItem('loginType') || undefined,
         tableData: JSON.parse(sessionStorage.getItem('tableData')) || undefined,
         ready: Boolean(sessionStorage.getItem('ready') || undefined),
         platform: sessionStorage.getItem('platform') || undefined,
@@ -75,27 +79,47 @@ export default new Vuex.Store({
             state.loginInfo = obj;
             sessionStorage.setItem('loginInfo', JSON.stringify(obj));
         },
-        setUserLimit(state, userLimit){
+        setUserLimit(state, userLimit) {
             console.log(userLimit);
             state.userLimit = userLimit;
-            sessionStorage.setItem('userLimit',userLimit);
+            sessionStorage.setItem('userLimit', userLimit);
         },
-        setShowConfigForm(state, showConfigForm){
+        setShowConfigForm(state, showConfigForm) {
             console.log(showConfigForm);
             state.showConfigForm = showConfigForm;
-            sessionStorage.setItem('showConfigForm',showConfigForm);
+            sessionStorage.setItem('showConfigForm', showConfigForm);
+        },
+        setOrgOption(state, orgOptions) {
+            console.log(orgOptions);
+            state.orgOptions = orgOptions;
+            sessionStorage.setItem('orgOptions', orgOptions);
+        },
+        setRepositoryOptions(state, repositoryOptions) {
+            console.log(repositoryOptions);
+            state.repositoryOptions = repositoryOptions;
+            sessionStorage.setItem('repositoryOptions', repositoryOptions);
+        },
+        setOrgValue(state, orgValue) {
+            console.log(orgValue);
+            state.orgValue = orgValue;
+            sessionStorage.setItem('orgValue', orgValue);
+        },
+        setRepositoryValue(state, repositoryValue) {
+            console.log(repositoryValue);
+            state.repositoryValue = repositoryValue;
+            sessionStorage.setItem('repositoryValue', repositoryValue);
         },
     },
     actions: {
-        setShowConfigFormAct({commit}, showConfigForm){
+        setShowConfigFormAct({commit}, showConfigForm) {
             console.log(showConfigForm);
             commit('setShowConfigForm', showConfigForm);
         },
-        setUserLimitAct({commit}, userLimit){
+        setUserLimitAct({commit}, userLimit) {
             console.log(userLimit);
             commit('setUserLimit', userLimit);
         },
-        setLoginInfoAct({commit}, obj){
+        setLoginInfoAct({commit}, obj) {
             console.log(obj);
             commit('setLoginInfo', obj);
         },
@@ -104,7 +128,7 @@ export default new Vuex.Store({
             commit('setRepoInfo', obj);
 
 
-},
+        },
         setLoginTypeAct({commit}, loginType) {
             console.log(loginType);
             commit('setLoginType', loginType)
@@ -122,10 +146,10 @@ export default new Vuex.Store({
         },
 
         getLinkedRepoListAct({commit}, data) {
-            console.log('getLinkedRepoListAct',data);
+            console.log('getLinkedRepoListAct', data);
             axios({
                 url: '/api' + url.getLinkedRepoList,
-                params:{platform:data.platform,enabled:true},
+                params: {platform: data.platform, enabled: true},
                 headers: {
                     'Access-Token': data.access_token,
                     'Refresh-Token': data.refresh_token,
@@ -138,16 +162,17 @@ export default new Vuex.Store({
                     let tableData = [];
                     let count = res.data.length
                     res.data.forEach((item, index) => {
-                       this.claChoose = true; console.log(index);
+                        this.claChoose = true;
+                        console.log(index);
                         tableData.push({
                             id: item.id,
                             repository: `${item.org_id}/${item.repo_id}`,
                             cla: item.cla_id,
-                            org_id:item.org_id,
-                            repo_id:item.repo_id,
-                            apply_to:item.apply_to,
-                            cla_language:item.cla_language,
-                            platform:item.platform,
+                            org_id: item.org_id,
+                            repo_id: item.repo_id,
+                            apply_to: item.apply_to,
+                            cla_language: item.cla_language,
+                            platform: item.platform,
                             contributors: '0',
                         });
                         ((index, item, length, {commit}, tableData) => {
@@ -156,11 +181,11 @@ export default new Vuex.Store({
                                 count++
                                 axios({
                                     url: `/api${url.corporation_signing}`,
-                                    params:{
-                                        platform:item.platform,
-                                        org_id:item.org_id,
-                                        repo_id:item.repo_id,
-                                        cla_language:item.cla_language
+                                    params: {
+                                        platform: item.platform,
+                                        org_id: item.org_id,
+                                        repo_id: item.repo_id,
+                                        cla_language: item.cla_language
                                     },
                                     headers: {
                                         'Access-Token': data.access_token,
@@ -171,9 +196,9 @@ export default new Vuex.Store({
                                     console.log(resp);
                                     Object.assign(tableData[index], {
                                         contributors: resp.data.length,
-                                        corporationInfo:resp.data,
+                                        corporationInfo: resp.data,
                                     })
-                                    if (--count===0) {
+                                    if (--count === 0) {
                                         let obj = {tableData: tableData, ready: true}
                                         console.log(tableData);
                                         commit('setReady', obj);
@@ -195,7 +220,7 @@ export default new Vuex.Store({
                                 Object.assign(tableData[index], {
                                     claName: resp.data.name,
                                 })
-                                if (--count===0) {
+                                if (--count === 0) {
                                     let obj = {tableData: tableData, ready: true}
                                     console.log(tableData);
                                     commit('setReady', obj);
