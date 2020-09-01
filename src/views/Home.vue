@@ -372,13 +372,13 @@
                 return this.$store.state.orgValue
             },
             orgChoose(){
-                return this.$store.state.orgChoose
+                return this.$store.state.orgChoose === 'true';
             },
             isEmail(){
-                return this.$store.state.isEmail
+                return this.$store.state.isEmail === 'true';
             },
             repositoryChoose(){
-                return this.$store.state.repositoryChoose
+                return this.$store.state.repositoryChoose==='true'
             },
             repositoryOptions(){
                 return this.$store.state.repositoryOptions
@@ -772,19 +772,19 @@
             },
             /*选择组织*/
             changeOrg(value) {
-
-                console.log(this.orgValue);
-                if (this.orgValue !== '') {
-                    this.orgChoose = true;
-                    this.getRepositoriesOfOrg(this.orgOptions[this.orgValue].label, this.orgOptions[this.orgValue].id)
-                } else {
-                    this.orgChoose = false;
-                    let repositoryOptions = [];
-                    this.repositoryValue = ''
-                    this.repositoryChoose = false
-                    this.$store.commit('setRepositoryOptions', repositoryOptions)
-                }
                 this.$store.commit('setOrgValue', value)
+                console.log(value);
+
+                if (value !== '') {
+                    this.$store.commit('setOrgChoose', true)
+                    this.getRepositoriesOfOrg(this.orgOptions[value].label, this.orgOptions[value].id)
+                } else {
+                    this.$store.commit('setOrgChoose', false)
+                    this.$store.commit('setRepositoryValue', '')
+                    this.$store.commit('setRepositoryChoose', false)
+                    this.$store.commit('setRepositoryOptions', [])
+                }
+
 
             },
             /*选择仓库*/

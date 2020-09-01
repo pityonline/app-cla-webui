@@ -4,7 +4,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/bdd0211e92f6f1aabbec.worker.js"
   },
   {
-    "revision": "0e71e5daab9e034f9806",
+    "revision": "c893611215e0ca169f58",
     "url": "/css/app.fa2101f4.css"
   },
   {
@@ -34,6 +34,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "d2a689f1519d20076a7a",
     "url": "/css/chunk-253271c4.70d03ee1.css"
+  },
+  {
+    "revision": "d7e3fd6ec0e4e762f71c",
+    "url": "/css/chunk-271767d6.98743a29.css"
   },
   {
     "revision": "cde1c59da18a6774584c",
@@ -76,10 +80,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/css/chunk-ba7f532e.10550a0d.css"
   },
   {
-    "revision": "8020df60e823daa51656",
-    "url": "/css/chunk-c80a5442.f3ae5da1.css"
-  },
-  {
     "revision": "53462145b040044a12cd",
     "url": "/css/chunk-c818f51e.c8672826.css"
   },
@@ -112,12 +112,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/logo.3a1a754d.png"
   },
   {
-    "revision": "da70f6a4ef6fe61c253e2eaa1c5c052f",
+    "revision": "c4dcc9f259d2ef67a690fbed7e03e99f",
     "url": "/index.html"
   },
   {
-    "revision": "0e71e5daab9e034f9806",
-    "url": "/js/app.959005e4.js"
+    "revision": "c893611215e0ca169f58",
+    "url": "/js/app.f5a534dc.js"
   },
   {
     "revision": "7f1e3da00c3358153222",
@@ -150,6 +150,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "d2a689f1519d20076a7a",
     "url": "/js/chunk-253271c4.27243090.js"
+  },
+  {
+    "revision": "d7e3fd6ec0e4e762f71c",
+    "url": "/js/chunk-271767d6.fe55650b.js"
   },
   {
     "revision": "cde1c59da18a6774584c",
@@ -206,10 +210,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "f524c59eeaaa61dc3a67",
     "url": "/js/chunk-ba7f532e.3ea00d84.js"
-  },
-  {
-    "revision": "8020df60e823daa51656",
-    "url": "/js/chunk-c80a5442.a5c39e32.js"
   },
   {
     "revision": "53462145b040044a12cd",

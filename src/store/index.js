@@ -7,6 +7,9 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
+        orgChoose: sessionStorage.getItem('orgChoose') || undefined,
+        repositoryChoose: sessionStorage.getItem('repositoryChoose') || undefined,
+        isEmail: sessionStorage.getItem('isEmail') || undefined,
         repositoryValue: parseInt(sessionStorage.getItem('repositoryValue')) || undefined,
         claValue: parseInt(sessionStorage.getItem('claValue')) || undefined,
         orgValue: parseInt(sessionStorage.getItem('orgValue')) || undefined,
@@ -120,6 +123,21 @@ export default new Vuex.Store({
             console.log(claValue);
             state.claValue = claValue;
             sessionStorage.setItem('claValue', claValue);
+        },
+        setOrgChoose(state, orgChoose) {
+            console.log(orgChoose);
+            state.orgChoose = orgChoose;
+            sessionStorage.setItem('orgChoose', orgChoose);
+        },
+        setRepositoryChoose(state, repositoryChoose) {
+            console.log(repositoryChoose);
+            state.repositoryChoose = repositoryChoose;
+            sessionStorage.setItem('repositoryChoose', repositoryChoose);
+        },
+        setIsEmail(state, isEmail) {
+            console.log(isEmail);
+            state.isEmail = isEmail;
+            sessionStorage.setItem('isEmail', isEmail);
         },
     },
     actions: {
