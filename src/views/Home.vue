@@ -810,9 +810,9 @@
                 }).then(res => {
                     console.log(res);
                     if (res.status === 200) {
-                        this.repositoryOptions = [];
+                        let repositoryOptions = [];
                         res.data.forEach((item, index) => {
-                            this.repositoryOptions.push({
+                            repositoryOptions.push({
                                 value: index,
                                 org: org,
                                 org_id: org_id,
@@ -821,7 +821,7 @@
                                 id: item.id
                             });
                         })
-                        this.$store.commit('setRepositoryOptions', this.repositoryOptions)
+                        this.$store.commit('setRepositoryOptions', repositoryOptions)
                     }
                 }).catch(err => {
                     console.log(err);
