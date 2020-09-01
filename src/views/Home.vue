@@ -451,7 +451,7 @@
                 repositoryOptions: [],
                 repositoryValue: '',
                 repositoryChoose: '',
-                showConfigForm: false,
+                showConfigForm: this.$store.state.showConfigForm,
 
 
                 home: {
