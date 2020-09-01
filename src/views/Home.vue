@@ -5,12 +5,12 @@
         <el-col :offset="4" :span="16" id="section">
 
             <div id="configBtDiv">
-                <el-button v-if="!(this.$store.state.showConfigForm==='true'||this.$store.state.showConfigForm)" class="configBt" type="primary" @click="configCla()">
+                <el-button v-if="!(this.$store.state.showConfigForm==='true')" class="configBt" type="primary" @click="configCla()">
                     Configure CLA
                 </el-button>
             </div>
             <el-row>
-                <el-row v-if="this.$store.state.showConfigForm==='true'||this.$store.state.showConfigForm">
+                <el-row v-if="this.$store.state.showConfigForm==='true'">
                     <div style="padding-bottom: 1.5rem;font-size: 1.3rem">Configure CLA</div>
                     <el-row>
                         <el-col :span="10">
@@ -855,14 +855,14 @@
             },
             /*关闭cla配置表单*/
             closeConfigForm() {
-                this.$store.commit('setShowConfigForm',false)
+                this.$store.commit('setShowConfigForm','false')
                 this.showConfigForm = false
                 this.setClientHeight()
             },
 
             /*点击配置cla按钮*/
             configCla() {
-                this.$store.commit('setShowConfigForm',true)
+                this.$store.commit('setShowConfigForm','true')
                 this.showConfigForm = true;
                 this.home.height = 'auto'
                 // this.getCLA()
