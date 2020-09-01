@@ -964,6 +964,7 @@
                         arr[0] === 'access_token' ? access_token = arr[1] : arr[0] === 'refresh_token' ? refresh_token = arr[1] : arr[0] === 'email' ? email = arr[1] : email = '';
                     })
                     this.email = email;
+                    this.$store.commit('setIsEmail',true)
                     let data = {access_token, refresh_token};
                     this.setTokenAct(data);
                     this.getUserInfo(access_token, refresh_token)
