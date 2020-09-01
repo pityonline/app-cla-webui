@@ -376,7 +376,7 @@
         },
         data() {
             return {
-                emailTypeArr: [{value:'Gmail',label:'Gmail'}],
+                emailTypeArr: [{value: 'Gmail', label: 'Gmail'}],
                 emailType: '',
                 emailDialogVisible: false,
                 filterChange: true,
@@ -467,20 +467,20 @@
         methods: {
 
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
-            authorizeEmail(){
-                let myUrl=''
+            authorizeEmail() {
+                let myUrl = ''
                 switch (this.emailType) {
                     case 'Gmail':
-                        myUrl=url.getAuthEmail;
+                        myUrl = url.getAuthEmail;
                         break;
 
                 }
                 this.$axios({
-                    url:'/api'+myUrl
-                }).then(res=>{
+                    url: '/api' + myUrl
+                }).then(res => {
                     console.log(res);
-                    window.location.href=res.data.url;
-                }).catch(err=>{
+                    window.location.href = res.data.url;
+                }).catch(err => {
                     console.log(err);
                 })
                 console.log('authorizeEmail');
@@ -932,11 +932,12 @@
                     let cookieArr = document.cookie.split('; ')
                     console.log(cookieArr);
                     let access_token, refresh_token = '';
+                    let email = ''
                     cookieArr.forEach((item, index) => {
                         let arr = item.split('=');
-                        arr[0] === 'access_token' ? access_token = arr[1] : arr[0] === 'refresh_token' ? refresh_token = arr[1] : refresh_token = '';
-                        ;
+                        arr[0] === 'access_token' ? access_token = arr[1] : arr[0] === 'refresh_token' ? refresh_token = arr[1] : arr[0] === 'email' ? email = arr[1] : email = '';
                     })
+                    this.email = email;
                     let data = {access_token, refresh_token};
                     this.setTokenAct(data);
                     this.getUserInfo(access_token, refresh_token)
@@ -973,15 +974,36 @@
                 })
             },
         },
+        beforeCreate() {
+            console.log('beforeCreate');
 
+        },
         created() {
+            console.log('created');
             this.getPath();
             this.openFullScreen();
             this.getCookieData()
         },
+        beforeMount() {
+            console.log('beforeMount');
+        },
         mounted() {
+            console.log('mounted');
             this.setClientHeight();
+        },
+        beforeUpdate(){
+            console.log('beforeUpdate');
+        },
+        updated() {
+            console.log('updated');
+        },
+        beforeDestroy() {
+            console.log('beforeDestroy');
+        },
+        destroyed() {
+            console.log('destroyed');
         }
+
     };
 
 </script>

@@ -4,7 +4,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/bdd0211e92f6f1aabbec.worker.js"
   },
   {
-    "revision": "12c73559e23b09d78b20",
+    "revision": "332516b330186bf46e3d",
     "url": "/css/app.fa2101f4.css"
   },
   {
@@ -34,10 +34,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "d2a689f1519d20076a7a",
     "url": "/css/chunk-253271c4.70d03ee1.css"
-  },
-  {
-    "revision": "49a2336af6d8235759dc",
-    "url": "/css/chunk-2827b062.812c711f.css"
   },
   {
     "revision": "cde1c59da18a6774584c",
@@ -84,6 +80,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/css/chunk-c818f51e.c8672826.css"
   },
   {
+    "revision": "4ecf1d1051b0d3bf5428",
+    "url": "/css/chunk-e7a19ace.4530204b.css"
+  },
+  {
     "revision": "56eca739e5f1590bc189",
     "url": "/css/chunk-e8574c7c.157a9440.css"
   },
@@ -112,12 +112,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/logo.3a1a754d.png"
   },
   {
-    "revision": "fa7d8e10613b8e99cf41ad74afa14684",
+    "revision": "5e7ed72739fe4bd584dede6faa0d7b89",
     "url": "/index.html"
   },
   {
-    "revision": "12c73559e23b09d78b20",
-    "url": "/js/app.4b57316e.js"
+    "revision": "332516b330186bf46e3d",
+    "url": "/js/app.adb31a8e.js"
   },
   {
     "revision": "7f1e3da00c3358153222",
@@ -150,10 +150,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "d2a689f1519d20076a7a",
     "url": "/js/chunk-253271c4.27243090.js"
-  },
-  {
-    "revision": "49a2336af6d8235759dc",
-    "url": "/js/chunk-2827b062.afa51872.js"
   },
   {
     "revision": "cde1c59da18a6774584c",
@@ -214,6 +210,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "53462145b040044a12cd",
     "url": "/js/chunk-c818f51e.5d44d1b4.js"
+  },
+  {
+    "revision": "4ecf1d1051b0d3bf5428",
+    "url": "/js/chunk-e7a19ace.92cd5be5.js"
   },
   {
     "revision": "56eca739e5f1590bc189",
