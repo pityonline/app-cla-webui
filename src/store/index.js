@@ -7,6 +7,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
+        showConfigForm:sessionStorage.getItem('showConfigForm') || undefined,
         userLimit:sessionStorage.getItem('userLimit') || undefined,
         loginInfo:JSON.parse(sessionStorage.getItem('loginInfo')) || undefined,
         repoInfo:JSON.parse(sessionStorage.getItem('repoInfo')) || undefined,
@@ -79,8 +80,17 @@ export default new Vuex.Store({
             state.userLimit = userLimit;
             sessionStorage.setItem('userLimit',userLimit);
         },
+        setShowConfigForm(state, showConfigForm){
+            console.log(showConfigForm);
+            state.showConfigForm = showConfigForm;
+            sessionStorage.setItem('showConfigForm',showConfigForm);
+        },
     },
     actions: {
+        setShowConfigFormAct({commit}, showConfigForm){
+            console.log(showConfigForm);
+            commit('setShowConfigForm', showConfigForm);
+        },
         setUserLimitAct({commit}, userLimit){
             console.log(userLimit);
             commit('setUserLimit', userLimit);
