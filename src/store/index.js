@@ -83,7 +83,7 @@ export default new Vuex.Store({
         setShowConfigForm(state, showConfigForm){
             console.log(showConfigForm);
             state.showConfigForm = showConfigForm;
-            // sessionStorage.setItem('showConfigForm',showConfigForm);
+            sessionStorage.setItem('showConfigForm',showConfigForm);
         },
     },
     actions: {

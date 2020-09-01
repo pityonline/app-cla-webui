@@ -4,7 +4,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/bdd0211e92f6f1aabbec.worker.js"
   },
   {
-    "revision": "667129cef914a88388c7",
+    "revision": "f5890163906d8edc6350",
     "url": "/css/app.fa2101f4.css"
   },
   {
@@ -22,10 +22,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "6a273334740a084964f2",
     "url": "/css/chunk-19c342ed.637ac5e8.css"
-  },
-  {
-    "revision": "43c2b7e3971b2d09fb4d",
-    "url": "/css/chunk-21b19eb7.571b7026.css"
   },
   {
     "revision": "fb11de3f60c02451e975",
@@ -46,6 +42,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "11e68ad22528de9882d8",
     "url": "/css/chunk-2a90cadc.a1da32bc.css"
+  },
+  {
+    "revision": "b9b985037105946f8e80",
+    "url": "/css/chunk-2bf55bdc.19159536.css"
   },
   {
     "revision": "b3c937595b65ad74b7e6",
@@ -112,12 +112,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/logo.3a1a754d.png"
   },
   {
-    "revision": "ff0b812737daab6b2eec2d4410df285a",
+    "revision": "4796a3c454436d2ecf62c3aaff2635c2",
     "url": "/index.html"
   },
   {
-    "revision": "667129cef914a88388c7",
-    "url": "/js/app.37c5a172.js"
+    "revision": "f5890163906d8edc6350",
+    "url": "/js/app.41a6ec67.js"
   },
   {
     "revision": "7f1e3da00c3358153222",
@@ -140,10 +140,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/js/chunk-19c342ed.92ba7380.js"
   },
   {
-    "revision": "43c2b7e3971b2d09fb4d",
-    "url": "/js/chunk-21b19eb7.d1d7a07b.js"
-  },
-  {
     "revision": "fb11de3f60c02451e975",
     "url": "/js/chunk-2252f7e0.0345895d.js"
   },
@@ -162,6 +158,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "11e68ad22528de9882d8",
     "url": "/js/chunk-2a90cadc.07988d1f.js"
+  },
+  {
+    "revision": "b9b985037105946f8e80",
+    "url": "/js/chunk-2bf55bdc.e48acdeb.js"
   },
   {
     "revision": "03b37623351a6d6068de",
