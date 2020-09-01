@@ -5,12 +5,12 @@
         <el-col :offset="4" :span="16" id="section">
 
             <div id="configBtDiv">
-                <el-button v-if="!(this.$store.state.showConfigForm==='true')" class="configBt" type="primary" @click="configCla()">
+                <el-button v-if="!(this.$store.state.showConfigForm==='true'||this.$store.state.showConfigForm)" class="configBt" type="primary" @click="configCla()">
                     Configure CLA
                 </el-button>
             </div>
             <el-row>
-                <el-row v-if="this.$store.state.showConfigForm==='true'">
+                <el-row v-if="this.$store.state.showConfigForm==='true'||this.$store.state.showConfigForm">
                     <div style="padding-bottom: 1.5rem;font-size: 1.3rem">Configure CLA</div>
                     <el-row>
                         <el-col :span="10">
