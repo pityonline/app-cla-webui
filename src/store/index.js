@@ -7,8 +7,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        repositoryValue: sessionStorage.getItem('repositoryValue') || undefined,
-        orgValue: sessionStorage.getItem('orgValue') || undefined,
+        repositoryValue: parseInt(sessionStorage.getItem('repositoryValue')) || undefined,
+        claValue: parseInt(sessionStorage.getItem('claValue')) || undefined,
+        orgValue: parseInt(sessionStorage.getItem('orgValue')) || undefined,
+        claOptions: JSON.parse(sessionStorage.getItem('claOptions')) || undefined,
         repositoryOptions: JSON.parse(sessionStorage.getItem('repositoryOptions')) || undefined,
         orgOptions: JSON.parse(sessionStorage.getItem('orgOptions')) || undefined,
         showConfigForm: sessionStorage.getItem('showConfigForm') || undefined,
@@ -99,6 +101,11 @@ export default new Vuex.Store({
             state.repositoryOptions = repositoryOptions;
             sessionStorage.setItem('repositoryOptions', JSON.stringify(repositoryOptions));
         },
+        setClaOptions(state, claOptions) {
+            console.log(claOptions);
+            state.claOptions = claOptions;
+            sessionStorage.setItem('claOptions', JSON.stringify(claOptions));
+        },
         setOrgValue(state, orgValue) {
             console.log(orgValue);
             state.orgValue = orgValue;
@@ -108,6 +115,11 @@ export default new Vuex.Store({
             console.log(repositoryValue);
             state.repositoryValue = repositoryValue;
             sessionStorage.setItem('repositoryValue', repositoryValue);
+        },
+        setClaValue(state, claValue) {
+            console.log(claValue);
+            state.claValue = claValue;
+            sessionStorage.setItem('claValue', claValue);
         },
     },
     actions: {

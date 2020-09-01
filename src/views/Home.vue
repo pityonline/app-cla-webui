@@ -5,7 +5,8 @@
         <el-col :offset="4" :span="16" id="section">
 
             <div id="configBtDiv">
-                <el-button v-if="!(this.$store.state.showConfigForm==='true')" class="configBt" type="primary" @click="configCla()">
+                <el-button v-if="!(this.$store.state.showConfigForm==='true')" class="configBt" type="primary"
+                           @click="configCla()">
                     Configure CLA
                 </el-button>
             </div>
@@ -446,7 +447,7 @@
                 lineNumber: '',
                 gistUrl: '',
                 orgOptions: this.$store.state.orgOptions,
-                orgValue:this.$store.state.orgValue,
+                orgValue: this.$store.state.orgValue,
                 orgChoose: false,
                 repositoryOptions: this.$store.state.repositoryOptions,
                 repositoryValue: this.$store.state.repositoryValue,
@@ -722,6 +723,7 @@
                 this.showPreviewCla = true
                 this.claChoose = true;
                 this.previewText = this.claOptions[value].text;
+                this.$store.commit('setClaValue',this.claValue)
             },
 
             mataVisibleChange(visible) {
@@ -761,12 +763,9 @@
                     this.repositoryOptions = [];
                     this.repositoryValue = ''
                     this.repositoryChoose = false
-                    this.$store.commit('setRepositoryOptions',this.repositoryOptions)
-                    this.$store.commit('setOrgValue',this.orgValue)
-
-
-
+                    this.$store.commit('setRepositoryOptions', this.repositoryOptions)
                 }
+                this.$store.commit('setOrgValue', this.orgValue)
 
             },
             /*选择仓库*/
@@ -778,8 +777,7 @@
                     this.repositoryChoose = false;
 
                 }
-                this.$store.commit('setRepositoryValue',this.repositoryValue)
-
+                this.$store.commit('setRepositoryValue', this.repositoryValue)
 
 
             },
@@ -803,7 +801,7 @@
                                 id: item.id
                             });
                         })
-                        this.$store.commit('setRepositoryOptions',this.repositoryOptions)
+                        this.$store.commit('setRepositoryOptions', this.repositoryOptions)
                     }
                 }).catch(err => {
                     console.log(err);
@@ -824,7 +822,7 @@
                             this.orgOptions.push({value: index, label: item.login, id: item.id});
 
                         })
-                        this.$store.commit('setOrgOption',this.orgOptions)
+                        this.$store.commit('setOrgOption', this.orgOptions)
                     }
                 }).catch(err => {
                     console.log(err);
@@ -855,6 +853,7 @@
                                 language: item.language
                             })
                         })
+                        this.$store.commit('setClaOptions', this.claOptions)
                     }
                 }).catch(err => {
                     console.log(err);
@@ -862,19 +861,17 @@
             },
             /*关闭cla配置表单*/
             closeConfigForm() {
-                this.$store.commit('setShowConfigForm','false')
+                this.$store.commit('setShowConfigForm', 'false')
                 this.showConfigForm = false
                 this.setClientHeight()
             },
 
             /*点击配置cla按钮*/
             configCla() {
-                this.$store.commit('setShowConfigForm','true')
+                this.$store.commit('setShowConfigForm', 'true')
                 this.showConfigForm = true;
                 this.home.height = 'auto'
-                // this.getCLA()
                 this.getOrgsInfo()
-                // this.getMeta();
             },
             /*获取metadata数据*/
             getMeta() {
@@ -1000,7 +997,7 @@
             console.log('mounted');
             this.setClientHeight();
         },
-        beforeUpdate(){
+        beforeUpdate() {
             console.log('beforeUpdate');
         },
         updated() {
