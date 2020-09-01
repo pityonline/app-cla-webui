@@ -5,13 +5,13 @@
         <el-col :offset="4" :span="16" id="section">
 
             <div id="configBtDiv">
-                <el-button v-if="!(this.$store.state.showConfigForm==='true')" class="configBt" type="primary"
+                <el-button v-if="!showConfigForm" class="configBt" type="primary"
                            @click="configCla()">
                     Configure CLA
                 </el-button>
             </div>
             <el-row>
-                <el-row v-if="this.$store.state.showConfigForm==='true'">
+                <el-row v-if="showConfigForm">
                     <div style="padding-bottom: 1.5rem;font-size: 1.3rem">Configure CLA</div>
                     <el-row>
                         <el-col :span="10">
@@ -370,18 +370,23 @@
                 return this.$store.state.orgOptions
             },
             orgValue() {
+                console.log(this.$store.state.orgValue);
                 return this.$store.state.orgValue
             },
             orgChoose() {
+                console.log(this.$store.state.orgChoose === 'true');
                 return this.$store.state.orgChoose === 'true';
             },
             claChoose() {
+                console.log(this.$store.state.claChoose === 'true');
                 return this.$store.state.claChoose === 'true';
             },
             isEmail() {
+                console.log(this.$store.state.isEmail === 'true');
                 return this.$store.state.isEmail === 'true';
             },
             repositoryChoose() {
+                console.log(this.$store.state.repositoryChoose === 'true');
                 return this.$store.state.repositoryChoose === 'true'
             },
             repositoryOptions() {
@@ -391,13 +396,15 @@
                 return this.$store.state.claOptions
             },
             claValue() {
+                console.log(this.$store.state.claValue);
                 return this.$store.state.claValue
             },
             repositoryValue() {
+                console.log(this.$store.state.repositoryValue);
                 return this.$store.state.repositoryValue
             },
             showConfigForm() {
-                return this.$store.state.showConfigForm
+                return this.$store.state.showConfigForm==='true'
             },
 
         },
@@ -964,7 +971,9 @@
                         arr[0] === 'access_token' ? access_token = arr[1] : arr[0] === 'refresh_token' ? refresh_token = arr[1] : arr[0] === 'email' ? email = arr[1] : email = '';
                     })
                     this.email = email;
-                    this.$store.commit('setIsEmail',true)
+                    if (email !== '') {
+                        this.$store.commit('setIsEmail',true)
+                    }
                     let data = {access_token, refresh_token};
                     this.setTokenAct(data);
                     this.getUserInfo(access_token, refresh_token)
