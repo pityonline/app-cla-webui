@@ -92,12 +92,12 @@ export default new Vuex.Store({
         setOrgOption(state, orgOptions) {
             console.log(orgOptions);
             state.orgOptions = orgOptions;
-            sessionStorage.setItem('orgOptions', orgOptions);
+            sessionStorage.setItem('orgOptions', JSON.stringify(orgOptions));
         },
         setRepositoryOptions(state, repositoryOptions) {
             console.log(repositoryOptions);
             state.repositoryOptions = repositoryOptions;
-            sessionStorage.setItem('repositoryOptions', repositoryOptions);
+            sessionStorage.setItem('repositoryOptions', JSON.stringify(repositoryOptions));
         },
         setOrgValue(state, orgValue) {
             console.log(orgValue);
