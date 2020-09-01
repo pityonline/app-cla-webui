@@ -10,7 +10,7 @@
                 </el-button>
             </div>
             <el-row>
-                <el-row v-if="showConfigForm">
+                <el-row v-if="this.$store.state.showConfigForm">
                     <div style="padding-bottom: 1.5rem;font-size: 1.3rem">Configure CLA</div>
                     <el-row>
                         <el-col :span="10">
