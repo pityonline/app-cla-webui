@@ -147,7 +147,7 @@
                                 </div>
 
                                 <div
-                                        :class="{'linkBt pointer':claChoose&&orgChoose&&isEmail,'disableClass':!(claChoose&&repositoryChoose&&isEmail)}"
+                                        :class="{'linkBt pointer':claChoose&&orgChoose&&isEmail,'disableClass':!(claChoose&&orgChoose&&isEmail)}"
                                         @click="openLinkDialog()">
                                     <div>
                                         <svg-icon icon-class="link"></svg-icon>
@@ -364,7 +364,33 @@
             Header,
             Footer,
         },
-        computed: {},
+        computed: {
+            orgOptions(){
+               return this.$store.state.orgOptions
+            } ,
+            orgValue(){
+                return this.$store.state.orgValue
+            },
+            orgChoose(){
+                return this.$store.state.orgChoose
+            },
+            isEmail(){
+                return this.$store.state.isEmail
+            },
+            repositoryChoose(){
+                return this.$store.state.repositoryChoose
+            },
+            repositoryOptions(){
+                return this.$store.state.repositoryOptions
+            },
+            repositoryValue(){
+                return this.$store.state.repositoryValue
+            },
+            showConfigForm(){
+                return this.$store.state.showConfigForm
+            },
+
+        },
         watch: {
             $route(to, from) {
                 let path = to.path;
@@ -407,7 +433,6 @@
 
                 listCurrentPage: 1,
                 dropdownTitle: 'Linked Repositories',
-                isEmail: false,
                 email: '',
                 code: '',
                 gitee_client_id: this.$store.state.gitee_client_id,
@@ -426,8 +451,8 @@
                 claName: '',
                 repositoryName: '',
                 shareGistChecked: false,
-                claOptions: [],
-                claValue: '',
+                claOptions: this.$store.state.claOptions,
+                claValue:this.$store.state.claValue,
                 metadataOptions: [{
                     value: 0,
                     label: '',
@@ -446,13 +471,7 @@
                 fileNumber: '',
                 lineNumber: '',
                 gistUrl: '',
-                orgOptions: this.$store.state.orgOptions,
-                orgValue: this.$store.state.orgValue,
-                orgChoose: false,
-                repositoryOptions: this.$store.state.repositoryOptions,
-                repositoryValue: this.$store.state.repositoryValue,
-                repositoryChoose: '',
-                showConfigForm: this.$store.state.showConfigForm,
+
 
 
                 home: {
