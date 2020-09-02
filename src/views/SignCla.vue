@@ -233,7 +233,8 @@
                         {required: true, message: 'please input name', trigger: 'blur'},
                         {min: 2, max: 10, message: 'The length is between 2 and 10 characters', trigger: 'blur'}
                     ],
-                    email: [{required: true, message: 'please input email', trigger: 'blur'}],
+                    email: [{required: true, message: 'please input email', trigger: 'blur'},
+                        {validator:verifyEmail,trigger:'blur'} ],
                     date: [{required: true, message: 'please input date', trigger: 'blur'}],
                     telephone: [
                         {validator: verifyTel, trigger: 'blur'}
