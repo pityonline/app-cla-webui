@@ -76,7 +76,7 @@
                                         prop="code">
 
                                     <el-input v-model="ruleForm.code" size="small">
-                                        <template slot="append" @click="sendCode()">send code</template>
+                                        <el-button slot="append" @click="sendCode()">send code</el-button>
                                     </el-input>
                                 </el-form-item>
                                 <p style="font-size: .9rem;" class="borderClass">{{desc.metadataDesc}}</p>
@@ -317,7 +317,9 @@
                     })
                     let data = {access_token, refresh_token};
                     this.setTokenAct(data);
-                    this.getEmail(access_token, refresh_token)
+                    if (this.loginType !== 'corporation') {
+                        this.getEmail(access_token, refresh_token)
+                    }
                 }
 
             },
