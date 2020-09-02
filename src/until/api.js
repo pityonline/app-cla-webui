@@ -37,3 +37,4 @@ export const enableEmployee = '/v1/employee-signing'                            
 export const getAuthCodeUrl = '/v1/auth/authcodeurl'                                   //获取授权登陆的链接   方式get   参数/platform,/purpose
 export const getEmail = 'https://gitee.com/api/v5/emails'                              //获取授权用户的邮箱   方式get   参数access_token
 export const getAuthEmail = '/v1/email/authcodeurl/gmail'                               //邮箱授权             方式get
+export const sendVerifyCode = '/v1/corporation-signing/verifi-code'                     //像邮箱发送验证码        方式put  参数：cla_org_id,email
