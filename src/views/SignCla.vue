@@ -160,6 +160,11 @@
     export default {
 
         name: "CheckCLA",
+        computed: {
+            loginType() {
+                return this.$store.state.loginType
+            },
+        },
         components: {
             Header,
             Footer
@@ -198,7 +203,7 @@
 
             return {
                 cla_org_id: '',
-                loginType: this.$store.state.loginType,
+
                 sendBtText: 'send code',
                 claOrgIdArr: [],
                 fields: [],
