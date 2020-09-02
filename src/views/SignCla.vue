@@ -61,12 +61,19 @@
                                               :required="item.required"
                                               :prop="item.type">
 
-                                    <el-input v-if="item.type==='email'" :readonly="loginType!=='corporation'" v-model="ruleForm[item.type]"
+                                    <el-input v-if="item.type==='email'" :readonly="loginType!=='corporation'"
+                                              v-model="ruleForm[item.type]"
                                               size="small"></el-input>
 
                                     <el-input v-else-if="item.type==='date'" readonly="" v-model="ruleForm[item.type]"
                                               size="small"></el-input>
                                     <el-input v-else v-model="ruleForm[item.type]" size="small"></el-input>
+                                </el-form-item>
+                                <el-form-item label="VerifyCode"
+                                              required=""
+                                              :prop="ruleForm.code">
+
+                                    <el-input v-model="ruleForm.code" size="small"></el-input>
                                 </el-form-item>
                                 <p style="font-size: .9rem;" class="borderClass">{{desc.metadataDesc}}</p>
                                 <div class="marginTop1rem">
@@ -163,7 +170,7 @@
                 if (reg.test(email)) {
                     callback();
                 } else {
-                    callback(new Error('邮箱格式有误'))
+                    callback(new Error('Email format error'))
                 }
             }
             let verifyTel = (rule, value, callback) => {
@@ -188,7 +195,8 @@
             }
 
             return {
-                loginType:this.$store.state.loginType,
+                cla_org_id: '',
+                loginType: this.$store.state.loginType,
                 sendBtText: 'send code',
                 claOrgIdArr: [],
                 fields: [],
@@ -197,14 +205,14 @@
                 enDesc: {
                     personalContributor: 'Individual Contributor',
                     comContributor: 'Legal Entity Contributor',
-                    metadataDesc: '* require field. Please make sure the E-Mail is related with your gitee account.',
+                    metadataDesc: '* require field. ',
                     sign: 'SIGN',
                     reset: 'RESET',
                 },
                 cnDesc: {
                     personalContributor: '个人贡献者',
                     comContributor: '企业贡献者',
-                    metadataDesc: '*为必填项，请确保你的邮箱与gitee账号绑定',
+                    metadataDesc: '*为必填项',
                     sign: '签署',
                     reset: '重置',
                 },
@@ -218,6 +226,7 @@
                 repo: '',
                 role: '0',
                 ruleForm: {
+                    code: '',
                     adminEmail: '',
                     corporationName: '',
                     name: '',
@@ -234,7 +243,7 @@
                         {min: 2, max: 10, message: 'The length is between 2 and 10 characters', trigger: 'blur'}
                     ],
                     email: [{required: true, message: 'please input email', trigger: 'blur'},
-                        {validator:verifyEmail,trigger:'blur'} ],
+                        {validator: verifyEmail, trigger: 'blur'}],
                     date: [{required: true, message: 'please input date', trigger: 'blur'}],
                     telephone: [
                         {validator: verifyTel, trigger: 'blur'}
@@ -300,8 +309,9 @@
 
             },
             changeLanguage(value) {
-                this.changeDesc(this.languageOptions[this.value].label);
+                this.changeDesc(this.languageOptions[value].label);
                 this.getClaText(this.claIdArr[value])
+                this.cla_org_id = this.claOrgIdArr[value]
             },
             changeDesc(language) {
                 if (language === 'english') {
@@ -347,8 +357,6 @@
                             this.claIdArr.push(item.cla_id)
                             this.claOrgIdArr.push(item.id)
                         })
-
-                    } else {
 
                     }
 
