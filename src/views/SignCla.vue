@@ -75,7 +75,7 @@
                                         required=""
                                         prop="code">
 
-                                    <el-input v-model="ruleForm.code" size="small"></el-input>
+                                    <el-input v-model="ruleForm.code" size="small">555</el-input>
                                 </el-form-item>
                                 <p style="font-size: .9rem;" class="borderClass">{{desc.metadataDesc}}</p>
                                 <div class="marginTop1rem">
