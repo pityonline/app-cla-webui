@@ -283,6 +283,16 @@
             ...mapActions(['setTokenAct', 'setRepoInfoAct']),
             sendCode(){
                 console.log('sengcode');
+                this.$axios({
+                    url: '/api'+url.sendVerifyCode,
+                    method:'put',
+                    params: {cla_org_id:this.cla_org_id,email:this.ruleForm.email}
+                }).then(res => {
+                    console.log(res);
+
+                }).catch(err => {
+                    console.log(err);
+                })
             },
             getNowDate() {
                 let date = new Date();
