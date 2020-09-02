@@ -69,9 +69,11 @@
                                               size="small"></el-input>
                                     <el-input v-else v-model="ruleForm[item.type]" size="small"></el-input>
                                 </el-form-item>
-                                <el-form-item label="VerifyCode"
-                                              required=""
-                                              :prop="ruleForm.code">
+                                <el-form-item
+                                        v-if="loginType==='corporation'"
+                                        label="VerifyCode"
+                                        required=""
+                                        :prop="ruleForm.code">
 
                                     <el-input v-model="ruleForm.code" size="small"></el-input>
                                 </el-form-item>
@@ -238,6 +240,7 @@
 
                 },
                 rules: {
+                    code: [{required: true, message: 'Please enter the verification code', trigger: 'blur'},],
                     name: [
                         {required: true, message: 'please input name', trigger: 'blur'},
                         {min: 2, max: 10, message: 'The length is between 2 and 10 characters', trigger: 'blur'}
