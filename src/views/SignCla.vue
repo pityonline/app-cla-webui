@@ -522,6 +522,7 @@
                         admin_email: this.ruleForm.adminEmail,
                         enabled: true,
                         info: info,
+                        verifi_code:this.ruleForm.code,
                     }
                 } else if (this.$store.state.loginType === 'employee') {
                     myUrl = url.employee_signing;
