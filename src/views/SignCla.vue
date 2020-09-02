@@ -374,6 +374,7 @@
                         res.data.forEach((item, index) => {
                             if (item.cla_language === 'english') {
                                 this.value = index;
+
                                 console.log('查找clatext');
                                 this.getClaText(item.cla_id)
 
@@ -382,6 +383,7 @@
                             this.claIdArr.push(item.cla_id)
                             this.claOrgIdArr.push(item.id)
                         })
+                        this.cla_org_id=this.claOrgIdArr[this.value]
 
                     }
 
