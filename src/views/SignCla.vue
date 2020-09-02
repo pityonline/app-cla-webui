@@ -564,8 +564,9 @@
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        this.dialogVisible = true
-                        console.log(this.$store.state.loginType);
+                        // this.dialogVisible = true
+                        // console.log(this.$store.state.loginType);
+                        this.signCla();
 
                     } else {
                         console.log('error submit!!');
