@@ -370,10 +370,7 @@
                 console.log(this.$store.state.orgOptions);
                 return this.$store.state.orgOptions
             },
-            orgValue() {
-                console.log(Number(this.$store.state.orgValue));
-                return Number(this.$store.state.orgValue)
-            },
+
             orgChoose() {
                 console.log(this.$store.state.orgChoose);
                 console.log(`${this.$store.state.orgChoose}` === 'true');
@@ -397,6 +394,15 @@
             },
             claOptions() {
                 return this.$store.state.claOptions
+            },
+            orgValue() {
+                console.log(Number(this.$store.state.orgValue));
+                if (this.$store.state.orgValue === undefined) {
+                    return this.$store.state.orgValue
+
+                }else{
+                    return Number(this.$store.state.orgValue)
+                }
             },
             claValue() {
                 console.log(this.$store.state.claValue);
