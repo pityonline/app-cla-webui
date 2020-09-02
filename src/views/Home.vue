@@ -652,6 +652,7 @@
             /*打开确认绑定开源项目的弹框*/
             openLinkDialog() {
                 this.linkDialogVisible = true
+                console.log(this.orgChoose, this.claChoose, this.isEmail);
                 // (this.orgChoose && this.claChoose && this.isEmail) && (this.linkDialogVisible = true)
             },
 
