@@ -73,7 +73,7 @@
                                         v-if="loginType==='corporation'"
                                         label="VerifyCode"
                                         required=""
-                                        :prop="ruleForm.code">
+                                        prop="code">
 
                                     <el-input v-model="ruleForm.code" size="small"></el-input>
                                 </el-form-item>
