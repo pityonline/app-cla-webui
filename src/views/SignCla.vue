@@ -75,7 +75,9 @@
                                         required=""
                                         prop="code">
 
-                                    <el-input v-model="ruleForm.code" size="small">555</el-input>
+                                    <el-input v-model="ruleForm.code" size="small">
+                                        <template slot="append" @click="sendCode()">send code</template>
+                                    </el-input>
                                 </el-form-item>
                                 <p style="font-size: .9rem;" class="borderClass">{{desc.metadataDesc}}</p>
                                 <div class="marginTop1rem">
@@ -279,6 +281,9 @@
         },
         methods: {
             ...mapActions(['setTokenAct', 'setRepoInfoAct']),
+            sendCode(){
+                console.log('sengcode');
+            },
             getNowDate() {
                 let date = new Date();
                 let year, month, day
