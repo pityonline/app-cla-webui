@@ -374,10 +374,12 @@
                 return this.$store.state.orgValue
             },
             orgChoose() {
+                console.log(this.$store.state.orgChoose);
                 console.log(this.$store.state.orgChoose === 'true');
                 return this.$store.state.orgChoose === 'true';
             },
             claChoose() {
+                console.log(this.$store.state.claChoose);
                 console.log(this.$store.state.claChoose === 'true');
                 return this.$store.state.claChoose === 'true';
             },
