@@ -396,7 +396,6 @@
                 return this.$store.state.claOptions
             },
             orgValue() {
-                console.log(Number(this.$store.state.orgValue));
                 if (this.$store.state.orgValue === undefined) {
                     return this.$store.state.orgValue
 
@@ -405,12 +404,18 @@
                 }
             },
             claValue() {
-                console.log(this.$store.state.claValue);
-                return Number(this.$store.state.claValue)
+                if (this.$store.state.claValue === undefined) {
+                    return this.$store.state.claValue
+                }else{
+                    return Number(this.$store.state.claValue)
+                }
             },
             repositoryValue() {
-                console.log(this.$store.state.repositoryValue);
-                return Number(this.$store.state.repositoryValue)
+                if (this.$store.state.repositoryValue === undefined) {
+                    return this.$store.state.repositoryValue
+                }else{
+                    return Number(this.$store.state.repositoryValue)
+                }
             },
             showConfigForm() {
                 return `${this.$store.state.showConfigForm}`==='true'
