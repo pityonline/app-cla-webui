@@ -372,7 +372,7 @@
             },
             orgValue() {
                 console.log(Number(this.$store.state.orgValue));
-                return this.$store.state.orgValue
+                return Number(this.$store.state.orgValue)
             },
             orgChoose() {
                 console.log(this.$store.state.orgChoose);
@@ -400,11 +400,11 @@
             },
             claValue() {
                 console.log(this.$store.state.claValue);
-                return this.$store.state.claValue
+                return Number(this.$store.state.claValue)
             },
             repositoryValue() {
                 console.log(this.$store.state.repositoryValue);
-                return this.$store.state.repositoryValue
+                return Number(this.$store.state.repositoryValue)
             },
             showConfigForm() {
                 return `${this.$store.state.showConfigForm}`==='true'
