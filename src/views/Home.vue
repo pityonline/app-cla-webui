@@ -376,20 +376,20 @@
             orgChoose() {
                 console.log(this.$store.state.orgChoose);
                 console.log(`${this.$store.state.orgChoose}` === 'true');
-                return this.$store.state.orgChoose === 'true';
+                return `${this.$store.state.orgChoose}` === 'true';
             },
             claChoose() {
                 console.log(this.$store.state.claChoose);
                 console.log(this.$store.state.claChoose === 'true');
-                return this.$store.state.claChoose === 'true';
+                return `${this.$store.state.claChoose}` === 'true';
             },
             isEmail() {
                 console.log(this.$store.state.isEmail === 'true');
-                return this.$store.state.isEmail === 'true';
+                return `${this.$store.state.isEmail}` === 'true';
             },
             repositoryChoose() {
                 console.log(this.$store.state.repositoryChoose === 'true');
-                return this.$store.state.repositoryChoose === 'true'
+                return `${this.$store.state.repositoryChoose}` === 'true'
             },
             repositoryOptions() {
                 return this.$store.state.repositoryOptions
@@ -406,7 +406,7 @@
                 return this.$store.state.repositoryValue
             },
             showConfigForm() {
-                return this.$store.state.showConfigForm==='true'
+                return `${this.$store.state.showConfigForm}`==='true'
             },
 
         },
@@ -653,9 +653,9 @@
             },
             /*打开确认绑定开源项目的弹框*/
             openLinkDialog() {
-                this.linkDialogVisible = true
+                // this.linkDialogVisible = true
                 console.log(this.orgChoose, this.claChoose, this.isEmail);
-                // (this.orgChoose && this.claChoose && this.isEmail) && (this.linkDialogVisible = true)
+                (this.orgChoose && this.claChoose && this.isEmail) && (this.linkDialogVisible = true)
             },
 
 
