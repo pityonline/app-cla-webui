@@ -375,7 +375,7 @@
             },
             orgChoose() {
                 console.log(this.$store.state.orgChoose);
-                console.log(this.$store.state.orgChoose === 'true');
+                console.log(`${this.$store.state.orgChoose}` === 'true');
                 return this.$store.state.orgChoose === 'true';
             },
             claChoose() {
