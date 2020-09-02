@@ -282,10 +282,10 @@
         methods: {
             ...mapActions(['setTokenAct', 'setRepoInfoAct']),
             sendCode(){
-                console.log('sengcode');
+                console.log('sendcode');
                 this.$axios({
                     url: '/api'+url.sendVerifyCode,
-                    method:'put',
+                    method:'post',
                     data: {cla_org_id:this.cla_org_id,email:this.ruleForm.email}
                 }).then(res => {
                     console.log(res);
