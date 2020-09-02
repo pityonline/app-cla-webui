@@ -651,7 +651,8 @@
             },
             /*打开确认绑定开源项目的弹框*/
             openLinkDialog() {
-                (this.orgChoose && this.claChoose && this.isEmail) && (this.linkDialogVisible = true)
+                this.linkDialogVisible = true
+                // (this.orgChoose && this.claChoose && this.isEmail) && (this.linkDialogVisible = true)
             },
 
 
@@ -800,8 +801,8 @@
             },
             /*选择仓库*/
             changeRepository(value) {
-                console.log(this.repositoryValue);
                 this.$store.commit('setRepositoryValue', value)
+                console.log(this.repositoryValue);
                 if (value !== '') {
                     this.$store.commit('setRepositoryChoose', true)
                 } else {
