@@ -371,7 +371,7 @@
                 return this.$store.state.orgOptions
             },
             orgValue() {
-                console.log(this.$store.state.orgValue);
+                console.log(Number(this.$store.state.orgValue));
                 return this.$store.state.orgValue
             },
             orgChoose() {
