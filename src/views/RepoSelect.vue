@@ -93,6 +93,7 @@
                     this.getOrg(this.platform)
             },
             submit(){
+                this.toSignCla()
                 if (this.org === '') {
                     this.$message.closeAll()
                     this.$message.error("please select org or repo")
