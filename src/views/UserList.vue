@@ -139,7 +139,7 @@
                     url: '/api' + url.queryEmployeeManager,
                     params: obj,
                     header:{
-                        access_token:this.userInfo[this.orgValue].token
+                        token:this.userInfo[this.orgValue].token
                     }
                 }).then(res => {
                     console.log(res);
@@ -158,7 +158,7 @@
                     method: 'delete',
                     data: obj,
                     header:{
-                        access_token:this.userInfo[this.orgValue].token
+                        token:this.userInfo[this.orgValue].token
                     }
                 }).then(res => {
                     console.log(res);
