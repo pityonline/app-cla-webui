@@ -41,6 +41,11 @@ const routes = [
                 name: 'CorporationManagerLogin',
                 component: () => import('../views/CorporationManagerLogin.vue')
             },
+            {
+                path: '/orgSelect',
+                name: 'OrgSelect',
+                component: () => import('../views/OrgSelect.vue')
+            },
         ]
     },
     {

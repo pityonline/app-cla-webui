@@ -1,5 +1,4 @@
 <template>
-    <div>
         <el-row>
             <el-col align="middle" style="padding:3rem">
                 <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="0"
@@ -15,15 +14,13 @@
                         <span class="pointer" @click="findPwd" id="forgetPwd">Forget the password?</span>
                     </el-form-item>
                     <el-form-item>
-                        <el-button style="width: 100%" type="primary" @click="submitForm('ruleForm')">SIGN IN
+                        <el-button style="width: 100%" type="primary" @click="submitForm('ruleForm')">LOGIN IN
                         </el-button>
                     </el-form-item>
                 </el-form>
             </el-col>
         </el-row>
 
-
-    </div>
 </template>
 
 <script>
@@ -81,25 +78,27 @@
                 }).then(res => {
                     console.log(res);
                     new Promise((resolve, reject) => {
-                        Object.assign(res.data,{userName:userName})
-                        this.setLoginInfoAct(res.data)
-                        console.log(res.data);
+                       let userInfo ={userInfo:res.data}
+                        Object.assign(userInfo,{userName:userName})
+                        this.setLoginInfoAct(userInfo)
+                        console.log(userInfo);
+                       if (res.data.length > 1) {
+                           this.$router.push('/orgSelect')
+                       }else{
+                           if (res.data.role === 'admin') {
+                               this.$router.push('/rootManager')
+                           }else{
+                               this.$router.push('/signedRepo')
+                           }
+
+                       }
                         resolve('completed');
                     }).then(res => {
                         console.log(res);
-
-                        // this.$router.push({
-                        //     path: '/rootManager',
-                        //     query: {userName: userName, cla_org_id: res.data.cla_org_id, email: res.data.email}
-                        // })
                     }, err => {
                         console.log(err);
                     })
-                    if (res.data.role === 'admin') {
-                        this.$router.push('/rootManager')
-                    }else{
-                        this.$router.push('/signedRepo')
-                    }
+
 
 
                     //     this.$router.push('/signedRepo')
