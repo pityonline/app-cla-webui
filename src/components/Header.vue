@@ -47,6 +47,7 @@
             },
             loginOut(){
                 /*清空缓存，服务器改变登录状态。成功则跳转到登录页面*/
+                sessionStorage.clear()
                 this.$router.push('/')
 
             },
