@@ -64,7 +64,7 @@
 
             },
             submit(){
-                let data =JSON.parse(JSON.stringify(this.$store.state.loginIn))
+                let data =JSON.parse(JSON.stringify(this.$store.state.loginInfo))
                 Object.assign(data,{orgValue:this.orgValue})
                 this.setLoginInfoAct(data)
                 console.log(data);
