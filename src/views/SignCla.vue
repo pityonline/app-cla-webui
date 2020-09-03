@@ -336,10 +336,12 @@
 
                 }
                 this.$axios({
-                    url: `/api${url.getSignPage}/gitee/${this.$store.state.repoInfo.org_id}/${applyTo}`,
+                    url: `/api${url.getSignPage}/gitee/cla-test/${applyTo}`,
+                    // url: `/api${url.getSignPage}/gitee/${this.$store.state.repoInfo.org_id}/${applyTo}`,
                     params: {
 
-                        repo_id: this.$store.state.repoInfo.repo_id,
+                        repo_id: 'test1',
+                        // repo_id: this.$store.state.repoInfo.repo_id,
                     }
 
                 }).then(res => {
