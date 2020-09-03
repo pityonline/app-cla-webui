@@ -19,14 +19,14 @@
 
                 <el-dropdown @command="handleCommand">
   <span class="el-dropdown-link">
-    {{user.userName}}<i class="el-icon-arrow-down el-icon--right"></i>
+    {{userName}}<i class="el-icon-arrow-down el-icon--right"></i>
   </span>
                     <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item v-if="user.role==='admin'" command="a">user</el-dropdown-item>
+                        <el-dropdown-item v-if="userInfo[orgValue].role==='admin'" command="a">user</el-dropdown-item>
                         <el-dropdown-item v-else command="a">employee</el-dropdown-item>
-                        <el-dropdown-item v-if="user.role==='admin'" command="b">create user</el-dropdown-item>
+                        <el-dropdown-item v-if="userInfo[orgValue].role==='admin'" command="b">create user</el-dropdown-item>
                         <el-dropdown-item command="c">reset password</el-dropdown-item>
-                        <el-dropdown-item v-if="user.role==='admin'" command="d">my cla</el-dropdown-item>
+                        <el-dropdown-item v-if="userInfo[orgValue].role==='admin'" command="d">my cla</el-dropdown-item>
                         <el-dropdown-item command="e">login out</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
@@ -42,10 +42,21 @@
         name: "CorporationHeader",
         // computed: {user:{get:()=>{return this.userName}}},
         props:['user'],
+        computed:{
+
+            userInfo(){
+                return this.user.userInfo
+            },
+            orgValue(){
+                console.log(this.user.orgValue);
+                return this.user.orgValue
+            },
+        },
 
         data() {
             return {
-                userInfo:this.user,
+                userName:this.user.userName
+
             }
         },
         created() {

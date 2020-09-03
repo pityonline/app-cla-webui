@@ -10,15 +10,6 @@
 
                     </el-tab-pane>
                 </el-tabs>
-
-                <!--<el-row>-->
-                <!--<el-col align="left">-->
-                <!--<el-button type="primary" size="small" @click="clickAddUser()">-->
-                <!--create user-->
-                <!--</el-button>-->
-                <!--</el-col>-->
-
-                <!--</el-row>-->
                 <router-view></router-view>
             </el-col>
         </el-row>
@@ -98,28 +89,33 @@
             pdfReader
 
         },
+        computed:{
+            user(){
+                return this.$store.state.loginInfo
+            },
+        },
         data() {
             let validateAccount = (rule, value, callback) => {
                 if (value === '') {
-                    callback(new Error('请输入账号'));
+                    callback(new Error('input account'));
                 }
                 callback();
             };
             let validatePass = (rule, value, callback) => {
                 if (value === '') {
-                    callback(new Error('请输入密码'));
+                    callback(new Error('input password'));
                 }
                 callback();
             };
             let validateEmail = (rule, value, callback) => {
                 if (value === '') {
-                    callback(new Error('请输入邮箱'));
+                    callback(new Error('input email'));
                 } else {
                     let reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
                     if (reg.test(value)) {
                         callback();
                     } else {
-                        callback(new Error('邮箱格式有误'))
+                        callback(new Error('email format error'))
                     }
                     callback();
                 }
@@ -131,7 +127,7 @@
                     href: "/static/pdf/merge.pdf"
                 },
                 previewDialogVisible: false,
-                user:this.$store.state.loginInfo,
+
                 section: {
                     height: '',
                 },

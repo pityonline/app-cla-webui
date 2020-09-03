@@ -76,6 +76,16 @@
 
     export default {
         name: "UserList",
+        computed:{
+            orgValue(){
+                console.log(this.$store.state.loginInfo.orgValue);
+                return this.$store.state.loginInfo.orgValue
+            },
+            userInfo(){
+                return this.$store.state.loginInfo.userInfo
+            },
+
+        },
         components: {},
         data() {
             return {
@@ -123,11 +133,14 @@
             },
             getEmployeeManager() {
                 let obj = {
-                    cla_org_id: this.$store.state.loginInfo.cla_org_id, email: this.$store.state.loginInfo.email
+                    cla_org_id: this.userInfo[this.orgValue].cla_org_id, email: this.userInfo[this.orgValue].email
                 }
                 this.$axios({
                     url: '/api' + url.queryEmployeeManager,
-                    params: obj
+                    params: obj,
+                    header:{
+                        access_token:this.userInfo[this.orgValue].token
+                    }
                 }).then(res => {
                     console.log(res);
                     this.tableData = res.data;
@@ -138,12 +151,15 @@
             },
             submit() {
                 let obj = {
-                    cla_org_id: this.$store.state.loginInfo.cla_org_id, emails: this.emails
+                    cla_org_id: this.userInfo[this.orgValue].cla_org_id, emails: this.emails
                 }
                 this.$axios({
                     url: '/api' + url.deleteEmployeeManager,
                     method: 'delete',
-                    data: obj
+                    data: obj,
+                    header:{
+                        access_token:this.userInfo[this.orgValue].token
+                    }
                 }).then(res => {
                     console.log(res);
                     this.getEmployeeManager();
