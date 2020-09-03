@@ -1,16 +1,17 @@
 <template>
     <el-row>
         <el-col>
-            <el-row>
+            <el-row class="marginTop">
                 <el-col>
                     <span>Please select the organization you want to manage</span>
                 </el-col>
             </el-row>
-            <el-row>
+            <el-row class="marginTop">
                 <el-col>
                     <el-select v-model="orgValue"
                                clearable=""
                                filterable=""
+                               placeholder="select"
                                @change="changeOrg">
                         <el-option
                                 v-for="item in orgData"
@@ -22,33 +23,62 @@
                     </el-select>
                 </el-col>
             </el-row>
-
+            <el-row class="marginTop">
+                <el-col>
+                    <el-button type="primary" size="medium" @click="submit">SUBMIT</el-button>
+                </el-col>
+            </el-row>
 
         </el-col>
     </el-row>
 </template>
 
 <script>
+    import {mapActions} from 'vuex'
+
     export default {
         name: "OrgSelect",
-        computed:{
-            orgData(){
-                return this.$store.state.loginInfo.userInfo
+        computed: {
+            orgData() {
+                let data = []
+                this.$store.state.loginInfo.userInfo.forEach((item, index) => {
+                    if (item.repo_id) {
+                        data.push({value: index, label: `${item.org_id}/${item.repo_id}`})
+                    } else {
+                        data.push({value: index, label: item.org_id})
+                    }
+                })
+                return data
             },
         },
-        data(){
-            return{
-                orgValue:'',
+        data() {
+            return {
+                orgValue: '',
             }
         },
-        methods:{
-            changeOrg(value){
+        methods: {
+            ...mapActions(['setLoginInfoAct']),
+            changeOrg(value) {
                 console.log(value);
+
+            },
+            submit(){
+                let data =JSON.parse(JSON.stringify(this.$store.state.loginIn))
+                Object.assign(data,{orgValue:this.orgValue})
+                this.setLoginInfoAct(data)
+                if (data.userInfo[this.orgValue].role==='admin')
+                {
+                    this.$router.push('/rootManager')
+                }else{
+                    this.$router.push('/signedRepo')
+                }
             },
         },
     }
 </script>
 
-<style scoped>
-
+<style scoped lang="less">
+    .marginTop {
+        margin-top: 1rem;
+    }
 </style>
