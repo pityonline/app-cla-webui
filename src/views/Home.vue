@@ -905,13 +905,13 @@
                     }
                     let data = {access_token, refresh_token,platform_token};
                     this.setTokenAct(data);
-                    this.getUserInfo(platform_token, refresh_token)
+                    this.getUserInfo(access_token, refresh_token,platform_token)
                 }
 
             },
             /*获取用户名并显示*/
-            getUserInfo(access_token, refresh_token) {
-                let obj = {access_token: access_token};
+            getUserInfo(access_token, refresh_token,platform_token) {
+                let obj = {access_token: platform_token};
                 console.log(obj);
                 this.$axios({
                     url: url.getUserInfo,
