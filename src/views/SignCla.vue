@@ -40,17 +40,7 @@
                     </div>
 
                     <el-divider></el-divider>
-                    <!--<el-row class="marginTop1rem">-->
 
-
-                    <!--<el-col :span="8" class="borderClass">-->
-                    <!--<el-radio label="0" @change="roleChange()" v-model="role">{{desc.personalContributor}}</el-radio>-->
-                    <!--</el-col>-->
-                    <!--<el-col :span="8" class="borderClass">-->
-                    <!--<el-radio label="1" @change="roleChange()" v-model="role">{{desc.comContributor}}</el-radio>-->
-                    <!--</el-col>-->
-
-                    <!--</el-row>-->
                     <el-row class="marginTop1rem">
                         <el-col :span="16">
                             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="left"
@@ -329,16 +319,16 @@
             getCookieData() {
                 if (document.cookie !== '') {
                     let cookieArr = document.cookie.split('; ')
-                    let access_token, refresh_token = '';
+                    let access_token, refresh_token ,platform_token= '';
                     cookieArr.forEach((item, index) => {
                         let arr = item.split('=');
-                        arr[0] === 'access_token' ? access_token = arr[1] : arr[0] === 'refresh_token' ? refresh_token = arr[1] : refresh_token = '';
+                        arr[0] === 'access_token' ? access_token = arr[1] : arr[0] === 'refresh_token' ? refresh_token = arr[1] :arr[0] === 'platform_token' ? platform_token = arr[1] : platform_token = '';
                         ;
                     })
-                    let data = {access_token, refresh_token};
+                    let data = {access_token, refresh_token,platform_token};
                     this.setTokenAct(data);
                     if (this.loginType !== 'corporation') {
-                        this.getEmail(access_token, refresh_token)
+                        this.getEmail(platform_token, refresh_token)
                     }
                 }
 
@@ -410,44 +400,10 @@
                     console.log(resp);
                     document.getElementById('claBox').innerHTML = resp.data.text
                     this.fields = resp.data.fields
-                    // this.ruleForm={};
-                    // this.fields.forEach(item=>{
-                    //     Object.assign(this.ruleForm,{[item.type]:''})
-                    // })
-                    // console.log(this.ruleForm);
 
                 }).catch(err => {
                     console.log(err);
                 })
-            },
-            /*获取企业签署的metadata*/
-            getCompanyMetaAndCla() {
-                this.$axios({
-                    url: '/api' + url.getClaInfo,
-                    headers: {
-                        'Access-Token': this.$store.state.access_token,
-                        'Refresh-Token': this.$store.state.refresh_token,
-                        'User': `${this.platform}/${this.$store.state.user.userName}`
-                    }
-
-                }).then(res => {
-                    console.log(res);
-
-                }).catch(err => {
-                    console.log(err);
-                })
-            },
-            roleChange() {
-                console.log(this.role);
-                switch (this.role) {
-                    case '0':
-                        // this.getPersonalMetaAndCla();
-                        break;
-                    case '1':
-                        this.getCompanyMetaAndCla();
-                        break;
-
-                }
             },
             toHome() {
                 this.$router.push('/home')

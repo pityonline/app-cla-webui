@@ -474,6 +474,7 @@
                 github_redirect_uri: this.$store.state.github_redirect_uri,
                 access_token: this.$store.state.access_token,
                 refresh_token: this.$store.state.refresh_token,
+                platform_token: this.$store.state.platform_token,
                 listDialogVisible: false,
                 checkClaDialogVisible: false,
                 unLinkDialogVisible: false,
@@ -597,67 +598,6 @@
                 console.log(page);
             },
 
-
-            /*获取个人签署的项目*/
-            getPersonalSigned() {
-                console.log('getPersonalRepositories');
-                let obj = {
-                    userName: this.user.userName
-                };
-                this.$axios({
-                    url: url.getPersonalRepositories,
-                    methods: 'post',
-                    data: obj,
-                    headers: {access_token: this.$store.state.access_token, refresh_token: this.refresh_token}
-                }).then(res => {
-                    console.log(res);
-                    if (res.data.code === 200) {
-                        this.tableData = res.data.data
-                    }
-                }).catch(err => {
-                    console.log(err);
-                })
-            },
-            /*获取企业签署的项目*/
-            getCompanyRepositories() {
-                console.log('getCompanyRepositories');
-                let obj = {
-                    userName: this.user.userName
-                };
-                this.$axios({
-                    url: url.getCompanyRepositories,
-                    methods: 'post',
-                    data: obj,
-                    headers: {access_token: this.$store.state.access_token, refresh_token: this.refresh_token}
-                }).then(res => {
-                    console.log(res);
-                    if (res.data.code === 200) {
-                        this.tableData = res.data.data
-                    }
-                }).catch(err => {
-                    console.log(err);
-                })
-            },
-            /*获取企业个人签署的项目*/
-            getCompanyPersonRepositories() {
-                console.log('getCompanyPersonRepositories');
-                let obj = {
-                    userName: this.user.userName
-                };
-                this.$axios({
-                    url: url.getCompanyPersonRepositories,
-                    methods: 'post',
-                    data: obj,
-                    headers: {access_token: this.$store.state.access_token, refresh_token: this.refresh_token}
-                }).then(res => {
-                    console.log(res);
-                    if (res.data.code === 200) {
-                        this.tableData = res.data.data
-                    }
-                }).catch(err => {
-                    console.log(err);
-                })
-            },
 
             newWindow() {
                 // window.open('https://github.com/ouchengle/Test','_black')
@@ -825,7 +765,7 @@
                 }
             },
             getRepositoriesOfOrg(org, org_id) {
-                let obj = {access_token: this.$store.state.access_token, org: org, page: 1, per_page: 10};
+                let obj = {access_token: this.$store.state.platform_token, org: org, page: 1, per_page: 10};
                 console.log("getRepositoriesOfOrg", obj);
                 this.$axios({
                     url: `https://gitee.com/api/v5/orgs/${org}/repos`,
@@ -852,7 +792,7 @@
             },
             /*获取仓库数据*/
             getOrgsInfo() {
-                let obj = {access_token: this.$store.state.access_token, admin: true, page: 1, per_page: 10};
+                let obj = {access_token: this.$store.state.platform_token, admin: true, page: 1, per_page: 10};
                 console.log("getOrgsInfo", obj);
                 this.$axios({
                     url: url.getOrgsInfo,
@@ -916,35 +856,7 @@
                 this.home.height = 'auto'
                 this.getOrgsInfo()
             },
-            /*获取metadata数据*/
-            getMeta() {
-                console.log("getMeta");
-                this.$axios({
-                    url: '/api' + url.getMeta,
-                    headers: {
-                        'Access-Token': this.access_token,
-                        'Refresh-Token': this.refresh_token,
-                        'User': `${this.platform}/${this.user.userName}`
-                    }
 
-                }).then(res => {
-                    console.log(res);
-                    if (res.data.length) {
-                        this.metadataOptions = [];
-                        res.data.forEach((item, index) => {
-                            this.metadataOptions.push({
-                                value: index,
-                                label: item.name,
-                                id: item.id,
-                                text: item.text,
-                                language: item.language
-                            })
-                        })
-                    }
-                }).catch(err => {
-                    console.log(err);
-                })
-            },
             /*设置页面高度*/
             setClientHeight() {
                 // console.log(until.getClientHeight());
@@ -980,19 +892,20 @@
                 if (document.cookie !== '') {
                     let cookieArr = document.cookie.split('; ')
                     console.log(cookieArr);
-                    let access_token, refresh_token = '';
+                    let access_token, refresh_token ,platform_token= '';
                     let email = ''
                     cookieArr.forEach((item, index) => {
                         let arr = item.split('=');
-                        arr[0] === 'access_token' ? access_token = arr[1] : arr[0] === 'refresh_token' ? refresh_token = arr[1] : arr[0] === 'email' ? email = arr[1] : email = '';
+                        arr[0] === 'access_token' ? access_token = arr[1] : arr[0] === 'refresh_token' ? refresh_token = arr[1] :
+                            arr[0] === 'email' ? email = arr[1] :arr[0] === 'platform_token' ? platform_token = arr[1] : platform_token = '';
                     })
                     this.email = email;
                     if (email !== '') {
                         this.$store.commit('setIsEmail',true)
                     }
-                    let data = {access_token, refresh_token};
+                    let data = {access_token, refresh_token,platform_token};
                     this.setTokenAct(data);
-                    this.getUserInfo(access_token, refresh_token)
+                    this.getUserInfo(platform_token, refresh_token)
                 }
 
             },

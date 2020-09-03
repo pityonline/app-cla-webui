@@ -33,6 +33,7 @@ export default new Vuex.Store({
         github_redirect_uri: 'http://localhost:8080/home',
         access_token: sessionStorage.getItem('access_token') || undefined,
         refresh_token: sessionStorage.getItem('refresh_token') || undefined,
+        platform_token: sessionStorage.getItem('platform_token') || undefined,
         user: {
             userId: sessionStorage.getItem('userId') || undefined,
             userName: sessionStorage.getItem('userName') || undefined,
@@ -52,8 +53,10 @@ export default new Vuex.Store({
             console.log(data);
             state.access_token = data.access_token;
             state.refresh_token = data.refresh_token;
+            state.platform_token = data.platform_token;
             sessionStorage.setItem('access_token', data.access_token);
             sessionStorage.setItem('refresh_token', data.refresh_token);
+            sessionStorage.setItem('platform_token', data.platform_token);
         },
         setLoginUser(state, data) {
             state.user.userId = data.userId;
