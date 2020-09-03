@@ -11,6 +11,7 @@
                     <el-select v-model="orgValue"
                                clearable=""
                                filterable=""
+                               style="width: 15rem"
                                placeholder="select"
                                @change="changeOrg">
                         <el-option
@@ -25,7 +26,7 @@
             </el-row>
             <el-row class="marginTop">
                 <el-col>
-                    <el-button type="primary" size="medium" @click="submit">SUBMIT</el-button>
+                    <el-button style="width: 15rem" type="primary" size="medium" @click="submit">SUBMIT</el-button>
                 </el-col>
             </el-row>
 
@@ -79,6 +80,6 @@
 
 <style scoped lang="less">
     .marginTop {
-        margin-top: 1rem;
+        margin-top: 2rem;
     }
 </style>
