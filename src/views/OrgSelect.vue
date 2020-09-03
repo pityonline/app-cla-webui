@@ -67,6 +67,7 @@
                 let data =JSON.parse(JSON.stringify(this.$store.state.loginIn))
                 Object.assign(data,{orgValue:this.orgValue})
                 this.setLoginInfoAct(data)
+                console.log(data);
                 if (data.userInfo[this.orgValue].role==='admin')
                 {
                     this.$router.push('/rootManager')
