@@ -85,7 +85,7 @@
                        if (res.data.length > 1) {
                            this.$router.push('/orgSelect')
                        }else{
-                           if (res.data.role === 'admin') {
+                           if (res.data[0].role === 'admin') {
                                this.$router.push('/rootManager')
                            }else{
                                this.$router.push('/signedRepo')

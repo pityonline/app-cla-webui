@@ -39,7 +39,6 @@
         data(){
             return{
                 orgValue:'',
-                orgData:'',
             }
         },
         methods:{
