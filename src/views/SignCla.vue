@@ -76,7 +76,7 @@
                                         prop="code">
 
                                     <el-input v-model="ruleForm.code" size="small">
-                                        <el-button slot="append" @click="sendCode()">send code</el-button>
+                                        <el-button slot="append" :disabled="sendBtText!=='send code'" @click="sendCode()">{{sendBtText}}</el-button>
                                     </el-input>
                                 </el-form-item>
                                 <p style="font-size: .9rem;" class="borderClass">{{desc.metadataDesc}}</p>
@@ -283,6 +283,16 @@
             ...mapActions(['setTokenAct', 'setRepoInfoAct']),
             sendCode(){
                 console.log('sendcode');
+                let second = 60
+                let codeInterval = setInterval(() => {
+                    if (second !== 0) {
+                        second--
+                        this.sendBtText = second + 's'
+                    } else {
+                        this.sendBtText = 'send code'
+                        clearInterval(codeInterval)
+                    }
+                }, 1000)
                 this.$axios({
                     url: '/api'+url.sendVerifyCode,
                     method:'post',
