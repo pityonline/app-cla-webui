@@ -116,27 +116,6 @@
         </div>
 
         <Footer></Footer>
-        <el-dialog
-                title="To sign the mailbox to complete"
-                top="5vh"
-                :visible.sync="dialogVisible"
-                width="20%">
-            <el-row style="margin-bottom: 2rem" class="codeBox">
-                <el-col :span="16">
-                    <el-input size="medium" v-model="verifyCode">
-                    </el-input>
-                </el-col>
-                <el-col :span="8">
-                    <el-button @click="createAndSendCode" :disabled="sendBtText!=='send code'" type="primary"
-                               style="width: 100%" size="medium">{{sendBtText}}
-                    </el-button>
-                </el-col>
-
-            </el-row>
-            <div>
-                <el-button type="primary" style="width: 100%" size="medium" @click="verify">确定</el-button>
-            </div>
-        </el-dialog>
 
     </div>
 </template>
@@ -357,13 +336,13 @@
 
                 }
                 this.$axios({
-                    url: '/api' + url.getSignPage,
-                    params: {
-                        platform: 'gitee',
-                        org_id: this.$store.state.repoInfo.org_id,
-                        repo_id: this.$store.state.repoInfo.repo_id,
-                        apply_to: applyTo
-                    }
+                    url: `/api${url.getSignPage}/gitee/${this.$store.state.repoInfo.org_id}/${applyTo}/${this.$store.state.repoInfo.repo_id}`,
+                    // params: {
+                    //     platform: 'gitee',
+                    //     org_id: this.$store.state.repoInfo.org_id,
+                    //     repo_id: this.$store.state.repoInfo.repo_id,
+                    //     apply_to: applyTo
+                    // }
 
                 }).then(res => {
                     console.log(res);
@@ -395,7 +374,7 @@
             getClaText(cla_id) {
                 this.$axios({
                     url: `/api${url.getClaInfo}/${cla_id}`,
-
+                    headers:{access_token:this.$store.state.access_token},
                 }).then(resp => {
                     console.log(resp);
                     document.getElementById('claBox').innerHTML = resp.data.text
@@ -409,54 +388,7 @@
                 this.$router.push('/home')
             },
 
-            /*生成验证码*/
-            createAndSendCode() {
-                let second = 60
-                let codeInterval = setInterval(() => {
-                    if (second !== 0) {
-                        second--
-                        this.sendBtText = second + 's'
-                    } else {
-                        this.sendBtText = 'send code'
-                        clearInterval(codeInterval)
-                    }
-                }, 1000)
-                let code = `${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}`;
-                console.log(Math.random());
-                console.log(md5(code));
-                localStorage.setItem('code', md5(code))
-                let obj = {};
-                if (this.$store.state.loginType === 'corporation') {
-                    obj = {code: code, email: this.ruleForm.adminEmail}
-                } else {
-                    obj = {code: code, email: this.ruleForm.email}
-                }
-                this.$axios({
-                    url: '/api' + url.sendCode,
-                    method: 'post',
-                    data: obj,
-                }).then(res => {
-                    console.log(res);
 
-                }).catch(err => {
-                    console.log(err);
-
-                })
-            },
-
-            /*验证验证码*/
-            verify() {
-                let code = sessionStorage.getItem('code')
-                if (this.verifyCode === code) {
-                    this.signCla()
-                    this.dialogVisible = false
-                } else {
-                    this.$message.closeAll()
-                    this.$message.error('verifyCode error')
-
-                }
-
-            },
             /*发送验证码*/
             signCla() {
 
