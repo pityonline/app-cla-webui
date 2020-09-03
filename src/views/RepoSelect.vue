@@ -159,12 +159,9 @@
 
                 }
                     this.$axios({
-                        url:'/api' +url.getSignPage,
+                        url: `/api${url.getSignPage}/${platform}//${applyTo}`,
                         params:{
-                            platform:platform,
-                            org_id:'',
                             repo_id:'',
-                            apply_to:applyTo,
                         }
                     }).then(res=>{
                         console.log(res);
@@ -201,12 +198,9 @@
 
                 }
                 this.$axios({
-                    url:'/api' +url.getSignPage,
+                    url:`/api${url.getSignPage}/${this.platform}/${this.org}/${applyTo}`,
                     params: {
-                        platform: this.platform,
-                        org_id: this.org,
                         repo_id:'',
-                        apply_to: applyTo
                     }
                 }).then(res=>{
                     console.log(res);
