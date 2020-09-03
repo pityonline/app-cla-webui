@@ -336,13 +336,11 @@
 
                 }
                 this.$axios({
-                    url: `/api${url.getSignPage}/gitee/${this.$store.state.repoInfo.org_id}/${applyTo}/${this.$store.state.repoInfo.repo_id}`,
-                    // params: {
-                    //     platform: 'gitee',
-                    //     org_id: this.$store.state.repoInfo.org_id,
-                    //     repo_id: this.$store.state.repoInfo.repo_id,
-                    //     apply_to: applyTo
-                    // }
+                    url: `/api${url.getSignPage}/gitee/${this.$store.state.repoInfo.org_id}/${applyTo}`,
+                    params: {
+
+                        repo_id: this.$store.state.repoInfo.repo_id,
+                    }
 
                 }).then(res => {
                     console.log(res);
