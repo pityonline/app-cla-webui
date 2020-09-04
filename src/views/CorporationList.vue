@@ -93,6 +93,7 @@
                     <el-form v-model="form">
                         <el-form-item label="" label-width="0">
                             <el-upload
+                                    name="signature_page"
                                     ref="uploadPdf"
                                     class="upload-demo"
                                     :action="uploadUrl"
