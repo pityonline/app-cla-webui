@@ -2,7 +2,7 @@
     <div class="show-pdf">
         <div>
             <pdf
-                    :src="pdfSrc"
+                    :src="dochref"
                     :page="currentPage"
 
                     @num-pages="pageCount=$event"
@@ -40,10 +40,13 @@
             pdfSrc(){
                 return this.dochref
             },
+            typeValue(){
+                return this.doctype
+            },
         },
         data() {
             return {
-                typeValue: "",
+
                 currentPage: 0, // pdf文件页码
                 pageCount: 0, // pdf文件总页数
                 numPages: 1,
@@ -62,7 +65,7 @@
             },
             // pdf加载时
             loadPdfHandler(e) {
-                console.log(this.pdfSrc, this.typeValue);
+                console.log(this.dochref, this.doctype);
 
                 this.currentPage = 1; // 加载的时候先加载第一页
             }
