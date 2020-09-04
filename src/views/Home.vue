@@ -647,6 +647,7 @@
                     method: 'post',
                     data: obj,
                     headers: {
+                        'Token':this.$store.state.access_token,
                         'Access-Token': this.access_token,
                         'Refresh-Token': this.refresh_token,
                         'User': `${this.platform}/${this.user.userName}`
