@@ -150,18 +150,13 @@
         components: {
             pdfReader,
         },
-        computed:{
-            uploadUrl(){
-                console.log(this.$store.state);
-                return `/api${url.uploadSignature}/${this.$store.state.item.id}`
-            },
-        },
+
         data() {
             return {
                 uploadHeaders: {
                     'Token': this.$store.state.access_token,
                 },
-
+                uploadUrl:'',
                 access_token: this.$store.state.access_token,
                 refresh_token: this.$store.state.refresh_token,
                 platform: this.$store.state.platform,
@@ -210,6 +205,7 @@
                 this.item = this.$route.query.item
                 sessionStorage.setItem('item', JSON.stringify(this.$route.query.item))
             }
+            this.uploadUrl=this.item.id
             this.getCorporationInfo()
         },
 
