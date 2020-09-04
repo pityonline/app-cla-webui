@@ -95,14 +95,14 @@
                             <el-upload
                                     ref="uploadPdf"
                                     class="upload-demo"
-                                    action=""
+                                    :action="uploadUrl"
                                     :headers="uploadHeaders"
                                     :on-preview="handlePreview"
                                     :on-remove="handleRemove"
                                     :on-success="handleSuccess"
                                     :before-remove="beforeRemove"
                                     :auto-upload="false"
-                                    :http-request="uploadOk"
+
                                     :on-exceed="handleExceed"
                                     :file-list="fileList">
                                 <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
