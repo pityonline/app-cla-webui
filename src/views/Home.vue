@@ -689,7 +689,8 @@
             },
             /*跳转到创建CLA页面*/
             toCreateCLA() {
-                this.$router.push('/createCLA2')
+                this.$router.push('/createCLA')
+                this.$router.push('/createCLA')
             },
             toCreateMetadata() {
                 this.$router.push('/createMetadata')

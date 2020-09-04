@@ -144,6 +144,13 @@
         },
         data() {
             return {
+                access_token: this.$store.state.access_token,
+                refresh_token: this.$store.state.refresh_token,
+                platform: this.$store.state.platform,
+                user: {
+                    userName: this.$store.state.user.userName,
+                    userId: this.$store.state.user.userId,
+                },
                 msg: 'Welcome to Your Vue.js App',
                 docInfo: {
                     type: "pdf",
@@ -233,6 +240,11 @@
                         repo_id: this.item.repo_id,
                         cla_language: this.item.cla_language
                     },
+                    headers: {
+                        'Access-Token': this.access_token,
+                        'Refresh-Token': this.refresh_token,
+                        'User': `${this.platform}/${this.user.userName}`
+                    }
                 }).then(resp => {
                     console.log(resp);
                     this.tableData = resp.data;
@@ -246,6 +258,11 @@
                     url: `/api${url.corporationManager}`,
                     method: 'post',
                     data: data,
+                    headers: {
+                        'Access-Token': this.access_token,
+                        'Refresh-Token': this.refresh_token,
+                        'User': `${this.platform}/${this.user.userName}`
+                    }
                 }).then(res => {
                     console.log(res);
                     this.$message.closeAll()
@@ -269,6 +286,11 @@
                     url: `/api${url.active_corporation}`,
                     method: 'put',
                     data: data,
+                    headers: {
+                        'Access-Token': this.access_token,
+                        'Refresh-Token': this.refresh_token,
+                        'User': `${this.platform}/${this.user.userName}`
+                    }
                 }).then(res => {
                     console.log(res);
                     this.getCorporationInfo()

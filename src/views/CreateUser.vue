@@ -28,6 +28,17 @@
 
     export default {
         name: "CreateUser",
+        computed:{
+            orgValue(){
+                console.log(this.$store.state.loginInfo.orgValue);
+                return this.$store.state.loginInfo.orgValue
+            },
+            userInfo(){
+                console.log(this.$store.state.loginInfo.userInfo);
+                return this.$store.state.loginInfo.userInfo
+            },
+
+        },
         data() {
 
             return {
@@ -61,6 +72,9 @@
                     url: '/api' + url.addEmployeeManager,
                     method: 'post',
                     data: obj,
+                    headers:{
+                        token: this.userInfo[this.orgValue].token,
+                    }
                 }).then(res => {
                     console.log(res);
                     this.$message.closeAll()

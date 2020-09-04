@@ -46,40 +46,78 @@
                 </div>
 
 
-                <!--<p>Edit your metaData</p>-->
-                <!--<div>-->
-                    <!--<el-tag-->
-                            <!--class="pointer"-->
-                            <!--:key="tag"-->
-                            <!--v-for="(tag,index) in metaTags"-->
-                            <!--closable-->
-                            <!--@click="chooseMeta(index)"-->
-                            <!--:disable-transitions="false"-->
-                            <!--@close="closeMetaTag(tag)">-->
-                        <!--{{tag}}-->
-                    <!--</el-tag>-->
-                <!--</div>-->
-                <!--<div v-if="!isAddNewMetaFile">-->
-                    <!--<el-button class="pointer" size="mini" @click="clickAddNewMetaFile()">+ add new file</el-button>-->
-                <!--</div>-->
-                <!--<div v-else style="display: flex;justify-content: space-between;">-->
-                    <!--<el-col :span="20" style="padding-right: 2rem">-->
-                        <!--<el-input style="margin-bottom: 0.5rem;" size="small" v-model="newMetaFileName"-->
-                                  <!--placeholder="please input file name">-->
-                        <!--</el-input>-->
-                    <!--</el-col>-->
-                    <!--<el-select style="width: 8rem" size="small" v-model="value" value="">-->
-                    <!--<el-option-->
-                    <!--v-for="item in languageOptions"-->
-                    <!--:key="item.value"-->
-                    <!--:label="item.label"-->
-                    <!--:value="item.value">-->
-                    <!--</el-option>-->
-                    <!--</el-select>-->
-                <!--</div>-->
-                <!--<el-input :readonly="!isEditMeta" rows="10" class="textAreaClass" v-model="metaData" type="textarea">-->
+                <p>Edit your metaData
+                    <el-tooltip class="item" effect="dark"
+                                content="The information you want contributors to fill in when they sign the cla.Title and type are required, otherwise the field will fail to be added"
+                                placement="right">
+                        <svg-icon icon-class="bangzhu"></svg-icon>
+                    </el-tooltip>
+                </p>
+                <el-row style="margin: 0 -10px">
+                    <el-col :span="5" class="typeCol">
+                        <el-radio v-model="metadataType" @change="changeRadio" label="individual">Individual Contributor</el-radio>
+                    </el-col>
+                    <el-col :span="5" class="typeCol">
+                        <el-radio v-model="metadataType" @change="changeRadio" label="corporation">Legal Entity Contributor</el-radio>
+                    </el-col>
 
-                <!--</el-input>-->
+                </el-row>
+                <div>
+                    <div>
+                        <el-row style="padding: 0.5rem 0;" type="flex" align="middle" :gutter="20"
+                                v-for="(item,index) in metadataArr">
+                            <el-col :span="5">
+                                <el-input v-model="item.title" size="medium" readonly="">
+
+                                </el-input>
+                            </el-col>
+                            <el-col :span="5">
+                                <el-input v-model="item.type" size="medium" readonly></el-input>
+                            </el-col>
+                            <el-col :span="5">
+                                <el-input v-model="item.description" size="medium" readonly></el-input>
+                            </el-col>
+                            <el-col :span="5" style="height: 100%">
+                                <el-checkbox v-model="item.required" disabled="">required</el-checkbox>
+                            </el-col>
+                        </el-row>
+
+                    </div>
+                    <!--<div>-->
+                        <!--<el-row style="padding: 0.5rem 0;" type="flex" align="middle" :gutter="20"-->
+                                <!--v-for="(item,index) in customMetadataArr">-->
+                            <!--<el-col :span="5">-->
+                                <!--<el-input v-model="item.title" size="medium"-->
+                                          <!--placeholder="please input title">-->
+
+                                <!--</el-input>-->
+                            <!--</el-col>-->
+                            <!--<el-col :span="5">-->
+                                <!--<el-select style="width: 100%" v-model="item.type"-->
+                                           <!--placeholder="select dataType"-->
+                                           <!--size="medium">-->
+                                    <!--<el-option-->
+                                            <!--v-for="i in dataTypeOptions"-->
+                                            <!--:key="i.value"-->
+                                            <!--:label="i.label"-->
+                                            <!--:value="i.value">-->
+                                    <!--</el-option>-->
+                                <!--</el-select>-->
+                            <!--</el-col>-->
+                            <!--<el-col :span="5" style="height: 100%">-->
+                                <!--<el-input v-model="item.description" size="medium"-->
+                                          <!--placeholder="description"></el-input>-->
+                            <!--</el-col>-->
+                            <!--<el-col :span="5" style="height: 100%">-->
+                                <!--<el-checkbox v-model="item.required">required</el-checkbox>-->
+                            <!--</el-col>-->
+                            <!--<el-col :span="4">-->
+                                <!--<el-button @click="addRow(index)" size="medium">+</el-button>-->
+                                <!--<el-button @click="myDeleteRow(index)" size="medium">-</el-button>-->
+                            <!--</el-col>-->
+                        <!--</el-row>-->
+                    <!--</div>-->
+                </div>
                 <div style="margin-top: 1rem;display: flex;justify-content: space-between">
                     <el-button size="medium" v-loading.fullscreen.lock="fullscreenLoading" :disabled="!verifyNotNull()"
                                type="primary"
@@ -107,14 +145,53 @@
         },
         data() {
             return {
+                metadataArr: [{
+                    title: 'Name',
+                    type: 'name',
+                    description: 'your name',
+                    required: true,
+                }, {
+                    title: 'E-Mail',
+                    type: 'email',
+                    description: 'your email',
+                    required: true,
+                },
+                    {
+                    title: 'Date',
+                    type: 'date',
+                    description: 'the date of today',
+                    required: true,
+                },],
+                metadataType: 'individual',
+                customMetadataArr:[{
+                    title: '',
+                    type: '',
+                    description: '',
+                    required: true,
+                }],
+                individualCustomMetadataArr: [{
+                    title: '',
+                    type: '',
+                    description: '',
+                    required: true,
+                }],
+                corporationCustomMetadataArr: [{
+                    title: '',
+                    type: '',
+                    description: '',
+                    required: true,
+                }],
+                dataTypeOptions: [{label: 'name', value:  'name'},{label: 'corporationName', value:  'corporationName'}, {label: 'adminEmail', value:  'adminEmail'},{label: 'date', value: 'date'}, {
+                    label: 'telephone',
+                    value: 'telephone'
+                }, {label: 'address', value:  'address'}, {label: 'email', value: 'email'}, {label: 'fax', value: 'fax'}],
                 access_token: this.$store.state.access_token,
                 refresh_token: this.$store.state.refresh_token,
                 isAddNewMetaFile: false,
                 isEditMeta: false,
                 metaText: '',
-                currentIndex:'',
+                currentIndex: '',
                 newMetaFileName: '',
-                metaTags: ['test', 'myMeta', 'test1', 'myTest', 'test2', 'test3', 'test4', 'test5', 'test6', 'test7', 'internationalMetadata', 'openLooKeng', 'test8'],
                 newClaFileName: '',
                 addNewFile: false,
                 isEdit: false,
@@ -133,7 +210,11 @@
                 }, {
                     value: 1,
                     label: 'chinese'
-                },],
+                },
+                    {
+                        value: 2,
+                        label: 'japanese'
+                    },],
                 claText: '',
                 metaData: '',
                 createCLAClass: {
@@ -148,11 +229,80 @@
             }
         },
         methods: {
+            changeRadio(){
+               if (this.metadataType==='individual'){
+                   this. metadataArr=[{
+                       title: 'Name',
+                       type: 'name',
+                       description: 'your name',
+                       required: true,
+                   }, {
+                       title: 'E-Mail',
+                       type: 'email',
+                       description: 'your email',
+                       required: true,
+                   }, {
+                       title: 'Date',
+                       type: 'date',
+                       description: 'the date of today',
+                       required: true,
+                   },]
+                   this.customMetadataArr=this.individualCustomMetadataArr;
+               } else if(this.metadataType==='corporation'){
+                   this.metadataArr = [
+                       {
+                           title: 'CorporationName',
+                           type: 'corporationName',
+                           description: 'your corporation email',
+                           required: true,
+                       },
 
+                       {
+                           title: 'Name',
+                           type: 'name',
+                           description: 'your name',
+                           required: true,
+                       },
+                       {
+                           title: 'E-Mail',
+                           type: 'adminEmail',
+                           description: 'your email',
+                           required: true,
+                       }, {
+                           title: 'Date',
+                           type: 'date',
+                           description: 'the date of today',
+                           required: true,
+                       },];
+                   this.customMetadataArr=this.corporationCustomMetadataArr;
+
+               }
+            },
+            addRow(index) {
+                this.customMetadataArr.splice(index + 1, 0, {
+                    title: '',
+                    type: '',
+                    description: '',
+                    required: true,
+                })
+
+            },
+            myDeleteRow(index) {
+                console.log(index);
+                if (this.customMetadataArr.length===1) {
+                    this.customMetadataArr[0].type=''
+                    this.customMetadataArr[0].title=''
+                    this.customMetadataArr[0].description=''
+                }else{
+                    this.customMetadataArr.splice(index, 1);
+                }
+
+            },
             clickAddNewClaFile() {
                 this.addNewFile = true;
                 this.claText = '';
                 this.isEdit = true;
+                this.newClaFileName = '';
             },
             clickAddNewMetaFile() {
                 this.isAddNewMetaFile = true;
@@ -170,9 +320,9 @@
                 console.log('chooseCla', index);
                 this.claText = this.claOptions[index].text;
                 this.isEdit = false;
-                this.currentIndex=index;
+                this.currentIndex = index;
                 this.addNewFile = false;
-                this.newClaFileName = '';
+                this.newClaFileName = this.claTags[index];
             },
             handleClose(tag, index) {
                 this.$axios({
@@ -188,13 +338,14 @@
                     console.log(res);
                     this.claTags.splice(this.claTags.indexOf(tag), 1);
                     if (this.currentIndex === index) {
-                        this.claText='';
-                        this.currentIndex='';
+                        this.claText = '';
+                        this.currentIndex = '';
                     }
                     this.getCLA();
                 }).catch(err => {
                     console.log(err);
-                    this.$message.error('已有绑定关系，无法删除')
+                    this.$message.closeAll();
+                    this.$message.error('Binding relationship already exists, unable to delete')
                 })
 
             },
@@ -237,44 +388,90 @@
             verifyNotNull() {
                 return this.addNewFile ? this.newClaFileName.trim() !== '' && this.claText.trim() !== '' : this.claText.trim() !== '';
             },
-            /*上传cla*/
-            async uploadCla() {
-                this.fullscreenLoading = true;
-                let obj = {
-                    name: this.newClaFileName,
-                    text: this.claText,
-                    // metaData: this.metaData,
-                    language: this.languageOptions[this.value].label,
-                    // id: this.user.userId,
-                    submitter: `${this.platform}/${this.user.userName}`
-                    // user: this.user.userName
+            checkMetadata() {
+                let newArr = this.customMetadataArr.concat(this.metadataArr);
+                for (let i = 0; i < newArr.length; i++) {
+                    for (let j = i+1; j < newArr.length; j++) {
+                        if (newArr[i].title === newArr[j].title) {
+                            return false;
+                        }
+                    }
                 }
-                console.log(obj);
-                this.$axios({
-                    url: '/api' + url.uploadCla,
-                    method: 'post',
-                    data: obj,
-                    headers: {
-                        'Access-Token': this.access_token,
-                        'Refresh-Token': this.refresh_token,
-                        'User': `${this.platform}/${this.user.userName}`
+                return true;
+
+            },
+            /*上传cla*/
+            uploadCla() {
+                if (this.checkMetadata()) {
+                    let fields = [];
+
+                    this.metadataArr.forEach((item, index) => {
+                        fields.push({
+                            id:index+'',
+                            title: item.title,
+                            type: item.type,
+                            description: item.description,
+                            required: item.required,
+                        })
+                    })
+                    for(let i=0 ;i<this.customMetadataArr.length;i++) {
+                        if (this.customMetadataArr[i].title !== '' && this.customMetadataArr[i].type !== '') {
+                            fields.push({
+                                id: this.metadataArr.length + i + '',
+                                title: this.customMetadataArr[i].title,
+                                type: this.customMetadataArr[i].type,
+                                description: this.customMetadataArr[i].description,
+                                required: this.customMetadataArr[i].required,
+                            })
+                        }
+                        if (i===this.customMetadataArr.length-1) {
+                                this.fullscreenLoading = true;
+                                let obj = {
+                                    name: this.newClaFileName,
+                                    text: this.claText,
+                                    language: this.languageOptions[this.value].label,
+                                    submitter: `${this.platform}/${this.user.userName}`,
+                                    apply_to: this.metadataType,
+                                    fields: fields,
+
+                                }
+                                console.log(obj);
+                                this.$axios({
+                                    url: '/api' + url.uploadCla,
+                                    method: 'post',
+                                    data: obj,
+                                    headers: {
+                                        'Access-Token': this.access_token,
+                                        'Refresh-Token': this.refresh_token,
+                                        'User': `${this.platform}/${this.user.userName}`
+                                    }
+
+                                }).then(res => {
+                                    console.log(res);
+
+                                    this.fullscreenLoading = false;
+                                    this.$message.success('succeed')
+                                    setTimeout(() => {
+                                        this.$router.replace('/home')
+                                    }, 2000)
+
+
+                                }).catch(err => {
+                                    console.log(err);
+                                    this.fullscreenLoading = false;
+                                    this.$message.error('failed')
+                                })
+                            }
+
+
+
                     }
 
-                }).then(res => {
-                    console.log(res);
+                } else {
+                    this.$message.closeAll();
+                    this.$message.error('The title is repeated')
+                }
 
-                    this.fullscreenLoading = false;
-                    this.$message.success('succeed')
-                    setTimeout(() => {
-                        this.$router.replace('/home')
-                    }, 2000)
-
-
-                }).catch(err => {
-                    console.log(err);
-                    this.fullscreenLoading = false;
-                    this.$message.error('failed')
-                })
             },
 
             setClientHeight() {
@@ -317,7 +514,11 @@
     }
 </script>
 
-<style scoped lang="less">
+<style lang="less">
+    .typeCol {
+        padding: .5rem 10px;
+    }
+
     #createCLA {
         display: flex;
         flex-direction: column;
@@ -337,6 +538,7 @@
 
 
         }
+
         & > .footer {
             height: 4rem;
             width: 100%;
@@ -348,7 +550,12 @@
         margin-right: 1rem;
         margin-bottom: 0.5rem;
     }
+
     .el-button.is-disabled, .el-button.is-disabled:focus, .el-button.is-disabled:hover {
-        cursor:pointer;
+        cursor: pointer;
+    }
+
+    .el-checkbox__input.is-disabled + span.el-checkbox__label, .el-checkbox__input.is-disabled .el-checkbox__inner, .el-checkbox__input.is-disabled .el-checkbox__inner::after {
+        cursor: pointer;
     }
 </style>

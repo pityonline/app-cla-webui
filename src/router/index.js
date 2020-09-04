@@ -124,11 +124,6 @@ const routes = [
             },]
     },
     {
-        path: '/config',
-        name: 'Config',
-        component: () => import('../views/Config.vue')
-    },
-    {
         path: '/createCLA',
         name: 'CreateCLA',
         component: () => import('../views/CreateCLA.vue')
@@ -158,11 +153,7 @@ const routes = [
         name: 'EmailVerify',
         component: () => import('../views/EmailVerify.vue')
     },
-    {
-        path: '/createCLA2',
-        name: 'CreateCLA2',
-        component: () => import('../views/CreateCLA2.vue')
-    },
+
 
 ]
 

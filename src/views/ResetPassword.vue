@@ -25,6 +25,17 @@
     export default {
 
         name: "ResetPassword",
+        computed:{
+            orgValue(){
+                console.log(this.$store.state.loginInfo.orgValue);
+                return this.$store.state.loginInfo.orgValue
+            },
+            userInfo(){
+                console.log(this.$store.state.loginInfo.userInfo);
+                return this.$store.state.loginInfo.userInfo
+            },
+
+        },
         data() {
             var validatePass = (rule, value, callback) => {
                 if (value === '') {
@@ -88,6 +99,9 @@
                     url:'/api'+url.resetPassword,
                     method:'put',
                     data:obj,
+                    headers:{
+                        token:this.userInfo[this.orgValue].token
+                    }
                 }).then(res => {
                     console.log(res);
                     this.$message.closeAll()

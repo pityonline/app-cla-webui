@@ -16,38 +16,6 @@
 
         <Footer></Footer>
         <el-dialog
-                width="50%"
-                title="新增管理员"
-                align="center"
-                :visible.sync="addUserVisible">
-            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="10rem">
-                <el-form-item label="用户名" prop="userName">
-                    <el-input
-                            size="medium" v-model="ruleForm.userName">
-                    </el-input>
-                </el-form-item>
-                <el-form-item label="密码" prop="pwd">
-                    <el-input
-                            show-password size="medium" v-model="ruleForm.pwd">
-                    </el-input>
-                </el-form-item>
-                <el-form-item label="邮箱" prop="email">
-                    <el-input
-                            size="medium" v-model="ruleForm.email">
-                    </el-input>
-                </el-form-item>
-                <el-form-item label-width="0">
-                    <el-row align="center">
-
-                        <el-button type="primary" size="medium" @click="submit('ruleForm')">确定</el-button>
-                        <el-button size="medium" @click="reset('ruleForm')">重置</el-button>
-                    </el-row>
-                </el-form-item>
-            </el-form>
-
-
-        </el-dialog>
-        <el-dialog
                 style="background-color: #3C3C3C"
                 title="pdf-reader"
                 top="5vh"
@@ -96,32 +64,6 @@
             },
         },
         data() {
-            let validateAccount = (rule, value, callback) => {
-                if (value === '') {
-                    callback(new Error('input account'));
-                }
-                callback();
-            };
-            let validatePass = (rule, value, callback) => {
-                if (value === '') {
-                    callback(new Error('input password'));
-                }
-                callback();
-            };
-            let validateEmail = (rule, value, callback) => {
-                if (value === '') {
-                    callback(new Error('input email'));
-                } else {
-                    let reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
-                    if (reg.test(value)) {
-                        callback();
-                    } else {
-                        callback(new Error('email format error'))
-                    }
-                    callback();
-                }
-                callback();
-            };
             return {
                 docInfo: {
                     type: "pdf",
@@ -133,32 +75,7 @@
                     height: '',
                 },
                 active: 'first',
-                maxUser: 2,
-                deleteUserVisible: false,
-                rules: {
-                    userName: [
-                        {require: true, validator: validateAccount, trigger: 'blur'}
-                    ],
-                    pwd: [
-                        {require: true, validator: validatePass, trigger: 'blur'}
-                    ],
-                    email: [
-                        {require: true, validator: validateEmail, trigger: 'blur'}
-                    ],
-                },
-                ruleForm: {
-                    userName: '',
-                    pwd: '',
-                    email: '',
-                },
-                addUserVisible: false,
-                tableData: [{id: 0, userName: '001', pwd: '001', email: '969707751@qq.com', class: '法务'}, {
-                    id: 1,
-                    userName: '002',
-                    pwd: '002',
-                    email: '1057750732@qq.com',
-                    class: '开发部'
-                },],
+
             }
         },
         created() {
@@ -214,42 +131,7 @@
 
                 })
             },
-            addUser() {
-                let data = {}
-                this.$axios({
-                    url: '/api' + url.addUser,
-                    method: 'post',
-                    data: data,
-                }).then(res => {
-                    console.log(res);
-                }).catch(err => {
-                    console.log(err);
-                })
-            },
-            submit(formName) {
-                this.$refs[formName].validate((valid => {
-                    if (valid) {
-                        alert('submit!')
-                    } else {
-                        console.log('error submit');
-                        return false;
-                    }
-                }))
-            },
-            reset(formName) {
-                this.$refs[formName].resetFields();
-            },
 
-            clickAddUser() {
-
-                if (this.tableData.length === this.maxUser) {
-                    this.$message.closeAll();
-                    this.$message(`最多新增${this.maxUser}个管理账号`)
-                } else {
-                    this.addUserVisible = true;
-                }
-
-            },
         },
     }
 </script>
