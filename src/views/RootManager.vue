@@ -91,6 +91,7 @@
         },
         computed:{
             user(){
+                console.log(this.$store.state.loginInfo);
                 return this.$store.state.loginInfo
             },
         },
