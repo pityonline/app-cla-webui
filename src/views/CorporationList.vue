@@ -152,7 +152,7 @@
         },
         computed:{
             uploadUrl(){
-                console.log(this.$store.state.item);
+                console.log(this.$store.state);
                 return `/api${url.uploadSignature}/${this.$store.state.item.id}`
             },
         },
