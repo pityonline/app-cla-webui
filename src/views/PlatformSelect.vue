@@ -47,7 +47,7 @@
                             url: `/api${url.getAuthCodeUrl}/${platform}/login`,
                         }).then(res=>{
                             console.log(res);
-                                window.location.href =res.data.url
+                                // window.location.href =res.data.url
                         }).catch(err=>{
                             console.log(err);
                         })
