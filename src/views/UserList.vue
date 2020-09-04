@@ -82,6 +82,7 @@
                 return this.$store.state.loginInfo.orgValue
             },
             userInfo(){
+                console.log(this.$store.state.loginInfo.userInfo);
                 return this.$store.state.loginInfo.userInfo
             },
 

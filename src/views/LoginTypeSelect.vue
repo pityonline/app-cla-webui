@@ -43,8 +43,8 @@
                 this.setLoginTypeAct(loginType)
                 if (loginType==='orgManager') {
                     this.$router.push('/platformSelect')
-                }else{
-                    this.$router.push('/repoSelect')
+                }else if (loginType === 'corporationManager') {
+                    this.$router.push('/corporationManagerLogin')
                 }
             },
         }
