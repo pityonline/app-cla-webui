@@ -4,7 +4,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/bdd0211e92f6f1aabbec.worker.js"
   },
   {
-    "revision": "067254af7bb7d1adf130",
+    "revision": "fb19276f5bd86e942e8d",
     "url": "/css/app.fa2101f4.css"
   },
   {
@@ -22,10 +22,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "ce810e673a996570045c",
     "url": "/css/chunk-19c342ed.637ac5e8.css"
-  },
-  {
-    "revision": "fb11de3f60c02451e975",
-    "url": "/css/chunk-2252f7e0.614415a8.css"
   },
   {
     "revision": "88a187ff6de96a10e235",
@@ -46,6 +42,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "5c2fe3035d79d7a6f3ef",
     "url": "/css/chunk-41ce1963.3427caec.css"
+  },
+  {
+    "revision": "34266a6e98c06c960d96",
+    "url": "/css/chunk-48238760.7553f0e8.css"
   },
   {
     "revision": "5b0b6389b9c592ed3200",
@@ -112,12 +112,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/logo.3a1a754d.png"
   },
   {
-    "revision": "9680dc046309b33763380b14ea414c06",
+    "revision": "b1d67c70000af543f5364f6e9ffc9be1",
     "url": "/index.html"
   },
   {
-    "revision": "067254af7bb7d1adf130",
-    "url": "/js/app.b0e7efde.js"
+    "revision": "fb19276f5bd86e942e8d",
+    "url": "/js/app.566264bf.js"
   },
   {
     "revision": "a3dbd70e9688ae53f0a0",
@@ -138,10 +138,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "ce810e673a996570045c",
     "url": "/js/chunk-19c342ed.70b12384.js"
-  },
-  {
-    "revision": "fb11de3f60c02451e975",
-    "url": "/js/chunk-2252f7e0.0345895d.js"
   },
   {
     "revision": "88a187ff6de96a10e235",
@@ -170,6 +166,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "5c2fe3035d79d7a6f3ef",
     "url": "/js/chunk-41ce1963.69dbb1a2.js"
+  },
+  {
+    "revision": "34266a6e98c06c960d96",
+    "url": "/js/chunk-48238760.1a30ba64.js"
   },
   {
     "revision": "5b0b6389b9c592ed3200",

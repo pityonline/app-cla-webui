@@ -2,8 +2,9 @@
     <div class="show-pdf">
         <div>
             <pdf
-                    :src="dochref"
+                    :src="pdfSrc"
                     :page="currentPage"
+
                     @num-pages="pageCount=$event"
                     @page-loaded="currentPage=$event"
                     @loaded="loadPdfHandler"
@@ -35,10 +36,14 @@
             console.log('created');
             // this.pdfSrc = pdf.createLoadingTask(this.pdfSrc)
         },
+        computed:{
+            pdfSrc(){
+                return this.dochref
+            },
+        },
         data() {
             return {
                 typeValue: "",
-                pdfSrc: "",
                 currentPage: 0, // pdf文件页码
                 pageCount: 0, // pdf文件总页数
                 numPages: 1,
@@ -63,7 +68,7 @@
             }
         },
         mounted: ()=> {
-            pdf.createLoadingTask("/static/pdf/test.pdf").then((res) => {
+            pdf.createLoadingTask(this.pdfSrc).then((res) => {
                 console.log(res);
             });
         }
