@@ -205,7 +205,7 @@
                 this.item = this.$route.query.item
                 sessionStorage.setItem('item', JSON.stringify(this.$route.query.item))
             }
-            this.uploadUrl=this.item.id
+            this.uploadUrl=`/api${url.uploadSignature}/${this.item.id}`
             this.getCorporationInfo()
         },
 
