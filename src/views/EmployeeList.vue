@@ -120,6 +120,17 @@
                 }]
             }
         },
+        computed:{
+            orgValue(){
+                console.log(this.$store.state.loginInfo.orgValue);
+                return this.$store.state.loginInfo.orgValue
+            },
+            userInfo(){
+                console.log(this.$store.state.loginInfo.userInfo);
+                return this.$store.state.loginInfo.userInfo
+            },
+
+        },
         methods: {
             changeActtive(cla_org_id, email, enabled) {
                 let data = {
@@ -141,14 +152,17 @@
 
             getEmployee() {
                 let obj = {
-                    platform: this.$store.state.repoInfo.platform,
-                    repo_id: this.$store.state.repoInfo.repo_id,
-                    org_id: this.$store.state.repoInfo.org_id,
-                    corporation_email: this.$store.state.loginInfo.email
+                    platform: this.userInfo[this.orgValue].platform,
+                    repo_id:  this.userInfo[this.orgValue].repo_id,
+                    org_id:  this.userInfo[this.orgValue].org_id,
+                    corporation_email: this.userInfo[this.orgValue].email
                 }
                 this.$axios({
                     url: '/api' + url.queryEmployee,
-                    params: obj
+                    params: obj,
+                    headers:{
+                        token: this.userInfo[this.orgValue].token,
+                    }
                 }).then(res => {
                     this.inactiveData = [];
                     this.activeData = [];
