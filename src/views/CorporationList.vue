@@ -157,7 +157,7 @@
                 uploadHeaders: {
                     'Token': this.$store.state.access_token,
                 },
-                uploadUrl:'',
+                uploadUrl: '',
                 access_token: this.$store.state.access_token,
                 refresh_token: this.$store.state.refresh_token,
                 platform: this.$store.state.platform,
@@ -166,10 +166,7 @@
                     userId: this.$store.state.user.userId,
                 },
                 msg: 'Welcome to Your Vue.js App',
-                docInfo: {
-                    type: "pdf",
-                    href: "/static/pdf/merge.pdf"
-                },
+                docInfo: {},
                 previewDialogVisible: false,
                 form: {file: ''},
                 fileList: [],
@@ -206,25 +203,29 @@
                 this.item = this.$route.query.item
                 sessionStorage.setItem('item', JSON.stringify(this.$route.query.item))
             }
-            this.uploadUrl=`/api${url.uploadSignature}/${this.item.id}`
+            this.uploadUrl = `/api${url.uploadSignature}/${this.item.id}`
             this.getCorporationInfo()
         },
 
         methods: {
             uploadOk() {
                 let fd = new FormData();
-                for(let i=0;i<this.fileList.length;i++){
-                  fd.append('file',this.fileList[i],this.fileList[i].name);
+                for (let i = 0; i < this.fileList.length; i++) {
+                    fd.append('file', this.fileList[i], this.fileList[i].name);
                 }
                 this.$axios({
-                    url:this.uploadUrl,
-                    data:{fd},
-                    headers:{'Token':this.$store.state.access_token}
+                    url: this.uploadUrl,
+                    data: {fd},
+                    headers: {'Token': this.$store.state.access_token}
                 }).then(res => {
                     console.log(res)
                 })
             },
             previewClaFile(row) {
+                this.docInfo = {
+                    type: "pdf",
+                    href:`/api${url.downloadSignature}/${this.item.id}`
+                }
                 this.previewDialogVisible = true
                 console.log('previewClaFil', row);
             },

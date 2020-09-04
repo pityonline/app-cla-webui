@@ -35,3 +35,4 @@ export const getEmail = 'https://gitee.com/api/v5/emails'                       
 export const getAuthEmail = '/v1/email/authcodeurl/gmail'                               //邮箱授权             方式get
 export const sendVerifyCode = '/v1/corporation-signing/verifi-code'                     //给邮箱发送验证码        方式put  参数：cla_org_id,email
 export const uploadSignature = '/v1/org-signature'                                       //上传pdf签名页        方式post  参数：/cla_org_id
+export const downloadSignature = '/v1/org-signature'                                       //上传pdf签名页        方式get  参数：/cla_org_id
