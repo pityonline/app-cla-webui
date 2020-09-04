@@ -60,7 +60,8 @@
                                     inactive-color="#EBEEF5">
                             </el-switch>
                         </div>
-                        <el-button :disabled="scope.row.administrator_enabled" style="margin-left: 1rem" type="primary" size="mini"
+                        <el-button :disabled="scope.row.administrator_enabled" style="margin-left: 1rem" type="primary"
+                                   size="mini"
                                    @click="createRoot(scope.row.cla_org_id,scope.row.admin_email)">Create Root
                         </el-button>
 
@@ -94,17 +95,19 @@
                             <el-upload
                                     ref="uploadPdf"
                                     class="upload-demo"
-                                    :action="uploadUrl"
+                                    action=""
                                     :headers="uploadHeaders"
                                     :on-preview="handlePreview"
                                     :on-remove="handleRemove"
                                     :on-success="handleSuccess"
                                     :before-remove="beforeRemove"
                                     :auto-upload="false"
+                                    :http-request="uploadOk"
                                     :on-exceed="handleExceed"
                                     :file-list="fileList">
                                 <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-                                <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器
+                                <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">
+                                    上传到服务器
                                 </el-button>
                                 <!--<div slot="tip" class="el-upload__tip">文件不超过500kb</div>-->
                             </el-upload>
@@ -149,10 +152,10 @@
         },
         data() {
             return {
-                uploadHeaders:{
-                    'Token':this.$store.state.access_token,
+                uploadHeaders: {
+                    'Token': this.$store.state.access_token,
                 },
-                uploadUrl:`/api${url.uploadSignature}`,
+                uploadUrl: `/api${url.uploadSignature}`,
                 access_token: this.$store.state.access_token,
                 refresh_token: this.$store.state.refresh_token,
                 platform: this.$store.state.platform,
@@ -163,9 +166,10 @@
                 msg: 'Welcome to Your Vue.js App',
                 docInfo: {
                     type: "pdf",
-                    href: "/static/pdf/merge.pdf"},
+                    href: "/static/pdf/merge.pdf"
+                },
                 previewDialogVisible: false,
-                form:{file:''},
+                form: {file: ''},
                 fileList: [],
                 uploadDialogVisible: false,
                 item: '',
@@ -204,6 +208,19 @@
         },
 
         methods: {
+            uploadOk() {
+                let fd = new FormData();
+                for(let i=0;i<this.fileList.length;i++){
+                  fd.append('file',this.fileList[i],this.fileList[i].name);
+                }
+                this.$axios({
+                    url:this.uploadUrl,
+                    data:{fd},
+                    headers:{'Token':this.$store.state.access_token}
+                }).then(res => {
+                    console.log(res)
+                })
+            },
             previewClaFile(row) {
                 this.previewDialogVisible = true
                 console.log('previewClaFil', row);
@@ -245,7 +262,7 @@
                         cla_language: this.item.cla_language
                     },
                     headers: {
-                        'Token':this.$store.state.access_token,
+                        'Token': this.$store.state.access_token,
                         'Access-Token': this.access_token,
                         'Refresh-Token': this.refresh_token,
                         'User': `${this.platform}/${this.user.userName}`
@@ -264,7 +281,7 @@
                     method: 'post',
                     data: data,
                     headers: {
-                        'Token':this.$store.state.access_token,
+                        'Token': this.$store.state.access_token,
                         'Access-Token': this.access_token,
                         'Refresh-Token': this.refresh_token,
                         'User': `${this.platform}/${this.user.userName}`
@@ -293,7 +310,7 @@
                     method: 'put',
                     data: data,
                     headers: {
-                        'Token':this.$store.state.access_token,
+                        'Token': this.$store.state.access_token,
                         'Access-Token': this.access_token,
                         'Refresh-Token': this.refresh_token,
                         'User': `${this.platform}/${this.user.userName}`
@@ -315,6 +332,7 @@
     .el-button.is-disabled, .el-button.is-disabled:focus, .el-button.is-disabled:hover {
         cursor: pointer;
     }
+
     .el-popover {
         min-width: 7rem;
     }
