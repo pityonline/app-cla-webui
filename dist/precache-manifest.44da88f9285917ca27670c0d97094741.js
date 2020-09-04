@@ -4,7 +4,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/bdd0211e92f6f1aabbec.worker.js"
   },
   {
-    "revision": "12fe3e46eca753cbd333",
+    "revision": "cf16b5192bf2c569ea7b",
     "url": "/css/app.fa2101f4.css"
   },
   {
@@ -22,10 +22,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "fb11de3f60c02451e975",
     "url": "/css/chunk-2252f7e0.614415a8.css"
-  },
-  {
-    "revision": "9c3804c9933307b83aac",
-    "url": "/css/chunk-241237a8.23869a0a.css"
   },
   {
     "revision": "88a187ff6de96a10e235",
@@ -62,6 +58,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "5012f8533e974f7d99e2",
     "url": "/css/chunk-5879720d.c45c7946.css"
+  },
+  {
+    "revision": "9c40633228727cecdccb",
+    "url": "/css/chunk-5bf57e19.085ac9b8.css"
   },
   {
     "revision": "fccae4ec63cb3a2b68c2",
@@ -116,12 +116,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/logo.3a1a754d.png"
   },
   {
-    "revision": "c5eae1f2a1c7fb737404b08dd88f5e22",
+    "revision": "1e4ef0954bfa0d668397031c540562ef",
     "url": "/index.html"
   },
   {
-    "revision": "12fe3e46eca753cbd333",
-    "url": "/js/app.6edf6120.js"
+    "revision": "cf16b5192bf2c569ea7b",
+    "url": "/js/app.ba7a76e1.js"
   },
   {
     "revision": "2c9ca42bb9c5cc0c782a",
@@ -142,10 +142,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "fb11de3f60c02451e975",
     "url": "/js/chunk-2252f7e0.0345895d.js"
-  },
-  {
-    "revision": "9c3804c9933307b83aac",
-    "url": "/js/chunk-241237a8.761f110f.js"
   },
   {
     "revision": "88a187ff6de96a10e235",
@@ -194,6 +190,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "5012f8533e974f7d99e2",
     "url": "/js/chunk-5879720d.5d3049f0.js"
+  },
+  {
+    "revision": "9c40633228727cecdccb",
+    "url": "/js/chunk-5bf57e19.b8421df0.js"
   },
   {
     "revision": "fccae4ec63cb3a2b68c2",
