@@ -61,7 +61,7 @@
             }
         },
         created() {
-            console.log(this.userInfo);
+            console.log(this.user);
         },
         methods: {
             handleCommand(command) {
