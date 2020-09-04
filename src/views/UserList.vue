@@ -139,7 +139,7 @@
                 this.$axios({
                     url: '/api' + url.queryEmployeeManager,
                     params: obj,
-                    header:{
+                    headers:{
                         token:this.userInfo[this.orgValue].token
                     }
                 }).then(res => {
@@ -158,7 +158,7 @@
                     url: '/api' + url.deleteEmployeeManager,
                     method: 'delete',
                     data: obj,
-                    header:{
+                    headers:{
                         token:this.userInfo[this.orgValue].token
                     }
                 }).then(res => {
