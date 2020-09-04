@@ -90,6 +90,7 @@
 
                 <div class="left">
                     <el-upload
+                            ref="uploadPdf"
                             class="upload-demo"
                             :action="uploadUrl"
                             :headers="uploadHeaders"
@@ -97,13 +98,13 @@
                             :on-remove="handleRemove"
                             :on-success="handleSuccess"
                             :before-remove="beforeRemove"
-                            auto-upload="false"
+                            :auto-upload="false"
                             :on-exceed="handleExceed"
                             :file-list="fileList">
                         <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
                         <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器
                         </el-button>
-                        <div slot="tip" class="el-upload__tip">文件不超过500kb</div>
+                        <!--<div slot="tip" class="el-upload__tip">文件不超过500kb</div>-->
                     </el-upload>
 
                 </div>
@@ -210,7 +211,7 @@
                 this.uploadDialogVisible = true
             },
             submitUpload() {
-                this.$refs.upload.submit();
+                this.$refs.uploadPdf.submit();
             },
             handleSuccess(file, fileList) {
                 console.log(file, fileList);
@@ -238,6 +239,7 @@
                         cla_language: this.item.cla_language
                     },
                     headers: {
+                        'Token':this.$store.state.access_token,
                         'Access-Token': this.access_token,
                         'Refresh-Token': this.refresh_token,
                         'User': `${this.platform}/${this.user.userName}`
@@ -256,6 +258,7 @@
                     method: 'post',
                     data: data,
                     headers: {
+                        'Token':this.$store.state.access_token,
                         'Access-Token': this.access_token,
                         'Refresh-Token': this.refresh_token,
                         'User': `${this.platform}/${this.user.userName}`
@@ -284,6 +287,7 @@
                     method: 'put',
                     data: data,
                     headers: {
+                        'Token':this.$store.state.access_token,
                         'Access-Token': this.access_token,
                         'Refresh-Token': this.refresh_token,
                         'User': `${this.platform}/${this.user.userName}`
