@@ -85,6 +85,8 @@
                        if (res.data.length > 1) {
                            this.$router.push('/orgSelect')
                        }else{
+                           Object.assign(userInfo,{orgValue:this.orgValue})
+                           this.setLoginInfoAct(data)
                            if (res.data[0].role === 'admin') {
                                this.$router.push('/rootManager')
                            }else{

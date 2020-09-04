@@ -4,7 +4,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/bdd0211e92f6f1aabbec.worker.js"
   },
   {
-    "revision": "704e70b62021b972f666",
+    "revision": "813ecead41cf643f511e",
     "url": "/css/app.fa2101f4.css"
   },
   {
@@ -56,10 +56,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/css/chunk-44e6457d.aa8eb4c3.css"
   },
   {
-    "revision": "82607355c49e0ea730d2",
-    "url": "/css/chunk-5415dd15.1c255156.css"
-  },
-  {
     "revision": "5012f8533e974f7d99e2",
     "url": "/css/chunk-5879720d.c45c7946.css"
   },
@@ -96,6 +92,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/css/chunk-f6c617aa.dfd08d83.css"
   },
   {
+    "revision": "6c374bed32db9b9e31a1",
+    "url": "/css/chunk-f86fbd32.95938368.css"
+  },
+  {
     "revision": "c960aeba11b2190205ed",
     "url": "/css/chunk-vendors.2ac5db4b.css"
   },
@@ -116,12 +116,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/logo.3a1a754d.png"
   },
   {
-    "revision": "ac6e249d9d6ef0f0b8e914f61fef9e4c",
+    "revision": "5963596aff7e3277d0fa1a2909bfb21b",
     "url": "/index.html"
   },
   {
-    "revision": "704e70b62021b972f666",
-    "url": "/js/app.b0b0c3f9.js"
+    "revision": "813ecead41cf643f511e",
+    "url": "/js/app.4126c2d2.js"
   },
   {
     "revision": "2c9ca42bb9c5cc0c782a",
@@ -188,10 +188,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/js/chunk-44e6457d.b81a5c42.js"
   },
   {
-    "revision": "82607355c49e0ea730d2",
-    "url": "/js/chunk-5415dd15.43d4509f.js"
-  },
-  {
     "revision": "5012f8533e974f7d99e2",
     "url": "/js/chunk-5879720d.5d3049f0.js"
   },
@@ -226,6 +222,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "27cb8c419ae481cbbd6e",
     "url": "/js/chunk-f6c617aa.7b2471c8.js"
+  },
+  {
+    "revision": "6c374bed32db9b9e31a1",
+    "url": "/js/chunk-f86fbd32.96c0388f.js"
   },
   {
     "revision": "c960aeba11b2190205ed",
