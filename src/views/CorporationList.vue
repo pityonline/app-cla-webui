@@ -150,12 +150,17 @@
         components: {
             pdfReader,
         },
+        computed:{
+            uploadUrl(){
+                return `/api${url.uploadSignature}/${this.$store.state.item.id}`
+            },
+        },
         data() {
             return {
                 uploadHeaders: {
                     'Token': this.$store.state.access_token,
                 },
-                uploadUrl: `/api${url.uploadSignature}/${this.item.id}`,
+
                 access_token: this.$store.state.access_token,
                 refresh_token: this.$store.state.refresh_token,
                 platform: this.$store.state.platform,
