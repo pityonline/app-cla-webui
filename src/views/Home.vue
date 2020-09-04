@@ -806,7 +806,8 @@
                     url: '/api' + url.getClaInfo,
                     params: {language: this.claLanguageValue, apply_to: this.claTypeValue},
                     headers: {
-                        'Access-Token': this.$store.state.access_token,
+                        'Token':this.$store.state.access_token,
+                        'Access-Token': this.$store.state.platform_token,
                         'Refresh-Token': this.$store.state.refresh_token,
                         'User': `${this.$store.state.platform}/${this.$store.state.user.userName}`
                     }
