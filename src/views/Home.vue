@@ -404,6 +404,7 @@
                 }
             },
             claValue() {
+                console.log(this.$store.state.claValue);
                 if (this.$store.state.claValue === undefined) {
                     return this.$store.state.claValue
                 }else{
