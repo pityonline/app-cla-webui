@@ -37,12 +37,7 @@
             // this.pdfSrc = pdf.createLoadingTask(this.pdfSrc)
         },
         computed:{
-            pdfSrc(){
-                return this.dochref
-            },
-            typeValue(){
-                return this.doctype
-            },
+
         },
         data() {
             return {
@@ -71,7 +66,7 @@
             }
         },
         mounted: ()=> {
-            pdf.createLoadingTask(this.pdfSrc).then((res) => {
+            pdf.createLoadingTask(this.dochref).then((res) => {
                 console.log(res);
             });
         }
