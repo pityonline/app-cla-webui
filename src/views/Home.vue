@@ -914,7 +914,7 @@
                     }
                     this.setLoginUserAct(data);
                     let obj = {
-                        token:platform_token,
+                        platform_token:platform_token,
                         access_token: access_token,
                         refresh_token: refresh_token,
                         userName: res.data.login,
