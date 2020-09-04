@@ -522,7 +522,8 @@
 
                 }
                 this.$axios({
-                    url: '/api' + myUrl
+                    url: '/api' + myUrl,
+                    headers:{'Token':this.$store.state.access_token},
                 }).then(res => {
                     console.log(res);
                     window.location.href = res.data.url;

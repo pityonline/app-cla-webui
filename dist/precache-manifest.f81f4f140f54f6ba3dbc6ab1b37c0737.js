@@ -4,7 +4,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/bdd0211e92f6f1aabbec.worker.js"
   },
   {
-    "revision": "741774c94f6a59a06b28",
+    "revision": "d92538b531c551a163fc",
     "url": "/css/app.fa2101f4.css"
   },
   {
@@ -60,6 +60,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/css/chunk-5bf57e19.085ac9b8.css"
   },
   {
+    "revision": "08fcb6a524e7714de110",
+    "url": "/css/chunk-605e8341.94cb4f90.css"
+  },
+  {
     "revision": "15ce7b3dc27e61b71d59",
     "url": "/css/chunk-6f4716bd.69528397.css"
   },
@@ -74,10 +78,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "84ce335ae2b90be05dd8",
     "url": "/css/chunk-8904defe.a1da32bc.css"
-  },
-  {
-    "revision": "88e1fdf3f0bad7ac153b",
-    "url": "/css/chunk-bf45e106.c43f8ed1.css"
   },
   {
     "revision": "22a45478b2b75d8ea4b2",
@@ -112,12 +112,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/logo.3a1a754d.png"
   },
   {
-    "revision": "dffb96d623e863a8ce6167caa716788c",
+    "revision": "166f1cb38030a05c5d10b99879458d35",
     "url": "/index.html"
   },
   {
-    "revision": "741774c94f6a59a06b28",
-    "url": "/js/app.aa772710.js"
+    "revision": "d92538b531c551a163fc",
+    "url": "/js/app.7a4600d7.js"
   },
   {
     "revision": "92eea06dae05c689b2c2",
@@ -184,6 +184,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/js/chunk-5bf57e19.b0d938f1.js"
   },
   {
+    "revision": "08fcb6a524e7714de110",
+    "url": "/js/chunk-605e8341.cc305dfb.js"
+  },
+  {
     "revision": "15ce7b3dc27e61b71d59",
     "url": "/js/chunk-6f4716bd.8bede155.js"
   },
@@ -198,10 +202,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "84ce335ae2b90be05dd8",
     "url": "/js/chunk-8904defe.6f7f01d4.js"
-  },
-  {
-    "revision": "88e1fdf3f0bad7ac153b",
-    "url": "/js/chunk-bf45e106.f138e75b.js"
   },
   {
     "revision": "22a45478b2b75d8ea4b2",
