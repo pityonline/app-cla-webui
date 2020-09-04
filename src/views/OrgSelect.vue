@@ -66,6 +66,7 @@
             submit(){
                 let data =JSON.parse(JSON.stringify(this.$store.state.loginInfo))
                 Object.assign(data,{orgValue:this.orgValue})
+                console.log(data);
                 this.setLoginInfoAct(data)
                 console.log(data);
                 if (data.userInfo[this.orgValue].role==='admin')

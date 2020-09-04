@@ -45,6 +45,7 @@
         computed:{
 
             userInfo(){
+                console.log(this.user.userInfo);
                 return this.user.userInfo
             },
             orgValue(){
