@@ -227,6 +227,7 @@ export default new Vuex.Store({
                                         cla_language: item.cla_language
                                     },
                                     headers: {
+                                        'Token':data.platform_token,
                                         'Access-Token': data.access_token,
                                         'Refresh-Token': data.refresh_token,
                                         'User': `${data.platform}/${data.userName}`
@@ -250,6 +251,7 @@ export default new Vuex.Store({
                             axios({
                                 url: `/api${url.getClaInfo}/${item.cla_id}`,
                                 headers: {
+                                    'Token':data.platform_token,
                                     'Access-Token': data.access_token,
                                     'Refresh-Token': data.refresh_token,
                                     'User': `${data.platform}/${data.userName}`
