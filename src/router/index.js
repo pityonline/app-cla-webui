@@ -26,11 +26,11 @@ const routes = [
                 name: 'LoginTypeSelect',
                 component: () => import('../views/LoginTypeSelect.vue')
             },
-            {
-                path: '/repoSelect',
-                name: 'RepoSelect',
-                component: () => import('../views/RepoSelect.vue')
-            },
+            // {
+            //             //     path: '/repoSelect',
+            //             //     name: 'RepoSelect',
+            //             //     component: () => import('../views/RepoSelect.vue')
+            //             // },
             {
                 path: '/platformSelect',
                 name: 'PlatformSelect',
