@@ -4,7 +4,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/bdd0211e92f6f1aabbec.worker.js"
   },
   {
-    "revision": "813ecead41cf643f511e",
+    "revision": "12fe3e46eca753cbd333",
     "url": "/css/app.fa2101f4.css"
   },
   {
@@ -22,6 +22,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "fb11de3f60c02451e975",
     "url": "/css/chunk-2252f7e0.614415a8.css"
+  },
+  {
+    "revision": "9c3804c9933307b83aac",
+    "url": "/css/chunk-241237a8.23869a0a.css"
   },
   {
     "revision": "88a187ff6de96a10e235",
@@ -92,10 +96,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/css/chunk-f6c617aa.dfd08d83.css"
   },
   {
-    "revision": "6c374bed32db9b9e31a1",
-    "url": "/css/chunk-f86fbd32.95938368.css"
-  },
-  {
     "revision": "c960aeba11b2190205ed",
     "url": "/css/chunk-vendors.2ac5db4b.css"
   },
@@ -116,12 +116,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/logo.3a1a754d.png"
   },
   {
-    "revision": "5963596aff7e3277d0fa1a2909bfb21b",
+    "revision": "c5eae1f2a1c7fb737404b08dd88f5e22",
     "url": "/index.html"
   },
   {
-    "revision": "813ecead41cf643f511e",
-    "url": "/js/app.4126c2d2.js"
+    "revision": "12fe3e46eca753cbd333",
+    "url": "/js/app.6edf6120.js"
   },
   {
     "revision": "2c9ca42bb9c5cc0c782a",
@@ -142,6 +142,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "fb11de3f60c02451e975",
     "url": "/js/chunk-2252f7e0.0345895d.js"
+  },
+  {
+    "revision": "9c3804c9933307b83aac",
+    "url": "/js/chunk-241237a8.761f110f.js"
   },
   {
     "revision": "88a187ff6de96a10e235",
@@ -222,10 +226,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "27cb8c419ae481cbbd6e",
     "url": "/js/chunk-f6c617aa.7b2471c8.js"
-  },
-  {
-    "revision": "6c374bed32db9b9e31a1",
-    "url": "/js/chunk-f86fbd32.96c0388f.js"
   },
   {
     "revision": "c960aeba11b2190205ed",
