@@ -490,9 +490,7 @@
                     text: '',
                     language: ''
                 }],
-                metadataValue: '',
                 showPreviewCla: false,
-                metadataChoose: false,
                 linkDialogVisible: false,
                 shareDialogVisible: false,
                 createCLADialogVisible: false,
@@ -657,13 +655,12 @@
                     this.linkLoading = false;
                     this.$message.success('success')
                     console.log(res);
-                    this.claValue = '';
-                    this.metadataValue = ''
-                    this.repositoryValue = '';
-                    this.claChoose = false;
-                    this.metadataChoose = false;
-                    this.repositoryChoose = false;
+                    this.$store.commit('setClaValue','')
+                    this.$store.commit('setRepositoryValue','')
+                    this.$store.commit('setClaChoose',false)
+                    this.$store.commit('setRepositoryChoose',false)
                     this.email = '';
+                    document.cookie='';
                     this.linkDialogVisible = false;
                     let data = {
                         access_token: this.$store.state.access_token,
@@ -712,17 +709,6 @@
                 this.previewText = this.claOptions[value].text;
             },
 
-            mataVisibleChange(visible) {
-                this.metadataValue !== '' && visible ?
-                    this.previewText = this.metadataOptions[this.metadataValue].text : '';
-
-            },
-
-            /*选择Metadata*/
-            changeMetadata(value) {
-                this.metadataChoose = true;
-                this.previewText = this.metadataOptions[value].text;
-            },
             /*弹出dialog说明框*/
             createCLA() {
                 this.createCLADialogVisible = true
@@ -939,35 +925,19 @@
                 })
             },
         },
-        beforeCreate() {
-            console.log('beforeCreate');
 
-        },
         created() {
             console.log('created');
             this.getPath();
             this.openFullScreen();
             this.getCookieData()
         },
-        beforeMount() {
-            console.log('beforeMount');
-        },
+
         mounted() {
             console.log('mounted');
             this.setClientHeight();
         },
-        beforeUpdate() {
-            console.log('beforeUpdate');
-        },
-        updated() {
-            console.log('updated');
-        },
-        beforeDestroy() {
-            console.log('beforeDestroy');
-        },
-        destroyed() {
-            console.log('destroyed');
-        }
+
 
     };
 
