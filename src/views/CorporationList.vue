@@ -91,14 +91,13 @@
                 <div class="left">
                     <el-upload
                             class="upload-demo"
-                            action="https://jsonplaceholder.typicode.com/posts/"
+                            :action="uploadUrl"
+                            :headers="uploadHeaders"
                             :on-preview="handlePreview"
                             :on-remove="handleRemove"
                             :on-success="handleSuccess"
                             :before-remove="beforeRemove"
                             auto-upload="false"
-                            multiple
-                            :limit="3"
                             :on-exceed="handleExceed"
                             :file-list="fileList">
                         <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
@@ -144,6 +143,10 @@
         },
         data() {
             return {
+                uploadHeaders:{
+                    'Token':this.$store.state.access_token,
+                },
+                uploadUrl:`/api${url.uploadSignature}`,
                 access_token: this.$store.state.access_token,
                 refresh_token: this.$store.state.refresh_token,
                 platform: this.$store.state.platform,
@@ -156,13 +159,7 @@
                     type: "pdf",
                     href: "/static/pdf/merge.pdf"},
                 previewDialogVisible: false,
-                fileList: [{
-                    name: 'food.jpeg',
-                    url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-                }, {
-                    name: 'food2.jpeg',
-                    url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-                }],
+                fileList: [],
                 uploadDialogVisible: false,
                 item: '',
                 tableData: [{
