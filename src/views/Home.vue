@@ -920,6 +920,7 @@
                         userName: res.data.login,
                         platform: this.platform
                     }
+                    console.log(obj);
                     this.getLinkedRepoListAct(obj);
 
                 }).catch(err => {

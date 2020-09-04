@@ -218,6 +218,7 @@ export default new Vuex.Store({
                             console.log(index, tableData, item, length);
                             if (item.apply_to === 'corporation') {
                                 count++
+                                console.log(data);
                                 axios({
                                     url: `/api${url.corporation_signing}`,
                                     params: {
