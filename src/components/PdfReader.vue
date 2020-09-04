@@ -37,7 +37,12 @@
             // this.pdfSrc = pdf.createLoadingTask(this.pdfSrc)
         },
         computed:{
-
+            pdfSrc(){
+                return this.dochref
+            },
+            typeValue(){
+                return this.doctype
+            },
         },
         data() {
             return {
@@ -60,7 +65,8 @@
             },
             // pdf加载时
             loadPdfHandler(e) {
-                console.log(this.dochref, this.doctype);
+                console.log(this.pdfSrc);
+                console.log(this.pdfSrc, this.doctype);
 
                 this.currentPage = 1; // 加载的时候先加载第一页
             }
