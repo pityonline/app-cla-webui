@@ -66,7 +66,9 @@
                                         prop="code">
 
                                     <el-input v-model="ruleForm.code" size="small">
-                                        <el-button slot="append" :disabled="sendBtText!=='send code'" @click="sendCode()">{{sendBtText}}</el-button>
+                                        <el-button slot="append" :disabled="sendBtText!=='send code'"
+                                                   @click="sendCode()">{{sendBtText}}
+                                        </el-button>
                                     </el-input>
                                 </el-form-item>
                                 <p style="font-size: .9rem;" class="borderClass">{{desc.metadataDesc}}</p>
@@ -213,7 +215,7 @@
                     date: '',
                     fax: '',
                     address: '',
-                    individualEmail:'',
+                    individualEmail: '',
 
                 },
                 rules: {
@@ -251,13 +253,13 @@
         },
         methods: {
             ...mapActions(['setTokenAct', 'setRepoInfoAct']),
-            sendCode(){
+            sendCode() {
                 console.log('sendcode');
 
                 this.$axios({
-                    url: '/api'+url.sendVerifyCode,
-                    method:'post',
-                    data: {cla_org_id:this.cla_org_id,email:this.ruleForm.adminEmail},
+                    url: '/api' + url.sendVerifyCode,
+                    method: 'post',
+                    data: {cla_org_id: this.cla_org_id, email: this.ruleForm.adminEmail},
 
                 }).then(res => {
                     console.log(res);
@@ -301,13 +303,13 @@
             getCookieData() {
                 if (document.cookie !== '') {
                     let cookieArr = document.cookie.split('; ')
-                    let access_token, refresh_token ,platform_token= '';
+                    let access_token, refresh_token, platform_token = '';
                     cookieArr.forEach((item, index) => {
                         let arr = item.split('=');
-                        arr[0] === 'access_token' ? access_token = arr[1] : arr[0] === 'refresh_token' ? refresh_token = arr[1] :arr[0] === 'platform_token' ? platform_token = arr[1] : platform_token = '';
+                        arr[0] === 'access_token' ? access_token = arr[1] : arr[0] === 'refresh_token' ? refresh_token = arr[1] : arr[0] === 'platform_token' ? platform_token = arr[1] : platform_token = '';
                         ;
                     })
-                    let data = {access_token, refresh_token,platform_token};
+                    let data = {access_token, refresh_token, platform_token};
                     this.setTokenAct(data);
                     if (this.loginType !== 'corporation') {
                         this.getEmail(platform_token, refresh_token)
@@ -320,30 +322,32 @@
                 this.changeDesc('english');
                 let applyTo = '';
                 if (this.$store.state.loginType === 'individual' || this.$store.state.loginType === 'employee') {
-                    this.rules={
+                    this.rules = {
                         code: [{required: true, message: 'Please enter the verification code', trigger: 'blur'},],
-                            name: [
+                        individualEmail: [{required: true, message: 'Please set the email', trigger: 'blur'},],
+                        name: [
                             {required: true, message: 'please input name', trigger: 'blur'},
                             {min: 2, max: 10, message: 'The length is between 2 and 10 characters', trigger: 'blur'}
-                        ],}
-                        this.ruleForm={
-                            code: '',
-                            adminEmail: '',
-                            corporationName: '',
-                            name: '',
-                            telephone: '',
-                            date: '',
-                            fax: '',
-                            address: '',
-                            individualEmail:'',
-                        }
+                        ],
+                    }
+                    this.ruleForm = {
+                        code: '',
+                        adminEmail: '',
+                        corporationName: '',
+                        name: '',
+                        telephone: '',
+                        date: '',
+                        fax: '',
+                        address: '',
+                        individualEmail: '',
+                    }
                     applyTo = 'individual';
                 } else {
                     applyTo = 'corporation';
 
                 }
                 this.$axios({
-                    url: `/api${url.getSignPage}/gitee/${this.$store.state.repoInfo.org_id}/${applyTo}`,
+                    url: `/api${url.getSignPage}/${this.$store.state.repoInfo.platform}/${this.$store.state.repoInfo.org_id}/${applyTo}`,
                     params: {
                         repo_id: this.$store.state.repoInfo.repo_id,
                     }
@@ -366,7 +370,7 @@
                             this.claIdArr.push(item.cla_id)
                             this.claOrgIdArr.push(item.id)
                         })
-                        this.cla_org_id=this.claOrgIdArr[this.value]
+                        this.cla_org_id = this.claOrgIdArr[this.value]
 
                     }
 
@@ -391,7 +395,7 @@
             getClaText(cla_id) {
                 this.$axios({
                     url: `/api${url.getClaInfo}/${cla_id}`,
-                    headers:{'Token':this.$store.state.access_token},
+                    headers: {'Token': this.$store.state.access_token},
                 }).then(resp => {
                     console.log(resp);
                     document.getElementById('claBox').innerHTML = resp.data.text
@@ -438,7 +442,7 @@
                         admin_email: this.ruleForm.adminEmail,
                         enabled: true,
                         info: info,
-                        verifi_code:this.ruleForm.code,
+                        verifi_code: this.ruleForm.code,
                     }
                 } else if (this.$store.state.loginType === 'employee') {
                     myUrl = url.employee_signing;

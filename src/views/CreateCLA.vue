@@ -187,6 +187,7 @@
                 }, {label: 'address', value:  'address'}, {label: 'email', value: 'email'}, {label: 'fax', value: 'fax'}],
                 access_token: this.$store.state.access_token,
                 refresh_token: this.$store.state.refresh_token,
+                platform_token:this.$store.state.platform_token,
                 isAddNewMetaFile: false,
                 isEditMeta: false,
                 metaText: '',
@@ -304,18 +305,8 @@
                 this.isEdit = true;
                 this.newClaFileName = '';
             },
-            clickAddNewMetaFile() {
-                this.isAddNewMetaFile = true;
-                this.metaData = '';
-                this.isEditMeta = true;
-            },
-            chooseMeta(index) {
-                console.log('chooseMeta', index);
-                this.metaData = this.metaOptions[0].text;
-                this.isEditMeta = false;
-                this.isAddNewMetaFile = false;
-                this.newMetaFileName = '';
-            },
+
+
             chooseCla(index) {
                 console.log('chooseCla', index);
                 this.claText = this.claOptions[index].text;
@@ -329,7 +320,8 @@
                     url: `/api${url.delCla}/${this.claOptions[index].id}`,
                     method: 'delete',
                     headers: {
-                        'Access-Token': this.access_token,
+                        'Token':this.access_token,
+                        'Access-Token': this.platform_token,
                         'Refresh-Token': this.refresh_token,
                         'User': `${this.platform}/${this.user.userName}`
                     }
@@ -356,7 +348,8 @@
                 this.$axios({
                     url: '/api' + url.getClaInfo,
                     headers: {
-                        'Access-Token': this.access_token,
+                        'Token':this.access_token,
+                        'Access-Token': this.platform_token,
                         'Refresh-Token': this.refresh_token,
                         'User': `${this.platform}/${this.user.userName}`
                     }
@@ -441,7 +434,8 @@
                                     method: 'post',
                                     data: obj,
                                     headers: {
-                                        'Access-Token': this.access_token,
+                                        'Token':this.access_token,
+                                        'Access-Token': this.platform_token,
                                         'Refresh-Token': this.refresh_token,
                                         'User': `${this.platform}/${this.user.userName}`
                                     }
