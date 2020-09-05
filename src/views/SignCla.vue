@@ -52,7 +52,7 @@
                                               :prop="item.type">
 
                                     <el-input v-if="item.type==='email'" :readonly="loginType!=='corporation'"
-                                              v-model="ruleForm.individualEmail"
+                                              v-model="ruleForm.type"
                                               size="small"></el-input>
 
                                     <el-input v-else-if="item.type==='date'" readonly="" v-model="ruleForm[item.type]"
@@ -81,7 +81,7 @@
                                     <el-button :disabled="!isRead" type="primary" @click="submitForm('ruleForm')">
                                         {{desc.sign}}
                                     </el-button>
-                                    <el-button @click="resetForm('ruleForm')">{{desc.reset}}</el-button>
+                                    <!--<el-button @click="resetForm('ruleForm')">{{desc.reset}}</el-button>-->
                                 </el-form-item>
                             </el-form>
                             <!--<div style="margin-top: 1rem;text-align: left">-->
@@ -215,8 +215,6 @@
                     date: '',
                     fax: '',
                     address: '',
-                    individualEmail: '',
-
                 },
                 rules: {
                     code: [{required: true, message: 'Please enter the verification code', trigger: 'blur'},],
@@ -322,25 +320,6 @@
                 this.changeDesc('english');
                 let applyTo = '';
                 if (this.$store.state.loginType === 'individual' || this.$store.state.loginType === 'employee') {
-                    this.rules = {
-                        code: [{required: true, message: 'Please enter the verification code', trigger: 'blur'},],
-                        individualEmail: [{required: true, message: 'Please set the email', trigger: 'blur'},],
-                        name: [
-                            {required: true, message: 'please input name', trigger: 'blur'},
-                            {min: 2, max: 10, message: 'The length is between 2 and 10 characters', trigger: 'blur'}
-                        ],
-                    }
-                    this.ruleForm = {
-                        code: '',
-                        adminEmail: '',
-                        corporationName: '',
-                        name: '',
-                        telephone: '',
-                        date: '',
-                        fax: '',
-                        address: '',
-                        individualEmail: '',
-                    }
                     applyTo = 'individual';
                 } else {
                     applyTo = 'corporation';
@@ -419,7 +398,7 @@
                 for (let key in this.ruleForm) {
                     console.log(key);
                     if (this.ruleForm[key] !== '') {
-                        this.fields.title
+                        // this.fields.title
                         Object.assign(info, {[key]: this.ruleForm[key]})
                     }
                 }
@@ -428,7 +407,7 @@
                     myUrl = url.individual_signing;
                     obj = {
                         cla_org_id: this.claOrgIdArr[this.value],
-                        email: this.ruleForm.individualEmail,
+                        email: this.ruleForm.email,
                         info: info,
                     }
 
@@ -449,7 +428,7 @@
                     obj = {
                         name: this.ruleForm.name,
                         cla_org_id: this.claOrgIdArr[this.value],
-                        email: this.ruleForm.individualEmail,
+                        email: this.ruleForm.email,
                         info: info,
                     }
                 }
@@ -551,7 +530,6 @@
         },
         mounted() {
             this.setClientHeight();
-            this.resetForm('ruleForm')
         }
     }
     window.onresize = () => {
