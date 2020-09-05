@@ -206,6 +206,7 @@
                 repo: '',
                 role: '0',
                 ruleForm: {
+                    '0':'',
                     code: '',
                     adminEmail: '',
                     corporationName: '',
@@ -379,6 +380,10 @@
                     console.log(resp);
                     document.getElementById('claBox').innerHTML = resp.data.text
                     this.fields = resp.data.fields
+                    resp.data.fields.forEach(item=>{
+                       Object.assign(this.ruleForm,{[item.id]:''})
+                    })
+                    console.log(this.ruleForm);
 
                 }).catch(err => {
                     console.log(err);
