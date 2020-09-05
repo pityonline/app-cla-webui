@@ -137,6 +137,15 @@
             loginType() {
                 return this.$store.state.loginType
             },
+            platform(){
+                return this.$store.state.platform
+            },
+            access_token(){
+                return this.$store.state.access_token
+            },
+            refresh_token(){
+                return this.$store.state.refresh_token
+            },
         },
         components: {
             Header,
@@ -306,17 +315,22 @@
                 })
             },
             getNowDate() {
+
                 let date = new Date();
                 let year, month, day
                 year = date.getFullYear()
                 console.log(date.getFullYear(), date.getMonth() + 1, date.getDate());
                 date.getMonth() < 9 ? month = `0${date.getMonth() + 1}` : month = date.getMonth() + 1;
                 date.getDate() < 10 ? day = `0${date.getDate()}` : day = date.getDate()
+                console.log(fields);
                 for(let item in this.fields){
                     if (item.type === 'date') {
                         this.ruleForm[item.id]=year + '-' + month + '-' + day
                         break;
                     }
+                }
+                if (this.loginType !== 'corporation') {
+                    this.getEmail(platform_token, refresh_token)
                 }
             },
             getEmail(access_token, refresh_token) {
@@ -348,9 +362,7 @@
                     })
                     let data = {access_token, refresh_token, platform_token};
                     this.setTokenAct(data);
-                    if (this.loginType !== 'corporation') {
-                        this.getEmail(platform_token, refresh_token)
-                    }
+
                 }
 
             },
@@ -621,6 +633,7 @@
             this.getCookieData()
             this.getSignPage();
             this.getNowDate()
+
 
 
         },
