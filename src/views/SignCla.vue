@@ -312,8 +312,12 @@
                 console.log(date.getFullYear(), date.getMonth() + 1, date.getDate());
                 date.getMonth() < 9 ? month = `0${date.getMonth() + 1}` : month = date.getMonth() + 1;
                 date.getDate() < 10 ? day = `0${date.getDate()}` : day = date.getDate()
-                this.ruleForm.date = year + '-' + month + '-' + day
-
+                for(let item in this.fields){
+                    if (item.type === 'date') {
+                        this.ruleForm[item.id]=year + '-' + month + '-' + day
+                        break;
+                    }
+                }
             },
             getEmail(access_token, refresh_token) {
                 this.$axios({
@@ -428,7 +432,7 @@
                         Object.assign(this.ruleForm, {[item.id]: ''})
                         if (item.type === 'name') {
                             Object.assign(this.rules, {
-                                name: [
+                                [item.id]: [
                                     {required: true, message: 'please input name', trigger: 'blur'},
                                     {
                                         min: 2,
@@ -441,7 +445,7 @@
 
                         } else if (item.type === 'email') {
                             Object.assign(this.rules, {
-                                email: [{
+                                [item.id]: [{
                                     required: true,
                                     validator: this.verifyFormEmail(),
                                     trigger: 'blur'
@@ -449,7 +453,7 @@
                             })
                         } else if (item.type === 'telephone') {
                             Object.assign(this.rules, {
-                                email: [{
+                                [item.id]: [{
                                     required: true,
                                     validator: this.verifyTel(),
                                     trigger: 'blur'
@@ -457,7 +461,7 @@
                             })
                         }else if (item.type === 'address') {
                             Object.assign(this.rules, {
-                                email: [{
+                                [item.id]: [{
                                     required: true,
                                     validator: this.verifyAddr(),
                                     trigger: 'blur'
