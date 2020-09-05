@@ -342,7 +342,7 @@
                     params: {access_token: access_token}
                 }).then(res => {
                     console.log(res);
-                    for(let item in this.fields){
+                    for(let item of this.fields){
                         if (item.type === 'email') {
                             this.ruleForm[item.id]=res.data[0].email
                             break;
@@ -517,7 +517,7 @@
                 for (let key in this.ruleForm) {
                     console.log(key);
                     if (this.ruleForm[key] !== '') {
-                        Object.assign(info, {[key]: this.ruleForm[key]})
+                        Object.assign(info, {[key]: this.ruleForm[key]+''})
                     }
                 }
                 console.log(info);
