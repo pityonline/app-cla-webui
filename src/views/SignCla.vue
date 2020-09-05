@@ -296,6 +296,7 @@
                     console.log(err);
                 })
             },
+
             getCookieData() {
                 if (document.cookie !== '') {
                     let cookieArr = document.cookie.split('; ')
@@ -313,19 +314,6 @@
                 }
 
             },
-            changeLanguage(value) {
-                this.changeDesc(this.languageOptions[value].label);
-                this.getClaText(this.claIdArr[value])
-                this.cla_org_id = this.claOrgIdArr[value]
-            },
-            changeDesc(language) {
-                if (language === 'english') {
-                    this.desc = this.enDesc;
-                } else if (language === 'chinese') {
-                    this.desc = this.cnDesc;
-                }
-            },
-            /*获取个人签署的metadata*/
             getSignPage() {
                 console.log('getSignPage');
                 this.changeDesc('english');
@@ -371,6 +359,19 @@
                     console.log(err);
                 })
             },
+            changeLanguage(value) {
+                this.changeDesc(this.languageOptions[value].label);
+                this.getClaText(this.claIdArr[value])
+                this.cla_org_id = this.claOrgIdArr[value]
+            },
+            changeDesc(language) {
+                if (language === 'english') {
+                    this.desc = this.enDesc;
+                } else if (language === 'chinese') {
+                    this.desc = this.cnDesc;
+                }
+            },
+
             /*查找clatext*/
             getClaText(cla_id) {
                 this.$axios({

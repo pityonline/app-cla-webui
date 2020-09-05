@@ -17,6 +17,11 @@ const routes = [
         component: () => import('../views/Login.vue')
     },
     {
+        path: '/signType',
+        /*组件懒加载*/
+        component: () => import('../views/SignType.vue')
+    },
+    {
         path: '/index',
         /*组件懒加载*/
         component: () => import('../views/Index.vue'),

@@ -72,7 +72,7 @@
             }
         },
         mounted: ()=> {
-            pdf.createLoadingTask(this.dochref).then((res) => {
+            pdf.createLoadingTask(this.pdfSrc).then((res) => {
                 console.log(res);
             });
         }
