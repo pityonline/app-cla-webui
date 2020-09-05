@@ -214,17 +214,19 @@
                 repositoryOptions: [],
                 repo: '',
                 role: '0',
-                ruleForm: {
-                    code: '',
-                    adminEmail: '',
-                    corporationName: '',
-                    name: '',
-                    email: '',
-                    telephone: '',
-                    date: '',
-                    fax: '',
-                    address: '',
-                },
+                // ruleForm: {
+                //     code: '',
+                //     adminEmail: '',
+                //     corporationName: '',
+                //     name: '',
+                //     email: '',
+                //     telephone: '',
+                //     date: '',
+                //     fax: '',
+                //     address: '',
+                // },
+
+                ruleForm: {},
                 rules: {
                     code: [{required: true, message: 'Please enter the verification code', trigger: 'blur'},],
                     name: [
@@ -469,7 +471,12 @@
                                 ],
                             })
 
-                        } else if (item.type === 'email') {
+                        }else if (item.type === 'date') {
+                            Object.assign(this.rules, {
+                                [item.id]: [
+                                    {required: true, message: 'please input date', trigger: 'blur'}],
+                            })
+                        }  else if (item.type === 'email') {
                             Object.assign(this.rules, {
                                 [item.id]: [{
                                     required: true,
