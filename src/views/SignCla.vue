@@ -320,24 +320,32 @@
                 this.changeDesc('english');
                 let applyTo = '';
                 if (this.$store.state.loginType === 'individual' || this.$store.state.loginType === 'employee') {
-                    this.rules={
-                        code: [{required: true, message: 'Please enter the verification code', trigger: 'blur'},],
-                            name: [
-                            {required: true, message: 'please input name', trigger: 'blur'},
-                            {min: 2, max: 10, message: 'The length is between 2 and 10 characters', trigger: 'blur'}
-                        ],}
+                    // this.rules={
+                    //     code: [{required: true, message: 'Please enter the verification code', trigger: 'blur'},],
+                    //         name: [
+                    //         {required: true, message: 'please input name', trigger: 'blur'},
+                    //         {min: 2, max: 10, message: 'The length is between 2 and 10 characters', trigger: 'blur'}
+                    //     ],}
+                        this.ruleForm={
+                            code: '',
+                            adminEmail: '',
+                            corporationName: '',
+                            name: '',
+                            telephone: '',
+                            date: '',
+                            fax: '',
+                            address: '',
+                            individualEmail:'',
+                        }
                     applyTo = 'individual';
                 } else {
                     applyTo = 'corporation';
 
                 }
                 this.$axios({
-                    url: `/api${url.getSignPage}/gitee/cla-test/${applyTo}`,
-                    // url: `/api${url.getSignPage}/gitee/${this.$store.state.repoInfo.org_id}/${applyTo}`,
+                    url: `/api${url.getSignPage}/gitee/${this.$store.state.repoInfo.org_id}/${applyTo}`,
                     params: {
-
-                        repo_id: 'test1',
-                        // repo_id: this.$store.state.repoInfo.repo_id,
+                        repo_id: this.$store.state.repoInfo.repo_id,
                     }
 
                 }).then(res => {
@@ -350,7 +358,7 @@
                             if (item.cla_language === 'english') {
                                 this.value = index;
 
-                                console.log('查找clatext');
+                                console.log('find claText');
                                 this.getClaText(item.cla_id)
 
                             }
@@ -407,6 +415,7 @@
                 for (let key in this.ruleForm) {
                     console.log(key);
                     if (this.ruleForm[key] !== '') {
+                        this.fields.title
                         Object.assign(info, {[key]: this.ruleForm[key]})
                     }
                 }
