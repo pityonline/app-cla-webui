@@ -320,12 +320,12 @@
                 this.changeDesc('english');
                 let applyTo = '';
                 if (this.$store.state.loginType === 'individual' || this.$store.state.loginType === 'employee') {
-                    // this.rules={
-                    //     code: [{required: true, message: 'Please enter the verification code', trigger: 'blur'},],
-                    //         name: [
-                    //         {required: true, message: 'please input name', trigger: 'blur'},
-                    //         {min: 2, max: 10, message: 'The length is between 2 and 10 characters', trigger: 'blur'}
-                    //     ],}
+                    this.rules={
+                        code: [{required: true, message: 'Please enter the verification code', trigger: 'blur'},],
+                            name: [
+                            {required: true, message: 'please input name', trigger: 'blur'},
+                            {min: 2, max: 10, message: 'The length is between 2 and 10 characters', trigger: 'blur'}
+                        ],}
                         this.ruleForm={
                             code: '',
                             adminEmail: '',
