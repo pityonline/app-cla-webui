@@ -323,9 +323,11 @@
                 date.getMonth() < 9 ? month = `0${date.getMonth() + 1}` : month = date.getMonth() + 1;
                 date.getDate() < 10 ? day = `0${date.getDate()}` : day = date.getDate()
                 console.log(this.fields);
+                console.log(this.ruleForm);
                 for(let item of this.fields){
                     console.log(item);
                     if (item.type === 'date') {
+                        console.log(this.ruleForm[item.id]);
                         this.ruleForm[item.id]=year + '-' + month + '-' + day
                         break;
                     }
