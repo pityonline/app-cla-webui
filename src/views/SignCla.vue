@@ -278,7 +278,7 @@
                 if (reg.test(email)) {
                     callback();
                 } else {
-                    callback(new Error('Email format error'))
+                    // callback(new Error('Email format error'))
                 }
             },
             sendCode() {
@@ -325,7 +325,12 @@
                     params: {access_token: access_token}
                 }).then(res => {
                     console.log(res);
-                    this.ruleForm.email = res.data[0].email
+                    for(let item in this.fields){
+                        if (item.type === 'email') {
+                            this.ruleForm[item.id]=res.data[0].email
+                            break;
+                        }
+                    }
 
                 }).catch(err => {
                     console.log(err);
