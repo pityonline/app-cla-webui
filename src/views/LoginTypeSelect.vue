@@ -2,15 +2,15 @@
     <div >
         <el-row>
             <el-col :span="4" :offset="10" style="padding:3rem ">
-                <el-button type="primary" size="medium" style="width: 100%;margin: 1rem 0;" @click="submit('individual')">
-                    Individual
-                </el-button>
-                <el-button type="primary" size="medium" style="width: 100%;margin: 1rem 0" @click="submit('corporation')">
-                    Corporation
-                </el-button>
-                <el-button type="primary" size="medium" style="width: 100%;margin: 1rem 0" @click="submit('employee')">
-                    Employee
-                </el-button>
+                <!--<el-button type="primary" size="medium" style="width: 100%;margin: 1rem 0;" @click="submit('individual')">-->
+                    <!--Individual-->
+                <!--</el-button>-->
+                <!--<el-button type="primary" size="medium" style="width: 100%;margin: 1rem 0" @click="submit('corporation')">-->
+                    <!--Corporation-->
+                <!--</el-button>-->
+                <!--<el-button type="primary" size="medium" style="width: 100%;margin: 1rem 0" @click="submit('employee')">-->
+                    <!--Employee-->
+                <!--</el-button>-->
                 <el-button type="primary" size="medium" style="width: 100%;margin: 1rem 0" @click="submit('orgManager')">
                     OrgManager
                 </el-button>

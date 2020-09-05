@@ -16,11 +16,7 @@ const routes = [
         /*组件懒加载*/
         component: () => import('../views/Login.vue')
     },
-    {
-        path: '/signType',
-        /*组件懒加载*/
-        component: () => import('../views/SignType.vue')
-    },
+
     {
         path: '/index',
         /*组件懒加载*/
@@ -30,6 +26,11 @@ const routes = [
                 path: '/',
                 name: 'LoginTypeSelect',
                 component: () => import('../views/LoginTypeSelect.vue')
+            },
+            {
+                path: '/signType',
+                /*组件懒加载*/
+                component: () => import('../views/SignType.vue')
             },
             // {
             //             //     path: '/repoSelect',
