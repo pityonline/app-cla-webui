@@ -52,7 +52,7 @@
                                               :prop="item.type">
 
                                     <el-input v-if="item.type==='email'" :readonly="loginType!=='corporation'"
-                                              v-model="ruleForm[item.type]"
+                                              v-model="ruleForm.individualEmail"
                                               size="small"></el-input>
 
                                     <el-input v-else-if="item.type==='date'" readonly="" v-model="ruleForm[item.type]"
@@ -213,6 +213,7 @@
                     date: '',
                     fax: '',
                     address: '',
+                    individualEmail:'',
 
                 },
                 rules: {
@@ -408,7 +409,7 @@
                     myUrl = url.individual_signing;
                     obj = {
                         cla_org_id: this.claOrgIdArr[this.value],
-                        email: this.ruleForm.email,
+                        email: this.ruleForm.individualEmail,
                         info: info,
                     }
 
@@ -429,7 +430,7 @@
                     obj = {
                         name: this.ruleForm.name,
                         cla_org_id: this.claOrgIdArr[this.value],
-                        email: this.ruleForm.email,
+                        email: this.ruleForm.individualEmail,
                         info: info,
                     }
                 }
