@@ -49,15 +49,15 @@
                                 <el-form-item v-for="(item,index) in fields"
                                               :label="item.title"
                                               :required="item.required"
-                                              :prop="item.type">
+                                              :prop="item.id">
 
                                     <el-input v-if="item.type==='email'" :readonly="loginType!=='corporation'"
-                                              v-model="ruleForm[item.type]"
+                                              v-model="ruleForm[item.id]"
                                               size="small"></el-input>
 
-                                    <el-input v-else-if="item.type==='date'" readonly="" v-model="ruleForm[item.type]"
+                                    <el-input v-else-if="item.type==='date'" readonly="" v-model="ruleForm[item.id]"
                                               size="small"></el-input>
-                                    <el-input v-else v-model="ruleForm[item.type]" size="small"></el-input>
+                                    <el-input v-else v-model="ruleForm[item.id]" size="small"></el-input>
                                 </el-form-item>
                                 <el-form-item
                                         v-if="loginType==='corporation'"
@@ -378,9 +378,20 @@
                     headers: {'Token': this.$store.state.access_token},
                 }).then(resp => {
                     console.log(resp);
-                    document.getElementById('claBox').innerHTML = resp.data.text
+                    document.getElementById('claBox').innerHTML = resp.data.text;
+
+                    for (let i = 0; i < resp.data.fields.length; i++) {
+                        for (let j = i + 1; j < resp.data.fields.length; j++) {
+                            if ( Number(resp.data.fields[i].id)>Number(resp.data.fields[j].id)) {
+                                let field = resp.data.fields[i]
+                                resp.data.fields[i]=resp.data.fields[j]
+                                resp.data.fields[j]=field
+                            }
+                        }
+                    }
+                    console.log(resp.data.fields);
                     this.fields = resp.data.fields
-                    resp.data.fields.forEach(item=>{
+                    this.fields.forEach(item=>{
                        Object.assign(this.ruleForm,{[item.id]:''})
                     })
                     console.log(this.ruleForm);
@@ -403,7 +414,6 @@
                 for (let key in this.ruleForm) {
                     console.log(key);
                     if (this.ruleForm[key] !== '') {
-                        // this.fields.title
                         Object.assign(info, {[key]: this.ruleForm[key]})
                     }
                 }
