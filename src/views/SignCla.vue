@@ -291,7 +291,7 @@
                     params: {access_token: access_token}
                 }).then(res => {
                     console.log(res);
-                    this.ruleForm.individualEmail = res.data[0].email
+                    this.ruleForm.email = res.data[0].email
 
                 }).catch(err => {
                     console.log(err);
