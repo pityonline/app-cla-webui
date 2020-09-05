@@ -52,7 +52,7 @@
                                               :prop="item.type">
 
                                     <el-input v-if="item.type==='email'" :readonly="loginType!=='corporation'"
-                                              v-model="ruleForm.type"
+                                              v-model="ruleForm[item.type]"
                                               size="small"></el-input>
 
                                     <el-input v-else-if="item.type==='date'" readonly="" v-model="ruleForm[item.type]"
