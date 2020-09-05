@@ -546,6 +546,7 @@
             this.getCookieData()
             this.getSignPage();
             this.getNowDate()
+            this.resetForm('ruleForm')
 
         },
         mounted() {
