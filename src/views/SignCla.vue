@@ -287,7 +287,7 @@
                 if (reg.test(email)) {
                     callback();
                 } else {
-                    // callback(new Error('Email format error'))
+                    callback(new Error('Email format error'))
                 }
             },
             sendCode() {
@@ -473,7 +473,7 @@
                             Object.assign(this.rules, {
                                 [item.id]: [{
                                     required: true,
-                                    validator: this.verifyFormEmail(),
+                                    validator: this.verifyFormEmail,
                                     trigger: 'blur'
                                 }],
                             })
@@ -481,7 +481,7 @@
                             Object.assign(this.rules, {
                                 [item.id]: [{
                                     required: true,
-                                    validator: this.verifyTel(),
+                                    validator: this.verifyTel,
                                     trigger: 'blur'
                                 }],
                             })
