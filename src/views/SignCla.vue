@@ -324,6 +324,7 @@
                 date.getDate() < 10 ? day = `0${date.getDate()}` : day = date.getDate()
                 console.log(this.fields);
                 for(let item in this.fields){
+                    console.log(item);
                     if (item.type === 'date') {
                         this.ruleForm[item.id]=year + '-' + month + '-' + day
                         break;
