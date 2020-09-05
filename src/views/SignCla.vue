@@ -282,7 +282,7 @@
             },
             async verifyFormEmail(rule, value, callback) {
                 let email = value;
-                console.log(email);
+                // console.log(email);
                 let reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
                 if (reg.test(email)) {
                     callback();
@@ -366,7 +366,7 @@
                 }
 
             },
-            getSignPage() {
+            getSignPage(argRes) {
                 console.log('getSignPage');
                 this.changeDesc('english');
                 let applyTo = '';
@@ -393,7 +393,13 @@
                                 this.value = index;
 
                                 console.log('find claText');
-                                this.getClaText(item.cla_id)
+                                new Promise(resolve=>{
+                                    this.getClaText(item.cla_id,resolve)
+                                }).then(resp=>{
+                                    console.log(resp);
+                                    argRes('completed')
+                                })
+
 
                             }
                             this.languageOptions.push({value: index, label: item.cla_language})
@@ -422,7 +428,7 @@
             },
 
             /*查找clatext*/
-            getClaText(cla_id) {
+            getClaText(cla_id,argRes) {
                 this.$axios({
                     url: `/api${url.getClaInfo}/${cla_id}`,
                     headers: {'Token': this.$store.state.access_token},
@@ -488,6 +494,7 @@
                     })
                     console.log(this.ruleForm);
                     console.log(this.rules);
+                    argRes('complete')
 
                 }).catch(err => {
                     console.log(err);
@@ -631,8 +638,16 @@
 
         created() {
             this.getCookieData()
-            this.getSignPage();
-            this.getNowDate()
+            new Promise(resolve=>{
+               this.getSignPage(resolve);
+           },reject=>{
+
+            }).then(res=>{
+                console.log(res);
+                this.getNowDate()
+
+           },err=>{})
+
 
 
 
