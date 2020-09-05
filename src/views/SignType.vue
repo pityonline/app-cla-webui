@@ -1,6 +1,6 @@
 <template>
     <el-row>
-        <el-col :span="4" :offset="10">
+        <el-col :span="4" :offset="10" style="padding:3rem">
             <el-button type="primary" size="medium" style="width: 100%;margin: 1rem 0;" @click="submit('individual')">
                 Individual
             </el-button>
@@ -29,22 +29,29 @@
         },
         methods: {
             ...mapActions(['setTokenAct', 'setRepoInfoAct']),
-            getRepoInfo(){
+            getRepoInfo() {
                 console.log(window.location.href);
-
-
+                let args = window.location.href.split('?')[1].split('&')
+                args.forEach(item => {
+                    let arg = item.split('=')
+                    if (arg[0] === 'platform') {
+                        this.platform=arg[1]
+                    }else if (arg[0] === 'org'){
+                        this.org=arg[1]
+                    } else if (arg[0] === 'repo'){
+                        this.repo=arg[1]
+                    }
+                })
                 this.setRepoInfoAct({platform: this.platform, org_id: this.org, repo_id: this.repo});
 
             },
-            toSignCla() {
+            submit(loginType) {
+                this.setLoginTypeAct(loginType)
                 if (this.platform === 'gitee') {
                     console.log('gitee');
 
-                    if (this.$store.state.loginType === 'individual' || this.$store.state.loginType === 'employee') {
+                    if (loginType === 'individual' || loginType === 'employee') {
                         console.log('individual');
-
-                        // window.location.href = 'https://gitee.com/oauth/authorize?client_id=2632e89d3dfb17ce941d2d2b45efc6f235afb4941ddb67578adda83aa33ab6a2&redirect_uri=http://139.159.224.207:60031/api/v1/login?platform=gitee&response_type=code';
-                        //     this.$router.push('/signCla')
                         this.$axios({
                             url: `/api${url.getAuthCodeUrl}/${this.platform}/sign`,
                         }).then(res => {
@@ -55,10 +62,8 @@
                             console.log(err);
                         })
 
-                    } else if (this.$store.state.loginType === 'corporation') {
-                        this.$router.push('/signCla')
                     } else {
-                        this.$router.push('/corporationManagerLogin')
+                        this.$router.push('/signCla')
                     }
                 } else if (this.platform === 'github') {
                     console.log('github');
@@ -71,15 +76,7 @@
                 }
 
             },
-            submit(loginType) {
-                console.log(loginType);
-                this.setLoginTypeAct(loginType)
-                if (loginType === 'orgManager') {
-                    this.$router.push('/platformSelect')
-                } else if (loginType === 'corporationManager') {
-                    this.$router.push('/corporationManagerLogin')
-                }
-            },
+
         },
         created() {
             this.getRepoInfo();
