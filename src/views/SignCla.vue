@@ -137,8 +137,8 @@
             loginType() {
                 return this.$store.state.loginType
             },
-            platform(){
-                return this.$store.state.platform
+            platform_token(){
+                return this.$store.state.platform_token
             },
             access_token(){
                 return this.$store.state.access_token
@@ -330,7 +330,7 @@
                     }
                 }
                 if (this.loginType !== 'corporation') {
-                    this.getEmail(platform_token, refresh_token)
+                    this.getEmail(this.platform_token, this.refresh_token)
                 }
             },
             getEmail(access_token, refresh_token) {
