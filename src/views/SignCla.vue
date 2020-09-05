@@ -322,7 +322,7 @@
                 console.log(date.getFullYear(), date.getMonth() + 1, date.getDate());
                 date.getMonth() < 9 ? month = `0${date.getMonth() + 1}` : month = date.getMonth() + 1;
                 date.getDate() < 10 ? day = `0${date.getDate()}` : day = date.getDate()
-                console.log(fields);
+                console.log(this.fields);
                 for(let item in this.fields){
                     if (item.type === 'date') {
                         this.ruleForm[item.id]=year + '-' + month + '-' + day
