@@ -28,7 +28,7 @@
             }
         },
         methods: {
-            ...mapActions(['setTokenAct', 'setRepoInfoAct']),
+            ...mapActions(['setTokenAct','setLoginTypeAct', 'setRepoInfoAct']),
             getRepoInfo() {
                 console.log(window.location.href);
                 let args = window.location.href.split('?')[1].split('&')
