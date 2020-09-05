@@ -376,7 +376,7 @@
             getClaText(cla_id) {
                 this.$axios({
                     url: `/api${url.getClaInfo}/${cla_id}`,
-                    headers:{access_token:this.$store.state.access_token},
+                    headers:{'Token':this.$store.state.access_token},
                 }).then(resp => {
                     console.log(resp);
                     document.getElementById('claBox').innerHTML = resp.data.text
