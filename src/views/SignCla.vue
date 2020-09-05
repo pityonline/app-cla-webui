@@ -206,7 +206,6 @@
                 repo: '',
                 role: '0',
                 ruleForm: {
-                    '0':'',
                     code: '',
                     adminEmail: '',
                     corporationName: '',
@@ -252,6 +251,36 @@
         },
         methods: {
             ...mapActions(['setTokenAct', 'setRepoInfoAct']),
+            async verifyTel(rule, value, callback){
+                if (!value) {
+                    callback();
+                } else {
+
+                    let reg = /^1[3456789]\d{9}$/;
+                    if (reg.test(value)) {
+                        callback();
+                    } else {
+                        callback(new Error('telephone format error'))
+                    }
+                    callback();
+                }
+            },
+            async verifyAddr (rule, value, callback) {
+                if (!value) {
+                    callback(new Error('please input address'))
+                }
+                callback();
+            },
+            async verifyFormEmail(rule, value, callback) {
+                let email = value;
+                console.log(email);
+                let reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+                if (reg.test(email)) {
+                    callback();
+                } else {
+                    callback(new Error('Email format error'))
+                }
+            },
             sendCode() {
                 console.log('sendcode');
 
@@ -378,23 +407,66 @@
                     headers: {'Token': this.$store.state.access_token},
                 }).then(resp => {
                     console.log(resp);
+                    this.ruleForm = {};
+                    this.rules = {};
+                    Object.assign(this.ruleForm, {code: ''})
+                    Object.assign(this.rules, {code: [{required: true, message: 'Please enter the verification code', trigger: 'blur'},]})
                     document.getElementById('claBox').innerHTML = resp.data.text;
 
                     for (let i = 0; i < resp.data.fields.length; i++) {
                         for (let j = i + 1; j < resp.data.fields.length; j++) {
-                            if ( Number(resp.data.fields[i].id)>Number(resp.data.fields[j].id)) {
+                            if (Number(resp.data.fields[i].id) > Number(resp.data.fields[j].id)) {
                                 let field = resp.data.fields[i]
-                                resp.data.fields[i]=resp.data.fields[j]
-                                resp.data.fields[j]=field
+                                resp.data.fields[i] = resp.data.fields[j]
+                                resp.data.fields[j] = field
                             }
                         }
                     }
                     console.log(resp.data.fields);
                     this.fields = resp.data.fields
-                    this.fields.forEach(item=>{
-                       Object.assign(this.ruleForm,{[item.id]:''})
+                    this.fields.forEach(item => {
+                        Object.assign(this.ruleForm, {[item.id]: ''})
+                        if (item.type === 'name') {
+                            Object.assign(this.rules, {
+                                name: [
+                                    {required: true, message: 'please input name', trigger: 'blur'},
+                                    {
+                                        min: 2,
+                                        max: 10,
+                                        message: 'The length is between 2 and 10 characters',
+                                        trigger: 'blur'
+                                    }
+                                ],
+                            })
+
+                        } else if (item.type === 'email') {
+                            Object.assign(this.rules, {
+                                email: [{
+                                    required: true,
+                                    validator: this.verifyFormEmail(),
+                                    trigger: 'blur'
+                                }],
+                            })
+                        } else if (item.type === 'telephone') {
+                            Object.assign(this.rules, {
+                                email: [{
+                                    required: true,
+                                    validator: this.verifyTel(),
+                                    trigger: 'blur'
+                                }],
+                            })
+                        }else if (item.type === 'address') {
+                            Object.assign(this.rules, {
+                                email: [{
+                                    required: true,
+                                    validator: this.verifyAddr(),
+                                    trigger: 'blur'
+                                }],
+                            })
+                        }
                     })
                     console.log(this.ruleForm);
+                    console.log(this.rules);
 
                 }).catch(err => {
                     console.log(err);
