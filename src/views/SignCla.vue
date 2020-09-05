@@ -546,11 +546,12 @@
             this.getCookieData()
             this.getSignPage();
             this.getNowDate()
-            this.resetForm('ruleForm')
+
 
         },
         mounted() {
             this.setClientHeight();
+            this.resetForm('ruleForm')
         }
     }
     window.onresize = () => {
