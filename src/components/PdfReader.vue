@@ -66,6 +66,7 @@
             },
             // pdf加载时
             loadPdfHandler(e) {
+                console.log(e);
                 console.log(this.pdfSrc);
                 console.log(this.pdfSrc, this.doctype);
 

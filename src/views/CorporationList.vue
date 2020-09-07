@@ -224,7 +224,8 @@
             previewClaFile(row) {
                 this.docInfo = {
                     type: "pdf",
-                    href:`/api${url.downloadSignature}/${this.item.id}`
+                    href:`/static/pdf/merge.pdf`
+                    // href:`/api${url.downloadSignature}/${this.item.id}`
                 }
                 this.previewDialogVisible = true
                 console.log('previewClaFil', row);
