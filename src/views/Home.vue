@@ -886,6 +886,9 @@
                 sessionStorage.removeItem('orgOptions')
                 sessionStorage.removeItem('repositoryOptions')
                 sessionStorage.removeItem('claOptions')
+                sessionStorage.removeItem('claOptions')
+                sessionStorage.removeItem('claOptions')
+                sessionStorage.removeItem('claOptions')
             },
             getCookieData() {
                 if (document.cookie !== '') {

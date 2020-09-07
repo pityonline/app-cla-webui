@@ -392,7 +392,8 @@
                     url: `/api${url.getSignPage}/${this.$store.state.repoInfo.platform}/${this.$store.state.repoInfo.org_id}/${applyTo}`,
                     params: {
                         repo_id: this.$store.state.repoInfo.repo_id,
-                    }
+                    },
+                    headers:{'Token':this.$store.state.access_token}
 
                 }).then(res => {
                     console.log(res);
