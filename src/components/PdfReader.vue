@@ -34,7 +34,7 @@
         props: ["dochref", "doctype"],
         created() {
             console.log('created');
-            // this.pdfSrc = pdf.createLoadingTask(this.pdfSrc)
+            this.pdfSrc = pdf.createLoadingTask(this.pdfSrc)
         },
         computed:{
             pdfSrc(){
@@ -71,11 +71,7 @@
                 this.currentPage = 1; // 加载的时候先加载第一页
             }
         },
-        mounted: ()=> {
-            pdf.createLoadingTask(this.pdfSrc).then((res) => {
-                console.log(res);
-            });
-        }
+
     };
 </script>
 
