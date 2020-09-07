@@ -190,7 +190,8 @@ export default new Vuex.Store({
                 url: '/api' + url.getLinkedRepoList,
                 params: {platform: data.platform, enabled: true},
                 headers: {
-                    'Access-Token': data.access_token,
+                    'Token': data.access_token,
+                    'Access-Token': data.platform_token,
                     'Refresh-Token': data.refresh_token,
                     'User': `${data.platform}/${data.userName}`
                 }

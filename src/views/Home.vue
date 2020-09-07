@@ -418,9 +418,9 @@
                     return Number(this.$store.state.repositoryValue)
                 }
             },
-            // showConfigForm() {
-            //     return `${this.$store.state.showConfigForm}`==='true'
-            // },
+            showConfigForm() {
+                return `${this.$store.state.showConfigForm}`==='true'
+            },
 
         },
         watch: {
@@ -435,7 +435,7 @@
         },
         data() {
             return {
-                showConfigForm:false,
+                // showConfigForm:false,
                 emailTypeArr: [{value: 'Gmail', label: 'Gmail'}],
                 emailType: '',
                 emailDialogVisible: false,
@@ -838,14 +838,14 @@
             },
             /*关闭cla配置表单*/
             closeConfigForm() {
-                // this.$store.commit('setShowConfigForm', 'false')
+                this.$store.commit('setShowConfigForm', 'false')
                 this.showConfigForm = false
                 this.setClientHeight()
             },
 
             /*点击配置cla按钮*/
             configCla() {
-                // this.$store.commit('setShowConfigForm', 'true')
+                this.$store.commit('setShowConfigForm', 'true')
                 this.showConfigForm = true;
                 this.home.height = 'auto'
                 this.getOrgsInfo()
@@ -883,7 +883,9 @@
 
             },
             clearPageSession(){
-                sessionStorage.removeItem('')
+                sessionStorage.removeItem('orgOptions')
+                sessionStorage.removeItem('repositoryOptions')
+                sessionStorage.removeItem('claOptions')
             },
             getCookieData() {
                 if (document.cookie !== '') {
@@ -940,6 +942,7 @@
         },
 
         created() {
+            this.clearPageSession();
             console.log('created');
             this.getPath();
             this.openFullScreen();
