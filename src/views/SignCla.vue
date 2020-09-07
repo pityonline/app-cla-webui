@@ -137,13 +137,13 @@
             loginType() {
                 return this.$store.state.loginType
             },
-            platform_token(){
+            platform_token() {
                 return this.$store.state.platform_token
             },
-            access_token(){
+            access_token() {
                 return this.$store.state.access_token
             },
-            refresh_token(){
+            refresh_token() {
                 return this.$store.state.refresh_token
             },
         },
@@ -262,7 +262,7 @@
         },
         methods: {
             ...mapActions(['setTokenAct', 'setRepoInfoAct']),
-            async verifyTel(rule, value, callback){
+            async verifyTel(rule, value, callback) {
                 if (!value) {
                     callback();
                 } else {
@@ -276,7 +276,7 @@
                     callback();
                 }
             },
-            async verifyAddr (rule, value, callback) {
+            async verifyAddr(rule, value, callback) {
                 if (!value) {
                     callback(new Error('please input address'))
                 }
@@ -326,14 +326,15 @@
                 date.getDate() < 10 ? day = `0${date.getDate()}` : day = date.getDate()
                 console.log(this.fields);
                 console.log(this.ruleForm);
-                for(let item of this.fields){
+                for (let item of this.fields) {
                     console.log(item);
                     if (item.type === 'date') {
-                        console.log(this.ruleForm[item.id]);
-                        this.ruleForm[item.id]=year + '-' + month + '-' + day
+                        Object.assign(this.ruleForm, {[item.id]: year + '-' + month + '-' + day})
+                        // this.ruleForm[item.id] = year + '-' + month + '-' + day
                         break;
                     }
                 }
+                console.log(this.ruleForm);
                 if (this.loginType !== 'corporation') {
                     this.getEmail(this.platform_token, this.refresh_token)
                 }
@@ -344,13 +345,14 @@
                     params: {access_token: access_token}
                 }).then(res => {
                     console.log(res);
-                    for(let item of this.fields){
+                    for (let item of this.fields) {
                         if (item.type === 'email') {
-                            this.ruleForm[item.id]=res.data[0].email
+                            Object.assign(this.ruleForm, {[item.id]: res.data[0].email})
+                            // this.ruleForm[item.id]=res.data[0].email
                             break;
                         }
                     }
-
+                    console.log(this.ruleForm);
                 }).catch(err => {
                     console.log(err);
                 })
@@ -398,9 +400,9 @@
                                 this.value = index;
 
                                 console.log('find claText');
-                                new Promise(resolve=>{
-                                    this.getClaText(item.cla_id,resolve)
-                                }).then(resp=>{
+                                new Promise(resolve => {
+                                    this.getClaText(item.cla_id, resolve)
+                                }).then(resp => {
                                     console.log(resp);
                                     argRes('completed')
                                 })
@@ -433,7 +435,7 @@
             },
 
             /*查找clatext*/
-            getClaText(cla_id,argRes) {
+            getClaText(cla_id, argRes) {
                 this.$axios({
                     url: `/api${url.getClaInfo}/${cla_id}`,
                     headers: {'Token': this.$store.state.access_token},
@@ -442,7 +444,13 @@
                     this.ruleForm = {};
                     this.rules = {};
                     Object.assign(this.ruleForm, {code: ''})
-                    Object.assign(this.rules, {code: [{required: true, message: 'Please enter the verification code', trigger: 'blur'},]})
+                    Object.assign(this.rules, {
+                        code: [{
+                            required: true,
+                            message: 'Please enter the verification code',
+                            trigger: 'blur'
+                        },]
+                    })
                     document.getElementById('claBox').innerHTML = resp.data.text;
 
                     for (let i = 0; i < resp.data.fields.length; i++) {
@@ -471,12 +479,12 @@
                                 ],
                             })
 
-                        }else if (item.type === 'date') {
+                        } else if (item.type === 'date') {
                             Object.assign(this.rules, {
                                 [item.id]: [
                                     {required: true, message: 'please input date', trigger: 'blur'}],
                             })
-                        }  else if (item.type === 'email') {
+                        } else if (item.type === 'email') {
                             Object.assign(this.rules, {
                                 [item.id]: [{
                                     required: true,
@@ -492,7 +500,7 @@
                                     trigger: 'blur'
                                 }],
                             })
-                        }else if (item.type === 'address') {
+                        } else if (item.type === 'address') {
                             Object.assign(this.rules, {
                                 [item.id]: [{
                                     required: true,
@@ -524,7 +532,7 @@
                 for (let key in this.ruleForm) {
                     console.log(key);
                     if (this.ruleForm[key] !== '') {
-                        Object.assign(info, {[key]: this.ruleForm[key]+''})
+                        Object.assign(info, {[key]: this.ruleForm[key] + ''})
                     }
                 }
                 console.log(info);
@@ -648,17 +656,16 @@
 
         created() {
             this.getCookieData()
-            new Promise(resolve=>{
-               this.getSignPage(resolve);
-           },reject=>{
+            new Promise(resolve => {
+                this.getSignPage(resolve);
+            }, reject => {
 
-            }).then(res=>{
+            }).then(res => {
                 console.log(res);
                 this.getNowDate()
 
-           },err=>{})
-
-
+            }, err => {
+            })
 
 
         },
