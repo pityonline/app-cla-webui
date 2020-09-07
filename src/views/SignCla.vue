@@ -447,7 +447,7 @@
                     headers: {'Token': this.$store.state.access_token},
                 }).then(resp => {
                     console.log(resp);
-                    this.ruleForm = {};
+                    // this.ruleForm = {};
                     this.rules = {};
                     Object.assign(this.ruleForm, {code: ''})
                     Object.assign(this.rules, {
