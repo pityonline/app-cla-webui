@@ -185,7 +185,6 @@
 
             return {
                 cla_org_id: '',
-
                 sendBtText: 'send code',
                 claOrgIdArr: [],
                 fields: [],
@@ -227,6 +226,7 @@
                 // },
 
                 ruleForm: {},
+                myForm: {},
                 rules: {
                     code: [{required: true, message: 'Please enter the verification code', trigger: 'blur'},],
                     name: [
@@ -326,12 +326,12 @@
                 date.getDate() < 10 ? day = `0${date.getDate()}` : day = date.getDate()
                 console.log(this.fields);
                 console.log(this.ruleForm);
+
                 for (let item of this.fields) {
                     console.log(item);
                     if (item.type === 'date') {
+                        this.myForm.date=year + '-' + month + '-' + day
                         Object.assign(this.ruleForm, {[item.id]: year + '-' + month + '-' + day})
-                        Object.assign(this.ruleForm, {code: 555555})
-                        // this.ruleForm[item.id] = year + '-' + month + '-' + day
                         break;
                     }
                 }
@@ -346,10 +346,10 @@
                     params: {access_token: access_token}
                 }).then(res => {
                     console.log(res);
+                    this.myForm.email=res.data[0].email
                     for (let item of this.fields) {
                         if (item.type === 'email') {
                             Object.assign(this.ruleForm, {[item.id]: res.data[0].email})
-                            // this.ruleForm[item.id]=res.data[0].email
                             break;
                         }
                     }
@@ -468,6 +468,7 @@
                     this.fields.forEach(item => {
                         Object.assign(form, {[item.id]: ''})
                         if (item.type === 'name') {
+                            Object.assign(this.myForm, {name: ''})
                             Object.assign(rules, {
                                 [item.id]: [
                                     {required: true, message: 'please input name', trigger: 'blur'},
@@ -481,11 +482,15 @@
                             })
 
                         } else if (item.type === 'date') {
+                            Object.assign(this.myForm, {date: ''})
+
                             Object.assign(rules, {
                                 [item.id]: [
                                     {required: true, message: 'please input date', trigger: 'blur'}],
                             })
                         } else if (item.type === 'email') {
+                            Object.assign(this.myForm, {email: ''})
+
                             Object.assign(rules, {
                                 [item.id]: [{
                                     required: true,
@@ -494,6 +499,8 @@
                                 }],
                             })
                         } else if (item.type === 'telephone') {
+                            Object.assign(this.myForm, {telephone: ''})
+
                             Object.assign(rules, {
                                 [item.id]: [{
                                     required: true,
@@ -502,6 +509,7 @@
                                 }],
                             })
                         } else if (item.type === 'address') {
+                            Object.assign(this.myForm, {address: ''})
                             Object.assign(rules, {
                                 [item.id]: [{
                                     required: true,
@@ -543,7 +551,7 @@
                     myUrl = url.individual_signing;
                     obj = {
                         cla_org_id: this.claOrgIdArr[this.value],
-                        email: this.ruleForm.email,
+                        email: this.myForm.email,
                         info: info,
                     }
 
@@ -552,9 +560,9 @@
                     myUrl = url.corporation_signing;
                     obj = {
                         cla_org_id: this.claOrgIdArr[this.value],
-                        corporation_name: this.ruleForm.corporationName,
-                        admin_name: this.ruleForm.name,
-                        admin_email: this.ruleForm.adminEmail,
+                        corporation_name: this.myForm.corporationName,
+                        admin_name: this.myForm.name,
+                        admin_email: this.myForm.adminEmail,
                         enabled: true,
                         info: info,
                         verifi_code: this.ruleForm.code,
@@ -564,7 +572,7 @@
                     obj = {
                         name: this.ruleForm.name,
                         cla_org_id: this.claOrgIdArr[this.value],
-                        email: this.ruleForm.email,
+                        email: this.myForm.email,
                         info: info,
                     }
                 }
