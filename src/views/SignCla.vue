@@ -302,7 +302,7 @@
                 this.$axios({
                     url: '/api' + url.sendVerifyCode,
                     method: 'post',
-                    data: {cla_org_id: this.cla_org_id, email: this.ruleForm.adminEmail},
+                    data: {cla_org_id: this.cla_org_id, email: this.myForm.adminEmail},
 
                 }).then(res => {
                     console.log(res);
