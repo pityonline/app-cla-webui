@@ -6,7 +6,7 @@
             <el-col :offset="8" :span="8">
                 <div>
 
-                    <svg-icon class="pointer" @click="" id="svg_logo" icon-class="logo_b"/>
+                    <svg-icon class="pointer" @click="" id="svg_logo" icon-class="CLA_SYSTEM_BLACK"/>
                 </div>
             </el-col>
 
@@ -575,7 +575,7 @@
                 } else if (this.$store.state.loginType === 'employee') {
                     myUrl = url.employee_signing;
                     obj = {
-                        name: this.ruleForm.name,
+                        name: this.myForm.name,
                         cla_org_id: this.claOrgIdArr[this.value],
                         email: this.myForm.email,
                         info: info,
