@@ -25,17 +25,6 @@
 <script>
     import pdf from "vue-pdf";
 
-    var loadingTask = pdf.createLoadingTask({
-
-        url: 'https://cdn.mozilla.net/pdfjs/tracemonkey.pdf',
-
-        httpHeaders: {
-            url: this.pdfSrc,
-            httpHeaders: {'Token': this.$store.state.access_token}
-        }
-
-    });
-
     export default {
         name: "PdfReader",
         components: {
@@ -82,13 +71,13 @@
         created() {
             console.log('created');
             console.log(this.pdfSrc);
-            // this.pdfSrc = pdf.createLoadingTask({
-            //     url: this.pdfSrc,
-            //     httpHeaders: {'Token': this.$store.state.access_token}
-            // })
+            this.pdfSrc = pdf.createLoadingTask({
+                url: this.pdfSrc,
+                httpHeaders: {'Token': this.$store.state.access_token}
+            })
         },
         mounted() {
-            this.src.then(pdf => {
+            this.pdfSrc.then(pdf => {
                 this.pageCount = pdf.pageCount;
             });
         }
