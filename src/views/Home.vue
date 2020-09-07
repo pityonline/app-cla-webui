@@ -34,6 +34,7 @@
                                                        size="medium"
                                                        clearable=""
                                                        filterable
+                                                       @visible-change="orgVisibleChange"
                                                        @change="changeOrg">
                                                 <el-option
                                                         v-for="item in orgOptions"
@@ -50,6 +51,7 @@
                                                        size="medium"
                                                        clearable=""
                                                        filterable
+                                                       @visible-change="repoVisibleChange"
                                                        @change="changeRepository">
                                                 <el-option
                                                         v-for="item in repositoryOptions"
@@ -708,6 +710,22 @@
                 }
 
             },
+            orgVisibleChange(visible) {
+                console.log('orgVisibleChange');
+                if (visible) {
+                    console.log('orgVisibleChange',visible);
+                    this.getOrgsInfo();
+                }
+
+            },
+            repoVisibleChange(visible) {
+                console.log('repoVisibleChange');
+                if (visible) {
+                    console.log('repoVisibleChange',visible);
+                    this.getRepositoriesOfOrg();
+                }
+
+            },
             /*选择cla*/
             changeCla(value) {
                 this.$store.commit('setClaValue', value)
@@ -886,9 +904,9 @@
                 sessionStorage.removeItem('orgOptions')
                 sessionStorage.removeItem('repositoryOptions')
                 sessionStorage.removeItem('claOptions')
-                sessionStorage.removeItem('claOptions')
-                sessionStorage.removeItem('claOptions')
-                sessionStorage.removeItem('claOptions')
+                sessionStorage.removeItem('orgValue')
+                sessionStorage.removeItem('claValue')
+                sessionStorage.removeItem('repositoryValue')
             },
             getCookieData() {
                 if (document.cookie !== '') {

@@ -4,7 +4,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/bdd0211e92f6f1aabbec.worker.js"
   },
   {
-    "revision": "a5afc0afe0b1e495358d",
+    "revision": "1dc7dc81f812c881f273",
     "url": "/css/app.fa2101f4.css"
   },
   {
@@ -14,10 +14,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "b74d0239e8c2e51450bc",
     "url": "/css/chunk-05dc671b.9c565723.css"
-  },
-  {
-    "revision": "f960931cbb1028fe93ef",
-    "url": "/css/chunk-0e46c9c0.9ee11644.css"
   },
   {
     "revision": "23aea2ed3e8ccae62dd0",
@@ -80,6 +76,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/css/chunk-7f10db34.f7688ac9.css"
   },
   {
+    "revision": "78171983ec861ef9518d",
+    "url": "/css/chunk-812b1cba.9d678d6f.css"
+  },
+  {
     "revision": "d2fd40bb517b9d0ea7db",
     "url": "/css/chunk-8904defe.a1da32bc.css"
   },
@@ -116,12 +116,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/logo.3a1a754d.png"
   },
   {
-    "revision": "69a025eb6f03ffc4bb3dcd6677d9db11",
+    "revision": "b299a77022bf30ee3d702ed7a635ddf5",
     "url": "/index.html"
   },
   {
-    "revision": "a5afc0afe0b1e495358d",
-    "url": "/js/app.89b65e47.js"
+    "revision": "1dc7dc81f812c881f273",
+    "url": "/js/app.a0ca8a8b.js"
   },
   {
     "revision": "a3916ca7abddf5f9a8aa",
@@ -130,10 +130,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "b74d0239e8c2e51450bc",
     "url": "/js/chunk-05dc671b.db2c8405.js"
-  },
-  {
-    "revision": "f960931cbb1028fe93ef",
-    "url": "/js/chunk-0e46c9c0.164e8e35.js"
   },
   {
     "revision": "23aea2ed3e8ccae62dd0",
@@ -210,6 +206,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "71043bf6b34db7521593",
     "url": "/js/chunk-7f10db34.38a704b3.js"
+  },
+  {
+    "revision": "78171983ec861ef9518d",
+    "url": "/js/chunk-812b1cba.bcb8abc6.js"
   },
   {
     "revision": "d2fd40bb517b9d0ea7db",
