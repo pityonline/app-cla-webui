@@ -699,7 +699,9 @@
                 this.$router.push('/createMetadata')
             },
             claVisibleChange(visible) {
+                console.log('claVisibleChange');
                 if (visible && this.filterChange) {
+                    console.log('claVisibleChange',visible,this.filterChange);
                     this.getCLA();
                     this.filterChange = false;
                 }

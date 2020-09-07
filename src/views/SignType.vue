@@ -36,9 +36,9 @@
                     let arg = item.split('=')
                     if (arg[0] === 'platform') {
                         this.platform=arg[1]
-                    }else if (arg[0] === 'org'){
+                    }else if (arg[0] === 'org_id'){
                         this.org=arg[1]
-                    } else if (arg[0] === 'repo'){
+                    } else if (arg[0] === 'repo_id'){
                         this.repo=arg[1]
                     }
                 })

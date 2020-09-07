@@ -244,6 +244,7 @@
             handleSuccess(file, fileList) {
                 console.log(file, fileList);
 
+
             },
             handleRemove(file, fileList) {
                 console.log(file, fileList);

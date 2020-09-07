@@ -42,7 +42,6 @@
         },
         data() {
             return {
-                src: loadingTask,
                 currentPage: 0, // pdf文件页码
                 pageCount: 0, // pdf文件总页数
                 numPages: 1,

@@ -34,6 +34,10 @@
                         prop="cla_language"
                         label="Language">
                 </el-table-column>
+                <el-table-column
+                        label="Signature">
+
+                </el-table-column>
                 <!--<el-table-column-->
                 <!--prop="contributors"-->
                 <!--label="Corporation Contributors"-->
