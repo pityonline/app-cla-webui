@@ -447,10 +447,10 @@
                     headers: {'Token': this.$store.state.access_token},
                 }).then(resp => {
                     console.log(resp);
-                    // this.ruleForm = {};
-                    this.rules = {};
-                    Object.assign(this.ruleForm, {code: ''})
-                    Object.assign(this.rules, {
+                    let form = {}
+                    let rules={}
+                    Object.assign(form, {code: ''})
+                    Object.assign(rules, {
                         code: [{
                             required: true,
                             message: 'Please enter the verification code',
@@ -471,9 +471,9 @@
                     console.log(resp.data.fields);
                     this.fields = resp.data.fields
                     this.fields.forEach(item => {
-                        // Object.assign(this.ruleForm, {[item.id]: ''})
+                        Object.assign(form, {[item.id]: ''})
                         if (item.type === 'name') {
-                            Object.assign(this.rules, {
+                            Object.assign(rules, {
                                 [item.id]: [
                                     {required: true, message: 'please input name', trigger: 'blur'},
                                     {
@@ -486,12 +486,12 @@
                             })
 
                         } else if (item.type === 'date') {
-                            Object.assign(this.rules, {
+                            Object.assign(rules, {
                                 [item.id]: [
                                     {required: true, message: 'please input date', trigger: 'blur'}],
                             })
                         } else if (item.type === 'email') {
-                            Object.assign(this.rules, {
+                            Object.assign(rules, {
                                 [item.id]: [{
                                     required: true,
                                     validator: this.verifyFormEmail,
@@ -499,7 +499,7 @@
                                 }],
                             })
                         } else if (item.type === 'telephone') {
-                            Object.assign(this.rules, {
+                            Object.assign(rules, {
                                 [item.id]: [{
                                     required: true,
                                     validator: this.verifyTel,
@@ -507,7 +507,7 @@
                                 }],
                             })
                         } else if (item.type === 'address') {
-                            Object.assign(this.rules, {
+                            Object.assign(rules, {
                                 [item.id]: [{
                                     required: true,
                                     validator: this.verifyAddr(),
@@ -516,6 +516,8 @@
                             })
                         }
                     })
+                    this.ruleForm=form
+                    this.rules=rules
                     console.log(this.ruleForm);
                     console.log(this.rules);
                     argRes('complete')
