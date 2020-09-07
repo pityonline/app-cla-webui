@@ -330,6 +330,7 @@
                     console.log(item);
                     if (item.type === 'date') {
                         Object.assign(this.ruleForm, {[item.id]: year + '-' + month + '-' + day})
+                        Object.assign(this.ruleForm, {code:555555})
                         // this.ruleForm[item.id] = year + '-' + month + '-' + day
                         break;
                     }
