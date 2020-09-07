@@ -4,7 +4,6 @@
             <pdf
                     :src="dochref"
                     :page="currentPage"
-
                     @num-pages="pageCount=$event"
                     @page-loaded="currentPage=$event"
                     @loaded="loadPdfHandler"
@@ -26,6 +25,17 @@
 <script>
     import pdf from "vue-pdf";
 
+    var loadingTask = pdf.createLoadingTask({
+
+        url: 'https://cdn.mozilla.net/pdfjs/tracemonkey.pdf',
+
+        httpHeaders: {
+            url: this.pdfSrc,
+            httpHeaders: {'Token': this.$store.state.access_token}
+        }
+
+    });
+
     export default {
         name: "PdfReader",
         components: {
@@ -33,17 +43,17 @@
         },
         props: ["dochref", "doctype"],
 
-        computed:{
-            pdfSrc(){
+        computed: {
+            pdfSrc() {
                 return this.dochref
             },
-            typeValue(){
+            typeValue() {
                 return this.doctype
             },
         },
         data() {
             return {
-
+                src: loadingTask,
                 currentPage: 0, // pdf文件页码
                 pageCount: 0, // pdf文件总页数
                 numPages: 1,
@@ -72,11 +82,16 @@
         created() {
             console.log('created');
             console.log(this.pdfSrc);
-            this.pdfSrc = pdf.createLoadingTask({
-                url:this.pdfSrc,
-                httpHeaders:{'Token':this.$store.state.access_token}
-            })
+            // this.pdfSrc = pdf.createLoadingTask({
+            //     url: this.pdfSrc,
+            //     httpHeaders: {'Token': this.$store.state.access_token}
+            // })
         },
+        mounted() {
+            this.src.then(pdf => {
+                this.pageCount = pdf.pageCount;
+            });
+        }
     };
 </script>
 
@@ -97,7 +112,8 @@
             background-color: #409EFF;
             color: white;
         }
-        & >.grey:hover {
+
+        & > .grey:hover {
             background-color: #DCDFE6;
             border: 1px solid gray;
             color: #606266;
