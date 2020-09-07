@@ -72,7 +72,10 @@
         created() {
             console.log('created');
             console.log(this.pdfSrc);
-            this.pdfSrc = pdf.createLoadingTask(this.pdfSrc)
+            this.pdfSrc = pdf.createLoadingTask({
+                url:this.pdfSrc,
+                httpHeaders:{'Token':this.$store.state.access_token}
+            })
         },
     };
 </script>
