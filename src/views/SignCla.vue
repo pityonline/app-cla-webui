@@ -53,11 +53,11 @@
 
                                     <el-input v-if="item.type==='email'" :readonly="loginType!=='corporation'"
                                               v-model="ruleForm[item.id]"
-                                              size="small"></el-input>
+                                              size="small" @blur="setMyForm(item.type,ruleForm[item.id])"></el-input>
 
                                     <el-input v-else-if="item.type==='date'" readonly="" v-model="ruleForm[item.id]"
-                                              size="small"></el-input>
-                                    <el-input v-else v-model="ruleForm[item.id]" size="small"></el-input>
+                                              size="small" @blur="setMyForm(item.type,ruleForm[item.id])"></el-input>
+                                    <el-input v-else v-model="ruleForm[item.id]" size="small" @blur="setMyForm(item.type,ruleForm[item.id])"></el-input>
                                 </el-form-item>
                                 <el-form-item
                                         v-if="loginType==='corporation'"
@@ -291,6 +291,10 @@
                 } else {
                     callback(new Error('Email format error'))
                 }
+            },
+            setMyForm(type,value){
+                this.myForm[type]=value
+                console.log(this.myForm[type]);
             },
             sendCode() {
                 console.log('sendcode');
