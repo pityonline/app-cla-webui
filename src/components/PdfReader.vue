@@ -34,6 +34,7 @@
         props: ["dochref", "doctype"],
         created() {
             console.log('created');
+            console.log(this.pdfSrc);
             this.pdfSrc = pdf.createLoadingTask(this.pdfSrc)
         },
         computed:{
