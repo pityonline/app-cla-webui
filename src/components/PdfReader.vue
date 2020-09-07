@@ -32,11 +32,7 @@
             pdf,
         },
         props: ["dochref", "doctype"],
-        created() {
-            console.log('created');
-            console.log(this.pdfSrc);
-            this.pdfSrc = pdf.createLoadingTask(this.pdfSrc)
-        },
+
         computed:{
             pdfSrc(){
                 return this.dochref
@@ -54,6 +50,7 @@
                 activeIndex: 0
             };
         },
+
         methods: {
             // 改变PDF页码,val传过来区分上一页下一页的值,0上一页,1下一页
             changePdfPage(val) {
@@ -66,14 +63,17 @@
             },
             // pdf加载时
             loadPdfHandler(e) {
-                console.log(e);
                 console.log(this.pdfSrc);
                 console.log(this.pdfSrc, this.doctype);
 
                 this.currentPage = 1; // 加载的时候先加载第一页
             }
         },
-
+        created() {
+            console.log('created');
+            console.log(this.pdfSrc);
+            this.pdfSrc = pdf.createLoadingTask(this.pdfSrc)
+        },
     };
 </script>
 
