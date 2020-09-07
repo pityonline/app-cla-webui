@@ -226,7 +226,12 @@
                 //     address: '',
                 // },
 
-                ruleForm: {},
+                ruleForm: {
+                    '0': '',
+                    '1': '',
+                    '2': '',
+                    code: '',
+                },
                 rules: {
                     code: [{required: true, message: 'Please enter the verification code', trigger: 'blur'},],
                     name: [
@@ -330,7 +335,7 @@
                     console.log(item);
                     if (item.type === 'date') {
                         Object.assign(this.ruleForm, {[item.id]: year + '-' + month + '-' + day})
-                        Object.assign(this.ruleForm, {code:555555})
+                        Object.assign(this.ruleForm, {code: 555555})
                         // this.ruleForm[item.id] = year + '-' + month + '-' + day
                         break;
                     }
@@ -453,7 +458,7 @@
                         },]
                     })
                     document.getElementById('claBox').innerHTML = resp.data.text;
-
+                    /*排序*/
                     for (let i = 0; i < resp.data.fields.length; i++) {
                         for (let j = i + 1; j < resp.data.fields.length; j++) {
                             if (Number(resp.data.fields[i].id) > Number(resp.data.fields[j].id)) {
@@ -466,7 +471,7 @@
                     console.log(resp.data.fields);
                     this.fields = resp.data.fields
                     this.fields.forEach(item => {
-                        Object.assign(this.ruleForm, {[item.id]: ''})
+                        // Object.assign(this.ruleForm, {[item.id]: ''})
                         if (item.type === 'name') {
                             Object.assign(this.rules, {
                                 [item.id]: [
