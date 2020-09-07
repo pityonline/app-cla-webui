@@ -2,7 +2,7 @@
     <div class="show-pdf">
         <div>
             <pdf
-                    :src="dochref"
+                    :src="pdfSrc"
                     :page="currentPage"
                     @num-pages="pageCount=$event"
                     @page-loaded="currentPage=$event"
@@ -77,9 +77,9 @@
             })
         },
         mounted() {
-            this.pdfSrc.then(pdf => {
-                this.pageCount = pdf.pageCount;
-            });
+            // this.pdfSrc.then(pdf => {
+            //     this.pageCount = pdf.pageCount;
+            // });
         }
     };
 </script>
