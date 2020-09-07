@@ -779,8 +779,7 @@
                 let obj = {access_token: this.$store.state.platform_token, org: org, page: 1, per_page: 10};
                 console.log("getRepositoriesOfOrg", obj);
                 this.$axios({
-                    url: `https:
-                    //gitee.com/api/v5/orgs/${org}/repos`,
+                    url: `https://gitee.com/api/v5/orgs/${org}/repos`,
                     params: obj,
                 }).then(res => {
                     console.log(res);
