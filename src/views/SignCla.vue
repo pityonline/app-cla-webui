@@ -226,12 +226,7 @@
                 //     address: '',
                 // },
 
-                ruleForm: {
-                    '0': '',
-                    '1': '',
-                    '2': '',
-                    code: '',
-                },
+                ruleForm: {},
                 rules: {
                     code: [{required: true, message: 'Please enter the verification code', trigger: 'blur'},],
                     name: [
