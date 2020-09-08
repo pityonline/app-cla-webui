@@ -106,9 +106,7 @@
                         }
                         break;
                     case 'd':
-                        if (this.$route.path !== '/resetPassword') {
                             this.previewDialogVisible=true
-                        }
                         break;
 
                     case 'e':

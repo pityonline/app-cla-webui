@@ -154,7 +154,7 @@
                         }
                         break;
 
-                    case 'd':
+                    case 'e':
                         this.loginOut()
                         break;
                 }

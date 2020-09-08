@@ -27,8 +27,8 @@
                         <el-dropdown-item v-if="userInfo[orgValue].role==='admin'" command="b">create user
                         </el-dropdown-item>
                         <el-dropdown-item command="c">reset password</el-dropdown-item>
-                        <!--<el-dropdown-item v-if="userInfo[orgValue].role==='admin'" command="d">my cla</el-dropdown-item>-->
-                        <el-dropdown-item command="d">login out</el-dropdown-item>
+                        <el-dropdown-item v-if="userInfo[orgValue].role==='admin'" command="d">my cla</el-dropdown-item>
+                        <el-dropdown-item command="e">login out</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
             </div>
