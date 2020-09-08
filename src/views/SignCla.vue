@@ -401,6 +401,9 @@
                         this.languageOptions = []
                         this.claIdArr = []
                         this.claOrgIdArr = []
+                        for (let item of res.data){
+                            console.log((item));
+                        }
                         res.data.forEach((item, index) => {
                             console.log((item, index));
                             if (item.cla_language === 'english') {
