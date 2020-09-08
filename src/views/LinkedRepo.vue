@@ -45,7 +45,7 @@
 
                             <div class="menuBT">
 
-                                <el-button @click="previewOriginalSignature(scope.row)" type="" size="mini">preview
+                                <el-button style="margin-left: 10px" @click="previewOriginalSignature(scope.row)" type="" size="mini">preview
                                 </el-button>
                                 <el-button @click="downloadOriginalSignature(scope.row)" type="" size="mini">download
                                 </el-button>
@@ -643,17 +643,17 @@
         text-align: left;
     }
 
+
     .menuBT {
         display: flex;
         flex-direction: column;
 
         & > * {
-
-            margin: .2rem 0;
+            width: 6rem;
+            margin: .2rem 1rem;
             text-align: center;
         }
     }
-
     .pointer {
         cursor: pointer;
     }
