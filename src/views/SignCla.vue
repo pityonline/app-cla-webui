@@ -409,7 +409,7 @@
                             if (res.data[key].language === 'english') {
                                 this.value = key;
                                 this.cla_org_id=key
-
+                                console.log(this.cla_org_id);
                                 console.log('find claText');
 
                                 this.setClaText(key)
