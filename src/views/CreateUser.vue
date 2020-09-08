@@ -49,14 +49,18 @@
         },
         methods: {
             addRow(index) {
+                console.log(emails);
                 if (Number(this.$store.state.userLimit) + this.emails.length === this.limit) {
                     this.$message.closeAll()
                     this.$message.error(`Create up to ${this.limit} users`)
                 } else {
                     this.emails.splice(index + 1, 0, {email: ''})
                 }
+                console.log(emails);
+
             },
             myDeleteRow(index) {
+                console.log(emails);
                 console.log(index);
                 if (this.emails.length === 1) {
                     this.emails[0] = ''
@@ -64,7 +68,7 @@
                 } else {
                     this.emails.splice(index, 1);
                 }
-
+                console.log(emails);
             },
             createUser() {
                 let myEmails = []
