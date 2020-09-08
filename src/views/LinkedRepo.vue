@@ -33,12 +33,7 @@
                         prop="cla_language"
                         label="Language">
                 </el-table-column>
-                <el-table-column
-                        label="Sign">
-                    <template slot-scope="scope">
-                    <el-button size="mini" @click="toSignPage(scope.row)">Sign</el-button>
-                    </template>
-                </el-table-column>
+
                 <el-table-column
                         align="center"
                         label="Original Signature">
@@ -126,7 +121,12 @@
                         <!--</el-popover>-->
                     </template>
                 </el-table-column>
-
+                <el-table-column
+                        label="Sign">
+                    <template slot-scope="scope">
+                        <el-button size="mini" @click="toSignPage(scope.row)">Sign</el-button>
+                    </template>
+                </el-table-column>
             </el-table>
         </div>
         <div class="paginationClass">
@@ -377,6 +377,7 @@
         },
         data() {
             return {
+                signRouter:'/signType',
                 pdfSrc: '',
                 numPages: undefined,
                 docInfo: {},
@@ -406,7 +407,8 @@
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
             toSignPage(row){
                 console.log(row);
-                // window.open()
+                let url=`http://cla.osinfra.cn:60031${this.signRouter}?platform=${row.platform}&org_id=${row.org_id}&repo_id=${row.repo_id}`
+                window.open(url)
             },
             submitUpload() {
                 this.$refs.uploadPdf.submit();
