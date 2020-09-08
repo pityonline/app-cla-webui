@@ -44,7 +44,8 @@
             return {
                 currentPage: 0, // pdf文件页码
                 pageCount: 0, // pdf文件总页数
-                activeIndex: 0
+                activeIndex: 0,
+                numPages: undefined,
             };
         },
 
@@ -71,9 +72,16 @@
             console.log(this.pdfSrc);
             this.pdfSrc = pdf.createLoadingTask({
                 url: this.pdfSrc,
-                httpHeaders: {'Token': this.$store.state.access_token}
+                httpHeaders: {
+                    'Token': this.$store.state.access_token,
+                    'x-ipp-device-uuid': 'SOME_UUID',
+                    'x-ipp-client': 'SOME_ID',
+                    'x-ipp-client-version': 'SOME_VERSION'
+                }
             })
-            this.pdfSrc.then(pdf => { this.numPages = pdf.numPages; });
+            this.pdfSrc.promise.then(pdf => {
+                this.numPages = pdf.numPages;
+            });
         },
         mounted() {
             // this.pdfSrc.then(pdf => {
