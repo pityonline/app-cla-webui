@@ -49,7 +49,7 @@
         },
         methods: {
             addRow(index) {
-                if (this.$store.state.userLimit + this.emails.length === this.limit) {
+                if (Number(this.$store.state.userLimit) + this.emails.length === this.limit) {
                     this.$message.closeAll()
                     this.$message.error(`Create up to ${this.limit} users`)
                 } else {
