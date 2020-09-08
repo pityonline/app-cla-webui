@@ -91,6 +91,11 @@
                     // this.$message.error('Please enter the correct old password')
                 })
             },
+        },
+        created() {
+            console.log(this.$store.state.loginInfo);
+            console.log(this.$store.state.loginInfo.userInfo);
+            console.log(this.$store.state.loginInfo.userInfo.cla_org_id,);
         }
     }
 </script>
