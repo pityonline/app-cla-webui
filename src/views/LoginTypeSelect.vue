@@ -12,10 +12,10 @@
                     <!--Employee-->
                 <!--</el-button>-->
                 <el-button type="primary" size="medium" style="width: 100%;margin: 1rem 0" @click="submit('orgManager')">
-                    OrgManager
+                    Org Manager
                 </el-button>
                 <el-button type="primary" size="medium" style="width: 100%;margin: 1rem 0" @click="submit('corporationManager')">
-                    CorporationManager
+                    Corporation Manager
                 </el-button>
 
 

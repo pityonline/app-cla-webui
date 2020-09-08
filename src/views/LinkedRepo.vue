@@ -35,6 +35,7 @@
                         label="Language">
                 </el-table-column>
                 <el-table-column
+                        align="center"
                         label="Original Signature">
                     <template slot-scope="scope">
                         <el-popover
@@ -44,15 +45,18 @@
 
                             <div class="menuBT">
 
-                                <el-button @click="previewOriginalSignature(scope.row)" type="" size="mini">preview</el-button>
-                                <el-button @click="downloadOriginalSignature(scope.row)" type="" size="mini">download</el-button>
+                                <el-button @click="previewOriginalSignature(scope.row)" type="" size="mini">preview
+                                </el-button>
+                                <el-button @click="downloadOriginalSignature(scope.row)" type="" size="mini">download
+                                </el-button>
                             </div>
 
-                            <svg-icon slot="reference" class="pointer" icon-class="pdf" />
+                            <svg-icon slot="reference" class="pointer" icon-class="pdf"/>
                         </el-popover>
                     </template>
                 </el-table-column>
                 <el-table-column
+                        align="center"
                         label="Org Signature">
                     <template slot-scope="scope">
                         <el-popover
@@ -64,11 +68,13 @@
                                 <el-button @click="uploadOrgSignature(scope.row)" style="margin-left: 10px" type=""
                                            size="mini">upload
                                 </el-button>
-                                <el-button @click="downloadOrgSignature(scope.row)" type="" size="mini">download</el-button>
-                                <el-button @click="previewOrgSignature(scope.row)" type="" size="mini">preview</el-button>
+                                <el-button @click="downloadOrgSignature(scope.row)" type="" size="mini">download
+                                </el-button>
+                                <el-button @click="previewOrgSignature(scope.row)" type="" size="mini">preview
+                                </el-button>
                             </div>
 
-                            <svg-icon slot="reference" class="pointer" icon-class="pdf" />
+                            <svg-icon slot="reference" class="pointer" icon-class="pdf"/>
 
                         </el-popover>
                     </template>
@@ -363,8 +369,8 @@
                 uploadUrl: '',
                 form: {file: ''},
                 fileList: [],
-                previewOriginalDialogVisible:false,
-                uploadOrgDialogVisible:false,
+                previewOriginalDialogVisible: false,
+                uploadOrgDialogVisible: false,
                 tableData: [],
                 unlinkId: '',
                 platform: this.$store.state.platform,
@@ -424,7 +430,7 @@
                 this.docInfo = {
                     type: "pdf",
                     // href:`/static/pdf/merge.pdf`
-                    href:`/api${url.downloadSignature}/${this.item.id}`
+                    href: `/api${url.downloadSignature}/${this.item.id}`
                 }
                 this.previewOriginalDialogVisible = true
                 console.log('previewOrgSignature', row);
@@ -581,6 +587,9 @@
 </script>
 
 <style scoped lang="less">
+    .el-popover {
+        min-width: 7rem;
+    }
     .tableStyle {
         margin-bottom: 2rem;
         padding: 3rem;
