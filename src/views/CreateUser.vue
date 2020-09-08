@@ -42,25 +42,22 @@
         data() {
 
             return {
-                cla_org_id: this.$store.state.loginInfo.cla_org_id,
+                cla_org_id: this.$store.state.loginInfo.userInfo.cla_org_id,
                 emails: [{email: ''}],
                 limit: 5,
             }
         },
         methods: {
             addRow(index) {
-                console.log(this.emails);
                 if (Number(this.$store.state.userLimit) + this.emails.length === this.limit) {
                     this.$message.closeAll()
                     this.$message.error(`Create up to ${this.limit} users`)
                 } else {
                     this.emails.splice(index + 1, 0, {email: ''})
                 }
-                console.log(this.emails);
 
             },
             myDeleteRow(index) {
-                console.log(this.emails);
                 console.log(index);
                 if (this.emails.length === 1) {
                     this.emails[0].email =''
@@ -68,7 +65,6 @@
                 } else {
                     this.emails.splice(index, 1);
                 }
-                console.log(this.emails);
             },
             createUser() {
                 let myEmails = []
