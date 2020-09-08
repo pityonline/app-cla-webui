@@ -403,10 +403,7 @@
                         this.claIdArr = []
                         this.claOrgIdArr = []
                         for (let item of res.data){
-                            console.log((item));
-                        }
-                        res.data.forEach((item, index) => {
-                            console.log((item, index));
+                            console.log(item);
                             if (item.cla_language === 'english') {
                                 this.value = index;
 
@@ -423,7 +420,8 @@
                             this.languageOptions.push({value: index, label: item.cla_language})
                             this.claIdArr.push(item.cla_id)
                             this.claOrgIdArr.push(item.id)
-                        })
+                        }
+
                         this.cla_org_id = this.claOrgIdArr[this.value]
 
                     }
