@@ -427,13 +427,14 @@
                 this.uploadOrgDialogVisible = true
             },
             previewOrgSignature(row) {
+                console.log('previewOrgSignature', row);
+
                 this.docInfo = {
                     type: "pdf",
                     // href:`/static/pdf/merge.pdf`
                     href: `/api${url.downloadSignature}/${this.item.id}`
                 }
                 this.previewOriginalDialogVisible = true
-                console.log('previewOrgSignature', row);
             },
             downloadOrgSignature(row) {
                 console.log('downloadOriginalSignature', row);
@@ -586,7 +587,7 @@
     }
 </script>
 
-<style scoped lang="less">
+<style  lang="less">
     .el-popover {
         min-width: 7rem;
     }
