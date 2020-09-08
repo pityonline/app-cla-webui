@@ -7,7 +7,7 @@
                     <img src="../assets/logo.png" alt="">
                 </div>
 
-                <span class="pointer" @click="loginIn">Sign in</span>
+                <!--<span class="pointer" @click="loginIn">Sign in</span>-->
             </div>
             <div id="section">
                 <div id="title">
