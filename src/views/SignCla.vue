@@ -186,7 +186,7 @@
             }
 
             return {
-                signPageData:'',
+                signPageData: '',
                 cla_org_id: '',
                 sendBtText: 'send code',
                 claOrgIdArr: [],
@@ -400,7 +400,7 @@
 
                 }).then(res => {
                     console.log(res);
-                    this.signPageData=res.data
+                    this.signPageData = res.data
                     console.log(Object.keys(res.data).length);
                     if (Object.keys(res.data).length) {
                         this.languageOptions = []
@@ -412,6 +412,7 @@
                                 console.log('find claText');
 
                                 this.setClaText(key)
+                                argRes('complete')
 
 
                             }
@@ -443,87 +444,87 @@
             /*查找clatext*/
             setClaText(key) {
 
-                    let form = {}
-                    let rules = {}
-                    Object.assign(form, {code: ''})
-                    Object.assign(rules, {
-                        code: [{
-                            required: true,
-                            message: 'Please enter the verification code',
-                            trigger: 'blur'
-                        },]
-                    })
-                    document.getElementById('claBox').innerHTML = this.signPageData[key].text;
-                    /*排序*/
-                    for (let i = 0; i < this.signPageData[key].fields.length; i++) {
-                        for (let j = i + 1; j < this.signPageData[key].fields.length; j++) {
-                            if (Number(this.signPageData[key].fields[i].id) > Number(this.signPageData[key].fields[j].id)) {
-                                let field = this.signPageData[key].fields[i]
-                                this.signPageData[key].fields[i] = this.signPageData[key].fields[j]
-                                this.signPageData[key].fields[j] = field
-                            }
+                let form = {}
+                let rules = {}
+                Object.assign(form, {code: ''})
+                Object.assign(rules, {
+                    code: [{
+                        required: true,
+                        message: 'Please enter the verification code',
+                        trigger: 'blur'
+                    },]
+                })
+                document.getElementById('claBox').innerHTML = this.signPageData[key].text;
+                /*排序*/
+                for (let i = 0; i < this.signPageData[key].fields.length; i++) {
+                    for (let j = i + 1; j < this.signPageData[key].fields.length; j++) {
+                        if (Number(this.signPageData[key].fields[i].id) > Number(this.signPageData[key].fields[j].id)) {
+                            let field = this.signPageData[key].fields[i]
+                            this.signPageData[key].fields[i] = this.signPageData[key].fields[j]
+                            this.signPageData[key].fields[j] = field
                         }
                     }
-                    console.log(this.signPageData[key].fields);
-                    this.fields = this.signPageData[key].fields
-                    this.fields.forEach(item => {
-                        Object.assign(form, {[item.id]: ''})
-                        if (item.type === 'name') {
-                            Object.assign(this.myForm, {name: ''})
-                            Object.assign(rules, {
-                                [item.id]: [
-                                    {required: true, message: 'please input name', trigger: 'blur'},
-                                    {
-                                        min: 2,
-                                        max: 10,
-                                        message: 'The length is between 2 and 10 characters',
-                                        trigger: 'blur'
-                                    }
-                                ],
-                            })
-
-                        } else if (item.type === 'date') {
-                            Object.assign(this.myForm, {date: ''})
-
-                            Object.assign(rules, {
-                                [item.id]: [
-                                    {required: true, message: 'please input date', trigger: 'blur'}],
-                            })
-                        } else if (item.type === 'email') {
-                            Object.assign(this.myForm, {email: ''})
-
-                            Object.assign(rules, {
-                                [item.id]: [{
-                                    required: true,
-                                    validator: this.verifyFormEmail,
+                }
+                console.log(this.signPageData[key].fields);
+                this.fields = this.signPageData[key].fields
+                this.fields.forEach(item => {
+                    Object.assign(form, {[item.id]: ''})
+                    if (item.type === 'name') {
+                        Object.assign(this.myForm, {name: ''})
+                        Object.assign(rules, {
+                            [item.id]: [
+                                {required: true, message: 'please input name', trigger: 'blur'},
+                                {
+                                    min: 2,
+                                    max: 10,
+                                    message: 'The length is between 2 and 10 characters',
                                     trigger: 'blur'
-                                }],
-                            })
-                        } else if (item.type === 'telephone') {
-                            Object.assign(this.myForm, {telephone: ''})
+                                }
+                            ],
+                        })
 
-                            Object.assign(rules, {
-                                [item.id]: [{
-                                    required: true,
-                                    validator: this.verifyTel,
-                                    trigger: 'blur'
-                                }],
-                            })
-                        } else if (item.type === 'address') {
-                            Object.assign(this.myForm, {address: ''})
-                            Object.assign(rules, {
-                                [item.id]: [{
-                                    required: true,
-                                    validator: this.verifyAddr(),
-                                    trigger: 'blur'
-                                }],
-                            })
-                        }
-                    })
-                    this.ruleForm = form
-                    this.rules = rules
-                    console.log(this.ruleForm);
-                    console.log(this.rules);
+                    } else if (item.type === 'date') {
+                        Object.assign(this.myForm, {date: ''})
+
+                        Object.assign(rules, {
+                            [item.id]: [
+                                {required: true, message: 'please input date', trigger: 'blur'}],
+                        })
+                    } else if (item.type === 'email') {
+                        Object.assign(this.myForm, {email: ''})
+
+                        Object.assign(rules, {
+                            [item.id]: [{
+                                required: true,
+                                validator: this.verifyFormEmail,
+                                trigger: 'blur'
+                            }],
+                        })
+                    } else if (item.type === 'telephone') {
+                        Object.assign(this.myForm, {telephone: ''})
+
+                        Object.assign(rules, {
+                            [item.id]: [{
+                                required: true,
+                                validator: this.verifyTel,
+                                trigger: 'blur'
+                            }],
+                        })
+                    } else if (item.type === 'address') {
+                        Object.assign(this.myForm, {address: ''})
+                        Object.assign(rules, {
+                            [item.id]: [{
+                                required: true,
+                                validator: this.verifyAddr(),
+                                trigger: 'blur'
+                            }],
+                        })
+                    }
+                })
+                this.ruleForm = form
+                this.rules = rules
+                console.log(this.ruleForm);
+                console.log(this.rules);
 
             },
             toHome() {
