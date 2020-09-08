@@ -28,12 +28,12 @@
 
     export default {
         name: "CreateUser",
-        computed:{
-            orgValue(){
+        computed: {
+            orgValue() {
                 console.log(this.$store.state.loginInfo.orgValue);
                 return this.$store.state.loginInfo.orgValue
             },
-            userInfo(){
+            userInfo() {
                 console.log(this.$store.state.loginInfo.userInfo);
                 return this.$store.state.loginInfo.userInfo
             },
@@ -43,8 +43,8 @@
 
             return {
                 cla_org_id: this.$store.state.loginInfo.cla_org_id,
-                emails: [],
-                limit:5,
+                emails: [{email: ''}],
+                limit: 5,
             }
         },
         methods: {
@@ -52,8 +52,8 @@
                 if (this.$store.state.userLimit + this.emails.length === this.limit) {
                     this.$message.closeAll()
                     this.$message.error(`Create up to ${this.limit} users`)
-                }else {
-                    this.emails.splice(index + 1, 0, '')
+                } else {
+                    this.emails.splice(index + 1, 0, {email: ''})
                 }
             },
             myDeleteRow(index) {
@@ -67,12 +67,16 @@
 
             },
             createUser() {
-                let obj = {cla_org_id: this.cla_org_id, emails: this.emails}
+                let myEmails = []
+                this.emails.forEach(item => {
+                    myEmails.push(item.email)
+                })
+                let obj = {cla_org_id: this.cla_org_id, emails: myEmails}
                 this.$axios({
                     url: '/api' + url.addEmployeeManager,
                     method: 'post',
                     data: obj,
-                    headers:{
+                    headers: {
                         token: this.userInfo[this.orgValue].token,
                     }
                 }).then(res => {
