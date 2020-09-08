@@ -24,10 +24,11 @@
                     <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item v-if="userInfo[orgValue].role==='admin'" command="a">user</el-dropdown-item>
                         <el-dropdown-item v-else command="a">employee</el-dropdown-item>
-                        <el-dropdown-item v-if="userInfo[orgValue].role==='admin'" command="b">create user</el-dropdown-item>
+                        <el-dropdown-item v-if="userInfo[orgValue].role==='admin'" command="b">create user
+                        </el-dropdown-item>
                         <el-dropdown-item command="c">reset password</el-dropdown-item>
-                        <el-dropdown-item v-if="userInfo[orgValue].role==='admin'" command="d">my cla</el-dropdown-item>
-                        <el-dropdown-item command="e">login out</el-dropdown-item>
+                        <!--<el-dropdown-item v-if="userInfo[orgValue].role==='admin'" command="d">my cla</el-dropdown-item>-->
+                        <el-dropdown-item command="d">login out</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
             </div>
@@ -41,14 +42,14 @@
     export default {
         name: "CorporationHeader",
         // computed: {user:{get:()=>{return this.userName}}},
-        props:['user'],
-        computed:{
+        props: ['user'],
+        computed: {
 
-            userInfo(){
+            userInfo() {
                 console.log(this.user.userInfo);
                 return this.user.userInfo
             },
-            orgValue(){
+            orgValue() {
                 console.log(this.user.orgValue);
                 return this.user.orgValue
             },
@@ -56,7 +57,7 @@
 
         data() {
             return {
-                userName:this.user.userName
+                userName: this.user.userName
 
             }
         },
@@ -65,7 +66,7 @@
         },
         methods: {
             handleCommand(command) {
-                this.$emit('clickItem' ,command);
+                this.$emit('clickItem', command);
             },
             toHome() {
                 this.$router.push('/home')
@@ -83,14 +84,16 @@
     }
 </script>
 
-<style  lang="less">
+<style lang="less">
     .el-dropdown-link {
         cursor: pointer;
         color: rgba(54, 54, 54, 0.91);
     }
+
     .el-icon-arrow-down {
         font-size: 12px;
     }
+
     .pointer {
         cursor: pointer;
     }

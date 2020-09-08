@@ -45,6 +45,7 @@
     import * as until from '../until/until'
     import CorporationHeader from '@components/CorporationHeader'
     import Footer from '@components/Footer'
+
     window.onresize = () => {
         // console.log(until.getClientHeight());
         if (until.getClientHeight() > document.getElementById('section').offsetHeight) {
@@ -53,15 +54,15 @@
     }
     export default {
         name: "SignedRepo",
-        components:{
+        components: {
             CorporationHeader,
             Footer,
         },
         data() {
             return {
-                user:this.$store.state.loginInfo,
+                user: this.$store.state.loginInfo,
 
-                active:'first',
+                active: 'first',
                 section: {
                     height: '',
                 },
@@ -78,7 +79,7 @@
                     tel: '18832486437',
                     isUsed: false
                 }],
-                activeData:[{id: 0, name: 'tom', email: '10577507@qq.com', tel: '15632486433', isUsed: true}, {
+                activeData: [{id: 0, name: 'tom', email: '10577507@qq.com', tel: '15632486433', isUsed: true}, {
                     id: 1,
                     name: 'helen',
                     email: '105507@163.com',
@@ -88,7 +89,8 @@
             }
         },
         methods: {
-            checkPdf(){
+
+            checkPdf() {
                 console.log('checkPdf');
             },
             changeActive(id, active) {
@@ -157,6 +159,11 @@
                         break;
                 }
             },
+            loginOut() {
+                sessionStorage.clear()
+                this.$router.push('/')
+
+            },
         },
         created() {
         },
@@ -178,6 +185,7 @@
             flex-grow: 1;
         }
     }
+
     .tableStyle {
         margin-bottom: 2rem;
         padding: 3rem;

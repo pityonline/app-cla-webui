@@ -83,7 +83,6 @@
                     console.log(res);
                     this.$message.closeAll()
                     this.$message.success('success')
-                    this.$refs.ruleForm.resetFields();
 
                 }).catch(err => {
                     console.log(err);
