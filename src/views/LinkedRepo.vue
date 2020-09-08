@@ -423,6 +423,7 @@
 
             /*======================OrgSignature======================================*/
             uploadOrgSignature(row) {
+                this.uploadUrl = `/api${url.uploadSignature}/${row.id}`
                 console.log('uploadClaFile', row);
                 this.uploadOrgDialogVisible = true
             },
