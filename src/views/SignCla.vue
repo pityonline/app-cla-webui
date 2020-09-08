@@ -419,9 +419,6 @@
                             }
                             this.languageOptions.push({value: key, label: res.data[key].language})
                         }
-
-                        this.cla_org_id = this.claOrgIdArr[this.value]
-
                     }
 
                 }).catch(err => {
@@ -570,8 +567,7 @@
                     myUrl = url.employee_signing;
                     obj = {
                         name: this.myForm.name,
-                        // cla_org_id: this.cla_org_id,
-                        cla_org_id: '5f56208010b8d1184df840e4',
+                        cla_org_id: this.cla_org_id,
                         email: this.myForm.email,
                         info: info,
                     }

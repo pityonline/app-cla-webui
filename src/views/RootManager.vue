@@ -115,7 +115,6 @@
                 }
             },
             loginOut() {
-                console.log('删除账号信息');
                 sessionStorage.clear();
                 this.$router.push('/')
             },

@@ -81,7 +81,7 @@
             })
             this.pdfSrc.promise.then(pdf => {
                 this.numPages = pdf.numPages;
-            });
+            }).catch(err=>{});
         },
         mounted() {
             // this.pdfSrc.then(pdf => {
