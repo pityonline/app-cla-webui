@@ -373,7 +373,7 @@
         data() {
             return {
                 pdfSrc: '',
-                numPages: '',
+                numPages: undefined,
                 docInfo: {},
                 uploadHeaders: {
                     'Token': this.$store.state.access_token,
@@ -454,7 +454,7 @@
                 })
                 this.pdfSrc.promise.then(pdf => {
                     this.numPages = pdf.numPages
-                })
+                }).catch(() => {})
                 // this.docInfo = {
                 //     type: "pdf",
                 //     // href:`/static/pdf/merge.pdf`
