@@ -79,6 +79,10 @@
             // this.pdfSrc.then(pdf => {
             //     this.pageCount = pdf.pageCount;
             // });
+            this.pdfSrc = pdf.createLoadingTask({
+                url: this.pdfSrc,
+                httpHeaders: {'Token': this.$store.state.access_token}
+            })
         }
     };
 </script>

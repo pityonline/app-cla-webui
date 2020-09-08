@@ -291,7 +291,7 @@
 
         </el-dialog>
         <el-dialog
-                title="upload cla file"
+                title="upload"
                 top="5vh"
                 :visible.sync="uploadOrgDialogVisible"
                 width="35%">
