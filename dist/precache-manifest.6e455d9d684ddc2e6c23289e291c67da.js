@@ -4,7 +4,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/bdd0211e92f6f1aabbec.worker.js"
   },
   {
-    "revision": "6b2889a6adc8456a7bf4",
+    "revision": "a4eb39307d5e8a7f66f2",
     "url": "/css/app.fa2101f4.css"
   },
   {
@@ -18,6 +18,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "ce810e673a996570045c",
     "url": "/css/chunk-19c342ed.637ac5e8.css"
+  },
+  {
+    "revision": "27dde2d09f74c69fee56",
+    "url": "/css/chunk-1cd616e4.1116be14.css"
   },
   {
     "revision": "88a187ff6de96a10e235",
@@ -58,10 +62,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "c2ef5f12eb778faae0f1",
     "url": "/css/chunk-6f4716bd.69528397.css"
-  },
-  {
-    "revision": "04078507eceab547c7cc",
-    "url": "/css/chunk-736ac7d9.54a1bbb7.css"
   },
   {
     "revision": "e201f1c8590ff8dec855",
@@ -112,12 +112,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/logo.3a1a754d.png"
   },
   {
-    "revision": "3b66de282ba80b7c1ea81d0bd6b4c5c7",
+    "revision": "a4df0a194ff98725c5c2261f393d3896",
     "url": "/index.html"
   },
   {
-    "revision": "6b2889a6adc8456a7bf4",
-    "url": "/js/app.8c9961d2.js"
+    "revision": "a4eb39307d5e8a7f66f2",
+    "url": "/js/app.b6afe9b2.js"
   },
   {
     "revision": "a3916ca7abddf5f9a8aa",
@@ -134,6 +134,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "ce810e673a996570045c",
     "url": "/js/chunk-19c342ed.70b12384.js"
+  },
+  {
+    "revision": "27dde2d09f74c69fee56",
+    "url": "/js/chunk-1cd616e4.4ee3cdba.js"
   },
   {
     "revision": "88a187ff6de96a10e235",
@@ -186,10 +190,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "c0c56670b9a1dc5c05ff",
     "url": "/js/chunk-72312042.be8ea0ef.js"
-  },
-  {
-    "revision": "04078507eceab547c7cc",
-    "url": "/js/chunk-736ac7d9.cc4b9fae.js"
   },
   {
     "revision": "e201f1c8590ff8dec855",

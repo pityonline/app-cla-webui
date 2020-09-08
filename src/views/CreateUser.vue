@@ -42,7 +42,7 @@
         data() {
 
             return {
-                cla_org_id: this.$store.state.loginInfo.userInfo.cla_org_id,
+                cla_org_id: this.$store.state.loginInfo.userInfo[0].cla_org_id,
                 emails: [{email: ''}],
                 limit: 5,
             }
@@ -93,9 +93,7 @@
             },
         },
         created() {
-            console.log(this.$store.state.loginInfo);
-            console.log(this.$store.state.loginInfo.userInfo);
-            console.log(this.$store.state.loginInfo.userInfo.cla_org_id,);
+
         }
     }
 </script>
