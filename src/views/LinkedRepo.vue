@@ -432,7 +432,7 @@
                 this.docInfo = {
                     type: "pdf",
                     // href:`/static/pdf/merge.pdf`
-                    href: `/api${url.downloadSignature}/${this.item.id}`
+                    href: `/api${url.downloadSignature}/${row.id}`
                 }
                 this.previewOriginalDialogVisible = true
             },
