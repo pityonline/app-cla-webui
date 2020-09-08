@@ -336,12 +336,18 @@
                 :visible.sync="previewOriginalDialogVisible"
                 width="50%">
             <div>
-                <pdfReader
-                        v-if="docInfo.type === 'pdf'"
-                        :doctype="docInfo.type"
-                        :dochref="docInfo.href">
+                <pdf
+                        v-for="i in numPages"
+                        :key="i"
+                        :src="pdfSrc"
+                        :page="i">
+                </pdf>
+                <!--<pdfReader-->
+                        <!--v-if="docInfo.type === 'pdf'"-->
+                        <!--:doctype="docInfo.type"-->
+                        <!--:dochref="docInfo.href">-->
 
-                </pdfReader>
+                <!--</pdfReader>-->
 
             </div>
 
@@ -354,14 +360,19 @@
     import {mapActions} from 'vuex'
     import * as url from '../until/api'
     import pdfReader from "@components/PdfReader";
+    import pdf from 'vue-pdf'
+
 
     export default {
         name: "linkedRepo",
         components: {
             pdfReader,
+            pdf,
         },
         data() {
             return {
+                pdfSrc:'',
+                numPages:'',
                 docInfo: {},
                 uploadHeaders: {
                     'Token': this.$store.state.access_token,
@@ -409,6 +420,7 @@
             },
             /*======================OriginalSignature======================================*/
             previewOriginalSignature(row) {
+
                 // this.docInfo = {
                 //     type: "pdf",
                 //     // href:`/static/pdf/merge.pdf`
@@ -429,12 +441,16 @@
             },
             previewOrgSignature(row) {
                 console.log('previewOrgSignature', row);
-
-                this.docInfo = {
-                    type: "pdf",
-                    // href:`/static/pdf/merge.pdf`
-                    href: `/api${url.downloadSignature}/${row.id}`
-                }
+                this.pdfSrc=`/api${url.downloadSignature}/${row.id}`
+                this.pdfSrc = pdf.createLoadingTask(this.pdfSrc)
+                this.pdfSrc.promise.then(pdf => {
+                    this.numPages = pdf.numPages
+                })
+                // this.docInfo = {
+                //     type: "pdf",
+                //     // href:`/static/pdf/merge.pdf`
+                //     href: `/api${url.downloadSignature}/${row.id}`
+                // }
                 this.previewOriginalDialogVisible = true
             },
             downloadOrgSignature(row) {
