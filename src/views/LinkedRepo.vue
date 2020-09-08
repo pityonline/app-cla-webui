@@ -22,8 +22,7 @@
                         prop="claName"
                         label="CLA">
                     <template slot-scope="scope">
-                                        <span class="pointer hoverUnderline"
-                                              @click="checkCla()">{{scope.row.claName}}</span>
+                                        <span class="pointer hoverUnderline">{{scope.row.claName}}</span>
                     </template>
                 </el-table-column>
                 <el-table-column
@@ -33,6 +32,12 @@
                 <el-table-column
                         prop="cla_language"
                         label="Language">
+                </el-table-column>
+                <el-table-column
+                        label="Sign">
+                    <template slot-scope="scope">
+                    <el-button size="mini" @click="toSignPage(scope.row)">Sign</el-button>
+                    </template>
                 </el-table-column>
                 <el-table-column
                         align="center"
@@ -399,6 +404,10 @@
         },
         methods: {
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
+            toSignPage(row){
+                console.log(row);
+                // window.open()
+            },
             submitUpload() {
                 this.$refs.uploadPdf.submit();
             },
@@ -550,6 +559,8 @@
 
                 }).catch(err => {
                     console.log(err);
+                    this.$message.closeAll()
+                    this.$message.error(err.response.data)
                 })
             },
 
@@ -602,6 +613,8 @@
                     this.getLinkedRepoListAct(data)
                 }).catch(err => {
                     console.log(err);
+                    this.$message.closeAll()
+                    this.$message.error(err.response.data)
                 })
             },
             /*首页展示项目翻页*/

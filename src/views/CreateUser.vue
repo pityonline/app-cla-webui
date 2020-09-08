@@ -87,7 +87,8 @@
                 }).catch(err => {
                     console.log(err);
                     this.$message.closeAll()
-                    // this.$message.error('Please enter the correct old password')
+                    this.$message.error(err.response.data)
+
                 })
             },
         },

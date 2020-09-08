@@ -321,6 +321,8 @@
                     }, 1000)
                 }).catch(err => {
                     console.log(err);
+                    this.$message.closeAll()
+                    this.$message.error(err.response.data)
                 })
             },
             getNowDate() {
@@ -363,6 +365,8 @@
                     console.log(this.ruleForm);
                 }).catch(err => {
                     console.log(err);
+                    this.$message.closeAll()
+                    this.$message.error(err.response.data)
                 })
             },
 
@@ -601,6 +605,8 @@
 
                 }).catch(err => {
                     console.log(err);
+                    this.$message.closeAll()
+                    this.$message.error(err.response.data)
                 })
             },
             submitForm(formName) {
@@ -644,6 +650,8 @@
                     }
                 }).catch(err => {
                     console.log(err);
+                    this.$message.closeAll()
+                    this.$message.error(err.response.data)
                 })
             },
 

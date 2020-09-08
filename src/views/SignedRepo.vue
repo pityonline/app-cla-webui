@@ -104,6 +104,8 @@
                     console.log(res);
                 }).catch(err => {
                     console.log(err);
+                    this.$message.closeAll()
+                    this.$message.error(err.response.data)
                 })
             },
             clickDelete(id) {
@@ -120,6 +122,8 @@
                     console.log(res);
                 }).catch(err => {
                     console.log(err);
+                    this.$message.closeAll()
+                    this.$message.error(err.response.data)
                 })
             },
             changePage(page) {
