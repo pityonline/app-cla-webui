@@ -43,7 +43,7 @@
 
             return {
                 cla_org_id: this.$store.state.loginInfo.cla_org_id,
-                emails: [{email:''}],
+                emails: [],
                 limit:5,
             }
         },
