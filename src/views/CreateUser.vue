@@ -63,7 +63,7 @@
                 console.log(this.emails);
                 console.log(index);
                 if (this.emails.length === 1) {
-                    this.emails[0] = ''
+                    this.emails[0].email =''
 
                 } else {
                     this.emails.splice(index, 1);
