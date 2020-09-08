@@ -632,19 +632,33 @@
                 }
             },
 
-            /*链接开源项目*/
+            /*绑定开源项目*/
             linkRepository() {
-                // this.linkLoading = true;
-                let obj = {
-                    repo_id: `${this.repositoryOptions[this.repositoryValue].repoName}`,
-                    cla_id: this.claOptions[this.claValue].id,
-                    org_email: this.email,
-                    platform: this.platform,
-                    org_id: `${this.repositoryOptions[this.repositoryValue].org}`,
-                    cla_language: this.claOptions[this.claValue].language,
-                    submitter: `${this.platform}/${this.$store.state.user.userName}`,
-                    metadata_id: '',
-                };
+                this.linkLoading = true;
+                let obj = {}
+                if (this.repositoryChoose){
+                     obj = {
+                        repo_id: `${this.repositoryOptions[this.repositoryValue].repoName}`,
+                        cla_id: this.claOptions[this.claValue].id,
+                        org_email: this.email,
+                        platform: this.platform,
+                        org_id: `${this.repositoryOptions[this.repositoryValue].org}`,
+                        cla_language: this.claOptions[this.claValue].language,
+                        submitter: `${this.platform}/${this.$store.state.user.userName}`,
+                        metadata_id: '',
+                    };
+                } else{
+                     obj = {
+                        repo_id: '',
+                        cla_id: this.claOptions[this.claValue].id,
+                        org_email: this.email,
+                        platform: this.platform,
+                        org_id: `${this.repositoryOptions[this.repositoryValue].org}`,
+                        cla_language: this.claOptions[this.claValue].language,
+                        submitter: `${this.platform}/${this.$store.state.user.userName}`,
+                        metadata_id: '',
+                    };
+                }
                 console.log(obj);
                 this.$axios({
                     url: '/api' + url.linkRepository,

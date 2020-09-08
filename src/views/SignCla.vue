@@ -71,7 +71,7 @@
                                         </el-button>
                                     </el-input>
                                 </el-form-item>
-                                <p style="font-size: .9rem;" class="borderClass">{{desc.metadataDesc}}</p>
+                                <p style="font-size: .9rem;" class="borderClass"><span style="color: #F56C6C;">*</span>{{desc.metadataDesc}}</p>
                                 <div class="marginTop1rem">
                                     <el-checkbox v-model="isRead">I have read the Privacy Policy and hereby consent to
                                         the processing of my data by openLooKeng in Hong Kong"
@@ -193,14 +193,14 @@
                 enDesc: {
                     personalContributor: 'Individual Contributor',
                     comContributor: 'Legal Entity Contributor',
-                    metadataDesc: '* require field. ',
+                    metadataDesc: ' require field. ',
                     sign: 'SIGN',
                     reset: 'RESET',
                 },
                 cnDesc: {
                     personalContributor: '个人贡献者',
                     comContributor: '企业贡献者',
-                    metadataDesc: '*为必填项',
+                    metadataDesc: '为必填项',
                     sign: '签署',
                     reset: '重置',
                 },

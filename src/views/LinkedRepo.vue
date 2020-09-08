@@ -35,7 +35,43 @@
                         label="Language">
                 </el-table-column>
                 <el-table-column
-                        label="Signature">
+                        label="Original Signature">
+                    <template slot-scope="scope">
+                        <el-popover
+                                width="80"
+                                trigger="hover"
+                                placement="right">
+
+                            <div class="menuBT">
+
+                                <el-button @click="previewOriginalSignature(scope.row)" type="" size="mini">preview</el-button>
+                                <el-button @click="downloadOriginalSignature(scope.row)" type="" size="mini">download</el-button>
+                            </div>
+
+                            <svg-icon slot="reference" class="pointer" icon-class="pdf" />
+                        </el-popover>
+                    </template>
+                </el-table-column>
+                <el-table-column
+                        label="Org Signature">
+                    <template slot-scope="scope">
+                        <el-popover
+                                width="80"
+                                trigger="hover"
+                                placement="right">
+
+                            <div class="menuBT">
+                                <el-button @click="uploadOrgSignature(scope.row)" style="margin-left: 10px" type=""
+                                           size="mini">upload
+                                </el-button>
+                                <el-button @click="downloadOrgSignature(scope.row)" type="" size="mini">download</el-button>
+                                <el-button @click="previewOrgSignature(scope.row)" type="" size="mini">preview</el-button>
+                            </div>
+
+                            <svg-icon slot="reference" class="pointer" icon-class="pdf" />
+
+                        </el-popover>
+                    </template>
 
                 </el-table-column>
                 <!--<el-table-column-->
@@ -248,6 +284,62 @@
             </div>
 
         </el-dialog>
+        <el-dialog
+                title="upload cla file"
+                top="5vh"
+                :visible.sync="uploadOrgDialogVisible"
+                width="35%">
+            <div>
+
+                <div class="left">
+                    <el-form v-model="form">
+                        <el-form-item label="" label-width="0">
+                            <el-upload
+                                    name="signature_page"
+                                    ref="uploadPdf"
+                                    class="upload-demo"
+                                    :action="uploadUrl"
+                                    :headers="uploadHeaders"
+                                    :on-preview="handlePreview"
+                                    :on-remove="handleRemove"
+                                    :on-success="handleSuccess"
+                                    :before-remove="beforeRemove"
+                                    :auto-upload="false"
+                                    :limit="1"
+                                    :on-exceed="handleExceed"
+                                    :file-list="fileList">
+                                <el-button slot="trigger" size="small" type="primary">select file</el-button>
+                                <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">
+                                    upload
+                                </el-button>
+                                <!--<div slot="tip" class="el-upload__tip">文件不超过500kb</div>-->
+                            </el-upload>
+                        </el-form-item>
+                    </el-form>
+
+
+                </div>
+            </div>
+
+        </el-dialog>
+        <el-dialog
+                style="background-color: #3C3C3C"
+                title="pdf-reader"
+                top="5vh"
+                :close-on-click-modal="false"
+                :visible.sync="previewOriginalDialogVisible"
+                width="50%">
+            <div>
+                <pdfReader
+                        v-if="docInfo.type === 'pdf'"
+                        :doctype="docInfo.type"
+                        :dochref="docInfo.href">
+
+                </pdfReader>
+
+            </div>
+
+        </el-dialog>
     </div>
 
 
@@ -255,11 +347,24 @@
 <script>
     import {mapActions} from 'vuex'
     import * as url from '../until/api'
+    import pdfReader from "@components/PdfReader";
 
     export default {
         name: "linkedRepo",
+        components: {
+            pdfReader,
+        },
         data() {
             return {
+                docInfo: {},
+                uploadHeaders: {
+                    'Token': this.$store.state.access_token,
+                },
+                uploadUrl: '',
+                form: {file: ''},
+                fileList: [],
+                previewOriginalDialogVisible:false,
+                uploadOrgDialogVisible:false,
                 tableData: [],
                 unlinkId: '',
                 platform: this.$store.state.platform,
@@ -276,7 +381,57 @@
         },
         methods: {
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
+            submitUpload() {
+                this.$refs.uploadPdf.submit();
+            },
+            handleSuccess(file, fileList) {
+                console.log(file, fileList);
 
+
+            },
+            handleRemove(file, fileList) {
+                console.log(file, fileList);
+            },
+            handlePreview(file) {
+                console.log(file);
+            },
+            handleExceed(files, fileList) {
+                this.$message.warning(`Currently, 1 file is limited to be selected. ${files.length} files are selected this time, and a total of ${files.length + fileList.length} files are selected`);
+            },
+            beforeRemove(file, fileList) {
+                return this.$confirm(`Are you sure you want to remove ${file.name}？`);
+            },
+            /*======================OriginalSignature======================================*/
+            previewOriginalSignature(row) {
+                // this.docInfo = {
+                //     type: "pdf",
+                //     // href:`/static/pdf/merge.pdf`
+                //     href:`/api${url.downloadSignature}/${this.item.id}`
+                // }
+                // this.previewOriginalDialogVisible = true
+                console.log('previewOriginalSignature', row);
+            },
+            downloadOriginalSignature(row) {
+                console.log('downloadOriginalSignature', row);
+            },
+
+            /*======================OrgSignature======================================*/
+            uploadOrgSignature(row) {
+                console.log('uploadClaFile', row);
+                this.uploadOrgDialogVisible = true
+            },
+            previewOrgSignature(row) {
+                this.docInfo = {
+                    type: "pdf",
+                    // href:`/static/pdf/merge.pdf`
+                    href:`/api${url.downloadSignature}/${this.item.id}`
+                }
+                this.previewOriginalDialogVisible = true
+                console.log('previewOrgSignature', row);
+            },
+            downloadOrgSignature(row) {
+                console.log('downloadOriginalSignature', row);
+            },
             getTableData() {
 
                 let interval = setInterval(() => {
