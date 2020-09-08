@@ -408,6 +408,7 @@
                             console.log(key);
                             if (res.data[key].language === 'english') {
                                 this.value = key;
+                                this.cla_org_id=key
 
                                 console.log('find claText');
 
@@ -548,7 +549,7 @@
                 if (this.$store.state.loginType === 'individual') {
                     myUrl = url.individual_signing;
                     obj = {
-                        cla_org_id: this.claOrgIdArr[this.value],
+                        cla_org_id: this.cla_org_id,
                         email: this.myForm.email,
                         info: info,
                     }
@@ -557,7 +558,7 @@
 
                     myUrl = url.corporation_signing;
                     obj = {
-                        cla_org_id: this.claOrgIdArr[this.value],
+                        cla_org_id: this.cla_org_id,
                         corporation_name: this.myForm.corporationName,
                         admin_name: this.myForm.name,
                         admin_email: this.myForm.adminEmail,
@@ -569,7 +570,7 @@
                     myUrl = url.employee_signing;
                     obj = {
                         name: this.myForm.name,
-                        cla_org_id: this.claOrgIdArr[this.value],
+                        cla_org_id: this.cla_org_id,
                         email: this.myForm.email,
                         info: info,
                     }
