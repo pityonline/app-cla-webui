@@ -397,8 +397,8 @@
 
                 }).then(res => {
                     console.log(res);
-
-                    if ( Object.keys(res.data).length) {
+                    console.log(Object.keys(res.data).length);
+                    if (Object.keys(res.data).length) {
                         this.languageOptions = []
                         this.claIdArr = []
                         this.claOrgIdArr = []
