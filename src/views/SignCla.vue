@@ -402,6 +402,7 @@
                         this.claIdArr = []
                         this.claOrgIdArr = []
                         res.data.forEach((item, index) => {
+                            console.log((item, index));
                             if (item.cla_language === 'english') {
                                 this.value = index;
 
