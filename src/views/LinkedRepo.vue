@@ -45,7 +45,8 @@
 
                             <div class="menuBT">
 
-                                <el-button style="margin-left: 10px" @click="previewOriginalSignature(scope.row)" type="" size="mini">preview
+                                <el-button style="margin-left: 10px" @click="previewOriginalSignature(scope.row)"
+                                           type="" size="mini">preview
                                 </el-button>
                                 <el-button @click="downloadOriginalSignature(scope.row)" type="" size="mini">download
                                 </el-button>
@@ -343,9 +344,9 @@
                         :page="i">
                 </pdf>
                 <!--<pdfReader-->
-                        <!--v-if="docInfo.type === 'pdf'"-->
-                        <!--:doctype="docInfo.type"-->
-                        <!--:dochref="docInfo.href">-->
+                <!--v-if="docInfo.type === 'pdf'"-->
+                <!--:doctype="docInfo.type"-->
+                <!--:dochref="docInfo.href">-->
 
                 <!--</pdfReader>-->
 
@@ -371,8 +372,8 @@
         },
         data() {
             return {
-                pdfSrc:'',
-                numPages:'',
+                pdfSrc: '',
+                numPages: '',
                 docInfo: {},
                 uploadHeaders: {
                     'Token': this.$store.state.access_token,
@@ -441,8 +442,16 @@
             },
             previewOrgSignature(row) {
                 console.log('previewOrgSignature', row);
-                this.pdfSrc=`/api${url.downloadSignature}/${row.id}`
-                this.pdfSrc = pdf.createLoadingTask(this.pdfSrc)
+                this.pdfSrc = `/api${url.downloadSignature}/${row.id}`
+                this.pdfSrc = pdf.createLoadingTask({
+                    url: this.pdfSrc,
+                    httpHeaders: {
+                        'Token': this.$store.state.access_token,
+                        // 'x-ipp-device-uuid': 'SOME_UUID',
+                        // 'x-ipp-client': 'SOME_ID',
+                        // 'x-ipp-client-version': 'SOME_VERSION'
+                    }
+                })
                 this.pdfSrc.promise.then(pdf => {
                     this.numPages = pdf.numPages
                 })
@@ -604,10 +613,11 @@
     }
 </script>
 
-<style  lang="less">
+<style lang="less">
     .el-popover {
         min-width: 7rem;
     }
+
     .tableStyle {
         margin-bottom: 2rem;
         padding: 3rem;
@@ -671,6 +681,7 @@
             text-align: center;
         }
     }
+
     .pointer {
         cursor: pointer;
     }
