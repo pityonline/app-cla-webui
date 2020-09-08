@@ -57,7 +57,8 @@
 
                                     <el-input v-else-if="item.type==='date'" readonly="" v-model="ruleForm[item.id]"
                                               size="small" @blur="setMyForm(item.type,ruleForm[item.id])"></el-input>
-                                    <el-input v-else v-model="ruleForm[item.id]" size="small" @blur="setMyForm(item.type,ruleForm[item.id])"></el-input>
+                                    <el-input v-else v-model="ruleForm[item.id]" size="small"
+                                              @blur="setMyForm(item.type,ruleForm[item.id])"></el-input>
                                 </el-form-item>
                                 <el-form-item
                                         v-if="loginType==='corporation'"
@@ -71,7 +72,8 @@
                                         </el-button>
                                     </el-input>
                                 </el-form-item>
-                                <p style="font-size: .9rem;" class="borderClass"><span style="color: #F56C6C;">*</span>{{desc.metadataDesc}}</p>
+                                <p style="font-size: .9rem;" class="borderClass"><span style="color: #F56C6C;">*</span>{{desc.metadataDesc}}
+                                </p>
                                 <div class="marginTop1rem">
                                     <el-checkbox v-model="isRead">I have read the Privacy Policy and hereby consent to
                                         the processing of my data by openLooKeng in Hong Kong"
@@ -184,6 +186,7 @@
             }
 
             return {
+                signPageData:'',
                 cla_org_id: '',
                 sendBtText: 'send code',
                 claOrgIdArr: [],
@@ -292,8 +295,8 @@
                     callback(new Error('Email format error'))
                 }
             },
-            setMyForm(type,value){
-                this.myForm[type]=value
+            setMyForm(type, value) {
+                this.myForm[type] = value
                 console.log(this.myForm[type]);
             },
             sendCode() {
@@ -334,7 +337,7 @@
                 for (let item of this.fields) {
                     console.log(item);
                     if (item.type === 'date') {
-                        this.myForm.date=year + '-' + month + '-' + day
+                        this.myForm.date = year + '-' + month + '-' + day
                         Object.assign(this.ruleForm, {[item.id]: year + '-' + month + '-' + day})
                         break;
                     }
@@ -350,7 +353,7 @@
                     params: {access_token: access_token}
                 }).then(res => {
                     console.log(res);
-                    this.myForm.email=res.data[0].email
+                    this.myForm.email = res.data[0].email
                     for (let item of this.fields) {
                         if (item.type === 'email') {
                             Object.assign(this.ruleForm, {[item.id]: res.data[0].email})
@@ -393,33 +396,26 @@
                     params: {
                         repo_id: this.$store.state.repoInfo.repo_id,
                     },
-                    headers:{'Token':this.$store.state.access_token}
+                    headers: {'Token': this.$store.state.access_token}
 
                 }).then(res => {
                     console.log(res);
+                    this.signPageData=res.data
                     console.log(Object.keys(res.data).length);
                     if (Object.keys(res.data).length) {
                         this.languageOptions = []
-                        this.claIdArr = []
-                        this.claOrgIdArr = []
-                        for (let item of res.data){
-                            console.log(item);
-                            if (item.cla_language === 'english') {
-                                this.value = index;
+                        for (let key in res.data) {
+                            console.log(key);
+                            if (res.data[key].language === 'english') {
+                                this.value = key;
 
                                 console.log('find claText');
-                                new Promise(resolve => {
-                                    this.getClaText(item.cla_id, resolve)
-                                }).then(resp => {
-                                    console.log(resp);
-                                    argRes('completed')
-                                })
+
+                                this.setClaText(key)
 
 
                             }
-                            this.languageOptions.push({value: index, label: item.cla_language})
-                            this.claIdArr.push(item.cla_id)
-                            this.claOrgIdArr.push(item.id)
+                            this.languageOptions.push({value: key, label: res.data[key].language})
                         }
 
                         this.cla_org_id = this.claOrgIdArr[this.value]
@@ -431,9 +427,10 @@
                 })
             },
             changeLanguage(value) {
+                console.log(value);
                 this.changeDesc(this.languageOptions[value].label);
-                this.getClaText(this.claIdArr[value])
-                this.cla_org_id = this.claOrgIdArr[value]
+                this.setClaText(value)
+                this.cla_org_id = value
             },
             changeDesc(language) {
                 if (language === 'english') {
@@ -444,14 +441,10 @@
             },
 
             /*查找clatext*/
-            getClaText(cla_id, argRes) {
-                this.$axios({
-                    url: `/api${url.getClaInfo}/${cla_id}`,
-                    headers: {'Token': this.$store.state.access_token},
-                }).then(resp => {
-                    console.log(resp);
+            setClaText(key) {
+
                     let form = {}
-                    let rules={}
+                    let rules = {}
                     Object.assign(form, {code: ''})
                     Object.assign(rules, {
                         code: [{
@@ -460,19 +453,19 @@
                             trigger: 'blur'
                         },]
                     })
-                    document.getElementById('claBox').innerHTML = resp.data.text;
+                    document.getElementById('claBox').innerHTML = this.signPageData[key].text;
                     /*排序*/
-                    for (let i = 0; i < resp.data.fields.length; i++) {
-                        for (let j = i + 1; j < resp.data.fields.length; j++) {
-                            if (Number(resp.data.fields[i].id) > Number(resp.data.fields[j].id)) {
-                                let field = resp.data.fields[i]
-                                resp.data.fields[i] = resp.data.fields[j]
-                                resp.data.fields[j] = field
+                    for (let i = 0; i < this.signPageData[key].fields.length; i++) {
+                        for (let j = i + 1; j < this.signPageData[key].fields.length; j++) {
+                            if (Number(this.signPageData[key].fields[i].id) > Number(this.signPageData[key].fields[j].id)) {
+                                let field = this.signPageData[key].fields[i]
+                                this.signPageData[key].fields[i] = this.signPageData[key].fields[j]
+                                this.signPageData[key].fields[j] = field
                             }
                         }
                     }
-                    console.log(resp.data.fields);
-                    this.fields = resp.data.fields
+                    console.log(this.signPageData[key].fields);
+                    this.fields = this.signPageData[key].fields
                     this.fields.forEach(item => {
                         Object.assign(form, {[item.id]: ''})
                         if (item.type === 'name') {
@@ -527,15 +520,11 @@
                             })
                         }
                     })
-                    this.ruleForm=form
-                    this.rules=rules
+                    this.ruleForm = form
+                    this.rules = rules
                     console.log(this.ruleForm);
                     console.log(this.rules);
-                    argRes('complete')
 
-                }).catch(err => {
-                    console.log(err);
-                })
             },
             toHome() {
                 this.$router.push('/home')
