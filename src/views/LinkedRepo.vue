@@ -442,9 +442,9 @@
             },
             previewOrgSignature(row) {
                 console.log('previewOrgSignature', row);
-                this.pdfSrc = `/api${url.downloadSignature}/${row.id}`
+                // this.pdfSrc = `/api${url.downloadSignature}/${row.id}`
                 this.pdfSrc = pdf.createLoadingTask({
-                    url: this.pdfSrc,
+                    url: `/api${url.downloadSignature}/${row.id}`,
                     httpHeaders: {
                         'Token': this.$store.state.access_token,
                         // 'x-ipp-device-uuid': 'SOME_UUID',
