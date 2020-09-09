@@ -17,7 +17,7 @@
         <el-col :span="8">
             <div>
 
-                <el-tooltip  effect="dark" content="Sign out" placement="left">
+                <el-tooltip  effect="dark" content="Login out" placement="left">
                     <svg-icon class="pointer" @click="loginOut()" id="svg_loginOut" icon-class="loginOut"/>
                 </el-tooltip>
             </div>

@@ -502,8 +502,6 @@
                 fileNumber: '',
                 lineNumber: '',
                 gistUrl: '',
-
-
                 home: {
                     height: '',
                 },
@@ -642,7 +640,7 @@
                         cla_id: this.claOptions[this.claValue].id,
                         org_email: this.email,
                         platform: this.platform,
-                        org_id: `${this.repositoryOptions[this.repositoryValue].org}`,
+                        org_id: `${this.orgOptions[this.orgValue].label}`,
                         cla_language: this.claOptions[this.claValue].language,
                         submitter: `${this.platform}/${this.$store.state.user.userName}`,
                         metadata_id: '',
@@ -653,7 +651,7 @@
                         cla_id: this.claOptions[this.claValue].id,
                         org_email: this.email,
                         platform: this.platform,
-                        org_id: `${this.repositoryOptions[this.repositoryValue].org}`,
+                        org_id: `${this.orgOptions[this.orgValue].label}`,
                         cla_language: this.claOptions[this.claValue].language,
                         submitter: `${this.platform}/${this.$store.state.user.userName}`,
                         metadata_id: '',
