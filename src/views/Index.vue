@@ -9,7 +9,7 @@
 
                 <!--<span class="pointer" @click="loginIn">Sign in</span>-->
             </div>
-            <div id="section">
+            <div id="login_section">
                 <div id="title">
                     <svg-icon class="logText" icon-class="CLA_SYSTEM_WHITE"></svg-icon>
 
@@ -233,7 +233,7 @@
         }
     }
 
-    #section {
+    #login_section {
         height: 90%;
         color: white;
 

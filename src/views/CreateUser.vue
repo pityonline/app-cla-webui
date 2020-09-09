@@ -42,7 +42,6 @@
         data() {
 
             return {
-                cla_org_id: this.$store.state.loginInfo.userInfo[0].cla_org_id,
                 emails: [{email: ''}],
                 limit: 5,
             }
