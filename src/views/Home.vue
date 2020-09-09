@@ -632,7 +632,7 @@
 
             /*绑定开源项目*/
             linkRepository() {
-                this.linkLoading = true;
+                // this.linkLoading = true;
                 let obj = {}
                 if (this.repositoryChoose){
                      obj = {
@@ -691,7 +691,7 @@
                     console.log(err);
                     this.linkLoading = false
                     this.$message.closeAll();
-                    this.$message.error('failed')
+                    this.$message.error(err.response.data)
                 })
             },
 
@@ -907,8 +907,8 @@
                     background: 'rgba(255, 255, 255, 0.8)'
                 });
                 setInterval(() => {
-                    loading.close()
-                    // this.$store.state.user.userName && this.$store.state.ready && loading.close();
+                    // loading.close()
+                    this.$store.state.user.userName && this.$store.state.ready && loading.close();
                 }, 500)
 
             },
@@ -976,14 +976,12 @@
 
         created() {
             this.clearPageSession();
-            console.log('created');
             this.getPath();
             this.openFullScreen();
             this.getCookieData()
         },
 
         mounted() {
-            console.log('mounted');
             this.setClientHeight();
         },
 

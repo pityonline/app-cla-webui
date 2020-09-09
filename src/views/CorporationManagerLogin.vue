@@ -97,10 +97,6 @@
                         console.log(err);
                     })
 
-
-
-                    //     this.$router.push('/signedRepo')
-
                 }).catch(err => {
                     console.log(err);
                     this.$message.closeAll()

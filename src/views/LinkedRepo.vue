@@ -474,7 +474,8 @@
                 //     // href:`/static/pdf/merge.pdf`
                 //     href: `/api${url.downloadSignature}/${row.id}`
                 // }
-                this.url = `../../static/pdf_source/web/viewer.html?file=${encodeURIComponent(`/api${url.downloadSignature}/${row.id}?token=${this.$store.state.access_token}`)}`
+                // this.url = `../../static/pdf_source/web/viewer.html?file=${encodeURIComponent(`/api${url.downloadSignature}/${row.id}?token=${this.$store.state.access_token}`)}`
+                this.url = `../../static/pdf_source/web/viewer.html?file=${encodeURIComponent(`/api${url.downloadSignature}/${row.id}`)}`
                 this.previewOriginalDialogVisible = true
             },
             downloadOrgSignature(row) {
