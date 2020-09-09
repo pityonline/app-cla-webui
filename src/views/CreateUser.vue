@@ -83,7 +83,7 @@
                     console.log(res);
                     this.$message.closeAll()
                     this.$message.success('success')
-                    location.reload();
+                    this.emails=[{email:''}]
 
 
 

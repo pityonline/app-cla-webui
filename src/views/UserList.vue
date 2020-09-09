@@ -95,13 +95,7 @@
                 multipleSelection: [],
                 row: '',
                 deleteUserVisible: false,
-                tableData: [{id: 0, userName: '001', pwd: '001', email: '969707751@qq.com', class: '法务'}, {
-                    id: 1,
-                    userName: '002',
-                    pwd: '002',
-                    email: '1057750732@qq.com',
-                    class: '开发部'
-                },],
+                tableData: [],
             }
         },
         created() {

@@ -421,6 +421,8 @@
             },
             handleRemove(file, fileList) {
                 console.log(file, fileList);
+                this.$message.closeAll()
+                this.$message.success(file)
             },
             handlePreview(file) {
                 console.log(file);

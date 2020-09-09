@@ -368,9 +368,15 @@
             Footer,
         },
         computed: {
-            orgOptions() {
-                console.log(this.$store.state.orgOptions);
-                return this.$store.state.orgOptions
+            orgOptions:{
+                get:()=>{
+                    console.log(this.$store.state.orgOptions);
+                    return this.$store.state.orgOptions
+                },
+                set:(value)=>{
+
+                }
+
             },
 
             orgChoose() {

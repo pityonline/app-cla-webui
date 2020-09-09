@@ -142,6 +142,9 @@
                     url: `/api${url.enableEmployee}`,
                     method: 'put',
                     data: data,
+                    headers:{
+                        token: this.userInfo[this.orgValue].token,
+                    }
                 }).then(res => {
                     console.log(res);
                     this.getEmployee()
