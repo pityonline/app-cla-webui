@@ -42,13 +42,17 @@
         computed: {
             orgData() {
                 let data = []
-                this.$store.state.loginInfo.userInfo.forEach((item, index) => {
-                    if (item.repo_id) {
-                        data.push({value: index, label: `${item.org_id}/${item.repo_id}`})
-                    } else {
-                        data.push({value: index, label: item.org_id})
-                    }
-                })
+                if (this.$store.state.loginInfo.userInfo.length) {
+                    this.$store.state.loginInfo.userInfo.forEach((item, index) => {
+                        if (item.repo_id) {
+                            data.push({value: index, label: `${item.org_id}/${item.repo_id}`})
+                        } else {
+                            data.push({value: index, label: item.org_id})
+                        }
+                    })
+                    this.orgValue=0;
+                }
+
                 return data
             },
         },

@@ -354,7 +354,7 @@
                 <!--:dochref="docInfo.href">-->
 
                 <!--</pdfReader>-->
-                <iframe :src="url" width="100%" height="100%"></iframe>
+                <iframe :src="url"  width="100%" height="100%"></iframe>
             </div>
 
         </el-dialog>
