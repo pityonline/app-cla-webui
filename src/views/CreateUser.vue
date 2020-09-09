@@ -71,7 +71,7 @@
                 this.emails.forEach(item => {
                     myEmails.push(item.email)
                 })
-                let obj = {cla_org_id: this.cla_org_id, emails: myEmails}
+                let obj = {cla_org_id: this.userInfo[this.orgValue].cla_org_id, emails: myEmails}
                 this.$axios({
                     url: '/api' + url.addEmployeeManager,
                     method: 'post',

@@ -4,7 +4,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/bdd0211e92f6f1aabbec.worker.js"
   },
   {
-    "revision": "790a6c4b941318b34960",
+    "revision": "2119cf6193eb3a70d5a2",
     "url": "/css/app.fa2101f4.css"
   },
   {
@@ -26,10 +26,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "e7aa4fdd2f417801931c",
     "url": "/css/chunk-29758297.1da9991d.css"
-  },
-  {
-    "revision": "1b2e98d41b4b5d26c465",
-    "url": "/css/chunk-2b67ac24.1f67934f.css"
   },
   {
     "revision": "e4fbcbb239b0ce17550c",
@@ -58,6 +54,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "d36cadb7994b6f352c05",
     "url": "/css/chunk-5bf57e19.085ac9b8.css"
+  },
+  {
+    "revision": "cd24da1325b97c00d057",
+    "url": "/css/chunk-5c516672.16218a65.css"
   },
   {
     "revision": "46221ea2d6052281989a",
@@ -112,12 +112,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/logo.3a1a754d.png"
   },
   {
-    "revision": "494a8c1547b3dcfe7e91fd9b20b1acb7",
+    "revision": "c1ea1c3853347e2968b749ec444190f2",
     "url": "/index.html"
   },
   {
-    "revision": "790a6c4b941318b34960",
-    "url": "/js/app.f6e3304d.js"
+    "revision": "2119cf6193eb3a70d5a2",
+    "url": "/js/app.23670a62.js"
   },
   {
     "revision": "a3916ca7abddf5f9a8aa",
@@ -142,10 +142,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "e7aa4fdd2f417801931c",
     "url": "/js/chunk-29758297.23eccc6f.js"
-  },
-  {
-    "revision": "1b2e98d41b4b5d26c465",
-    "url": "/js/chunk-2b67ac24.c1ce3aab.js"
   },
   {
     "revision": "99a3de8a94aefa60cd41",
@@ -182,6 +178,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "d36cadb7994b6f352c05",
     "url": "/js/chunk-5bf57e19.4cd4ef47.js"
+  },
+  {
+    "revision": "cd24da1325b97c00d057",
+    "url": "/js/chunk-5c516672.5ee51dea.js"
   },
   {
     "revision": "46221ea2d6052281989a",
