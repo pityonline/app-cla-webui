@@ -75,7 +75,7 @@
                                             @change="changeActtive(scope.row.cla_org_id,scope.row.email,scope.row.enabled)"
                                             v-model="scope.row.enabled"
                                             class="mySwitch"
-                                            :disabled="scope.row.enabled"
+
                                             width="3rem"
                                             active-color="#409EFF"
                                             active-text="active"
@@ -133,6 +133,7 @@
         },
         methods: {
             changeActtive(cla_org_id, email, enabled) {
+                console.log(cla_org_id, email, enabled);
                 let data = {
                     cla_org_id: cla_org_id,
                     email: email,
