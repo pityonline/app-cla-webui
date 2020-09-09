@@ -478,7 +478,7 @@
                 // this.url = `../../static/pdf_source/web/viewer.html?file=${encodeURIComponent(`/api${url.downloadSignature}/${row.id}`)}`
                 // this.url = `../../static/pdf_source/web/viewer.html?file=/api${url.downloadSignature}/${row.id}`
                 // this.url = `../../static/pdf_source/web/viewer.html?file=${url.downloadSignature}/${row.id}`
-                this.url = `../../static/pdf_source/web/viewer.html?file=../../public/static/pdf/merge.pdf`
+                this.url = `../../static/pdf_source/web/viewer.html?file=../../static/pdf/merge.pdf`
                 this.previewOriginalDialogVisible = true
             },
             downloadOrgSignature(row) {
