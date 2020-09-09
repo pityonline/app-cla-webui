@@ -83,6 +83,7 @@
                     console.log(res);
                     this.$message.closeAll()
                     this.$message.success('success')
+                    window.location.reload();
 
                 }).catch(err => {
                     console.log(err);
