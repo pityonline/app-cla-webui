@@ -34,7 +34,7 @@
                             width="100">
                         <template slot-scope="scope">
                             <el-button v-if="!multipleChoice" type="danger" size="mini" @click="deleteUser(scope.row)">
-                                删除
+                                Delete
                             </el-button>
                         </template>
 
@@ -56,12 +56,12 @@
                 align="center"
                 :visible.sync="deleteUserVisible">
             <el-row align="center">
-                确定删除？
+                Are you sure to delete ?
             </el-row>
             <el-row align="center" class="marginTop1rem contentTitle">
 
-                <el-button type="primary" size="medium" @click="submit()">确定</el-button>
-                <el-button size="medium" @click="deleteUserVisible=false">取消</el-button>
+                <el-button type="primary" size="medium" @click="submit()">Yes</el-button>
+                <el-button size="medium" @click="deleteUserVisible=false">No</el-button>
             </el-row>
 
         </el-dialog>
