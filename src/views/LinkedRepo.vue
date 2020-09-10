@@ -342,21 +342,23 @@
                 :visible.sync="previewOriginalDialogVisible"
                 width="50%">
             <div>
-                <pdf
-                        :src="pdfSrc">
-                </pdf>
+                <!--<pdf-->
+                        <!--:src="pdfSrc">-->
+                <!--</pdf>-->
+
                 <!--<pdf-->
                         <!--v-for="i in numPages"-->
                         <!--:key="i"-->
                         <!--:src="pdfSrc"-->
                         <!--:page="i">-->
                 <!--</pdf>-->
-                <!--<pdfReader-->
-                <!--v-if="docInfo.type === 'pdf'"-->
-                <!--:doctype="docInfo.type"-->
-                <!--:dochref="docInfo.href">-->
 
-                <!--</pdfReader>-->
+                <pdfReader
+                v-if="docInfo.type === 'pdf'"
+                :doctype="docInfo.type"
+                :dochref="docInfo.href">
+                </pdfReader>
+
                 <!--<iframe :src="url"  width="100%" height="100%"></iframe>-->
             </div>
 
@@ -475,11 +477,11 @@
                 // this.pdfSrc.promise.then(pdf => {
                 //     this.numPages = pdf.numPages
                 // }).catch(() => {})
-                // this.docInfo = {
-                //     type: "pdf",
-                //     // href:`/static/pdf/merge.pdf`
-                //     href: `/api${url.downloadSignature}/${row.id}`
-                // }
+                this.docInfo = {
+                    type: "pdf",
+                    href:`/static/pdf/merge.pdf`,
+                    // href: `/api${url.downloadSignature}/${row.id}`
+                }
 
 
                 // this.url = `../../static/pdf_source/web/viewer.html?file=${encodeURIComponent(`/api${url.downloadSignature}/${row.id}?token=${this.$store.state.access_token}`)}`

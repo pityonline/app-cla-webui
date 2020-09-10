@@ -79,9 +79,9 @@
                     'x-ipp-client-version': 'SOME_VERSION'
                 }
             })
-            this.pdfSrc.promise.then(pdf => {
-                this.numPages = pdf.numPages;
-            }).catch(err=>{});
+            // this.pdfSrc.promise.then(pdf => {
+            //     this.numPages = pdf.numPages;
+            // }).catch(err=>{});
         },
         mounted() {
             // this.pdfSrc.then(pdf => {
