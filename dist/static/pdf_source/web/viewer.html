@@ -60,7 +60,8 @@ See https://github.com/adobe-type-tools/cmap-resources
                 //转换成pdf.js能直接解析的Uint8Array类型
                 var array = new Uint8Array(new ArrayBuffer(rawLength));
                 for (i = 0; i < rawLength; i++) {
-                    array[i] = raw.charCodeAt(i) & 0xff;
+                    // array[i] = raw.charCodeAt(i) & 0xff;
+                    array[i] = raw.charCodeAt(i);
                 }
                 console.log(array);
                 return array;
