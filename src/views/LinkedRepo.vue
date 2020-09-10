@@ -493,11 +493,19 @@
                 // this.url = `../../static/pdf_source/web/viewer.html?file=${url.downloadSignature}/${row.id}`
                 // this.url = `../../static/pdf_source/web/viewer.html?file=../../static/pdf/merge.pdf`
                 // this.previewOriginalDialogVisible = true
-                window.location.href=`../../static/pdf_source/web/viewer.html?file=../../static/pdf/compressed.tracemonkey-pldi-09.pdf`
+                window.location.href=`../../static/pdf_source/web/viewer.html?file=${encodeURIComponent('../../static/pdf/compressed.tracemonkey-pldi-09.pdf')}`
             },
             downloadOrgSignature(row) {
                 console.log('downloadOriginalSignature', row);
-                download((new Blob([res])), `/api${url.downloadSignature}/${row.id}`, 'application/pdf')
+                this.$axios({
+                    url:`/api${url.downloadSignature}/${row.id}`
+                }).then(res=>{
+                    console.log(res);
+                    download((new Blob([res])), 'myDownload.pdf', 'application/pdf')
+
+                }).catch(err=>{
+                    console.log(err);
+                })
             },
             getTableData() {
 
