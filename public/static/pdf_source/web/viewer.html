@@ -47,9 +47,11 @@ See https://github.com/adobe-type-tools/cmap-resources
 
             //编码转换
             function convertDataURIToBinary(dataURI) {
+                console.log(dataURI);
                 //[RFC2045]中有规定：Base64一行不能超过76字符，超过则添加回车换行符。因此需要把base64字段中的换行符，回车符给去掉。
                 var base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
                 var newUrl = dataURI.substring(base64Index).replace(/[\n\r]/g, '');
+                console.log(newUrl);
                 var raw = window.atob(newUrl);//这个方法在ie内核下无法正常解析。
                 var rawLength = raw.length;
                 //转换成pdf.js能直接解析的Uint8Array类型
