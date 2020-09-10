@@ -348,13 +348,13 @@
                         :src="pdfSrc"
                         :page="i">
                 </pdf>
-                <!--<pdfReader-->
-                <!--v-if="docInfo.type === 'pdf'"-->
-                <!--:doctype="docInfo.type"-->
-                <!--:dochref="docInfo.href">-->
+                <pdfReader
+                v-if="docInfo.type === 'pdf'"
+                :doctype="docInfo.type"
+                :dochref="docInfo.href">
 
-                <!--</pdfReader>-->
-                <iframe :src="url"  width="100%" height="100%"></iframe>
+                </pdfReader>
+                <!--<iframe :src="url"  width="100%" height="100%"></iframe>-->
             </div>
 
         </el-dialog>
@@ -457,23 +457,23 @@
             previewOrgSignature(row) {
                 console.log('previewOrgSignature', row);
                 // this.pdfSrc = `/api${url.downloadSignature}/${row.id}`
-                // this.pdfSrc = pdf.createLoadingTask({
-                //     url: `/api${url.downloadSignature}/${row.id}`,
-                //     httpHeaders: {
-                //         'Token': this.$store.state.access_token,
-                //         // 'x-ipp-device-uuid': 'SOME_UUID',
-                //         // 'x-ipp-client': 'SOME_ID',
-                //         // 'x-ipp-client-version': 'SOME_VERSION'
-                //     }
-                // })
-                // this.pdfSrc.promise.then(pdf => {
-                //     this.numPages = pdf.numPages
-                // }).catch(() => {})
-                // this.docInfo = {
-                //     type: "pdf",
-                //     // href:`/static/pdf/merge.pdf`
-                //     href: `/api${url.downloadSignature}/${row.id}`
-                // }
+                this.pdfSrc = pdf.createLoadingTask({
+                    url: `/api${url.downloadSignature}/${row.id}`,
+                    httpHeaders: {
+                        'Token': this.$store.state.access_token,
+                        // 'x-ipp-device-uuid': 'SOME_UUID',
+                        // 'x-ipp-client': 'SOME_ID',
+                        // 'x-ipp-client-version': 'SOME_VERSION'
+                    }
+                })
+                this.pdfSrc.promise.then(pdf => {
+                    this.numPages = pdf.numPages
+                }).catch(() => {})
+                this.docInfo = {
+                    type: "pdf",
+                    // href:`/static/pdf/merge.pdf`
+                    href: `/api${url.downloadSignature}/${row.id}`
+                }
                 // this.url = `../../static/pdf_source/web/viewer.html?file=${encodeURIComponent(`/api${url.downloadSignature}/${row.id}?token=${this.$store.state.access_token}`)}`
                 // this.url = `../../static/pdf_source/web/viewer.html?file=${encodeURIComponent(`/api${url.downloadSignature}/${row.id}`)}`
                 // this.url = `../../static/pdf_source/web/viewer.html?file=/api${url.downloadSignature}/${row.id}`
