@@ -28,20 +28,13 @@
             }
         },
         methods: {
-            ...mapActions(['setTokenAct','setLoginTypeAct', 'setRepoInfoAct']),
+            ...mapActions(['setTokenAct', 'setLoginTypeAct', 'setRepoInfoAct']),
             getRepoInfo() {
                 console.log(window.location.href);
-                let args = window.location.href.split('?')[1].split('&')
-                args.forEach(item => {
-                    let arg = item.split('=')
-                    if (arg[0] === 'platform') {
-                        this.platform=arg[1]
-                    }else if (arg[0] === 'org_id'){
-                        this.org=arg[1]
-                    } else if (arg[0] === 'repo_id'){
-                        this.repo=arg[1]
-                    }
-                })
+                let args = window.location.href.split('/signType/')[1].split('/')
+                this.platform = args[0]
+                this.org = args[1]
+                this.repo = args[2]
                 this.setRepoInfoAct({platform: this.platform, org_id: this.org, repo_id: this.repo});
 
             },
@@ -75,7 +68,8 @@
                     }
                 }
 
-            },
+            }
+            ,
 
         },
         created() {
