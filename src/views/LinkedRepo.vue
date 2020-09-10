@@ -500,10 +500,10 @@
                 this.$axios({
                     url:`/api${url.downloadSignature}/${row.id}`,
                     method: 'get',
-                    responseType: 'blob'
                 }).then(res=>{
-                    console.log(res.data);
+                    console.log(res.data.pdf);
                     let data = window.atob(res.data.pdf)
+                    console.log(data);
                     download((new Blob([data])), 'myDownload.pdf', 'application/pdf')
 
                 }).catch(err=>{
