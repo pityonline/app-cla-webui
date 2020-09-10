@@ -479,8 +479,8 @@
                 // }).catch(() => {})
                 this.docInfo = {
                     type: "pdf",
-                    href:`/static/pdf/merge.pdf`,
-                    // href: `/api${url.downloadSignature}/${row.id}`
+                    // href:`/static/pdf/merge.pdf`,
+                    href: `/api${url.downloadSignature}/${row.id}`
                 }
 
 
