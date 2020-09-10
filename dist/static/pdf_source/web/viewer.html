@@ -45,6 +45,7 @@ See https://github.com/adobe-type-tools/cmap-resources
             var pdfAsArray = convertDataURIToBinary(pdfAsDataUri);
             DEFAULT_URL = pdfAsArray;
 
+
             //编码转换
             function convertDataURIToBinary(dataURI) {
                 console.log(dataURI);
@@ -60,6 +61,7 @@ See https://github.com/adobe-type-tools/cmap-resources
                 for (i = 0; i < rawLength; i++) {
                     array[i] = raw.charCodeAt(i) & 0xff;
                 }
+                console.log(array);
                 return array;
             }
         }

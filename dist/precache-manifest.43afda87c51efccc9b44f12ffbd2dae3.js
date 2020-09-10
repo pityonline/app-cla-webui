@@ -1744,7 +1744,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/pdf_source/web/viewer.css"
   },
   {
-    "revision": "e336bb1c553cda4d64f7bc42d879ada3",
+    "revision": "ad6bb0c4fc5db51f0cd8935cf5966394",
     "url": "/static/pdf_source/web/viewer.html"
   },
   {
