@@ -53,7 +53,9 @@ See https://github.com/adobe-type-tools/cmap-resources
                 var base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
                 var newUrl = dataURI.substring(base64Index).replace(/[\n\r]/g, '');
                 console.log(newUrl);
-                var raw = window.atob(newUrl);//这个方法在ie内核下无法正常解析。
+                var raw=decodeURIComponent(escape(window.atob((newUrl).replace(/-/g, "+").replace(/_/g, "/"))));
+
+                // var raw = window.atob(newUrl);//这个方法在ie内核下无法正常解析。
                 // var raw = window.atob(dataURI);//这个方法在ie内核下无法正常解析。
                 var rawLength = raw.length;
                 //转换成pdf.js能直接解析的Uint8Array类型
