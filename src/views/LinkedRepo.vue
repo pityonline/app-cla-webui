@@ -464,7 +464,8 @@
                 console.log('previewOrgSignature', row);
                 // this.pdfSrc = `../../static/pdf/merge.pdf`
                 // this.pdfSrc = `/api${url.downloadSignature}/${row.id}`
-                this.pdfSrc = pdf.createLoadingTask(encodeURIComponent(`/api${url.downloadSignature}/${row.id}`))
+                this.pdfSrc = pdf.createLoadingTask(`/api${url.downloadSignature}/${row.id}`)
+                console.log(this.pdfSrc);
                 // this.pdfSrc = pdf.createLoadingTask({
                 //     url: `/api${url.downloadSignature}/${row.id}`,
                 //     httpHeaders: {
