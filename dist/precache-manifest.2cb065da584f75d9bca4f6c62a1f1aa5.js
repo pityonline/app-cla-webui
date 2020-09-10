@@ -240,11 +240,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/pdf/test.pdf"
   },
   {
-    "revision": "cc453515db254cb57ee31eede5f0a33c",
+    "revision": "e0bb899c849c532cb48a5d5c774dd293",
     "url": "/static/pdf_source/build/pdf.js"
   },
   {
-    "revision": "4331ee8bec3ef93b642ed9d1c10c1089",
+    "revision": "e7340014e9c8307c1957aa2f7ed5fe5b",
     "url": "/static/pdf_source/build/pdf.worker.js"
   },
   {
@@ -972,16 +972,32 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/pdf_source/web/images/findbarButton-next-dark.svg"
   },
   {
+    "revision": "b425dabab271624e125082f6be17e996",
+    "url": "/static/pdf_source/web/images/findbarButton-next.png"
+  },
+  {
     "revision": "4fc027039a1c63389d5a58d5b003222c",
     "url": "/static/pdf_source/web/images/findbarButton-next.svg"
+  },
+  {
+    "revision": "7f5d17319ccac59c9eec58275e6b4023",
+    "url": "/static/pdf_source/web/images/findbarButton-next@2x.png"
   },
   {
     "revision": "2d5d003a86f08d436d408dd75687046e",
     "url": "/static/pdf_source/web/images/findbarButton-previous-dark.svg"
   },
   {
+    "revision": "d635a5da775d416e415930f5433d829c",
+    "url": "/static/pdf_source/web/images/findbarButton-previous.png"
+  },
+  {
     "revision": "e500db8aad34cf4331ee05e7dd3e343e",
     "url": "/static/pdf_source/web/images/findbarButton-previous.svg"
+  },
+  {
+    "revision": "e6397a5760a891c427998d92a5c65e11",
+    "url": "/static/pdf_source/web/images/findbarButton-previous@2x.png"
   },
   {
     "revision": "ef50ac9e93aaebe3299791c79f277f8e",
@@ -1000,6 +1016,14 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/pdf_source/web/images/loading-icon.gif"
   },
   {
+    "revision": "9244a600a36f650764a9512791792ec8",
+    "url": "/static/pdf_source/web/images/loading-small.png"
+  },
+  {
+    "revision": "14e5ac73c1ae3f8a1f62556b9634db33",
+    "url": "/static/pdf_source/web/images/loading-small@2x.png"
+  },
+  {
     "revision": "28e82fa827563f85d2986895c1162311",
     "url": "/static/pdf_source/web/images/loading.svg"
   },
@@ -1008,124 +1032,248 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/pdf_source/web/images/secondaryToolbarButton-documentProperties-dark.svg"
   },
   {
+    "revision": "e81d4e81a94de79e10c236547670eb5a",
+    "url": "/static/pdf_source/web/images/secondaryToolbarButton-documentProperties.png"
+  },
+  {
     "revision": "4c2b72ff339db54b184bc8631d218fb4",
     "url": "/static/pdf_source/web/images/secondaryToolbarButton-documentProperties.svg"
+  },
+  {
+    "revision": "0f468066bd65a8d2bc3e7c848069c056",
+    "url": "/static/pdf_source/web/images/secondaryToolbarButton-documentProperties@2x.png"
   },
   {
     "revision": "7f131eb404efe40e25d9d03e5dd6e413",
     "url": "/static/pdf_source/web/images/secondaryToolbarButton-firstPage-dark.svg"
   },
   {
+    "revision": "4966f15d1573ee9665ad1115b3a1eb44",
+    "url": "/static/pdf_source/web/images/secondaryToolbarButton-firstPage.png"
+  },
+  {
     "revision": "ec0005f4fd8cdf1015f9e106f919ae59",
     "url": "/static/pdf_source/web/images/secondaryToolbarButton-firstPage.svg"
+  },
+  {
+    "revision": "2d43ccfa724192addf989be5b45c565f",
+    "url": "/static/pdf_source/web/images/secondaryToolbarButton-firstPage@2x.png"
   },
   {
     "revision": "09102df40550f94148cbe14eac8fc9ab",
     "url": "/static/pdf_source/web/images/secondaryToolbarButton-handTool-dark.svg"
   },
   {
+    "revision": "2eac9c669b98ce3c624dba5f46a6b328",
+    "url": "/static/pdf_source/web/images/secondaryToolbarButton-handTool.png"
+  },
+  {
     "revision": "d9f8eabdfaffa359eeb4a9db0b2af2c7",
     "url": "/static/pdf_source/web/images/secondaryToolbarButton-handTool.svg"
+  },
+  {
+    "revision": "04d38d1ed2861a6d8fca564324dc27d7",
+    "url": "/static/pdf_source/web/images/secondaryToolbarButton-handTool@2x.png"
   },
   {
     "revision": "6b6f3b517075027a2259ce091d4345df",
     "url": "/static/pdf_source/web/images/secondaryToolbarButton-lastPage-dark.svg"
   },
   {
+    "revision": "d58e9db0f88f5129cb026d2d6ecca73c",
+    "url": "/static/pdf_source/web/images/secondaryToolbarButton-lastPage.png"
+  },
+  {
     "revision": "b85ef9e480a3097cdd8861cb1b2f2ee3",
     "url": "/static/pdf_source/web/images/secondaryToolbarButton-lastPage.svg"
+  },
+  {
+    "revision": "c450b43bcf64b4e4a31c1a040d7964bf",
+    "url": "/static/pdf_source/web/images/secondaryToolbarButton-lastPage@2x.png"
   },
   {
     "revision": "98a1856b3e1b389b944846186e7e2ba7",
     "url": "/static/pdf_source/web/images/secondaryToolbarButton-rotateCcw-dark.svg"
   },
   {
+    "revision": "9904daadfe637b3a1003ba5274363c5d",
+    "url": "/static/pdf_source/web/images/secondaryToolbarButton-rotateCcw.png"
+  },
+  {
     "revision": "fee6abfc7164630f24d287bb4a9a63dc",
     "url": "/static/pdf_source/web/images/secondaryToolbarButton-rotateCcw.svg"
+  },
+  {
+    "revision": "c89c60ede5edd40d6ba425d35b1c2ba6",
+    "url": "/static/pdf_source/web/images/secondaryToolbarButton-rotateCcw@2x.png"
   },
   {
     "revision": "6047a6334648b78ecb6092a4f627e671",
     "url": "/static/pdf_source/web/images/secondaryToolbarButton-rotateCw-dark.svg"
   },
   {
+    "revision": "858044220ca467eac1d3d8abec9e0b8c",
+    "url": "/static/pdf_source/web/images/secondaryToolbarButton-rotateCw.png"
+  },
+  {
     "revision": "dbe1f8bcc2720e581b821b4ce4703e6c",
     "url": "/static/pdf_source/web/images/secondaryToolbarButton-rotateCw.svg"
+  },
+  {
+    "revision": "9a07c9d66c3d75fbf64d8fc046131fe2",
+    "url": "/static/pdf_source/web/images/secondaryToolbarButton-rotateCw@2x.png"
   },
   {
     "revision": "1b2149b4544213d052ca4d96b277fdb3",
     "url": "/static/pdf_source/web/images/secondaryToolbarButton-scrollHorizontal-dark.svg"
   },
   {
+    "revision": "4d4b2e69413360368a96d612d0c431f2",
+    "url": "/static/pdf_source/web/images/secondaryToolbarButton-scrollHorizontal.png"
+  },
+  {
     "revision": "8452a9a46afd2c3f78573a1e754634f9",
     "url": "/static/pdf_source/web/images/secondaryToolbarButton-scrollHorizontal.svg"
+  },
+  {
+    "revision": "f01f66adde5d412e652aa6878b0c7dab",
+    "url": "/static/pdf_source/web/images/secondaryToolbarButton-scrollHorizontal@2x.png"
   },
   {
     "revision": "89c9efd3b6fe0a69a5ca8611ce6bb6a1",
     "url": "/static/pdf_source/web/images/secondaryToolbarButton-scrollVertical-dark.svg"
   },
   {
+    "revision": "b0dbe88561bb48fc3b0580ec26df8f5a",
+    "url": "/static/pdf_source/web/images/secondaryToolbarButton-scrollVertical.png"
+  },
+  {
     "revision": "0dd2c3d856c3f9b132f115027e7471c7",
     "url": "/static/pdf_source/web/images/secondaryToolbarButton-scrollVertical.svg"
+  },
+  {
+    "revision": "6489acfca9e652ea619dfb3a178ca74a",
+    "url": "/static/pdf_source/web/images/secondaryToolbarButton-scrollVertical@2x.png"
   },
   {
     "revision": "bbae48a6c94b2837966390597fc84754",
     "url": "/static/pdf_source/web/images/secondaryToolbarButton-scrollWrapped-dark.svg"
   },
   {
+    "revision": "55fce14861a5587bf01ec72b18cc121f",
+    "url": "/static/pdf_source/web/images/secondaryToolbarButton-scrollWrapped.png"
+  },
+  {
     "revision": "b5b9bb4612980214384cc7d030aa4a39",
     "url": "/static/pdf_source/web/images/secondaryToolbarButton-scrollWrapped.svg"
+  },
+  {
+    "revision": "61b79e9f1c70bac96f04038d0c443345",
+    "url": "/static/pdf_source/web/images/secondaryToolbarButton-scrollWrapped@2x.png"
   },
   {
     "revision": "082f326e0eeae93d829945674e23c9cb",
     "url": "/static/pdf_source/web/images/secondaryToolbarButton-selectTool-dark.svg"
   },
   {
+    "revision": "edfd25ff9999ace3ee701fff5dbc2fa2",
+    "url": "/static/pdf_source/web/images/secondaryToolbarButton-selectTool.png"
+  },
+  {
     "revision": "a1d4b9cf2d7bc52899aa292443626b7b",
     "url": "/static/pdf_source/web/images/secondaryToolbarButton-selectTool.svg"
+  },
+  {
+    "revision": "62a82ead4a30d2dbb7421c038fcdc9d3",
+    "url": "/static/pdf_source/web/images/secondaryToolbarButton-selectTool@2x.png"
   },
   {
     "revision": "71d13a9dca4f8bb0df1958bfa1970465",
     "url": "/static/pdf_source/web/images/secondaryToolbarButton-spreadEven-dark.svg"
   },
   {
+    "revision": "3e83bd58b9f77a6cb906e37276675271",
+    "url": "/static/pdf_source/web/images/secondaryToolbarButton-spreadEven.png"
+  },
+  {
     "revision": "d9da9b8d8543269298098f512ddb613e",
     "url": "/static/pdf_source/web/images/secondaryToolbarButton-spreadEven.svg"
+  },
+  {
+    "revision": "c5d447ed101b00492d05075b907ffeaa",
+    "url": "/static/pdf_source/web/images/secondaryToolbarButton-spreadEven@2x.png"
   },
   {
     "revision": "eef6fa70f44df68ab5a34d8353d5f2d9",
     "url": "/static/pdf_source/web/images/secondaryToolbarButton-spreadNone-dark.svg"
   },
   {
+    "revision": "458217d12e4449eec9b4d714ea5aea40",
+    "url": "/static/pdf_source/web/images/secondaryToolbarButton-spreadNone.png"
+  },
+  {
     "revision": "576faa927ff4d56e18b5a12a0ba66a85",
     "url": "/static/pdf_source/web/images/secondaryToolbarButton-spreadNone.svg"
+  },
+  {
+    "revision": "9528f82a4af0ec621f866f309fc49094",
+    "url": "/static/pdf_source/web/images/secondaryToolbarButton-spreadNone@2x.png"
   },
   {
     "revision": "eafaab7e8517052d333ee1aa67e8565f",
     "url": "/static/pdf_source/web/images/secondaryToolbarButton-spreadOdd-dark.svg"
   },
   {
+    "revision": "84d9145fcd7fee78cdb1b57e846dc794",
+    "url": "/static/pdf_source/web/images/secondaryToolbarButton-spreadOdd.png"
+  },
+  {
     "revision": "6f7ebe325ba53ba872ae12c4bc3b24d1",
     "url": "/static/pdf_source/web/images/secondaryToolbarButton-spreadOdd.svg"
+  },
+  {
+    "revision": "ee68a154138508bd0ff24c3c9b85649c",
+    "url": "/static/pdf_source/web/images/secondaryToolbarButton-spreadOdd@2x.png"
   },
   {
     "revision": "bf677598a57b9539055834af51cf6062",
     "url": "/static/pdf_source/web/images/shadow.png"
   },
   {
+    "revision": "be7cd9355fa2121fab8e619ed546ced4",
+    "url": "/static/pdf_source/web/images/texture.png"
+  },
+  {
     "revision": "5a1adc05bf219f1a86188f6d7848a9e7",
     "url": "/static/pdf_source/web/images/toolbarButton-bookmark-dark.svg"
+  },
+  {
+    "revision": "97676ebb2225309ad15ba193f23f7fa8",
+    "url": "/static/pdf_source/web/images/toolbarButton-bookmark.png"
   },
   {
     "revision": "83b450773227c79e0f1b84485aa7ef20",
     "url": "/static/pdf_source/web/images/toolbarButton-bookmark.svg"
   },
   {
+    "revision": "5da7bcfae7b61f069cb91b25920c64c5",
+    "url": "/static/pdf_source/web/images/toolbarButton-bookmark@2x.png"
+  },
+  {
     "revision": "b5f2274495c0df84f22b2a8a54ddb723",
     "url": "/static/pdf_source/web/images/toolbarButton-download-dark.svg"
   },
   {
+    "revision": "f20a55dc99268dac130586e52e2b10d6",
+    "url": "/static/pdf_source/web/images/toolbarButton-download.png"
+  },
+  {
     "revision": "7097f3e5861fb0830d36b6d12ac58216",
     "url": "/static/pdf_source/web/images/toolbarButton-download.svg"
+  },
+  {
+    "revision": "3b56d4b64a3bf24df1c0dbe2dd2f52b2",
+    "url": "/static/pdf_source/web/images/toolbarButton-download@2x.png"
   },
   {
     "revision": "ff2746ed2c0ebc9f0d745118fbadd587",
@@ -1136,76 +1284,156 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/pdf_source/web/images/toolbarButton-menuArrow.svg"
   },
   {
+    "revision": "0f776a81f64ed3775ce1917917879e4b",
+    "url": "/static/pdf_source/web/images/toolbarButton-menuArrows.png"
+  },
+  {
+    "revision": "211044c3c1f898cc25a872d13f5108f4",
+    "url": "/static/pdf_source/web/images/toolbarButton-menuArrows@2x.png"
+  },
+  {
     "revision": "0f3a2041fef6ded629b3799a2d2c8a79",
     "url": "/static/pdf_source/web/images/toolbarButton-openFile-dark.svg"
+  },
+  {
+    "revision": "8db4158c49b8a31e311ee501af30566f",
+    "url": "/static/pdf_source/web/images/toolbarButton-openFile.png"
   },
   {
     "revision": "1e4c53e692bca5c40b29d2048be9df72",
     "url": "/static/pdf_source/web/images/toolbarButton-openFile.svg"
   },
   {
+    "revision": "4a27a5e1915518b7fef119007e937c8d",
+    "url": "/static/pdf_source/web/images/toolbarButton-openFile@2x.png"
+  },
+  {
     "revision": "4663f1bbf7c6252dbc7f07d96c938b0c",
     "url": "/static/pdf_source/web/images/toolbarButton-pageDown-dark.svg"
+  },
+  {
+    "revision": "d86ed7c2ca30e08f7f3b499de2dca107",
+    "url": "/static/pdf_source/web/images/toolbarButton-pageDown.png"
   },
   {
     "revision": "403ec3874f3d293be7ff1bbbbe0e0183",
     "url": "/static/pdf_source/web/images/toolbarButton-pageDown.svg"
   },
   {
+    "revision": "7fdce5fb0a3d1bf9e884cc3b4061d143",
+    "url": "/static/pdf_source/web/images/toolbarButton-pageDown@2x.png"
+  },
+  {
     "revision": "bb5c3d3be5b2108f729abb669893e49f",
     "url": "/static/pdf_source/web/images/toolbarButton-pageUp-dark.svg"
+  },
+  {
+    "revision": "c270b41d7a0ff9892ba9ac67d789a841",
+    "url": "/static/pdf_source/web/images/toolbarButton-pageUp.png"
   },
   {
     "revision": "8f70a27f790afc7fb74f658a654702cd",
     "url": "/static/pdf_source/web/images/toolbarButton-pageUp.svg"
   },
   {
+    "revision": "1919a86db02ab08b5ac0ef3cb5e53ff9",
+    "url": "/static/pdf_source/web/images/toolbarButton-pageUp@2x.png"
+  },
+  {
     "revision": "861b22a6199485712781358d690d344b",
     "url": "/static/pdf_source/web/images/toolbarButton-presentationMode-dark.svg"
+  },
+  {
+    "revision": "fb94ca39aec07d85a29fdb62b0b03b24",
+    "url": "/static/pdf_source/web/images/toolbarButton-presentationMode.png"
   },
   {
     "revision": "cdde3ed871b4fe44de749cd40e6e4afe",
     "url": "/static/pdf_source/web/images/toolbarButton-presentationMode.svg"
   },
   {
+    "revision": "6f172f3b9c5b7331531969c68f919945",
+    "url": "/static/pdf_source/web/images/toolbarButton-presentationMode@2x.png"
+  },
+  {
     "revision": "dbdb63af97dd16012817d47406b002fc",
     "url": "/static/pdf_source/web/images/toolbarButton-print-dark.svg"
+  },
+  {
+    "revision": "923cfb0f2a944b5a49f99a6901770f71",
+    "url": "/static/pdf_source/web/images/toolbarButton-print.png"
   },
   {
     "revision": "653ebf35a6d2cb971640a697f3bf059d",
     "url": "/static/pdf_source/web/images/toolbarButton-print.svg"
   },
   {
+    "revision": "a603c277f9547c2428055e7371fd4d81",
+    "url": "/static/pdf_source/web/images/toolbarButton-print@2x.png"
+  },
+  {
     "revision": "048bd89e23e8ceabf571a6076332b5a9",
     "url": "/static/pdf_source/web/images/toolbarButton-search-dark.svg"
+  },
+  {
+    "revision": "273cffad049d5b4e1f0a9d7af149e597",
+    "url": "/static/pdf_source/web/images/toolbarButton-search.png"
   },
   {
     "revision": "e471a9114a3945a991bba9a984b115f7",
     "url": "/static/pdf_source/web/images/toolbarButton-search.svg"
   },
   {
+    "revision": "33358e593e99cfe72ac2e9de6c9f244f",
+    "url": "/static/pdf_source/web/images/toolbarButton-search@2x.png"
+  },
+  {
     "revision": "eee9933854a25f1afcb9e11703a389bf",
     "url": "/static/pdf_source/web/images/toolbarButton-secondaryToolbarToggle-dark.svg"
+  },
+  {
+    "revision": "7af7e96cf59fea4b789db1c5d4636d08",
+    "url": "/static/pdf_source/web/images/toolbarButton-secondaryToolbarToggle.png"
   },
   {
     "revision": "351ca3f4106ef60ec466f25cbdf61d67",
     "url": "/static/pdf_source/web/images/toolbarButton-secondaryToolbarToggle.svg"
   },
   {
+    "revision": "cdac287bc3d5648256e106dcb921c520",
+    "url": "/static/pdf_source/web/images/toolbarButton-secondaryToolbarToggle@2x.png"
+  },
+  {
     "revision": "66d0eb5d9cf78291d71ff2f0f349d90e",
     "url": "/static/pdf_source/web/images/toolbarButton-sidebarToggle-dark.svg"
+  },
+  {
+    "revision": "6c365a103073ff2d8303c68856df0a4e",
+    "url": "/static/pdf_source/web/images/toolbarButton-sidebarToggle.png"
   },
   {
     "revision": "1d2ecbb341bc363d2908bd803596f6c4",
     "url": "/static/pdf_source/web/images/toolbarButton-sidebarToggle.svg"
   },
   {
+    "revision": "b82384c2cc730c47b2e132eb89e9cec4",
+    "url": "/static/pdf_source/web/images/toolbarButton-sidebarToggle@2x.png"
+  },
+  {
     "revision": "f38826a2ff5ec8575c81a31587df6ccd",
     "url": "/static/pdf_source/web/images/toolbarButton-viewAttachments-dark.svg"
   },
   {
+    "revision": "b58498a5ba191146108d60bf1e079592",
+    "url": "/static/pdf_source/web/images/toolbarButton-viewAttachments.png"
+  },
+  {
     "revision": "60453c22701125c6eb8bead0f9da709f",
     "url": "/static/pdf_source/web/images/toolbarButton-viewAttachments.svg"
+  },
+  {
+    "revision": "13c0f04fa5dd5a05059b017b28181304",
+    "url": "/static/pdf_source/web/images/toolbarButton-viewAttachments@2x.png"
   },
   {
     "revision": "225536356c6c9716a7fda335162835df",
@@ -1220,48 +1448,96 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/pdf_source/web/images/toolbarButton-viewOutline-dark.svg"
   },
   {
+    "revision": "2d32348db7b0eca4195bf844551a5c58",
+    "url": "/static/pdf_source/web/images/toolbarButton-viewOutline.png"
+  },
+  {
     "revision": "52630f82d519baeb7efdb0ec7dd6430c",
     "url": "/static/pdf_source/web/images/toolbarButton-viewOutline.svg"
+  },
+  {
+    "revision": "9eb0bed2459b8cecb8d435849d7ae75c",
+    "url": "/static/pdf_source/web/images/toolbarButton-viewOutline@2x.png"
   },
   {
     "revision": "5b6f4cc7e0d5b53d374c06bac956b840",
     "url": "/static/pdf_source/web/images/toolbarButton-viewThumbnail-dark.svg"
   },
   {
+    "revision": "5ab2c00425ead7f7a0c219385d55bf03",
+    "url": "/static/pdf_source/web/images/toolbarButton-viewThumbnail.png"
+  },
+  {
     "revision": "7340b77d9492e56b5f84cc2072f8db70",
     "url": "/static/pdf_source/web/images/toolbarButton-viewThumbnail.svg"
+  },
+  {
+    "revision": "f74f681bc5389d5163e0a845fff82b61",
+    "url": "/static/pdf_source/web/images/toolbarButton-viewThumbnail@2x.png"
   },
   {
     "revision": "bb5403bfbfe04e9ea8ba602395914caf",
     "url": "/static/pdf_source/web/images/toolbarButton-zoomIn-dark.svg"
   },
   {
+    "revision": "1ec009b6c54709afa73d99db10c57039",
+    "url": "/static/pdf_source/web/images/toolbarButton-zoomIn.png"
+  },
+  {
     "revision": "91edbe98fed5e3bd7b80367326384ed2",
     "url": "/static/pdf_source/web/images/toolbarButton-zoomIn.svg"
+  },
+  {
+    "revision": "19aea6e460a160e97ec298448d9f06f9",
+    "url": "/static/pdf_source/web/images/toolbarButton-zoomIn@2x.png"
   },
   {
     "revision": "04d7308c82e2a0a89a5dbe694c72d08b",
     "url": "/static/pdf_source/web/images/toolbarButton-zoomOut-dark.svg"
   },
   {
+    "revision": "e1256ccd98a1865848fb957009e6f7a9",
+    "url": "/static/pdf_source/web/images/toolbarButton-zoomOut.png"
+  },
+  {
     "revision": "8b25c4c6039c29d9b842342eb4ef1677",
     "url": "/static/pdf_source/web/images/toolbarButton-zoomOut.svg"
+  },
+  {
+    "revision": "cc2a035371ed64c3878f903e05a7fea8",
+    "url": "/static/pdf_source/web/images/toolbarButton-zoomOut@2x.png"
   },
   {
     "revision": "7eb980c08df2e480d4be6e7db4fe8fca",
     "url": "/static/pdf_source/web/images/treeitem-collapsed-dark.svg"
   },
   {
+    "revision": "583ca0cee62b36c8972ef6b89967700b",
+    "url": "/static/pdf_source/web/images/treeitem-collapsed.png"
+  },
+  {
     "revision": "57e07b703e74290b985879a5606283e5",
     "url": "/static/pdf_source/web/images/treeitem-collapsed.svg"
+  },
+  {
+    "revision": "9879163b7a2d0bd390c73174c6e276d5",
+    "url": "/static/pdf_source/web/images/treeitem-collapsed@2x.png"
   },
   {
     "revision": "5b53bc09d403d37728a60632125f20a6",
     "url": "/static/pdf_source/web/images/treeitem-expanded-dark.svg"
   },
   {
+    "revision": "6fd8d469b43811d4d0cbdbc2e3dca116",
+    "url": "/static/pdf_source/web/images/treeitem-expanded.png"
+  },
+  {
     "revision": "af9e269b3a6939136b579962c0fdb3ef",
     "url": "/static/pdf_source/web/images/treeitem-expanded.svg"
+  },
+  {
+    "revision": "f71c9d5993e2823a1829a454014e0471",
+    "url": "/static/pdf_source/web/images/treeitem-expanded@2x.png"
   },
   {
     "revision": "33988ab8b94be6cb303338b238f7de2e",
@@ -1696,7 +1972,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/pdf_source/web/viewer.html"
   },
   {
-    "revision": "6392e5b24d6f90b1151902af49ee3148",
+    "revision": "fc0daeb4229096ca428ca2bac6ed25f1",
     "url": "/static/pdf_source/web/viewer.js"
   }
 ]);
