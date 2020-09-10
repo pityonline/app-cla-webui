@@ -501,7 +501,7 @@
                 }).then(res=>{
                     console.log(res);
                     sessionStorage.setItem('pdf_base64',res.data.pdf)
-                    window.open(`../../static/pdf_source/web/viewer.html`)
+                    window.location.href=`../../static/pdf_source/web/viewer.html`
 
                 }).catch(err=>{
                     console.log(err);
