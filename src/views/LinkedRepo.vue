@@ -502,14 +502,53 @@
                     method: 'get',
                 }).then(res=>{
                     console.log(res.data.pdf);
-                    let data = window.atob(res.data.pdf)
-                    console.log(data);
-                    download((new Blob([data])), 'myDownload.pdf', 'application/pdf')
+                    // let data = window.atob(res.data.pdf)
+                    // console.log(data);
+                    // download((new Blob([data])), 'myDownload.pdf', 'application/pdf')
 
+
+                    let URL = this.dataURLtoBlob(res.data.pdf);
+                    console.log(URL);
+                    var reader = new FileReader();
+                    reader.readAsDataURL(URL);
+                    reader.onload = function (e) {
+                        // 兼容IE
+                        if (window.navigator.msSaveOrOpenBlob) {
+                            var bstr = atob(e.target.result.split(",")[1]);
+                            var n = bstr.length;
+                            var u8arr = new Uint8Array(n);
+                            while (n--) {
+                                u8arr[n] = bstr.charCodeAt(n);
+                            }
+                            var blob = new Blob([u8arr]);
+                            window.navigator.msSaveOrOpenBlob(blob,'签名页.pdf');
+                        } else {
+                            // 转换完成，创建一个a标签用于下载
+                            const a = document.createElement('a');
+                            a.download = '签名页.pdf'; // 这里写你的文件名
+                            a.href = e.target.result;
+                            document.body.appendChild(a)
+                            a.click();
+                            document.body.removeChild(a)
+                        }
+                    }
                 }).catch(err=>{
                     console.log(err);
                 })
             },
+            //base64 转换 blob
+            dataURLtoBlob(dataurl) {
+                var bstr = atob(dataurl)
+                var n = bstr.length;
+                var u8arr = new Uint8Array(n);
+                while (n--) {
+                    u8arr[n] = bstr.charCodeAt(n);
+                }
+                return new Blob([u8arr], { type: 'pdf' });
+            },
+
+// res.data   就是后台返回的base64的 文件流
+
             getTableData() {
 
                 let interval = setInterval(() => {
