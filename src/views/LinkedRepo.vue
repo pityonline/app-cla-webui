@@ -493,7 +493,8 @@
                 // this.url = `../../static/pdf_source/web/viewer.html?file=${url.downloadSignature}/${row.id}`
                 // this.url = `../../static/pdf_source/web/viewer.html?file=../../static/pdf/merge.pdf`
                 // this.previewOriginalDialogVisible = true
-                window.location.href=`../../static/pdf_source/web/viewer.html?file=../../static/pdf_source/web/compressed.tracemonkey-pldi-09.pdf`
+                // window.open(`../../static/pdf_source/web/viewer.html?file=../../static/pdf_source/web/compressed.tracemonkey-pldi-09.pdf`)
+                window.open(`../../static/pdf_source/web/viewer.html`)
             },
             downloadOrgSignature(row) {
                 console.log('downloadOriginalSignature', row);
@@ -547,7 +548,6 @@
                 return new Blob([u8arr], { type: 'pdf' });
             },
 
-// res.data   就是后台返回的base64的 文件流
 
             getTableData() {
 
