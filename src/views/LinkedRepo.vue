@@ -359,7 +359,7 @@
                 :dochref="docInfo.href">
                 </pdfReader>
 
-                <!--<iframe :src="url"  width="100%" height="100%"></iframe>-->
+
                 <!--<iframe :src="url"  width="100%" height="100%"></iframe>-->
             </div>
 
@@ -493,7 +493,7 @@
                 // this.url = `../../static/pdf_source/web/viewer.html?file=${url.downloadSignature}/${row.id}`
                 // this.url = `../../static/pdf_source/web/viewer.html?file=../../static/pdf/merge.pdf`
                 // this.previewOriginalDialogVisible = true
-                window.location.href=`../../static/pdf_source/web/viewer.html?file=${encodeURIComponent('../../static/pdf/compressed.tracemonkey-pldi-09.pdf')}`
+                window.location.href=`../../static/pdf_source/web/viewer.html?file=../../static/pdf_source/web/compressed.tracemonkey-pldi-09.pdf`
             },
             downloadOrgSignature(row) {
                 console.log('downloadOriginalSignature', row);
