@@ -465,8 +465,8 @@
                 console.log('previewOrgSignature', row);
                 // this.pdfSrc = `../../static/pdf/merge.pdf`
                 // this.pdfSrc = `/api${url.downloadSignature}/${row.id}`
-                this.pdfSrc = pdf.createLoadingTask(`/api${url.downloadSignature}/${row.id}`)
-                console.log(this.pdfSrc);
+                // this.pdfSrc = pdf.createLoadingTask(`/api${url.downloadSignature}/${row.id}`)
+                // console.log(this.pdfSrc);
                 // this.pdfSrc = pdf.createLoadingTask({
                 //     url: `/api${url.downloadSignature}/${row.id}`,
                 //     httpHeaders: {
@@ -494,7 +494,18 @@
                 // this.url = `../../static/pdf_source/web/viewer.html?file=../../static/pdf/merge.pdf`
                 // this.previewOriginalDialogVisible = true
                 // window.open(`../../static/pdf_source/web/viewer.html?file=../../static/pdf_source/web/compressed.tracemonkey-pldi-09.pdf`)
-                window.open(`../../static/pdf_source/web/viewer.html`)
+
+                this.$axios({
+                    url:`/api${url.downloadSignature}/${row.id}`,
+
+                }).then(res=>{
+                    console.log(res);
+                    sessionStorage.setItem('pdf_base64',res.data.pdf)
+                    window.open(`../../static/pdf_source/web/viewer.html`)
+
+                }).catch(err=>{
+                    console.log(err);
+                })
             },
             downloadOrgSignature(row) {
                 console.log('downloadOriginalSignature', row);
