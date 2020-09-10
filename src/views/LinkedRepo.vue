@@ -414,7 +414,8 @@
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
             toSignPage(row){
                 console.log(row);
-                let url=`http://cla.osinfra.cn:60031${this.signRouter}?platform=${row.platform}&org_id=${row.org_id}&repo_id=${row.repo_id}`
+                // let url=`http://cla.osinfra.cn:60031${this.signRouter}?platform=${row.platform}&org_id=${row.org_id}&repo_id=${row.repo_id}`
+                let url=`http://cla.osinfra.cn:60031${this.signRouter}/${row.platform}/${row.org_id}/${row.repo_id}`
                 window.open(url)
             },
             submitUpload() {
