@@ -28,7 +28,7 @@ const routes = [
                 component: () => import('../views/LoginTypeSelect.vue')
             },
             {
-                path: '/signType',
+                path: '/signType/:platform/:org_id/:repo_id',
                 /*组件懒加载*/
                 component: () => import('../views/SignType.vue')
             },
