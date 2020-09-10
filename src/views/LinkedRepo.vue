@@ -348,12 +348,12 @@
                         :src="pdfSrc"
                         :page="i">
                 </pdf>
-                <pdfReader
-                v-if="docInfo.type === 'pdf'"
-                :doctype="docInfo.type"
-                :dochref="docInfo.href">
+                <!--<pdfReader-->
+                <!--v-if="docInfo.type === 'pdf'"-->
+                <!--:doctype="docInfo.type"-->
+                <!--:dochref="docInfo.href">-->
 
-                </pdfReader>
+                <!--</pdfReader>-->
                 <!--<iframe :src="url"  width="100%" height="100%"></iframe>-->
             </div>
 
