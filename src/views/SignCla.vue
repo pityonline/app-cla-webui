@@ -355,9 +355,9 @@
                     params: {access_token: access_token}
                 }).then(res => {
                     console.log(res);
-                    for (let item in res.data){
+                    for (let item of res.data){
                         console.log(item);
-                        if (item.scope){
+                        if (res.data.scope){
                             if (item[0]==='primary'){
                                 this.myForm.email=item.email;
                                 break
