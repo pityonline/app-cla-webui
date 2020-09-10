@@ -343,11 +343,14 @@
                 width="50%">
             <div>
                 <pdf
-                        v-for="i in numPages"
-                        :key="i"
-                        :src="pdfSrc"
-                        :page="i">
+                        :src="pdfSrc">
                 </pdf>
+                <!--<pdf-->
+                        <!--v-for="i in numPages"-->
+                        <!--:key="i"-->
+                        <!--:src="pdfSrc"-->
+                        <!--:page="i">-->
+                <!--</pdf>-->
                 <!--<pdfReader-->
                 <!--v-if="docInfo.type === 'pdf'"-->
                 <!--:doctype="docInfo.type"-->
@@ -457,23 +460,27 @@
             previewOrgSignature(row) {
                 console.log('previewOrgSignature', row);
                 // this.pdfSrc = `/api${url.downloadSignature}/${row.id}`
-                this.pdfSrc = pdf.createLoadingTask({
-                    url: `/api${url.downloadSignature}/${row.id}`,
-                    httpHeaders: {
-                        'Token': this.$store.state.access_token,
-                        // 'x-ipp-device-uuid': 'SOME_UUID',
-                        // 'x-ipp-client': 'SOME_ID',
-                        // 'x-ipp-client-version': 'SOME_VERSION'
-                    }
-                })
-                this.pdfSrc.promise.then(pdf => {
-                    this.numPages = pdf.numPages
-                }).catch(() => {})
-                this.docInfo = {
-                    type: "pdf",
-                    // href:`/static/pdf/merge.pdf`
-                    href: `/api${url.downloadSignature}/${row.id}`
-                }
+                this.pdfSrc = pdf.createLoadingTask(`/api${url.downloadSignature}/${row.id}`)
+                // this.pdfSrc = pdf.createLoadingTask({
+                //     url: `/api${url.downloadSignature}/${row.id}`,
+                //     httpHeaders: {
+                //         'Token': this.$store.state.access_token,
+                //         // 'x-ipp-device-uuid': 'SOME_UUID',
+                //         // 'x-ipp-client': 'SOME_ID',
+                //         // 'x-ipp-client-version': 'SOME_VERSION'
+                //     }
+                // })
+
+                // this.pdfSrc.promise.then(pdf => {
+                //     this.numPages = pdf.numPages
+                // }).catch(() => {})
+                // this.docInfo = {
+                //     type: "pdf",
+                //     // href:`/static/pdf/merge.pdf`
+                //     href: `/api${url.downloadSignature}/${row.id}`
+                // }
+
+
                 // this.url = `../../static/pdf_source/web/viewer.html?file=${encodeURIComponent(`/api${url.downloadSignature}/${row.id}?token=${this.$store.state.access_token}`)}`
                 // this.url = `../../static/pdf_source/web/viewer.html?file=${encodeURIComponent(`/api${url.downloadSignature}/${row.id}`)}`
                 // this.url = `../../static/pdf_source/web/viewer.html?file=/api${url.downloadSignature}/${row.id}`
