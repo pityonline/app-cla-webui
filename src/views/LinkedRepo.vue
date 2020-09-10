@@ -502,7 +502,7 @@
                     method: 'get',
                     responseType: 'blob'
                 }).then(res=>{
-                    console.log(res.data.pdf);
+                    console.log(res.data);
                     let data = window.atob(res.data.pdf)
                     download((new Blob([data])), 'myDownload.pdf', 'application/pdf')
 
