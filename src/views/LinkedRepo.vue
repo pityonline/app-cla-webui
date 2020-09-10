@@ -353,13 +353,14 @@
                         <!--:page="i">-->
                 <!--</pdf>-->
 
-                <pdfReader
-                v-if="docInfo.type === 'pdf'"
-                :doctype="docInfo.type"
-                :dochref="docInfo.href">
-                </pdfReader>
+                <!--<pdfReader-->
+                <!--v-if="docInfo.type === 'pdf'"-->
+                <!--:doctype="docInfo.type"-->
+                <!--:dochref="docInfo.href">-->
+                <!--</pdfReader>-->
 
                 <!--<iframe :src="url"  width="100%" height="100%"></iframe>-->
+                <iframe :src="url"  width="100%" height="100%"></iframe>
             </div>
 
         </el-dialog>
@@ -461,7 +462,7 @@
             },
             previewOrgSignature(row) {
                 console.log('previewOrgSignature', row);
-                this.pdfSrc = `../../static/pdf/merge.pdf`
+                // this.pdfSrc = `../../static/pdf/merge.pdf`
                 // this.pdfSrc = `/api${url.downloadSignature}/${row.id}`
                 // this.pdfSrc = pdf.createLoadingTask(`/api${url.downloadSignature}/${row.id}`)
                 // this.pdfSrc = pdf.createLoadingTask({
@@ -477,18 +478,18 @@
                 // this.pdfSrc.promise.then(pdf => {
                 //     this.numPages = pdf.numPages
                 // }).catch(() => {})
-                this.docInfo = {
-                    type: "pdf",
-                    // href:`/static/pdf/merge.pdf`,
-                    href: `/api${url.downloadSignature}/${row.id}`
-                }
+                // this.docInfo = {
+                //     type: "pdf",
+                //     // href:`/static/pdf/merge.pdf`,
+                //     href: `/api${url.downloadSignature}/${row.id}`
+                // }
 
 
                 // this.url = `../../static/pdf_source/web/viewer.html?file=${encodeURIComponent(`/api${url.downloadSignature}/${row.id}?token=${this.$store.state.access_token}`)}`
                 // this.url = `../../static/pdf_source/web/viewer.html?file=${encodeURIComponent(`/api${url.downloadSignature}/${row.id}`)}`
                 // this.url = `../../static/pdf_source/web/viewer.html?file=/api${url.downloadSignature}/${row.id}`
                 // this.url = `../../static/pdf_source/web/viewer.html?file=${url.downloadSignature}/${row.id}`
-                this.url = `../../static/pdf_source/web/viewer.html?file=../../static/pdf/test.pdf`
+                this.url = `../../static/pdf_source/web/viewer.html?file=../../static/pdf/merge.pdf`
                 this.previewOriginalDialogVisible = true
             },
             downloadOrgSignature(row) {
