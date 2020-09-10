@@ -501,7 +501,7 @@
                     url:`/api${url.downloadSignature}/${row.id}`
                 }).then(res=>{
                     console.log(res);
-                    download((new Blob([res])), 'myDownload.pdf', 'application/pdf')
+                    download((new Blob([res.data.pdf])), 'myDownload.pdf', 'application/pdf')
 
                 }).catch(err=>{
                     console.log(err);
