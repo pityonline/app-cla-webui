@@ -358,8 +358,9 @@
                     for (let item of res.data){
                         console.log(item);
                         if (item.scope){
-                            if (item[0]==='primary'){
+                            if (item.scope[0]==='primary'){
                                 this.myForm.email=item.email;
+                                console.log(this.myForm.email);
                                 break
                             }
                         } 
