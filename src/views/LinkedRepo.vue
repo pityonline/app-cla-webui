@@ -373,7 +373,7 @@
     import * as url from '../until/api'
     import pdfReader from "@components/PdfReader";
     import pdf from 'vue-pdf'
-
+    import download from 'downloadjs'
 
     export default {
         name: "linkedRepo",
@@ -452,6 +452,7 @@
             },
             downloadOriginalSignature(row) {
                 console.log('downloadOriginalSignature', row);
+
             },
 
             /*======================OrgSignature======================================*/
@@ -495,6 +496,7 @@
             },
             downloadOrgSignature(row) {
                 console.log('downloadOriginalSignature', row);
+                download((new Blob([`/api${url.downloadSignature}/${row.id}`])), 'contract.pdf', 'application/pdf')
             },
             getTableData() {
 
