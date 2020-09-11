@@ -22,7 +22,7 @@
                         prop="claName"
                         label="CLA">
                     <template slot-scope="scope">
-                                        <span class="pointer hoverUnderline">{{scope.row.claName}}</span>
+                        <span class="pointer hoverUnderline">{{scope.row.claName}}</span>
                     </template>
                 </el-table-column>
                 <el-table-column
@@ -343,20 +343,20 @@
                 width="50%">
             <div>
                 <!--<pdf-->
-                        <!--:src="pdfSrc">-->
+                <!--:src="pdfSrc">-->
                 <!--</pdf>-->
 
                 <!--<pdf-->
-                        <!--v-for="i in numPages"-->
-                        <!--:key="i"-->
-                        <!--:src="pdfSrc"-->
-                        <!--:page="i">-->
+                <!--v-for="i in numPages"-->
+                <!--:key="i"-->
+                <!--:src="pdfSrc"-->
+                <!--:page="i">-->
                 <!--</pdf>-->
 
                 <pdfReader
-                v-if="docInfo.type === 'pdf'"
-                :doctype="docInfo.type"
-                :dochref="docInfo.href">
+                        v-if="docInfo.type === 'pdf'"
+                        :doctype="docInfo.type"
+                        :dochref="docInfo.href">
                 </pdfReader>
 
 
@@ -374,6 +374,7 @@
     import pdfReader from "@components/PdfReader";
     import pdf from 'vue-pdf'
     import download from 'downloadjs'
+    import PDFJS from '../until/pdf/pdf'
 
     export default {
         name: "linkedRepo",
@@ -383,8 +384,8 @@
         },
         data() {
             return {
-                url:'',
-                signRouter:'/signType',
+                url: '',
+                signRouter: '/signType',
                 pdfSrc: '',
                 numPages: undefined,
                 docInfo: {},
@@ -412,10 +413,10 @@
         },
         methods: {
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
-            toSignPage(row){
+            toSignPage(row) {
                 console.log(row);
                 // let url=`http://cla.osinfra.cn:60031${this.signRouter}?platform=${row.platform}&org_id=${row.org_id}&repo_id=${row.repo_id}`
-                let url=`http://cla.osinfra.cn:60031${this.signRouter}/${row.platform}/${row.org_id}/${row.repo_id}`
+                let url = `http://cla.osinfra.cn:60031${this.signRouter}/${row.platform}/${row.org_id}/${row.repo_id}`
                 window.open(url)
             },
             submitUpload() {
@@ -497,23 +498,69 @@
                 // window.open(`../../static/pdf_source/web/viewer.html?file=../../static/pdf_source/web/compressed.tracemonkey-pldi-09.pdf`)
 
                 this.$axios({
-                    url:`/api${url.downloadSignature}/${row.id}`,
+                    url: `/api${url.downloadSignature}/${row.id}`,
 
-                }).then(res=>{
+                }).then(res => {
                     console.log(res);
-                    sessionStorage.setItem('pdf_base64',res.data.pdf)
-                    window.location.href=`../../static/pdf_source/web/viewer.html`
+                    this.showPdfFile(res.data.pdf)
+                    // sessionStorage.setItem('pdf_base64', res.data.pdf)
+                    // window.location.href = `../../static/pdf_source/web/viewer.html`
 
-                }).catch(err=>{
+                }).catch(err => {
                     console.log(err);
+                })
+            },
+            converData(data) {
+                data = data.replace(/[\n\r]/g, '');
+                var raw = window.atob(data);
+                var rawLength = raw.length;
+                var array = new Uint8Array(new ArrayBuffer(rawLength));
+                for (var i = 0; i < rawLength; i++) {
+                    array[i] = raw.charCodeAt(i)
+                }
+                return array
+            },
+
+            /*将解码后的值传给PDFJS.getDocument(),交给pdf.js处理*/
+            showPdfFile(data) {
+                var fileContent = this.converData(data);
+                $('#container').show();
+                $('#pop').empty();
+                PDFJS.getDocument(fileContent).then(function getPdfHelloWorld(pdf) {
+                    pages = pdf.numPages;
+                    for (var i = 1; i < pdf.numPages; i++) {
+                        var id = 'page-id' + i;
+                        $('#pop').append('<canvas id="' + id + '"></canvas>');
+                        this.showAll(url, i, id)
+                    }
+                })
+            },
+
+            showAll(url, i, id) {
+                PDFJS.getDocument().then(function getPdfHelloWorld(pdf) {
+                    pdf.getPage(page).then(function getPageHelloWorld(page) {
+                        var scale = 1.0,
+                            viewport = page.getViewport(scale),
+                            canvas = document.getElementById(id),
+                            context = canvas.getContext('2d');
+                        canvas.height = viewport.height;
+                        canvas.width = viewport.width;
+                        var renderContext = {
+                            canvasContext: context,
+                            viewport: viewport
+                        }
+                        page.render(renderContext)
+
+                    })
+
                 })
             },
             downloadOrgSignature(row) {
                 console.log('downloadOriginalSignature', row);
                 this.$axios({
-                    url:`/api${url.downloadSignature}/${row.id}`,
+                    url: `/api${url.downloadSignature}/${row.id}`,
                     method: 'get',
-                }).then(res=>{
+                }).then(res => {
                     console.log(res.data.pdf);
                     let URL = this.dataURLtoBlob(res.data.pdf);
                     console.log(URL);
@@ -529,7 +576,7 @@
                                 u8arr[n] = bstr.charCodeAt(n);
                             }
                             var blob = new Blob([u8arr]);
-                            window.navigator.msSaveOrOpenBlob(blob,'Signature.pdf');
+                            window.navigator.msSaveOrOpenBlob(blob, 'Signature.pdf');
                         } else {
                             // 转换完成，创建一个a标签用于下载
                             const a = document.createElement('a');
@@ -540,7 +587,7 @@
                             document.body.removeChild(a)
                         }
                     }
-                }).catch(err=>{
+                }).catch(err => {
                     console.log(err);
                 })
             },
@@ -552,7 +599,7 @@
                 while (n--) {
                     u8arr[n] = bstr.charCodeAt(n);
                 }
-                return new Blob([u8arr], { type: 'pdf' });
+                return new Blob([u8arr], {type: 'pdf'});
             },
 
 
