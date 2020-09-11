@@ -44,6 +44,8 @@ See https://github.com/adobe-type-tools/cmap-resources
             var preFileId = "";
             var pdfAsDataUri = sessionStorage.getItem("pdf_base64");//这里就是pdf文件的base64码，我是通过session传递base64的
             DEFAULT_URL = convertDataURIToBinary(pdfAsDataUri);
+            console.log(DEFAULT_URL);
+            window.URL.createObjectURL(DEFAULT_URL)
 
 
             //编码转换
