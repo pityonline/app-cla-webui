@@ -341,7 +341,7 @@
                 :close-on-click-modal="false"
                 :visible.sync="previewOriginalDialogVisible"
                 width="50%">
-            <div>
+            <div id="pop">
                 <!--<pdf-->
                 <!--:src="pdfSrc">-->
                 <!--</pdf>-->
@@ -353,11 +353,11 @@
                 <!--:page="i">-->
                 <!--</pdf>-->
 
-                <pdfReader
-                        v-if="docInfo.type === 'pdf'"
-                        :doctype="docInfo.type"
-                        :dochref="docInfo.href">
-                </pdfReader>
+                <!--<pdfReader-->
+                <!--v-if="docInfo.type === 'pdf'"-->
+                <!--:doctype="docInfo.type"-->
+                <!--:dochref="docInfo.href">-->
+                <!--</pdfReader>-->
 
 
                 <!--<iframe :src="url"  width="100%" height="100%"></iframe>-->
@@ -524,13 +524,16 @@
             /*将解码后的值传给PDFJS.getDocument(),交给pdf.js处理*/
             showPdfFile(data) {
                 var fileContent = this.converData(data);
-                $('#container').show();
-                $('#pop').empty();
+                this.previewOriginalDialogVisible = true
+                // $('#container').show();
+                // $('#pop').empty();
+                let pop = document.getElementById('pop');
+                pop.innerHTML ='';
                 PDFJS.getDocument(fileContent).then(function getPdfHelloWorld(pdf) {
                     pages = pdf.numPages;
                     for (var i = 1; i < pdf.numPages; i++) {
                         var id = 'page-id' + i;
-                        $('#pop').append('<canvas id="' + id + '"></canvas>');
+                        pop.append('<canvas id="' + id + '"></canvas>');
                         this.showAll(url, i, id)
                     }
                 })
