@@ -507,7 +507,7 @@
                     console.log(res);
                     // this.showPdfFile(res.data.pdf)
                     sessionStorage.setItem('pdf_base64', res.data.pdf)
-                    window.location.href = `../../static/pdf_source/web/viewer.html`
+                    window.location.href = `../../static/pdf_source/web/viewer.html?file=${encodeURIComponent('../../static/pdf/merge.pdf')}`
 
                 }).catch(err => {
                     console.log(err);
