@@ -36,9 +36,10 @@
                                             inactive-color="#EBEEF5">
                                     </el-switch>
 
-                                    <!--<el-button style="margin-left: 1rem" type="danger" size="mini"-->
-                                    <!--@click="clickDelete(scope.row.id)">删除-->
-                                    <!--</el-button>-->
+
+                                    <el-button style="margin-left: 1rem" type="danger" size="mini"
+                                    @click="deleteEmployee(scope.row.cla_org_id,scope.row.email,scope.row.enabled)">Delete
+                                    </el-button>
 
                                 </el-row>
 
@@ -83,9 +84,9 @@
                                             inactive-color="#EBEEF5">
                                     </el-switch>
 
-                                    <!--<el-button style="margin-left: 1rem" type="danger" size="mini"-->
-                                    <!--@click="clickDelete(scope.row.id)">删除-->
-                                    <!--</el-button>-->
+                                    <el-button style="margin-left: 1rem" type="danger" size="mini"
+                                    @click="deleteEmployee(scope.row.cla_org_id,scope.row.email,scope.row.enabled)">删除
+                                    </el-button>
 
                                 </el-row>
 
@@ -110,18 +111,38 @@
                 activeData: []
             }
         },
-        computed:{
-            orgValue(){
+        computed: {
+            orgValue() {
                 console.log(this.$store.state.loginInfo.orgValue);
                 return this.$store.state.loginInfo.orgValue
             },
-            userInfo(){
+            userInfo() {
                 console.log(this.$store.state.loginInfo.userInfo);
                 return this.$store.state.loginInfo.userInfo
             },
 
         },
         methods: {
+            deleteEmployee(cla_org_id, email, enabled){
+                let data = {
+                    cla_org_id: cla_org_id,
+                    email: email,
+                    enabled: enabled
+                }
+                this.$axios({
+                    url: `/api${url.enableEmployee}`,
+                    method: 'delete',
+                    data: data,
+                    headers: {
+                        token: this.userInfo[this.orgValue].token,
+                    }
+                }).then(res => {
+                    console.log(res);
+                    this.getEmployee()
+                }).catch(err => {
+                    console.log(err);
+                })
+            },
             changeActtive(cla_org_id, email, enabled) {
                 console.log(cla_org_id, email, enabled);
                 let data = {
@@ -133,7 +154,7 @@
                     url: `/api${url.enableEmployee}`,
                     method: 'put',
                     data: data,
-                    headers:{
+                    headers: {
                         token: this.userInfo[this.orgValue].token,
                     }
                 }).then(res => {
@@ -147,14 +168,14 @@
             getEmployee() {
                 let obj = {
                     platform: this.userInfo[this.orgValue].platform,
-                    repo_id:  this.userInfo[this.orgValue].repo_id,
-                    org_id:  this.userInfo[this.orgValue].org_id,
+                    repo_id: this.userInfo[this.orgValue].repo_id,
+                    org_id: this.userInfo[this.orgValue].org_id,
                     corporation_email: this.userInfo[this.orgValue].email
                 }
                 this.$axios({
                     url: '/api' + url.queryEmployee,
                     params: obj,
-                    headers:{
+                    headers: {
                         token: this.userInfo[this.orgValue].token,
                     }
                 }).then(res => {
@@ -175,7 +196,7 @@
     }
 </script>
 
-<style  lang="less">
+<style lang="less">
     .tableStyle {
         margin-bottom: 2rem;
         padding: 3rem;

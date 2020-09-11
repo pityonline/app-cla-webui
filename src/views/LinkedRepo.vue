@@ -526,6 +526,7 @@
 
             /*将解码后的值传给PDFJS.getDocument(),交给pdf.js处理*/
             showPdfFile(data) {
+                PDFJS.GlobalWorkerOptions.workerSrc = '../until/pdf/pdf.worker.js';
                 var fileContent = this.converData(data);
                 this.previewOriginalDialogVisible = true
                 // $('#container').show();
