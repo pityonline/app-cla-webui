@@ -364,9 +364,9 @@
             </div>
 
         </el-dialog>
-        <div id="pop">
+        <!--<div id="pop">-->
 
-        </div>
+        <!--</div>-->
     </div>
 
 
@@ -377,7 +377,7 @@
     import pdfReader from "@components/PdfReader";
     import pdf from 'vue-pdf'
     import download from 'downloadjs'
-    import PDFJS from '../until/pdf/pdf'
+    // import PDFJS from '../until/pdf/pdf'
 
     export default {
         name: "linkedRepo",
@@ -505,9 +505,9 @@
 
                 }).then(res => {
                     console.log(res);
-                    this.showPdfFile(res.data.pdf)
-                    // sessionStorage.setItem('pdf_base64', res.data.pdf)
-                    // window.location.href = `../../static/pdf_source/web/viewer.html`
+                    // this.showPdfFile(res.data.pdf)
+                    sessionStorage.setItem('pdf_base64', res.data.pdf)
+                    window.location.href = `../../static/pdf_source/web/viewer.html`
 
                 }).catch(err => {
                     console.log(err);
