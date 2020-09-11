@@ -62,7 +62,8 @@ See https://github.com/adobe-type-tools/cmap-resources
                 var rawLength = raw.length;
                 console.log(rawLength);
                 //转换成pdf.js能直接解析的Uint8Array类型
-                var array = new Uint8Array(new ArrayBuffer(rawLength));
+                // var array = new Uint8Array(new ArrayBuffer(rawLength));
+                var array = new Uint8Array(rawLength);
                 for (i = 0; i < rawLength; i++) {
                     // array[i] = raw.charCodeAt(i) & 0xff;
                     array[i] = raw.charCodeAt(i);
