@@ -527,7 +527,7 @@
                 this.previewOriginalDialogVisible = true
                 // $('#container').show();
                 // $('#pop').empty();
-                let pop = document.getElementById('pop');
+                let pop = document.getElementById('#pop');
                 pop.innerHTML ='';
                 PDFJS.getDocument(fileContent).then(function getPdfHelloWorld(pdf) {
                     pages = pdf.numPages;
