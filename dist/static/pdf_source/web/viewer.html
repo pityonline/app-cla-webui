@@ -34,10 +34,11 @@ See https://github.com/adobe-type-tools/cmap-resources
 
     <!-- This snippet is used in production (included from viewer.html) -->
     <link rel="resource" type="application/l10n" href="locale/locale.properties">
-    <script src="../build/pdf.js"></script>
     <script type="text/javascript">
         var DEFAULT_URL = "";
         var pdfUrl = document.location.search.substring(1);
+        console.log(document.location.search);
+        console.log(pdfUrl);
         if (null == pdfUrl || "" === pdfUrl) {
             var BASE64_MARKER = ';base64,';//声明文件流编码格式
             var preFileId = "";
@@ -49,7 +50,8 @@ See https://github.com/adobe-type-tools/cmap-resources
             function convertDataURIToBinary(dataURI) {
                 console.log(dataURI);
                 //[RFC2045]中有规定：Base64一行不能超过76字符，超过则添加回车换行符。因此需要把base64字段中的换行符，回车符给去掉。
-                // var base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
+                var base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
+                console.log(dataURI.indexOf(BASE64_MARKER), BASE64_MARKER.length);
                 // var newUrl = dataURI.substring(base64Index).replace(/[\n\r]/g, '');
                 // console.log(newUrl);
                 // var raw = window.atob(newUrl);//这个方法在ie内核下无法正常解析。
@@ -68,6 +70,7 @@ See https://github.com/adobe-type-tools/cmap-resources
             }
         }
     </script>
+    <script src="../build/pdf.js"></script>
 
     <script src="viewer.js"></script>
 

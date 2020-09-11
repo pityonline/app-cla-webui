@@ -516,11 +516,6 @@
                     method: 'get',
                 }).then(res=>{
                     console.log(res.data.pdf);
-                    // let data = window.atob(res.data.pdf)
-                    // console.log(data);
-                    // download((new Blob([data])), 'myDownload.pdf', 'application/pdf')
-
-
                     let URL = this.dataURLtoBlob(res.data.pdf);
                     console.log(URL);
                     var reader = new FileReader();
@@ -535,11 +530,11 @@
                                 u8arr[n] = bstr.charCodeAt(n);
                             }
                             var blob = new Blob([u8arr]);
-                            window.navigator.msSaveOrOpenBlob(blob,'签名页.pdf');
+                            window.navigator.msSaveOrOpenBlob(blob,'Signature.pdf');
                         } else {
                             // 转换完成，创建一个a标签用于下载
                             const a = document.createElement('a');
-                            a.download = '签名页.pdf'; // 这里写你的文件名
+                            a.download = 'Signature.pdf'; // 这里写你的文件名
                             a.href = e.target.result;
                             document.body.appendChild(a)
                             a.click();
