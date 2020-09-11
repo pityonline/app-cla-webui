@@ -355,7 +355,7 @@
     import {mapActions} from 'vuex'
 
     window.onresize = () => {
-        console.log(until.getClientHeight(),document.getElementById('home'));
+        console.log(until.getClientHeight(), document.getElementById('home'));
         if (until.getClientHeight() > document.getElementById('home').offsetHeight) {
             document.getElementById("home").style.height = until.getClientHeight() + 'px'
         }
@@ -368,9 +368,9 @@
             Footer,
         },
         computed: {
-            orgOptions(){
-                    console.log(this.$store.state.orgOptions);
-                    return this.$store.state.orgOptions
+            orgOptions() {
+                console.log(this.$store.state.orgOptions);
+                return this.$store.state.orgOptions
             },
 
             orgChoose() {
@@ -401,7 +401,7 @@
                 if (this.$store.state.orgValue === undefined) {
                     return this.$store.state.orgValue
 
-                }else{
+                } else {
                     return Number(this.$store.state.orgValue)
                 }
             },
@@ -409,19 +409,19 @@
                 console.log(this.$store.state.claValue);
                 if (this.$store.state.claValue === undefined) {
                     return this.$store.state.claValue
-                }else{
+                } else {
                     return Number(this.$store.state.claValue)
                 }
             },
             repositoryValue() {
                 if (this.$store.state.repositoryValue === undefined) {
                     return this.$store.state.repositoryValue
-                }else{
+                } else {
                     return Number(this.$store.state.repositoryValue)
                 }
             },
             showConfigForm() {
-                return `${this.$store.state.showConfigForm}`==='true'
+                return `${this.$store.state.showConfigForm}` === 'true'
             },
 
         },
@@ -437,8 +437,8 @@
         },
         data() {
             return {
-                org_id:'',
-                org:'',
+                org_id: '',
+                org: '',
                 // showConfigForm:false,
                 emailTypeArr: [{value: 'Gmail', label: 'Gmail'}],
                 emailType: '',
@@ -527,7 +527,7 @@
                 }
                 this.$axios({
                     url: '/api' + myUrl,
-                    headers:{'Token':this.$store.state.access_token},
+                    headers: {'Token': this.$store.state.access_token},
                 }).then(res => {
                     console.log(res);
                     window.location.href = res.data.url;
@@ -556,9 +556,9 @@
                 this.emailDialogVisible = true
             },
             resetCla() {
-                this.$store.commit('setClaChoose',false)
+                this.$store.commit('setClaChoose', false)
                 this.filterChange = true
-                this.$store.commit('setClaValue','')
+                this.$store.commit('setClaValue', '')
                 this.previewText = ''
                 this.getCLA()
             },
@@ -636,8 +636,8 @@
             linkRepository() {
                 // this.linkLoading = true;
                 let obj = {}
-                if (this.repositoryChoose){
-                     obj = {
+                if (this.repositoryChoose) {
+                    obj = {
                         repo_id: `${this.repositoryOptions[this.repositoryValue].repoName}`,
                         cla_id: this.claOptions[this.claValue].id,
                         org_email: this.email,
@@ -647,8 +647,8 @@
                         submitter: `${this.platform}/${this.$store.state.user.userName}`,
                         metadata_id: '',
                     };
-                } else{
-                     obj = {
+                } else {
+                    obj = {
                         repo_id: '',
                         cla_id: this.claOptions[this.claValue].id,
                         org_email: this.email,
@@ -665,7 +665,7 @@
                     method: 'post',
                     data: obj,
                     headers: {
-                        'Token':this.$store.state.access_token,
+                        'Token': this.$store.state.access_token,
                         'Access-Token': this.access_token,
                         'Refresh-Token': this.refresh_token,
                         'User': `${this.platform}/${this.user.userName}`
@@ -675,12 +675,12 @@
                     this.linkLoading = false;
                     this.$message.success('success')
                     console.log(res);
-                    this.$store.commit('setClaValue','')
-                    this.$store.commit('setRepositoryValue','')
-                    this.$store.commit('setClaChoose',false)
-                    this.$store.commit('setRepositoryChoose',false)
+                    this.$store.commit('setClaValue', '')
+                    this.$store.commit('setRepositoryValue', '')
+                    this.$store.commit('setClaChoose', false)
+                    this.$store.commit('setRepositoryChoose', false)
                     this.email = '';
-                    document.cookie='';
+                    document.cookie = '';
                     this.linkDialogVisible = false;
                     let data = {
                         access_token: this.$store.state.access_token,
@@ -718,7 +718,7 @@
             claVisibleChange(visible) {
                 console.log('claVisibleChange');
                 if (visible && this.filterChange) {
-                    console.log('claVisibleChange',visible,this.filterChange);
+                    console.log('claVisibleChange', visible, this.filterChange);
                     this.getCLA();
                     this.filterChange = false;
                 }
@@ -727,7 +727,7 @@
             orgVisibleChange(visible) {
                 console.log('orgVisibleChange');
                 if (visible) {
-                    console.log('orgVisibleChange',visible);
+                    console.log('orgVisibleChange', visible);
                     this.getOrgsInfo();
                 }
 
@@ -735,8 +735,8 @@
             repoVisibleChange(visible) {
                 console.log('repoVisibleChange');
                 if (visible) {
-                    console.log('repoVisibleChange',visible);
-                    this.getRepositoriesOfOrg(this.org,this.org_id);
+                    console.log('repoVisibleChange', visible);
+                    this.getRepositoriesOfOrg(this.org, this.org_id);
                 }
 
             },
@@ -765,8 +765,8 @@
             /*选择组织*/
             changeOrg(value) {
                 this.$store.commit('setOrgValue', value)
-                this.org=this.orgOptions[value].label;
-                this.org_id=this.orgOptions[value].id
+                this.org = this.orgOptions[value].label;
+                this.org_id = this.orgOptions[value].id
                 console.log(value);
 
                 if (value !== '') {
@@ -846,7 +846,7 @@
                     url: '/api' + url.getClaInfo,
                     params: {language: this.claLanguageValue, apply_to: this.claTypeValue},
                     headers: {
-                        'Token':this.$store.state.access_token,
+                        'Token': this.$store.state.access_token,
                         'Access-Token': this.$store.state.platform_token,
                         'Refresh-Token': this.$store.state.refresh_token,
                         'User': `${this.$store.state.platform}/${this.$store.state.user.userName}`
@@ -916,37 +916,38 @@
                 }, 500)
 
             },
-            clearPageSession(){
+            clearPageSession() {
                 sessionStorage.removeItem('orgOptions')
                 sessionStorage.removeItem('repositoryOptions')
                 sessionStorage.removeItem('claOptions')
                 sessionStorage.removeItem('orgValue')
                 sessionStorage.removeItem('claValue')
                 sessionStorage.removeItem('repositoryValue')
+                sessionStorage.removeItem('tableData')
             },
             getCookieData() {
                 if (document.cookie !== '') {
                     let cookieArr = document.cookie.split('; ')
                     console.log(cookieArr);
-                    let access_token, refresh_token ,platform_token= '';
+                    let access_token, refresh_token, platform_token = '';
                     let email = ''
                     cookieArr.forEach((item, index) => {
                         let arr = item.split('=');
                         arr[0] === 'access_token' ? access_token = arr[1] : arr[0] === 'refresh_token' ? refresh_token = arr[1] :
-                            arr[0] === 'email' ? email = arr[1] :arr[0] === 'platform_token' ? platform_token = arr[1] : platform_token = '';
+                            arr[0] === 'email' ? email = arr[1] : arr[0] === 'platform_token' ? platform_token = arr[1] : platform_token = '';
                     })
                     this.email = email;
                     if (email !== '') {
-                        this.$store.commit('setIsEmail',true)
+                        this.$store.commit('setIsEmail', true)
                     }
-                    let data = {access_token, refresh_token,platform_token};
+                    let data = {access_token, refresh_token, platform_token};
                     this.setTokenAct(data);
-                    this.getUserInfo(access_token, refresh_token,platform_token)
+                    this.getUserInfo(access_token, refresh_token, platform_token)
                 }
 
             },
             /*获取用户名并显示*/
-            getUserInfo(access_token, refresh_token,platform_token) {
+            getUserInfo(access_token, refresh_token, platform_token) {
                 let obj = {access_token: platform_token};
                 console.log(obj);
                 this.$axios({
@@ -963,7 +964,7 @@
                     }
                     this.setLoginUserAct(data);
                     let obj = {
-                        platform_token:platform_token,
+                        platform_token: platform_token,
                         access_token: access_token,
                         refresh_token: refresh_token,
                         userName: res.data.login,
@@ -977,9 +978,11 @@
                 })
             },
         },
-
-        created() {
+        beforeCreate() {
             this.clearPageSession();
+        },
+        created() {
+
             this.getPath();
             this.openFullScreen();
             this.getCookieData()
