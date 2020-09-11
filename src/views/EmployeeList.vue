@@ -96,6 +96,21 @@
                 </div>
             </el-tab-pane>
         </el-tabs>
+        <el-dialog
+                width="20%"
+                title=""
+                align="center"
+                :visible.sync="deleteUserVisible">
+            <el-row align="center">
+                Are you sure to delete ?
+            </el-row>
+            <el-row align="center" class="marginTop1rem contentTitle">
+
+                <el-button type="primary" size="medium" @click="submit()">Yes</el-button>
+                <el-button size="medium" @click="deleteUserVisible=false">No</el-button>
+            </el-row>
+
+        </el-dialog>
     </div>
 </template>
 
@@ -106,9 +121,11 @@
         name: "EmployeeList",
         data() {
             return {
+                deleteUserVisible:false,
                 active: 'first',
                 inactiveData: [],
-                activeData: []
+                activeData: [],
+                deleteData:'',
             }
         },
         computed: {
@@ -123,16 +140,11 @@
 
         },
         methods: {
-            deleteEmployee(cla_org_id, email, enabled){
-                let data = {
-                    cla_org_id: cla_org_id,
-                    email: email,
-                    enabled: enabled
-                }
+            submit(){
                 this.$axios({
                     url: `/api${url.enableEmployee}`,
                     method: 'delete',
-                    data: data,
+                    data: this.deleteData,
                     headers: {
                         token: this.userInfo[this.orgValue].token,
                     }
@@ -142,6 +154,14 @@
                 }).catch(err => {
                     console.log(err);
                 })
+            },
+            deleteEmployee(cla_org_id, email, enabled){
+                this.deleteData={
+                    cla_org_id: cla_org_id,
+                    email: email,
+                    enabled: enabled
+                }
+
             },
             changeActtive(cla_org_id, email, enabled) {
                 console.log(cla_org_id, email, enabled);
