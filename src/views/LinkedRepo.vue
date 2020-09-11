@@ -341,7 +341,7 @@
                 :close-on-click-modal="false"
                 :visible.sync="previewOriginalDialogVisible"
                 width="50%">
-            <div id="pop">
+            <div id="box">
                 <!--<pdf-->
                 <!--:src="pdfSrc">-->
                 <!--</pdf>-->
@@ -364,6 +364,9 @@
             </div>
 
         </el-dialog>
+        <div id="pop">
+
+        </div>
     </div>
 
 
