@@ -38,7 +38,7 @@ See https://github.com/adobe-type-tools/cmap-resources
     <script type="text/javascript">
         var DEFAULT_URL = "";
         var pdfUrl = document.location.search.substring(1);
-        if (null == pdfUrl || "" == pdfUrl) {
+        if (null == pdfUrl || "" === pdfUrl) {
             var BASE64_MARKER = ';base64,';//声明文件流编码格式
             var preFileId = "";
             var pdfAsDataUri = sessionStorage.getItem("pdf_base64");//这里就是pdf文件的base64码，我是通过session传递base64的
