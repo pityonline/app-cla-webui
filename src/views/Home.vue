@@ -437,6 +437,8 @@
         },
         data() {
             return {
+                org_id:'',
+                org:'',
                 // showConfigForm:false,
                 emailTypeArr: [{value: 'Gmail', label: 'Gmail'}],
                 emailType: '',
@@ -734,7 +736,7 @@
                 console.log('repoVisibleChange');
                 if (visible) {
                     console.log('repoVisibleChange',visible);
-                    this.getRepositoriesOfOrg();
+                    this.getRepositoriesOfOrg(this.org,this.org_id);
                 }
 
             },
@@ -763,6 +765,8 @@
             /*选择组织*/
             changeOrg(value) {
                 this.$store.commit('setOrgValue', value)
+                this.org=this.orgOptions[value].label;
+                this.org_id=this.orgOptions[value].id
                 console.log(value);
 
                 if (value !== '') {
