@@ -69,7 +69,8 @@ See https://github.com/adobe-type-tools/cmap-resources
                     array[i] = raw.charCodeAt(i);
                 }
                 console.log(array);
-                return array;
+                // return array;
+                return new Blob([array], { type: 'pdf' });
             }
         }
     </script>
