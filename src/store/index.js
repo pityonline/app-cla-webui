@@ -151,7 +151,7 @@ export default new Vuex.Store({
         setTableData(state, data) {
             console.log(data);
             state.tableData = data;
-            sessionStorage.setItem('tableData', data);
+            sessionStorage.setItem('tableData', JSON.stringify(data));
         },
     },
     actions: {

@@ -659,6 +659,7 @@
                                 })
                             }
                         })
+                        console.log(tableData);
                         this.setTableDataAct(tableData)
                         // this.tableData = tableData
                         console.log(this.tableData);
