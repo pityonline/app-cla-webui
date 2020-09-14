@@ -979,10 +979,9 @@
             },
         },
         beforeCreate() {
-            this.clearPageSession();
         },
         created() {
-
+            this.clearPageSession();
             this.getPath();
             this.openFullScreen();
             this.getCookieData()
