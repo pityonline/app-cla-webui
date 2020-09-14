@@ -116,6 +116,21 @@
         </div>
 
         <Footer></Footer>
+        <el-dialog
+                title=""
+                top="5vh"
+                :close-on-press-escape="false"
+                :show-close="false"
+                :close-on-click-modal="false"
+                :visible.sync="tipsDialogVisible"
+                width="50%">
+            <el-row>
+                <el-col align="center">
+                    <p>{{tipsMessage}}</p>
+                    <el-button type="primary" size="medium" @click="clickOk()">OK</el-button>
+                </el-col>
+            </el-row>
+        </el-dialog>
 
     </div>
 </template>
@@ -182,6 +197,8 @@
             }
 
             return {
+                tipsMessage: 'Signed successfully.We have sent a notification email to your email address. Please check it',
+                tipsDialogVisible: false,
                 signPageData: '',
                 cla_org_id: '',
                 sendBtText: 'send code',
@@ -261,6 +278,10 @@
         },
         methods: {
             ...mapActions(['setTokenAct', 'setRepoInfoAct']),
+            clickOk(){
+                this.$router.go(-1)
+                this.tipsDialogVisible=false;
+            },
             async verifyTel(rule, value, callback) {
                 if (!value) {
                     callback();
@@ -351,15 +372,15 @@
                     params: {access_token: access_token}
                 }).then(res => {
                     console.log(res);
-                    for (let item of res.data){
+                    for (let item of res.data) {
                         console.log(item);
-                        if (item.scope){
-                            if (item.scope[0]==='primary'){
-                                this.myForm.email=item.email;
+                        if (item.scope) {
+                            if (item.scope[0] === 'primary') {
+                                this.myForm.email = item.email;
                                 console.log(this.myForm.email);
                                 break
                             }
-                        } 
+                        }
                     }
                     for (let item of this.fields) {
                         if (item.type === 'email') {
@@ -417,7 +438,7 @@
                             console.log(key);
                             if (res.data[key].language === 'english') {
                                 this.value = key;
-                                this.cla_org_id=key
+                                this.cla_org_id = key
                                 console.log(this.cla_org_id);
                                 console.log('find claText');
 
@@ -597,6 +618,7 @@
                     this.$message.closeAll()
                     this.$message.success('sign successfully')
                     // this.dialogVisible = true;
+
                     this.clearForm()
                     this.isRead = false;
                     // this.isSendCode = true;
@@ -607,17 +629,17 @@
                     this.$message.error(err.response.data)
                 })
             },
-            clearForm(){
-                if (this.$store.state.loginType === 'employee'||this.$store.state.loginType === 'individual') {
-                    for (let key in this.ruleForm){
-                       if (key!=='1'&&key!=='2'){
-                           this.ruleForm[key]=''
-                       }
+            clearForm() {
+                if (this.$store.state.loginType === 'employee' || this.$store.state.loginType === 'individual') {
+                    for (let key in this.ruleForm) {
+                        if (key !== '1' && key !== '2') {
+                            this.ruleForm[key] = ''
+                        }
                     }
-                }else{
-                    for (let key in this.ruleForm){
-                        if (key!=='3'){
-                            this.ruleForm[key]=''
+                } else {
+                    for (let key in this.ruleForm) {
+                        if (key !== '3') {
+                            this.ruleForm[key] = ''
                         }
                     }
                 }
