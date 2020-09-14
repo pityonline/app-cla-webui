@@ -2,6 +2,7 @@
 
 import { register } from 'register-service-worker'
 
+// process.env.NODE_TLS_REJECT_UNAUTHORIZED='0';
 if (process.env.NODE_ENV === 'production') {
   register(`${process.env.BASE_URL}service-worker.js`, {
     ready () {
