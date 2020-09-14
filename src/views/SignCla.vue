@@ -62,7 +62,7 @@
                                 </el-form-item>
                                 <el-form-item
                                         v-if="loginType==='corporation'"
-                                        label="VerifyCode"
+                                        label="Verify Code"
                                         required=""
                                         prop="code">
 
@@ -487,12 +487,6 @@
                         Object.assign(rules, {
                             [item.id]: [
                                 {required: true, message: 'please input name', trigger: 'blur'},
-                                {
-                                    min: 2,
-                                    max: 10,
-                                    message: 'The length is between 2 and 10 characters',
-                                    trigger: 'blur'
-                                }
                             ],
                         })
 
@@ -608,7 +602,7 @@
                     this.$message.closeAll()
                     this.$message.success('sign successfully')
                     // this.dialogVisible = true;
-                    this.resetForm('ruleForm')
+                    this.clearForm()
                     this.isRead = false;
                     // this.isSendCode = true;
 
@@ -617,6 +611,21 @@
                     this.$message.closeAll()
                     this.$message.error(err.response.data)
                 })
+            },
+            clearForm(){
+                if (this.$store.state.loginType === 'employee'||this.$store.state.loginType === 'individual') {
+                    for (let key in this.ruleForm){
+                       if (key!=='1'&&key!=='2'){
+                           this.ruleForm[key]=''
+                       }
+                    }
+                }else{
+                    for (let key in this.ruleForm){
+                        if (key!=='3'){
+                            this.ruleForm[key]=''
+                        }
+                    }
+                }
             },
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {

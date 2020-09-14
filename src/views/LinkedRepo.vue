@@ -385,6 +385,11 @@
             pdfReader,
             pdf,
         },
+        computed:{
+            tableData(){
+                return this.$store.state.tableData
+            },
+        },
         data() {
             return {
                 url: '',
@@ -400,7 +405,7 @@
                 fileList: [],
                 previewOriginalDialogVisible: false,
                 uploadOrgDialogVisible: false,
-                tableData: [],
+
                 unlinkId: '',
                 platform: this.$store.state.platform,
                 editDialogVisible: false,
@@ -415,7 +420,7 @@
             this.getTableData()
         },
         methods: {
-            ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
+            ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct','setTableDataAct']),
             toSignPage(row) {
                 console.log(row);
                 // let url=`http://cla.osinfra.cn:60031${this.signRouter}?platform=${row.platform}&org_id=${row.org_id}&repo_id=${row.repo_id}`
@@ -649,7 +654,8 @@
                                 })
                             }
                         })
-                        this.tableData = tableData
+                        this.setTableDataAct(tableData)
+                        // this.tableData = tableData
                         console.log(this.tableData);
                         clearInterval(interval)
                     }

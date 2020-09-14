@@ -252,7 +252,7 @@
                } else if(this.metadataType==='corporation'){
                    this.metadataArr = [
                        {
-                           title: 'CorporationName',
+                           title: 'Corporation Name',
                            type: 'corporationName',
                            description: 'your corporation email',
                            required: true,
@@ -456,6 +456,7 @@
                                     this.$message.error('failed')
                                 })
                             }
+
 
 
 

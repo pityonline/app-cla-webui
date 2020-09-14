@@ -148,6 +148,11 @@ export default new Vuex.Store({
             state.isEmail = isEmail;
             sessionStorage.setItem('isEmail', isEmail);
         },
+        setTableData(state, data) {
+            console.log(data);
+            state.tableData = data;
+            sessionStorage.setItem('tableData', tableData);
+        },
     },
     actions: {
         setShowConfigFormAct({commit}, showConfigForm) {
@@ -281,6 +286,9 @@ export default new Vuex.Store({
                 console.log(err);
             })
 
+        },
+        setTableDataAct({commit}, data) {
+            commit('setTableData', data)
         },
 
     },
