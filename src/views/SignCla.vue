@@ -127,7 +127,7 @@
             <el-row>
                 <el-col align="center">
                     <p>{{tipsMessage}}</p>
-                    <el-button type="primary" size="medium" @click="clickOk()">OK</el-button>
+                    <el-button style="margin-top: 3rem" type="primary" size="medium" @click="clickOk()">OK</el-button>
                 </el-col>
             </el-row>
         </el-dialog>
@@ -615,13 +615,18 @@
                     }
                 }).then(res => {
                     console.log(res);
-                    this.$message.closeAll()
-                    this.$message.success('sign successfully')
-                    // this.dialogVisible = true;
-
-                    this.clearForm()
-                    this.isRead = false;
+                    // this.$message.closeAll()
+                    // this.clearForm()
+                    // this.isRead = false;
                     // this.isSendCode = true;
+                    // this.$message.success('sign successfully')
+                    if (this.$store.state.loginType === 'corporation') {
+                        this.tipsMessage='We have sent a notification email to your email address. Please check it.And please complete the signature according to the prompt in the email'
+                    }else if (this.$store.state.loginType === 'employee') {
+                        this.tipsMessage='We have sent a notification email to your email address. Please check it,And email the administrator of your company to audit'
+                    }
+                    this.tipsDialogVisible = true;
+
 
                 }).catch(err => {
                     console.log(err);
