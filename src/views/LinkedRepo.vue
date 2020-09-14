@@ -392,6 +392,7 @@
         },
         data() {
             return {
+                address:'http://cla.osinfra.cn:60031',
                 url: '',
                 signRouter: '/signType',
                 pdfSrc: '',
@@ -423,8 +424,12 @@
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct','setTableDataAct']),
             toSignPage(row) {
                 console.log(row);
-                // let url=`http://cla.osinfra.cn:60031${this.signRouter}?platform=${row.platform}&org_id=${row.org_id}&repo_id=${row.repo_id}`
-                let url = `http://cla.osinfra.cn:60031${this.signRouter}/${row.platform}/${row.org_id}/${row.repo_id}`
+                let url=''
+                if (row.repo_id) {
+                     url = `${this.address}${this.signRouter}/${row.platform}/${row.org_id}/${row.repo_id}`
+                }else{
+                    url = `${this.address}${this.signRouter}/${row.platform}/${row.org_id}`
+                }
                 window.open(url)
             },
             submitUpload() {

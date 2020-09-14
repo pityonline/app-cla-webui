@@ -34,7 +34,11 @@
                 let args = window.location.href.split('/signType/')[1].split('/')
                 this.platform = args[0]
                 this.org = args[1]
-                this.repo = args[2]
+                if (args[2]) {
+                    this.repo = args[2]
+                }else {
+                    this.repo=''
+                }
                 this.setRepoInfoAct({platform: this.platform, org_id: this.org, repo_id: this.repo});
 
             },
