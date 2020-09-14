@@ -1,17 +1,17 @@
 <template>
     <div id="checkCLA" :style="checkCLAClass">
-        <!--<Header></Header>-->
-        <div class="header">
+        <Header></Header>
+        <!--<div class="header">-->
 
-            <el-col :offset="8" :span="8">
-                <div>
+            <!--<el-col :offset="8" :span="8">-->
+                <!--<div>-->
 
-                    <svg-icon class="pointer" @click="" id="svg_logo" icon-class="CLA_SYSTEM_BLACK"/>
-                </div>
-            </el-col>
+                    <!--<svg-icon class="pointer" @click="" id="svg_logo" icon-class="CLA_SYSTEM_BLACK"/>-->
+                <!--</div>-->
+            <!--</el-col>-->
 
 
-        </div>
+        <!--</div>-->
         <div id="section">
             <div v-if="!isSendCode" class="content">
                 <el-col :offset="6" :span="12">
@@ -125,7 +125,7 @@
 </template>
 
 <script>
-    import Header from '@components/Header'
+    import Header from '@components/HeaderPure'
     import Footer from '@components/Footer'
     import * as until from '../until/until'
     import * as url from '../until/api'

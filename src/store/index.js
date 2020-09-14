@@ -207,7 +207,6 @@ export default new Vuex.Store({
                     let tableData = [];
                     let count = res.data.length
                     res.data.forEach((item, index) => {
-                        this.claChoose = true;
                         console.log(index);
                         tableData.push({
                             id: item.id,
