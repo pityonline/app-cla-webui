@@ -1,16 +1,36 @@
 <template>
-    <div class="header">
-        <el-col :offset="8" :span="8">
-            <div>
-                <svg-icon class="pointer" @click="toHome()" id="svg_logo" icon-class="CLA_SYSTEM_BLACK"/>
-            </div>
+    <el-row class="header" align="meddle">
+        <el-col :offset="4" :span="16">
+            <el-row>
+                <el-col :span="12" align="left">
+                    <svg-icon class="pointer" @click="toHome()" id="svg_logo" icon-class="qianshu"/>
+                </el-col>
+                <el-col :span="12" align="right">
+                    <el-select
+                            v-model="language">
+                        <el-option
+                                v-for="item in languageOptions"
+                                :key="item.value"
+                                :value="item.value"
+                                :label="item.label">
+
+                        </el-option>
+                    </el-select>
+                </el-col>
+            </el-row>
         </el-col>
-    </div>
+    </el-row>
 </template>
 
 <script>
     export default {
         name: "HeaderPure",
+        data() {
+            return {
+                language: '',
+                languageOptions: '',
+            }
+        },
         methods: {
             toHome() {
                 this.$router.push('/home')
@@ -24,32 +44,9 @@
         position: fixed;
         top: 0;
         left: 0;
-        background-color: #ececec;
         height: 4rem;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
         z-index: 10;
         width: 100%;
-
-
-        & > div:nth-of-type(1) {
-            display: flex;
-            justify-content: center;
-
-            & > div {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-
-                #svg_logo {
-                    height: 4rem;
-                    width: 4rem;
-                }
-            }
-
-        }
-
-
+        border-bottom: lightgrey;
     }
 </style>
