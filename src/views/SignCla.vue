@@ -125,7 +125,7 @@
 </template>
 
 <script>
-    import Header from '@components/HeaderPure'
+    import Header from '@components/CorporationHeader'
     import Footer from '@components/Footer'
     import * as until from '../until/until'
     import * as url from '../until/api'
