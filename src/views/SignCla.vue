@@ -2,15 +2,11 @@
     <div id="checkCLA" :style="checkCLAClass">
         <!--<Header></Header>-->
         <div class="header">
-
             <el-col :offset="8" :span="8">
                 <div>
-
                     <svg-icon class="pointer" @click="" id="svg_logo" icon-class="CLA_SYSTEM_BLACK"/>
                 </div>
             </el-col>
-
-
         </div>
         <div id="section">
             <div v-if="!isSendCode" class="content">
@@ -553,9 +549,9 @@
                 }
                 console.log(info);
                 if (this.$store.state.loginType === 'individual') {
-                    myUrl = url.individual_signing;
+                    myUrl = `${url.individual_signing}/${this.cla_org_id}`;
                     obj = {
-                        cla_org_id: this.cla_org_id,
+                        name: this.myForm.name,
                         email: this.myForm.email,
                         info: info,
                     }
@@ -573,10 +569,9 @@
                         verifi_code: this.ruleForm.code,
                     }
                 } else if (this.$store.state.loginType === 'employee') {
-                    myUrl = url.employee_signing;
+                    myUrl = `${url.employee_signing}/${this.cla_org_id}`;
                     obj = {
                         name: this.myForm.name,
-                        cla_org_id: this.cla_org_id,
                         email: this.myForm.email,
                         info: info,
                     }
