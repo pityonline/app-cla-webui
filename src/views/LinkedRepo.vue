@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-row class="tableStyle">
-            <el-col :span="4">
+            <el-col :span="3">
                 <el-table
                         :data="orgTableData"
                         align="center"
@@ -13,7 +13,7 @@
 
                 </el-table>
             </el-col >
-            <el-col :span="20">
+            <el-col :span="21">
                 <el-table
                         :data="tableData"
                         align="center"
@@ -23,8 +23,7 @@
                     <el-table-column
 
                             prop="repository"
-                            label="Repository"
-                            width="200">
+                            label="Repository">
                         <template slot-scope="scope">
                             <svg-icon icon-class="repository"/>
                             <span class="pointer hoverUnderline"
