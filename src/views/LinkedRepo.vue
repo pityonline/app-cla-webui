@@ -7,7 +7,7 @@
                         align="center"
                         style="width: 100%;">
                     <el-table-column
-                            prop="org"
+                            prop="Organization"
                             label="Organization">
                     </el-table-column>
 

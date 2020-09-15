@@ -1009,7 +1009,7 @@
                         platform: this.platform
                     }
                     console.log(obj);
-                    this.getLinkedRepoListAct(obj);
+                    // this.getLinkedRepoListAct(obj);
 
                 }).catch(err => {
                     console.log(err);
