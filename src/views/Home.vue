@@ -778,11 +778,15 @@
             },
             /*选择组织*/
             changeOrg(value) {
-                this.$store.commit('setOrgValue', value)
-                this.org = this.orgOptions[value].label;
-                this.org_id = this.orgOptions[value].id
                 console.log(value);
-
+                this.$store.commit('setOrgValue', value)
+                if (value === '') {
+                    this.org = '';
+                    this.org_id = ''
+                }else{
+                    this.org = this.orgOptions[value].label;
+                    this.org_id = this.orgOptions[value].id
+                }
                 if (value !== '') {
                     this.$store.commit('setOrgChoose', true)
                     this.getRepositoriesOfOrg(this.orgOptions[value].label, this.orgOptions[value].id)
