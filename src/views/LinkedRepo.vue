@@ -1,135 +1,124 @@
 <template>
     <div>
-        <div class="tableStyle">
-            <el-table
-                    :data="tableData"
-                    align="center"
-                    row-key="id"
-                    :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
-                    style="width: 100%;">
-                <el-table-column
-                        prop="repository"
-                        label="Repository"
-                        width="300">
-                    <template slot-scope="scope">
-                        <svg-icon icon-class="repository"/>
-                        <span class="pointer hoverUnderline"
-                              @click="checkCorporationList(scope.row)"
-                              style="margin-left: 10px;">{{scope.row.repository}}</span>
-                    </template>
-                </el-table-column>
-                <el-table-column
-                        prop="claName"
-                        label="CLA">
-                    <template slot-scope="scope">
-                        <span class="pointer hoverUnderline">{{scope.row.claName}}</span>
-                    </template>
-                </el-table-column>
-                <el-table-column
-                        prop="apply_to"
-                        label="Apply">
-                </el-table-column>
-                <el-table-column
-                        prop="cla_language"
-                        label="Language">
-                </el-table-column>
-
-                <el-table-column
+        <el-row class="tableStyle">
+            <el-col :span="4">
+                <el-table
+                        :data="orgTableData"
                         align="center"
-                        label="Original Signature">
-                    <template slot-scope="scope">
-                        <el-popover
-                                width="80"
-                                trigger="hover"
-                                placement="right">
+                        style="width: 100%;">
+                    <el-table-column
+                            prop="org"
+                            label="Organization"
+                            width="100%">
+                    </el-table-column>
 
-                            <div class="menuBT">
-
-                                <el-button style="margin-left: 10px" @click="previewOriginalSignature(scope.row)"
-                                           type="" size="mini">preview
-                                </el-button>
-                                <el-button @click="downloadOriginalSignature(scope.row)" type="" size="mini">download
-                                </el-button>
-                            </div>
-
-                            <svg-icon slot="reference" class="pointer" icon-class="pdf"/>
-                        </el-popover>
-                    </template>
-                </el-table-column>
-                <el-table-column
+                </el-table>
+            </el-col >
+            <el-col :span="20">
+                <el-table
+                        :data="tableData"
                         align="center"
-                        label="Org Signature">
-                    <template slot-scope="scope">
-                        <el-popover
-                                width="80"
-                                trigger="hover"
-                                placement="right">
+                        row-key="id"
+                        :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
+                        style="width: 100%;">
+                    <el-table-column
 
-                            <div class="menuBT">
-                                <el-button @click="uploadOrgSignature(scope.row)" style="margin-left: 10px" type=""
-                                           size="mini">upload
-                                </el-button>
-                                <el-button @click="downloadOrgSignature(scope.row)" type="" size="mini">download
-                                </el-button>
-                                <el-button @click="previewOrgSignature(scope.row)" type="" size="mini">preview
-                                </el-button>
-                            </div>
+                            prop="repository"
+                            label="Repository"
+                            width="300">
+                        <template slot-scope="scope">
+                            <svg-icon icon-class="repository"/>
+                            <span class="pointer hoverUnderline"
+                                  @click="checkCorporationList(scope.row)"
+                                  style="margin-left: 10px;">{{scope.row.repository}}</span>
+                        </template>
+                    </el-table-column>
+                    <el-table-column
+                            prop="claName"
+                            label="CLA">
+                        <template slot-scope="scope">
+                            <span class="pointer hoverUnderline">{{scope.row.claName}}</span>
+                        </template>
+                    </el-table-column>
+                    <el-table-column
+                            prop="apply_to"
+                            label="Apply">
+                    </el-table-column>
+                    <el-table-column
+                            prop="cla_language"
+                            label="Language">
+                    </el-table-column>
 
-                            <svg-icon slot="reference" class="pointer" icon-class="pdf"/>
+                    <el-table-column
+                            align="center"
+                            label="Original Signature">
+                        <template slot-scope="scope">
+                            <el-popover
+                                    width="80"
+                                    trigger="hover"
+                                    placement="right">
 
-                        </el-popover>
-                    </template>
+                                <div class="menuBT">
 
-                </el-table-column>
-                <!--<el-table-column-->
-                <!--prop="contributors"-->
-                <!--label="Corporation Contributors"-->
-                <!--width="260"-->
-                <!--align="center">-->
-                <!--<template slot-scope="scope">-->
-                <!--<span class="pointer hoverUnderline"-->
-                <!--@click="checkCorporationList(scope.row)"-->
-                <!--style="margin-left: 10px;">{{scope.row.contributors}}</span>-->
-                <!--</template>-->
-                <!--</el-table-column>-->
+                                    <el-button style="margin-left: 10px" @click="previewOriginalSignature(scope.row)"
+                                               type="" size="mini">preview
+                                    </el-button>
+                                    <el-button @click="downloadOriginalSignature(scope.row)" type="" size="mini">download
+                                    </el-button>
+                                </div>
 
-                <el-table-column
-                        label="Unlink"
-                        width="100"
-                        align="center">
+                                <svg-icon slot="reference" class="pointer" icon-class="pdf"/>
+                            </el-popover>
+                        </template>
+                    </el-table-column>
+                    <el-table-column
+                            align="center"
+                            label="Org Signature">
+                        <template slot-scope="scope">
+                            <el-popover
+                                    width="80"
+                                    trigger="hover"
+                                    placement="right">
 
-                    <template slot-scope="scope">
-                        <el-tooltip slot="reference" effect="dark" content="unlink"
-                                    placement="bottom">
-                            <svg-icon class="pointer" icon-class="delete" @click="unlinkHandleClick(scope)"/>
-                        </el-tooltip>
-                        <!--<el-popover-->
-                        <!--width="80"-->
-                        <!--placement="right">-->
+                                <div class="menuBT">
+                                    <el-button @click="uploadOrgSignature(scope.row)" style="margin-left: 10px" type=""
+                                               size="mini">upload
+                                    </el-button>
+                                    <el-button @click="downloadOrgSignature(scope.row)" type="" size="mini">download
+                                    </el-button>
+                                    <el-button @click="previewOrgSignature(scope.row)" type="" size="mini">preview
+                                    </el-button>
+                                </div>
 
-                        <!--<div class="menuBT">-->
-                        <!--<el-button type="primary" size="medium">Import</el-button>-->
-                        <!--<el-button type="primary" size="medium">ReCheck PRs</el-button>-->
-                        <!--<el-button type="primary" size="medium">Get Badge</el-button>-->
-                        <!--<el-button type="primary" size="medium"-->
-                        <!--@click="unLinkDialogVisible=true">Unlink-->
-                        <!--</el-button>-->
-                        <!--</div>-->
-                        <!--<el-tooltip slot="reference" effect="dark" content="More.."-->
-                        <!--placement="bottom">-->
-                        <!--<svg-icon class="pointer" icon-class="menu"/>-->
-                        <!--</el-tooltip>-->
-                        <!--</el-popover>-->
-                    </template>
-                </el-table-column>
-                <el-table-column
-                        label="Sign">
-                    <template slot-scope="scope">
-                        <el-button size="mini" @click="toSignPage(scope.row)">Sign</el-button>
-                    </template>
-                </el-table-column>
-            </el-table>
-        </div>
+                                <svg-icon slot="reference" class="pointer" icon-class="pdf"/>
+
+                            </el-popover>
+                        </template>
+
+                    </el-table-column>
+                    <el-table-column
+                            label="Unlink"
+                            width="100"
+                            align="center">
+
+                        <template slot-scope="scope">
+                            <el-tooltip slot="reference" effect="dark" content="unlink"
+                                        placement="bottom">
+                                <svg-icon class="pointer" icon-class="delete" @click="unlinkHandleClick(scope)"/>
+                            </el-tooltip>
+
+                        </template>
+                    </el-table-column>
+                    <el-table-column
+                            label="Sign">
+                        <template slot-scope="scope">
+                            <el-button size="mini" @click="toSignPage(scope.row)">Sign</el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
+
+            </el-col>
+        </el-row>
         <div class="paginationClass">
             <el-pagination
                     background
@@ -389,6 +378,14 @@
         computed:{
             tableData(){
                 return this.$store.state.tableData
+            },
+            orgTableData(){
+                try {
+                    return JSON.parse(this.$store.state.orgOptions)
+                } catch(e) {
+                    return this.$store.state.orgOptions
+                }
+
             },
         },
         data() {
