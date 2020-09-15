@@ -456,15 +456,17 @@
                 })
             },
             getClaName(cla_id){
+                let name=''
                 this.$axios({
                     url: `/api${url.getClaInfo}/${cla_id}`,
                     headers: this.uploadHeaders
                 }).then(resp => {
                     console.log(resp);
-                    return resp.data.name
+                    name= resp.data.name
                 }).catch(err => {
                     console.log(err);
                 })
+                return name
             },
             getOrgTableData() {
                 let obj = {access_token: this.$store.state.platform_token, admin: true, page: 1, per_page: 10};
