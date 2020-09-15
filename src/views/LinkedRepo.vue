@@ -799,7 +799,7 @@
 
     .tableStyle {
         margin-bottom: 2rem;
-        padding: 3rem;
+        padding: 3rem 1rem;
         background-color: white;
     }
 
