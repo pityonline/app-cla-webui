@@ -425,7 +425,8 @@
             getLinkedRepoList(org_id){
                 this.$axios({
                     url:`/api${url.getLinkedRepoList}/${this.platform}/${org_id}`,
-                    params:{repo_id:'',apply_to:''}
+                    params:{repo_id:'',apply_to:''},
+                    headers:this.uploadHeaders
                 }).then(res=>{
                     console.log(res);
                 }).catch(err=>{
