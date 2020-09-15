@@ -1,7 +1,7 @@
 <template>
     <div>
-        <el-row class="tableStyle">
-            <el-col :span="3">
+        <el-row >
+            <el-col :span="3" class="tableStyle">
                 <el-table
                         :data="orgTableData"
                         align="center"
@@ -13,7 +13,7 @@
 
                 </el-table>
             </el-col >
-            <el-col :span="21">
+            <el-col :span="21" class="tableStyle">
                 <el-table
                         :data="tableData"
                         align="center"
