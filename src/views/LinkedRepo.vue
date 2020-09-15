@@ -1,18 +1,20 @@
 <template>
     <div>
-        <el-row >
+        <el-row :gutter="10">
             <el-col :span="3" class="tableStyle">
                 <el-table
                         :data="orgTableData"
                         align="center"
                         style="width: 100%;">
                     <el-table-column
+                            @cell-click="clickOrg"
                             prop="Organization"
                             label="Organization">
+
                     </el-table-column>
 
                 </el-table>
-            </el-col >
+            </el-col>
             <el-col :span="21" class="tableStyle">
                 <el-table
                         :data="tableData"
@@ -61,7 +63,8 @@
                                     <el-button style="margin-left: 10px" @click="previewOriginalSignature(scope.row)"
                                                type="" size="mini">preview
                                     </el-button>
-                                    <el-button @click="downloadOriginalSignature(scope.row)" type="" size="mini">download
+                                    <el-button @click="downloadOriginalSignature(scope.row)" type="" size="mini">
+                                        download
                                     </el-button>
                                 </div>
 
@@ -374,16 +377,16 @@
             pdfReader,
             pdf,
         },
-        computed:{
-            tableData(){
+        computed: {
+            tableData() {
                 return this.$store.state.tableData
             },
 
         },
         data() {
             return {
-                orgTableData:'',
-                address:'http://cla.osinfra.cn:60031',
+                orgTableData: '',
+                address: 'http://cla.osinfra.cn:60031',
                 url: '',
                 signRouter: '/signType',
                 pdfSrc: '',
@@ -413,8 +416,11 @@
             // this.getTableData()
         },
         methods: {
-            ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct','setTableDataAct']),
-            getOrgTableData(){
+            ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct', 'setTableDataAct']),
+            clickOrg(row, column, cell, event){
+                console.log(row, column, cell, event);
+            },
+            getOrgTableData() {
                 let obj = {access_token: this.$store.state.platform_token, admin: true, page: 1, per_page: 10};
                 console.log("getOrgsInfo", obj);
                 this.$axios({
@@ -423,12 +429,12 @@
                 }).then(res => {
                     console.log(res);
 
-                        let orgOptions = [];
-                        res.data.forEach((item, index) => {
-                            orgOptions.push({value: index, Organization: item.login, id: item.id});
+                    let orgOptions = [];
+                    res.data.forEach((item, index) => {
+                        orgOptions.push({value: index, Organization: item.login, id: item.id});
 
-                        })
-                       this.orgTableData=orgOptions
+                    })
+                    this.orgTableData = orgOptions
 
                 }).catch(err => {
                     console.log(err);
@@ -436,10 +442,10 @@
             },
             toSignPage(row) {
                 console.log(row);
-                let url=''
+                let url = ''
                 if (row.repo_id) {
-                     url = `${this.address}${this.signRouter}/${row.platform}/${row.org_id}/${row.repo_id}`
-                }else{
+                    url = `${this.address}${this.signRouter}/${row.platform}/${row.org_id}/${row.repo_id}`
+                } else {
                     url = `${this.address}${this.signRouter}/${row.platform}/${row.org_id}`
                 }
                 window.open(url)
@@ -559,7 +565,7 @@
                 // $('#pop').empty();
                 let pop = document.getElementById('pop');
                 console.log(pop);
-                pop.innerHTML ='';
+                pop.innerHTML = '';
                 console.log(pop.innerHTML);
                 PDFJS.getDocument(fileContent).promise.then(function getPdfHelloWorld(pdf) {
                     pages = pdf.numPages;
