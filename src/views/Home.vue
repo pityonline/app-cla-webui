@@ -416,11 +416,9 @@
                 console.log(Number(this.$store.state.orgValue));
                 console.log(this.orgOptions);
 
-                if (this.$store.state.orgValue === undefined) {
+                if (this.$store.state.orgValue === undefined||this.$store.state.orgValue === '') {
                     return this.$store.state.orgValue
 
-                } else if (this.$store.state.orgValue === '') {
-                    return this.$store.state.orgValue
                 }else{
                     return Number(this.$store.state.orgValue)
 
@@ -428,14 +426,14 @@
             },
             claValue() {
                 console.log(this.$store.state.claValue);
-                if (this.$store.state.claValue === undefined) {
+                if (this.$store.state.claValue === undefined||this.$store.state.claValue === '') {
                     return this.$store.state.claValue
-                } else {
+                } else{
                     return Number(this.$store.state.claValue)
                 }
             },
             repositoryValue() {
-                if (this.$store.state.repositoryValue === undefined) {
+                if (this.$store.state.repositoryValue === undefined||this.$store.state.repositoryValue === '') {
                     return this.$store.state.repositoryValue
                 } else {
                     return Number(this.$store.state.repositoryValue)
