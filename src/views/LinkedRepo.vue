@@ -470,7 +470,7 @@
 
                     })
                     this.orgTableData = orgOptions
-                    this.getLinkedRepoList(res.data[0].org_id)
+                    this.getLinkedRepoList(res.data[0].login)
 
 
                 }).catch(err => {
