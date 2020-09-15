@@ -442,6 +442,7 @@
                         }).then(res=>{
                             Object.assign(data[index],{claName:res})
                             this.tableData=data
+                            console.log(this.tableData);
                         })
 
                     })
