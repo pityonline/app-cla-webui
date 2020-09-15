@@ -5,7 +5,7 @@
                 <el-table
                         :data="orgTableData"
                         align="center"
-                        @cell-click="clickOrg(row, column, cell, event)"
+                        @cell-click="clickOrg"
                         style="width: 100%;">
                     <el-table-column
 
