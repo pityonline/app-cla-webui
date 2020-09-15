@@ -792,9 +792,9 @@
                     this.getRepositoriesOfOrg(this.orgOptions[value].label, this.orgOptions[value].id)
                 } else {
                     this.$store.commit('setOrgChoose', false)
-                    this.$store.commit('setRepositoryValue', '')
+                    this.$store.commit('setRepositoryValue', undefined)
                     this.$store.commit('setRepositoryChoose', false)
-                    this.$store.commit('setRepositoryOptions', [])
+                    this.$store.commit('setRepositoryOptions', undefined)
                 }
 
 
