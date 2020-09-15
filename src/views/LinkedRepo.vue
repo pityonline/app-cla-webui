@@ -5,9 +5,10 @@
                 <el-table
                         :data="orgTableData"
                         align="center"
+                        @cell-click="clickOrg()"
                         style="width: 100%;">
                     <el-table-column
-                            @cell-click="clickOrg"
+
                             prop="Organization"
                             label="Organization">
 
