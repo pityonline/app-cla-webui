@@ -440,6 +440,7 @@
                             let claName = this.getClaName(item.cla_id)
                             resolve(claName)
                         }).then(res=>{
+                            console.log(res);
                             Object.assign(data[index],{claName:res})
                             this.tableData=data
                             console.log(this.tableData);
