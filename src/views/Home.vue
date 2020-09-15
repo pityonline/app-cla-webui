@@ -918,25 +918,25 @@
             },
             clearPageSession() {
                 // sessionStorage.removeItem('orgOptions')
-                this.$store.commit('setOrgOption', '')
+                this.$store.commit('setOrgOption', undefined)
 
                 // sessionStorage.removeItem('repositoryOptions')
-                this.$store.commit('setRepositoryOptions', '')
+                this.$store.commit('setRepositoryOptions', undefined)
 
                 // sessionStorage.removeItem('claOptions')
-                this.$store.commit('setClaOptions', '')
+                this.$store.commit('setClaOptions', undefined)
 
                 // sessionStorage.removeItem('orgValue')
-                this.$store.commit('setOrgValue', '')
+                this.$store.commit('setOrgValue', undefined)
 
                 // sessionStorage.removeItem('claValue')
-                this.$store.commit('setClaValue', '')
+                this.$store.commit('setClaValue', undefined)
 
                 // sessionStorage.removeItem('repositoryValue')
-                this.$store.commit('setRepositoryValue', '')
+                this.$store.commit('setRepositoryValue', undefined)
 
                 // sessionStorage.removeItem('tableData')
-                this.$store.commit('setTableData', '')
+                this.$store.commit('setTableData', undefined)
 
             },
             getCookieData() {
