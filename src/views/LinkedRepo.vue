@@ -20,12 +20,9 @@
                 <el-table
                         :data="tableData"
                         align="center"
-                        row-key="id"
-                        :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
                         style="width: 100%;">
                     <el-table-column
-
-                            prop="repository"
+                            prop="repo_id"
                             label="Repository">
                         <template slot-scope="scope">
                             <svg-icon icon-class="repository"/>
@@ -379,13 +376,11 @@
             pdf,
         },
         computed: {
-            tableData() {
-                return this.$store.state.tableData
-            },
 
         },
         data() {
             return {
+                tableData:'',
                 orgTableData: '',
                 address: 'http://cla.osinfra.cn:60031',
                 url: '',
@@ -429,7 +424,24 @@
                     headers:this.uploadHeaders
                 }).then(res=>{
                     console.log(res);
+                    let data = res.data
+                    res.data.forEach((item,index)=>{
+                        let claName = this.getClaName(item.cla_id)
+                        Object.assign(data[index],{claName:claName})
+                    })
+                    this.tableData=data
                 }).catch(err=>{
+                    console.log(err);
+                })
+            },
+            getClaName(cla_id){
+                this.$axios({
+                    url: `/api${url.getClaInfo}/${cla_id}`,
+                    headers: this.uploadHeaders
+                }).then(resp => {
+                    console.log(resp);
+                    return resp.data.name
+                }).catch(err => {
                     console.log(err);
                 })
             },
