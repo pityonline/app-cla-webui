@@ -779,6 +779,7 @@
             /*选择组织*/
             changeOrg(value) {
                 console.log(value);
+                this.orgValue=value
                 this.$store.commit('setOrgValue', value)
                 if (value === '') {
                     this.org = '';
