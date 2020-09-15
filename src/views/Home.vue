@@ -32,7 +32,7 @@
                                                        placeholder="select org"
                                                        style="width: 100%"
                                                        size="medium"
-                                                       clearable=""
+                                                       clearable
                                                        filterable
                                                        @visible-change="orgVisibleChange"
                                                        @change="changeOrg">
@@ -412,6 +412,9 @@
 
             },
             orgValue() {
+                console.log(this.$store.state.orgValue);
+                console.log(this.orgOptions);
+
                 if (this.$store.state.orgValue === undefined) {
                     return this.$store.state.orgValue
 
@@ -779,7 +782,7 @@
             /*选择组织*/
             changeOrg(value) {
                 console.log(value);
-                this.orgValue=value
+                // this.orgValue=value
                 this.$store.commit('setOrgValue', value)
                 if (value === '') {
                     this.org = '';
