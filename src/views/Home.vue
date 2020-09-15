@@ -370,12 +370,11 @@
         computed: {
             orgOptions() {
                 console.log(this.$store.state.orgOptions);
-                if (this.$store.state.orgOptions === undefined) {
-
-                    return this.$store.state.orgOptions
-                } else {
-                    return JSON.parse(this.$store.state.orgOptions)
-                }
+                    try {
+                        return JSON.parse(this.$store.state.orgOptions)
+                    } catch(e) {
+                        return this.$store.state.orgOptions
+                    }
             },
 
             orgChoose() {
