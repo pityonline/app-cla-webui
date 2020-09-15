@@ -413,6 +413,7 @@
             },
             orgValue() {
                 console.log(this.$store.state.orgValue);
+                console.log(Number(this.$store.state.orgValue));
                 console.log(this.orgOptions);
 
                 if (this.$store.state.orgValue === undefined) {
