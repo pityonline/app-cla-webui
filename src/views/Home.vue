@@ -370,7 +370,12 @@
         computed: {
             orgOptions() {
                 console.log(this.$store.state.orgOptions);
-                return this.$store.state.orgOptions
+                if (this.$store.state.orgOptions === undefined) {
+
+                    return this.$store.state.orgOptions
+                } else {
+                    return JSON.parse(this.$store.state.orgOptions)
+                }
             },
 
             orgChoose() {
@@ -392,10 +397,20 @@
                 return `${this.$store.state.repositoryChoose}` === 'true'
             },
             repositoryOptions() {
-                return this.$store.state.repositoryOptions
+                if (this.$store.state.repositoryOptions === undefined) {
+                    return this.$store.state.repositoryOptions
+
+                } else {
+                    return JSON.parse(this.$store.state.repositoryOptions)
+                }
             },
             claOptions() {
-                return this.$store.state.claOptions
+                if (this.$store.state.claOptions === undefined) {
+
+                    return this.$store.state.claOptions
+                } else {
+                    return JSON.parse(this.$store.state.claOptions)
+                }
             },
             orgValue() {
                 if (this.$store.state.orgValue === undefined) {
