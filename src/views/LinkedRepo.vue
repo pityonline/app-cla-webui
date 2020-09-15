@@ -6,6 +6,7 @@
                         :data="orgTableData"
                         align="center"
                         @cell-click="clickOrg"
+                        :row-class-name="tableRowClassName"
                         style="width: 100%;">
                     <el-table-column
 
@@ -380,6 +381,7 @@
         },
         data() {
             return {
+                clickRow:0,
                 tableData:'',
                 orgTableData: '',
                 address: 'http://cla.osinfra.cn:60031',
@@ -409,12 +411,20 @@
         created() {
             // this.getCookieData()
             this.getOrgTableData();
+
             // this.getTableData()
         },
         methods: {
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct', 'setTableDataAct']),
+            tableRowClassName({row, rowIndex}) {
+                if (rowIndex === this.clickRow) {
+                    return 'warning-row';
+                }
+                return '';
+            },
             clickOrg(row, column, cell, event){
                 console.log(row, column, cell, event);
+                this.clickRow=row.value
                 this.getLinkedRepoList(row.Organization)
             },
             getLinkedRepoList(org_id){
@@ -460,6 +470,8 @@
 
                     })
                     this.orgTableData = orgOptions
+                    this.getLinkedRepoList(res.data[0].org_id)
+
 
                 }).catch(err => {
                     console.log(err);
@@ -824,13 +836,16 @@
 </script>
 
 <style lang="less">
+    .el-table .warning-row {
+        background: #8CC5FF;
+    }
     .el-popover {
         min-width: 7rem;
     }
 
     .tableStyle {
         margin-bottom: 2rem;
-        padding: 3rem 1rem;
+        padding: 3rem 0;
         background-color: white;
     }
 
