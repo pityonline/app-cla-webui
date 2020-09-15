@@ -452,18 +452,19 @@
                     console.log(err);
                 })
             },
-            getClaName(cla_id){
+            async  getClaName(cla_id){
                 let name=''
-                this.$axios({
+               await this.$axios({
                     url: `/api${url.getClaInfo}/${cla_id}`,
                     headers: this.uploadHeaders
                 }).then(resp => {
                     console.log(resp);
                     name= resp.data.name
-                    return name
+
                 }).catch(err => {
                     console.log(err);
                 })
+                return name
 
             },
             getOrgTableData() {
