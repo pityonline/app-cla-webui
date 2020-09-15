@@ -396,20 +396,20 @@
                 return `${this.$store.state.repositoryChoose}` === 'true'
             },
             repositoryOptions() {
-                if (this.$store.state.repositoryOptions === undefined) {
-                    return this.$store.state.repositoryOptions
-
-                } else {
+                try {
                     return JSON.parse(this.$store.state.repositoryOptions)
+                } catch(e) {
+                    return this.$store.state.repositoryOptions
                 }
+
             },
             claOptions() {
-                if (this.$store.state.claOptions === undefined) {
-
-                    return this.$store.state.claOptions
-                } else {
+                try {
                     return JSON.parse(this.$store.state.claOptions)
+                } catch(e) {
+                    return this.$store.state.claOptions
                 }
+
             },
             orgValue() {
                 if (this.$store.state.orgValue === undefined) {
