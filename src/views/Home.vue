@@ -917,25 +917,25 @@
 
             },
             clearPageSession() {
-                sessionStorage.removeItem('orgOptions')
+                // sessionStorage.removeItem('orgOptions')
                 this.$store.commit('setOrgOption', '')
 
-                sessionStorage.removeItem('repositoryOptions')
+                // sessionStorage.removeItem('repositoryOptions')
                 this.$store.commit('setRepositoryOptions', '')
 
-                sessionStorage.removeItem('claOptions')
+                // sessionStorage.removeItem('claOptions')
                 this.$store.commit('setClaOptions', '')
 
-                sessionStorage.removeItem('orgValue')
+                // sessionStorage.removeItem('orgValue')
                 this.$store.commit('setOrgValue', '')
 
-                sessionStorage.removeItem('claValue')
+                // sessionStorage.removeItem('claValue')
                 this.$store.commit('setClaValue', '')
 
-                sessionStorage.removeItem('repositoryValue')
+                // sessionStorage.removeItem('repositoryValue')
                 this.$store.commit('setRepositoryValue', '')
 
-                sessionStorage.removeItem('tableData')
+                // sessionStorage.removeItem('tableData')
                 this.$store.commit('setTableData', '')
 
             },
