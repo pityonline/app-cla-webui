@@ -419,8 +419,11 @@
                 if (this.$store.state.orgValue === undefined) {
                     return this.$store.state.orgValue
 
-                } else {
+                } else if (this.$store.state.orgValue === '') {
+                    return this.$store.state.orgValue
+                }else{
                     return Number(this.$store.state.orgValue)
+
                 }
             },
             claValue() {
