@@ -29,15 +29,12 @@
                             <svg-icon icon-class="repository"/>
                             <span class="pointer hoverUnderline"
                                   @click="checkCorporationList(scope.row)"
-                                  style="margin-left: 10px;">{{scope.row.repository}}</span>
+                                  style="margin-left: 10px;">{{scope.row.repo_id}}</span>
                         </template>
                     </el-table-column>
                     <el-table-column
                             prop="claName"
                             label="CLA">
-                        <template slot-scope="scope">
-                            <span class="pointer hoverUnderline">{{scope.row.claName}}</span>
-                        </template>
                     </el-table-column>
                     <el-table-column
                             prop="apply_to"
