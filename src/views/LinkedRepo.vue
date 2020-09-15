@@ -7,7 +7,6 @@
                         align="center"
                         style="width: 100%;">
                     <el-table-column
-                            
                             prop="org"
                             label="Organization">
                     </el-table-column>
@@ -426,7 +425,7 @@
 
                         let orgOptions = [];
                         res.data.forEach((item, index) => {
-                            orgOptions.push({value: index, label: item.login, id: item.id});
+                            orgOptions.push({value: index, Organization: item.login, id: item.id});
 
                         })
                        this.orgTableData=orgOptions
