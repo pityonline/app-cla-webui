@@ -420,6 +420,17 @@
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct', 'setTableDataAct']),
             clickOrg(row, column, cell, event){
                 console.log(row, column, cell, event);
+                this.getLinkedRepoList(row.Organization)
+            },
+            getLinkedRepoList(org_id){
+                this.$axios({
+                    url:`${url.getLinkedRepoList}/${this.platform}/${org_id}`,
+                    params:{repo_id:'',apply_to:''}
+                }).then(res=>{
+                    console.log(res);
+                }).catch(err=>{
+                    console.log(err);
+                })
             },
             getOrgTableData() {
                 let obj = {access_token: this.$store.state.platform_token, admin: true, page: 1, per_page: 10};
