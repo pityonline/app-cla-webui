@@ -7,9 +7,9 @@
                         align="center"
                         style="width: 100%;">
                     <el-table-column
+                            
                             prop="org"
-                            label="Organization"
-                            width="100%">
+                            label="Organization">
                     </el-table-column>
 
                 </el-table>
@@ -25,7 +25,7 @@
 
                             prop="repository"
                             label="Repository"
-                            width="300">
+                            width="200">
                         <template slot-scope="scope">
                             <svg-icon icon-class="repository"/>
                             <span class="pointer hoverUnderline"
@@ -379,17 +379,11 @@
             tableData(){
                 return this.$store.state.tableData
             },
-            orgTableData(){
-                try {
-                    return JSON.parse(this.$store.state.orgOptions)
-                } catch(e) {
-                    return this.$store.state.orgOptions
-                }
 
-            },
         },
         data() {
             return {
+                orgTableData:'',
                 address:'http://cla.osinfra.cn:60031',
                 url: '',
                 signRouter: '/signType',
@@ -416,10 +410,31 @@
 
         created() {
             // this.getCookieData()
-            this.getTableData()
+            this.getOrgTableData();
+            // this.getTableData()
         },
         methods: {
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct','setTableDataAct']),
+            getOrgTableData(){
+                let obj = {access_token: this.$store.state.platform_token, admin: true, page: 1, per_page: 10};
+                console.log("getOrgsInfo", obj);
+                this.$axios({
+                    url: url.getOrgsInfo,
+                    params: obj,
+                }).then(res => {
+                    console.log(res);
+
+                        let orgOptions = [];
+                        res.data.forEach((item, index) => {
+                            orgOptions.push({value: index, label: item.login, id: item.id});
+
+                        })
+                       this.orgTableData=orgOptions
+
+                }).catch(err => {
+                    console.log(err);
+                })
+            },
             toSignPage(row) {
                 console.log(row);
                 let url=''
