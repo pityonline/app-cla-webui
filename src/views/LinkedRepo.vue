@@ -108,6 +108,7 @@
                         </template>
                     </el-table-column>
                     <el-table-column
+                            width="100"
                             label="Sign">
                         <template slot-scope="scope">
                             <el-button size="mini" @click="toSignPage(scope.row)">Sign</el-button>
