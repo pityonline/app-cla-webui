@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-row :gutter="10">
+        <el-row :gutter="20">
             <el-col :span="3" class="tableStyle">
                 <el-table
                         :data="orgTableData"
