@@ -463,10 +463,11 @@
                 }).then(resp => {
                     console.log(resp);
                     name= resp.data.name
+                    return name
                 }).catch(err => {
                     console.log(err);
                 })
-                return name
+
             },
             getOrgTableData() {
                 let obj = {access_token: this.$store.state.platform_token, admin: true, page: 1, per_page: 10};
