@@ -436,8 +436,13 @@
                     console.log(res);
                     let data = res.data
                     res.data.forEach((item,index)=>{
-                        let claName = this.getClaName(item.cla_id)
-                        Object.assign(data[index],{claName:claName})
+                        new Promise((resolve,reject)=>{
+                            let claName = this.getClaName(item.cla_id)
+                            resolve(claName)
+                        }).then(res=>{
+                            Object.assign(data[index],{claName:res})
+                        })
+
                     })
                     this.tableData=data
                 }).catch(err=>{
