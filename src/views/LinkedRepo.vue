@@ -438,12 +438,15 @@
                     res.data.forEach((item,index)=>{
                         new Promise((resolve,reject)=>{
                             let claName = this.getClaName(item.cla_id)
+                            console.log(claName);
                             resolve(claName)
                         }).then(res=>{
                             console.log(res);
                             Object.assign(data[index],{claName:res})
                             this.tableData=data
                             console.log(this.tableData);
+                        },err=>{
+                            console.log(err);
                         })
 
                     })
