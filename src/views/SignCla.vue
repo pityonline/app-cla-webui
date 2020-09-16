@@ -1,13 +1,13 @@
 <template>
     <div id="checkCLA" :style="checkCLAClass">
-        <!--<Header></Header>-->
-        <div class="header">
-            <el-col :offset="8" :span="8">
-                <div>
-                    <svg-icon class="pointer" @click="" id="svg_logo" icon-class="CLA_SYSTEM_BLACK"/>
-                </div>
-            </el-col>
-        </div>
+        <Header></Header>
+        <!--<div class="header">-->
+            <!--<el-col :offset="8" :span="8">-->
+                <!--<div>-->
+                    <!--<svg-icon class="pointer" @click="" id="svg_logo" icon-class="CLA_SYSTEM_BLACK"/>-->
+                <!--</div>-->
+            <!--</el-col>-->
+        <!--</div>-->
         <div id="section">
             <div v-if="!isSendCode" class="content">
                 <el-col :offset="6" :span="12">
