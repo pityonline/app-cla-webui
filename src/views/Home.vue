@@ -936,7 +936,7 @@
                 });
                 setInterval(() => {
                     // loading.close()
-                    this.$store.state.user.userName && this.$store.state.ready && loading.close();
+                    this.$store.state.user.userName  && loading.close();
                 }, 500)
 
             },
