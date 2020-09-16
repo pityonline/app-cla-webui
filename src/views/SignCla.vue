@@ -136,8 +136,8 @@
 </template>
 
 <script>
-    import Header from '@components/HeaderPure'
-    import Footer from '@components/Footer'
+    import Header from '@components/NewHeader'
+    import Footer from '@components/NewFooter'
     import * as until from '../until/until'
     import * as url from '../until/api'
     import {mapActions} from 'vuex'
