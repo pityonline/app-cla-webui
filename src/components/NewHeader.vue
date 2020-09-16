@@ -5,15 +5,15 @@
                 <svg-icon icon-class="icon" class="icon"></svg-icon>
             </div>
             <div class="box">
-                <el-select value="" v-model="language" placeholder="language">
-                    <el-option
+                <select class="my_select"  v-model="language" placeholder="language">
+                    <option
                             v-for="item in options"
                             :key="item.value"
                             :label="item.label"
                             :value="item.value">
 
-                    </el-option>
-                </el-select>
+                    </option>
+                </select>
             </div>
         </el-col>
     </el-row>
@@ -32,6 +32,17 @@
 </script>
 
 <style scoped lang="less">
+    .my_select{
+        width: 8rem;
+        height: 3rem;
+        border-radius: 1.5rem;
+        font-size: 1.2rem;
+        text-align: center;
+        padding: 0 1rem;
+    }
+    .my_select:focus{
+        outline: none;
+    }
     .icon{
         width: 3.5rem;
         height: 3.5rem;

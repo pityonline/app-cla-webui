@@ -2,15 +2,29 @@
     <el-row>
         <el-col class="index" id="transparentDiv" :style="transparentDiv">
             <NewHeader></NewHeader>
-            <div id="section">
-                <!--<div id="title">-->
-                    <!--<svg-icon class="logText" icon-class="CLA_SYSTEM_WHITE"></svg-icon>-->
+            <el-row id="section">
+                <el-col :offset="3" :span="18" style="height: 100%">
+                    <el-row style="height: 100%">
+                        <el-col :span="12" class="title">
+                            <div>
+                                <div class="name">
+                                    <div>
+                                        <span>CLA</span>
+                                    </div>
+                                    <span>SYSTEM</span>
+                                </div>
+                                <p class="description">Easily handle Contributor License Agreements (CLAs)</p>
+                            </div>
 
-                <!--</div>-->
-                <!--<div>Easily handle Contributor License Agreements (CLAs)</div>-->
-                <router-view></router-view>
+                        </el-col>
+                        <el-col :span="12" style="height: 100%;">
+                            <router-view></router-view>
+                        </el-col>
+                    </el-row>
+                </el-col>
 
-            </div>
+
+            </el-row>
             <NewFooter></NewFooter>
         </el-col>
 
@@ -55,7 +69,7 @@
             setClientHeight() {
                 this.$nextTick(() => {
                     console.log(until.getClientHeight(), document.getElementById('transparentDiv').offsetHeight);
-                    if (until.getClientHeight() > document.getElementById('transparentDiv').offsetHeight)  {
+                    if (until.getClientHeight() > document.getElementById('transparentDiv').offsetHeight) {
                         this.transparentDiv.height = until.getClientHeight() + 'px'
                     }
                 })
@@ -70,17 +84,36 @@
     }
 </script>
 <style scoped lang="less">
+    .title {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: left
+    }
+
+    .name {
+        font-size: 6rem;
+        font-weight: bold;
+    }
+
+    .description {
+        font-size: 1.5rem;
+    }
+
     .index {
         display: flex;
         flex-direction: column;
         background-image: url("../assets/images/backgroundx1.png");
         background-repeat: no-repeat;
-        background-position: 40rem 15rem;
-        &>#section {
+        /*background-position: 40rem 15rem;*/
+        background-position: 40rem center;
+        background-size: 60rem;
+
+        & > #section {
             flex-grow: 1;
         }
     }
-
 
 
 </style>

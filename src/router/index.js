@@ -6,7 +6,7 @@ Vue.use(VueRouter)
 const routes = [
     {
         path: '/',
-        name: 'Login',
+        name: 'Index',
         redirect: '/index',
         /*组件懒加载*/
         // component: () => import('../views/Index.vue')

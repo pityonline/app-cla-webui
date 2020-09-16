@@ -1,16 +1,27 @@
 <template>
-    <el-row>
-        <el-col :span="4" :offset="10" style="padding:3rem">
-            <el-button type="primary" size="medium" style="width: 100%;margin: 1rem 0;" @click="submit('individual')">
-                Individual
-            </el-button>
-            <el-button type="primary" size="medium" style="width: 100%;margin: 1rem 0" @click="submit('corporation')">
-                Corporation
-            </el-button>
-            <el-button type="primary" size="medium" style="width: 100%;margin: 1rem 0" @click="submit('employee')">
-                Employee
-            </el-button>
+    <el-row style="height: 100%">
+        <el-col style="height: 100%">
+            <el-row style="height: 50%">
+
+            </el-row>
+            <el-row style="height: 50%">
+                <el-col :offset="15" :span="9" align="right" class="buttonBox">
+                    <div>
+                        <button class="button" @click="submit('individual')">
+                            Individual
+                        </button>
+                        <button class="button" @click="submit('corporation')">
+                            Corporation
+                        </button>
+                        <button class="button" @click="submit('employee')">
+                            Employee
+                        </button>
+                    </div>
+
+                </el-col>
+            </el-row>
         </el-col>
+
     </el-row>
 </template>
 
@@ -36,8 +47,8 @@
                 this.org = args[1]
                 if (args[2]) {
                     this.repo = args[2]
-                }else {
-                    this.repo=''
+                } else {
+                    this.repo = ''
                 }
                 this.setRepoInfoAct({platform: this.platform, org_id: this.org, repo_id: this.repo});
 
@@ -82,6 +93,27 @@
     }
 </script>
 
-<style scoped>
+<style scoped lang="less">
+    .buttonBox {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
 
+    .button {
+        width: 100%;
+        height: 4rem;
+        border-radius: 2rem;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        background: linear-gradient(to right, #97DB30, #319E55);
+        margin: 1rem 0;
+    }
+
+    .button:focus {
+        outline: none;
+    }
 </style>
