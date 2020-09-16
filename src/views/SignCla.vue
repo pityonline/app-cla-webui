@@ -756,38 +756,38 @@
         cursor: pointer;
     }
 
-    .header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        background-color: #ececec;
-        height: 4rem;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        z-index: 1;
-        width: 100%;
+    /*.header {*/
+        /*position: fixed;*/
+        /*top: 0;*/
+        /*left: 0;*/
+        /*background-color: #ececec;*/
+        /*height: 4rem;*/
+        /*display: flex;*/
+        /*flex-direction: row;*/
+        /*justify-content: space-between;*/
+        /*z-index: 1;*/
+        /*width: 100%;*/
 
 
-        & > div:nth-of-type(1) {
-            display: flex;
-            justify-content: center;
+        /*& > div:nth-of-type(1) {*/
+            /*display: flex;*/
+            /*justify-content: center;*/
 
-            & > div {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
+            /*& > div {*/
+                /*display: flex;*/
+                /*flex-direction: column;*/
+                /*justify-content: center;*/
 
-                #svg_logo {
-                    height: 4rem;
-                    width: 4rem;
-                }
-            }
+                /*#svg_logo {*/
+                    /*height: 4rem;*/
+                    /*width: 4rem;*/
+                /*}*/
+            /*}*/
 
-        }
+        /*}*/
 
 
-    }
+    /*}*/
 
     .verifyClass {
         padding: 10rem 0;
@@ -818,10 +818,10 @@
         box-sizing: border-box;
         padding-top: 4rem;
 
-        & > .header {
-            height: 4rem;
-            width: 100%;
-        }
+        /*& > .header {*/
+            /*height: 4rem;*/
+            /*width: 100%;*/
+        /*}*/
 
         & > #section {
             flex-grow: 1;
@@ -835,10 +835,10 @@
             }
         }
 
-        & > .footer {
-            height: 4rem;
-            width: 100%;
-        }
+        /*& > .footer {*/
+            /*height: 4rem;*/
+            /*width: 100%;*/
+        /*}*/
 
 
     }
