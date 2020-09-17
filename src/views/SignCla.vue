@@ -190,24 +190,7 @@
 
                 ruleForm: {},
                 myForm: {},
-                rules: {
-                    // code: [{required: true, message: 'Please enter the verification code', trigger: 'blur'},],
-                    // name: [
-                    //     {required: true, message: 'please input name', trigger: 'blur'},
-                    //     {min: 2, max: 10, message: 'The length is between 2 and 10 characters', trigger: 'blur'}
-                    // ],
-                    // email: [{required: true, message: 'please input email', trigger: 'blur'},
-                    //     {validator: verifyEmail, trigger: 'blur'}],
-                    // date: [{required: true, message: 'please input date', trigger: 'blur'}],
-                    // telephone: [
-                    //     {validator: verifyTel, trigger: 'blur'}
-                    // ],
-                    // address: [
-                    //     {validator: verifyAddr, trigger: 'blur'}
-                    // ],
-                    //
-
-                },
+                rules: {},
                 isRead: false,
                 value: 0,
                 languageOptions: [{
@@ -424,6 +407,7 @@
                 let form = {}
                 let rules = {}
                 Object.assign(form, {code: ''})
+                Object.assign(this.myForm, {code: ''})
                 Object.assign(rules, {
                     code: [{
                         required: true,
