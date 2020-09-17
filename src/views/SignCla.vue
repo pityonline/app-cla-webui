@@ -2,11 +2,11 @@
     <el-row id="checkCLA" :style="checkCLAClass">
         <Header></Header>
         <!--<div class="header">-->
-            <!--<el-col :offset="8" :span="8">-->
-                <!--<div>-->
-                    <!--<svg-icon class="pointer" @click="" id="svg_logo" icon-class="CLA_SYSTEM_BLACK"/>-->
-                <!--</div>-->
-            <!--</el-col>-->
+        <!--<el-col :offset="8" :span="8">-->
+        <!--<div>-->
+        <!--<svg-icon class="pointer" @click="" id="svg_logo" icon-class="CLA_SYSTEM_BLACK"/>-->
+        <!--</div>-->
+        <!--</el-col>-->
         <!--</div>-->
         <el-row id="section">
             <el-row v-if="!isSendCode" class="content">
@@ -14,11 +14,11 @@
                     <p class="contentTitle">Please sign the CLA for <span>{{repo}}</span></p>
 
 
-                    <el-row class="marginTop1rem" id="claBox">
+                    <el-row class="marginTop3rem" id="claBox">
                     </el-row>
 
 
-                    <el-row class="marginTop1rem">
+                    <el-row class="marginTop3rem form">
                         <el-col :span="16">
                             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="left"
                                      label-width="30%"
@@ -63,37 +63,11 @@
                                     <!--<el-button @click="resetForm('ruleForm')">{{desc.reset}}</el-button>-->
                                 </el-form-item>
                             </el-form>
-                            <!--<div style="margin-top: 1rem;text-align: left">-->
-                            <!--<el-button style="font-size: 1rem" type="primary">Agree</el-button>-->
-                            <!--</div>-->
                         </el-col>
                     </el-row>
-
-
                 </el-col>
             </el-row>
-            <div v-else-if="!isVerify" class="content ">
-                <el-col :offset="6" :span="12" class="verifyClass">
-                    <p>请输入6位数验证码完成验证</p>
-                    <el-row>
-                        <el-col :span="6" style="margin-right: 2rem">
 
-                            <el-input v-model="verifyCode" size="medium"></el-input>
-                        </el-col>
-                        <el-col :span="6">
-                            <el-button type="primary" size="medium" @click="verify()">确定</el-button>
-                        </el-col>
-                    </el-row>
-
-                </el-col>
-            </div>
-            <div v-else class="content">
-                <el-col :offset="6" :span="12" class="verifyClass">
-                    <p style="text-align: center">
-                        {{passContent}}
-                    </p>
-                </el-col>
-            </div>
         </el-row>
 
         <Footer></Footer>
@@ -201,7 +175,6 @@
                     sign: '签署',
                     reset: '重置',
                 },
-                passContent: '',
                 isVerify: false,
                 isSendCode: false,
                 verifyCode: '',
@@ -259,9 +232,9 @@
         },
         methods: {
             ...mapActions(['setTokenAct', 'setRepoInfoAct']),
-            clickOk(){
+            clickOk() {
                 this.$router.go(-1)
-                this.tipsDialogVisible=false;
+                this.tipsDialogVisible = false;
             },
             async verifyTel(rule, value, callback) {
                 if (!value) {
@@ -602,9 +575,9 @@
                     // this.isSendCode = true;
                     // this.$message.success('sign successfully')
                     if (this.$store.state.loginType === 'corporation') {
-                        this.tipsMessage='We have sent a notification email to your email address. Please check it.And please complete the signature according to the prompt in the email'
-                    }else if (this.$store.state.loginType === 'employee') {
-                        this.tipsMessage='We have sent a notification email to your email address. Please check it,And email the administrator of your company to audit'
+                        this.tipsMessage = 'We have sent a notification email to your email address. Please check it.And please complete the signature according to the prompt in the email'
+                    } else if (this.$store.state.loginType === 'employee') {
+                        this.tipsMessage = 'We have sent a notification email to your email address. Please check it,And email the administrator of your company to audit'
                     }
                     this.tipsDialogVisible = true;
 
@@ -748,10 +721,20 @@
         border-top: 1px solid lightgray;
     }
 
+    .form {
+        border-radius: 2rem;
+        box-shadow: 0 0 0 lightgrey;
+    }
+
+    .marginTop3rem {
+        margin-top: 3rem;
+    }
+
     .marginTop1rem {
         margin-top: 3rem;
     }
-    #claBox{
+
+    #claBox {
         border-bottom: 2px dashed lightgrey;
         padding-bottom: 2rem;
         margin-bottom: 2rem;
@@ -775,8 +758,8 @@
         /*padding-top: 4rem;*/
 
         /*& > .header {*/
-            /*height: 4rem;*/
-            /*width: 100%;*/
+        /*height: 4rem;*/
+        /*width: 100%;*/
         /*}*/
 
         & > #section {
@@ -792,8 +775,8 @@
         }
 
         /*& > .footer {*/
-            /*height: 4rem;*/
-            /*width: 100%;*/
+        /*height: 4rem;*/
+        /*width: 100%;*/
         /*}*/
 
 

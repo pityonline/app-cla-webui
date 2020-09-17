@@ -1,29 +1,27 @@
 <template>
-    <div >
-        <el-row>
-            <el-col :span="4" :offset="10" style="padding:3rem ">
-                <!--<el-button type="primary" size="medium" style="width: 100%;margin: 1rem 0;" @click="submit('individual')">-->
-                    <!--Individual-->
-                <!--</el-button>-->
-                <!--<el-button type="primary" size="medium" style="width: 100%;margin: 1rem 0" @click="submit('corporation')">-->
-                    <!--Corporation-->
-                <!--</el-button>-->
-                <!--<el-button type="primary" size="medium" style="width: 100%;margin: 1rem 0" @click="submit('employee')">-->
-                    <!--Employee-->
-                <!--</el-button>-->
-                <el-button type="primary" size="medium" style="width: 100%;margin: 1rem 0" @click="submit('orgManager')">
-                    Org Manager
-                </el-button>
-                <el-button type="primary" size="medium" style="width: 100%;margin: 1rem 0" @click="submit('corporationManager')">
-                    Corporation Manager
-                </el-button>
+    <el-row style="height: 100%">
+        <el-col style="height: 100%">
+            <el-row style="height: 50%">
 
+            </el-row>
+            <el-row style="height: 50%">
+                <el-col :offset="15" :span="9" align="right" class="buttonBox">
+                    <div>
+                        <button class="button" @click="submit('orgManager')">
+                            Org Manager
+                        </button>
+                        <button class="button" @click="submit('corporationManager')">
+                            Corporation Manager
+                        </button>
 
-            </el-col>
-        </el-row>
+                    </div>
 
+                </el-col>
+            </el-row>
+        </el-col>
 
-    </div>
+    </el-row>
+
 </template>
 
 <script>
@@ -54,6 +52,27 @@
     }
 </script>
 
-<style scoped>
+<style scoped lang="less">
+    .buttonBox {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
 
+    .button {
+        width: 100%;
+        height: 4rem;
+        border-radius: 2rem;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        background: linear-gradient(to right, #97DB30, #319E55);
+        margin: 1rem 0;
+    }
+
+    .button:focus {
+        outline: none;
+    }
 </style>
