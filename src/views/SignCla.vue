@@ -807,6 +807,9 @@
         & .el-checkbox__inner:hover{
             border: 1px solid #3EA650;
         }
+        & .el-checkbox__inner:focus{
+            border: 1px solid #3EA650;
+        }
         & .el-checkbox__inner:after{
             height: 10px;
             left: 7px;
