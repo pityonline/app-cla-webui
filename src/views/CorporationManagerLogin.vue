@@ -1,9 +1,9 @@
 <template>
     <el-row style="height: 100%">
-        <el-col :offset="6" :span="18" ="right" class="formBox">
+        <el-col  align="right" class="formBox">
             <div class="formBack">
                 <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="0"
-                         class="demo-ruleForm" style="padding: 2rem 2rem 0 2rem;width: 15rem">
+                         class="demo-ruleForm" style="padding: 2rem 2rem 0 2rem;width: 15rem;margin: 0">
                     <el-form-item label="" prop="account">
                         <el-input v-model="ruleForm.userName" autocomplete="off" placeholder="account"></el-input>
                     </el-form-item>
@@ -123,6 +123,7 @@
 
 <style scoped lang="less">
     .formBack{
+        box-shadow: 0 0 0 lightgrey;
         padding: 3rem;
         background-color: white;
         border-radius: 2rem;
