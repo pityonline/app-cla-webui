@@ -687,7 +687,7 @@
     }
 </script>
 
-<style scoped lang="less">
+<style  lang="less">
     .codeBox .el-button--medium, .codeBox .el-button {
         border-radius: 0 4px 4px 0;
     }
