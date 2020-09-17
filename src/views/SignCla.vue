@@ -747,20 +747,22 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 8rem;
+            width: 10rem;
             height: 2.5rem;
             border-radius: 1.25rem;
             font-size: 1.2rem;
             color: white;
+            margin: 0;
         }
         & .el-input-group__append{
             position: absolute;
-            right: -12rem;
+            right: -10rem;
             top: 0;
             background: linear-gradient(to right, #97DB30, #319E55);
-            width: 12rem;
+            width: 10rem;
             height: 2.5rem;
             border-radius: 1.25rem;
+            padding: 0;
         }
         & .fontSize12{
             font-size: 1.2rem;
