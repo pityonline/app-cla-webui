@@ -756,7 +756,7 @@
         }
         & .el-input-group__append{
             position: absolute;
-            right: -10rem;
+            right: 0;
             top: 0;
             background: linear-gradient(to right, #97DB30, #319E55);
             width: 10rem;
