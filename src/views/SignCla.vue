@@ -13,22 +13,22 @@
                 <el-col :offset="6" :span="12">
                     <p class="contentTitle">Please sign the CLA for <span>{{repo}}</span></p>
 
-                    <el-row>
-                        <span class="size_s">Version: 2020-06-17</span>
-                        <el-select
-                                style="width: 6rem;margin-left: 2rem"
-                                size="small"
-                                v-model="value"
-                                value=""
-                                @change="changeLanguage">
-                            <el-option
-                                    v-for="item in languageOptions"
-                                    :key="item.value"
-                                    :label="item.label"
-                                    :value="item.value">
-                            </el-option>
-                        </el-select>
-                    </el-row>
+                    <!--<el-row>-->
+                        <!--<span class="size_s">Version: 2020-06-17</span>-->
+                        <!--<el-select-->
+                                <!--style="width: 6rem;margin-left: 2rem"-->
+                                <!--size="small"-->
+                                <!--v-model="value"-->
+                                <!--value=""-->
+                                <!--@change="changeLanguage">-->
+                            <!--<el-option-->
+                                    <!--v-for="item in languageOptions"-->
+                                    <!--:key="item.value"-->
+                                    <!--:label="item.label"-->
+                                    <!--:value="item.value">-->
+                            <!--</el-option>-->
+                        <!--</el-select>-->
+                    <!--</el-row>-->
 
 
                     <div class="marginTop1rem" id="claBox" style="white-space: pre-wrap">
