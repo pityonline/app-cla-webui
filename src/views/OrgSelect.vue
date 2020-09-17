@@ -86,6 +86,7 @@
 
 <style scoped lang="less">
     .formBack{
+        width: 18rem;
         box-shadow: 0 0 20px 10px #F3F3F3;
         padding: 3rem;
         background-color: white;
