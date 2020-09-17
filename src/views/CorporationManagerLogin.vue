@@ -1,25 +1,28 @@
 <template>
     <el-row style="height: 100%">
         <el-col  align="right" class="formBox">
-            <div class="formBack">
-                <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="0">
-                    <el-form-item label="" prop="account">
-                        <el-input v-model="ruleForm.userName" autocomplete="off" placeholder="account"></el-input>
-                    </el-form-item>
-                    <el-form-item label="" prop="pass">
-                        <el-input type="password" v-model="ruleForm.pwd" autocomplete="off"
-                                  placeholder="password"></el-input>
-                    </el-form-item>
-                    <el-form-item style="text-align: left">
-                        <span class="pointer" @click="findPwd" id="forgetPwd">Forget the password?</span>
-                    </el-form-item>
-                    <el-form-item>
-                        <el-button style="width: 100%" type="primary" @click="submitForm('ruleForm')">LOGIN IN
-                        </el-button>
-                    </el-form-item>
-                </el-form>
+            <div class="formBack_Box">
+                <div class="formBack">
+                    <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="0">
+                        <el-form-item label="" prop="account">
+                            <el-input v-model="ruleForm.userName" autocomplete="off" placeholder="account"></el-input>
+                        </el-form-item>
+                        <el-form-item label="" prop="pass">
+                            <el-input type="password" v-model="ruleForm.pwd" autocomplete="off"
+                                      placeholder="password"></el-input>
+                        </el-form-item>
+                        <el-form-item style="text-align: left">
+                            <span class="pointer" @click="findPwd" id="forgetPwd">Forget the password?</span>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-button style="width: 100%" type="primary" @click="submitForm('ruleForm')">LOGIN IN
+                            </el-button>
+                        </el-form-item>
+                    </el-form>
 
+                </div>
             </div>
+
         </el-col>
     </el-row>
 
@@ -121,6 +124,12 @@
 </script>
 
 <style scoped lang="less">
+    .formBack_Box{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+    }
     .formBack{
         width: 18rem;
         box-shadow: 0 0 20px 10px #F3F3F3;
