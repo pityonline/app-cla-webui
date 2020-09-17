@@ -740,7 +740,9 @@
         padding: 2rem;
         margin-bottom: 2rem;
         font-size: 1.2rem;
-
+        & .fontSize12{
+            font-size: 1.2rem;
+        }
         & .el-input--small .el-input__inner {
         height: 2.5rem;
         }
@@ -790,12 +792,6 @@
         display: flex;
         flex-direction: column;
         box-sizing: border-box;
-        /*padding-top: 4rem;*/
-
-        /*& > .header {*/
-        /*height: 4rem;*/
-        /*width: 100%;*/
-        /*}*/
 
         & > #section {
             flex-grow: 1;
@@ -809,14 +805,6 @@
             }
         }
 
-        /*& > .footer {*/
-        /*height: 4rem;*/
-        /*width: 100%;*/
-        /*}*/
-
-
     }
-    .fontSize12{
-        font-size: 1.2rem;
-    }
+
 </style>
