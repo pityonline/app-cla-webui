@@ -13,7 +13,7 @@
 
 
                     <el-row class="marginTop3rem form">
-                        <el-col >
+                        <el-col>
                             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="left"
                                      label-width="20%"
                                      class="demo-ruleForm">
@@ -50,8 +50,8 @@
                                         the processing of my data by openLooKeng in Hong Kong"
                                     </el-checkbox>
                                 </div>
-                                <el-form-item label-width="0" class="marginTop1rem">
-                                    <button class="button"  @click="submitForm('ruleForm')">
+                                <el-form-item label-width="0" class="marginTop1rem signBtBox">
+                                    <button class="button" @click="submitForm('ruleForm')">
                                         {{desc.sign}}
                                     </button>
                                     <!--<el-button @click="resetForm('ruleForm')">{{desc.reset}}</el-button>-->
@@ -687,13 +687,16 @@
     }
 </script>
 
-<style  lang="less">
-
+<style lang="less">
+    .signBtBox {
+        display: flex;
+        justify-content: center;
+    }
 
     .button {
-        width: 10rem;
+        width: 20rem;
         height: 5rem;
-        border-radius: 2rem;
+        border-radius: 2.5rem;
         border: none;
         color: white;
         font-size: 1.5rem;
@@ -705,6 +708,7 @@
     .button:focus {
         outline: none;
     }
+
     .codeBox .el-button--medium, .codeBox .el-button {
         border-radius: 0 4px 4px 0;
     }
@@ -737,13 +741,15 @@
         box-shadow: 0 0 20px 10px #F3F3F3;
         padding: 2rem;
         margin-bottom: 2rem;
+
         & .el-input__inner {
             background-color: #F3F3F3;
             border-radius: 1rem;
             border: 1px solid #F3F3F3;
         }
-        & .el-form-item{
-            margin-bottom:28px
+
+        & .el-form-item {
+            margin-bottom: 28px
         }
     }
 
