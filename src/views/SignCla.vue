@@ -699,7 +699,7 @@
         border-radius: 2.5rem;
         border: none;
         color: white;
-        font-size: 1.5rem;
+        font-size: 2rem;
         cursor: pointer;
         background: linear-gradient(to right, #97DB30, #319E55);
         margin: 1rem 0;
@@ -737,10 +737,11 @@
     }
 
     .form {
-        border-radius: 2rem;
+        border-radius: 1rem;
         box-shadow: 0 0 20px 10px #F3F3F3;
         padding: 2rem;
         margin-bottom: 2rem;
+        font-size: 1.5rem;
 
         & .el-input__inner {
             background-color: #F3F3F3;
