@@ -784,6 +784,31 @@
         & .el-form-item {
             margin-bottom: 28px
         }
+        & .el-checkbox__label{
+            display: inline-grid;
+            white-space: pre-line;
+        }
+        & .el-checkbox__input.is-checked+.el-checkbox__label{
+            display: inline-grid;
+            white-space: pre-line;
+        }
+        & .el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner {
+            background-color: #3EA650;
+            border-color: #3EA650;
+        }
+        & .el-checkbox__inner{
+            border: 1px solid #3EA650;
+            width: 20px;
+            height: 20px;
+        }
+        & .el-checkbox__inner:hover{
+            border: 1px solid #3EA650;
+        }
+        & .el-checkbox__inner:after{
+            height: 10px;
+            left: 7px;
+            top: 2px
+        }
     }
 
     .marginTop3rem {
