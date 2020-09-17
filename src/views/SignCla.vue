@@ -31,13 +31,9 @@
                     <!--</el-row>-->
 
 
-                    <div class="marginTop1rem" id="claBox" style="white-space: pre-wrap">
-
+                    <div class="marginTop1rem" id="claBox">
                     </div>
-                    <div style="border-bottom: 1px dashed lightgray">
 
-                    </div>
-                    <el-divider></el-divider>
 
                     <el-row class="marginTop1rem">
                         <el-col :span="16">
@@ -805,11 +801,17 @@
     .marginTop1rem {
         margin-top: 1rem;
     }
+    #claBox{
+        border-bottom: 2px dashed lightgrey;
+        padding-bottom: 2rem;
+        margin-bottom: 2rem;
+        white-space: pre-wrap;
+    }
 
     .contentTitle {
         font-size: 1.5rem;
         font-weight: bold;
-        margin-bottom: 1rem;
+        margin-bottom: 2rem;
     }
 
     .size_s {
