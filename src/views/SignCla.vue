@@ -743,6 +743,16 @@
         & .el-input.el-input--small.el-input-group.el-input-group--append{
           position: relative;
         }
+        & .el-button.el-button--default {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 8rem;
+            height: 2.5rem;
+            border-radius: 1.25rem;
+            font-size: 1.2rem;
+            color: white;
+        }
         & .el-input-group__append{
             position: absolute;
             right: -12rem;
@@ -750,6 +760,7 @@
             background: linear-gradient(to right, #97DB30, #319E55);
             width: 12rem;
             height: 2.5rem;
+            border-radius: 1.25rem;
         }
         & .fontSize12{
             font-size: 1.2rem;
