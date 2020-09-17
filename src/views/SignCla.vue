@@ -738,7 +738,11 @@
         box-shadow: 0 0 20px 10px #F3F3F3;
         padding: 2rem;
         margin-bottom: 2rem;
+        font-size: 1.2rem;
 
+        & .el-input--small .el-input__inner {
+        height: 2.5rem;
+        }
         & .el-form-item__label {
         font-size: 1.2rem;
         }
@@ -747,6 +751,7 @@
             background-color: #F3F3F3;
             border-radius: 1rem;
             border: 1px solid #F3F3F3;
+            font-size: 1.2rem;
         }
 
         & .el-form-item {
