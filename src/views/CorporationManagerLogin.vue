@@ -123,7 +123,7 @@
 
 <style scoped lang="less">
     .formBack{
-        box-shadow: 0 0 2px 10px #F3F3F3;
+        box-shadow: 0 0 20px 10px #F3F3F3;
         padding: 3rem;
         background-color: white;
         border-radius: 2rem;
