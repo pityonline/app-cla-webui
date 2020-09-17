@@ -51,9 +51,9 @@
                                     </el-checkbox>
                                 </div>
                                 <el-form-item label-width="0" class="marginTop1rem">
-                                    <el-button :disabled="!isRead" type="primary" @click="submitForm('ruleForm')">
+                                    <button class="button"  @click="submitForm('ruleForm')">
                                         {{desc.sign}}
-                                    </el-button>
+                                    </button>
                                     <!--<el-button @click="resetForm('ruleForm')">{{desc.reset}}</el-button>-->
                                 </el-form-item>
                             </el-form>
@@ -688,6 +688,23 @@
 </script>
 
 <style  lang="less">
+
+
+    .button {
+        width: 100%;
+        height: 4rem;
+        border-radius: 2rem;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        background: linear-gradient(to right, #97DB30, #319E55);
+        margin: 1rem 0;
+    }
+
+    .button:focus {
+        outline: none;
+    }
     .codeBox .el-button--medium, .codeBox .el-button {
         border-radius: 0 4px 4px 0;
     }
@@ -710,9 +727,9 @@
     }
 
     .borderClass {
-        padding: .5rem 0;
-        border-bottom: 1px solid lightgray;
-        border-top: 1px solid lightgray;
+        margin-top: 1rem;
+        padding: 1rem 0;
+        border-top: 1px dashed #F3F3F3;
     }
 
     .form {
