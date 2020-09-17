@@ -1,35 +1,38 @@
 <template>
     <el-row style="height: 100%">
         <el-col align="right" class="formBox">
-            <div class="formBack">
-                <el-row class="marginTop">
-                    <el-col>
-                        <span>Please select the organization you want to manage</span>
-                    </el-col>
-                </el-row>
-                <el-row class="marginTop">
-                    <el-col>
-                        <el-select value="" v-model="orgValue"
-                                   clearable=""
-                                   filterable=""
-                                   style="width: 15rem"
-                                   placeholder="select"
-                                   @change="changeOrg">
-                            <el-option
-                                    v-for="item in orgData"
-                                    :key="item.value"
-                                    :value="item.value"
-                                    :label="item.label">
+            <div class="formBack_Box">
+                <div class="formBack">
+                    <el-row class="marginTop">
+                        <el-col>
+                            <span>Please select the organization you want to manage</span>
+                        </el-col>
+                    </el-row>
+                    <el-row class="marginTop">
+                        <el-col>
+                            <el-select value="" v-model="orgValue"
+                                       clearable=""
+                                       filterable=""
+                                       style="width: 15rem"
+                                       placeholder="select"
+                                       @change="changeOrg">
+                                <el-option
+                                        v-for="item in orgData"
+                                        :key="item.value"
+                                        :value="item.value"
+                                        :label="item.label">
 
-                            </el-option>
-                        </el-select>
-                    </el-col>
-                </el-row>
-                <el-row class="marginTop">
-                    <el-col>
-                        <el-button style="width: 15rem" type="primary" size="medium" @click="submit">SUBMIT</el-button>
-                    </el-col>
-                </el-row>
+                                </el-option>
+                            </el-select>
+                        </el-col>
+                    </el-row>
+                    <el-row class="marginTop">
+                        <el-col>
+                            <el-button style="width: 15rem" type="primary" size="medium" @click="submit">SUBMIT
+                            </el-button>
+                        </el-col>
+                    </el-row>
+                </div>
             </div>
         </el-col>
     </el-row>
@@ -85,7 +88,14 @@
 </script>
 
 <style scoped lang="less">
-    .formBack{
+    .formBack_Box {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+
+    .formBack {
         width: 18rem;
         box-shadow: 0 0 20px 10px #F3F3F3;
         padding: 3rem;
@@ -93,6 +103,7 @@
         border-radius: 2rem;
 
     }
+
     .formBox {
         height: 100%;
         display: flex;
