@@ -691,8 +691,8 @@
 
 
     .button {
-        width: 100%;
-        height: 4rem;
+        width: 10rem;
+        height: 5rem;
         border-radius: 2rem;
         border: none;
         color: white;
