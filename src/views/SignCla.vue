@@ -787,10 +787,13 @@
         & .el-checkbox__label{
             display: inline-grid;
             white-space: pre-line;
+            font-size: 1.2rem;
         }
         & .el-checkbox__input.is-checked+.el-checkbox__label{
             display: inline-grid;
             white-space: pre-line;
+            color: black;
+            font-size: 1.2rem;
         }
         & .el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner {
             background-color: #3EA650;
