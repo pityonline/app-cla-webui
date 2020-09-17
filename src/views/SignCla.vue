@@ -792,7 +792,7 @@
         & .el-checkbox__input.is-checked+.el-checkbox__label{
             display: inline-grid;
             white-space: pre-line;
-            color: black;
+            color: #606266;
             font-size: 1.2rem;
         }
         & .el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner {
@@ -810,6 +810,7 @@
         & .el-checkbox__inner:focus{
             border: 1px solid #3EA650;
         }
+
         & .el-checkbox__inner:after{
             height: 10px;
             left: 7px;
