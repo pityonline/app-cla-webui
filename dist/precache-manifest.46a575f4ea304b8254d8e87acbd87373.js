@@ -4,7 +4,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/bdd0211e92f6f1aabbec.worker.js"
   },
   {
-    "revision": "dc4b025992f9a9262a87",
+    "revision": "43d9dee5e083206b49b2",
     "url": "/css/app.fa2101f4.css"
   },
   {
@@ -18,10 +18,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "39179d528cf3c6a1d875",
     "url": "/css/chunk-0b78266a.10ee475b.css"
-  },
-  {
-    "revision": "6b0bd859c4a1947fcc79",
-    "url": "/css/chunk-0bce64e4.13d448bd.css"
   },
   {
     "revision": "1018a09a8d981211ea6c",
@@ -50,6 +46,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "2886ca4dc66cf3dcaaa0",
     "url": "/css/chunk-35354cd6.4fe59a2e.css"
+  },
+  {
+    "revision": "f98fcc432c27fcc5e0ab",
+    "url": "/css/chunk-35713553.73248f53.css"
   },
   {
     "revision": "447ceba2e60620c77365",
@@ -120,12 +120,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/logo.3a1a754d.png"
   },
   {
-    "revision": "29aeed7a367c0937eb1b7f7c2d223abe",
+    "revision": "5ea2cefe0b0daa10fda55277a861516a",
     "url": "/index.html"
   },
   {
-    "revision": "dc4b025992f9a9262a87",
-    "url": "/js/app.72656d15.js"
+    "revision": "43d9dee5e083206b49b2",
+    "url": "/js/app.2f3bca1f.js"
   },
   {
     "revision": "c0c69d65b108f3a47354",
@@ -142,10 +142,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "39179d528cf3c6a1d875",
     "url": "/js/chunk-0b78266a.bbe7de70.js"
-  },
-  {
-    "revision": "6b0bd859c4a1947fcc79",
-    "url": "/js/chunk-0bce64e4.c33c3962.js"
   },
   {
     "revision": "1018a09a8d981211ea6c",
@@ -182,6 +178,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "2886ca4dc66cf3dcaaa0",
     "url": "/js/chunk-35354cd6.ef39aac3.js"
+  },
+  {
+    "revision": "f98fcc432c27fcc5e0ab",
+    "url": "/js/chunk-35713553.d1be335e.js"
   },
   {
     "revision": "447ceba2e60620c77365",
