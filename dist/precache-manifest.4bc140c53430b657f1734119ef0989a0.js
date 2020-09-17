@@ -4,7 +4,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/bdd0211e92f6f1aabbec.worker.js"
   },
   {
-    "revision": "84578b036d37294b735c",
+    "revision": "ced057a4f6e0d2b1035a",
     "url": "/css/app.fa2101f4.css"
   },
   {
@@ -18,10 +18,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "6b0bd859c4a1947fcc79",
     "url": "/css/chunk-0bce64e4.13d448bd.css"
-  },
-  {
-    "revision": "d16743af569498890622",
-    "url": "/css/chunk-0e1d5865.4f24ed16.css"
   },
   {
     "revision": "1018a09a8d981211ea6c",
@@ -80,6 +76,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/css/chunk-8abeee68.ace9bdc0.css"
   },
   {
+    "revision": "b37cd2320a5ce9b3849a",
+    "url": "/css/chunk-957f2138.b4adddfb.css"
+  },
+  {
     "revision": "54fd9a6737e1d3138244",
     "url": "/css/chunk-a1087b02.57061d52.css"
   },
@@ -116,12 +116,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/logo.3a1a754d.png"
   },
   {
-    "revision": "b2b726812d71848bbdc001c92f544444",
+    "revision": "0f40234d83c4d4efe9a88cb49d416911",
     "url": "/index.html"
   },
   {
-    "revision": "84578b036d37294b735c",
-    "url": "/js/app.7f3d01ce.js"
+    "revision": "ced057a4f6e0d2b1035a",
+    "url": "/js/app.4f4d273c.js"
   },
   {
     "revision": "c0c69d65b108f3a47354",
@@ -138,10 +138,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "6b0bd859c4a1947fcc79",
     "url": "/js/chunk-0bce64e4.c33c3962.js"
-  },
-  {
-    "revision": "d16743af569498890622",
-    "url": "/js/chunk-0e1d5865.45537a70.js"
   },
   {
     "revision": "1018a09a8d981211ea6c",
@@ -210,6 +206,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "33f1af2102b971d2a9a9",
     "url": "/js/chunk-8abeee68.5eb7390b.js"
+  },
+  {
+    "revision": "b37cd2320a5ce9b3849a",
+    "url": "/js/chunk-957f2138.952dd469.js"
   },
   {
     "revision": "54fd9a6737e1d3138244",
