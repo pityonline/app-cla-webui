@@ -1,13 +1,7 @@
 <template>
     <el-row id="checkCLA" :style="checkCLAClass">
         <Header></Header>
-        <!--<div class="header">-->
-        <!--<el-col :offset="8" :span="8">-->
-        <!--<div>-->
-        <!--<svg-icon class="pointer" @click="" id="svg_logo" icon-class="CLA_SYSTEM_BLACK"/>-->
-        <!--</div>-->
-        <!--</el-col>-->
-        <!--</div>-->
+
         <el-row id="section">
             <el-row v-if="!isSendCode" class="content">
                 <el-col :offset="6" :span="12">
@@ -19,7 +13,7 @@
 
 
                     <el-row class="marginTop3rem form">
-                        <el-col :span="16">
+                        <el-col >
                             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="left"
                                      label-width="30%"
                                      class="demo-ruleForm">
@@ -725,7 +719,12 @@
         border-radius: 2rem;
         box-shadow: 0 0 20px 10px #F3F3F3;
         padding: 2rem;
-
+        margin-bottom: 2rem;
+        &>.el-input__inner {
+            background-color: #F3F3F3;
+            border-radius: 1rem;
+            border: 1rem solid #F3F3F3;
+        }
     }
 
     .marginTop3rem {
@@ -733,7 +732,7 @@
     }
 
     .marginTop1rem {
-        margin-top: 3rem;
+        margin-top: 1rem;
     }
 
     #claBox {
