@@ -723,7 +723,8 @@
 
     .form {
         border-radius: 2rem;
-        box-shadow: 0 0 0 lightgrey;
+        box-shadow: 0 0 20px 10px #F3F3F3;
+
     }
 
     .marginTop3rem {
