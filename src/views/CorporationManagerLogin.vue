@@ -1,7 +1,7 @@
 <template>
-        <el-row style="height: 100%">
-            <el-col :offset="6" :span="18" align="right" class="formBox">
-
+    <el-row style="height: 100%">
+        <el-col :offset="6" :span="18" ="right" class="formBox">
+            <div class="formBack">
                 <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="0"
                          class="demo-ruleForm" style="padding: 2rem 2rem 0 2rem;width: 15rem">
                     <el-form-item label="" prop="account">
@@ -19,8 +19,10 @@
                         </el-button>
                     </el-form-item>
                 </el-form>
-            </el-col>
-        </el-row>
+
+            </div>
+        </el-col>
+    </el-row>
 
 </template>
 
@@ -75,22 +77,22 @@
                 }).then(res => {
                     console.log(res);
                     new Promise((resolve, reject) => {
-                       let userInfo ={userInfo:res.data}
-                        Object.assign(userInfo,{userName:userName})
+                        let userInfo = {userInfo: res.data}
+                        Object.assign(userInfo, {userName: userName})
                         this.setLoginInfoAct(userInfo)
                         console.log(userInfo);
-                       if (res.data.length > 1) {
-                           this.$router.push('/orgSelect')
-                       }else{
-                           Object.assign(userInfo,{orgValue:0})
-                           this.setLoginInfoAct(userInfo)
-                           if (res.data[0].role === 'admin') {
-                               this.$router.push('/rootManager')
-                           }else{
-                               this.$router.push('/signedRepo')
-                           }
+                        if (res.data.length > 1) {
+                            this.$router.push('/orgSelect')
+                        } else {
+                            Object.assign(userInfo, {orgValue: 0})
+                            this.setLoginInfoAct(userInfo)
+                            if (res.data[0].role === 'admin') {
+                                this.$router.push('/rootManager')
+                            } else {
+                                this.$router.push('/signedRepo')
+                            }
 
-                       }
+                        }
                         resolve('completed');
                     }).then(res => {
                         console.log(res);
@@ -120,12 +122,19 @@
 </script>
 
 <style scoped lang="less">
-    .formBox{
+    .formBack{
+        padding: 3rem;
+        background-color: white;
+        border-radius: 2rem;
+
+    }
+    .formBox {
         height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
     }
+
     .pointer {
         cursor: pointer;
     }
