@@ -738,7 +738,6 @@
         box-shadow: 0 0 20px 10px #F3F3F3;
         padding: 2rem;
         margin-bottom: 2rem;
-        font-size: 1.5rem;
 
         & .el-form-item__label {
         font-size: 1.2rem;
@@ -768,7 +767,7 @@
         padding-bottom: 2rem;
         margin-bottom: 2rem;
         white-space: pre-wrap;
-        font-size: 1.5rem;
+        font-size: 1.2rem;
     }
 
     .contentTitle {
