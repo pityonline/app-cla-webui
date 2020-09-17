@@ -489,7 +489,7 @@
                     code: [{
                         required: true,
                         message: 'Please enter the verification code',
-                        trigger: 'blur'
+                        trigger: ['blur','change']
                     },]
                 })
                 this.ruleForm = form
