@@ -1,6 +1,6 @@
 <template>
-        <el-row >
-            <el-col :offset="6" :span="18" class="formBox">
+        <el-row style="height: 100%">
+            <el-col :offset="6" :span="18" align="right" class="formBox">
 
                 <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="0"
                          class="demo-ruleForm" style="padding: 2rem 2rem 0 2rem;width: 15rem">
@@ -121,6 +121,7 @@
 
 <style scoped lang="less">
     .formBox{
+        height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
