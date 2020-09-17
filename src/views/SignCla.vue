@@ -406,15 +406,6 @@
 
                 let form = {}
                 let rules = {}
-                Object.assign(form, {code: ''})
-                Object.assign(this.myForm, {code: ''})
-                Object.assign(rules, {
-                    code: [{
-                        required: true,
-                        message: 'Please enter the verification code',
-                        trigger: 'blur'
-                    },]
-                })
                 document.getElementById('claBox').innerHTML = this.signPageData[key].text;
                 /*排序*/
                 for (let i = 0; i < this.signPageData[key].fields.length; i++) {
@@ -491,6 +482,15 @@
                             }],
                         })
                     }
+                })
+                Object.assign(form, {code: ''})
+                Object.assign(this.myForm, {code: ''})
+                Object.assign(rules, {
+                    code: [{
+                        required: true,
+                        message: 'Please enter the verification code',
+                        trigger: 'blur'
+                    },]
                 })
                 this.ruleForm = form
                 this.rules = rules
@@ -641,8 +641,6 @@
                     this.$message.error(err.response.data)
                 })
             },
-
-
             resetForm(formName) {
                 this.$refs[formName].resetFields();
             },
