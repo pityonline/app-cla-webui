@@ -735,7 +735,7 @@
     }
 
     .form {
-        border-radius: 1rem;
+        border-radius: 1.25rem;
         box-shadow: 0 0 20px 10px #F3F3F3;
         padding: 2rem;
         margin-bottom: 2rem;
@@ -745,8 +745,11 @@
         }
         & .el-input-group__append{
             position: absolute;
-            left: 0;
+            right: -12rem;
             top: 0;
+            background: linear-gradient(to right, #97DB30, #319E55);
+            width: 12rem;
+            height: 2.5rem;
         }
         & .fontSize12{
             font-size: 1.2rem;
@@ -760,7 +763,7 @@
 
         & .el-input__inner {
             background-color: #F3F3F3;
-            border-radius: 1rem;
+            border-radius: 1.25rem;
             border: 1px solid #F3F3F3;
             font-size: 1.2rem;
         }
