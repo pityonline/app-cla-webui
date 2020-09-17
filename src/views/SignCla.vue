@@ -15,7 +15,7 @@
                     <el-row class="marginTop3rem form">
                         <el-col >
                             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="left"
-                                     label-width="30%"
+                                     label-width="20%"
                                      class="demo-ruleForm">
                                 <el-form-item v-for="(item,index) in fields"
                                               :label="item.title"
@@ -725,6 +725,9 @@
             border-radius: 1rem;
             border: 1rem solid #F3F3F3;
         }
+        & .el-form-item{
+            margin-bottom:28px
+        }
     }
 
     .marginTop3rem {
@@ -736,7 +739,7 @@
     }
 
     #claBox {
-        border-bottom: 2px dashed lightgrey;
+        border-bottom: 1px dashed lightgrey;
         padding-bottom: 2rem;
         margin-bottom: 2rem;
         white-space: pre-wrap;
