@@ -739,7 +739,7 @@
     }
 </script>
 
-<style lang="less">
+<style scoped lang="less">
     .codeBox .el-button--medium, .codeBox .el-button {
         border-radius: 0 4px 4px 0;
     }
@@ -816,7 +816,7 @@
         display: flex;
         flex-direction: column;
         box-sizing: border-box;
-        padding-top: 4rem;
+        /*padding-top: 4rem;*/
 
         /*& > .header {*/
             /*height: 4rem;*/

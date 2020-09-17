@@ -59,7 +59,7 @@
     }
 </script>
 
-<style lang="less">
+<style scoped lang="less">
     .mark{
         visibility: hidden;
         height: 6px;
