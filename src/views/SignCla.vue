@@ -15,7 +15,7 @@
                     <el-row class="marginTop3rem form">
                         <el-col>
                             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="left"
-                                     label-width="20%"
+                                     label-width="25%"
                                      class="demo-ruleForm">
                                 <el-form-item v-for="(item,index) in fields"
                                               :label="item.title"
@@ -43,9 +43,9 @@
                                         </el-button>
                                     </el-input>
                                 </el-form-item>
-                                <p style="font-size: .9rem;" class="borderClass"><span style="color: #F56C6C;">*</span>{{desc.metadataDesc}}
+                                <p style="font-size: .9rem;" class="borderClass fontSize12"><span style="color: #F56C6C;">*</span>{{desc.metadataDesc}}
                                 </p>
-                                <div class="marginTop1rem">
+                                <div class="marginTop1rem fontSize12">
                                     <el-checkbox v-model="isRead">I have read the Privacy Policy and hereby consent to
                                         the processing of my data by openLooKeng in Hong Kong"
                                     </el-checkbox>
@@ -728,6 +728,7 @@
     }
 
     .borderClass {
+        font-size: 1.2rem;
         margin-top: 1rem;
         padding: 1rem 0;
         border-top: 1px dashed #F3F3F3;
@@ -814,5 +815,8 @@
         /*}*/
 
 
+    }
+    .fontSize12{
+        font-size: 1.2rem;
     }
 </style>
