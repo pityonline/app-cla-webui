@@ -429,7 +429,7 @@
                             ],
                         })
 
-                    }else if (item.type === 'corporationName') {
+                    } else if (item.type === 'corporationName') {
                         Object.assign(this.myForm, {corporationName: ''})
                         Object.assign(rules, {
                             [item.id]: [
@@ -437,7 +437,7 @@
                             ],
                         })
 
-                    }else if (item.type === 'adminEmail') {
+                    } else if (item.type === 'adminEmail') {
                         Object.assign(this.myForm, {adminEmail: ''})
                         Object.assign(rules, {
                             [item.id]: [
@@ -489,7 +489,7 @@
                     code: [{
                         required: true,
                         message: 'Please enter the verification code',
-                        trigger: ['blur','change']
+                        trigger: ['blur', 'change']
                     },]
                 })
                 this.ruleForm = form
@@ -740,6 +740,10 @@
         margin-bottom: 2rem;
         font-size: 1.5rem;
 
+        & .el-form-item__label {
+        font-size: 1.2rem;
+        }
+
         & .el-input__inner {
             background-color: #F3F3F3;
             border-radius: 1rem;
@@ -764,6 +768,7 @@
         padding-bottom: 2rem;
         margin-bottom: 2rem;
         white-space: pre-wrap;
+        font-size: 1.5rem;
     }
 
     .contentTitle {
