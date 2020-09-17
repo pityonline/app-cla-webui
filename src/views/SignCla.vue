@@ -740,6 +740,14 @@
         padding: 2rem;
         margin-bottom: 2rem;
         font-size: 1.2rem;
+        & .el-input.el-input--small.el-input-group.el-input-group--append{
+          position: relative;
+        }
+        & .el-input-group__append{
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
         & .fontSize12{
             font-size: 1.2rem;
         }
