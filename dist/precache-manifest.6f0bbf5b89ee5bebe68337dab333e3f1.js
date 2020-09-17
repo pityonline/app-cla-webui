@@ -4,7 +4,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/bdd0211e92f6f1aabbec.worker.js"
   },
   {
-    "revision": "645e42030a5f694c5aef",
+    "revision": "1dd60f276c01faa2dffa",
     "url": "/css/app.fa2101f4.css"
   },
   {
@@ -22,10 +22,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "1018a09a8d981211ea6c",
     "url": "/css/chunk-10d83fab.c45c7946.css"
-  },
-  {
-    "revision": "efb48151a9a214ad1e1f",
-    "url": "/css/chunk-1a01ebbe.c4c2d935.css"
   },
   {
     "revision": "a82970a35a5f26eeac32",
@@ -92,6 +88,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/css/chunk-aedc16de.48d3183e.css"
   },
   {
+    "revision": "5bfe097cf7eece2cfd8a",
+    "url": "/css/chunk-d8a836a4.5ac9467f.css"
+  },
+  {
     "revision": "e2a3a885ebd0e50694b6",
     "url": "/css/chunk-f599746e.a1f65007.css"
   },
@@ -120,12 +120,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/logo.3a1a754d.png"
   },
   {
-    "revision": "47247eb4d5e34da3503815da61074e04",
+    "revision": "b7bf8c64c14f0c5fa895a7de53e04999",
     "url": "/index.html"
   },
   {
-    "revision": "645e42030a5f694c5aef",
-    "url": "/js/app.3d11c8af.js"
+    "revision": "1dd60f276c01faa2dffa",
+    "url": "/js/app.9fd15953.js"
   },
   {
     "revision": "c0c69d65b108f3a47354",
@@ -146,10 +146,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "1018a09a8d981211ea6c",
     "url": "/js/chunk-10d83fab.b3e6346c.js"
-  },
-  {
-    "revision": "efb48151a9a214ad1e1f",
-    "url": "/js/chunk-1a01ebbe.70eaade0.js"
   },
   {
     "revision": "a82970a35a5f26eeac32",
@@ -222,6 +218,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "21b10d45f32ae4f22941",
     "url": "/js/chunk-aedc16de.e878d353.js"
+  },
+  {
+    "revision": "5bfe097cf7eece2cfd8a",
+    "url": "/js/chunk-d8a836a4.cc4b45b9.js"
   },
   {
     "revision": "e2a3a885ebd0e50694b6",
