@@ -90,7 +90,6 @@
     import * as until from '../until/until'
     import * as url from '../until/api'
     import {mapActions} from 'vuex'
-    import md5 from 'js-md5'
 
     export default {
 
@@ -133,7 +132,7 @@
                     if (reg.test(value)) {
                         callback();
                     } else {
-                        callback(new Error('电话号码有误'))
+                        callback(new Error('telephone format error'))
                     }
                     callback();
                 }
@@ -452,6 +451,22 @@
                         Object.assign(rules, {
                             [item.id]: [
                                 {required: true, message: 'please input name', trigger: 'blur'},
+                            ],
+                        })
+
+                    }else if (item.type === 'corporationName') {
+                        Object.assign(this.myForm, {corporationName: ''})
+                        Object.assign(rules, {
+                            [item.id]: [
+                                {required: true, message: 'please input corporationName', trigger: 'blur'},
+                            ],
+                        })
+
+                    }else if (item.type === 'adminEmail') {
+                        Object.assign(this.myForm, {adminEmail: ''})
+                        Object.assign(rules, {
+                            [item.id]: [
+                                {required: true, message: 'please input adminEmail', trigger: 'blur'},
                             ],
                         })
 
