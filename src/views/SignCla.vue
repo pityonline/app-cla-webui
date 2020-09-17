@@ -723,7 +723,7 @@
         & .el-input__inner {
             background-color: #F3F3F3;
             border-radius: 1rem;
-            border: 1rem solid #F3F3F3;
+            border: 1px solid #F3F3F3;
         }
         & .el-form-item{
             margin-bottom:28px
