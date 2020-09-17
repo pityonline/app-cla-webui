@@ -720,7 +720,7 @@
         box-shadow: 0 0 20px 10px #F3F3F3;
         padding: 2rem;
         margin-bottom: 2rem;
-        &>.el-input__inner {
+        & .el-input__inner {
             background-color: #F3F3F3;
             border-radius: 1rem;
             border: 1rem solid #F3F3F3;
