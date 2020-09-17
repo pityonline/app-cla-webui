@@ -34,7 +34,9 @@
                     <div class="marginTop1rem" id="claBox" style="white-space: pre-wrap">
 
                     </div>
+                    <div style="border-bottom: 1px dashed lightgray">
 
+                    </div>
                     <el-divider></el-divider>
 
                     <el-row class="marginTop1rem">
@@ -805,7 +807,9 @@
     }
 
     .contentTitle {
-        font-size: 1.2rem;
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
     }
 
     .size_s {

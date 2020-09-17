@@ -4,7 +4,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/bdd0211e92f6f1aabbec.worker.js"
   },
   {
-    "revision": "b412f00e904febf0ffa8",
+    "revision": "c38184a8a6579aa74a5d",
     "url": "/css/app.fa2101f4.css"
   },
   {
@@ -22,6 +22,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "1018a09a8d981211ea6c",
     "url": "/css/chunk-10d83fab.c45c7946.css"
+  },
+  {
+    "revision": "ef13e044c9dbcf946b57",
+    "url": "/css/chunk-20681688.97be6ea7.css"
   },
   {
     "revision": "a82970a35a5f26eeac32",
@@ -62,10 +66,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "d336ccae4b9ad497faa9",
     "url": "/css/chunk-520aacc5.0c160518.css"
-  },
-  {
-    "revision": "5ae6c0a26964518d1b85",
-    "url": "/css/chunk-531978ef.204afdfa.css"
   },
   {
     "revision": "dee06c45380a76ed2d72",
@@ -116,12 +116,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/logo.3a1a754d.png"
   },
   {
-    "revision": "acaea34344a1821019f5d952756cc20f",
+    "revision": "bb4b125ebb447710ce59dcce124d1ad4",
     "url": "/index.html"
   },
   {
-    "revision": "b412f00e904febf0ffa8",
-    "url": "/js/app.df8727db.js"
+    "revision": "c38184a8a6579aa74a5d",
+    "url": "/js/app.8cb7c213.js"
   },
   {
     "revision": "c0c69d65b108f3a47354",
@@ -146,6 +146,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "e9aba4af3a3d68b82aca",
     "url": "/js/chunk-15cfb83c.a6773747.js"
+  },
+  {
+    "revision": "ef13e044c9dbcf946b57",
+    "url": "/js/chunk-20681688.6471e43e.js"
   },
   {
     "revision": "a82970a35a5f26eeac32",
@@ -194,10 +198,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "d336ccae4b9ad497faa9",
     "url": "/js/chunk-520aacc5.17365ac9.js"
-  },
-  {
-    "revision": "5ae6c0a26964518d1b85",
-    "url": "/js/chunk-531978ef.98f530c9.js"
   },
   {
     "revision": "dee06c45380a76ed2d72",
