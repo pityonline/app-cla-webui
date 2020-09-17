@@ -1,5 +1,5 @@
 <template>
-    <div id="checkCLA" :style="checkCLAClass">
+    <el-row id="checkCLA" :style="checkCLAClass">
         <Header></Header>
         <!--<div class="header">-->
             <!--<el-col :offset="8" :span="8">-->
@@ -8,8 +8,8 @@
                 <!--</div>-->
             <!--</el-col>-->
         <!--</div>-->
-        <div id="section">
-            <div v-if="!isSendCode" class="content">
+        <el-row id="section">
+            <el-row v-if="!isSendCode" class="content">
                 <el-col :offset="6" :span="12">
                     <p class="contentTitle">Please sign the CLA for <span>{{repo}}</span></p>
 
@@ -31,8 +31,8 @@
                     <!--</el-row>-->
 
 
-                    <div class="marginTop1rem" id="claBox">
-                    </div>
+                    <el-row class="marginTop1rem" id="claBox">
+                    </el-row>
 
 
                     <el-row class="marginTop1rem">
@@ -88,7 +88,7 @@
 
 
                 </el-col>
-            </div>
+            </el-row>
             <div v-else-if="!isVerify" class="content ">
                 <el-col :offset="6" :span="12" class="verifyClass">
                     <p>请输入6位数验证码完成验证</p>
@@ -111,7 +111,7 @@
                     </p>
                 </el-col>
             </div>
-        </div>
+        </el-row>
 
         <Footer></Footer>
         <el-dialog
@@ -130,7 +130,7 @@
             </el-row>
         </el-dialog>
 
-    </div>
+    </el-row>
 </template>
 
 <script>
