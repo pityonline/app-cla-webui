@@ -128,10 +128,10 @@
         width: 100%;
         display: flex;
         flex-direction: row;
-        align-items: flex-end;
+       justify-content: flex-end;
     }
     .formBack{
-        width: 18rem;
+        width: 16rem;
         box-shadow: 0 0 20px 10px #F3F3F3;
         padding: 3rem;
         background-color: white;
