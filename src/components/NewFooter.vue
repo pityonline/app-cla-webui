@@ -23,6 +23,7 @@
 <style scoped lang="less">
 
     @import '../assets/font/css/huaweisans-bold.css';
+    @import '../assets/font/css/HuaweiSans-Thin.css';
 
     .footer {
         font-family: HuaweiSans-Bold, sans-serif;
@@ -39,6 +40,7 @@
 
     .copyright {
         font-size: .5rem;
+        font-family: HuaweiSans-Thin,sans-serif;
     }
 
     .join_us {

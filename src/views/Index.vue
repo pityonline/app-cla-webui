@@ -85,6 +85,7 @@
 </script>
 <style scoped lang="less">
     @import "../assets/font/css/Roboto-Bold.css";
+    @import "../assets/font/css/Roboto-Black.css";
     .title {
         height: 100%;
         display: flex;
@@ -94,16 +95,18 @@
     }
 
     .name {
+        font-family: Roboto-Bold,sans-serif;
+
         font-size: 6rem;
         font-weight: bold;
     }
 
     .description {
+        font-family: Roboto-Black,sans-serif;
         font-size: 1.5rem;
     }
 
     .index {
-        font-family: Roboto-Bold,sans-serif;
         display: flex;
         flex-direction: column;
         background-image: url("../assets/images/backgroundx2.png");
