@@ -1,23 +1,36 @@
 <template>
-    <div>
-        <el-row>
-            <el-col :span="8" :offset="8" style="padding:3rem ">
-                <el-row :gutter="20">
-                    <el-col>
-                        <svg-icon icon-class="giteelogin" class="loginIcon" @click="login('gitee')"></svg-icon>
-                        <svg-icon icon-class="githublogin" class="loginIcon" @click="login('github')"></svg-icon>
-                    </el-col>
+    <el-row style="height: 100%">
+        <el-col  align="right" class="formBox">
+            <el-row>
+            </el-row>
+            <el-row>
+                <el-col :span="12">
+                    <el-row>
+                        <svg-icon icon-class="giteelogin" class="loginIcon" ></svg-icon>
+                    </el-row>
+                    <el-row>
+                        <button class="button" @click="login('gitee')">
+                            Login in
+                        </button>
+                    </el-row>
+                </el-col>
+                <el-col :span="12">
+                    <el-row>
+                        <svg-icon icon-class="githublogin" class="loginIcon" ></svg-icon>
+                    </el-row>
+                    <el-row>
+                        <button class="button" @click="login('github')">
+                            Login in
+                        </button>
+                    </el-row>
+                </el-col>
+            </el-row>
+            <el-row>
+            <span> Select the platform you want to authorize to log in</span>
+            </el-row>
+        </el-col>
+    </el-row>
 
-
-                </el-row>
-                <el-row :gutter="20" style="margin: 3rem 0">
-                    Select the platform you want to authorize to log in
-                </el-row>
-            </el-col>
-        </el-row>
-
-
-    </div>
 </template>
 
 <script>
