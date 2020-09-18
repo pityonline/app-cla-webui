@@ -6,7 +6,7 @@
             <el-row>
                 <el-col :span="12">
                     <el-row>
-                        <svg-icon icon-class="giteelogin" class="loginIcon" ></svg-icon>
+                        <svg-icon icon-class="gitee_new" class="loginIcon" ></svg-icon>
                     </el-row>
                     <el-row>
                         <button class="button" @click="login('gitee')">
@@ -16,7 +16,7 @@
                 </el-col>
                 <el-col :span="12">
                     <el-row>
-                        <svg-icon icon-class="githublogin" class="loginIcon" ></svg-icon>
+                        <svg-icon icon-class="github_new" class="loginIcon" ></svg-icon>
                     </el-row>
                     <el-row>
                         <button class="button" @click="login('github')">
@@ -75,6 +75,27 @@
 </script>
 
 <style scoped lang="less">
+    .button {
+        width: 100%;
+        height: 4rem;
+        border-radius: 2rem;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        background: linear-gradient(to right, #97DB30, #319E55);
+        margin: 1rem 0;
+    }
+
+    .button:focus {
+        outline: none;
+    }
+    .formBox {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
     .loginIcon {
         cursor: pointer;
         width: 2rem;
