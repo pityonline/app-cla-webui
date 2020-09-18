@@ -28,12 +28,12 @@ const routes = [
                 component: () => import('../views/LoginTypeSelect.vue')
             },
             {
-                path: '/signType/:platform/:org_id/:repo_id',
+                path: '/sign/:platform/:org_id/:repo_id',
                 /*组件懒加载*/
                 component: () => import('../views/SignType.vue')
             },
             {
-                path: '/signType/:platform/:org_id',
+                path: '/sign/:platform/:org_id',
                 /*组件懒加载*/
                 component: () => import('../views/SignType.vue')
             },

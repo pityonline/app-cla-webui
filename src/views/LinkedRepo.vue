@@ -383,7 +383,7 @@
                 orgTableData: '',
                 address: 'http://cla.osinfra.cn:60031',
                 url: '',
-                signRouter: '/signType',
+                signRouter: '/sign',
                 pdfSrc: '',
                 numPages: undefined,
                 docInfo: {},
