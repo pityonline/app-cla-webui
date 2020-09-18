@@ -799,6 +799,9 @@
             background-color: #3EA650;
             border-color: #3EA650;
         }
+        & .el-checkbox__input.is-focus .el-checkbox__inner{
+            border-color: #3EA650;
+        }
         & .el-checkbox__inner{
             border: 1px solid #3EA650;
             width: 20px;
