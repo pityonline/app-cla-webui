@@ -86,6 +86,7 @@
 <style scoped lang="less">
     @import "../assets/font/css/Roboto-Bold.css";
     @import "../assets/font/css/Roboto-Black.css";
+    @import "../assets/font/css/Roboto-Light.css";
     .title {
         height: 100%;
         display: flex;
@@ -102,7 +103,7 @@
     }
 
     .description {
-        font-family: Roboto-Black,sans-serif;
+        font-family: Roboto-Light,sans-serif;
         font-size: 1.5rem;
     }
 

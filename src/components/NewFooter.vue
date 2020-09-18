@@ -24,6 +24,7 @@
 
     @import '../assets/font/css/huaweisans-bold.css';
     @import '../assets/font/css/HuaweiSans-Thin.css';
+    @import '../assets/font/css/HuaweiSans-Light.css';
 
     .footer {
         font-family: HuaweiSans-Bold, sans-serif;
@@ -40,7 +41,7 @@
 
     .copyright {
         font-size: .5rem;
-        font-family: HuaweiSans-Thin,sans-serif;
+        font-family: HuaweiSans-Light,sans-serif;
     }
 
     .join_us {
