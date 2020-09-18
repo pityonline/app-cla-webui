@@ -83,40 +83,40 @@
                         </el-row>
 
                     </div>
-                    <!--<div>-->
-                        <!--<el-row style="padding: 0.5rem 0;" type="flex" align="middle" :gutter="20"-->
-                                <!--v-for="(item,index) in customMetadataArr">-->
-                            <!--<el-col :span="5">-->
-                                <!--<el-input v-model="item.title" size="medium"-->
-                                          <!--placeholder="please input title">-->
+                    <div>
+                        <el-row style="padding: 0.5rem 0;" type="flex" align="middle" :gutter="20"
+                                v-for="(item,index) in customMetadataArr">
+                            <el-col :span="5">
+                                <el-input v-model="item.title" size="medium"
+                                          placeholder="please input title">
 
-                                <!--</el-input>-->
-                            <!--</el-col>-->
-                            <!--<el-col :span="5">-->
-                                <!--<el-select style="width: 100%" v-model="item.type"-->
-                                           <!--placeholder="select dataType"-->
-                                           <!--size="medium">-->
-                                    <!--<el-option-->
-                                            <!--v-for="i in dataTypeOptions"-->
-                                            <!--:key="i.value"-->
-                                            <!--:label="i.label"-->
-                                            <!--:value="i.value">-->
-                                    <!--</el-option>-->
-                                <!--</el-select>-->
-                            <!--</el-col>-->
-                            <!--<el-col :span="5" style="height: 100%">-->
-                                <!--<el-input v-model="item.description" size="medium"-->
-                                          <!--placeholder="description"></el-input>-->
-                            <!--</el-col>-->
-                            <!--<el-col :span="5" style="height: 100%">-->
-                                <!--<el-checkbox v-model="item.required">required</el-checkbox>-->
-                            <!--</el-col>-->
-                            <!--<el-col :span="4">-->
-                                <!--<el-button @click="addRow(index)" size="medium">+</el-button>-->
-                                <!--<el-button @click="myDeleteRow(index)" size="medium">-</el-button>-->
-                            <!--</el-col>-->
-                        <!--</el-row>-->
-                    <!--</div>-->
+                                </el-input>
+                            </el-col>
+                            <el-col :span="5">
+                                <el-select style="width: 100%" v-model="item.type"
+                                           placeholder="select dataType"
+                                           size="medium">
+                                    <el-option
+                                            v-for="i in dataTypeOptions"
+                                            :key="i.value"
+                                            :label="i.label"
+                                            :value="i.value">
+                                    </el-option>
+                                </el-select>
+                            </el-col>
+                            <el-col :span="5" style="height: 100%">
+                                <el-input v-model="item.description" size="medium"
+                                          placeholder="description"></el-input>
+                            </el-col>
+                            <el-col :span="5" style="height: 100%">
+                                <el-checkbox v-model="item.required">required</el-checkbox>
+                            </el-col>
+                            <el-col :span="4">
+                                <el-button @click="addRow(index)" size="medium">+</el-button>
+                                <el-button @click="myDeleteRow(index)" size="medium">-</el-button>
+                            </el-col>
+                        </el-row>
+                    </div>
                 </div>
                 <div style="margin-top: 1rem;display: flex;justify-content: space-between">
                     <el-button size="medium" v-loading.fullscreen.lock="fullscreenLoading" :disabled="!verifyNotNull()"
@@ -156,12 +156,13 @@
                     description: 'your email',
                     required: true,
                 },
-                    {
-                    title: 'Date',
-                    type: 'date',
-                    description: 'the date of today',
-                    required: true,
-                },],
+                //     {
+                //     title: 'Date',
+                //     type: 'date',
+                //     description: 'the date of today',
+                //     required: true,
+                // },
+                ],
                 metadataType: 'individual',
                 customMetadataArr:[{
                     title: '',

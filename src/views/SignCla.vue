@@ -692,13 +692,13 @@
     }
 
     .button {
-        font-family: Roboto-Bold, sans-serif;
+        font-family: Roboto-Light, sans-serif;
         width: 15rem;
         height: 3rem;
         border-radius: 2.5rem;
         border: none;
         color: white;
-        font-size: 1rem;
+        font-size: 1.2rem;
         cursor: pointer;
         background: linear-gradient(to right, #97DB30, #319E55);
         margin: 1rem 0;
