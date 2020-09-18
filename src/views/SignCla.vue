@@ -685,6 +685,8 @@
 </script>
 
 <style lang="less">
+    @import "../assets/font/css/Roboto-Bold.css";
+
     .signBtBox {
         display: flex;
         justify-content: center;
@@ -740,9 +742,11 @@
         padding: 2rem;
         margin-bottom: 2rem;
         font-size: 1.2rem;
-        & .el-input.el-input--small.el-input-group.el-input-group--append{
-          position: relative;
+
+        & .el-input.el-input--small.el-input-group.el-input-group--append {
+            position: relative;
         }
+
         & .el-button.el-button--default {
             position: absolute;
             top: 0;
@@ -754,7 +758,8 @@
             color: white;
             margin: 0;
         }
-        & .el-input-group__append{
+
+        & .el-input-group__append {
             position: absolute;
             right: 0;
             top: 0;
@@ -764,14 +769,17 @@
             border-radius: 1.25rem;
             padding: 0;
         }
-        & .fontSize12{
+
+        & .fontSize12 {
             font-size: 1.2rem;
         }
+
         & .el-input--small .el-input__inner {
-        height: 2.5rem;
+            height: 2.5rem;
         }
+
         & .el-form-item__label {
-        font-size: 1.2rem;
+            font-size: 1.2rem;
         }
 
         & .el-input__inner {
@@ -784,37 +792,44 @@
         & .el-form-item {
             margin-bottom: 28px
         }
-        & .el-checkbox__label{
+
+        & .el-checkbox__label {
             display: inline-grid;
             white-space: pre-line;
             font-size: 1.2rem;
         }
-        & .el-checkbox__input.is-checked+.el-checkbox__label{
+
+        & .el-checkbox__input.is-checked + .el-checkbox__label {
             display: inline-grid;
             white-space: pre-line;
             color: #606266;
             font-size: 1.2rem;
         }
+
         & .el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner {
             background-color: #3EA650;
             border-color: #3EA650;
         }
-        & .el-checkbox__input.is-focus .el-checkbox__inner{
+
+        & .el-checkbox__input.is-focus .el-checkbox__inner {
             border-color: #3EA650;
         }
-        & .el-checkbox__inner{
+
+        & .el-checkbox__inner {
             border: 1px solid #3EA650;
             width: 20px;
             height: 20px;
         }
-        & .el-checkbox__inner:hover{
-            border: 1px solid #3EA650;
-        }
-        & .el-checkbox__inner:focus{
+
+        & .el-checkbox__inner:hover {
             border: 1px solid #3EA650;
         }
 
-        & .el-checkbox__inner:after{
+        & .el-checkbox__inner:focus {
+            border: 1px solid #3EA650;
+        }
+
+        & .el-checkbox__inner:after {
             height: 10px;
             left: 7px;
             top: 2px
@@ -854,7 +869,7 @@
 
         & > #section {
             flex-grow: 1;
-
+            font-family: Roboto-Bold,sans-serif;
 
             & > .content {
                 padding: 1rem;
