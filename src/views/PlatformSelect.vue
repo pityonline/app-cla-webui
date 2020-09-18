@@ -1,8 +1,7 @@
 <template>
     <el-row style="height: 100%">
         <el-col align="right" class="formBox">
-            <el-row>
-            </el-row>
+
             <el-row>
                 <el-col :offset="4" :span="10">
                     <div class="icon_back">
@@ -43,9 +42,7 @@
                     </div>
                 </el-col>
             </el-row>
-            <el-row>
-                <span> Select the platform you want to authorize to log in</span>
-            </el-row>
+
         </el-col>
     </el-row>
 
@@ -93,6 +90,13 @@
 </script>
 
 <style scoped lang="less">
+    .bt_desc {
+        height: 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
     .icon_box {
         display: flex;
         justify-content: center;
@@ -131,7 +135,6 @@
         font-size: 1.5rem;
         cursor: pointer;
         background: linear-gradient(to right, #97DB30, #319E55);
-        /*margin: 1rem 2rem;*/
     }
 
     .button:focus {
@@ -143,7 +146,7 @@
         height: 100%;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: center;
     }
 
     .loginIcon {

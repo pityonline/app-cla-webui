@@ -4,7 +4,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/bdd0211e92f6f1aabbec.worker.js"
   },
   {
-    "revision": "81d053792319703d347f",
+    "revision": "ef1c924dcbc59ce085b5",
     "url": "/css/app.fa2101f4.css"
   },
   {
@@ -18,6 +18,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "1018a09a8d981211ea6c",
     "url": "/css/chunk-10d83fab.c45c7946.css"
+  },
+  {
+    "revision": "e4d18ad5d0378195ec9c",
+    "url": "/css/chunk-15064056.e2e3a09f.css"
   },
   {
     "revision": "a82970a35a5f26eeac32",
@@ -78,10 +82,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "58df7785e9dc22f85828",
     "url": "/css/chunk-60afc358.602fc92b.css"
-  },
-  {
-    "revision": "2772c8e9f6b0c490ea6c",
-    "url": "/css/chunk-7103cc42.560c78b5.css"
   },
   {
     "revision": "b9e5d0dadf8d0a8dec9c",
@@ -148,12 +148,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/logo.3a1a754d.png"
   },
   {
-    "revision": "f9574d38ae854a4d901a87e19f83d8a9",
+    "revision": "b2296adbe6033da399e55c1a55454329",
     "url": "/index.html"
   },
   {
-    "revision": "81d053792319703d347f",
-    "url": "/js/app.ff0fb832.js"
+    "revision": "ef1c924dcbc59ce085b5",
+    "url": "/js/app.7f48cec6.js"
   },
   {
     "revision": "c0c69d65b108f3a47354",
@@ -170,6 +170,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "1018a09a8d981211ea6c",
     "url": "/js/chunk-10d83fab.b3e6346c.js"
+  },
+  {
+    "revision": "e4d18ad5d0378195ec9c",
+    "url": "/js/chunk-15064056.c9d4306e.js"
   },
   {
     "revision": "a82970a35a5f26eeac32",
@@ -238,10 +242,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "58df7785e9dc22f85828",
     "url": "/js/chunk-60afc358.887124ed.js"
-  },
-  {
-    "revision": "2772c8e9f6b0c490ea6c",
-    "url": "/js/chunk-7103cc42.f3659e26.js"
   },
   {
     "revision": "b9e5d0dadf8d0a8dec9c",
