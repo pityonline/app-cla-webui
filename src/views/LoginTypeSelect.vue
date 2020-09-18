@@ -1,5 +1,5 @@
 <template>
-    <el-row style="height: 100%">
+    <el-row class="loginTypeSelect" style="height: 100%">
         <el-col style="height: 100%">
             <el-row style="height: 50%">
 
@@ -53,6 +53,10 @@
 </script>
 
 <style scoped lang="less">
+    @import "../assets/font/css/Roboto-Bold.css";
+    .loginTypeSelect{
+        font-family: Roboto-Bold,sans-serif;
+    }
     .buttonBox {
         height: 100%;
         display: flex;

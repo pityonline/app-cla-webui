@@ -84,7 +84,7 @@
     }
 </script>
 <style scoped lang="less">
-    ///*@import "../commom/font/css/huaweisans-bold.css";*/
+    @import "../assets/font/css/Roboto-Bold.css";
     .title {
         height: 100%;
         display: flex;
@@ -94,8 +94,6 @@
     }
 
     .name {
-
-        ///*font-family: HuaweiSans-Bold,sans-serif;*/
         font-size: 6rem;
         font-weight: bold;
     }
@@ -105,9 +103,10 @@
     }
 
     .index {
+        font-family: Roboto-Bold,sans-serif;
         display: flex;
         flex-direction: column;
-        background-image: url("../assets/images/backgroundx1.png");
+        background-image: url("../assets/images/backgroundx2.png");
         background-repeat: no-repeat;
         /*background-position: 40rem 15rem;*/
         background-position: 40rem center;
