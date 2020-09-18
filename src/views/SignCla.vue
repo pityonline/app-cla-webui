@@ -694,8 +694,8 @@
 
     .button {
         font-family: Roboto-Bold, sans-serif;
-        width: 20rem;
-        height: 5rem;
+        width: 15rem;
+        height: 3rem;
         border-radius: 2.5rem;
         border: none;
         color: white;
