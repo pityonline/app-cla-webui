@@ -136,7 +136,6 @@
         padding: 3rem;
         background-color: white;
         border-radius: 2rem;
-
     }
     .formBox {
         height: 100%;
