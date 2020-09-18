@@ -687,6 +687,7 @@
 <style lang="less">
     @import "../assets/font/css/Roboto-Bold.css";
     @import "../assets/font/css/Roboto-Black.css";
+    @import "../assets/font/css/Roboto-Light.css";
 
     .signBtBox {
         display: flex;
@@ -871,7 +872,7 @@
 
         & > #section {
             flex-grow: 1;
-            font-family: Roboto-Black,sans-serif;
+            font-family: Roboto-Light,sans-serif;
 
             & > .content {
                 padding: 1rem;
