@@ -84,6 +84,7 @@
     }
 </script>
 <style scoped lang="less">
+    ///*@import "../commom/font/css/huaweisans-bold.css";*/
     .title {
         height: 100%;
         display: flex;
@@ -93,6 +94,8 @@
     }
 
     .name {
+
+        ///*font-family: HuaweiSans-Bold,sans-serif;*/
         font-size: 6rem;
         font-weight: bold;
     }
