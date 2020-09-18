@@ -22,25 +22,25 @@
                     </div>
 
                 </el-col>
-                <el-col :span="10">
-                    <div class="icon_back">
-                        <div class="icon_box">
-                            <div class="loginSvg">
-                                <svg-icon icon-class="github_new" class="loginIcon"></svg-icon>
+                <!--<el-col :span="10">-->
+                    <!--<div class="icon_back">-->
+                        <!--<div class="icon_box">-->
+                            <!--<div class="loginSvg">-->
+                                <!--<svg-icon icon-class="github_new" class="loginIcon"></svg-icon>-->
 
-                            </div>
-                        </div>
-                        <div class="icon_box">
-                            <div class="loginBt">
-                                <button class="button" @click="login('github')">
-                                    Login in
-                                </button>
-                            </div>
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="icon_box">-->
+                            <!--<div class="loginBt">-->
+                                <!--<button class="button" @click="login('github')">-->
+                                    <!--Login in-->
+                                <!--</button>-->
+                            <!--</div>-->
 
-                        </div>
+                        <!--</div>-->
 
-                    </div>
-                </el-col>
+                    <!--</div>-->
+                <!--</el-col>-->
             </el-row>
 
         </el-col>
