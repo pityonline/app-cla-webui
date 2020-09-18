@@ -51,7 +51,7 @@
                                     </el-checkbox>
                                 </div>
                                 <el-form-item label-width="0" class="marginTop1rem signBtBox">
-                                    <button class="button"  @click="submitForm(event,'ruleForm')">
+                                    <button class="button" type="button"  @click="submitForm('ruleForm')">
                                         {{desc.sign}}
                                     </button>
                                     <!--<el-button @click="resetForm('ruleForm')">{{desc.reset}}</el-button>-->
@@ -596,8 +596,7 @@
                     }
                 }
             },
-            submitForm(event,formName) {
-                event.preventDefault();
+            submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         this.signCla();
@@ -699,7 +698,7 @@
         border-radius: 2.5rem;
         border: none;
         color: white;
-        font-size: 2rem;
+        font-size: 1rem;
         cursor: pointer;
         background: linear-gradient(to right, #97DB30, #319E55);
         margin: 1rem 0;
