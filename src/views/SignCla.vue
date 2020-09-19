@@ -5,7 +5,7 @@
         <el-row id="section">
             <el-row v-if="!isSendCode" class="content">
                 <el-col :offset="4" :span="16">
-                    <p class="contentTitle"><span>{{org}}</span><span v-if="">/{{repo}}</span><span> {{apply_to}} </span>Contributor License Agreement</p>
+                    <p class="contentTitle">"<span>{{org}}</span><span v-if="repo">/{{repo}}</span><span>" {{apply_to}} </span>Contributor License Agreement</p>
 
 
                     <el-row class="marginTop3rem" id="claBox">
@@ -47,7 +47,7 @@
                                 </div>
                                 <div class="marginTop1rem fontSize12">
                                     <el-checkbox v-model="isRead">I have read the Privacy Policy and hereby consent to
-                                        the processing of my data by openLooKeng in Hong Kong"
+                                        the processing of my data by {{repo}}"
                                     </el-checkbox>
                                 </div>
                                 <el-form-item label-width="0" class="marginTop1rem signBtBox">
@@ -181,7 +181,6 @@
                 platform: this.$store.state.platform,
                 dialogVisible: false,
                 repositoryOptions: [],
-                repo: '',
                 role: '0',
                 // ruleForm: {
                 //     code: '',
