@@ -416,18 +416,9 @@
                     params: obj,
                 }).then(res => {
                     console.log(res);
-                    for (let item of res.data) {
-                        console.log(item);
-                        if (item.scope) {
-                            if (item.scope[0] === 'primary') {
-                                this.myForm.email = item.email;
-                                console.log(this.myForm.email);
-                                break
-                            }
-                        }
-                    }
+                    this.myForm.name= res.data.login
                     for (let item of this.fields) {
-                        if (item.type === 'email') {
+                        if (item.type === 'name') {
                             Object.assign(this.ruleForm, {[item.id]: this.myForm.email})
                             break;
                         }
