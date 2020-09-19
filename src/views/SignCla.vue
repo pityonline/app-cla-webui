@@ -417,9 +417,10 @@
                 }).then(res => {
                     console.log(res);
                     this.myForm.name= res.data.login
+                    console.log(this.myForm);
                     for (let item of this.fields) {
                         if (item.type === 'name') {
-                            Object.assign(this.ruleForm, {[item.id]: this.myForm.email})
+                            Object.assign(this.ruleForm, {[item.id]: this.myForm.name})
                             break;
                         }
                     }
