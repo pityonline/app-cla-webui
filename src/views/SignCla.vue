@@ -5,7 +5,7 @@
         <el-row id="section">
             <el-row v-if="!isSendCode" class="content">
                 <el-col :offset="4" :span="16">
-                    <p class="contentTitle">Sign CLA for "<span>{{org}}</span><span v-if="">/{{repo}}</span>"</p>
+                    <p class="contentTitle"><span>{{org}}</span><span v-if="">/{{repo}}</span><span>{{ apply_to }}</span>Contributor License Agreement</p>
 
 
                     <el-row class="marginTop3rem" id="claBox">
@@ -107,6 +107,13 @@
             refresh_token() {
                 return this.$store.state.refresh_token
             },
+            apply_to(){
+                if (this.$store.state.loginType === 'individual'||this.$store.state.loginType === 'employee') {
+                    return 'individual'
+                }else if (this.$store.state.loginType === 'corporation') {
+                    return 'corporation'
+                }
+            },
         },
         components: {
             Header,
@@ -187,7 +194,8 @@
                 //     fax: '',
                 //     address: '',
                 // },
-
+                org:this.$store.state.repoInfo.org_id,
+                repo:this.$store.state.repoInfo.repo_id,
                 ruleForm: {},
                 myForm: {},
                 rules: {},
