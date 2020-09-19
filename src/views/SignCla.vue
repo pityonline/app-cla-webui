@@ -4,8 +4,8 @@
 
         <el-row id="section">
             <el-row v-if="!isSendCode" class="content">
-                <el-col :offset="6" :span="12">
-                    <p class="contentTitle">Please sign the CLA for <span>{{repo}}</span></p>
+                <el-col :offset="4" :span="16">
+                    <p class="contentTitle">Sign CLA for "<span>{{org}}</span><span v-if="">/{{repo}}</span>"</p>
 
 
                     <el-row class="marginTop3rem" id="claBox">
@@ -562,11 +562,6 @@
                     }
                 }).then(res => {
                     console.log(res);
-                    // this.$message.closeAll()
-                    // this.clearForm()
-                    // this.isRead = false;
-                    // this.isSendCode = true;
-                    // this.$message.success('sign successfully')
                     if (this.$store.state.loginType === 'corporation') {
                         this.tipsMessage = 'We have sent a notification email to your email address. Please check it.And please complete the signature according to the prompt in the email'
                     } else if (this.$store.state.loginType === 'employee') {
@@ -757,6 +752,7 @@
             font-size: 1.2rem;
             color: white;
             margin: 0;
+            font-family: Roboto-Light,sans-serif;
         }
 
         & .el-input-group__append {

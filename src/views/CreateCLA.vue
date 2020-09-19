@@ -503,7 +503,6 @@
         }
     }
     window.onresize = () => {
-        // console.log(until.getClientHeight());
         if (until.getClientHeight() > document.getElementById('createCLA').offsetHeight) {
             document.getElementById("createCLA").style.height = until.getClientHeight() + 'px'
         }

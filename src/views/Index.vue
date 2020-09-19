@@ -3,7 +3,7 @@
         <el-col class="index" id="transparentDiv" :style="transparentDiv">
             <NewHeader></NewHeader>
             <el-row id="section">
-                <el-col :offset="3" :span="18" style="height: 100%">
+                <el-col :offset="4" :span="16" style="height: 100%">
                     <el-row style="height: 100%">
                         <el-col :span="12" class="title">
                             <div>
@@ -11,9 +11,9 @@
                                     <div>
                                         <span>CLA</span>
                                     </div>
-                                    <span>SYSTEM</span>
+                                    <span>SIGN</span>
                                 </div>
-                                <p class="description">Easily handle Contributor License Agreements (CLAs)</p>
+                                <!--<p class="description">Easily handle Contributor License Agreements (CLAs)</p>-->
                             </div>
 
                         </el-col>
@@ -87,6 +87,8 @@
     @import "../assets/font/css/Roboto-Bold.css";
     @import "../assets/font/css/Roboto-Black.css";
     @import "../assets/font/css/Roboto-Light.css";
+    @import "../assets/font/css/Roboto-Regular.css";
+
     .title {
         height: 100%;
         display: flex;
@@ -96,14 +98,12 @@
     }
 
     .name {
-        font-family: Roboto-Bold,sans-serif;
-
-        font-size: 6rem;
-        font-weight: bold;
+        font-family: Roboto-Regular, sans-serif;
+        font-size: 5rem;
     }
 
     .description {
-        font-family: Roboto-Light,sans-serif;
+        font-family: Roboto-Regular, sans-serif;
         font-size: 1.5rem;
     }
 
@@ -114,7 +114,7 @@
         background-repeat: no-repeat;
         /*background-position: 40rem 15rem;*/
         background-position: 40rem center;
-        background-size: 60rem;
+        background-size: 55rem;
 
         & > #section {
             flex-grow: 1;

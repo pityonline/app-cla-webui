@@ -140,6 +140,11 @@ const routes = [
         component: () => import('../views/CreateCLA.vue')
     },
     {
+        path: '/privacy',
+        name: 'Privacy',
+        component: () => import('../views/Privacy.vue')
+    },
+    {
         path: '/createMetadata',
         name: 'CreateMetadata',
         component: () => import('../views/CreateMetadata.vue')

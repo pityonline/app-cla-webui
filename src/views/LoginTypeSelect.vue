@@ -8,7 +8,7 @@
                 <el-col :offset="15" :span="9" align="right" class="buttonBox">
                     <div>
                         <button class="button" @click="submit('orgManager')">
-                            Org Manager
+                            Organization Manager
                         </button>
                         <button class="button" @click="submit('corporationManager')">
                             Corporation Manager
@@ -54,6 +54,7 @@
 
 <style scoped lang="less">
     @import "../assets/font/css/Roboto-Bold.css";
+    @import "../assets/font/css/Roboto-Regular.css";
     .loginTypeSelect{
         font-family: Roboto-Bold,sans-serif;
     }
@@ -65,12 +66,13 @@
     }
 
     .button {
+        font-family:Roboto-Regular,sans-serif ;
         width: 100%;
         height: 4rem;
         border-radius: 2rem;
         border: none;
         color: white;
-        font-size: 1.5rem;
+        font-size: 1.3rem;
         cursor: pointer;
         background: linear-gradient(to right, #97DB30, #319E55);
         margin: 1rem 0;
