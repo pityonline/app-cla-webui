@@ -216,7 +216,7 @@
             }
         },
         methods: {
-            ...mapActions(['setTokenAct', 'setRepoInfoAct','viewPrivacy']),
+            ...mapActions(['setTokenAct', 'setRepoInfoAct', 'viewPrivacy']),
             clickOk() {
                 let url = `/sign/${this.$store.state.repoInfo.platform}/${this.$store.state.repoInfo.org_id}/${this.$store.state.repoInfo.repo_id}`
                 this.$router.push(url)
@@ -624,19 +624,21 @@
                 }
             },
             submitForm(formName) {
-                if (this.isRead) {
-                    this.$refs[formName].validate((valid) => {
-                        if (valid) {
+
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        if (this.isRead) {
                             this.signCla();
                         } else {
-                            console.log('error submit!!');
-                            return false;
+                            this.$message.closeAll()
+                            this.$message.error('Please read the privacy statement')
                         }
-                    });
-                }else{
-                    this.$message.closeAll()
-                    this.$message.error('Please read the privacy statement')
-                }
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
+
 
             },
             getRepositoriesOfOrg(org, org_id) {
