@@ -47,7 +47,7 @@
                                 </div>
                                 <div class="marginTop1rem fontSize12">
                                     <el-checkbox v-model="isRead">I have read the Privacy Policy and hereby consent to
-                                        the processing of my data by {{repo}}"
+                                        the processing of my data by "{{repo}}"
                                     </el-checkbox>
                                 </div>
                                 <el-form-item label-width="0" class="marginTop1rem signBtBox">
