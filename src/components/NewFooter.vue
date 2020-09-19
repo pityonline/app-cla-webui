@@ -15,18 +15,20 @@
 </template>
 
 <script>
+    import {mapActions} from 'vuex'
     export default {
         name: "NewFooter",
         data(){
             return{}
         },
         methods:{
+            ...mapActions(['viewPrivacy']),
             join(){
                 window.open('https://github.com/opensourceways/app-cla-server')
             },
-            viewPrivacy(){
-                window.open('/privacy')
-            },
+            // viewPrivacy(){
+            //     window.open('/privacy')
+            // },
         },
     }
 </script>

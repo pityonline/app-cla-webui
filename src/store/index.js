@@ -289,6 +289,9 @@ export default new Vuex.Store({
         setTableDataAct({commit}, data) {
             commit('setTableData', data)
         },
+        viewPrivacy(){
+            window.open('/privacy')
+        },
 
     },
     modules: {}

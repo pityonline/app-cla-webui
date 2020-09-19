@@ -47,7 +47,8 @@
                                 <div class="borderClass fontSize12"><span style="color: #F56C6C;">*</span>{{desc.metadataDesc}}
                                 </div>
                                 <div class="marginTop1rem fontSize12">
-                                    <el-checkbox v-model="isRead">I have read the Privacy Policy and hereby consent to
+                                    <el-checkbox v-model="isRead">I have read the <span
+                                            class="privacy" @click="viewPrivacy">Privacy Policy</span> and hereby consent to
                                         the processing of my data by "{{repo}}"
                                     </el-checkbox>
                                 </div>
@@ -215,7 +216,7 @@
             }
         },
         methods: {
-            ...mapActions(['setTokenAct', 'setRepoInfoAct']),
+            ...mapActions(['setTokenAct', 'setRepoInfoAct','viewPrivacy']),
             clickOk() {
                 let url = `/sign/${this.$store.state.repoInfo.platform}/${this.$store.state.repoInfo.org_id}/${this.$store.state.repoInfo.repo_id}`
                 this.$router.push(url)
@@ -728,6 +729,11 @@
         cursor: pointer;
         outline: none;
 
+    }
+
+    .privacy {
+        cursor: pointer;
+        color: #319E55;
     }
 
     .button {
