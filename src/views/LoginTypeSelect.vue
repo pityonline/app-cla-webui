@@ -66,7 +66,7 @@
     }
 
     .button {
-        font-family:Roboto-Regular,sans-serif ;
+        /*font-family:Roboto-Regular,sans-serif ;*/
         width: 100%;
         height: 4rem;
         border-radius: 2rem;
