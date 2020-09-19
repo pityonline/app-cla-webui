@@ -261,7 +261,8 @@
                 let reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$");
                 console.log(this.myForm.email);
                 console.log(this.myForm.email.split('.')[0].split('@')[1]);
-                if (!this.myForm.email.trim() || !reg.test(this.myForm.email) || this.myForm.email.split('.')[0].split('@')[1] !== 'gmail') {
+                let email = this.myForm.email?this.myForm.email:this.myForm.adminEmail
+                if (!email.trim() || !reg.test(email) || email.split('.')[0].split('@')[1] !== 'gmail') {
                     this.$message.closeAll()
                     this.$message.error('Please fill in Google email in the e-mail column')
                 } else {

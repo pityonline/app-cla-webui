@@ -182,7 +182,7 @@
                     description: '',
                     required: true,
                 }],
-                dataTypeOptions: [{label: 'name', value:  'name'},{label: 'corporationName', value:  'corporationName'}, {label: 'adminEmail', value:  'adminEmail'},{label: 'date', value: 'date'}, {
+                dataTypeOptions: [{label: 'name', value:  'name'},{label: 'corporationName', value:  'corporationName'}, {label: 'date', value: 'date'}, {
                     label: 'telephone',
                     value: 'telephone'
                 }, {label: 'address', value:  'address'}, {label: 'email', value: 'email'}, {label: 'fax', value: 'fax'}],
@@ -267,7 +267,7 @@
                        },
                        {
                            title: 'E-Mail',
-                           type: 'adminEmail',
+                           type: 'email',
                            description: 'your email',
                            required: true,
                        }, {
