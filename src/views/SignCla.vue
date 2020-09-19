@@ -271,7 +271,7 @@
                 }
                 console.log(email);
                 console.log(email.split('.')[0].split('@')[1]);
-                if (!(email.trim()) || !reg.test(email) || email.split('.')[0].split('@')[1] !== 'gmail') {
+                if (!(email.trim()) || !reg.test(email) || email.split('@')[1] !== 'gmail.com') {
                     this.$message.closeAll()
                     this.$message.error('Please fill in Google email in the e-mail column')
                 } else {
