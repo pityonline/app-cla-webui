@@ -772,6 +772,8 @@
     .el-button.is-disabled, .el-button.is-disabled:focus, .el-button.is-disabled:hover {
         cursor: pointer;
         border: none;
+        background: linear-gradient(to right, #97DB30, #319E55);
+
     }
 
     .pointer {
