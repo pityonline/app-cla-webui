@@ -9,9 +9,9 @@
                             <div>
                                 <div class="name">
                                     <div>
-                                        <span>CLA</span>
+                                        <span>Contributor License Agreement</span>
                                     </div>
-                                    <span>SIGN</span>
+                                    <span>Sign</span>
                                 </div>
                                 <!--<p class="description">Easily handle Contributor License Agreements (CLAs)</p>-->
                             </div>

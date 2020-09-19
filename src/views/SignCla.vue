@@ -849,9 +849,10 @@
     }
 
     #claBox {
-        border-bottom: 1px dashed lightgrey;
+        /*border-bottom: 1px dashed lightgrey;*/
         /*padding-bottom: 2rem;*/
         margin-bottom: 2rem;
+        border-radius:1.25rem;
         white-space: pre-wrap;
         font-size: 1.2rem;
         box-shadow: 0 0 20px 10px #F3F3F3;
