@@ -47,9 +47,9 @@
                                 <div class="borderClass fontSize12"><span style="color: #F56C6C;">*</span>{{desc.metadataDesc}}
                                 </div>
                                 <div class="marginTop1rem fontSize12">
-                                    <el-checkbox v-model="isRead">I have read the <span
+                                    <el-checkbox v-model="isRead"><span>I have read the <span
                                             class="privacy" @click="viewPrivacy">Privacy Policy</span> and hereby consent to
-                                        the processing of my data by "{{repo}}"
+                                        the processing of my data by "{{repo}}"</span>
                                     </el-checkbox>
                                 </div>
                                 <el-form-item label-width="0" class="marginTop1rem signBtBox">
