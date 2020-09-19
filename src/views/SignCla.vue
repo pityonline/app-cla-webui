@@ -282,16 +282,21 @@
 
                     }).then(res => {
                         console.log(res);
-                        let second = 60
-                        let codeInterval = setInterval(() => {
-                            if (second !== 0) {
-                                second--
-                                this.sendBtText = second + 's'
-                            } else {
-                                this.sendBtText = 'send code'
-                                clearInterval(codeInterval)
-                            }
-                        }, 1000)
+                        if (res.status === 201) {
+                            this.$message.closeAll()
+                            this.$message.success('Please fill in the verification code in the email to continue signing')
+                            let second = 60
+                            let codeInterval = setInterval(() => {
+                                if (second !== 0) {
+                                    second--
+                                    this.sendBtText = second + 's'
+                                } else {
+                                    this.sendBtText = 'send code'
+                                    clearInterval(codeInterval)
+                                }
+                            }, 1000)
+                        }
+
                     }).catch(err => {
                         console.log(err);
                         this.$message.closeAll()
