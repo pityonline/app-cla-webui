@@ -854,6 +854,7 @@
         margin-bottom: 2rem;
         white-space: pre-wrap;
         font-size: 1.2rem;
+        box-shadow: 0 0 20px 10px #F3F3F3;
     }
 
     .contentTitle {
