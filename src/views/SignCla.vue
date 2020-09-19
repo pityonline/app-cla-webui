@@ -77,7 +77,7 @@
             <el-row>
                 <el-col align="center">
                     <p>{{tipsMessage}}</p>
-                    <button style="margin-top: 3rem"  @click="clickOk()">OK</button>
+                    <button class="dialogBt" @click="clickOk()">OK</button>
                 </el-col>
             </el-row>
         </el-dialog>
@@ -714,6 +714,18 @@
     .signBtBox {
         display: flex;
         justify-content: center;
+    }
+
+    .dialogBt {
+        margin-top: 3rem;
+        width: 8rem;
+        height: 3rem;
+        background: linear-gradient(to right, #97DB30, #319E55);
+        border-radius: 1.5rem;
+        border: none;
+        color: white;
+        cursor: pointer;
+
     }
 
     .button {
