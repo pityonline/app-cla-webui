@@ -150,7 +150,7 @@ const routes = [
         component: () => import('../views/CreateMetadata.vue')
     },
     {
-        path: '/signCla',
+        path: '/sign-cla',
         name: 'SignCla',
         component: () => import('../views/SignCla.vue')
     },

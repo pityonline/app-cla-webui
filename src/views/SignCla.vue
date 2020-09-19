@@ -301,6 +301,7 @@
                 console.log(this.ruleForm);
                 if (this.loginType !== 'corporation') {
                     this.getEmail(this.platform_token, this.refresh_token)
+                    this.getUserInfo(this.platform_token)
                 }
             },
             getEmail(access_token, refresh_token) {
@@ -406,6 +407,36 @@
                 } else if (language === 'chinese') {
                     this.desc = this.cnDesc;
                 }
+            },
+            getUserInfo(platform_token) {
+                let obj = {access_token: platform_token};
+                console.log(obj);
+                this.$axios({
+                    url: url.getUserInfo,
+                    params: obj,
+                }).then(res => {
+                    console.log(res);
+                    for (let item of res.data) {
+                        console.log(item);
+                        if (item.scope) {
+                            if (item.scope[0] === 'primary') {
+                                this.myForm.email = item.email;
+                                console.log(this.myForm.email);
+                                break
+                            }
+                        }
+                    }
+                    for (let item of this.fields) {
+                        if (item.type === 'email') {
+                            Object.assign(this.ruleForm, {[item.id]: this.myForm.email})
+                            break;
+                        }
+                    }
+                    console.log(this.ruleForm);
+
+                }).catch(err => {
+                    console.log(err);
+                })
             },
 
             /*查找clatext*/
