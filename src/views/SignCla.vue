@@ -217,7 +217,8 @@
         methods: {
             ...mapActions(['setTokenAct', 'setRepoInfoAct']),
             clickOk() {
-                this.$router.go(-1)
+                let url = `/sign/${this.$store.state.repoInfo.platform}/${this.$store.state.repoInfo.org_id}/${this.$store.state.repoInfo.repo_id}`
+                this.$router.push(url)
                 this.tipsDialogVisible = false;
             },
             async verifyTel(rule, value, callback) {
@@ -725,6 +726,7 @@
         border: none;
         color: white;
         cursor: pointer;
+        outline: none;
 
     }
 
@@ -732,7 +734,7 @@
         font-family: Roboto-Light, sans-serif;
         width: 15rem;
         height: 3rem;
-        border-radius: 2.5rem;
+        border-radius: 1.5rem;
         border: none;
         color: white;
         font-size: 1.2rem;
