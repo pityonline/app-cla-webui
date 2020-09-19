@@ -5,7 +5,7 @@
         <el-row id="section">
             <el-row v-if="!isSendCode" class="content">
                 <el-col :offset="4" :span="16">
-                    <p class="contentTitle"><span>{{org}}</span><span v-if="">/{{repo}}</span><span>{{ apply_to }}</span>Contributor License Agreement</p>
+                    <p class="contentTitle"><span>{{org}}</span><span v-if="">/{{repo}}</span><span> {{apply_to}} </span>Contributor License Agreement</p>
 
 
                     <el-row class="marginTop3rem" id="claBox">
