@@ -76,7 +76,7 @@
                         })
 
                     } else {
-                        this.$router.push('/signCla')
+                        this.$router.push('/sign-cla')
                     }
                 } else if (this.platform === 'github') {
                     console.log('github');
