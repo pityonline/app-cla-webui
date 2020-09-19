@@ -5,7 +5,8 @@
         <el-row id="section">
             <el-row v-if="!isSendCode" class="content">
                 <el-col :offset="4" :span="16">
-                    <p class="contentTitle">"<span>{{org}}</span><span v-if="repo">/{{repo}}</span><span>" {{apply_to}} </span>Contributor License Agreement</p>
+                    <p class="contentTitle">"<span>{{org}}</span><span
+                            v-if="repo">/{{repo}}</span><span>" {{apply_to}} </span>Contributor License Agreement</p>
 
 
                     <el-row class="marginTop3rem" id="claBox">
@@ -51,7 +52,7 @@
                                     </el-checkbox>
                                 </div>
                                 <el-form-item label-width="0" class="marginTop1rem signBtBox">
-                                    <button class="button" type="button"  @click="submitForm('ruleForm')">
+                                    <button class="button" type="button" @click="submitForm('ruleForm')">
                                         {{desc.sign}}
                                     </button>
                                     <!--<el-button @click="resetForm('ruleForm')">{{desc.reset}}</el-button>-->
@@ -72,11 +73,11 @@
                 :show-close="false"
                 :close-on-click-modal="false"
                 :visible.sync="tipsDialogVisible"
-                width="50%">
+                width="30%">
             <el-row>
                 <el-col align="center">
                     <p>{{tipsMessage}}</p>
-                    <el-button style="margin-top: 3rem" type="primary" size="medium" @click="clickOk()">OK</el-button>
+                    <button style="margin-top: 3rem"  @click="clickOk()">OK</button>
                 </el-col>
             </el-row>
         </el-dialog>
@@ -107,10 +108,10 @@
             refresh_token() {
                 return this.$store.state.refresh_token
             },
-            apply_to(){
-                if (this.$store.state.loginType === 'individual'||this.$store.state.loginType === 'employee') {
+            apply_to() {
+                if (this.$store.state.loginType === 'individual' || this.$store.state.loginType === 'employee') {
                     return 'individual'
-                }else if (this.$store.state.loginType === 'corporation') {
+                } else if (this.$store.state.loginType === 'corporation') {
                     return 'corporation'
                 }
             },
@@ -193,8 +194,8 @@
                 //     fax: '',
                 //     address: '',
                 // },
-                org:this.$store.state.repoInfo.org_id,
-                repo:this.$store.state.repoInfo.repo_id,
+                org: this.$store.state.repoInfo.org_id,
+                repo: this.$store.state.repoInfo.repo_id,
                 ruleForm: {},
                 myForm: {},
                 rules: {},
@@ -416,7 +417,7 @@
                     params: obj,
                 }).then(res => {
                     console.log(res);
-                    this.myForm.name= res.data.login
+                    this.myForm.name = res.data.login
                     console.log(this.myForm);
                     for (let item of this.fields) {
                         if (item.type === 'name') {
@@ -531,7 +532,6 @@
             toHome() {
                 this.$router.push('/home')
             },
-
 
 
             signCla() {
@@ -782,7 +782,7 @@
             font-size: 1.2rem;
             color: white;
             margin: 0;
-            font-family: Roboto-Light,sans-serif;
+            font-family: Roboto-Light, sans-serif;
         }
 
         & .el-input-group__append {
@@ -874,7 +874,7 @@
         /*border-bottom: 1px dashed lightgrey;*/
         /*padding-bottom: 2rem;*/
         margin-bottom: 2rem;
-        border-radius:1.25rem;
+        border-radius: 1.25rem;
         white-space: pre-wrap;
         font-size: 1.2rem;
         box-shadow: 0 0 20px 10px #F3F3F3;
@@ -896,9 +896,13 @@
         flex-direction: column;
         box-sizing: border-box;
 
+        & .el-dialog {
+            border-radius: 1rem;
+        }
+
         & > #section {
             flex-grow: 1;
-            font-family: Roboto-Light,sans-serif;
+            font-family: Roboto-Light, sans-serif;
 
             & > .content {
                 padding: 1rem;

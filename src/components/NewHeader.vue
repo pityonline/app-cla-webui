@@ -2,7 +2,7 @@
     <el-row class="headerBox" style="border-bottom:2px solid #F2F2F2;">
         <el-col class="header" :offset="4" :span="16">
             <div class="box">
-                <svg-icon icon-class="icon" class="icon"></svg-icon>
+                <!--<svg-icon icon-class="icon" class="icon"></svg-icon>-->
             </div>
 
             <div>
