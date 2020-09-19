@@ -261,8 +261,14 @@
                 let reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$");
                 console.log(this.myForm);
                 console.log(this.myForm.email);
+                let email = this.myForm.adminEmail
+                for (let item in this.myForm) {
+                    if (item === 'email') {
+                        email = this.myForm.email
+                        break
+                    }
 
-                let email = this.myForm.email?this.myForm.email:this.myForm.adminEmail
+                }
                 console.log(email);
                 console.log(email.split('.')[0].split('@')[1]);
                 if (!(email.trim()) || !reg.test(email) || email.split('.')[0].split('@')[1] !== 'gmail') {
