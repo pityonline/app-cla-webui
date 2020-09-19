@@ -5,11 +5,14 @@
 
             </el-row>
             <el-row style="height: 50%">
-                <el-col :offset="15" :span="9" align="right" class="buttonBox">
+                <el-col  align="right" class="buttonBox">
                     <div>
-                        <button class="button" @click="submit('orgManager')">
-                            Organization Manager
-                        </button>
+                        <div>
+                            <button class="button" @click="submit('orgManager')">
+                                Organization Manager
+                            </button>
+                        </div>
+
                         <button class="button" @click="submit('corporationManager')">
                             Corporation Manager
                         </button>
@@ -67,7 +70,7 @@
 
     .button {
         /*font-family:Roboto-Regular,sans-serif ;*/
-        width: 100%;
+        width: 15rem;
         height: 4rem;
         border-radius: 2rem;
         border: none;
@@ -75,7 +78,7 @@
         font-size: 1.3rem;
         cursor: pointer;
         background: linear-gradient(to right, #97DB30, #319E55);
-        margin: 1rem 0;
+        margin: 1.2rem 0;
     }
 
     .button:focus {

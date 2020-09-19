@@ -5,11 +5,11 @@
             <el-row id="section">
                 <el-col :offset="4" :span="16" style="height: 100%">
                     <el-row style="height: 100%">
-                        <el-col :span="12" class="title">
+                        <el-col :span="14" class="title">
                             <div>
                                 <div class="name">
                                     <div>
-                                        <span>Contributor License Agreement</span>
+                                        <p>Contributor License Agreement</p>
                                     </div>
                                     <span>Sign</span>
                                 </div>
@@ -17,7 +17,7 @@
                             </div>
 
                         </el-col>
-                        <el-col :span="12" style="height: 100%;">
+                        <el-col :span="10" style="height: 100%;">
                             <router-view></router-view>
                         </el-col>
                     </el-row>
@@ -99,7 +99,7 @@
 
     .name {
         font-family: Roboto-Regular, sans-serif;
-        font-size: 5rem;
+        font-size: 3rem;
     }
 
     .description {

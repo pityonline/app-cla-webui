@@ -5,14 +5,19 @@
 
             </el-row>
             <el-row style="height: 50%">
-                <el-col :offset="15" :span="9" align="right" class="buttonBox">
+                <el-col  align="right" class="buttonBox">
                     <div>
-                        <button class="button" @click="submit('individual')">
-                            Individual
-                        </button>
-                        <button class="button" @click="submit('corporation')">
-                            Corporation
-                        </button>
+                        <div>
+                            <button class="button" @click="submit('individual')">
+                                Individual
+                            </button>
+                        </div>
+                      <div>
+                          <button class="button" @click="submit('corporation')">
+                              Corporation
+                          </button>
+                      </div>
+
                         <button class="button" @click="submit('employee')">
                             Employee
                         </button>
@@ -107,7 +112,7 @@
     }
 
     .button {
-        width: 100%;
+        width: 15rem;
         height: 4rem;
         border-radius: 2rem;
         border: none;
@@ -115,7 +120,7 @@
         font-size: 1.5rem;
         cursor: pointer;
         background: linear-gradient(to right, #97DB30, #319E55);
-        margin: 1rem 0;
+        margin: 1.2rem 0;
     }
 
     .button:focus {
