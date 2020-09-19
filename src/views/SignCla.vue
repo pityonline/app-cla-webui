@@ -258,29 +258,36 @@
             },
             sendCode() {
                 console.log('sendcode');
-
-                this.$axios({
-                    url: '/api' + url.sendVerifyCode,
-                    method: 'post',
-                    data: {cla_org_id: this.cla_org_id, email: this.myForm.adminEmail},
-
-                }).then(res => {
-                    console.log(res);
-                    let second = 60
-                    let codeInterval = setInterval(() => {
-                        if (second !== 0) {
-                            second--
-                            this.sendBtText = second + 's'
-                        } else {
-                            this.sendBtText = 'send code'
-                            clearInterval(codeInterval)
-                        }
-                    }, 1000)
-                }).catch(err => {
-                    console.log(err);
+                let reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$");
+                console.log(this.myForm.email.split('.')[0].split('@')[1]);
+                if (!this.myForm.email.trim() || !reg.test(this.myForm.email) || this.myForm.email.split('.')[0].split('@')[1] !== 'gmail') {
                     this.$message.closeAll()
-                    this.$message.error(err.response.data)
-                })
+                    this.$message.error('Please fill in Google email in the e-mail column')
+                } else {
+                    this.$axios({
+                        url: '/api' + url.sendVerifyCode,
+                        method: 'post',
+                        data: {cla_org_id: this.cla_org_id, email: this.myForm.adminEmail},
+
+                    }).then(res => {
+                        console.log(res);
+                        let second = 60
+                        let codeInterval = setInterval(() => {
+                            if (second !== 0) {
+                                second--
+                                this.sendBtText = second + 's'
+                            } else {
+                                this.sendBtText = 'send code'
+                                clearInterval(codeInterval)
+                            }
+                        }, 1000)
+                    }).catch(err => {
+                        console.log(err);
+                        this.$message.closeAll()
+                        this.$message.error(err.response.data)
+                    })
+                }
+
             },
             getNowDate() {
 
