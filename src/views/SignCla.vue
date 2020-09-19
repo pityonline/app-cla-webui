@@ -771,6 +771,7 @@
 
     .el-button.is-disabled, .el-button.is-disabled:focus, .el-button.is-disabled:hover {
         cursor: pointer;
+        border: none;
     }
 
     .pointer {
