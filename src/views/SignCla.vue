@@ -624,14 +624,20 @@
                 }
             },
             submitForm(formName) {
-                this.$refs[formName].validate((valid) => {
-                    if (valid) {
-                        this.signCla();
-                    } else {
-                        console.log('error submit!!');
-                        return false;
-                    }
-                });
+                if (this.isRead) {
+                    this.$refs[formName].validate((valid) => {
+                        if (valid) {
+                            this.signCla();
+                        } else {
+                            console.log('error submit!!');
+                            return false;
+                        }
+                    });
+                }else{
+                    this.$message.closeAll()
+                    this.$message.error('Please read the privacy statement')
+                }
+
             },
             getRepositoriesOfOrg(org, org_id) {
                 let obj = {access_token: this.$store.state.access_token, org: org, page: 1, per_page: 10};
