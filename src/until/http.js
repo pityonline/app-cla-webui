@@ -25,7 +25,7 @@ instance.interceptors.request.use(req => {
 instance.interceptors.response.use(response => {
     //封装时与后台沟通，获取token的方式，保存在本地或者vuex中
     console.log(response);
-    response.data.token && sessionStorage.setItem('token', response.data.token)
+    response.headers.token && sessionStorage.setItem('token', response.headers.token)
     /* if(response.data.token){
          localStorage.setItem('token',response.data.loginToken)
      }*/
@@ -35,6 +35,7 @@ instance.interceptors.response.use(response => {
     let repoInfo = JSON.parse(sessionStorage.getItem('repoInfo'))
     let path = repoInfo.repo_id ? `/sign/${repoInfo.platform}/${repoInfo.org_id}/${repoInfo.repo_id}` : `/sign/${repoInfo.platform}/${repoInfo.org_id}`
     switch (_response.status) {
+        case 401:
         case 403:
             sessionStorage.clear();
 

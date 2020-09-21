@@ -31,7 +31,7 @@ export default new Vuex.Store({
         github_client_id: 'd86f4915398dad23bffc',
         github_client_secret: '7e605a8a1104b78452475264c85df5b73a108c94',
         github_redirect_uri: 'http://localhost:8080/home',
-        access_token: sessionStorage.getItem('access_token') || undefined,
+        access_token: sessionStorage.getItem('token') || undefined,
         refresh_token: sessionStorage.getItem('refresh_token') || undefined,
         platform_token: sessionStorage.getItem('platform_token') || undefined,
         user: {

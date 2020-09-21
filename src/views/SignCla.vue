@@ -280,7 +280,6 @@
                         url: '/api' + url.sendVerifyCode,
                         method: 'post',
                         data: {cla_org_id: this.cla_org_id, email: this.myForm.adminEmail},
-
                     }).then(res => {
                         console.log(res);
                         if (res.status === 201) {
@@ -616,7 +615,7 @@
 
             sign(myUrl, obj) {
                 console.log(myUrl, obj);
-                this.$axios({
+               http({
                     url: '/api' + myUrl,
                     method: 'post',
                     data: obj,
