@@ -729,6 +729,9 @@
         },
         mounted() {
             this.setClientHeight();
+            this.$nextTick(()=>{
+                this.$refs['ruleForm'].clearValidate();
+            })
         }
     }
     window.onresize = () => {
