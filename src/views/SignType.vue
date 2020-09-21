@@ -56,13 +56,11 @@
                     this.repo = ''
                 }
                 this.setRepoInfoAct({platform: this.platform, org_id: this.org, repo_id: this.repo});
-
             },
             submit(loginType) {
                 this.setLoginTypeAct(loginType)
                 if (this.platform === 'gitee') {
                     console.log('gitee');
-
                     if (loginType === 'individual' || loginType === 'employee') {
                         console.log('individual');
                         this.$axios({
@@ -70,37 +68,29 @@
                         }).then(res => {
                             console.log(res);
                             window.location.href = res.data.url
-
                         }).catch(err => {
                             console.log(err);
                         })
-
                     } else {
                         this.$router.push('/sign-cla')
                     }
                 } else if (this.platform === 'github') {
                     console.log('github');
-
                     if (this.$store.state.loginType === 'individual' || this.$store.state.loginType === 'employee') {
                         window.location.href = 'https://github.com/login/oauth/authorize?client_id=d86f4915398dad23bffc&redirect_uri=http://localhost:8080/home&scope=user,user:email'  //逗号分隔多个权限
                     } else {
                         this.$router.push('/signCla')
                     }
                 }
-
-            }
-            ,
-
+            },
         },
         created() {
             this.getRepoInfo();
         }
     }
 </script>
-
 <style scoped lang="less">
     @import "../assets/font/css/Roboto-Bold.css";
-
     .signType{
         font-family: Roboto-Bold,sans-serif;
     }
@@ -110,7 +100,6 @@
         flex-direction: column;
         /*justify-content: center;*/
     }
-
     .button {
         width: 15rem;
         height: 4rem;
@@ -122,7 +111,6 @@
         background: linear-gradient(to right, #97DB30, #319E55);
         margin: 1.2rem 0;
     }
-
     .button:focus {
         outline: none;
     }
