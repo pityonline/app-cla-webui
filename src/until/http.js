@@ -20,10 +20,10 @@ instance.interceptors.response.use(response => {
         case 401:
         case 403:
             sessionStorage.clear();
-            alert('token expired, please login again')
-            return router.replace({
-                path: path,
-            })
+            // alert('token expired, please login again')
+            // return router.replace({
+            //     path: path,
+            // })
     }
     return Promise.reject(error.response.data)
 })
