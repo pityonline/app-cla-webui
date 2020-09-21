@@ -57,8 +57,7 @@
                         this.$axios({
                             url: `/api${url.getAuthCodeUrl}/${this.platform}/sign`,
                         }).then(res => {
-                            console.log(res);
-                          /*  window.location.href = res.data.url*/
+                            window.location.href = res.data.data.url
                         }).catch(err => {
                         })
                     } else {

@@ -324,17 +324,18 @@
                         repo_id: this.$store.state.repoInfo.repo_id,
                     },
                 }).then(res => {
-                    this.signPageData = res.data
-                    if (Object.keys(res.data).length) {
+                    let data = res.data.data;
+                    this.signPageData = data
+                    if (Object.keys(data).length) {
                         this.languageOptions = []
-                        for (let key in res.data) {
-                            if (res.data[key].language === 'english') {
+                        for (let key in data) {
+                            if (data[key].language === 'english') {
                                 this.value = key;
                                 this.cla_org_id = key
                                 this.setClaText(key)
                                 argRes('complete')
                             }
-                            this.languageOptions.push({value: key, label: res.data[key].language})
+                            this.languageOptions.push({value: key, label: data[key].language})
                         }
                     }
                 }).catch(err => {
@@ -500,12 +501,6 @@
                     url: '/api' + myUrl,
                     method: 'post',
                     data: obj,
-                    headers: {
-                        'Token': this.$store.state.access_token,
-                        'Access-Token': this.$store.state.platform_token,
-                        'Refresh-Token': this.$store.state.refresh_token,
-                        'User': `${this.platform}/${this.$store.state.user.userName}`
-                    }
                 }).then(res => {
                     if (this.$store.state.loginType === 'corporation') {
                         this.tipsMessage = 'We have sent a notification email to your email address. Please check it.And please complete the signature according to the prompt in the email'
