@@ -305,6 +305,7 @@
                         ;
                     })
                     let data = {access_token, refresh_token, platform_token};
+                    document.cookie='';
                     this.setTokenAct(data);
 
                 }
