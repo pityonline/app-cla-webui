@@ -42,7 +42,7 @@ instance.interceptors.response.use(response => {
             return router.replace({
                 //跳转到login，此时login不会被记录
                 path: path,
-                query: {redirect: router.currentRoute.fullPath}//将跳转的路由路径作为参数，登录成功后跳转到该路由
+                // query: {redirect: router.currentRoute.fullPath}//将跳转的路由路径作为参数，登录成功后跳转到该路由
             })
     }
     return Promise.reject(error.response.data)
