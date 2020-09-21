@@ -481,7 +481,7 @@
                         Object.assign(this.myForm, {name: ''})
                         Object.assign(rules, {
                             [item.id]: [
-                                {required: true, message: 'please input name', trigger: 'blur'},
+                                {required: true, message: 'please input name', trigger: 'blur,change'},
                             ],
                         })
 
@@ -729,9 +729,7 @@
         },
         mounted() {
             this.setClientHeight();
-            this.$nextTick(()=>{
-                this.$refs['ruleForm'].clearValidate();
-            })
+
         }
     }
     window.onresize = () => {
