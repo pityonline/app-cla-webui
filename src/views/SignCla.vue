@@ -426,6 +426,7 @@
                     }
 
                 }).catch(err => {
+                    console.log(err);
                     console.log(err.response);
                     this.$message.closeAll()
                     this.$message.error(err.response.data)
