@@ -115,7 +115,8 @@
         color: white;
         font-size: 1.5rem;
         cursor: pointer;
-        background: linear-gradient(to right, #97DB30, #319E55);
+        /*background: linear-gradient(to right, #97DB30, #319E55);*/
+        background-color: lightgrey;
         margin: 1.2rem 0;
     }
     .disabledButton:focus {
