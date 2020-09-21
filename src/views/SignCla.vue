@@ -82,7 +82,7 @@
                 </el-col>
             </el-row>
         </el-dialog>
-
+        <ReLoginDialog :dialogVisible="reLoginDialogVisible" :message="reLoginMsg"></ReLoginDialog>
     </el-row>
 </template>
 
@@ -93,6 +93,7 @@
     import * as url from '../until/api'
     import {mapActions} from 'vuex'
     import http from '../until/http'
+    import ReLoginDialog from '../components/ReLoginDialog'
 
     export default {
 
@@ -120,10 +121,13 @@
         },
         components: {
             Header,
-            Footer
+            Footer,
+            ReLoginDialog,
         },
         data() {
             return {
+                reLoginDialogVisible: false,
+                reLoginMsg: '',
                 tipsMessage: 'Signed successfully.We have sent a notification email to your email address. Please check it',
                 tipsDialogVisible: false,
                 signPageData: '',
@@ -172,6 +176,7 @@
                 checkCLAClass: {
                     height: '',
                 },
+
             }
         },
         methods: {
@@ -232,18 +237,18 @@
                         method: 'post',
                         data: {cla_org_id: this.cla_org_id, email: this.myForm.adminEmail},
                     }).then(res => {
-                            this.$message.closeAll()
-                            this.$message.success('Please fill in the verification code in the email to continue signing')
-                            let second = 60
-                            let codeInterval = setInterval(() => {
-                                if (second !== 0) {
-                                    second--
-                                    this.sendBtText = second + 's'
-                                } else {
-                                    this.sendBtText = 'send code'
-                                    clearInterval(codeInterval)
-                                }
-                            }, 1000)
+                        this.$message.closeAll()
+                        this.$message.success('Please fill in the verification code in the email to continue signing')
+                        let second = 60
+                        let codeInterval = setInterval(() => {
+                            if (second !== 0) {
+                                second--
+                                this.sendBtText = second + 's'
+                            } else {
+                                this.sendBtText = 'send code'
+                                clearInterval(codeInterval)
+                            }
+                        }, 1000)
                     }).catch(err => {
                         this.$message.closeAll()
                         this.$message.error(err.response.data)
@@ -299,21 +304,21 @@
                 if (document.cookie !== '') {
                     let cookieArr = document.cookie.split('; ')
                     console.log(cookieArr);
-                    let access_token, refresh_token, platform_token,_mark = '';
+                    let access_token, refresh_token, platform_token, _mark = '';
                     cookieArr.forEach((item, index) => {
                         let arr = item.split('=');
                         arr[0] === 'access_token' ? access_token = arr[1] : arr[0] === 'refresh_token' ? refresh_token = arr[1] : arr[0] === 'platform_token' ? platform_token = arr[1] : platform_token = '';
-                        if (arr[0]==='_mark'){
-                            _mark=arr[1]
+                        if (arr[0] === '_mark') {
+                            _mark = arr[1]
                         }
                     })
                     if (!_mark) {
                         console.log(access_token);
                         let data = {access_token, refresh_token, platform_token};
                         let date = new Date();
-                        let domain='cla.osinfra.cn'
-                        date.setTime(date.getTime()-10000);
-                        document.cookie=`_mark=1; expire=${date.toUTCString()}; Domain=${domain}; path=/`;
+                        let domain = 'cla.osinfra.cn'
+                        date.setTime(date.getTime() - 10000);
+                        document.cookie = `_mark=1; expire=${date.toUTCString()}; Domain=${domain}; path=/`;
                         this.setTokenAct(data);
                     }
 
@@ -351,6 +356,12 @@
                     }
                 }).catch(err => {
                     console.log(err);
+                    switch (err.status) {
+                        case 401:
+                        case 403:
+                            this.reLoginMsg='token expired, please login again'
+                            this.reLoginDialogVisible = true
+                    }
                     this.$message.closeAll()
                     this.$message.error(err.response.data)
                 })
@@ -403,28 +414,28 @@
                         Object.assign(this.myForm, {name: ''})
                         Object.assign(rules, {
                             [item.id]: [
-                                {required: true, message: 'please input name', trigger: ['blur','change']},
+                                {required: true, message: 'please input name', trigger: ['blur', 'change']},
                             ],
                         })
                     } else if (item.type === 'corporationName') {
                         Object.assign(this.myForm, {corporationName: ''})
                         Object.assign(rules, {
                             [item.id]: [
-                                {required: true, message: 'please input corporationName', trigger:['blur','change']},
+                                {required: true, message: 'please input corporationName', trigger: ['blur', 'change']},
                             ],
                         })
                     } else if (item.type === 'adminEmail') {
                         Object.assign(this.myForm, {adminEmail: ''})
                         Object.assign(rules, {
                             [item.id]: [
-                                {required: true, message: 'please input adminEmail', trigger:['blur','change']},
+                                {required: true, message: 'please input adminEmail', trigger: ['blur', 'change']},
                             ],
                         })
                     } else if (item.type === 'date') {
                         Object.assign(this.myForm, {date: ''})
                         Object.assign(rules, {
                             [item.id]: [
-                                {required: true, message: 'please input date', trigger: ['blur','change']}],
+                                {required: true, message: 'please input date', trigger: ['blur', 'change']}],
                         })
                     } else if (item.type === 'email') {
                         Object.assign(this.myForm, {email: ''})
@@ -509,7 +520,7 @@
                 this.sign(myUrl, obj)
             },
             sign(myUrl, obj) {
-               http({
+                http({
                     url: '/api' + myUrl,
                     method: 'post',
                     data: obj,
@@ -560,17 +571,17 @@
                     url: `https://gitee.com/api/v5/orgs/${org}/repos`,
                     params: obj,
                 }).then(res => {
-                        this.repositoryOptions = [];
-                        res.data.forEach((item, index) => {
-                            this.repositoryOptions.push({
-                                value: index,
-                                org: org,
-                                org_id: org_id,
-                                repoName: item.name,
-                                label: `${org}/${item.name}`,
-                                id: item.id
-                            });
-                        })
+                    this.repositoryOptions = [];
+                    res.data.forEach((item, index) => {
+                        this.repositoryOptions.push({
+                            value: index,
+                            org: org,
+                            org_id: org_id,
+                            repoName: item.name,
+                            label: `${org}/${item.name}`,
+                            id: item.id
+                        });
+                    })
                 }).catch(err => {
                     this.$message.closeAll()
                     this.$message.error(err.response.data)
