@@ -298,6 +298,7 @@
             getCookieData() {
                 if (document.cookie !== '') {
                     let cookieArr = document.cookie.split('; ')
+
                     let access_token, refresh_token, platform_token = '';
                     cookieArr.forEach((item, index) => {
                         let arr = item.split('=');
@@ -306,6 +307,10 @@
                     })
                     let data = {access_token, refresh_token, platform_token};
                     document.cookie='';
+                    let date = new Date();
+                    let domain='cla.osinfra.cn'
+                    date.setTime(date.getTime()-10000);
+                    document.cookie=`access_token=; expire="${date.toUTCString()}"; Domain="${domain}"; path=/`;
                     this.setTokenAct(data);
 
                 }
