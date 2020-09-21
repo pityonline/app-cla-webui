@@ -12,13 +12,19 @@
                             </button>
                         </div>
                       <div>
-                          <button class="button" @click="submit('corporation')">
+                          <button class="disabledButton">
                               Corporation
                           </button>
+                          <!--<button class="button" @click="submit('corporation')">-->
+                              <!--Corporation-->
+                          <!--</button>-->
                       </div>
-                        <button class="button" @click="submit('employee')">
+                        <button class="disabledButton" >
                             Employee
                         </button>
+                        <!--<button class="button" @click="submit('employee')">-->
+                            <!--Employee-->
+                        <!--</button>-->
                     </div>
                 </el-col>
             </el-row>
@@ -99,6 +105,20 @@
         margin: 1.2rem 0;
     }
     .button:focus {
+        outline: none;
+    }
+    .disabledButton {
+        width: 15rem;
+        height: 4rem;
+        border-radius: 2rem;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        background: linear-gradient(to right, #97DB30, #319E55);
+        margin: 1.2rem 0;
+    }
+    .disabledButton:focus {
         outline: none;
     }
 </style>
