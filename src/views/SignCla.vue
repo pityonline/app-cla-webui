@@ -299,19 +299,21 @@
                 if (document.cookie !== '') {
                     let cookieArr = document.cookie.split('; ')
                     console.log(cookieArr);
-                    let access_token, refresh_token, platform_token = '';
+                    let access_token, refresh_token, platform_token,_mark = '';
                     cookieArr.forEach((item, index) => {
                         let arr = item.split('=');
                         arr[0] === 'access_token' ? access_token = arr[1] : arr[0] === 'refresh_token' ? refresh_token = arr[1] : arr[0] === 'platform_token' ? platform_token = arr[1] : platform_token = '';
-                        ;
+                        if (arr[0]==='_mark'){
+                            _mark=arr[1]
+                        }
                     })
-                    if (access_token) {
+                    if (!_mark) {
                         console.log(access_token);
                         let data = {access_token, refresh_token, platform_token};
                         let date = new Date();
                         let domain='cla.osinfra.cn'
                         date.setTime(date.getTime()-10000);
-                        document.cookie=`access_token=; expire=${date.toUTCString()}; Domain=${domain}; path=/`;
+                        document.cookie=`_mark=1; expire=${date.toUTCString()}; Domain=${domain}; path=/`;
                         this.setTokenAct(data);
                     }
 
