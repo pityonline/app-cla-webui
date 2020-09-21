@@ -123,37 +123,6 @@
             Footer
         },
         data() {
-            let verifyEmail = (rule, value, callback) => {
-                let email = value;
-                console.log(email);
-                let reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
-                if (reg.test(email)) {
-                    callback();
-                } else {
-                    callback(new Error('Email format error'))
-                }
-            }
-            let verifyTel = (rule, value, callback) => {
-                if (!value) {
-                    callback();
-                } else {
-
-                    let reg = /^1[3456789]\d{9}$/;
-                    if (reg.test(value)) {
-                        callback();
-                    } else {
-                        callback(new Error('telephone format error'))
-                    }
-                    callback();
-                }
-            }
-            let verifyAddr = (rule, value, callback) => {
-                if (!value) {
-                    callback(new Error('请输入地址'))
-                }
-                callback();
-            }
-
             return {
                 tipsMessage: 'Signed successfully.We have sent a notification email to your email address. Please check it',
                 tipsDialogVisible: false,
@@ -185,17 +154,6 @@
                 dialogVisible: false,
                 repositoryOptions: [],
                 role: '0',
-                // ruleForm: {
-                //     code: '',
-                //     adminEmail: '',
-                //     corporationName: '',
-                //     name: '',
-                //     email: '',
-                //     telephone: '',
-                //     date: '',
-                //     fax: '',
-                //     address: '',
-                // },
                 org: this.$store.state.repoInfo.org_id,
                 repo: this.$store.state.repoInfo.repo_id,
                 ruleForm: {},
@@ -245,7 +203,6 @@
             },
             async verifyFormEmail(rule, value, callback) {
                 let email = value;
-                // console.log(email);
                 let reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
                 if (reg.test(email)) {
                     callback();
@@ -255,13 +212,9 @@
             },
             setMyForm(type, value) {
                 this.myForm[type] = value
-                console.log(this.myForm[type]);
             },
             sendCode() {
-                console.log('sendcode');
                 let reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$");
-                console.log(this.myForm);
-                console.log(this.myForm.email);
                 let email = this.myForm.adminEmail
                 for (let item in this.myForm) {
                     if (item === 'email') {
@@ -270,8 +223,6 @@
                     }
 
                 }
-                console.log(email);
-                console.log(email.split('.')[0].split('@')[1]);
                 if (!(email.trim()) || !reg.test(email) || email.split('@')[1] !== 'gmail.com') {
                     this.$message.closeAll()
                     this.$message.error('Please fill in Google email in the e-mail column')
@@ -281,8 +232,6 @@
                         method: 'post',
                         data: {cla_org_id: this.cla_org_id, email: this.myForm.adminEmail},
                     }).then(res => {
-                        console.log(res);
-                        if (res.status === 201) {
                             this.$message.closeAll()
                             this.$message.success('Please fill in the verification code in the email to continue signing')
                             let second = 60
@@ -295,9 +244,7 @@
                                     clearInterval(codeInterval)
                                 }
                             }, 1000)
-                        }
                     }).catch(err => {
-                        console.log(err);
                         this.$message.closeAll()
                         this.$message.error(err.response.data)
                     })
@@ -309,21 +256,15 @@
                 let date = new Date();
                 let year, month, day
                 year = date.getFullYear()
-                console.log(date.getFullYear(), date.getMonth() + 1, date.getDate());
                 date.getMonth() < 9 ? month = `0${date.getMonth() + 1}` : month = date.getMonth() + 1;
                 date.getDate() < 10 ? day = `0${date.getDate()}` : day = date.getDate()
-                console.log(this.fields);
-                console.log(this.ruleForm);
-
                 for (let item of this.fields) {
-                    console.log(item);
                     if (item.type === 'date') {
                         this.myForm.date = year + '-' + month + '-' + day
                         Object.assign(this.ruleForm, {[item.id]: year + '-' + month + '-' + day})
                         break;
                     }
                 }
-                console.log(this.ruleForm);
                 if (this.loginType !== 'corporation') {
                     this.getEmail(this.platform_token, this.refresh_token)
                     this.getUserInfo(this.platform_token)
@@ -334,13 +275,10 @@
                     url: url.getEmail,
                     params: {access_token: access_token}
                 }).then(res => {
-                    console.log(res);
                     for (let item of res.data) {
-                        console.log(item);
                         if (item.scope) {
                             if (item.scope[0] === 'primary') {
                                 this.myForm.email = item.email;
-                                console.log(this.myForm.email);
                                 break
                             }
                         }
@@ -351,9 +289,7 @@
                             break;
                         }
                     }
-                    console.log(this.ruleForm);
                 }).catch(err => {
-                    console.log(err);
                     this.$message.closeAll()
                     this.$message.error(err.response.data)
                 })
@@ -375,63 +311,38 @@
 
             },
             getSignPage(argRes) {
-                console.log('getSignPage');
                 this.changeDesc('english');
                 let applyTo = '';
                 if (this.$store.state.loginType === 'individual' || this.$store.state.loginType === 'employee') {
                     applyTo = 'individual';
                 } else {
                     applyTo = 'corporation';
-
                 }
-                // this.$axios({
-                //     url: `/api${url.getSignPage}/${this.$store.state.repoInfo.platform}/${this.$store.state.repoInfo.org_id}/${applyTo}`,
-                //     params: {
-                //         repo_id: this.$store.state.repoInfo.repo_id,
-                //     },
-                //     headers: {'Token': this.$store.state.access_token}
-                //
-                // })
                 http({
                     url: `${url.getSignPage}/${this.$store.state.repoInfo.platform}/${this.$store.state.repoInfo.org_id}/${applyTo}`,
                     params: {
                         repo_id: this.$store.state.repoInfo.repo_id,
                     },
-                    // headers: {'Token': this.$store.state.access_token}
-
-                })
-                    .then(res => {
-                    console.log(res);
+                }).then(res => {
                     this.signPageData = res.data
-                    console.log(Object.keys(res.data).length);
                     if (Object.keys(res.data).length) {
                         this.languageOptions = []
                         for (let key in res.data) {
-                            console.log(key);
                             if (res.data[key].language === 'english') {
                                 this.value = key;
                                 this.cla_org_id = key
-                                console.log(this.cla_org_id);
-                                console.log('find claText');
-
                                 this.setClaText(key)
                                 argRes('complete')
-
-
                             }
                             this.languageOptions.push({value: key, label: res.data[key].language})
                         }
                     }
-
                 }).catch(err => {
-                    console.log(err);
-                    console.log(err.response);
                     this.$message.closeAll()
                     this.$message.error(err.response.data)
                 })
             },
             changeLanguage(value) {
-                console.log(value);
                 this.changeDesc(this.languageOptions[value].label);
                 this.setClaText(value)
                 this.cla_org_id = value
@@ -445,34 +356,24 @@
             },
             getUserInfo(platform_token) {
                 let obj = {access_token: platform_token};
-                console.log(obj);
                 this.$axios({
                     url: url.getUserInfo,
                     params: obj,
                 }).then(res => {
-                    console.log(res);
                     this.myForm.name = res.data.login
-                    console.log(this.myForm);
                     for (let item of this.fields) {
                         if (item.type === 'name') {
                             Object.assign(this.ruleForm, {[item.id]: this.myForm.name})
                             break;
                         }
                     }
-                    console.log(this.ruleForm);
-
                 }).catch(err => {
-                    console.log(err);
                 })
             },
-
-            /*查找clatext*/
             setClaText(key) {
-
                 let form = {}
                 let rules = {}
                 document.getElementById('claBox').innerHTML = this.signPageData[key].text;
-                /*排序*/
                 for (let i = 0; i < this.signPageData[key].fields.length; i++) {
                     for (let j = i + 1; j < this.signPageData[key].fields.length; j++) {
                         if (Number(this.signPageData[key].fields[i].id) > Number(this.signPageData[key].fields[j].id)) {
@@ -482,7 +383,6 @@
                         }
                     }
                 }
-                console.log(this.signPageData[key].fields);
                 this.fields = this.signPageData[key].fields
                 this.fields.forEach(item => {
                     Object.assign(form, {[item.id]: ''})
@@ -493,7 +393,6 @@
                                 {required: true, message: 'please input name', trigger: ['blur','change']},
                             ],
                         })
-
                     } else if (item.type === 'corporationName') {
                         Object.assign(this.myForm, {corporationName: ''})
                         Object.assign(rules, {
@@ -501,7 +400,6 @@
                                 {required: true, message: 'please input corporationName', trigger:['blur','change']},
                             ],
                         })
-
                     } else if (item.type === 'adminEmail') {
                         Object.assign(this.myForm, {adminEmail: ''})
                         Object.assign(rules, {
@@ -509,17 +407,14 @@
                                 {required: true, message: 'please input adminEmail', trigger:['blur','change']},
                             ],
                         })
-
                     } else if (item.type === 'date') {
                         Object.assign(this.myForm, {date: ''})
-
                         Object.assign(rules, {
                             [item.id]: [
                                 {required: true, message: 'please input date', trigger: ['blur','change']}],
                         })
                     } else if (item.type === 'email') {
                         Object.assign(this.myForm, {email: ''})
-
                         Object.assign(rules, {
                             [item.id]: [{
                                 required: true,
@@ -529,7 +424,6 @@
                         })
                     } else if (item.type === 'telephone') {
                         Object.assign(this.myForm, {telephone: ''})
-
                         Object.assign(rules, {
                             [item.id]: [{
                                 required: true,
@@ -559,27 +453,19 @@
                 })
                 this.ruleForm = form
                 this.rules = rules
-                console.log(this.ruleForm);
-                console.log(this.rules);
-
             },
             toHome() {
                 this.$router.push('/home')
             },
-
-
             signCla() {
-                console.log('signCla');
                 let info = {}
                 let myUrl = '';
                 let obj = {};
                 for (let key in this.ruleForm) {
-                    console.log(key);
                     if (this.ruleForm[key] !== '') {
                         Object.assign(info, {[key]: this.ruleForm[key] + ''})
                     }
                 }
-                console.log(info);
                 if (this.$store.state.loginType === 'individual') {
                     myUrl = `${url.individual_signing}/${this.cla_org_id}`;
                     obj = {
@@ -587,9 +473,7 @@
                         email: this.myForm.email,
                         info: info,
                     }
-
                 } else if (this.$store.state.loginType === 'corporation') {
-
                     myUrl = url.corporation_signing;
                     obj = {
                         cla_org_id: this.cla_org_id,
@@ -611,9 +495,7 @@
 
                 this.sign(myUrl, obj)
             },
-
             sign(myUrl, obj) {
-                console.log(myUrl, obj);
                http({
                     url: '/api' + myUrl,
                     method: 'post',
@@ -625,17 +507,13 @@
                         'User': `${this.platform}/${this.$store.state.user.userName}`
                     }
                 }).then(res => {
-                    console.log(res);
                     if (this.$store.state.loginType === 'corporation') {
                         this.tipsMessage = 'We have sent a notification email to your email address. Please check it.And please complete the signature according to the prompt in the email'
                     } else if (this.$store.state.loginType === 'employee') {
                         this.tipsMessage = 'We have sent a notification email to your email address. Please check it,And email the administrator of your company to audit'
                     }
                     this.tipsDialogVisible = true;
-
-
                 }).catch(err => {
-                    console.log(err);
                     this.$message.closeAll()
                     this.$message.error(err.response.data)
                 })
@@ -656,7 +534,6 @@
                 }
             },
             submitForm(formName) {
-
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         if (this.isRead) {
@@ -666,22 +543,16 @@
                             this.$message.error('Please read the privacy statement')
                         }
                     } else {
-                        console.log('error submit!!');
                         return false;
                     }
                 });
-
-
             },
             getRepositoriesOfOrg(org, org_id) {
                 let obj = {access_token: this.$store.state.access_token, org: org, page: 1, per_page: 10};
-                console.log("getRepositoriesOfOrg", obj);
                 this.$axios({
                     url: `https://gitee.com/api/v5/orgs/${org}/repos`,
                     params: obj,
                 }).then(res => {
-                    console.log(res);
-                    if (res.status === 200) {
                         this.repositoryOptions = [];
                         res.data.forEach((item, index) => {
                             this.repositoryOptions.push({
@@ -693,9 +564,7 @@
                                 id: item.id
                             });
                         })
-                    }
                 }).catch(err => {
-                    console.log(err);
                     this.$message.closeAll()
                     this.$message.error(err.response.data)
                 })
@@ -708,36 +577,24 @@
                     until.getClientHeight() > document.getElementById('checkCLA').offsetHeight ?
                         this.checkCLAClass.height = until.getClientHeight() + 'px' :
                         this.checkCLAClass.height = document.getElementById('checkCLA').offsetHeight
-
                 })
-                console.log(document.getElementById('checkCLA').offsetHeight);
             },
-
-
         },
-
         created() {
             this.getCookieData()
             new Promise(resolve => {
                 this.getSignPage(resolve);
             }, reject => {
-
             }).then(res => {
-                console.log(res);
                 this.getNowDate()
-
             }, err => {
             })
-
-
         },
         mounted() {
             this.setClientHeight();
-
         }
     }
     window.onresize = () => {
-        // console.log(until.getClientHeight());
         if (until.getClientHeight() > document.getElementById('checkCLA').offsetHeight) {
             document.getElementById("checkCLA").style.height = until.getClientHeight() + 'px'
         }
