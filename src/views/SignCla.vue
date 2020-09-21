@@ -311,7 +311,7 @@
                         let date = new Date();
                         let domain='cla.osinfra.cn'
                         date.setTime(date.getTime()-10000);
-                        document.cookie=`access_token=; expire="${date.toUTCString()}"; Domain="${domain}"; path=/`;
+                        document.cookie=`access_token=; expire=${date.toUTCString()}; Domain=${domain}; path=/`;
                         this.setTokenAct(data);
                     }
 
