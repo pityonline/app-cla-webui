@@ -339,7 +339,7 @@
                         }
                     }
                 }).catch(err => {
-                    console.log(err.response);
+                    console.log(err);
                     this.$message.closeAll()
                     this.$message.error(err.response.data)
                 })

@@ -25,6 +25,6 @@ instance.interceptors.response.use(response => {
             //     path: path,
             // })
     }
-    return Promise.reject(error.response.data)
+    return Promise.reject(error.response)
 })
 export default instance
