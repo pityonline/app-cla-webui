@@ -497,7 +497,7 @@
                         Object.assign(this.myForm, {adminEmail: ''})
                         Object.assign(rules, {
                             [item.id]: [
-                                {required: true, message: 'please input adminEmail', trigger: 'blur'},
+                                {required: true, message: 'please input adminEmail', trigger:['blur','change']},
                             ],
                         })
 
@@ -506,7 +506,7 @@
 
                         Object.assign(rules, {
                             [item.id]: [
-                                {required: true, message: 'please input date', trigger: 'blur'}],
+                                {required: true, message: 'please input date', trigger: ['blur','change']}],
                         })
                     } else if (item.type === 'email') {
                         Object.assign(this.myForm, {email: ''})
