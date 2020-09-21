@@ -14,7 +14,7 @@ let instance = axios.create({
 instance.interceptors.request.use(req => {
     //获取token的方式，一从vuex，二从本地
     let token = sessionStorage.getItem('token')
-    token && (req.headers['Authorization'] = `Bearer ${token}`)
+    token && (req.headers['Token'] = `${token}`)
     /*if(token !==undefined){
         //console.log(token)
         config.headers['Authorization']=`Bearer ${token}`
