@@ -481,7 +481,7 @@
                         Object.assign(this.myForm, {name: ''})
                         Object.assign(rules, {
                             [item.id]: [
-                                {required: true, message: 'please input name', trigger: 'blur,change'},
+                                {required: true, message: 'please input name', trigger: ['blur','change']},
                             ],
                         })
 
@@ -489,7 +489,7 @@
                         Object.assign(this.myForm, {corporationName: ''})
                         Object.assign(rules, {
                             [item.id]: [
-                                {required: true, message: 'please input corporationName', trigger: 'blur'},
+                                {required: true, message: 'please input corporationName', trigger:['blur','change']},
                             ],
                         })
 
