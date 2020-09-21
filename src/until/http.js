@@ -39,7 +39,7 @@ instance.interceptors.response.use(response => {
         case 403:
             sessionStorage.clear();
 
-            alert('身份过期，请重新登录')
+            alert('token expired, please login again')
             // return router.push('/login')
             return router.replace({
                 //跳转到login，此时login不会被记录

@@ -296,7 +296,6 @@
                                 }
                             }, 1000)
                         }
-
                     }).catch(err => {
                         console.log(err);
                         this.$message.closeAll()
