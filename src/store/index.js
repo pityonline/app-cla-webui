@@ -54,7 +54,7 @@ export default new Vuex.Store({
             state.access_token = data.access_token;
             state.refresh_token = data.refresh_token;
             state.platform_token = data.platform_token;
-            sessionStorage.setItem('access_token', data.access_token);
+            sessionStorage.setItem('token', data.access_token);
             sessionStorage.setItem('refresh_token', data.refresh_token);
             sessionStorage.setItem('platform_token', data.platform_token);
         },

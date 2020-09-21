@@ -92,6 +92,7 @@
     import * as until from '../until/until'
     import * as url from '../until/api'
     import {mapActions} from 'vuex'
+    import http from '../until/http'
 
     export default {
 
@@ -385,14 +386,23 @@
                     applyTo = 'corporation';
 
                 }
-                this.$axios({
-                    url: `/api${url.getSignPage}/${this.$store.state.repoInfo.platform}/${this.$store.state.repoInfo.org_id}/${applyTo}`,
+                // this.$axios({
+                //     url: `/api${url.getSignPage}/${this.$store.state.repoInfo.platform}/${this.$store.state.repoInfo.org_id}/${applyTo}`,
+                //     params: {
+                //         repo_id: this.$store.state.repoInfo.repo_id,
+                //     },
+                //     headers: {'Token': this.$store.state.access_token}
+                //
+                // })
+                http({
+                    url: `${url.getSignPage}/${this.$store.state.repoInfo.platform}/${this.$store.state.repoInfo.org_id}/${applyTo}`,
                     params: {
                         repo_id: this.$store.state.repoInfo.repo_id,
                     },
-                    headers: {'Token': this.$store.state.access_token}
+                    // headers: {'Token': this.$store.state.access_token}
 
-                }).then(res => {
+                })
+                    .then(res => {
                     console.log(res);
                     this.signPageData = res.data
                     console.log(Object.keys(res.data).length);
@@ -670,11 +680,6 @@
                 this.$axios({
                     url: `https://gitee.com/api/v5/orgs/${org}/repos`,
                     params: obj,
-                    headers: {
-                        'Access-Token': this.$store.state.access_token,
-                        'Refresh-Token': this.$store.state.refresh_token,
-                        'User': `${this.platform}/${this.$store.state.user.userName}`
-                    }
                 }).then(res => {
                     console.log(res);
                     if (res.status === 200) {

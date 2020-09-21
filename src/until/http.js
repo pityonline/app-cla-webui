@@ -33,18 +33,15 @@ instance.interceptors.response.use(response=>{
     let _response = error.response
     switch (_response.status) {
         case 401:
-            sessionStorage.removeItem('userName')
-            sessionStorage.removeItem('userId')
-            sessionStorage.removeItem('loginTime')
-            sessionStorage.removeItem('token')
-            sessionStorage.removeItem('power')
+            sessionStorage.clear();
+
             alert('身份过期，请重新登录')
-            return router.push('/login')
-        /*return router.replace({
+            // return router.push('/login')
+        return router.replace({
             //跳转到login，此时login不会被记录
             path:'login',
             query:{redirect:router.currentRoute.fullPath}//将跳转的路由路径作为参数，登录成功后跳转到该路由
-        })*/
+        })
     }
     return Promise.reject(error.response.data)
 })
