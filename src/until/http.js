@@ -10,6 +10,7 @@ instance.interceptors.request.use(req => {
     return req
 }, error => Promise.reject(error))
 instance.interceptors.response.use(response => {
+    console.log(response.headers);
     response.headers.token && sessionStorage.setItem('token', response.headers.token)
     return response
 }, error => {
