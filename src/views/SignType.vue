@@ -40,7 +40,9 @@
         methods: {
             ...mapActions(['setTokenAct', 'setLoginTypeAct', 'setRepoInfoAct']),
             getRepoInfo() {
+                console.log(window.location.href);
                 let args = window.location.href.split('/sign/')[1].split('/')
+                console.log(args);
                 this.platform = args[0]
                 this.org = args[1]
                 if (args[2]) {
