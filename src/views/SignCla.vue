@@ -363,8 +363,8 @@
                     case 401:
                     case 403:
                         this.reLoginMsg='token expired, please login again'
-                        this.reLoginDialogTitle = this.$store.state.repoInfo.repo_id?`${this.$store.state.repoInfo.org_id}/${this.$store.state.repoInfo.repo_id} prompt you`:
-                            `${this.$store.state.repoInfo.org_id} prompt you`
+                        this.reLoginDialogTitle = this.$store.state.repoInfo.repo_id?`"${this.$store.state.repoInfo.org_id}/${this.$store.state.repoInfo.repo_id}" prompt you`:
+                            `"${this.$store.state.repoInfo.org_id}" prompt you`
                         this.reLoginDialogVisible = true
                 }
             },
@@ -527,8 +527,8 @@
                     method: 'post',
                     data: obj,
                 }).then(res => {
-                    this.tipsTitle  = this.$store.state.repoInfo.repo_id?`${this.$store.state.repoInfo.org_id}/${this.$store.state.repoInfo.repo_id} prompt you`:
-                        `${this.$store.state.repoInfo.org_id} prompt you`
+                    this.tipsTitle  = this.$store.state.repoInfo.repo_id?`"${this.$store.state.repoInfo.org_id}/${this.$store.state.repoInfo.repo_id}" prompt you`:
+                        `"${this.$store.state.repoInfo.org_id}" prompt you`
                     if (this.$store.state.loginType === 'corporation') {
                         this.tipsMessage = 'We have sent a notification email to your email address. Please check it.And please complete the signature according to the prompt in the email'
                     } else if (this.$store.state.loginType === 'employee') {
