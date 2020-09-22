@@ -243,11 +243,6 @@
                        type: 'email',
                        description: 'your email',
                        required: true,
-                   }, {
-                       title: 'Date',
-                       type: 'date',
-                       description: 'the date of today',
-                       required: true,
                    },]
                    this.customMetadataArr=this.individualCustomMetadataArr;
                } else if(this.metadataType==='corporation'){
@@ -269,11 +264,6 @@
                            title: 'E-Mail',
                            type: 'email',
                            description: 'your email',
-                           required: true,
-                       }, {
-                           title: 'Date',
-                           type: 'date',
-                           description: 'the date of today',
                            required: true,
                        },];
                    this.customMetadataArr=this.corporationCustomMetadataArr;
@@ -358,6 +348,7 @@
                 }).then(res => {
                     console.log(res);
                     if (res.data.data.length) {
+                        this.claOptions = [];
                         this.claOptions = [];
                         this.claTags = [];
                         res.data.data.forEach((item, index) => {
