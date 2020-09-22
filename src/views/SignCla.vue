@@ -523,7 +523,7 @@
             },
             sign(myUrl, obj) {
                 http({
-                    url: '/api' + myUrl,
+                    url:  myUrl,
                     method: 'post',
                     data: obj,
                 }).then(res => {
