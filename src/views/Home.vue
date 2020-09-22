@@ -17,7 +17,6 @@
                         <el-col :span="10">
                             <div style="background-color: white">
                                 <div style="text-align: right;padding: 1rem">
-
                                     <svg-icon @click="closeConfigForm()" icon-class="close"/>
                                 </div>
                                 <!--选择仓库-->
@@ -165,11 +164,8 @@
                             </el-input>
                         </el-col>
                     </el-row>
-
                 </el-row>
-
             </el-row>
-
             <div>
                 <el-tabs v-model="activeName" @tab-click="tabsHandleClick">
                     <el-tab-pane label="Linked Repositories" name="first" style="margin-top: 1rem">
@@ -178,9 +174,7 @@
                 </el-tabs>
                 <router-view></router-view>
             </div>
-
         </el-col>
-
         <Footer></Footer>
         <el-dialog
                 top="5vh"
@@ -286,13 +280,11 @@
                         <li>Comment on pull requests</li>
                     </ul>
                 </div>
-
                 <span slot="footer" class="dialog-footer">
                     <el-button @click="linkDialogVisible = false">Cancel</el-button>
                     <el-button v-loading.fullscreen.lock="linkLoading" type="primary" @click="linkRepository()">Yes,Let's do this!</el-button>
                 </span>
             </div>
-
         </el-dialog>
         <el-dialog
                 top="5vh"
@@ -342,24 +334,19 @@
             </div>
 
         </el-dialog>
-
-
     </div>
 </template>
-
 <script>
     import * as url from '../until/api'
     import * as until from '../until/until'
     import Header from '@components/Header'
     import Footer from '@components/Footer'
     import {mapActions} from 'vuex'
-
     window.onresize = () => {
         console.log(until.getClientHeight(), document.getElementById('home'));
         if (until.getClientHeight() > document.getElementById('home').offsetHeight) {
             document.getElementById("home").style.height = until.getClientHeight() + 'px'
         }
-
     }
     export default {
         name: "Home",
@@ -376,7 +363,6 @@
                         return this.$store.state.orgOptions
                     }
             },
-
             orgChoose() {
                 console.log(this.$store.state.orgChoose);
                 console.log(`${this.$store.state.orgChoose}` === 'true');
@@ -476,17 +462,13 @@
                 createMetadataDialogVisible: false,
                 linkLoading: false,
                 platform: this.$store.state.platform,
-
-
                 isVerify: false,
                 activeName: 'first',
                 previewShow: false,
                 previewText: '',
                 loginType: this.$store.state.loginType,
-
                 tableType: 1,
                 tableShow: true,
-
                 listCurrentPage: 1,
                 dropdownTitle: 'Linked Repositories',
                 email: '',
@@ -534,7 +516,6 @@
             }
         },
         methods: {
-
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
             authorizeEmail() {
                 let myUrl = ''
@@ -542,14 +523,13 @@
                     case 'Gmail':
                         myUrl = url.getAuthEmail;
                         break;
-
                 }
                 this.$axios({
                     url: '/api' + myUrl,
                     headers: {'Token': this.$store.state.access_token},
                 }).then(res => {
                     console.log(res);
-                    window.location.href = res.data.url;
+                    window.location.href = res.data.data.url;
                 }).catch(err => {
                     console.log(err);
                 })
@@ -603,7 +583,6 @@
             tabsHandleClick(tab, event) {
                 console.log(tab, event);
                 tab.index === '0' ? this.$router.push('/linkedRepo') : this.$router.push('/signedRepoLogin')
-
             },
             /*获取组织权限*/
             getOrgPermission() {
@@ -619,8 +598,6 @@
             listChangePage(page) {
                 console.log(page);
             },
-
-
             newWindow() {
                 // window.open('https://github.com/ouchengle/Test','_black')
                 window.open('https://github.com/ouchengle')
@@ -631,27 +608,16 @@
                 console.log(this.orgChoose, this.claChoose, this.isEmail);
                 (this.orgChoose && this.claChoose && this.isEmail) && (this.linkDialogVisible = true)
             },
-
-
-            /*邮箱合法验证*/
             verifyEmail() {
                 var email = this.email;
                 var reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
                 if (reg.test(email)) {
                     this.isEmail = true
                 } else {
-                    // this.$message({
-                    //     type: 'error',
-                    //     message:'Please enter the correct email',
-                    //     center:true
-                    // });
                     this.isEmail = false
-
                     return false
                 }
             },
-
-            /*绑定开源项目*/
             linkRepository() {
                 // this.linkLoading = true;
                 let obj = {}
@@ -689,7 +655,6 @@
                         'Refresh-Token': this.refresh_token,
                         'User': `${this.platform}/${this.user.userName}`
                     }
-
                 }).then(res => {
                     this.linkLoading = false;
                     this.$message.success('success')
@@ -715,18 +680,13 @@
                     this.$message.error(err.response.data)
                 })
             },
-
-            /*查看CLA签署状态*/
             checkCla() {
-                console.log("checkCla");
                 this.$router.push('/checkCla')
             },
-            /*cla条目编辑*/
             editHandleClick(index) {
                 console.log(index);
                 this.editDialogVisible = true
             },
-            /*跳转到创建CLA页面*/
             toCreateCLA() {
                 this.$router.push('/createCLA')
                 this.$router.push('/createCLA')
@@ -735,56 +695,38 @@
                 this.$router.push('/createMetadata')
             },
             claVisibleChange(visible) {
-                console.log('claVisibleChange');
                 if (visible && this.filterChange) {
                     console.log('claVisibleChange', visible, this.filterChange);
                     this.getCLA();
                     this.filterChange = false;
                 }
-
             },
             orgVisibleChange(visible) {
-                console.log('orgVisibleChange');
                 if (visible) {
-                    console.log('orgVisibleChange', visible);
                     this.getOrgsInfo();
                 }
-
             },
             repoVisibleChange(visible) {
-                console.log('repoVisibleChange');
                 if (visible) {
-                    console.log('repoVisibleChange', visible);
                     this.getRepositoriesOfOrg(this.org, this.org_id);
                 }
-
             },
-            /*选择cla*/
             changeCla(value) {
                 this.$store.commit('setClaValue', value)
                 this.$store.commit('setClaChoose', true)
                 this.showPreviewCla = true
                 this.previewText = this.claOptions[value].text;
             },
-
-            /*弹出dialog说明框*/
             createCLA() {
                 this.createCLADialogVisible = true
             },
             createMetadata() {
                 this.createMetadataDialogVisible = true
             },
-            /*授权CLA应用访问开源组织的账号信息*/
             authorize() {
-                console.log("authorize");
                 this.authorizeDialogVisible = true
-                /*弹出dialog说明框，点击授权跳转到授权页面，点击确认授权，跳转至输入密码验证，成功之后自动跳转回配置页面*/
-
             },
-            /*选择组织*/
             changeOrg(value) {
-                console.log(value);
-                // this.orgValue=value
                 this.$store.commit('setOrgValue', value)
                 if (value === '') {
                     this.org = '';
@@ -802,10 +744,7 @@
                     this.$store.commit('setRepositoryChoose', false)
                     this.$store.commit('setRepositoryOptions', undefined)
                 }
-
-
             },
-            /*选择仓库*/
             changeRepository(value) {
                 this.$store.commit('setRepositoryValue', value)
                 console.log(this.repositoryValue);
@@ -817,12 +756,10 @@
             },
             getRepositoriesOfOrg(org, org_id) {
                 let obj = {access_token: this.$store.state.platform_token, org: org, page: 1, per_page: 10};
-                console.log("getRepositoriesOfOrg", obj);
                 this.$axios({
                     url: `https://gitee.com/api/v5/orgs/${org}/repos`,
                     params: obj,
                 }).then(res => {
-                    console.log(res);
                     if (res.status === 200) {
                         let repositoryOptions = [];
                         res.data.forEach((item, index) => {
@@ -838,10 +775,8 @@
                         this.$store.commit('setRepositoryOptions', repositoryOptions)
                     }
                 }).catch(err => {
-                    console.log(err);
                 })
             },
-            /*获取仓库数据*/
             getOrgsInfo() {
                 let obj = {access_token: this.$store.state.platform_token, admin: true, page: 1, per_page: 10};
                 console.log("getOrgsInfo", obj);
@@ -854,7 +789,6 @@
                         let orgOptions = [];
                         res.data.forEach((item, index) => {
                             orgOptions.push({value: index, label: item.login, id: item.id});
-
                         })
                         this.$store.commit('setOrgOption', orgOptions)
                     }
@@ -862,8 +796,6 @@
                     console.log(err);
                 })
             },
-
-            /*获取cla数据*/
             getCLA() {
                 console.log("getCLA");
                 this.$axios({
@@ -878,8 +810,8 @@
                 }).then(res => {
                     console.log(res);
                     let claOptions = [];
-                    if (res.data.length) {
-                        res.data.forEach((item, index) => {
+                    if (res.data.data.length) {
+                        res.data.data.forEach((item, index) => {
                             claOptions.push({
                                 value: index,
                                 label: item.name,
@@ -894,79 +826,49 @@
                     console.log(err);
                 })
             },
-            /*关闭cla配置表单*/
             closeConfigForm() {
                 this.$store.commit('setShowConfigForm', 'false')
                 this.showConfigForm = false
                 this.setClientHeight()
             },
-
-            /*点击配置cla按钮*/
             configCla() {
                 this.$store.commit('setShowConfigForm', 'true')
                 this.showConfigForm = true;
                 this.home.height = 'auto'
                 this.getOrgsInfo()
             },
-
-            /*设置页面高度*/
             setClientHeight() {
-                // console.log(until.getClientHeight());
                 this.$nextTick(() => {
                     until.getClientHeight() > document.getElementById('home').offsetHeight ?
                         this.home.height = until.getClientHeight() + 'px' :
                         this.home.height = document.getElementById('home').offsetHeight
-
                 })
             },
-            /**/
             change(value) {
                 console.log(value);
                 this.value = value;
             },
-            /*获取cookie*/
-
-
             openFullScreen() {
                 const loading = this.$loading({
                     lock: true,
-                    // text: 'Loading',
-                    // spinner: 'el-icon-loading',
                     background: 'rgba(255, 255, 255, 0.8)'
                 });
                 setInterval(() => {
-                    // loading.close()
                     this.$store.state.user.userName  && loading.close();
                 }, 500)
-
             },
             clearPageSession() {
-                // sessionStorage.removeItem('orgOptions')
                 this.$store.commit('setOrgOption', undefined)
-
-                // sessionStorage.removeItem('repositoryOptions')
                 this.$store.commit('setRepositoryOptions', undefined)
-
-                // sessionStorage.removeItem('claOptions')
                 this.$store.commit('setClaOptions', undefined)
-
-                // sessionStorage.removeItem('orgValue')
                 this.$store.commit('setOrgValue', undefined)
-
-                // sessionStorage.removeItem('claValue')
                 this.$store.commit('setClaValue', undefined)
-
-                // sessionStorage.removeItem('repositoryValue')
                 this.$store.commit('setRepositoryValue', undefined)
-
-                // sessionStorage.removeItem('tableData')
                 this.$store.commit('setTableData', undefined)
-
             },
             getCookieData() {
                 if (document.cookie !== '') {
                     let cookieArr = document.cookie.split('; ')
-                    console.log(cookieArr);
                     let access_token, refresh_token, platform_token = '';
                     let email = ''
                     cookieArr.forEach((item, index) => {
@@ -982,9 +884,7 @@
                     this.setTokenAct(data);
                     this.getUserInfo(access_token, refresh_token, platform_token)
                 }
-
             },
-            /*获取用户名并显示*/
             getUserInfo(access_token, refresh_token, platform_token) {
                 let obj = {access_token: platform_token};
                 console.log(obj);
@@ -993,7 +893,6 @@
                     params: obj,
                 }).then(res => {
                     console.log(res);
-
                     let data = {
                         userId: res.data.id,
                         userName: res.data.login,
@@ -1009,45 +908,10 @@
                         platform: this.platform
                     }
                     console.log(obj);
-                    // this.getLinkedRepoListAct(obj);
-
                 }).catch(err => {
                     console.log(err);
                 })
             },
-        },
-        beforeRouteEnter(to, from, next) {
-            console.log(this, 'beforeRouteEnter'); // undefined
-            console.log(to, '组件独享守卫beforeRouteEnter第一个参数');
-            console.log(from, '组件独享守卫beforeRouteEnter第二个参数');
-            console.log(next, '组件独享守卫beforeRouteEnter第三个参数');
-            next(vm => {
-                //因为当钩子执行前，组件实例还没被创建
-                // vm 就是当前组件的实例相当于上面的 this，所以在 next 方法里你就可以把 vm 当 this 来用了。
-                console.log(vm);//当前组件的实例
-            });
-        },
-        beforeRouteUpdate(to, from, next) {
-            //在当前路由改变，但是该组件被复用时调用
-            //对于一个带有动态参数的路径 /good/:id，在 /good/1 和 /good/2 之间跳转的时候，
-            // 由于会渲染同样的good组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。
-            // 可以访问组件实例 `this`
-            console.log(this, 'beforeRouteUpdate'); //当前组件实例
-            console.log(to, '组件独享守卫beforeRouteUpdate第一个参数');
-            console.log(from, '组件独享守beforeRouteUpdate卫第二个参数');
-            console.log(next, '组件独享守beforeRouteUpdate卫第三个参数');
-            next();
-        },
-        beforeRouteLeave(to, from, next) {
-            // 导航离开该组件的对应路由时调用
-            // 可以访问组件实例 `this`
-            console.log(this, 'beforeRouteLeave'); //当前组件实例
-            console.log(to, '组件独享守卫beforeRouteLeave第一个参数');
-            console.log(from, '组件独享守卫beforeRouteLeave第二个参数');
-            console.log(next, '组件独享守卫beforeRouteLeave第三个参数');
-            next();
-        },
-        beforeCreate() {
         },
         created() {
             this.clearPageSession();
@@ -1055,12 +919,9 @@
             this.openFullScreen();
             this.getCookieData()
         },
-
         mounted() {
             this.setClientHeight();
         },
-
-
     };
 
 </script>

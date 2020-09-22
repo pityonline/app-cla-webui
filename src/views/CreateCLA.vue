@@ -357,10 +357,10 @@
 
                 }).then(res => {
                     console.log(res);
-                    if (res.data.length) {
+                    if (res.data.data.length) {
                         this.claOptions = [];
                         this.claTags = [];
-                        res.data.forEach((item, index) => {
+                        res.data.data.forEach((item, index) => {
                             this.claTags.push(item.name);
                             this.claOptions.push({
                                 value: index,

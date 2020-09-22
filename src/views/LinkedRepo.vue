@@ -44,7 +44,6 @@
                             prop="cla_language"
                             label="Language">
                     </el-table-column>
-
                     <el-table-column
                             align="center"
                             label="Original Signature">
@@ -53,9 +52,7 @@
                                     width="80"
                                     trigger="hover"
                                     placement="right">
-
                                 <div class="menuBT">
-
                                     <el-button style="margin-left: 10px" @click="previewOriginalSignature(scope.row)"
                                                type="" size="mini">preview
                                     </el-button>
@@ -63,7 +60,6 @@
                                         download
                                     </el-button>
                                 </div>
-
                                 <svg-icon slot="reference" class="pointer" icon-class="pdf"/>
                             </el-popover>
                         </template>
@@ -91,19 +87,16 @@
 
                             </el-popover>
                         </template>
-
                     </el-table-column>
                     <el-table-column
                             label="Unlink"
                             width="100"
                             align="center">
-
                         <template slot-scope="scope">
                             <el-tooltip slot="reference" effect="dark" content="unlink"
                                         placement="bottom">
                                 <svg-icon class="pointer" icon-class="delete" @click="unlinkHandleClick(scope)"/>
                             </el-tooltip>
-
                         </template>
                     </el-table-column>
                     <el-table-column
@@ -114,7 +107,6 @@
                         </template>
                     </el-table-column>
                 </el-table>
-
             </el-col>
         </el-row>
         <div class="paginationClass">
@@ -347,34 +339,29 @@
                 <!--:dochref="docInfo.href">-->
                 <!--</pdfReader>-->
 
-
                 <!--<iframe :src="url"  width="100%" height="100%"></iframe>-->
             </div>
-
         </el-dialog>
         <!--<div id="pop">-->
-
         <!--</div>-->
+        <ReLoginDialog ></ReLoginDialog>
     </div>
-
-
 </template>
 <script>
     import {mapActions} from 'vuex'
     import * as url from '../until/api'
     import pdfReader from "@components/PdfReader";
     import pdf from 'vue-pdf'
+    import http from '../until/http'
+    import ReLoginDialog from '../components/ReLoginDialog'
     import download from 'downloadjs'
     // import PDFJS from '../until/pdf/pdf'
-
     export default {
         name: "linkedRepo",
         components: {
             pdfReader,
             pdf,
-        },
-        computed: {
-
+            ReLoginDialog,
         },
         data() {
             return {
@@ -404,11 +391,9 @@
                 currentPage: 1,
             }
         },
-
         created() {
             // this.getCookieData()
             this.getOrgTableData();
-
             // this.getTableData()
         },
         methods: {
@@ -431,8 +416,8 @@
                     headers:this.uploadHeaders
                 }).then(res=>{
                     console.log(res);
-                    let data = res.data
-                    res.data.forEach((item,index)=>{
+                    let data = res.data.data
+                    data.forEach((item,index)=>{
                         new Promise((resolve,reject)=>{
                             let claName = this.getClaName(item.cla_id)
                             console.log(claName);
@@ -443,13 +428,9 @@
                             this.tableData=data
                             console.log(this.tableData);
                         },err=>{
-                            console.log(err);
                         })
-
                     })
-
                 }).catch(err=>{
-                    console.log(err);
                 })
             },
             async  getClaName(cla_id){
@@ -459,7 +440,7 @@
                     headers: this.uploadHeaders
                 }).then(resp => {
                     console.log(resp);
-                    name= resp.data.name
+                    name= resp.data.data.name
 
                 }).catch(err => {
                     console.log(err);
@@ -474,17 +455,12 @@
                     url: url.getOrgsInfo,
                     params: obj,
                 }).then(res => {
-                    console.log(res);
-
                     let orgOptions = [];
                     res.data.forEach((item, index) => {
                         orgOptions.push({value: index, Organization: item.login, id: item.id});
-
                     })
                     this.orgTableData = orgOptions
                     this.getLinkedRepoList(res.data[0].login)
-
-
                 }).catch(err => {
                     console.log(err);
                 })
@@ -583,7 +559,7 @@
                 }).then(res => {
                     console.log(res);
                     // this.showPdfFile(res.data.pdf)
-                    sessionStorage.setItem('pdf_base64', res.data.pdf)
+                    sessionStorage.setItem('pdf_base64', res.data.data.pdf)
                     window.location.href = `../../static/pdf_source/web/viewer.html`
                     // window.location.href = `../../static/pdf_source/web/viewer.html?file=${this.converData(res.data.pdf)}`
                     // window.location.href = `../../static/pdf_source/web/viewer.html?file=${encodeURIComponent(res.data.pdf)}`
@@ -651,8 +627,8 @@
                     url: `/api${url.downloadSignature}/${row.id}`,
                     method: 'get',
                 }).then(res => {
-                    console.log(res.data.pdf);
-                    let URL = this.dataURLtoBlob(res.data.pdf);
+                    console.log(res.data.data.pdf);
+                    let URL = this.dataURLtoBlob(res.data.data.pdf);
                     console.log(URL);
                     var reader = new FileReader();
                     reader.readAsDataURL(URL);
@@ -816,6 +792,7 @@
                     url: `/api${url.unLinkRepository}/${this.unlinkId}`,
                     method: 'delete',
                     headers: {
+                        'Token': this.$store.state.access_token,
                         'Access-Token': this.$store.state.access_token,
                         'Refresh-Token': this.$store.state.refresh_token,
                         'User': `${this.platform}/${this.$store.state.user.userName}`

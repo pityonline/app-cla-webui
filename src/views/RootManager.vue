@@ -5,7 +5,6 @@
             <el-col :offset="4" :span="16">
                 <el-tabs v-model="active">
                     <el-tab-pane label="User Management" name="first" style="margin-top: 1rem">
-
                     </el-tab-pane>
                 </el-tabs>
                 <router-view></router-view>
