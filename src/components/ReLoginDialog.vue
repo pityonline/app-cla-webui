@@ -1,7 +1,7 @@
 <template>
     <el-row>
         <el-dialog
-                title=""
+                :title="title"
                 :visible.sync="dialogVisible"
                 :close-on-press-escape="false"
                 :show-close="false"
@@ -22,7 +22,7 @@
 <script>
     export default {
         name: "ReLoginDialog",
-        props: ['dialogVisible', 'message'],
+        props: ['dialogVisible', 'message','title'],
         methods: {
             clickGoHome() {
                 // let repoInfo = JSON.parse(sessionStorage.getItem('repoInfo'))

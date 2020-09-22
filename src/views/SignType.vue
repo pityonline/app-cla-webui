@@ -78,7 +78,15 @@
                 }
             },
         },
+        setCookie(){
+            console.log('setCookie');
+            let date = new Date();
+            let domain = 'cla.osinfra.cn'
+            date.setTime(date.getTime() - 10000);
+            document.cookie = `_mark=; expire=${date.toUTCString()}; Domain=${domain}; path=/`;
+        },
         created() {
+            this.setCookie();
             this.getRepoInfo();
         }
     }

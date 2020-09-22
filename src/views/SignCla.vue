@@ -68,7 +68,7 @@
 
         <Footer></Footer>
         <el-dialog
-                title=""
+                :title="tipsTitle"
                 top="5vh"
                 :close-on-press-escape="false"
                 :show-close="false"
@@ -82,7 +82,7 @@
                 </el-col>
             </el-row>
         </el-dialog>
-        <ReLoginDialog :dialogVisible="reLoginDialogVisible" :message="reLoginMsg"></ReLoginDialog>
+        <ReLoginDialog :dialogVisible="reLoginDialogVisible" :message="reLoginMsg" :title="reLoginDialogTitle"></ReLoginDialog>
     </el-row>
 </template>
 
@@ -126,8 +126,10 @@
         },
         data() {
             return {
+                reLoginDialogTitle:'',
                 reLoginDialogVisible: false,
                 reLoginMsg: '',
+                tipsTitle:'',
                 tipsMessage: 'Signed successfully.We have sent a notification email to your email address. Please check it',
                 tipsDialogVisible: false,
                 signPageData: '',
@@ -303,7 +305,6 @@
             getCookieData() {
                 if (document.cookie !== '') {
                     let cookieArr = document.cookie.split('; ')
-                    console.log(cookieArr);
                     let access_token, refresh_token, platform_token, _mark = '';
                     cookieArr.forEach((item, index) => {
                         let arr = item.split('=');
@@ -313,7 +314,6 @@
                         }
                     })
                     if (!_mark) {
-                        console.log(access_token);
                         let data = {access_token, refresh_token, platform_token};
                         let date = new Date();
                         let domain = 'cla.osinfra.cn'
@@ -355,16 +355,18 @@
                         }
                     }
                 }).catch(err => {
-                    console.log(err);
-                    switch (err.status) {
-                        case 401:
-                        case 403:
-                            this.reLoginMsg='token expired, please login again'
-                            this.reLoginDialogVisible = true
-                    }
-                    this.$message.closeAll()
-                    this.$message.error(err.response.data)
+                  this.responseCode(err.status)
                 })
+            },
+            responseCode(code){
+                switch (code) {
+                    case 401:
+                    case 403:
+                        this.reLoginMsg='token expired, please login again'
+                        this.reLoginDialogTitle = this.$store.state.repoInfo.repo_id?`${this.$store.state.repoInfo.org_id}/${this.$store.state.repoInfo.repo_id} prompt you`:
+                            `${this.$store.state.repoInfo.org_id} prompt you`
+                        this.reLoginDialogVisible = true
+                }
             },
             changeLanguage(value) {
                 this.changeDesc(this.languageOptions[value].label);
@@ -525,6 +527,8 @@
                     method: 'post',
                     data: obj,
                 }).then(res => {
+                    this.tipsTitle  = this.$store.state.repoInfo.repo_id?`${this.$store.state.repoInfo.org_id}/${this.$store.state.repoInfo.repo_id} prompt you`:
+                        `${this.$store.state.repoInfo.org_id} prompt you`
                     if (this.$store.state.loginType === 'corporation') {
                         this.tipsMessage = 'We have sent a notification email to your email address. Please check it.And please complete the signature according to the prompt in the email'
                     } else if (this.$store.state.loginType === 'employee') {
@@ -532,8 +536,7 @@
                     }
                     this.tipsDialogVisible = true;
                 }).catch(err => {
-                    this.$message.closeAll()
-                    this.$message.error(err.response.data)
+                   this.responseCode(err.status)
                 })
             },
             clearForm() {
