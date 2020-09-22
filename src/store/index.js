@@ -2,9 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import * as url from '../until/api'
-
 Vue.use(Vuex)
-
 export default new Vuex.Store({
     state: {
         claChoose: sessionStorage.getItem('claChoose') || undefined,
@@ -292,7 +290,6 @@ export default new Vuex.Store({
         viewPrivacy(){
             window.open('/privacy')
         },
-
     },
     modules: {}
 })

@@ -1,8 +1,6 @@
 <template>
     <div id="section" :style="section">
-
         <CorporationHeader @clickItem="clickItem" :user="user"></CorporationHeader>
-
         <el-row style="margin-top: 2rem">
             <el-col :offset="4" :span="16">
                 <el-tabs v-model="active">

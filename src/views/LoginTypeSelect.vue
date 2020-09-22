@@ -2,7 +2,6 @@
     <el-row class="loginTypeSelect" style="height: 100%">
         <el-col style="height: 100%">
             <el-row style="height: 50%">
-
             </el-row>
             <el-row style="height: 50%">
                 <el-col  align="right" class="buttonBox">
@@ -12,29 +11,21 @@
                                 Organization Manager
                             </button>
                         </div>
-
                         <button class="button" @click="submit('corporationManager')">
                             Corporation Manager
                         </button>
-
                     </div>
-
                 </el-col>
             </el-row>
         </el-col>
-
     </el-row>
-
 </template>
-
 <script>
     import {mapActions} from 'vuex'
-
     export default {
         name: "RepoSelect",
         data(){
             return {
-
             };
         },
         methods:{
@@ -48,13 +39,11 @@
                     this.$router.push('/corporationManagerLogin')
                 }else{
                     this.$router.push('/signCla')
-
                 }
             },
         }
     }
 </script>
-
 <style scoped lang="less">
     @import "../assets/font/css/Roboto-Bold.css";
     @import "../assets/font/css/Roboto-Regular.css";
@@ -67,7 +56,6 @@
         flex-direction: column;
         /*justify-content: center;*/
     }
-
     .button {
         /*font-family:Roboto-Regular,sans-serif ;*/
         width: 15rem;
@@ -80,7 +68,6 @@
         background: linear-gradient(to right, #97DB30, #319E55);
         margin: 1.2rem 0;
     }
-
     .button:focus {
         outline: none;
     }

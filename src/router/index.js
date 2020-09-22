@@ -16,7 +16,6 @@ const routes = [
         /*组件懒加载*/
         component: () => import('../views/Login.vue')
     },
-
     {
         path: '/index',
         /*组件懒加载*/
@@ -37,11 +36,6 @@ const routes = [
                 /*组件懒加载*/
                 component: () => import('../views/SignType.vue')
             },
-            // {
-            //             //     path: '/repoSelect',
-            //             //     name: 'RepoSelect',
-            //             //     component: () => import('../views/RepoSelect.vue')
-            //             // },
             {
                 path: '/platformSelect',
                 name: 'PlatformSelect',
@@ -84,7 +78,6 @@ const routes = [
                 name: 'SignedRepoLogin',
                 component: () => import('../views/SignedRepoLogin.vue')
             },
-
         ]
     },
     {
@@ -169,8 +162,6 @@ const routes = [
         name: 'EmailVerify',
         component: () => import('../views/EmailVerify.vue')
     },
-
-
 ]
 
 const router = new VueRouter({

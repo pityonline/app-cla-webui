@@ -61,11 +61,9 @@
         },
         methods: {
             ...mapActions(['setPlatformAct']),
-
             submit() {
                 console.log('submit');
             },
-
             login(platform) {
                 console.log(platform);
                 this.setPlatformAct(platform)
@@ -74,12 +72,9 @@
                         this.$axios({
                             url: `/api${url.getAuthCodeUrl}/${platform}/login`,
                         }).then(res => {
-                            console.log(res);
-                            window.location.href = res.data.url
+                            window.location.href = res.data.data.url
                         }).catch(err => {
-                            console.log(err);
                         })
-
                         clearInterval(interval)
                     }
                 }, 100)

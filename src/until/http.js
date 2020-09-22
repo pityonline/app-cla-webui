@@ -14,16 +14,10 @@ instance.interceptors.response.use(response => {
     return response
 }, error => {
     let _response = error.response
-    let repoInfo = JSON.parse(sessionStorage.getItem('repoInfo'))
-    let path = repoInfo.repo_id ? `/sign/${repoInfo.platform}/${repoInfo.org_id}/${repoInfo.repo_id}` : `/sign/${repoInfo.platform}/${repoInfo.org_id}`
     switch (_response.status) {
         case 401:
         case 403:
             sessionStorage.clear();
-            // alert('token expired, please login again')
-            // return router.replace({
-            //     path: path,
-            // })
     }
     return Promise.reject(error.response)
 })

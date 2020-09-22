@@ -27,7 +27,6 @@
                                 Employee
                             </button>
                         </el-tooltip>
-
                         <!--<button class="button" @click="submit('employee')">-->
                             <!--Employee-->
                         <!--</button>-->

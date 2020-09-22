@@ -15,17 +15,15 @@
                 </el-col>
             </el-row>
         </el-dialog>
-
     </el-row>
 </template>
 
 <script>
     export default {
         name: "ReLoginDialog",
-        props: ['dialogVisible', 'message','title'],
+        props: ['dialogVisible', 'message', 'title'],
         methods: {
             clickGoHome() {
-                // let repoInfo = JSON.parse(sessionStorage.getItem('repoInfo'))
                 let date = new Date();
                 let domain = 'cla.osinfra.cn'
                 date.setTime(date.getTime() - 10000);
@@ -49,6 +47,5 @@
         color: white;
         cursor: pointer;
         outline: none;
-
     }
 </style>
