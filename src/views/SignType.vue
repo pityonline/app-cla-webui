@@ -34,6 +34,8 @@
                 </el-col>
             </el-row>
         </el-col>
+        <ReTryDialog :dialogVisible="reTryDialogVisible" :message="reLoginMsg"
+                     :title="reLoginDialogTitle"></ReTryDialog>
     </el-row>
 </template>
 <script>
@@ -41,9 +43,25 @@
     import {mapActions} from 'vuex'
     import * as until from '../until/until'
     import http from '../until/http'
+    import ReTryDialog from '../components/ReTryDialog'
 
     export default {
         name: "SignType",
+        components:{
+            ReTryDialog,
+        },
+        computed:{
+            reTryDialogVisible() {
+                return this.$store.state.reTryDialogVisible
+            },
+            reLoginMsg() {
+                return this.$store.state.dialogMessage
+            },
+            reLoginDialogTitle() {
+                return this.$store.state.repoInfo.repo_id ? `"${this.$store.state.repoInfo.org_id}/${this.$store.state.repoInfo.repo_id}" prompt you` :
+                    `"${this.$store.state.repoInfo.org_id}" prompt you`
+            },
+        },
         data() {
             return {
                 platform: '',
