@@ -53,7 +53,7 @@
             }
         },
         methods: {
-            ...mapActions(['setTokenAct', 'setLoginTypeAct', 'setRepoInfoAct','errorSet']),
+            ...mapActions(['setTokenAct', 'setLoginTypeAct', 'setRepoInfoAct','errorAct']),
             getRepoInfo() {
                 let args = window.location.href.split('/sign/')[1].split('/')
                 this.platform = args[0]
@@ -74,7 +74,7 @@
                         }).then(res => {
                             window.location.href = res.data.data.url
                         }).catch(err => {
-                            this.errorSet(err)
+                            this.errorAct(err)
                         })
                     } else {
                         this.$router.push('/sign-cla')
