@@ -40,6 +40,7 @@
     import * as url from '../until/api'
     import {mapActions} from 'vuex'
     import * as until from '../until/until'
+    import http from '../until/http'
 
     export default {
         name: "SignType",
@@ -52,7 +53,7 @@
             }
         },
         methods: {
-            ...mapActions(['setTokenAct', 'setLoginTypeAct', 'setRepoInfoAct']),
+            ...mapActions(['setTokenAct', 'setLoginTypeAct', 'setRepoInfoAct','errorSet']),
             getRepoInfo() {
                 let args = window.location.href.split('/sign/')[1].split('/')
                 this.platform = args[0]
@@ -68,11 +69,12 @@
                 this.setLoginTypeAct(loginType)
                 if (this.platform === 'gitee') {
                     if (loginType === 'individual' || loginType === 'employee') {
-                        this.$axios({
-                            url: `/api${url.getAuthCodeUrl}/${this.platform}/sign`,
+                        http({
+                            url: `${url.getAuthCodeUrl}/${this.platform}/sign`,
                         }).then(res => {
                             window.location.href = res.data.data.url
                         }).catch(err => {
+                            this.errorSet(err)
                         })
                     } else {
                         this.$router.push('/sign-cla')
