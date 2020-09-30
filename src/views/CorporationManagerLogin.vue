@@ -31,8 +31,10 @@
 
 <script>
     import * as url from '../until/api'
+    import http from '../until/http'
     import * as until from '../until/until'
     import {mapActions} from 'vuex'
+
 
     export default {
         name: "RepoSelect",

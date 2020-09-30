@@ -81,6 +81,7 @@
 <script>
     import * as url from '../until/api'
     import {mapActions} from 'vuex'
+    import http from '../until/http'
 
     export default {
         name: "UserList",
@@ -134,8 +135,7 @@
                     cla_org_id: this.userInfo[this.orgValue].cla_org_id, email: this.userInfo[this.orgValue].email
                 }
                 this.$axios({
-                    url: '/api' + url.queryEmployeeManager,
-                    params: obj,
+                    url: `/api${url.queryEmployeeManager}`,
                     headers: {
                         token: this.userInfo[this.orgValue].token
                     }
@@ -144,6 +144,7 @@
                     this.tableData = res.data.data;
                     this.setUserLimitAct(res.data.data.length)
                 }).catch(err => {
+
                 })
             },
             submit() {
