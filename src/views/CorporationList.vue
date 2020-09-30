@@ -183,9 +183,7 @@
             }
         },
         beforeRouteEnter(to, from, next) {
-            // 在渲染该组件的对应路由被 confirm 前调用
-            // 不！能！获取组件实例 `this`
-            // 因为当钩子执行前，组件实例还没被创建
+
             if (from.path !== '/') {
                 sessionStorage.removeItem('item')
             }
@@ -265,6 +263,7 @@
                         'User': `${this.platform}/${this.user.userName}`
                     }
                 }).then(resp => {
+                    console.log(resp);
                     this.tableData = resp.data;
                 }).catch(err => {
                 })
@@ -332,19 +331,19 @@
         color: #fff;
     }
 
-    /*打开时文字位置设置*/
+
     .mySwitch .el-switch__label--right {
         z-index: 1;
         right: 0.5rem;
     }
 
-    /*关闭时文字位置设置*/
+
     .mySwitch .el-switch__label--left {
         z-index: 1;
         left: .5rem;
     }
 
-    /*显示文字*/
+
     .mySwitch .el-switch__label.is-active {
         display: block;
     }
