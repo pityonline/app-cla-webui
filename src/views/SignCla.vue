@@ -263,7 +263,7 @@
                     this.$message.error('Please fill in Google email in the e-mail column')
                 } else {
                     http({
-                        url: `/api${url.sendVerifyCode}/${this.cla_org_id}/${this.myForm.adminEmail}`,
+                        url: `${url.sendVerifyCode}/${this.cla_org_id}/${this.myForm.adminEmail}`,
                         method: 'put',
                     }).then(res => {
                         this.$message.closeAll();
