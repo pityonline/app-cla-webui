@@ -172,12 +172,7 @@
                 fileList: [],
                 uploadDialogVisible: false,
                 item: '',
-                tableData: [{
-                    corporation_name: 'ooo',
-                    admin_name: 'ocl',
-                    admin_email: '666@qq.com',
-                    date: '2020-08-18'
-                }, {corporation_name: 'oco', admin_name: 'oll', email: '555@qq.com', date: '2020-08-19'},],
+                tableData: [],
                 currentPage: 1,
                 tableTotal: 0,
             }
@@ -264,7 +259,7 @@
                     }
                 }).then(resp => {
                     console.log(resp);
-                    this.tableData = resp.data;
+                    this.tableData = resp.data.data[this.item.id];
                 }).catch(err => {
                 })
             },
