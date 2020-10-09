@@ -107,26 +107,34 @@
                 }).then(res => {
                     console.log(res);
                     let data = res.data.data
-                    new Promise((resolve, reject) => {
-                        let userInfo = {userInfo: data}
-                        Object.assign(userInfo, {userName: userName})
-                        this.setLoginInfoAct(userInfo)
-                        if (data.length > 1) {
-                            this.$router.push('/orgSelect')
-                        } else {
-                            this.setCorpTokenAct(data[0].token)
-                            Object.assign(userInfo, {orgValue: 0})
-                            this.setLoginInfoAct(userInfo)
-                            if (data[0].role === 'admin') {
-                                this.$router.push('/rootManager')
-                            } else {
-                                this.$router.push('/signedRepo')
-                            }
-                        }
-                        resolve('completed');
-                    }).then(res => {
-                    }, err => {
-                    })
+                   if (data.length){
+                       new Promise((resolve, reject) => {
+                           let userInfo = {userInfo: data}
+                           Object.assign(userInfo, {userName: userName})
+                           this.setLoginInfoAct(userInfo)
+                           if (data.length > 1) {
+                               this.$router.push('/orgSelect')
+                           } else {
+                               this.setCorpTokenAct(data[0].token)
+                               Object.assign(userInfo, {orgValue: 0})
+                               this.setLoginInfoAct(userInfo)
+                               if (data[0].role === 'admin') {
+                                   this.$router.push('/rootManager')
+                               } else {
+                                   this.$router.push('/signedRepo')
+                               }
+                           }
+                           resolve('completed');
+                       }).then(res => {
+                       }, err => {
+                       })
+                   }else{
+                       this.$store.commit('errorCodeSet', {
+                           dialogVisible: true,
+                           dialogMessage: 'Wrong user name or password, please try again',
+                       })
+                   }
+
 
                 }).catch(err => {
                    if (err.data.hasOwnProperty('data')) {
