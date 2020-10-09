@@ -4,10 +4,10 @@
             <div class="formBack_Box">
                 <div class="formBack">
                     <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="0">
-                        <el-form-item label="" prop="account">
+                        <el-form-item :required="true" label="" prop="account">
                             <el-input v-model="ruleForm.userName" autocomplete="off" placeholder="Account"></el-input>
                         </el-form-item>
-                        <el-form-item label="" prop="pass">
+                        <el-form-item :required="true" label="" prop="pass">
                             <el-input type="password" v-model="ruleForm.pwd" autocomplete="off"
                                       placeholder="Password"></el-input>
                         </el-form-item>

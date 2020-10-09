@@ -170,6 +170,12 @@
                                     dialogMessage: 'The mailbox does not belong to the company mailbox',
                                 });
                                 break;
+                                case 'cla.invalid_parameter':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: 'Old password error,please try again',
+                                });
+                                break;
                             case 'cla.system_error':
                                 this.$store.commit('errorCodeSet', {
                                     dialogVisible: true,

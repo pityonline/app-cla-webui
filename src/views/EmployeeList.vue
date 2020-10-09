@@ -295,16 +295,8 @@
             },
 
             getEmployee() {
-                let obj = {
-                    platform: this.userInfo[this.orgValue].platform,
-                    repo_id: this.userInfo[this.orgValue].repo_id,
-                    org_id: this.userInfo[this.orgValue].org_id,
-                    corporation_email: this.userInfo[this.orgValue].email
-                }
                http({
                     url: url.queryEmployee,
-                    params: obj,
-
                 }).then(res => {
                     console.log(res);
                     this.inactiveData = [];
@@ -319,7 +311,6 @@
                         })
                     }
                 }).catch(err => {
-                   console.log(err);
                    if (err.data.hasOwnProperty('data')) {
                        switch (err.data.data.error_code) {
                            case 'cla.invalid_token':
