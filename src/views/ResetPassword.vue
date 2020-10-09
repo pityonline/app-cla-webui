@@ -2,23 +2,28 @@
     <el-row>
         <el-col class="resetPwdFormBox" :offset="6" :span="12">
             <p id="tabName">Reset Password</p>
-            <el-form class="resetPwdForm" :model="ruleForm"  :rules="rules" ref="ruleForm" label-width="100px" >
+            <el-form class="resetPwdForm" :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px">
                 <el-form-item label="" prop="oldPassword" label-width="0">
-                    <el-input  placeholder="please input old password" clearable="" type="password" v-model="ruleForm.oldPassword"></el-input>
+                    <el-input placeholder="please input old password" clearable="" type="password"
+                              v-model="ruleForm.oldPassword"></el-input>
                 </el-form-item>
-                <el-form-item  label="" prop="newPassword" label-width="0">
-                    <el-input placeholder="please input new password"  clearable="" type="password" v-model="ruleForm.newPassword" ></el-input>
+                <el-form-item label="" prop="newPassword" label-width="0">
+                    <el-input placeholder="please input new password" clearable="" type="password"
+                              v-model="ruleForm.newPassword"></el-input>
                 </el-form-item>
                 <el-form-item label="" prop="checkPwd" label-width="0">
-                    <el-input placeholder="Please enter the new password again" clearable="" type="password" v-model="ruleForm.checkPwd" ></el-input>
+                    <el-input placeholder="Please enter the new password again" clearable="" type="password"
+                              v-model="ruleForm.checkPwd"></el-input>
                 </el-form-item>
                 <el-form-item label-width="0">
                     <button class="button" type="button" @click="submit('ruleForm')">Submit</button>
                     <button class="cancelBt" type="reset" @click="reset('ruleForm')">Reset</button>
                 </el-form-item>
             </el-form>
-            <corpReLoginDialog :title="corpReLoginDialogTitle" :message="corpReLoginMsg" :dialogVisible="corpReLoginDialogVisible"></corpReLoginDialog>
-            <reTryDialog :title="corpReLoginDialogTitle" :message="corpReLoginMsg" :dialogVisible="corpReTryDialogVisible"></reTryDialog>
+            <corpReLoginDialog :title="corpReLoginDialogTitle" :message="corpReLoginMsg"
+                               :dialogVisible="corpReLoginDialogVisible"></corpReLoginDialog>
+            <reTryDialog :title="corpReLoginDialogTitle" :message="corpReLoginMsg"
+                         :dialogVisible="corpReTryDialogVisible"></reTryDialog>
         </el-col>
     </el-row>
 </template>
@@ -28,6 +33,7 @@
     import http from '../until/http'
     import corpReLoginDialog from '../components/CorpReLoginDialog'
     import reTryDialog from '../components/ReTryDialog'
+
     export default {
 
         name: "ResetPassword",
@@ -35,11 +41,11 @@
             corpReLoginDialog,
             reTryDialog
         },
-        computed:{
-            orgValue(){
+        computed: {
+            orgValue() {
                 return this.$store.state.loginInfo.orgValue
             },
-            userInfo(){
+            userInfo() {
                 return this.$store.state.loginInfo.userInfo
             },
             corpReLoginDialogVisible() {
@@ -62,7 +68,7 @@
                     callback(new Error('please input old password'));
                 } else if (value === this.ruleForm.newPassword) {
                     callback(new Error('The new password cannot be the same as the old password'));
-                }else{
+                } else {
                     callback();
                 }
             };
@@ -71,7 +77,7 @@
                     callback(new Error('please input new password'));
                 } else if (value === this.ruleForm.oldPassword) {
                     callback(new Error('The new password cannot be the same as the old password'));
-                }else {
+                } else {
                     callback();
                 }
             };
@@ -80,17 +86,17 @@
                     callback(new Error('please input the new password again'));
                 } else if (value !== this.ruleForm.newPassword) {
                     callback(new Error('The two passwords are not the same'));
-                }else{
+                } else {
                     callback();
                 }
             };
             return {
-                cla_org_id:this.$store.state.loginInfo.cla_org_id,
-                email:this.$store.state.loginInfo.email,
+                cla_org_id: this.$store.state.loginInfo.cla_org_id,
+                email: this.$store.state.loginInfo.email,
                 ruleForm: {
                     oldPassword: '',
                     newPassword: '',
-                    checkPwd:'',
+                    checkPwd: '',
                 },
                 rules: {
                     oldPassword: [
@@ -109,11 +115,16 @@
         methods: {
 
             resetPassword() {
-                let obj ={cla_org_id:this.cla_org_id,email:this.email,old_password:this.ruleForm.oldPassword,new_password:this.ruleForm.newPassword}
+                let obj = {
+                    cla_org_id: this.cla_org_id,
+                    email: this.email,
+                    old_password: this.ruleForm.oldPassword,
+                    new_password: this.ruleForm.newPassword
+                }
                 http({
-                    url:url.resetPassword,
-                    method:'patch',
-                    data:obj,
+                    url: url.resetPassword,
+                    method: 'patch',
+                    data: obj,
 
                 }).then(res => {
                     this.$message.closeAll()
@@ -166,7 +177,7 @@
                                 });
                                 break;
                         }
-                    }else{
+                    } else {
                         this.$store.commit('errorCodeSet', {
                             dialogVisible: true,
                             dialogMessage: 'System error, please try again',
@@ -191,19 +202,22 @@
 
 </script>
 
-<style  lang="less">
+<style lang="less">
     @import "../assets/font/css/Roboto-Regular.css";
 
-    .resetPwdFormBox{
-        & .resetPwdForm{
+    .resetPwdFormBox {
+        & .el-dialog {
+            border-radius: 1rem;
+        }
+
+        & .resetPwdForm {
             box-shadow: 0 0 20px 10px #F3F3F3;
             padding: 2rem 2rem 0;
             background-color: white;
             border-radius: 1rem;
-            & .el-dialog {
-                border-radius: 1rem;
-            }
+
         }
+
         & #tabName {
             font-family: Roboto-Regular, sans-serif;
             font-size: 2rem;
@@ -222,26 +236,28 @@
             font-size: 1.2rem;
         }
 
-        & .el-form-item{
+        & .el-form-item {
             margin-bottom: 2rem
         }
 
+        & .button {
+            width: 6rem;
+            height: 3rem;
+            border-radius: 1.5rem;
+            border: none;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            background: linear-gradient(to right, #97DB30, #319E55);
+            margin-bottom: 1rem;
+        }
+
+        & .button:focus {
+            outline: none;
+        }
 
     }
-    .button {
-        width: 6rem;
-        height: 3rem;
-        border-radius: 1.5rem;
-        border: none;
-        color: white;
-        font-size: 1rem;
-        cursor: pointer;
-        background: linear-gradient(to right, #97DB30, #319E55);
-        margin-bottom: 1rem;
-    }
-    .button:focus {
-        outline: none;
-    }
+
     .cancelBt {
         width: 6rem;
         height: 3rem;
@@ -253,6 +269,7 @@
         background-color: white;
         margin-left: 1rem;
     }
+
     .cancelBt:focus {
         outline: none;
     }

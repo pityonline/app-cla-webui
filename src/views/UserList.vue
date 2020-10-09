@@ -34,7 +34,7 @@
                             align="center"
                             width="200">
                         <template slot-scope="scope">
-                            <button  class="deleteBt" @click="deleteUser(scope.row)">
+                            <button class="deleteBt" @click="deleteUser(scope.row)">
                                 Delete
                             </button>
                         </template>
@@ -54,8 +54,10 @@
                     <button class="cancelBt" @click="cancel()">Cancel</button>
                 </el-col>
             </el-row>
-            <corpReLoginDialog :title="corpReLoginDialogTitle" :message="corpReLoginMsg" :dialogVisible="corpReLoginDialogVisible"></corpReLoginDialog>
-            <reTryDialog :title="corpReLoginDialogTitle" :message="corpReLoginMsg" :dialogVisible="corpReTryDialogVisible"></reTryDialog>
+            <corpReLoginDialog :title="corpReLoginDialogTitle" :message="corpReLoginMsg"
+                               :dialogVisible="corpReLoginDialogVisible"></corpReLoginDialog>
+            <reTryDialog :title="corpReLoginDialogTitle" :message="corpReLoginMsg"
+                         :dialogVisible="corpReTryDialogVisible"></reTryDialog>
         </el-col>
 
 
@@ -157,59 +159,59 @@
                     this.tableData = res.data.data;
                     this.setUserLimitAct(res.data.data.length)
                 }).catch(err => {
-                        console.log(err);
-                        if (err.data.hasOwnProperty('data')) {
-                            switch (err.data.data.error_code) {
-                                case 'cla.invalid_token':
-                                    this.$store.commit('errorSet', {
-                                        dialogVisible: true,
-                                        dialogMessage: 'token expired, please login again',
-                                    });
-                                    break;
-                                case 'cla.missing_token':
-                                    this.$store.commit('errorSet', {
-                                        dialogVisible: true,
-                                        dialogMessage: 'Token does not exist, please login again',
-                                    });
-                                    break;
-                                case 'cla.unknown_token':
-                                    this.$store.commit('errorSet', {
-                                        dialogVisible: true,
-                                        dialogMessage: 'token unknown, please login again',
-                                    });
-                                    break;
+                    console.log(err);
+                    if (err.data.hasOwnProperty('data')) {
+                        switch (err.data.data.error_code) {
+                            case 'cla.invalid_token':
+                                this.$store.commit('errorSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: 'token expired, please login again',
+                                });
+                                break;
+                            case 'cla.missing_token':
+                                this.$store.commit('errorSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: 'Token does not exist, please login again',
+                                });
+                                break;
+                            case 'cla.unknown_token':
+                                this.$store.commit('errorSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: 'token unknown, please login again',
+                                });
+                                break;
 
-                                case 'cla.num_of_corp_managers_exceeded':
-                                    this.$store.commit('errorCodeSet', {
-                                        dialogVisible: true,
-                                        dialogMessage: 'The added administrator exceeds the limit',
-                                    });
-                                    break;
-                                case 'cla.corp_manager_exists':
-                                    this.$store.commit('errorCodeSet', {
-                                        dialogVisible: true,
-                                        dialogMessage: 'The added administrator already exists',
-                                    });
-                                    break;
-                                case 'cla.not_same_corp':
-                                    this.$store.commit('errorCodeSet', {
-                                        dialogVisible: true,
-                                        dialogMessage: 'The mailbox does not belong to the company mailbox',
-                                    });
-                                    break;
-                                case 'cla.system_error':
-                                    this.$store.commit('errorCodeSet', {
-                                        dialogVisible: true,
-                                        dialogMessage: 'System error, please try again',
-                                    });
-                                    break;
-                            }
-                        }else{
-                            this.$store.commit('errorCodeSet', {
-                                dialogVisible: true,
-                                dialogMessage: 'System error, please try again',
-                            })
+                            case 'cla.num_of_corp_managers_exceeded':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: 'The added administrator exceeds the limit',
+                                });
+                                break;
+                            case 'cla.corp_manager_exists':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: 'The added administrator already exists',
+                                });
+                                break;
+                            case 'cla.not_same_corp':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: 'The mailbox does not belong to the company mailbox',
+                                });
+                                break;
+                            case 'cla.system_error':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: 'System error, please try again',
+                                });
+                                break;
                         }
+                    } else {
+                        this.$store.commit('errorCodeSet', {
+                            dialogVisible: true,
+                            dialogMessage: 'System error, please try again',
+                        })
+                    }
                 })
             },
             submit() {
@@ -271,7 +273,7 @@
                                 });
                                 break;
                         }
-                    }else{
+                    } else {
                         this.$store.commit('errorCodeSet', {
                             dialogVisible: true,
                             dialogMessage: 'System error, please try again',
@@ -283,54 +285,9 @@
     }
 </script>
 
-<style  lang="less">
+<style lang="less">
     @import "../assets/font/css/Roboto-Regular.css";
-    .cancelBt {
-        width: 5rem;
-        height: 2rem;
-        border-radius: 1rem;
-        border: 1px solid black;
-        color: black;
-        font-size: 1rem;
-        cursor: pointer;
-        background-color: white;
-        margin-left: 1rem;
-    }
 
-    .cancelBt:focus {
-        outline: none;
-    }
-
-    .deleteBt {
-        width: 5rem;
-        height: 2rem;
-        border-radius: 1rem;
-        border: none;
-        color: white;
-        font-size: 1rem;
-        cursor: pointer;
-        background: linear-gradient(to right, #FF9D58, #E22424);
-    }
-
-    .deleteBt:focus {
-        outline: none;
-    }
-
-    .button {
-        width: 10rem;
-        height: 2rem;
-        border-radius: 1rem;
-        border: none;
-        color: white;
-        font-size: 1rem;
-        cursor: pointer;
-        background: linear-gradient(to right, #97DB30, #319E55);
-        margin-bottom: 1rem;
-    }
-
-    .button:focus {
-        outline: none;
-    }
 
     .tableClass {
         border: 1px solid black;
@@ -346,49 +303,109 @@
         margin-bottom: 2rem;
         padding: 3rem;
         background-color: white;
+
         & .el-dialog {
             border-radius: 1rem;
         }
+
+        & .cancelBt {
+            width: 5rem;
+            height: 2rem;
+            border-radius: 1rem;
+            border: 1px solid black;
+            color: black;
+            font-size: 1rem;
+            cursor: pointer;
+            background-color: white;
+            margin-left: 1rem;
+        }
+
+        & .cancelBt:focus {
+            outline: none;
+        }
+
+        & .deleteBt {
+            width: 5rem;
+            height: 2rem;
+            border-radius: 1rem;
+            border: none;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            background: linear-gradient(to right, #FF9D58, #E22424);
+        }
+
+        & .deleteBt:focus {
+            outline: none;
+        }
+
+        & .button {
+            width: 10rem;
+            height: 2rem;
+            border-radius: 1rem;
+            border: none;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            background: linear-gradient(to right, #97DB30, #319E55);
+            margin-bottom: 1rem;
+        }
+
+        & .button:focus {
+            outline: none;
+        }
+
         & #tabName {
             font-family: Roboto-Regular, sans-serif;
             font-size: 2rem;
             text-align: left;
         }
+
         & .el-dialog {
             border-radius: 1rem;
         }
-        & .el-dialog__body{
+
+        & .el-dialog__body {
             padding-top: 0;
         }
-        & .el-checkbox__inner{
+
+        & .el-checkbox__inner {
             border: 1px solid #319E55;
         }
-        & .el-checkbox__inner:hover{
+
+        & .el-checkbox__inner:hover {
             border: 1px solid #319E55;
         }
+
         & .el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner {
             background: linear-gradient(to right, #FF9D58, #E22424);
             border-color: transparent;
         }
-        & .el-checkbox__input.is-focus .el-checkbox__inner{
+
+        & .el-checkbox__input.is-focus .el-checkbox__inner {
             border: 1px solid #319e55;
         }
-        & .el-table__body, .el-table__footer, .el-table__header{
+
+        & .el-table__body, .el-table__footer, .el-table__header {
             padding: 0;
             width: auto;
         }
-        & .el-table__body-wrapper{
+
+        & .el-table__body-wrapper {
             margin: 0 1rem;
         }
-        & .el-table__body-wrapper:not(:last-child){
+
+        & .el-table__body-wrapper:not(:last-child) {
             border-top: 2px dashed lightgrey;
 
         }
+
         & .el-table__body-wrapper, .el-table__footer-wrapper, .el-table__header-wrapper {
             padding: 0;
             width: auto;
         }
-        & .el-table__footer-wrapper, .el-table__header-wrapper{
+
+        & .el-table__footer-wrapper, .el-table__header-wrapper {
             border: 1px solid black;
             border-radius: 1.5rem;
             padding: 0 1rem;

@@ -672,22 +672,6 @@
         color: #319E55;
     }
 
-    .button {
-        font-family: Roboto-Light, sans-serif;
-        width: 15rem;
-        height: 3rem;
-        border-radius: 1.5rem;
-        border: none;
-        color: white;
-        font-size: 1.2rem;
-        cursor: pointer;
-        background: linear-gradient(to right, #97DB30, #319E55);
-        margin: 1rem 0;
-    }
-
-    .button:focus {
-        outline: none;
-    }
 
     .codeBox .el-button--medium, .codeBox .el-button {
         border-radius: 0 4px 4px 0;
@@ -862,6 +846,23 @@
         & > #section {
             flex-grow: 1;
             font-family: Roboto-Light, sans-serif;
+
+            & .button {
+                font-family: Roboto-Light, sans-serif;
+                width: 15rem;
+                height: 3rem;
+                border-radius: 1.5rem;
+                border: none;
+                color: white;
+                font-size: 1.2rem;
+                cursor: pointer;
+                background: linear-gradient(to right, #97DB30, #319E55);
+                margin: 1rem 0;
+            }
+
+            & .button:focus {
+                outline: none;
+            }
 
             & > .content {
                 padding: 1rem;

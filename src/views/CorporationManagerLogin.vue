@@ -199,21 +199,7 @@
 <style  lang="less">
     @import "../assets/font/css/Roboto-Regular.css";
     @import "../assets/font/css/FZLTHJW.css";
-    .button {
-        font-family:Roboto-Regular,sans-serif ;
-        width: 15rem;
-        height: 4rem;
-        border-radius: 2rem;
-        border: none;
-        color: white;
-        font-size: 1.3rem;
-        cursor: pointer;
-        background: linear-gradient(to right, #97DB30, #319E55);
-    }
 
-    .button:focus {
-        outline: none;
-    }
     .formBack_Box{
         width: 100%;
         display: flex;
@@ -259,6 +245,21 @@
         & .el-dialog {
             border-radius: 1rem;
             text-align: center;
+        }
+       & .button {
+            font-family:Roboto-Regular,sans-serif ;
+            width: 15rem;
+            height: 4rem;
+            border-radius: 2rem;
+            border: none;
+            color: white;
+            font-size: 1.3rem;
+            cursor: pointer;
+            background: linear-gradient(to right, #97DB30, #319E55);
+        }
+
+       & .button:focus {
+            outline: none;
         }
     }
 
