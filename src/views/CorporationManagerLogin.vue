@@ -190,7 +190,7 @@
                 });
             },
         },
-        created() {
+        mounted() {
             this.setClientHeight()
         }
     }
