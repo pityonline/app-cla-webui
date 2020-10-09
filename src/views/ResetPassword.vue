@@ -1,7 +1,7 @@
 <template>
     <el-row>
         <el-col class="resetPwdFormBox" :offset="6" :span="12">
-            <p>Reset Password</p>
+            <p id="tabName">Reset Password</p>
             <el-form class="resetPwdForm" :model="ruleForm"  :rules="rules" ref="ruleForm" label-width="100px" >
                 <el-form-item label="" prop="oldPassword" label-width="0">
                     <el-input  placeholder="please input old password" clearable="" type="password" v-model="ruleForm.oldPassword"></el-input>
@@ -114,7 +114,7 @@
                     url:url.resetPassword,
                     method:'patch',
                     data:obj,
-                  
+
                 }).then(res => {
                     this.$message.closeAll()
                     this.$message.success('success')
@@ -200,8 +200,11 @@
             padding: 2rem 2rem 0;
             background-color: white;
             border-radius: 1rem;
+            & .el-dialog {
+                border-radius: 1rem;
+            }
         }
-        & p {
+        & #tabName {
             font-family: Roboto-Regular, sans-serif;
             font-size: 2rem;
             text-align: left;
