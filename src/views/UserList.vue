@@ -3,7 +3,7 @@
     <el-row id="tableStyle" class="marginTop1rem">
 
         <el-col>
-            <p>User Management</p>
+            <p id="tabName">User Management</p>
             <el-row>
                 <el-col align="left">
                     <button class="button" @click="multipleChoice=true">Multiple choice</button>
@@ -150,7 +150,7 @@
             },
             getEmployeeManager() {
                 http({
-                    url: `/api${url.queryEmployeeManager}`,
+                    url: `${url.queryEmployeeManager}`,
                 }).then(res => {
                     console.log(res);
                     this.tableData = res.data.data;
@@ -296,7 +296,7 @@
         margin-bottom: 2rem;
         padding: 3rem;
         background-color: white;
-        & p {
+        & #tabName {
             font-family: Roboto-Regular, sans-serif;
             font-size: 2rem;
             text-align: left;
