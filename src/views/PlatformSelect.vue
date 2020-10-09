@@ -153,7 +153,7 @@
     }
 </script>
 
-<style scoped lang="less">
+<style  lang="less">
     .bt_desc {
         height: 100px;
         display: flex;
@@ -213,6 +213,7 @@
         justify-content: center;
         & .el-dialog {
             border-radius: 1rem;
+            text-align: center;
         }
     }
 

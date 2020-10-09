@@ -258,6 +258,7 @@
         justify-content: center;
         & .el-dialog {
             border-radius: 1rem;
+            text-align: center;
         }
     }
 
