@@ -91,7 +91,7 @@
                 let obj ={cla_org_id:this.cla_org_id,email:this.email,old_password:this.ruleForm.oldPassword,new_password:this.ruleForm.newPassword}
                 this.$axios({
                     url:'/api'+url.resetPassword,
-                    method:'put',
+                    method:'patch',
                     data:obj,
                     headers:{
                         token:this.userInfo[this.orgValue].token
