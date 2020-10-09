@@ -75,10 +75,10 @@
                 },
                 rules: {
                     userName: [
-                        {required: item.required, validator: validateAccount, trigger:['blur','change']}
+                        {required: true, validator: validateAccount, trigger:['blur','change']}
                     ],
                     pwd: [
-                        {required: item.required,validator: validatePass, trigger: ['blur','change']}
+                        {required: true,validator: validatePass, trigger: ['blur','change']}
                     ],
                 },
                 ruleForm: {
