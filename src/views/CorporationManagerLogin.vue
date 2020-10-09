@@ -256,6 +256,9 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+        & .el-dialog {
+            border-radius: 1rem;
+        }
     }
 
     .pointer {

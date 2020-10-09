@@ -1,7 +1,7 @@
 <template>
     <el-row id="createUser">
         <el-col :offset="6" :span="12">
-            <p>Create User</p>
+            <p id="tabName">Create User</p>
             <el-row class="createUserBack">
                 <el-row class="emailRow" gutter="20" v-for="(item,index) in emails">
                     <el-col :span="16">
@@ -166,6 +166,9 @@
     @import "../assets/font/css/Roboto-Regular.css";
 
     #createUser {
+        & .el-dialog {
+            border-radius: 1rem;
+        }
         & .createUserBack {
             box-shadow: 0 0 20px 10px #F3F3F3;
             padding: 2rem;
@@ -181,7 +184,7 @@
             font-size: 1.2rem;
         }
 
-        & p {
+        & #tabName {
             font-family: Roboto-Regular, sans-serif;
             font-size: 2rem;
             text-align: left;

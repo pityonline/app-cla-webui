@@ -346,6 +346,9 @@
         margin-bottom: 2rem;
         padding: 3rem;
         background-color: white;
+        & .el-dialog {
+            border-radius: 1rem;
+        }
         & #tabName {
             font-family: Roboto-Regular, sans-serif;
             font-size: 2rem;

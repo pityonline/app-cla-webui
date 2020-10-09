@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="employeeList">
         <el-tabs v-model="active">
             <el-tab-pane label="inactive" name="first" style="margin-top: 1rem">
                 <div style="margin-bottom: 1rem" class="tableStyle">
@@ -382,6 +382,11 @@
 </script>
 
 <style lang="less">
+    #employeeList{
+        & .el-dialog {
+            border-radius: 1rem;
+        }
+    }
     .tableStyle {
         margin-bottom: 2rem;
         padding: 3rem;
