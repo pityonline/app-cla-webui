@@ -140,9 +140,15 @@ export default new Vuex.Store({
             state.reTryDialogVisible = obj.dialogVisible;
             state.dialogMessage = obj.dialogMessage
         },
+        setCorpToken(state, token) {
+            state.access_token = token;
+            sessionStorage.setItem('token', token);
+        },
     },
     actions: {
-
+        setCorpTokenAct({commit}, token) {
+            commit('setCorpToken', token);
+        },
         errorAct({commit}, err) {
             console.log(err);
             if (err.data.hasOwnProperty('data')) {

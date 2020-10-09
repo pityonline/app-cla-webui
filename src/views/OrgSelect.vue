@@ -66,12 +66,13 @@
             }
         },
         methods: {
-            ...mapActions(['setLoginInfoAct']),
+            ...mapActions(['setLoginInfoAct','setCorpTokenAct']),
             changeOrg(value) {
             },
             submit() {
                 let data = JSON.parse(JSON.stringify(this.$store.state.loginInfo))
                 Object.assign(data, {orgValue: this.orgValue})
+                this.setCorpTokenAct(data[this.orgValue].token)
                 this.setLoginInfoAct(data)
                 if (data.userInfo[this.orgValue].role === 'admin') {
                     this.$router.push('/rootManager')

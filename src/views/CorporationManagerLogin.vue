@@ -71,7 +71,7 @@
         },
         inject:['setClientHeight'],
         methods: {
-            ...mapActions(['setLoginInfoAct']),
+            ...mapActions(['setLoginInfoAct','setCorpTokenAct']),
             findPwd() {
             },
             login(userName, pwd) {
@@ -93,6 +93,7 @@
                         if (data.length > 1) {
                             this.$router.push('/orgSelect')
                         } else {
+                            this.setCorpTokenAct(data[0].token)
                             Object.assign(userInfo, {orgValue: 0})
                             this.setLoginInfoAct(userInfo)
                             if (data[0].role === 'admin') {
