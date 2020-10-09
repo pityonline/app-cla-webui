@@ -249,7 +249,7 @@ export default new Vuex.Store({
                             dialogMessage: 'The mailbox does not belong to the company mailbox',
                         });
                         break;
-                    case 'cla."not_ready_to_sign':
+                    case 'cla.not_ready_to_sign':
                         commit('errorSet', {
                             dialogVisible: true,
                             dialogMessage: 'The organization is not ready',
