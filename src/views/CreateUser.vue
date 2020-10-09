@@ -90,7 +90,7 @@
                 this.emails.forEach(item => {
                     myEmails.push(item.email)
                 })
-                let obj = {cla_org_id: this.userInfo[this.orgValue].cla_org_id, emails: myEmails}
+                let obj = {emails: myEmails}
                 http({
                     url: url.addEmployeeManager,
                     method: 'post',
