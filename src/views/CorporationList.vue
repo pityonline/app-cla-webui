@@ -267,7 +267,7 @@
                 let data = {cla_org_id: cla_org_id, email: email}
                 this.$axios({
                     url: `/api${url.corporationManager}`,
-                    method: 'post',
+                    method: 'put',
                     data: data,
                     headers: {
                         'Token': this.$store.state.access_token,

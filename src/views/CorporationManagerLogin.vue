@@ -84,6 +84,7 @@
                     method: 'post',
                     data: obj,
                 }).then(res => {
+                    console.log(res);
                     let data = res.data.data
                     new Promise((resolve, reject) => {
                         let userInfo = {userInfo: data}
