@@ -186,7 +186,7 @@ export default new Vuex.Store({
                     case 'cla.missing_token':
                         commit('errorSet', {
                             dialogVisible: true,
-                            dialogMessage: 'Token does not exist, please try again',
+                            dialogMessage: 'Token does not exist, please login again',
                         });
                         break;
                     case 'cla.unknown_token':

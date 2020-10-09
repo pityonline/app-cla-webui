@@ -168,7 +168,7 @@
                                 case 'cla.missing_token':
                                     this.$store.commit('errorSet', {
                                         dialogVisible: true,
-                                        dialogMessage: 'Token does not exist, please try again',
+                                        dialogMessage: 'Token does not exist, please login again',
                                     });
                                     break;
                                 case 'cla.unknown_token':
@@ -215,18 +215,68 @@
                 let obj = {
                     cla_org_id: this.userInfo[this.orgValue].cla_org_id, emails: this.emails
                 }
-                this.$axios({
-                    url: '/api' + url.deleteEmployeeManager,
+                http({
+                    url: url.deleteEmployeeManager,
                     method: 'delete',
                     data: obj,
-                    headers: {
-                        token: this.userInfo[this.orgValue].token
-                    }
                 }).then(res => {
                     console.log(res);
                     this.getEmployeeManager();
                     this.deleteUserVisible = false
                 }).catch(err => {
+                    console.log(err);
+                    if (err.data.hasOwnProperty('data')) {
+                        switch (err.data.data.error_code) {
+                            case 'cla.invalid_token':
+                                this.$store.commit('errorSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: 'token expired, please login again',
+                                });
+                                break;
+                            case 'cla.missing_token':
+                                this.$store.commit('errorSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: 'Token does not exist, please login again',
+                                });
+                                break;
+                            case 'cla.unknown_token':
+                                this.$store.commit('errorSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: 'token unknown, please login again',
+                                });
+                                break;
+
+                            case 'cla.num_of_corp_managers_exceeded':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: 'The added administrator exceeds the limit',
+                                });
+                                break;
+                            case 'cla.corp_manager_exists':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: 'The added administrator already exists',
+                                });
+                                break;
+                            case 'cla.not_same_corp':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: 'The mailbox does not belong to the company mailbox',
+                                });
+                                break;
+                            case 'cla.system_error':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: 'System error, please try again',
+                                });
+                                break;
+                        }
+                    }else{
+                        this.$store.commit('errorCodeSet', {
+                            dialogVisible: true,
+                            dialogMessage: 'System error, please try again',
+                        })
+                    }
                 })
             },
         },
