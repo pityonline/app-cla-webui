@@ -59,12 +59,16 @@
             var validateAccount = (rule, value, callback) => {
                 if (value === '') {
                     callback(new Error('please input account number'));
+                }else {
+                    callback()
                 }
 
             };
             var validatePass = (rule, value, callback) => {
                 if (value === '') {
                     callback(new Error('please input password'));
+                }else{
+                    callback()
                 }
 
             };
@@ -75,10 +79,10 @@
                 },
                 rules: {
                     userName: [
-                        {required: true, message:'please input account number', trigger:['blur','change']}
+                        {required: true, validator: validateAccount, trigger:['blur','change']}
                     ],
                     pwd: [
-                        {required: true,message:'please input password', trigger: ['blur','change']}
+                        {required: true,validator: validatePass, trigger: ['blur','change']}
                     ],
                 },
                 ruleForm: {
