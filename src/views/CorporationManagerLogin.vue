@@ -4,10 +4,10 @@
             <div class="formBack_Box">
                 <div class="formBack">
                     <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="0">
-                        <el-form-item label="" prop="account">
+                        <el-form-item :required="true" label="" prop="userName">
                             <el-input v-model="ruleForm.userName" autocomplete="off" placeholder="Account"></el-input>
                         </el-form-item>
-                        <el-form-item  label="" prop="pass">
+                        <el-form-item :required="true" label="" prop="pwd">
                             <el-input type="password" v-model="ruleForm.pwd" autocomplete="off"
                                       placeholder="Password"></el-input>
                         </el-form-item>
@@ -34,7 +34,6 @@
 <script>
     import * as url from '../until/api'
     import http from '../until/http'
-    import * as until from '../until/until'
     import {mapActions} from 'vuex'
     import reTryDialog from '../components/ReTryDialog'
 
