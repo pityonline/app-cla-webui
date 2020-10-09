@@ -1,11 +1,11 @@
 <template>
     <el-row class="headerBox" style="border-bottom:2px solid #F2F2F2;">
-        <el-col class="header" :offset="4" :span="16">
-            <div class="box">
+        <!--<el-col class="header" :offset="4" :span="16">-->
+            <!--<div class="box">-->
                 <!--<svg-icon icon-class="icon" class="icon"></svg-icon>-->
-            </div>
+            <!--</div>-->
 
-            <div>
+            <!--<div>-->
 
                 <!--<div class="my_select_box">-->
                     <!--<el-row class="my_select" @click.native="clickSelect()">-->
@@ -36,8 +36,8 @@
                         <!--</div>-->
                     <!--</div>-->
                 <!--</div>-->
-            </div>
-        </el-col>
+            <!--</div>-->
+        <!--</el-col>-->
     </el-row>
 </template>
 
