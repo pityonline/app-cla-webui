@@ -22,16 +22,23 @@
                 </el-row>
             </el-row>
 
-
+            <corpReLoginDialog :title="corpReLoginDialogTitle" :message="corpReLoginMsg" :dialogVisible="corpReLoginDialogVisible"></corpReLoginDialog>
+            <reTryDialog :title="corpReLoginDialogTitle" :message="corpReLoginMsg" :dialogVisible="corpReTryDialogVisible"></reTryDialog>
         </el-col>
     </el-row>
 </template>
 
 <script>
     import * as url from '../until/api'
-
+    import http from '../until/http'
+    import corpReLoginDialog from '../components/CorpReLoginDialog'
+    import reTryDialog from '../components/ReTryDialog'
     export default {
         name: "CreateUser",
+        components: {
+            corpReLoginDialog,
+            reTryDialog
+        },
         computed: {
             orgValue() {
                 return this.$store.state.loginInfo.orgValue
@@ -39,7 +46,19 @@
             userInfo() {
                 return this.$store.state.loginInfo.userInfo
             },
-
+            corpReLoginDialogVisible() {
+                return this.$store.state.dialogVisible
+            }
+            ,
+            corpReLoginMsg() {
+                return this.$store.state.dialogMessage
+            },
+            corpReLoginDialogTitle() {
+                return `cla sign prompt you`
+            },
+            corpReTryDialogVisible() {
+                return this.$store.state.reTryDialogVisible
+            },
         },
         data() {
 
@@ -72,23 +91,69 @@
                     myEmails.push(item.email)
                 })
                 let obj = {cla_org_id: this.userInfo[this.orgValue].cla_org_id, emails: myEmails}
-                this.$axios({
-                    url: '/api' + url.addEmployeeManager,
+                http({
+                    url: url.addEmployeeManager,
                     method: 'post',
                     data: obj,
-                    headers: {
-                        token: this.userInfo[this.orgValue].token,
-                    }
                 }).then(res => {
-
                     this.$message.closeAll()
                     this.$message.success('success')
                     setTimeout(() => {
                         this.$router.push('/userList')
                     }, 500)
                 }).catch(err => {
-                    this.$message.closeAll()
-                    this.$message.error(err.response.data.data)
+                    if (err.data.hasOwnProperty('data')) {
+                        switch (err.data.data.error_code) {
+                            case 'cla.invalid_token':
+                                this.$store.commit('errorSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: 'token expired, please login again',
+                                });
+                                break;
+                            case 'cla.missing_token':
+                                this.$store.commit('errorSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: 'Token does not exist, please login again',
+                                });
+                                break;
+                            case 'cla.unknown_token':
+                                this.$store.commit('errorSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: 'token unknown, please login again',
+                                });
+                                break;
+
+                            case 'cla.num_of_corp_managers_exceeded':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: 'The added administrator exceeds the limit',
+                                });
+                                break;
+                            case 'cla.corp_manager_exists':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: 'The added administrator already exists',
+                                });
+                                break;
+                            case 'cla.not_same_corp':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: 'The mailbox does not belong to the company mailbox',
+                                });
+                                break;
+                            case 'cla.system_error':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: 'System error, please try again',
+                                });
+                                break;
+                        }
+                    }else{
+                        this.$store.commit('errorCodeSet', {
+                            dialogVisible: true,
+                            dialogMessage: 'System error, please try again',
+                        })
+                    }
                 })
             },
         },
