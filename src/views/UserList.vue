@@ -54,6 +54,8 @@
                     <button class="cancelBt" @click="cancel()">Cancel</button>
                 </el-col>
             </el-row>
+            <corpReLoginDialog :title="corpReLoginDialogTitle" :message="corpReLoginMsg" :dialogVisible="corpReLoginDialogVisible"></corpReLoginDialog>
+            <reTryDialog :title="corpReLoginDialogTitle" :message="corpReLoginMsg" :dialogVisible="corpReTryDialogVisible"></reTryDialog>
         </el-col>
 
 
@@ -73,8 +75,7 @@
             </el-row>
 
         </el-dialog>
-        <corpReLoginDialog :title="corpReLoginDialogTitle" :message="corpReLoginMsg" :dialogVisible="corpReLoginDialogVisible"></corpReLoginDialog>
-        <reTryDialog :title="corpReLoginDialogTitle" :message="corpReLoginMsg" :dialogVisible="corpReTryDialogVisible"></reTryDialog>
+
     </el-row>
 
 </template>
