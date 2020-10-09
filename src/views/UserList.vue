@@ -214,7 +214,7 @@
             },
             submit() {
                 let obj = {
-                    cla_org_id: this.userInfo[this.orgValue].cla_org_id, emails: this.emails
+                    emails: this.emails
                 }
                 http({
                     url: url.deleteEmployeeManager,
@@ -225,7 +225,6 @@
                     this.getEmployeeManager();
                     this.deleteUserVisible = false
                 }).catch(err => {
-                    console.log(err);
                     if (err.data.hasOwnProperty('data')) {
                         switch (err.data.data.error_code) {
                             case 'cla.invalid_token':
