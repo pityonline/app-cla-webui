@@ -66,7 +66,7 @@
                 if (value === '') {
                     callback(new Error('please input password'));
                 }
-                
+
             };
             return {
 
@@ -75,10 +75,10 @@
                 },
                 rules: {
                     userName: [
-                        {validator: validateAccount, trigger: 'blur'}
+                        {required: item.required, validator: validateAccount, trigger:['blur','change']}
                     ],
                     pwd: [
-                        {validator: validatePass, trigger: 'blur'}
+                        {required: item.required,validator: validatePass, trigger: ['blur','change']}
                     ],
                 },
                 ruleForm: {
