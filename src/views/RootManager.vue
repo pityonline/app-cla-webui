@@ -108,7 +108,7 @@
             },
             loginOut() {
                 sessionStorage.clear();
-                this.$router.push('/corporationManagerLogin')
+                this.$router.push('/index/corporationManagerLogin')
             },
             setClientHeight() {
                 this.$nextTick(() => {
