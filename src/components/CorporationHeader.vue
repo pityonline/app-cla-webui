@@ -74,7 +74,7 @@
 
         data() {
             return {
-                userName: this.user.userName
+                userName: this.user.userName,
                 language: 'English',
                 value: 0,
                 options: [{value: 0, label: 'English'}, {value: 1, label: '中文'}, {value: 2, label: '日语'}],
