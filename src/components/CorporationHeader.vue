@@ -182,8 +182,12 @@
             right: 0;
             top: 0;
             z-index: 1;
+            &>div{
+                height: 2.6rem;
+                width: 100%;
+            }
         }
-        .uerImg{
+       & .uerImg{
             height: 2.6rem;
             width: 2.6rem;
         }
