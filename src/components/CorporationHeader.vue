@@ -5,52 +5,54 @@
                 <svg-icon @click="toHome()" icon-class="icon" class="icon"></svg-icon>
             </div>
             <div>
-                <div class="my_select_box">
-                    <el-row class="my_select" @click.native="clickSelect()">
-                        <el-col :span="20" class="select_content">
-                            {{language}}
-                        </el-col>
-                        <el-col :span="4" class="select_content">
-                            <svg-icon icon-class="arrow"></svg-icon>
-                        </el-col>
-                    </el-row>
-                    <div id="my_option" :class="visible">
-                        <div
-                                v-for="item in options"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value">
-                            <div style="width: 100%">
-                                <div>
-                                    <div class="mark">
+                <div>
+                    <div class="my_select_box">
+                        <el-row class="my_select" @click.native="clickSelect()">
+                            <el-col :span="20" class="select_content">
+                                {{language}}
+                            </el-col>
+                            <el-col :span="4" class="select_content">
+                                <svg-icon icon-class="arrow"></svg-icon>
+                            </el-col>
+                        </el-row>
+                        <div id="my_option" :class="visible">
+                            <div
+                                    v-for="item in options"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value">
+                                <div style="width: 100%">
+                                    <div>
+                                        <div class="mark">
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div>
-                                    {{item.label}}
-                                </div>
+                                    <div>
+                                        {{item.label}}
+                                    </div>
 
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div>
-                    <el-dropdown @command="handleCommand">
+                    <div>
+                        <el-dropdown @command="handleCommand">
   <span class="el-dropdown-link">
     {{userName}}<i class="el-icon-arrow-down el-icon--right"></i>
   </span>
-                        <el-dropdown-menu slot="dropdown">
-                            <el-dropdown-item v-if="userInfo[orgValue].role==='admin'" command="a">user
-                            </el-dropdown-item>
-                            <el-dropdown-item v-else command="b">employee</el-dropdown-item>
-                            <el-dropdown-item v-if="userInfo[orgValue].role==='admin'" command="c">create user
-                            </el-dropdown-item>
-                            <el-dropdown-item command="d">reset password</el-dropdown-item>
-                            <el-dropdown-item v-if="userInfo[orgValue].role==='admin'" command="e">my cla
-                            </el-dropdown-item>
-                            <el-dropdown-item command="f">login out</el-dropdown-item>
-                        </el-dropdown-menu>
-                    </el-dropdown>
+                            <el-dropdown-menu slot="dropdown">
+                                <el-dropdown-item v-if="userInfo[orgValue].role==='admin'" command="a">user
+                                </el-dropdown-item>
+                                <el-dropdown-item v-else command="b">employee</el-dropdown-item>
+                                <el-dropdown-item v-if="userInfo[orgValue].role==='admin'" command="c">create user
+                                </el-dropdown-item>
+                                <el-dropdown-item command="d">reset password</el-dropdown-item>
+                                <el-dropdown-item v-if="userInfo[orgValue].role==='admin'" command="e">my cla
+                                </el-dropdown-item>
+                                <el-dropdown-item command="f">login out</el-dropdown-item>
+                            </el-dropdown-menu>
+                        </el-dropdown>
+                    </div>
                 </div>
             </div>
         </el-col>
@@ -246,25 +248,22 @@
             justify-content: space-between;
         }
 
-        & .header > div:nth-of-type(1) {
+        & .header > div{
+            height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
 
-        & .header > div:nth-of-type(2) {
+        & .header > div:nth-of-type(2)>div {
             height: 100%;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
         }
 
-        & .header > div:nth-of-type(2) > div {
-            height: 100%;
+        & .header > div:nth-of-type(2) > div>div {
             margin-left: 1rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
         }
 
     }
