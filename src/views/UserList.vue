@@ -390,17 +390,14 @@
         & .el-table__body-wrapper {
             margin: 0 1rem;
         }
-        .el-table--border tr,td{
-            border-bottom: 1px dashed lightgrey!important;
+        .el-table__body tr:not(:last-of-type) td{
+            border-bottom: 1px dashed lightgrey;
         }
 
         .el-table::before{
             height:0;
         }
 
-        & .el-table__row{
-            border-top: 2px dashed lightgrey;
-        }
 
         & .el-table__body-wrapper, .el-table__footer-wrapper, .el-table__header-wrapper {
             padding: 0;
