@@ -293,8 +293,7 @@
         padding: 3rem;
         background-color: white;
         & .tableClass {
-            /*border: 1px solid black;*/
-            border-bottom: 1px solid black;
+            border: 1px solid black;
             border-radius: 1.5rem;
         }
 
@@ -403,7 +402,7 @@
         }
 
         & .el-table__footer-wrapper, .el-table__header-wrapper {
-            border: 1px solid black;
+            border-bottom: 1px solid black;
             border-radius: 1.5rem;
             padding: 0 1rem;
         }
