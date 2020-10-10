@@ -75,6 +75,12 @@
         data() {
             return {
                 userName: this.user.userName
+                language: 'English',
+                value: 0,
+                options: [{value: 0, label: 'English'}, {value: 1, label: '中文'}, {value: 2, label: '日语'}],
+                visible: {
+                    visibility: 'hidden',
+                },
 
             }
         },
@@ -82,6 +88,10 @@
             console.log(this.user);
         },
         methods: {
+            clickSelect() {
+                console.log('clickSelect');
+                document.getElementById('my_option').style.visibility = 'hidden'
+            },
             handleCommand(command) {
                 this.$emit('clickItem', command);
             },
@@ -240,6 +250,7 @@
             justify-content: center;
         }
         & .header > div:nth-of-type(2) {
+            height: 100%;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
