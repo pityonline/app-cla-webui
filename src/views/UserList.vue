@@ -390,7 +390,7 @@
         & .el-table__body-wrapper {
             margin: 0 1rem;
         }
-        .el-table--border tr,.el-table--border td{
+        .el-table--border tr,td{
             border-bottom: 1px dashed lightgrey!important;
         }
 
