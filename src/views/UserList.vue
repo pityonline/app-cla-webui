@@ -293,7 +293,8 @@
         padding: 3rem;
         background-color: white;
         & .tableClass {
-            border: 1px solid black;
+            /*border: 1px solid black;*/
+            border-bottom: 1px solid black;
             border-radius: 1.5rem;
         }
 
