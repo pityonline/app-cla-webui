@@ -395,6 +395,16 @@
             /*border-top: 2px dashed lightgrey;*/
 
         /*}*/
+        /*去每一行记录下的横线*/
+        .el-table--border tr,td{
+            border: 2px dashed lightgrey!important;
+        }
+
+        /*去最下面的横线*/
+        .el-table::before{
+            height:0;
+        }
+
         & .el-table__row{
             border-top: 2px dashed lightgrey;
         }
