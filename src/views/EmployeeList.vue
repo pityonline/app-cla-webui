@@ -485,7 +485,7 @@
 
         & .mySwitch .el-switch__label--right {
             z-index: 1;
-            right: -2.5rem;
+            right: 2.5rem;
         }
 
         & .mySwitch .el-switch__label--left {
