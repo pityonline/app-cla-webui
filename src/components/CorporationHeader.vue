@@ -40,12 +40,14 @@
     {{userName}}<i class="el-icon-arrow-down el-icon--right"></i>
   </span>
                         <el-dropdown-menu slot="dropdown">
-                            <el-dropdown-item v-if="userInfo[orgValue].role==='admin'" command="a">user</el-dropdown-item>
+                            <el-dropdown-item v-if="userInfo[orgValue].role==='admin'" command="a">user
+                            </el-dropdown-item>
                             <el-dropdown-item v-else command="b">employee</el-dropdown-item>
                             <el-dropdown-item v-if="userInfo[orgValue].role==='admin'" command="c">create user
                             </el-dropdown-item>
                             <el-dropdown-item command="d">reset password</el-dropdown-item>
-                            <el-dropdown-item v-if="userInfo[orgValue].role==='admin'" command="e">my cla</el-dropdown-item>
+                            <el-dropdown-item v-if="userInfo[orgValue].role==='admin'" command="e">my cla
+                            </el-dropdown-item>
                             <el-dropdown-item command="f">login out</el-dropdown-item>
                         </el-dropdown-menu>
                     </el-dropdown>
@@ -116,7 +118,7 @@
         /*position: fixed;*/
         /*top: 0;*/
         /*left: 0;*/
-        border-bottom:2px solid #F2F2F2;
+        border-bottom: 2px solid #F2F2F2;
         height: 4.5rem;
         width: 100%;
         /*z-index: 10;*/
@@ -249,20 +251,24 @@
             flex-direction: column;
             justify-content: center;
         }
+
         & .header > div:nth-of-type(2) {
             height: 100%;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
         }
-        & .header > div:nth-of-type(2)>div {
-           margin-left: 1rem;
+
+        & .header > div:nth-of-type(2) > div {
+            height: 100%;
+            margin-left: 1rem;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
 
     }
+
     .el-dropdown-link {
         cursor: pointer;
         color: rgba(54, 54, 54, 0.91);
@@ -277,48 +283,48 @@
     }
 
     /*.header {*/
-        /*position: fixed;*/
-        /*top: 0;*/
-        /*left: 0;*/
-        /*background-color: #ececec;*/
-        /*height: 4rem;*/
-        /*display: flex;*/
-        /*flex-direction: row;*/
-        /*justify-content: space-between;*/
-        /*z-index: 10;*/
-        /*width: 100%;*/
+    /*position: fixed;*/
+    /*top: 0;*/
+    /*left: 0;*/
+    /*background-color: #ececec;*/
+    /*height: 4rem;*/
+    /*display: flex;*/
+    /*flex-direction: row;*/
+    /*justify-content: space-between;*/
+    /*z-index: 10;*/
+    /*width: 100%;*/
 
-        /*& > div:nth-of-type(1) {*/
-            /*display: flex;*/
-            /*flex-direction: column;*/
-            /*justify-content: center;*/
-            /*text-align: left;*/
-            /*padding-left: 3rem;*/
-        /*}*/
+    /*& > div:nth-of-type(1) {*/
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*justify-content: center;*/
+    /*text-align: left;*/
+    /*padding-left: 3rem;*/
+    /*}*/
 
-        /*& > div:nth-of-type(2) {*/
-            /*display: flex;*/
-            /*justify-content: center;*/
+    /*& > div:nth-of-type(2) {*/
+    /*display: flex;*/
+    /*justify-content: center;*/
 
-            /*& > div {*/
-                /*display: flex;*/
-                /*flex-direction: column;*/
-                /*justify-content: center;*/
+    /*& > div {*/
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*justify-content: center;*/
 
-                /*#svg_logo {*/
-                    /*height: 4rem;*/
-                    /*width: 4rem;*/
-                /*}*/
-            /*}*/
+    /*#svg_logo {*/
+    /*height: 4rem;*/
+    /*width: 4rem;*/
+    /*}*/
+    /*}*/
 
-        /*}*/
+    /*}*/
 
-        /*& > div:nth-of-type(3) {*/
-            /*display: flex;*/
-            /*flex-direction: column;*/
-            /*justify-content: center;*/
-            /*text-align: right;*/
-            /*padding-right: 3rem;*/
-        /*}*/
+    /*& > div:nth-of-type(3) {*/
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*justify-content: center;*/
+    /*text-align: right;*/
+    /*padding-right: 3rem;*/
+    /*}*/
     /*}*/
 </style>
