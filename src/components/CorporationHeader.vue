@@ -234,7 +234,18 @@
             justify-content: space-between;
         }
 
-        & .header > div {
+        & .header > div:nth-of-type(1) {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        & .header > div:nth-of-type(2) {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        & .header > div:nth-of-type(2)>div {
+           margin-left: 1rem;
             display: flex;
             flex-direction: column;
             justify-content: center;
