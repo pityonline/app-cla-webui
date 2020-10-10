@@ -1,24 +1,12 @@
 <template>
     <div id="signedRepo" :style="section">
         <CorporationHeader @clickItem="clickItem" :user="user"></CorporationHeader>
-        <el-row style="margin-top: 2rem">
+        <el-row style="padding-top: 2rem">
             <el-col :offset="4" :span="16">
                 <router-view></router-view>
             </el-col>
         </el-row>
 
-        <div class="paginationClass">
-            <el-pagination
-                    background
-                    :page-size="5"
-                    :pager-count="5"
-                    :hide-on-single-page="true"
-                    :current-page="currentPage"
-                    @current-change="changePage"
-                    layout="prev, pager, next"
-                    :total="tableTotal">
-            </el-pagination>
-        </div>
         <el-dialog
                 width="20%"
                 title=""
@@ -180,11 +168,6 @@
             margin-bottom: 2rem;
             padding: 3rem;
             background-color: white;
-        }
-
-        & .paginationClass {
-            text-align: center;
-            margin-bottom: 1rem;
         }
 
         & .pointer {
