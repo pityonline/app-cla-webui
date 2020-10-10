@@ -390,17 +390,10 @@
         & .el-table__body-wrapper {
             margin: 0 1rem;
         }
-
-        /*& .el-table__body-wrapper:not(:last-child) {*/
-            /*border-top: 2px dashed lightgrey;*/
-
-        /*}*/
-        /*去每一行记录下的横线*/
-        .el-table--border tr,td{
+        .el-table--border tr:not(:last-child),td{
             border-bottom: 1px dashed lightgrey!important;
         }
 
-        /*去最下面的横线*/
         .el-table::before{
             height:0;
         }
