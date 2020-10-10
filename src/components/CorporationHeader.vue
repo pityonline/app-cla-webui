@@ -35,9 +35,11 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div>
                     <div>
                         <el-dropdown @command="handleCommand">
-  <span class="el-dropdown-link">
+                         <span class="el-dropdown-link">
     {{userName}}<i class="el-icon-arrow-down el-icon--right"></i>
   </span>
                             <el-dropdown-menu slot="dropdown">
@@ -54,6 +56,7 @@
                         </el-dropdown>
                     </div>
                 </div>
+
             </div>
         </el-col>
     </div>
@@ -248,22 +251,24 @@
             justify-content: space-between;
         }
 
-        & .header > div{
-            height: 100%;
+        & .header > div:nth-of-type(1) {
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
 
-        & .header > div:nth-of-type(2)>div {
+        & .header > div:nth-of-type(2) {
             height: 100%;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
         }
 
-        & .header > div:nth-of-type(2) > div>div {
+        & .header > div:nth-of-type(2) > div {
             margin-left: 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
     }
