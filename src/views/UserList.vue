@@ -1,6 +1,6 @@
 <template>
 
-    <el-row id="tableStyle" class="marginTop1rem">
+    <el-row id="userList" class="marginTop1rem">
 
         <el-col>
             <p id="tabName">User Management</p>
@@ -287,23 +287,19 @@
 
 <style lang="less">
     @import "../assets/font/css/Roboto-Regular.css";
-
-
-    .tableClass {
-        border: 1px solid black;
-        border-radius: 1.5rem;
-    }
-
-    .marginTop1rem {
-        margin-top: 1rem;
-    }
-
-    #tableStyle {
+    #userList {
         border-radius: 1.5rem;
         margin-bottom: 2rem;
         padding: 3rem;
         background-color: white;
+        & .tableClass {
+            border: 1px solid black;
+            border-radius: 1.5rem;
+        }
 
+        & .marginTop1rem {
+            margin-top: 1rem;
+        }
         & .el-dialog {
             border-radius: 1rem;
         }

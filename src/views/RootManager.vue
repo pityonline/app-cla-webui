@@ -1,5 +1,5 @@
 <template>
-    <div id="section" :style="section">
+    <div id="rootManager" :style="section">
         <Header @clickItem="clickItem" :user="user"></Header>
         <el-row>
             <el-col :offset="4" :span="16">
@@ -40,8 +40,8 @@
     import pdfReader from "@components/PdfReader";
 
     window.onresize = () => {
-        if (until.getClientHeight() > document.getElementById('section').offsetHeight) {
-            document.getElementById("section").style.height = until.getClientHeight() + 'px'
+        if (until.getClientHeight() > document.getElementById('rootManager').offsetHeight) {
+            document.getElementById("rootManager").style.height = until.getClientHeight() + 'px'
         }
     }
     export default {
@@ -112,9 +112,9 @@
             },
             setClientHeight() {
                 this.$nextTick(() => {
-                    until.getClientHeight() > document.getElementById('section').offsetHeight ?
+                    until.getClientHeight() > document.getElementById('rootManager').offsetHeight ?
                         this.section.height = until.getClientHeight() + 'px' :
-                        this.section.height = document.getElementById('section').offsetHeight
+                        this.section.height = document.getElementById('rootManager').offsetHeight
                 })
             },
 
@@ -123,7 +123,7 @@
 </script>
 
 <style scoped lang="less">
-    #section {
+    #rootManager {
         padding-top: 4rem;
         display: flex;
         box-sizing: border-box;
