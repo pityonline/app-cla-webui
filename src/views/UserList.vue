@@ -391,9 +391,12 @@
             margin: 0 1rem;
         }
 
-        & .el-table__body-wrapper:not(:last-child) {
-            border-top: 2px dashed lightgrey;
+        /*& .el-table__body-wrapper:not(:last-child) {*/
+            /*border-top: 2px dashed lightgrey;*/
 
+        /*}*/
+        & .el-table__row{
+            border-top: 2px dashed lightgrey;
         }
 
         & .el-table__body-wrapper, .el-table__footer-wrapper, .el-table__header-wrapper {
