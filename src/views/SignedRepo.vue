@@ -152,7 +152,7 @@
             },
             loginOut() {
                 sessionStorage.clear()
-                this.$router.push('/index')
+                this.$router.push('/corporationManagerLogin')
 
             },
         },
