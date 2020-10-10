@@ -365,9 +365,6 @@
             text-align: left;
         }
 
-        & .el-dialog {
-            border-radius: 1rem;
-        }
 
         & .el-dialog__body {
             padding-top: 0;

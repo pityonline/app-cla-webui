@@ -4,6 +4,7 @@
             <el-tab-pane label="inactive" name="first" style="margin-top: 1rem">
                 <div style="margin-bottom: 1rem" class="tableStyle">
                     <el-table
+                            class="tableClass"
                             :data="inactiveData"
                             align="center"
                             style="width: 100%;">
@@ -51,6 +52,7 @@
             <el-tab-pane label="active" name="second" style="margin-top: 1rem">
                 <div style="margin-bottom: 1rem" class="tableStyle">
                     <el-table
+                            class="tableClass"
                             :data="activeData"
                             align="center"
                             style="width: 100%;">
@@ -390,10 +392,92 @@
         .el-tabs__item:hover {
             color: #319E55;
         }
+        .el-tabs__item{
+            font-size: 1.5rem;
+        }
         & .tableStyle {
             margin-bottom: 2rem;
             padding: 3rem;
             background-color: white;
+            border-radius: 1.5rem;
+        }
+        & .cancelBt {
+            width: 5rem;
+            height: 2rem;
+            border-radius: 1rem;
+            border: 1px solid black;
+            color: black;
+            font-size: 1rem;
+            cursor: pointer;
+            background-color: white;
+            margin-left: 1rem;
+        }
+
+        & .cancelBt:focus {
+            outline: none;
+        }
+
+        & .deleteBt {
+            width: 5rem;
+            height: 2rem;
+            border-radius: 1rem;
+            border: none;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            background: linear-gradient(to right, #FF9D58, #E22424);
+        }
+
+        & .deleteBt:focus {
+            outline: none;
+        }
+
+        & .button {
+            width: 10rem;
+            height: 2rem;
+            border-radius: 1rem;
+            border: none;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            background: linear-gradient(to right, #97DB30, #319E55);
+            margin-bottom: 1rem;
+        }
+
+        & .button:focus {
+            outline: none;
+        }
+
+        .tableClass {
+            border: 1px solid black;
+            border-radius: 1.5rem;
+        }
+        & .el-table__body, .el-table__footer, .el-table__header {
+            padding: 0;
+            width: auto;
+        }
+
+        & .el-table__body-wrapper {
+            margin: 0 1rem;
+        }
+        .el-table__body tr:not(:last-of-type) td{
+            border-bottom: 1px dashed lightgrey;
+        }
+
+        .el-table::before{
+            height:0;
+        }
+
+
+        & .el-table__body-wrapper, .el-table__footer-wrapper, .el-table__header-wrapper {
+            padding: 0;
+            width: auto;
+        }
+
+        & .el-table__footer-wrapper, .el-table__header-wrapper {
+            border-bottom: 1px solid black;
+            border-radius: 1.5rem;
+            padding: 0 1rem;
         }
 
         & .mySwitch .el-switch__label {
