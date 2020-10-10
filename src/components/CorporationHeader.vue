@@ -185,6 +185,13 @@
             &>div{
                 height: 2.6rem;
                 width: 100%;
+                background-color: white;
+                line-height: 2.6rem;
+                margin: 0 .5rem;
+
+            }
+            &>div:not(:last-of-type){
+                border-bottom: 1px solid black;
             }
         }
        & .uerImg{
