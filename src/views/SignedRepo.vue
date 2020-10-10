@@ -1,5 +1,5 @@
 <template>
-    <div id="section" :style="section">
+    <div id="signedRepo" :style="section">
         <CorporationHeader @clickItem="clickItem" :user="user"></CorporationHeader>
         <el-row style="margin-top: 2rem">
             <el-col :offset="4" :span="16">
@@ -46,8 +46,8 @@
     import Footer from '@components/NewFooter'
 
     window.onresize = () => {
-        if (until.getClientHeight() > document.getElementById('section').offsetHeight) {
-            document.getElementById("section").style.height = until.getClientHeight() + 'px'
+        if (until.getClientHeight() > document.getElementById('signedRepo').offsetHeight) {
+            document.getElementById("signedRepo").style.height = until.getClientHeight() + 'px'
         }
     }
     export default {
@@ -121,9 +121,9 @@
             },
             setClientHeight() {
                 this.$nextTick(() => {
-                    until.getClientHeight() > document.getElementById('section').offsetHeight ?
+                    until.getClientHeight() > document.getElementById('signedRepo').offsetHeight ?
                         this.section.height = until.getClientHeight() + 'px' :
-                        this.section.height = document.getElementById('section').offsetHeight
+                        this.section.height = document.getElementById('signedRepo').offsetHeight
 
                 })
             },
@@ -165,7 +165,7 @@
 </script>
 
 <style lang="less">
-    #section {
+    #signedRepo {
         padding-top: 4rem;
         background-color: #F5F5F5;
         display: flex;
@@ -175,58 +175,55 @@
         & > div:nth-of-type(2) {
             flex-grow: 1;
         }
+
+        & .tableStyle {
+            margin-bottom: 2rem;
+            padding: 3rem;
+            background-color: white;
+        }
+
+        & .paginationClass {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        & .pointer {
+            cursor: pointer;
+        }
+
+        & .marginTop1rem {
+            margin-top: 1rem;
+        }
+
+        & .contentTitle {
+            font-size: 1.2rem;
+        }
+
+        & .mySwitch .el-switch__label {
+            position: absolute;
+            display: none;
+            color: #fff;
+        }
+
+        & .mySwitch .el-switch__label--right {
+            z-index: 1;
+            right: 0.5rem;
+        }
+
+        & .mySwitch .el-switch__label--left {
+            z-index: 1;
+            left: .5rem;
+        }
+
+        & .mySwitch .el-switch__label.is-active {
+            display: block;
+        }
+
+        & .mySwitch.el-switch .el-switch__core,
+        & .el-switch .el-switch__label {
+            width: 4rem !important;
+        }
     }
 
-    .tableStyle {
-        margin-bottom: 2rem;
-        padding: 3rem;
-        background-color: white;
-    }
 
-    .paginationClass {
-        text-align: center;
-        margin-bottom: 1rem;
-    }
-
-
-    .pointer {
-        cursor: pointer;
-    }
-
-
-    .marginTop1rem {
-        margin-top: 1rem;
-    }
-
-    .contentTitle {
-        font-size: 1.2rem;
-    }
-
-    .mySwitch .el-switch__label {
-        position: absolute;
-        display: none;
-        color: #fff;
-    }
-
-    /*打开时文字位置设置*/
-    .mySwitch .el-switch__label--right {
-        z-index: 1;
-        right: 0.5rem;
-    }
-
-    /*关闭时文字位置设置*/
-    .mySwitch .el-switch__label--left {
-        z-index: 1;
-        left: .5rem;
-    }
-
-    /*显示文字*/
-    .mySwitch .el-switch__label.is-active {
-        display: block;
-    }
-
-    .mySwitch.el-switch .el-switch__core,
-    .el-switch .el-switch__label {
-        width: 4rem !important;
-    }
 </style>
