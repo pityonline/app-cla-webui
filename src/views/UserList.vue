@@ -4,7 +4,7 @@
 
         <el-col>
             <p id="tabName">User Management</p>
-            <el-row>
+            <el-row class="tableBox">
                 <el-col>
                     <el-row>
                         <el-col align="left">
@@ -293,10 +293,13 @@
 <style lang="less">
     @import "../assets/font/css/Roboto-Regular.css";
     #userList {
-        border-radius: 1.5rem;
-        margin-bottom: 2rem;
-        padding: 3rem;
-        background-color: white;
+
+        .tableBox{
+            border-radius: 1.5rem;
+            margin-bottom: 2rem;
+            padding: 3rem;
+            background-color: white;
+        }
         & .tableClass {
             border: 1px solid black;
             border-radius: 1.5rem;
