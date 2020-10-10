@@ -485,21 +485,15 @@
 
         & .mySwitch .el-switch__label--right {
             z-index: 1;
-            right: 0.5rem;
+            right: -2.5rem;
         }
 
         & .mySwitch .el-switch__label--left {
             z-index: 1;
-            left: .5rem;
+            left: -.4rem;
         }
-
         & .mySwitch .el-switch__label.is-active {
             display: block;
-        }
-
-        & .mySwitch.el-switch .el-switch__core,
-        & .el-switch .el-switch__label {
-            width: 4rem !important;
         }
 
         & .mySwitch .el-switch.is-disabled .el-switch__core, .mySwitch .el-switch.is-disabled .el-switch__label, .tableStyle {
@@ -520,6 +514,15 @@
             height: 2rem;
             width: 2rem;
             top: -1px;
+        }
+        .el-switch{
+            font-size: 1rem;
+            line-height: 2rem;
+            height: 2rem;
+        }
+        .el-switch.is-checked .el-switch__core:after {
+            left: 100%;
+            margin-left: -2rem;
         }
     }
 
