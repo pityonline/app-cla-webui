@@ -8,10 +8,6 @@
                             :data="inactiveData"
                             align="center"
                             style="width: 100%;">
-                        <!--<el-table-column-->
-                        <!--prop="name"-->
-                        <!--label="Name">-->
-                        <!--</el-table-column>-->
                         <el-table-column
                                 prop="email"
                                 label="Email">
@@ -36,10 +32,10 @@
                                     </el-switch>
 
 
-                                    <el-button style="margin-left: 1rem" type="danger" size="mini"
+                                    <button class="deleteBt"
                                                @click="deleteEmployee(scope.row.cla_org_id,scope.row.email,scope.row.enabled)">
                                         Delete
-                                    </el-button>
+                                    </button>
 
                                 </el-row>
 
