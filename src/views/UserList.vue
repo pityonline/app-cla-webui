@@ -5,55 +5,60 @@
         <el-col>
             <p id="tabName">User Management</p>
             <el-row>
-                <el-col align="left">
-                    <button class="button" @click="multipleChoice=true">Multiple choice</button>
-                </el-col>
-            </el-row>
-            <el-row>
-                <el-table
-                        class="tableClass"
-                        @selection-change="handleSelectionChange"
-                        ref="multipleTable"
-                        :data="tableData">
+                <el-col>
+                    <el-row>
+                        <el-col align="left">
+                            <button class="button" @click="multipleChoice=true">Multiple choice</button>
+                        </el-col>
+                    </el-row>
+                    <el-row>
+                        <el-table
+                                class="tableClass"
+                                @selection-change="handleSelectionChange"
+                                ref="multipleTable"
+                                :data="tableData">
 
-                    <!--<el-table-column-->
-                    <!--prop="name"-->
-                    <!--label="userName">-->
-                    <!--</el-table-column>-->
-                    <el-table-column
-                            prop="email"
-                            label="email">
-                    </el-table-column>
-                    <el-table-column
-                            prop="role"
-                            label='role'>
-                    </el-table-column>
-                    <el-table-column
-                            v-if="!multipleChoice"
-                            key="2"
-                            align="center"
-                            width="200">
-                        <template slot-scope="scope">
-                            <button class="deleteBt" @click="deleteUser(scope.row)">
-                                Delete
-                            </button>
-                        </template>
-                    </el-table-column>
-                    <el-table-column
-                            key="3"
-                            v-if="multipleChoice"
-                            type="selection"
-                            align="center"
-                            width="200">
-                    </el-table-column>
-                </el-table>
-            </el-row>
-            <el-row style="margin-top: 20px" v-if="multipleChoice">
-                <el-col align="left">
-                    <button class="deleteBt" @click="deleteUser()">Delete</button>
-                    <button class="cancelBt" @click="cancel()">Cancel</button>
+                            <!--<el-table-column-->
+                            <!--prop="name"-->
+                            <!--label="userName">-->
+                            <!--</el-table-column>-->
+                            <el-table-column
+                                    prop="email"
+                                    label="email">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="role"
+                                    label='role'>
+                            </el-table-column>
+                            <el-table-column
+                                    v-if="!multipleChoice"
+                                    key="2"
+                                    align="center"
+                                    width="200">
+                                <template slot-scope="scope">
+                                    <button class="deleteBt" @click="deleteUser(scope.row)">
+                                        Delete
+                                    </button>
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    key="3"
+                                    v-if="multipleChoice"
+                                    type="selection"
+                                    align="center"
+                                    width="200">
+                            </el-table-column>
+                        </el-table>
+                    </el-row>
+                    <el-row style="margin-top: 20px" v-if="multipleChoice">
+                        <el-col align="left">
+                            <button class="deleteBt" @click="deleteUser()">Delete</button>
+                            <button class="cancelBt" @click="cancel()">Cancel</button>
+                        </el-col>
+                    </el-row>
                 </el-col>
             </el-row>
+
             <corpReLoginDialog :title="corpReLoginDialogTitle" :message="corpReLoginMsg"
                                :dialogVisible="corpReLoginDialogVisible"></corpReLoginDialog>
             <reTryDialog :title="corpReLoginDialogTitle" :message="corpReLoginMsg"
