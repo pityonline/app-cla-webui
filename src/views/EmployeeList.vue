@@ -381,7 +381,15 @@
         & .el-dialog {
             border-radius: 1rem;
         }
-
+        .el-tabs__active-bar{
+            background-color: #319E55;
+        }
+        .el-tabs__item.is-active {
+            color: #319E55;
+        }
+        .el-tabs__item:hover {
+            color: #319E55;
+        }
         & .tableStyle {
             margin-bottom: 2rem;
             padding: 3rem;
