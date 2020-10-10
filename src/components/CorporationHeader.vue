@@ -182,10 +182,10 @@
             right: 0;
             top: 0;
             z-index: 1;
+            background-color: white;
             &>div{
                 height: 2.6rem;
                 width: 100%;
-                background-color: white;
                 line-height: 2.6rem;
                 margin: 0 .5rem;
 
@@ -240,7 +240,7 @@
             border: 1px solid black;
             border-radius: 1.3rem;
             padding: 0 1rem;
-            z-index: 2;
+            z-index: 3;
             cursor: pointer;
         }
 
