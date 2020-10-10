@@ -390,7 +390,7 @@
         & .el-table__body-wrapper {
             margin: 0 1rem;
         }
-        .el-table--border tr:not(:last-child),td{
+        .el-table--border tr:not(:last-child){
             border-bottom: 1px dashed lightgrey!important;
         }
 
