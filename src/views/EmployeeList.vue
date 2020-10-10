@@ -93,14 +93,14 @@
                 width="20%"
                 title=""
                 align="center"
+                :show-close="false"
                 :visible.sync="deleteUserVisible">
             <el-row align="center">
                 Are you sure to delete ?
             </el-row>
             <el-row align="center" class="marginTop1rem contentTitle">
-
-                <el-button type="primary" size="medium" @click="submit()">Yes</el-button>
-                <el-button size="medium" @click="deleteUserVisible=false">No</el-button>
+                <button class="deleteBt"  @click="submit()">Yes</button>
+                <button class="cancelBt" @click="deleteUserVisible=false">No</button>
             </el-row>
 
         </el-dialog>
@@ -396,6 +396,9 @@
             padding: 3rem;
             background-color: white;
             border-radius: 1.5rem;
+        }
+        & .el-dialog__body {
+            padding-top: 0;
         }
         & .cancelBt {
             width: 5rem;
