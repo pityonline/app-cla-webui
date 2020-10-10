@@ -506,12 +506,20 @@
             cursor: pointer;
         }
         .el-switch .el-switch__label, .mySwitch.el-switch .el-switch__core{
-            width: 5rem!important;
+            width: 6rem!important;
             height: 2rem;
             border-radius: 1rem;
             line-height: 2rem;
             font-size: 1rem;
             text-align: right;
+        }
+        .el-switch__label *{
+            font-size: 1rem;
+        }
+        .el-switch__core:after{
+            height: 2rem;
+            width: 2rem;
+            top: -1px;
         }
     }
 

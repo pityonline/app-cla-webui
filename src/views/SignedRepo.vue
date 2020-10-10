@@ -199,30 +199,6 @@
             font-size: 1.2rem;
         }
 
-        & .mySwitch .el-switch__label {
-            position: absolute;
-            display: none;
-            color: #fff;
-        }
-
-        & .mySwitch .el-switch__label--right {
-            z-index: 1;
-            right: 0.5rem;
-        }
-
-        & .mySwitch .el-switch__label--left {
-            z-index: 1;
-            left: .5rem;
-        }
-
-        & .mySwitch .el-switch__label.is-active {
-            display: block;
-        }
-
-        & .mySwitch.el-switch .el-switch__core,
-        & .el-switch .el-switch__label {
-            width: 4rem !important;
-        }
     }
 
 
