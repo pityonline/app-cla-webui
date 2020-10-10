@@ -167,13 +167,13 @@
 <style lang="less">
     #signedRepo {
         padding-top: 4rem;
-        background-color: #F5F5F5;
         display: flex;
         box-sizing: border-box;
         flex-direction: column;
 
         & > div:nth-of-type(2) {
             flex-grow: 1;
+            background-color: #F0F2F5;
         }
 
         & .tableStyle {
