@@ -124,7 +124,6 @@
 
 <style scoped lang="less">
     #rootManager {
-        padding-top: 4rem;
         display: flex;
         box-sizing: border-box;
         flex-direction: column;
