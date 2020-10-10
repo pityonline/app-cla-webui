@@ -397,7 +397,7 @@
         /*}*/
         /*去每一行记录下的横线*/
         .el-table--border tr,td{
-            border: 2px dashed lightgrey!important;
+            border-bottom: 1px dashed lightgrey!important;
         }
 
         /*去最下面的横线*/
