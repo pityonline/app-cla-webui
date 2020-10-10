@@ -163,6 +163,8 @@
         /*z-index: 10;*/
         .menuBox{
             position: relative;
+            width: 8rem;
+            height: 2.6rem;
         }
         .userImgBox{
             height: 2.6rem;
@@ -174,6 +176,7 @@
             z-index: 2;
         }
         #menuOption{
+            border: 1px solid black;
             border-radius: 1.3rem;
             position: absolute;
             right: 0;
