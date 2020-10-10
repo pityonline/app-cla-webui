@@ -505,6 +505,14 @@
         & .mySwitch .el-switch.is-disabled .el-switch__core, .mySwitch .el-switch.is-disabled .el-switch__label, .tableStyle {
             cursor: pointer;
         }
+        .el-switch .el-switch__label, .mySwitch.el-switch .el-switch__core{
+            width: 5rem!important;
+            height: 2rem;
+            border-radius: 1rem;
+            line-height: 2rem;
+            font-size: 1rem;
+            text-align: right;
+        }
     }
 
 </style>
