@@ -606,7 +606,7 @@
                         userName: this.$store.state.user.userName,
                         platform: this.platform
                     }
-                    this.getLinkedRepoListAct(data)
+                    // this.getLinkedRepoListAct(data)
                 }).catch(err => {
                     this.linkLoading = false
                     this.$message.closeAll();
@@ -638,7 +638,7 @@
                 }
             },
             repoVisibleChange(visible) {
-                if (visible&&this.org) {
+                if (visible && this.org) {
                     this.getRepositoriesOfOrg(this.org, this.org_id);
                 }
             },

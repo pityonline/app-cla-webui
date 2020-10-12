@@ -608,7 +608,6 @@
                     var reader = new FileReader();
                     reader.readAsDataURL(URL);
                     reader.onload = function (e) {
-                        // 兼容IE
                         if (window.navigator.msSaveOrOpenBlob) {
                             var bstr = atob(e.target.result.split(",")[1]);
                             var n = bstr.length;
@@ -631,7 +630,6 @@
                 }).catch(err => {
                 })
             },
-            //base64 转换 blob
             dataURLtoBlob(dataurl) {
                 var bstr = atob(dataurl)
                 var n = bstr.length;

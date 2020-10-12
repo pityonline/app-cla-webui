@@ -157,7 +157,7 @@
             submit() {
                 let obj = {enabled: this.deleteData.enabled}
                 http({
-                    url: `${url.enableEmployee}/${this.deleteData.cla_org_id}/${this.deleteData.email}`,
+                    url: `${url.enableEmployee}/${this.deleteData.email}`,
                     method: 'delete',
                     data: obj,
                 }).then(res => {
@@ -234,7 +234,7 @@
                     enabled: enabled
                 }
                 http({
-                    url: `${url.enableEmployee}/${cla_org_id}/${email}`,
+                    url: `${url.enableEmployee}/${email}`,
                     method: 'put',
                     data: data,
                 }).then(res => {
