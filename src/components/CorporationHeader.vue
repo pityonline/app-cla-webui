@@ -8,25 +8,25 @@
                 <div>
                     <div class="menuBox">
                         <div class="userImgBox">
-                            <svg-icon class="userImg" @click.native="openMenu()" icon-class="default-user"></svg-icon>
+                            <svg-icon class="userImg" @click.native="openOrCloseMenu()" icon-class="default-user"></svg-icon>
                         </div>
                         <div v-if="menuVisible" id="menuOption" >
-                            <div>
+                            <div v-if="userInfo[orgValue].role==='admin'" @click.native="openOrCloseMenu('a')">
                                 user
                             </div>
-                            <div>
+                            <div v-else @click.native="openOrCloseMenu('b')">
                                 employee
-                            </div>
-                            <div>
+                            </div >
+                            <div v-if="userInfo[orgValue].role==='admin'" @click.native="openOrCloseMenu('c')">
                                 create user
                             </div>
-                            <div>
+                            <div @click.native="openOrCloseMenu('d')">
                                 reset password
                             </div>
-                            <div>
+                            <div v-if="userInfo[orgValue].role==='admin'" @click.native="openOrCloseMenu('e')">
                                 my cla
                             </div>
-                            <div>
+                            <div @click.native="openOrCloseMenu('f')">
                                 login out
                             </div>
                         </div>
@@ -124,9 +124,10 @@
             console.log(this.user);
         },
         methods: {
-            openMenu(){
+            openOrCloseMenu(command){
                 console.log('openMenu');
                 this.menuVisible=!this.menuVisible
+                this.$emit('clickItem', command);
             },
             clickSelect() {
                 console.log('clickSelect');
