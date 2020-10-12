@@ -351,8 +351,9 @@
                 }
 
             },
-            setData(res) {
+            setData(res,argRes) {
                 let data = res.data.data;
+                console.log(res);
                 this.signPageData = data
                 if (Object.keys(data).length) {
                     this.languageOptions = []
@@ -541,7 +542,7 @@
                     obj = {
                         corporation_name: this.myForm.corporationName,
                         admin_name: this.myForm.name,
-                        admin_email: this.myForm.adminEmail,
+                        admin_email: this.myForm.email,
                         enabled: true,
                         info: info,
                         verifi_code: this.ruleForm.code
