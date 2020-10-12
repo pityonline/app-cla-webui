@@ -314,6 +314,12 @@
                             }
                         }
                     }
+                    if (this.myForm.email === '') {
+                        this.$store.commit('errorSet', {
+                            dialogVisible: true,
+                            dialogMessage: 'Your gitee account has not been bound to the main mailbox. Please bind it and try again',
+                        })
+                    }
                     for (let item of this.fields) {
                         if (item.type === 'email') {
                             Object.assign(this.ruleForm, {[item.id]: this.myForm.email})
