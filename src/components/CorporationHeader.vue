@@ -10,9 +10,9 @@
                         <div class="userImgBox">
                             <svg-icon class="userImg" @click.native="openMenu()" icon-class="default-user"></svg-icon>
                         </div>
-                        <div id="menuOption" :class="menuVisible">
+                        <div id="menuOption" :style="menuVisible">
                             <div>
-                                user<
+                                user
                             </div>
                             <div>
                                 employee
@@ -167,6 +167,7 @@
             height: 2.6rem;
         }
         .userImgBox{
+            cursor: pointer;
             height: 2.6rem;
             width: 2.6rem;
             overflow: hidden;
