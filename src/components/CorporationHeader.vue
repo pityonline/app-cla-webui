@@ -2,13 +2,13 @@
     <div class="corpHeader">
         <el-col class="header" :offset="4" :span="16">
             <div class="box">
-                <svg-icon id="defaultImg" @click="toHome()" icon-class="icon" class="icon"></svg-icon>
+                <svg-icon  @click="toHome()" icon-class="icon" class="icon"></svg-icon>
             </div>
             <div>
                 <div>
                     <div class="menuBox">
                         <div class="userImgBox">
-                            <svg-icon class="userImg" @click.native="openOrCloseMenu()"
+                            <svg-icon id="defaultImg" class="userImg" @click.native="openOrCloseMenu()"
                                       icon-class="default-user"></svg-icon>
                         </div>
                         <div v-if="menuVisible" id="menuOption" >
