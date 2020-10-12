@@ -62,7 +62,7 @@
                         </div>
                         <el-button :disabled="scope.row.administrator_enabled" style="margin-left: 1rem" type="primary"
                                    size="mini"
-                                   @click="createRoot(scope.row.cla_org_id,scope.row.admin_email)">Create Root
+                                   @click="createRoot(scope.row.admin_email)">Create Root
                         </el-button>
 
                     </template>
@@ -277,9 +277,9 @@
                 }).catch(err => {
                 })
             },
-            createRoot(cla_org_id, email) {
+            createRoot(email) {
                 this.$axios({
-                    url: `/api${url.corporationManager}/${cla_org_id}/${email}`,
+                    url: `/api${url.corporationManager}/${this.item.id}/${email}`,
                     method: 'put',
                     headers: {
                         'Token': this.$store.state.access_token,
