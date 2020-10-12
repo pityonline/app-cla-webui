@@ -65,26 +65,26 @@
                 <!--</div>-->
                 <!--</div>-->
                 <!--</div>-->
-                <div>
-                    <div>
-                        <el-dropdown @command="handleCommand">
-                         <span class="el-dropdown-link">
-    {{userName}}<i class="el-icon-arrow-down el-icon--right"></i>
-  </span>
-                            <el-dropdown-menu slot="dropdown">
-                                <el-dropdown-item v-if="userInfo[orgValue].role==='admin'" command="a">user
-                                </el-dropdown-item>
-                                <el-dropdown-item v-else command="b">employee</el-dropdown-item>
-                                <el-dropdown-item v-if="userInfo[orgValue].role==='admin'" command="c">create user
-                                </el-dropdown-item>
-                                <el-dropdown-item command="d">reset password</el-dropdown-item>
-                                <el-dropdown-item v-if="userInfo[orgValue].role==='admin'" command="e">my cla
-                                </el-dropdown-item>
-                                <el-dropdown-item command="f">login out</el-dropdown-item>
-                            </el-dropdown-menu>
-                        </el-dropdown>
-                    </div>
-                </div>
+                <!--<div>-->
+                    <!--<div>-->
+                        <!--<el-dropdown @command="handleCommand">-->
+                         <!--<span class="el-dropdown-link">-->
+    <!--{{userName}}<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
+  <!--</span>-->
+                            <!--<el-dropdown-menu slot="dropdown">-->
+                                <!--<el-dropdown-item v-if="userInfo[orgValue].role==='admin'" command="a">user-->
+                                <!--</el-dropdown-item>-->
+                                <!--<el-dropdown-item v-else command="b">employee</el-dropdown-item>-->
+                                <!--<el-dropdown-item v-if="userInfo[orgValue].role==='admin'" command="c">create user-->
+                                <!--</el-dropdown-item>-->
+                                <!--<el-dropdown-item command="d">reset password</el-dropdown-item>-->
+                                <!--<el-dropdown-item v-if="userInfo[orgValue].role==='admin'" command="e">my cla-->
+                                <!--</el-dropdown-item>-->
+                                <!--<el-dropdown-item command="f">login out</el-dropdown-item>-->
+                            <!--</el-dropdown-menu>-->
+                        <!--</el-dropdown>-->
+                    <!--</div>-->
+                <!--</div>-->
 
             </div>
         </el-col>
