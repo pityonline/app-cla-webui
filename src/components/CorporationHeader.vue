@@ -12,22 +12,22 @@
                                       icon-class="default-user"></svg-icon>
                         </div>
                         <div v-if="menuVisible" id="menuOption">
-                            <div v-if="userInfo[orgValue].role==='admin'" @click.native="openOrCloseMenu('a')">
+                            <div v-if="userInfo[orgValue].role==='admin'" @click="openOrCloseMenu('a')">
                                 user
                             </div>
-                            <div v-else @click.native="openOrCloseMenu('b')">
+                            <div v-else @click="openOrCloseMenu('b')">
                                 employee
                             </div>
-                            <div v-if="userInfo[orgValue].role==='admin'" @click.native="openOrCloseMenu('c')">
+                            <div v-if="userInfo[orgValue].role==='admin'" @click="openOrCloseMenu('c')">
                                 create user
                             </div>
                             <div @click="openOrCloseMenu('d')">
                                 reset password
                             </div>
-                            <div v-if="userInfo[orgValue].role==='admin'" @click.native="openOrCloseMenu('e')">
+                            <div v-if="userInfo[orgValue].role==='admin'" @click="openOrCloseMenu('e')">
                                 my cla
                             </div>
-                            <div @click.native="openOrCloseMenu('f')">
+                            <div @click="openOrCloseMenu('f')">
                                 login out
                             </div>
                         </div>
