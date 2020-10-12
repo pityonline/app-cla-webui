@@ -21,7 +21,7 @@
                                 <span>create user</span>
                             </div>
                             <div>
-                                <span>reset password</span>
+                                reset&nbsp;password
                             </div>
                             <div>
                                 <span>my cla</span>
