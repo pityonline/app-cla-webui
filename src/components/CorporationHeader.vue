@@ -164,7 +164,6 @@
         /*z-index: 10;*/
         .menuBox{
             position: relative;
-            width: 8rem;
             height: 2.6rem;
         }
         .userImgBox{
