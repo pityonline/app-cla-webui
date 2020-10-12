@@ -260,7 +260,7 @@
 
                 }
                 http({
-                    url: `${url.sendVerifyCode}/${this.cla_org_id}/${this.myForm.adminEmail}`,
+                    url: `${url.sendVerifyCode}/${this.cla_org_id}/${this.myForm.email}`,
                     method: 'put',
                 }).then(res => {
                     this.$message.closeAll();
