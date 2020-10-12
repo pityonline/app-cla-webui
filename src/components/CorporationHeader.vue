@@ -174,6 +174,10 @@
             right: 0;
             top: 0;
             z-index: 2;
+            & .uerImg{
+                height: 2.6rem;
+                width: 2.6rem;
+            }
         }
         #menuOption{
             border: 1px solid black;
@@ -194,10 +198,7 @@
                 border-bottom: 1px solid black;
             }
         }
-       & .uerImg{
-            height: 2.6rem;
-            width: 2.6rem;
-        }
+
         & .mark {
             visibility: hidden;
             height: 6px;
