@@ -10,7 +10,7 @@
                         <div class="userImgBox">
                             <svg-icon class="userImg" @click.native="openMenu()" icon-class="default-user"></svg-icon>
                         </div>
-                        <div id="menuOption" :style="menuVisible">
+                        <div v-if="menuVisible" id="menuOption" >
                             <div>
                                 user
                             </div>
@@ -116,9 +116,7 @@
                 visible: {
                     visibility: 'hidden',
                 },
-                menuVisible:{
-                    visibility:'hidden'
-                },
+                menuVisible:false
 
             }
         },
@@ -128,7 +126,7 @@
         methods: {
             openMenu(){
                 console.log('openMenu');
-                this.menuVisible.visibility='visible'
+                this.menuVisible=!this.menuVisible
             },
             clickSelect() {
                 console.log('clickSelect');
