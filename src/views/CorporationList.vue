@@ -93,7 +93,7 @@
                     <el-form v-model="form">
                         <el-form-item label="" label-width="0">
                             <el-upload
-                                    name="signature_page"
+                                    name="pdf"
                                     ref="uploadPdf"
                                     class="upload-demo"
                                     action=""
@@ -199,7 +199,7 @@
         methods: {
             upload(fileObj) {
                 const formData = new FormData()
-                formData.append('signature_page', fileObj.file)
+                formData.append('pdf', fileObj.file)
                 formData.append('type', fileObj.file.type)
                 return this.$axios({
                     url: this.uploadUrl,
