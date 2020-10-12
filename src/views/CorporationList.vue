@@ -204,7 +204,8 @@
                 return this.$axios({
                     url: this.uploadUrl,
                     method: 'patch',
-                    data: formData
+                    data: formData,
+                    headers:{'Token':this.$store.state.access_token}
                 }).then()
             },
             uploadOk() {
