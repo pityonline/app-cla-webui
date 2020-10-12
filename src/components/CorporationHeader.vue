@@ -12,22 +12,22 @@
                         </div>
                         <div id="menuOption" :class="menuVisible">
                             <div>
-                                <span>user</span>
+                                user<
                             </div>
                             <div>
-                                <span>employee</span>
+                                employee
                             </div>
                             <div>
-                                <span>create user</span>
+                                create user
                             </div>
                             <div>
-                                reset&nbsp;password
+                                reset password
                             </div>
                             <div>
-                                <span>my cla</span>
+                                my cla
                             </div>
                             <div>
-                                <span>login out</span>
+                                login out
                             </div>
                         </div>
                     </div>
@@ -188,6 +188,7 @@
             top: 0;
             z-index: 9;
             background-color: white;
+            white-space: pre;
             &>div{
                 height: 2.6rem;
                 line-height: 2.6rem;
