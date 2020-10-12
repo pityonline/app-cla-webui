@@ -202,7 +202,7 @@
                 formData.append('file', fileObj.file)
                 formData.append('type', fileObj.file.type)
                 return this.$axios({
-                    url: 'api/upload',
+                    url: this.uploadUrl,
                     method: 'patch',
                     data: formData
                 }).then()
