@@ -174,7 +174,7 @@
             right: 0;
             top: 0;
             z-index: 2;
-            & .uerImg{
+            & .userImg{
                 height: 2.6rem;
                 width: 2.6rem;
             }
