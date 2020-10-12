@@ -259,30 +259,26 @@
                     }
 
                 }
-                if (!(email.trim()) || !reg.test(email) || email.split('@')[1] !== 'gmail.com') {
-                    this.$message.closeAll()
-                    this.$message.error('Please fill in Google email in the e-mail column')
-                } else {
-                    http({
-                        url: `${url.sendVerifyCode}/${this.cla_org_id}/${this.myForm.adminEmail}`,
-                        method: 'put',
-                    }).then(res => {
-                        this.$message.closeAll();
-                        this.$message.success('Please fill in the verification code in the email to continue signing');
-                        let second = 60;
-                        let codeInterval = setInterval(() => {
-                            if (second !== 0) {
-                                second--;
-                                this.sendBtText = second + 's'
-                            } else {
-                                this.sendBtText = 'send code';
-                                clearInterval(codeInterval)
-                            }
-                        }, 1000)
-                    }).catch(err => {
-                        this.errorAct(err)
-                    })
-                }
+                http({
+                    url: `${url.sendVerifyCode}/${this.cla_org_id}/${this.myForm.adminEmail}`,
+                    method: 'put',
+                }).then(res => {
+                    this.$message.closeAll();
+                    this.$message.success('Please fill in the verification code in the email to continue signing');
+                    let second = 60;
+                    let codeInterval = setInterval(() => {
+                        if (second !== 0) {
+                            second--;
+                            this.sendBtText = second + 's'
+                        } else {
+                            this.sendBtText = 'send code';
+                            clearInterval(codeInterval)
+                        }
+                    }, 1000)
+                }).catch(err => {
+                    this.errorAct(err)
+                })
+
             },
             getNowDate() {
                 let date = new Date();
@@ -355,7 +351,7 @@
                 }
 
             },
-            setData(res){
+            setData(res) {
                 let data = res.data.data;
                 this.signPageData = data
                 if (Object.keys(data).length) {
@@ -382,7 +378,7 @@
                             repo_id: this.$store.state.repoInfo.repo_id,
                         },
                     }).then(res => {
-                        this.setData(res,argRes)
+                        this.setData(res, argRes)
                     }).catch(err => {
                         this.errorAct(err)
                     })
@@ -394,7 +390,7 @@
                             repo_id: this.$store.state.repoInfo.repo_id,
                         },
                     }).then(res => {
-                        this.setData(res,argRes)
+                        this.setData(res, argRes)
                     }).catch(err => {
                         this.errorAct(err)
                     })
