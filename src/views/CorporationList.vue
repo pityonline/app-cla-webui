@@ -190,6 +190,7 @@
                 this.item = JSON.parse(sessionStorage.getItem('item'))
             } else {
                 this.tableData = this.$route.query.item.corporationInfo
+                console.log(this.tableData);
                 this.item = this.$route.query.item
                 sessionStorage.setItem('item', JSON.stringify(this.$route.query.item))
             }
@@ -277,11 +278,9 @@
                 })
             },
             createRoot(cla_org_id, email) {
-                let data = {cla_org_id: cla_org_id, email: email}
                 this.$axios({
-                    url: `/api${url.corporationManager}`,
+                    url: `/api${url.corporationManager}/${cla_org_id}/${email}`,
                     method: 'put',
-                    data: data,
                     headers: {
                         'Token': this.$store.state.access_token,
                         'Access-Token': this.access_token,
