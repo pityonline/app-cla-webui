@@ -96,7 +96,7 @@
                                     name="signature_page"
                                     ref="uploadPdf"
                                     class="upload-demo"
-                                    :action=""
+                                    action=""
                                     :headers="uploadHeaders"
                                     :http-request="upload"
                                     :on-preview="handlePreview"
