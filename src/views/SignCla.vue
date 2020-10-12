@@ -317,7 +317,7 @@
                     if (this.myForm.email === '') {
                         this.$store.commit('errorSet', {
                             dialogVisible: true,
-                            dialogMessage: 'Your gitee account has not been bound to the main mailbox. Please bind it and try again',
+                            dialogMessage: `Your ${this.platform} account has not been bound to the main mailbox. Please bind it and try again`,
                         })
                     }
                     for (let item of this.fields) {
