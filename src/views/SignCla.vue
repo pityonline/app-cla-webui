@@ -95,6 +95,7 @@
     import * as url from '../until/api'
     import {mapActions} from 'vuex'
     import http from '../until/http'
+    import axios from '../until/axios'
     import ReLoginDialog from '../components/ReLoginDialog'
     import ReTryDialog from '../components/ReTryDialog'
 
@@ -354,38 +355,51 @@
                 }
 
             },
+            setData(res){
+                let data = res.data.data;
+                this.signPageData = data
+                if (Object.keys(data).length) {
+                    this.languageOptions = []
+                    for (let key in data) {
+                        if (data[key].language === 'english') {
+                            this.value = key;
+                            this.cla_org_id = key
+                            this.setClaText(key)
+                            argRes('complete')
+                        }
+                        this.languageOptions.push({value: key, label: data[key].language})
+                    }
+                }
+            },
             getSignPage(argRes) {
                 this.changeDesc('english');
                 let applyTo = '';
                 if (this.$store.state.loginType === 'individual' || this.$store.state.loginType === 'employee') {
                     applyTo = 'individual';
+                    http({
+                        url: `${url.getSignPage}/${this.$store.state.repoInfo.platform}/${this.$store.state.repoInfo.org_id}/${applyTo}`,
+                        params: {
+                            repo_id: this.$store.state.repoInfo.repo_id,
+                        },
+                    }).then(res => {
+                        this.setData(res,argRes)
+                    }).catch(err => {
+                        this.errorAct(err)
+                    })
                 } else {
                     applyTo = 'corporation';
+                    axios({
+                        url: `${url.getSignPage}/${this.$store.state.repoInfo.platform}/${this.$store.state.repoInfo.org_id}/${applyTo}`,
+                        params: {
+                            repo_id: this.$store.state.repoInfo.repo_id,
+                        },
+                    }).then(res => {
+                        this.setData(res,argRes)
+                    }).catch(err => {
+                        this.errorAct(err)
+                    })
                 }
-                http({
-                    url: `${url.getSignPage}/${this.$store.state.repoInfo.platform}/${this.$store.state.repoInfo.org_id}/${applyTo}`,
-                    params: {
-                        repo_id: this.$store.state.repoInfo.repo_id,
-                    },
-                }).then(res => {
-                    let data = res.data.data;
-                    this.signPageData = data
-                    if (Object.keys(data).length) {
-                        this.languageOptions = []
-                        for (let key in data) {
-                            if (data[key].language === 'english') {
-                                this.value = key;
-                                this.cla_org_id = key
-                                this.setClaText(key)
-                                argRes('complete')
-                            }
-                            this.languageOptions.push({value: key, label: data[key].language})
-                        }
-                    }
-                }).catch(err => {
-                    this.errorAct(err)
 
-                })
             },
             changeLanguage(value) {
                 this.changeDesc(this.languageOptions[value].label);
