@@ -11,7 +11,7 @@
                             <svg-icon class="userImg" @click.native="openOrCloseMenu()"
                                       icon-class="default-user"></svg-icon>
                         </div>
-                        <div v-if="menuVisible" id="menuOption" @blur="openOrCloseMenu()">
+                        <div v-if="menuVisible" id="menuOption" >
                             <div v-if="userInfo[orgValue].role==='admin'" @click="openOrCloseMenu('a')">
                                 user
                             </div>
@@ -124,6 +124,15 @@
         created() {
             console.log(this.user);
         },
+        mounted(){
+            document.addEventListener('click', (e)=> {
+                console.log(e);
+                if (e.target.className !== 'menuOption') {
+                    this.menuVisible = !this.menuVisible
+                }
+            })
+        },
+
         methods: {
             openOrCloseMenu(command) {
                 console.log('openMenu', command);
