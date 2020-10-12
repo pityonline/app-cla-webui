@@ -11,7 +11,7 @@
                             <svg-icon class="userImg" @click.native="openOrCloseMenu()"
                                       icon-class="default-user"></svg-icon>
                         </div>
-                        <div v-if="menuVisible" id="menuOption">
+                        <div v-if="menuVisible" id="menuOption" @blur="openOrCloseMenu()">
                             <div v-if="userInfo[orgValue].role==='admin'" @click="openOrCloseMenu('a')">
                                 user
                             </div>
@@ -130,6 +130,7 @@
                 this.menuVisible = !this.menuVisible
                 this.$emit('clickItem', command);
             },
+
             clickSelect() {
                 console.log('clickSelect');
                 document.getElementById('my_option').style.visibility = 'hidden'
