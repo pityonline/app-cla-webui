@@ -12,22 +12,22 @@
                         </div>
                         <div id="menuOption" :class="menuVisible">
                             <div>
-                                user
+                                <span>user</span>
                             </div>
                             <div>
-                                employee
+                                <span>employee</span>
                             </div>
                             <div>
-                                create user
+                                <span>create user</span>
                             </div>
                             <div>
-                                reset password
+                                <span>reset password</span>
                             </div>
                             <div>
-                                my cla
+                                <span>my cla</span>
                             </div>
                             <div>
-                                login out
+                                <span>login out</span>
                             </div>
                         </div>
                     </div>
@@ -192,7 +192,7 @@
             &>div{
                 height: 2.6rem;
                 line-height: 2.6rem;
-                margin: 0 .5rem;
+                margin: 0 1rem;
 
             }
             &>div:not(:last-of-type){
