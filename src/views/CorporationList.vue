@@ -96,8 +96,9 @@
                                     name="signature_page"
                                     ref="uploadPdf"
                                     class="upload-demo"
-                                    :action="uploadUrl"
+                                    :action=""
                                     :headers="uploadHeaders"
+                                    :http-request="upload"
                                     :on-preview="handlePreview"
                                     :on-remove="handleRemove"
                                     :on-success="handleSuccess"
@@ -196,6 +197,16 @@
             this.getCorporationInfo()
         },
         methods: {
+            upload(fileObj) {
+                const formData = new FormData()
+                formData.append('file', fileObj.file)
+                formData.append('type', fileObj.file.type)
+                return this.$axios({
+                    url: 'api/upload',
+                    method: 'patch',
+                    data: formData
+                }).then()
+            },
             uploadOk() {
                 let fd = new FormData();
                 for (let i = 0; i < this.fileList.length; i++) {
