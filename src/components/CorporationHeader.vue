@@ -8,19 +8,20 @@
                 <div>
                     <div class="menuBox">
                         <div class="userImgBox">
-                            <svg-icon class="userImg" @click.native="openOrCloseMenu()" icon-class="default-user"></svg-icon>
+                            <svg-icon class="userImg" @click.native="openOrCloseMenu()"
+                                      icon-class="default-user"></svg-icon>
                         </div>
-                        <div v-if="menuVisible" id="menuOption" >
+                        <div v-if="menuVisible" id="menuOption">
                             <div v-if="userInfo[orgValue].role==='admin'" @click.native="openOrCloseMenu('a')">
                                 user
                             </div>
                             <div v-else @click.native="openOrCloseMenu('b')">
                                 employee
-                            </div >
+                            </div>
                             <div v-if="userInfo[orgValue].role==='admin'" @click.native="openOrCloseMenu('c')">
                                 create user
                             </div>
-                            <div @click.native="openOrCloseMenu('d')">
+                            <div @click="openOrCloseMenu('d')">
                                 reset password
                             </div>
                             <div v-if="userInfo[orgValue].role==='admin'" @click.native="openOrCloseMenu('e')">
@@ -34,35 +35,35 @@
                 </div>
 
                 <!--<div>-->
-                    <!--<div class="my_select_box">-->
-                        <!--<el-row class="my_select" @click.native="clickSelect()">-->
-                            <!--<el-col :span="20" class="select_content">-->
-                                <!--{{language}}-->
-                            <!--</el-col>-->
-                            <!--<el-col :span="4" class="select_content">-->
-                                <!--<svg-icon icon-class="arrow"></svg-icon>-->
-                            <!--</el-col>-->
-                        <!--</el-row>-->
-                        <!--<div id="my_option" :class="visible">-->
-                            <!--<div-->
-                                    <!--v-for="item in options"-->
-                                    <!--:key="item.value"-->
-                                    <!--:label="item.label"-->
-                                    <!--:value="item.value">-->
-                                <!--<div style="width: 100%">-->
-                                    <!--<div>-->
-                                        <!--<div class="mark">-->
-                                        <!--</div>-->
-                                    <!--</div>-->
+                <!--<div class="my_select_box">-->
+                <!--<el-row class="my_select" @click.native="clickSelect()">-->
+                <!--<el-col :span="20" class="select_content">-->
+                <!--{{language}}-->
+                <!--</el-col>-->
+                <!--<el-col :span="4" class="select_content">-->
+                <!--<svg-icon icon-class="arrow"></svg-icon>-->
+                <!--</el-col>-->
+                <!--</el-row>-->
+                <!--<div id="my_option" :class="visible">-->
+                <!--<div-->
+                <!--v-for="item in options"-->
+                <!--:key="item.value"-->
+                <!--:label="item.label"-->
+                <!--:value="item.value">-->
+                <!--<div style="width: 100%">-->
+                <!--<div>-->
+                <!--<div class="mark">-->
+                <!--</div>-->
+                <!--</div>-->
 
-                                    <!--<div>-->
-                                        <!--{{item.label}}-->
-                                    <!--</div>-->
+                <!--<div>-->
+                <!--{{item.label}}-->
+                <!--</div>-->
 
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
                 <!--</div>-->
                 <div>
                     <div>
@@ -116,7 +117,7 @@
                 visible: {
                     visibility: 'hidden',
                 },
-                menuVisible:false
+                menuVisible: false
 
             }
         },
@@ -124,9 +125,9 @@
             console.log(this.user);
         },
         methods: {
-            openOrCloseMenu(command){
-                console.log('openMenu');
-                this.menuVisible=!this.menuVisible
+            openOrCloseMenu(command) {
+                console.log('openMenu', command);
+                this.menuVisible = !this.menuVisible
                 this.$emit('clickItem', command);
             },
             clickSelect() {
@@ -161,11 +162,13 @@
         height: 4.5rem;
         width: 100%;
         /*z-index: 10;*/
-        .menuBox{
+
+        .menuBox {
             position: relative;
             height: 2.6rem;
         }
-        .userImgBox{
+
+        .userImgBox {
             cursor: pointer;
             height: 2.6rem;
             width: 2.6rem;
@@ -175,12 +178,14 @@
             right: 0;
             top: 0;
             z-index: 10;
-            & .userImg{
+
+            & .userImg {
                 height: 2.6rem;
                 width: 2.6rem;
             }
         }
-        #menuOption{
+
+        #menuOption {
             border: 1px solid black;
             border-radius: 1.3rem;
             position: absolute;
@@ -189,13 +194,15 @@
             z-index: 9;
             background-color: white;
             white-space: pre;
-            &>div{
+
+            & > div {
                 height: 2.6rem;
                 line-height: 2.6rem;
                 margin: 0 1rem;
-
+                cursor: pointer;
             }
-            &>div:not(:last-of-type){
+
+            & > div:not(:last-of-type) {
                 border-bottom: 1px solid black;
             }
         }
