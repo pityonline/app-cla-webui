@@ -2,7 +2,7 @@
     <div class="corpHeader">
         <el-col class="header" :offset="4" :span="16">
             <div class="box">
-                <svg-icon @click="toHome()" icon-class="icon" class="icon"></svg-icon>
+                <svg-icon id="defaultImg" @click="toHome()" icon-class="icon" class="icon"></svg-icon>
             </div>
             <div>
                 <div>
@@ -127,8 +127,8 @@
         mounted(){
             document.addEventListener('click', (e)=> {
                 console.log(e);
-                if (e.target.className !== 'menuOption') {
-                    this.menuVisible = !this.menuVisible
+                if (e.target.id !== 'menuOption'&&e.target.id !== 'defaultImg') {
+                    this.menuVisible = false
                 }
             })
         },
