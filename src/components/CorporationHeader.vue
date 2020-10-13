@@ -7,7 +7,7 @@
             <div>
                 <div>
                     <div class="menuBox">
-                        <div class="userImgBox">
+                        <div class="userImgBox" id="imgBox">
                             <svg-icon id="defaultImg" class="userImg" @click.native="openOrCloseMenu()"
                                       icon-class="default-user"></svg-icon>
                         </div>
@@ -127,7 +127,7 @@
         mounted(){
             document.addEventListener('click', (e)=> {
                 console.log(e);
-                if (e.target.id !== 'menuOption'&&e.target.id !== 'defaultImg') {
+                if (e.target.id !== 'menuOption'&&(e.target.id !== 'defaultImg'||e.target.id !== 'imgBox')) {
                     this.menuVisible = false
                 }
             })
