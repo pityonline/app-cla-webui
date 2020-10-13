@@ -544,6 +544,12 @@
         .pagination-class{
             margin-top: 2rem;
         }
+        .el-pager li.active {
+            color: #319E55;
+        }
+        .el-pager li:hover{
+            color: #319E55;
+        }
     }
 
 </style>
