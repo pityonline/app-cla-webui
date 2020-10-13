@@ -498,7 +498,10 @@
         & .mySwitch .el-switch__label.is-active {
             display: block;
         }
-
+        .el-switch.is-checked .el-switch__core {
+            border-color: #319E55!important;
+            background-color: #319E55!important;
+        }
         & .mySwitch .el-switch.is-disabled .el-switch__core, .mySwitch .el-switch.is-disabled .el-switch__label, .tableStyle {
             cursor: pointer;
         }
