@@ -146,7 +146,8 @@
         },
         data() {
             return {
-
+                inactivePageData:[],
+                activePageData:[],
                 pageSize: 5,
                 pagerPage: 5,
                 inactiveCurrentPage: 1,
@@ -180,13 +181,7 @@
             corpReTryDialogVisible() {
                 return this.$store.state.reTryDialogVisible
             },
-            inactivePageData(){
-                return this.getInactivePageData();
 
-            },
-            activePageData(){
-                return this.getActivePageData();
-            },
         },
         methods: {
             getInactivePageData(){
@@ -196,6 +191,7 @@
                     this.inactiveCurrentPage--
                     this.getInactivePageData()
                 }else{
+                    console.log(data);
                     return data
                 }
             },
@@ -206,6 +202,7 @@
                     this.activeCurrentPage--
                     this.getActivePageData()
                 }else{
+                    console.log(data);
                     return data
                 }
             },
@@ -374,6 +371,8 @@
                             Object.assign(item, {cla_org_id: key})
                             item.enabled === false ? this.inactiveData.push(item) : this.activeData.push(item)
                         })
+                        this.inactivePageData=this.getInactivePageData()
+                        this.activePageData=this.getActivePageData()
                         this.inactiveTotal = this.inactiveData.length
                         this.activeTotal = this.activeData.length
 
