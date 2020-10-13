@@ -197,6 +197,7 @@
             },
             getActivePageData(){
                 let data =[]
+                console.log(this.activeData);
                 data = this.activeData.slice((this.activeCurrentPage-1)*this.pageSize,this.activeCurrentPage*this.pageSize)
                 if (data.length === 0&&this.activeCurrentPage>0) {
                     this.activeCurrentPage--
