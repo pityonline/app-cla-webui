@@ -99,11 +99,9 @@
         computed: {
 
             userInfo() {
-                console.log(this.user.userInfo);
                 return this.user.userInfo
             },
             orgValue() {
-                console.log(this.user.orgValue);
                 return this.user.orgValue
             },
         },
@@ -122,11 +120,9 @@
             }
         },
         created() {
-            console.log(this.user);
         },
         mounted(){
             document.addEventListener('click', (e)=> {
-                console.log(e);
                 if (e.target.id !== 'menuOption'&&e.target.id !== 'defaultImg'&&e.target.id !== 'imgBox') {
                     this.menuVisible = false
                 }
@@ -135,13 +131,11 @@
 
         methods: {
             openOrCloseMenu(command) {
-                console.log('openMenu', command);
                 this.menuVisible = !this.menuVisible
                 this.$emit('clickItem', command);
             },
 
             clickSelect() {
-                console.log('clickSelect');
                 document.getElementById('my_option').style.visibility = 'hidden'
             },
             handleCommand(command) {

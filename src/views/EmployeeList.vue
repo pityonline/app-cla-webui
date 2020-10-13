@@ -42,7 +42,11 @@
                             </template>
                         </el-table-column>
                     </el-table>
-
+                    <el-pagination
+                            small
+                            layout="prev, pager, next"
+                            :total="50">
+                    </el-pagination>
                 </div>
             </el-tab-pane>
             <el-tab-pane label="active" name="second" style="margin-top: 1rem">
@@ -86,6 +90,11 @@
                             </template>
                         </el-table-column>
                     </el-table>
+                    <el-pagination
+                            small
+                            layout="prev, pager, next"
+                            :total="50">
+                    </el-pagination>
                 </div>
             </el-tab-pane>
         </el-tabs>

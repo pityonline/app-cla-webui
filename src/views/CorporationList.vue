@@ -233,7 +233,6 @@
                 console.log('downloadClaFile', row);
             },
             uploadClaFile(row) {
-                console.log('uploadClaFile', row);
                 this.uploadUrl = `/api${url.uploadCorporationPdf}/${this.item.id}/${row.admin_email}`
                 this.uploadDialogVisible = true
             },
