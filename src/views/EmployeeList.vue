@@ -33,7 +33,7 @@
 
 
                                     <button class="deleteBt"
-                                               @click="deleteEmployee(scope.row.cla_org_id,scope.row.email,scope.row.enabled)">
+                                            @click="deleteEmployee(scope.row.cla_org_id,scope.row.email,scope.row.enabled)">
                                         Delete
                                     </button>
 
@@ -101,7 +101,8 @@
                             :page-size="pageSize"
                             :current-page="activeCurrentPage"
                             :pager-count="pagerPage"
-                            :total="activeTotal">
+                            :total="activeTotal"
+                            @current-change="changePage()">
                     </el-pagination>
                 </div>
             </el-tab-pane>
@@ -116,7 +117,7 @@
                 Are you sure to delete ?
             </el-row>
             <el-row align="center" class="marginTop1rem contentTitle">
-                <button class="deleteBt"  @click="submit()">Yes</button>
+                <button class="deleteBt" @click="submit()">Yes</button>
                 <button class="cancelBt" @click="deleteUserVisible=false">No</button>
             </el-row>
 
@@ -142,12 +143,12 @@
         },
         data() {
             return {
-                pageSize:5,
-                pagerPage:5,
-                inactiveCurrentPage:1,
-                activeCurrentPage:1,
-                inactiveTotal:0,
-                activeTotal:0,
+                pageSize: 5,
+                pagerPage: 5,
+                inactiveCurrentPage: 1,
+                activeCurrentPage: 1,
+                inactiveTotal: 0,
+                activeTotal: 0,
                 deleteUserVisible: false,
                 active: 'first',
                 inactiveData: [],
@@ -177,6 +178,10 @@
             },
         },
         methods: {
+            changePage(page){
+                console.log(currentPage);
+                console.log(page);
+            },
             submit() {
                 let obj = {enabled: this.deleteData.enabled}
                 http({
@@ -334,8 +339,8 @@
                             Object.assign(item, {cla_org_id: key})
                             item.enabled === false ? this.inactiveData.push(item) : this.activeData.push(item)
                         })
-                        this.inactiveTotal=this.inactiveData.length
-                        this.activeTotal=this.activeData.length
+                        this.inactiveTotal = this.inactiveData.length
+                        this.activeTotal = this.activeData.length
 
                     }
                 }).catch(err => {
@@ -405,27 +410,34 @@
         & .el-dialog {
             border-radius: 1rem;
         }
-        .el-tabs__active-bar{
+
+        .el-tabs__active-bar {
             background-color: #319E55;
         }
+
         .el-tabs__item.is-active {
             color: #319E55;
         }
+
         .el-tabs__item:hover {
             color: #319E55;
         }
-        .el-tabs__item{
+
+        .el-tabs__item {
             font-size: 1.5rem;
         }
+
         & .tableStyle {
             margin-bottom: 2rem;
             padding: 3rem;
             background-color: white;
             border-radius: 1.5rem;
         }
+
         & .el-dialog__body {
             padding-top: 0;
         }
+
         & .cancelBt {
             width: 5rem;
             height: 2rem;
@@ -478,6 +490,7 @@
             border: 1px solid black;
             border-radius: 1.5rem;
         }
+
         & .el-table__body, .el-table__footer, .el-table__header {
             padding: 0;
             width: auto;
@@ -486,12 +499,13 @@
         & .el-table__body-wrapper {
             margin: 0 1rem;
         }
-        .el-table__body tr:not(:last-of-type) td{
+
+        .el-table__body tr:not(:last-of-type) td {
             border-bottom: 1px dashed lightgrey;
         }
 
-        .el-table::before{
-            height:0;
+        .el-table::before {
+            height: 0;
         }
 
 
@@ -521,54 +535,67 @@
             z-index: 1;
             left: -.4rem;
         }
+
         & .mySwitch .el-switch__label.is-active {
             display: block;
         }
+
         .el-switch.is-checked .el-switch__core {
-            border-color: #319E55!important;
-            background-color: #319E55!important;
+            border-color: #319E55 !important;
+            background-color: #319E55 !important;
         }
+
         & .mySwitch .el-switch.is-disabled .el-switch__core, .mySwitch .el-switch.is-disabled .el-switch__label, .tableStyle {
             cursor: pointer;
         }
-        .el-switch .el-switch__label, .mySwitch.el-switch .el-switch__core{
-            width: 6rem!important;
+
+        .el-switch .el-switch__label, .mySwitch.el-switch .el-switch__core {
+            width: 6rem !important;
             height: 2rem;
             border-radius: 1rem;
             line-height: 2rem;
             font-size: 1rem;
             text-align: right;
         }
-        .el-switch__label *{
+
+        .el-switch__label * {
             font-size: 1rem;
         }
-        .el-switch__core:after{
+
+        .el-switch__core:after {
             height: 2rem;
             width: 2rem;
             top: -1px;
         }
-        .el-switch{
+
+        .el-switch {
             font-size: 1rem;
             line-height: 2rem;
             height: 2rem;
         }
+
         .el-switch.is-checked .el-switch__core:after {
             left: 100%;
             margin-left: -2rem;
         }
-        .pagination-class{
+
+        .pagination-class {
             margin-top: 2rem;
         }
+
         .el-pager li.active {
             color: #319E55;
         }
-        .el-pager li:hover{
+
+        .el-pager li:hover {
             color: #319E55;
         }
-        .el-pagination .btn-next:hover, .el-pagination .btn-prev:hover{
+
+        .el-pagination .btn-next:hover, .el-pagination .btn-prev:hover {
             color: #319E55;
         }
-        .el-pagination button:disabled:hover{
+
+        .el-pagination button:disabled:hover {
             color: #c0c4cc;
         }
     }
