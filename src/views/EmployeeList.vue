@@ -550,7 +550,7 @@
         .el-pager li:hover{
             color: #319E55;
         }
-        .el-pagination .btn-next, .el-pagination .btn-prev:hover{
+        .el-pagination .btn-next:hover, .el-pagination .btn-prev:hover{
             color: #319E55;
         }
     }
