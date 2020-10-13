@@ -102,7 +102,7 @@
                             :current-page="activeCurrentPage"
                             :pager-count="pagerPage"
                             :total="40"
-                            @current-change="changePage(page)">
+                            @current-change="changePage">
                     </el-pagination>
                 </div>
             </el-tab-pane>
