@@ -86,13 +86,7 @@
                                             inactive-text="inactive"
                                             inactive-color="#EBEEF5">
                                     </el-switch>
-
-                                    <!--<el-button style="margin-left: 1rem" type="danger" size="mini"-->
-                                    <!--@click="deleteEmployee(scope.row.cla_org_id,scope.row.email,scope.row.enabled)">删除-->
-                                    <!--</el-button>-->
-
                                 </el-row>
-
                             </template>
                         </el-table-column>
                     </el-table>
@@ -103,7 +97,7 @@
                             :page-size="pageSize"
                             :current-page="activeCurrentPage"
                             :pager-count="pagerPage"
-                            :total="40"
+                            :total="activeTotal"
                             :hide-on-single-page="true"
                             @current-change="changeActivePage">
                     </el-pagination>
