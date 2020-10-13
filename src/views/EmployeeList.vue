@@ -182,7 +182,7 @@
                 let data =[]
                 console.log(this.inactiveCurrentPage);
                 data = this.inactiveData.slice((this.inactiveCurrentPage-1)*this.pageSize,this.inactiveCurrentPage*this.pageSize)
-                if (data.length === 0&&this.inactiveCurrentPage>0) {
+                if (data.length === 0&&this.inactiveCurrentPage>1) {
                     this.inactiveCurrentPage--
                     this.getInactivePageData()
                 }else{
@@ -194,7 +194,7 @@
                 let data =[]
                 console.log(this.activeData,this.activeCurrentPage);
                 data = this.activeData.slice((this.activeCurrentPage-1)*this.pageSize,this.activeCurrentPage*this.pageSize)
-                if (data.length === 0&&this.activeCurrentPage>0) {
+                if (data.length === 0&&this.activeCurrentPage>1) {
                     this.activeCurrentPage--
                     this.getActivePageData()
                 }else{
