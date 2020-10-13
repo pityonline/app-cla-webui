@@ -119,9 +119,17 @@
                                Object.assign(userInfo, {orgValue: 0})
                                this.setLoginInfoAct(userInfo)
                                if (data[0].role === 'admin') {
-                                   this.$router.push('/rootManager')
+                                   if (data[0].initial_pw_changed) {
+                                       this.$router.push('/rootManager')
+                                   }else{
+                                       this.$router.push('/rootManager/resetPassword')
+                                   }
                                } else {
-                                   this.$router.push('/signedRepo')
+                                   if (data[0].initial_pw_changed) {
+                                       this.$router.push('/signedRepo')
+                                   }else{
+                                       this.$router.push('/signedRepo/resetPassword')
+                                   }
                                }
                            }
                            resolve('completed');
