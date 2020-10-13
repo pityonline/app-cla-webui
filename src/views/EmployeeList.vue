@@ -553,6 +553,9 @@
         .el-pagination .btn-next:hover, .el-pagination .btn-prev:hover{
             color: #319E55;
         }
+        .el-pagination button:disabled:hover{
+            color: #c0c4cc;
+        }
     }
 
 </style>
