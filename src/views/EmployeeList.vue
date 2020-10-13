@@ -44,6 +44,7 @@
                     </el-table>
                     <el-pagination
                             small
+                            class="pagination-class"
                             layout="prev, pager, next"
                             :total="50">
                     </el-pagination>
@@ -92,6 +93,7 @@
                     </el-table>
                     <el-pagination
                             small
+                            class="pagination-class"
                             layout="prev, pager, next"
                             :total="50">
                     </el-pagination>
@@ -538,6 +540,9 @@
         .el-switch.is-checked .el-switch__core:after {
             left: 100%;
             margin-left: -2rem;
+        }
+        .pagination-class{
+            margin-top: 2rem;
         }
     }
 
