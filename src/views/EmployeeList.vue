@@ -180,6 +180,7 @@
         methods: {
             getInactivePageData(){
                 let data =[]
+                console.log(this.inactiveCurrentPage);
                 data = this.inactiveData.slice((this.inactiveCurrentPage-1)*this.pageSize,this.inactiveCurrentPage*this.pageSize)
                 if (data.length === 0&&this.inactiveCurrentPage>0) {
                     this.inactiveCurrentPage--
