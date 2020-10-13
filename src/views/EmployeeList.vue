@@ -101,7 +101,7 @@
                             :page-size="pageSize"
                             :current-page="activeCurrentPage"
                             :pager-count="pagerPage"
-                            :total="activeTotal"
+                            :total="40"
                             @current-change="changePage()">
                     </el-pagination>
                 </div>
