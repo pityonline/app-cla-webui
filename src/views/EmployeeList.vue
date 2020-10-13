@@ -179,7 +179,7 @@
         },
         methods: {
             changePage(page){
-                console.log(currentPage);
+                console.log(this.currentPage);
                 console.log(page);
             },
             submit() {
