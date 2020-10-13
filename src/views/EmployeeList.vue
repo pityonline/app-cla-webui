@@ -181,21 +181,32 @@
                 return this.$store.state.reTryDialogVisible
             },
             inactivePageData(){
-                return this.getPageData(this.inactiveData,this.inactiveCurrentPage);
+                return this.getInactivePageData();
+
             },
             activePageData(){
-                return this.getPageData(this.activeData,this.activeCurrentPage);
+                return this.getActivePageData();
             },
         },
         methods: {
-            getPageData(data,currentPage,){
-                let myData =[]
-                myData = this.data.slice((this.currentPage-1)*this.pageSize,this.currentPage*this.pageSize)
-                if (myData.length === 0&&this.currentPage>0) {
-                    this.currentPage--
-                    this.getPageData()
+            getInactivePageData(){
+                let data =[]
+                data = this.inactiveData.slice((this.inactiveCurrentPage-1)*this.pageSize,this.inactiveCurrentPage*this.pageSize)
+                if (data.length === 0&&this.inactiveCurrentPage>0) {
+                    this.inactiveCurrentPage--
+                    this.getInactivePageData()
                 }else{
-                    return myData
+                    return data
+                }
+            },
+            getActivePageData(){
+                let data =[]
+                data = this.activeData.slice((this.activeCurrentPage-1)*this.pageSize,this.activeCurrentPage*this.pageSize)
+                if (data.length === 0&&this.activeCurrentPage>0) {
+                    this.activeCurrentPage--
+                    this.getActivePageData()
+                }else{
+                    return data
                 }
             },
             changeActivePage(page){
