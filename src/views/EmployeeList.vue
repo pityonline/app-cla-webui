@@ -5,7 +5,7 @@
                 <div style="margin-bottom: 1rem" class="tableStyle">
                     <el-table
                             class="tableClass"
-                            :data="inactiveData"
+                            :data="inactivePageData"
                             align="center"
                             style="width: 100%;">
                         <el-table-column
@@ -49,6 +49,8 @@
                             :page-size="pageSize"
                             :current-page="inactiveCurrentPage"
                             :pager-count="pagerPage"
+                            @current-change="changeInActivePage"
+                            :hide-on-single-page="true"
                             :total="inactiveTotal">
                     </el-pagination>
                 </div>
@@ -57,7 +59,7 @@
                 <div style="margin-bottom: 1rem" class="tableStyle">
                     <el-table
                             class="tableClass"
-                            :data="activeData"
+                            :data="activePageData"
                             align="center"
                             style="width: 100%;">
                         <!--<el-table-column-->
@@ -102,7 +104,8 @@
                             :current-page="activeCurrentPage"
                             :pager-count="pagerPage"
                             :total="40"
-                            @current-change="changePage">
+                            :hide-on-single-page="true"
+                            @current-change="changeActivePage">
                     </el-pagination>
                 </div>
             </el-tab-pane>
@@ -143,6 +146,7 @@
         },
         data() {
             return {
+
                 pageSize: 5,
                 pagerPage: 5,
                 inactiveCurrentPage: 1,
@@ -176,11 +180,31 @@
             corpReTryDialogVisible() {
                 return this.$store.state.reTryDialogVisible
             },
+            inactivePageData(){
+                return this.getPageData(this.inactiveData,this.inactiveCurrentPage);
+            },
+            activePageData(){
+                return this.getPageData(this.activeData,this.activeCurrentPage);
+            },
         },
         methods: {
-            changePage(page){
-                console.log(this.activeCurrentPage);
+            getPageData(data,currentPage,){
+                let myData =[]
+                myData = this.data.slice((this.currentPage-1)*this.pageSize,this.currentPage*this.pageSize)
+                if (myData.length === 0&&this.currentPage>0) {
+                    this.currentPage--
+                    this.getPageData()
+                }else{
+                    return myData
+                }
+            },
+            changeActivePage(page){
                 console.log(page);
+                this.activeCurrentPage=page;
+            },
+            changeInActivePage(page){
+                console.log(page);
+                this.inactiveCurrentPage=page;
             },
             submit() {
                 let obj = {enabled: this.deleteData.enabled}

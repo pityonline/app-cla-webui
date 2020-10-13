@@ -173,6 +173,12 @@
                                 case 'cla.invalid_parameter':
                                 this.$store.commit('errorCodeSet', {
                                     dialogVisible: true,
+                                    dialogMessage: 'invalid_parameter,please try again',
+                                });
+                                break;
+                            case 'cla.invalid_account_or_pw':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
                                     dialogMessage: 'Old password error,please try again',
                                 });
                                 break;
