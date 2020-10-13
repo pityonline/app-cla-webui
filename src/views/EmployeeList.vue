@@ -46,7 +46,10 @@
                             small
                             class="pagination-class"
                             layout="prev, pager, next"
-                            :total="50">
+                            :page-size="pageSize"
+                            :current-page="inactiveCurrentPage"
+                            :pager-count="pagerPage"
+                            :total="inactiveTotal">
                     </el-pagination>
                 </div>
             </el-tab-pane>
@@ -95,7 +98,10 @@
                             small
                             class="pagination-class"
                             layout="prev, pager, next"
-                            :total="50">
+                            :page-size="pageSize"
+                            :current-page="activeCurrentPage"
+                            :pager-count="pagerPage"
+                            :total="activeTotal">
                     </el-pagination>
                 </div>
             </el-tab-pane>
@@ -136,6 +142,12 @@
         },
         data() {
             return {
+                pageSize:5,
+                pagerPage:5,
+                inactiveCurrentPage:1,
+                activeCurrentPage:1,
+                inactiveTotal:0,
+                activeTotal:0,
                 deleteUserVisible: false,
                 active: 'first',
                 inactiveData: [],
@@ -322,6 +334,9 @@
                             Object.assign(item, {cla_org_id: key})
                             item.enabled === false ? this.inactiveData.push(item) : this.activeData.push(item)
                         })
+                        this.inactiveTotal=this.inactiveData.length
+                        this.activeTotal=this.activeData.length
+
                     }
                 }).catch(err => {
                     if (err.data.hasOwnProperty('data')) {
