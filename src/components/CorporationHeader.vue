@@ -127,7 +127,7 @@
         mounted(){
             document.addEventListener('click', (e)=> {
                 console.log(e);
-                if (e.target.id !== 'menuOption'&&(e.target.id !== 'defaultImg'||e.target.id !== 'imgBox')) {
+                if (e.target.id !== 'menuOption'&&e.target.id !== 'defaultImg'&&e.target.id !== 'imgBox') {
                     this.menuVisible = false
                 }
             })
