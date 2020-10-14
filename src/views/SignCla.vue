@@ -273,7 +273,8 @@
                        this.errorAct(err)
                    })
                } else{
-
+                   this.$message.closeAll()
+                    this.$message.error('Please fill in the correct email address in the email box')
                }
 
 
