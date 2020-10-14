@@ -301,7 +301,7 @@
                                 <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">
                                     upload
                                 </el-button>
-                                <!--<div slot="tip" class="el-upload__tip">文件不超过500kb</div>-->
+
                             </el-upload>
                         </el-form-item>
                     </el-form>
@@ -453,7 +453,7 @@
                 let url = ''
                 if (row.repo_id) {
                     url = `${this.address}${this.signRouter}/${row.platform}/${row.org_id}/${row.repo_id}`
-                } else {
+                } else{
                     url = `${this.address}${this.signRouter}/${row.platform}/${row.org_id}`
                 }
                 window.open(url)
@@ -639,7 +639,6 @@
                 }
                 return new Blob([u8arr], {type: 'pdf'});
             },
-
 
             getTableData() {
                 let interval = setInterval(() => {

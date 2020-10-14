@@ -25,14 +25,13 @@
 
         data() {
             return {
-                domain: this.$store.state.domain,
             }
         },
         methods: {
             reTry() {
                 this.$store.commit('errorCodeSet', {
                     dialogVisible: false,
-                    dialogMessage: 'System error, please try again',
+                    dialogMessage: '',
                 })
 
             },
