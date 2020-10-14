@@ -251,33 +251,31 @@
             },
             sendCode() {
                 let reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$");
-                let email = this.myForm.adminEmail
-                for (let item in this.myForm) {
-                    if (item === 'email') {
-                        email = this.myForm.email
-                        break
-                    }
+                let email = this.myForm.email
+               if (reg.test(email)){
+                   http({
+                       url: `${url.sendVerifyCode}/${this.cla_org_id}/${this.myForm.email}`,
+                       method: 'put',
+                   }).then(res => {
+                       this.$message.closeAll();
+                       this.$message.success('Please fill in the verification code in the email to continue signing');
+                       let second = 60;
+                       let codeInterval = setInterval(() => {
+                           if (second !== 0) {
+                               second--;
+                               this.sendBtText = second + 's'
+                           } else {
+                               this.sendBtText = 'send code';
+                               clearInterval(codeInterval)
+                           }
+                       }, 1000)
+                   }).catch(err => {
+                       this.errorAct(err)
+                   })
+               } else{
 
-                }
-                http({
-                    url: `${url.sendVerifyCode}/${this.cla_org_id}/${this.myForm.email}`,
-                    method: 'put',
-                }).then(res => {
-                    this.$message.closeAll();
-                    this.$message.success('Please fill in the verification code in the email to continue signing');
-                    let second = 60;
-                    let codeInterval = setInterval(() => {
-                        if (second !== 0) {
-                            second--;
-                            this.sendBtText = second + 's'
-                        } else {
-                            this.sendBtText = 'send code';
-                            clearInterval(codeInterval)
-                        }
-                    }, 1000)
-                }).catch(err => {
-                    this.errorAct(err)
-                })
+               }
+
 
             },
             getNowDate() {
