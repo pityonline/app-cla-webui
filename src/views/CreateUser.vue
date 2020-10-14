@@ -95,6 +95,7 @@
                     }
                 })
                 let obj = {emails: myEmails}
+                console.log(obj);
                 http({
                     url: url.addEmployeeManager,
                     method: 'post',
