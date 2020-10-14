@@ -88,7 +88,9 @@
             createUser() {
                 let myEmails = []
                 this.emails.forEach(item => {
-                    myEmails.push(item.email)
+                    if (item.email.trim()!==''){
+                        myEmails.push(item.email)
+                    }
                 })
                 let obj = {emails: myEmails}
                 http({
