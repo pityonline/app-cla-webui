@@ -88,14 +88,11 @@
             createUser() {
                 let myEmails = []
                 this.emails.forEach(item => {
-                    console.log(item.email);
                     if (item.email.trim()!==''){
-                        console.log(item.email.trim());
-                        myEmails.push(item.email)
+                        myEmails.push(item.email.trim())
                     }
                 })
                 let obj = {emails: myEmails}
-                console.log(obj);
                 http({
                     url: url.addEmployeeManager,
                     method: 'post',
