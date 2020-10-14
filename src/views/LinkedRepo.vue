@@ -466,6 +466,7 @@
                 this.fileList=[]
                 this.$message.closeAll()
                 this.$message.success('success')
+                this.uploadOrgDialogVisible=false
             },
             handleRemove(file, fileList) {
                 console.log(file, fileList);
