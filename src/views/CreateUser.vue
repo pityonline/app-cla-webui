@@ -88,7 +88,9 @@
             createUser() {
                 let myEmails = []
                 this.emails.forEach(item => {
+                    console.log(item.email);
                     if (item.email.trim()!==''){
+                        console.log(item.email.trim());
                         myEmails.push(item.email)
                     }
                 })
