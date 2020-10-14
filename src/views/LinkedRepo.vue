@@ -464,6 +464,8 @@
             handleSuccess(file, fileList) {
                 console.log(file, fileList);
                 this.fileList=[]
+                this.$message.closeAll()
+                this.$message.success('success')
             },
             handleRemove(file, fileList) {
                 console.log(file, fileList);
