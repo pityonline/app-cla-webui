@@ -241,6 +241,10 @@
             },
             handleSuccess(file, fileList) {
                 console.log(file, fileList);
+                this.fileList=[]
+                this.$message.closeAll()
+                this.$message.success('success')
+                this.uploadDialogVisible=false
 
             },
             handleRemove(file, fileList) {
