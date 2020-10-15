@@ -418,6 +418,7 @@
                             },err=>{
                             })
                         })
+                        resolve()
                     }).then(res=>{
                         this.tableData=data
                         console.log(data);

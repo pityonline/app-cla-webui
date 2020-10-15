@@ -3,7 +3,7 @@
     <el-row id="userList" class="marginTop1rem">
 
         <el-col>
-            <p id="tabName">User Management</p>
+            <p id="tabName">Manager</p>
             <el-row class="tableBox">
                 <el-col>
                     <el-row>
