@@ -220,7 +220,7 @@
                     this.getEmployee()
                     this.deleteUserVisible = false
                     this.$message.closeAll();
-                    this.$message.success(res.data.data)
+                    this.$message.success('success')
                 }).catch(err => {
                     console.log(err);
                     if (err.data.hasOwnProperty('data')) {
@@ -367,12 +367,11 @@
                             Object.assign(item, {cla_org_id: key})
                             item.enabled === false ? this.inactiveData.push(item) : this.activeData.push(item)
                         })
-                        this.inactivePageData=this.getInactivePageData()
-                        this.activePageData=this.getActivePageData()
-                        this.inactiveTotal = this.inactiveData.length
-                        this.activeTotal = this.activeData.length
-
                     }
+                    this.inactivePageData=this.getInactivePageData()
+                    this.activePageData=this.getActivePageData()
+                    this.inactiveTotal = this.inactiveData.length
+                    this.activeTotal = this.activeData.length
                 }).catch(err => {
                     if (err.data.hasOwnProperty('data')) {
                         switch (err.data.data.error_code) {
