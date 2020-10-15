@@ -64,10 +64,10 @@
             getRepoInfo() {
                 let params = window.location.href.split('/sign/')[1]
                 console.log(params);
-                let args = decodeURIComponent(atob(params));
+                let args = decodeURIComponent(escape(atob(params)));
                 console.log(args);
-                this.platform = args[0]
-                this.org = args[1]
+                this.platform = args[0];
+                this.org = args[1];
                 if (args[2]) {
                     this.repo = args[2]
                 } else {

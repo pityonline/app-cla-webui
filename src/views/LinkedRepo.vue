@@ -456,7 +456,7 @@
                 } else{
                     params = `${row.platform}/${row.org_id}`
                 }
-                let base64Params =  window.btoa(encodeURIComponent(url));
+                let base64Params =  window.btoa(unescape(encodeURIComponent(url)));
                 let url = `${this.address}${this.signRouter}/${base64Params}`
                 window.open(url)
             },
