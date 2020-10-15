@@ -20,11 +20,7 @@ const routes = [
                 component: () => import('../views/LoginTypeSelect.vue')
             },
             {
-                path: '/sign/:platform/:org_id/:repo_id',
-                component: () => import('../views/SignType.vue')
-            },
-            {
-                path: '/sign/:platform/:org_id',
+                path: '/sign/:params',
                 component: () => import('../views/SignType.vue')
             },
             {
