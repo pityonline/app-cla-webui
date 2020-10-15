@@ -128,6 +128,8 @@
                 }).then(res => {
                     this.$message.closeAll()
                     this.$message.success('success')
+                    console.log(this.$router);
+                    console.log(this.$router.path);
                     if (this.$router.path === '/signedRepo/resetPassword') {
                         this.$router.push('/employeeList')
                     }else{
