@@ -574,7 +574,7 @@
             background-color: #319E55 !important;
         }
 
-        & .mySwitch .el-switch.is-disabled .el-switch__core, .mySwitch .el-switch.is-disabled .el-switch__label, .tableStyle {
+        & .mySwitch .el-switch.is-disabled .el-switch__core, .mySwitch .el-switch.is-disabled .el-switch__label {
             cursor: pointer;
         }
 
