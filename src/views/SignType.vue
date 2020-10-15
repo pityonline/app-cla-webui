@@ -13,22 +13,22 @@
                         </div>
                         <div>
                             <!--<el-tooltip class="item" effect="dark" content="Sorry, it's not open yet" placement="right">-->
-                                <!--<button class="disabledButton">-->
-                                    <!--Corporation-->
-                                <!--</button>-->
+                            <!--<button class="disabledButton">-->
+                            <!--Corporation-->
+                            <!--</button>-->
                             <!--</el-tooltip>-->
 
                             <button class="button" @click="submit('corporation')">
-                            Corporation
+                                Corporation
                             </button>
                         </div>
                         <!--<el-tooltip class="item" effect="dark" content="Sorry, it's not open yet" placement="right">-->
-                            <!--<button class="disabledButton">-->
-                                <!--Employee-->
-                            <!--</button>-->
+                        <!--<button class="disabledButton">-->
+                        <!--Employee-->
+                        <!--</button>-->
                         <!--</el-tooltip>-->
                         <button class="button" @click="submit('employee')">
-                        Employee
+                            Employee
                         </button>
                     </div>
                 </el-col>
@@ -47,10 +47,10 @@
 
     export default {
         name: "SignType",
-        components:{
+        components: {
             ReTryDialog,
         },
-        computed:{
+        computed: {
             reTryDialogVisible() {
                 return this.$store.state.reTryDialogVisible
             },
@@ -71,9 +71,12 @@
             }
         },
         methods: {
-            ...mapActions(['setTokenAct', 'setLoginTypeAct', 'setRepoInfoAct','errorAct']),
+            ...mapActions(['setTokenAct', 'setLoginTypeAct', 'setRepoInfoAct', 'errorAct']),
             getRepoInfo() {
-                let args = window.location.href.split('/sign/')[1].split('/')
+                let params = window.location.href.split('/sign/')[1]
+               let args = decodeURIComponent(atob(params).split('').map(function (c) {
+                    return '%' + ('00' + c.charCodeAt(0).toString(16)).splice(-2);
+                }).join('')).split('/');
                 this.platform = args[0]
                 this.org = args[1]
                 if (args[2]) {
@@ -126,6 +129,7 @@
 
     .signType {
         font-family: Roboto-Bold, sans-serif;
+
         & > div {
             display: flex;
             flex-direction: column;

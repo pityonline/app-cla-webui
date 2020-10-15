@@ -450,12 +450,16 @@
                 })
             },
             toSignPage(row) {
-                let url = ''
+                let params = ''
                 if (row.repo_id) {
-                    url = `${this.address}${this.signRouter}/${row.platform}/${row.org_id}/${row.repo_id}`
+                    params = `${row.platform}/${row.org_id}/${row.repo_id}`
                 } else{
-                    url = `${this.address}${this.signRouter}/${row.platform}/${row.org_id}`
+                    params = `${row.platform}/${row.org_id}`
                 }
+                let base64Params =  window.btoa(encodeURIComponent(url).replace(/%([0-9A-F]{2})/g,function toSolidBytes(match,p1){
+                    return String.fromCharCode('0x'+p1)
+                }));
+                let url = `${this.address}${this.signRouter}/${base64Params}`
                 window.open(url)
             },
             submitUpload() {
