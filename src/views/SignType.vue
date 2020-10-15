@@ -64,7 +64,7 @@
             getRepoInfo() {
                 let params = window.location.href.split('/sign/')[1]
                 console.log(params);
-                let args = decodeURIComponent(escape(atob(params)));
+                let args = decodeURIComponent(window.escape(window.atob(params)));
                 console.log(args);
                 this.platform = args[0];
                 this.org = args[1];
