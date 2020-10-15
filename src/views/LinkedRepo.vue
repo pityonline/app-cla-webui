@@ -414,10 +414,10 @@
                             resolve(claName)
                         }).then(res=>{
                             Object.assign(data[index],{claName:res})
-                            this.tableData=data
                         },err=>{
                         })
                     })
+                    this.tableData=data
                 }).catch(err=>{
                 })
             },
