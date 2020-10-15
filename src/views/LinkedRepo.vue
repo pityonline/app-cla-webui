@@ -418,6 +418,7 @@
                         })
                     })
                     this.tableData=data
+                    console.log(data);
                 }).catch(err=>{
                 })
             },
