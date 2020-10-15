@@ -456,7 +456,8 @@
                 } else{
                     params = `${row.platform}/${row.org_id}`
                 }
-                let base64Params =  window.btoa(encodeURIComponent(`gitee/cla-test/test1`));
+                console.log(params);
+                let base64Params =  window.btoa(encodeURIComponent(params));
                 let url = `${this.address}${this.signRouter}/${base64Params}`
                 window.open(url)
             },
