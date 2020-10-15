@@ -63,9 +63,7 @@
             ...mapActions(['setTokenAct', 'setLoginTypeAct', 'setRepoInfoAct', 'errorAct']),
             getRepoInfo() {
                 let params = window.location.href.split('/sign/')[1]
-                console.log(params);
                 let args = decodeURIComponent(window.atob(params)).split('/');
-                console.log(args);
                 this.platform = args[0];
                 this.org = args[1];
                 if (args[2]) {
