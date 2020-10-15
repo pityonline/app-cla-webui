@@ -189,12 +189,9 @@
             if (JSON.parse(sessionStorage.getItem('item'))) {
                 this.item = JSON.parse(sessionStorage.getItem('item'))
             } else {
-                this.tableData = this.$route.query.item.corporationInfo
-                console.log(this.tableData);
                 this.item = this.$route.query.item
                 sessionStorage.setItem('item', JSON.stringify(this.$route.query.item))
             }
-
             this.getCorporationInfo()
         },
         methods: {

@@ -408,17 +408,22 @@
                     headers:this.uploadHeaders
                 }).then(res=>{
                     let data = res.data.data
-                    data.forEach((item,index)=>{
-                        new Promise((resolve,reject)=>{
-                            let claName = this.getClaName(item.cla_id)
-                            resolve(claName)
-                        }).then(res=>{
-                            Object.assign(data[index],{claName:res})
-                        },err=>{
+                    new Promise((resolve,reject)=>{
+                        data.forEach((item,index)=>{
+                            new Promise((resolve,reject)=>{
+                                let claName = this.getClaName(item.cla_id)
+                                resolve(claName)
+                            }).then(res=>{
+                                Object.assign(data[index],{claName:res})
+                            },err=>{
+                            })
                         })
+                    }).then(res=>{
+                        this.tableData=data
+                        console.log(data);
                     })
-                    this.tableData=data
-                    console.log(data);
+
+
                 }).catch(err=>{
                 })
             },
