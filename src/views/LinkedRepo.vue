@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-row :gutter="20">
-            <el-col :span="3" class="tableStyle">
+            <el-col :span="3" class="orgTableStyle tableStyle">
                 <el-table
                         :data="orgTableData"
                         align="center"
@@ -791,7 +791,9 @@
         padding: 3rem 0;
         background-color: white;
     }
-
+    .orgTableStyle{
+        cursor: pointer;
+    }
     .paginationClass {
         text-align: center;
         margin-bottom: 1rem;
