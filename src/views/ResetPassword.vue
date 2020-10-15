@@ -128,7 +128,11 @@
                 }).then(res => {
                     this.$message.closeAll()
                     this.$message.success('success')
-                    this.$router.push('/userList')
+                    if (this.$router.path === '/signedRepo/resetPassword') {
+                        this.$router.push('/employeeList')
+                    }else{
+                        this.$router.push('/userList')
+                    }
                 }).catch(err => {
                     if (err.data.hasOwnProperty('data')) {
                         switch (err.data.data.error_code) {
