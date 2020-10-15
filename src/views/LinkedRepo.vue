@@ -456,7 +456,7 @@
                 } else{
                     params = `${row.platform}/${row.org_id}`
                 }
-                let base64Params =  window.btoa(unescape(encodeURIComponent('新码笔记')));
+                let base64Params =  window.btoa(encodeURIComponent(`gitee/cla-test/test1`));
                 let url = `${this.address}${this.signRouter}/${base64Params}`
                 window.open(url)
             },
