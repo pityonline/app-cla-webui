@@ -12,21 +12,10 @@
                             </button>
                         </div>
                         <div>
-                            <!--<el-tooltip class="item" effect="dark" content="Sorry, it's not open yet" placement="right">-->
-                            <!--<button class="disabledButton">-->
-                            <!--Corporation-->
-                            <!--</button>-->
-                            <!--</el-tooltip>-->
-
                             <button class="button" @click="submit('corporation')">
                                 Corporation
                             </button>
                         </div>
-                        <!--<el-tooltip class="item" effect="dark" content="Sorry, it's not open yet" placement="right">-->
-                        <!--<button class="disabledButton">-->
-                        <!--Employee-->
-                        <!--</button>-->
-                        <!--</el-tooltip>-->
                         <button class="button" @click="submit('employee')">
                             Employee
                         </button>
@@ -77,6 +66,7 @@
                let args = decodeURIComponent(atob(params).split('').map(function (c) {
                     return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
                 }).join('')).split('/');
+                console.log(args);
                 this.platform = args[0]
                 this.org = args[1]
                 if (args[2]) {
