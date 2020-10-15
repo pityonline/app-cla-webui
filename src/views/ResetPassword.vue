@@ -125,7 +125,6 @@
                     url: url.resetPassword,
                     method: 'patch',
                     data: obj,
-
                 }).then(res => {
                     this.$message.closeAll()
                     this.$message.success('success')

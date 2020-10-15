@@ -252,30 +252,30 @@
             sendCode() {
                 let reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$");
                 let email = this.myForm.email
-               if (reg.test(email)){
-                   http({
-                       url: `${url.sendVerifyCode}/${this.cla_org_id}/${this.myForm.email}`,
-                       method: 'put',
-                   }).then(res => {
-                       this.$message.closeAll();
-                       this.$message.success('Please fill in the verification code in the email to continue signing');
-                       let second = 60;
-                       let codeInterval = setInterval(() => {
-                           if (second !== 0) {
-                               second--;
-                               this.sendBtText = second + 's'
-                           } else {
-                               this.sendBtText = 'send code';
-                               clearInterval(codeInterval)
-                           }
-                       }, 1000)
-                   }).catch(err => {
-                       this.errorAct(err)
-                   })
-               } else{
-                   this.$message.closeAll()
+                if (reg.test(email)) {
+                    http({
+                        url: `${url.sendVerifyCode}/${this.cla_org_id}/${this.myForm.email}`,
+                        method: 'put',
+                    }).then(res => {
+                        this.$message.closeAll();
+                        this.$message.success('Please fill in the verification code in the email to continue signing');
+                        let second = 60;
+                        let codeInterval = setInterval(() => {
+                            if (second !== 0) {
+                                second--;
+                                this.sendBtText = second + 's'
+                            } else {
+                                this.sendBtText = 'send code';
+                                clearInterval(codeInterval)
+                            }
+                        }, 1000)
+                    }).catch(err => {
+                        this.errorAct(err)
+                    })
+                } else {
+                    this.$message.closeAll()
                     this.$message.error('Please fill in the correct email address in the email box')
-               }
+                }
 
 
             },
@@ -350,7 +350,7 @@
                 }
 
             },
-            setData(res,argRes) {
+            setData(res, argRes) {
                 let data = res.data.data;
                 console.log(res);
                 this.signPageData = data
@@ -482,7 +482,7 @@
                             [item.id]: [{
                                 required: item.required,
                                 validator: this.verifyFormEmail,
-                                trigger: 'blur'
+                                trigger: ['blur', 'change']
                             }],
                         })
                     } else if (item.type === 'telephone') {
@@ -491,7 +491,7 @@
                             [item.id]: [{
                                 required: item.required,
                                 validator: this.verifyTel,
-                                trigger: 'blur'
+                                trigger: ['blur', 'change']
                             }],
                         })
                     } else if (item.type === 'address') {
@@ -500,7 +500,7 @@
                             [item.id]: [{
                                 required: item.required,
                                 validator: this.verifyAddr,
-                                trigger: 'blur'
+                                trigger: ['blur', 'change']
                             }],
                         })
                     }
