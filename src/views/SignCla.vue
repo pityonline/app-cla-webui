@@ -66,21 +66,6 @@
         </el-row>
 
         <Footer></Footer>
-        <el-dialog
-                :title="tipsTitle"
-                top="5vh"
-                :close-on-press-escape="false"
-                :show-close="false"
-                :close-on-click-modal="false"
-                :visible.sync="tipsDialogVisible"
-                width="30%">
-            <el-row>
-                <el-col align="center">
-                    <p>{{tipsMessage}}</p>
-                    <button class="dialogBt" @click="clickOk()">OK</button>
-                </el-col>
-            </el-row>
-        </el-dialog>
         <ReLoginDialog :dialogVisible="reLoginDialogVisible" :message="reLoginMsg"
                        :title="reLoginDialogTitle"></ReLoginDialog>
         <ReTryDialog :dialogVisible="reTryDialogVisible" :message="reLoginMsg"
@@ -212,12 +197,6 @@
         methods: {
             ...
                 mapActions(['setTokenAct', 'setRepoInfoAct', 'viewPrivacy', 'errorAct']),
-            clickOk() {
-                let url = `/sign/${this.$store.state.repoInfo.platform}/${this.$store.state.repoInfo.org_id}/${this.$store.state.repoInfo.repo_id}`
-                this.$router.push(url)
-                this.tipsDialogVisible = false;
-            },
-
             async verifyTel(rule, value, callback) {
                 if (value) {
                     let reg = /^1[3456789]\d{9}$/;

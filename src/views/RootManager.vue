@@ -83,13 +83,13 @@
             clickItem(command) {
                 switch (command) {
                     case 'a':
-                        if (this.$route.path !== '/userList') {
-                            this.$router.push('/userList');
+                        if (this.$route.path !== '/managerList') {
+                            this.$router.push('/managerList');
                         }
                         break;
                     case 'c':
-                        if (this.$route.path !== '/createUser') {
-                            this.$router.push('/createUser');
+                        if (this.$route.path !== '/createManager') {
+                            this.$router.push('/createManager');
                         }
                         break;
                     case 'd':

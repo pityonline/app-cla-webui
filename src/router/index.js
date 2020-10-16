@@ -93,16 +93,16 @@ const routes = [
         children: [
             {
                 path: '/',
-                redirect: '/userList',
+                redirect: '/managerList',
             },
             {
-                path: '/userList',
-                name: 'UserList',
+                path: '/managerList',
+                name: 'ManagerList',
                 component: () => import('../views/UserList.vue'),
             },
             {
-                path: '/createUser',
-                name: 'CreateUser',
+                path: '/createManager',
+                name: 'CreateManager',
                 component: () => import('../views/CreateUser.vue'),
             },
             {
