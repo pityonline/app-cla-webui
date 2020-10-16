@@ -7,17 +7,18 @@
                 <el-col align="right" class="buttonBox">
                     <div id="btBox">
                         <div>
-                            <button class="button" @click="submit('individual')">
-                                Individual
-                            </button>
-                        </div>
-                        <div>
+
                             <button class="button" @click="submit('corporation')">
                                 Corporation
                             </button>
                         </div>
-                        <button class="button" @click="submit('employee')">
-                            Employee
+                        <div>
+                            <button class="button" @click="submit('employee')">
+                                Employee
+                            </button>
+                        </div>
+                        <button class="button" @click="submit('individual')">
+                            Individual
                         </button>
                     </div>
                 </el-col>
