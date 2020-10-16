@@ -415,6 +415,7 @@
                                 resolve(claName)
                             }).then(res=>{
                                 Object.assign(data[index],{claName:res})
+                                console.log(res);
                             },err=>{
                             })
                         })
