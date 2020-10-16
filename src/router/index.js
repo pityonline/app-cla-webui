@@ -155,10 +155,14 @@ const router = new VueRouter({
 });
 router.beforeEach((to, from, next) => {
     if (from.path === '/signedRepo/resetPassword' || from.path === '/rootManager/resetPassword') {
-        if (this.$store.state.loginInfo.initial_pw_changed) {
+        if (JSON.parse(sessionStorage.getItem(loginInfo)).userInfo[0].initial_pw_changed) {
             next()
         }else{
-            next(from.path)
+            if (to.path === '/corporationManagerLogin') {
+                next()
+            }else{
+                next(from.path)
+            }
         }
     }else{
         next()
