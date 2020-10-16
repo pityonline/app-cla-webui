@@ -1,5 +1,6 @@
 <template>
     <div id="employeeList">
+        <p id="tabName" >Employee</p>
         <el-tabs v-model="active">
             <el-tab-pane label="inactive" name="first" style="margin-top: 1rem">
                 <div style="margin-bottom: 1rem" class="tableStyle">
@@ -140,8 +141,8 @@
         },
         data() {
             return {
-                inactivePageData:[],
-                activePageData:[],
+                inactivePageData: [],
+                activePageData: [],
                 pageSize: 5,
                 pagerPage: 5,
                 inactiveCurrentPage: 1,
@@ -178,37 +179,37 @@
 
         },
         methods: {
-            getInactivePageData(){
-                let data =[]
+            getInactivePageData() {
+                let data = []
                 console.log(this.inactiveCurrentPage);
-                data = this.inactiveData.slice((this.inactiveCurrentPage-1)*this.pageSize,this.inactiveCurrentPage*this.pageSize)
-                if (data.length === 0&&this.inactiveCurrentPage>1) {
+                data = this.inactiveData.slice((this.inactiveCurrentPage - 1) * this.pageSize, this.inactiveCurrentPage * this.pageSize)
+                if (data.length === 0 && this.inactiveCurrentPage > 1) {
                     this.inactiveCurrentPage--
                     this.getInactivePageData()
-                }else{
+                } else {
                     console.log(data);
                     return data
                 }
             },
-            getActivePageData(){
-                let data =[]
-                console.log(this.activeData,this.activeCurrentPage);
-                data = this.activeData.slice((this.activeCurrentPage-1)*this.pageSize,this.activeCurrentPage*this.pageSize)
-                if (data.length === 0&&this.activeCurrentPage>1) {
+            getActivePageData() {
+                let data = []
+                console.log(this.activeData, this.activeCurrentPage);
+                data = this.activeData.slice((this.activeCurrentPage - 1) * this.pageSize, this.activeCurrentPage * this.pageSize)
+                if (data.length === 0 && this.activeCurrentPage > 1) {
                     this.activeCurrentPage--
                     this.getActivePageData()
-                }else{
+                } else {
                     console.log(data);
                     return data
                 }
             },
-            changeActivePage(page){
+            changeActivePage(page) {
                 console.log(page);
-                this.activeCurrentPage=page;
+                this.activeCurrentPage = page;
             },
-            changeInActivePage(page){
+            changeInActivePage(page) {
                 console.log(page);
-                this.inactiveCurrentPage=page;
+                this.inactiveCurrentPage = page;
             },
             submit() {
                 let obj = {enabled: this.deleteData.enabled}
@@ -368,8 +369,8 @@
                             item.enabled === false ? this.inactiveData.push(item) : this.activeData.push(item)
                         })
                     }
-                    this.inactivePageData=this.getInactivePageData()
-                    this.activePageData=this.getActivePageData()
+                    this.inactivePageData = this.getInactivePageData()
+                    this.activePageData = this.getActivePageData()
                     this.inactiveTotal = this.inactiveData.length
                     this.activeTotal = this.activeData.length
                 }).catch(err => {
@@ -435,15 +436,20 @@
 </script>
 
 <style lang="less">
+    @import "../assets/font/css/Roboto-Regular.css";
     #employeeList {
         & .el-dialog {
             border-radius: 1rem;
         }
-
+        & #tabName {
+            user-select: none;
+            font-family: Roboto-Regular, sans-serif;
+            font-size: 2rem;
+            text-align: left;
+        }
         .el-tabs__active-bar {
             background-color: #319E55;
         }
-
         .el-tabs__item.is-active {
             color: #319E55;
         }
@@ -451,22 +457,18 @@
         .el-tabs__item:hover {
             color: #319E55;
         }
-
         .el-tabs__item {
             font-size: 1.5rem;
         }
-
         & .tableStyle {
             margin-bottom: 2rem;
             padding: 3rem;
             background-color: white;
             border-radius: 1.5rem;
         }
-
         & .el-dialog__body {
             padding-top: 0;
         }
-
         & .cancelBt {
             width: 5rem;
             height: 2rem;
@@ -509,6 +511,7 @@
             cursor: pointer;
             background: linear-gradient(to right, #97DB30, #319E55);
             margin-bottom: 1rem;
+            user-select: none;
         }
 
         & .button:focus {
