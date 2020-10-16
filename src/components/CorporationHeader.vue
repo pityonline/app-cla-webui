@@ -204,6 +204,7 @@
                 line-height: 2.6rem;
                 margin: 0 1rem;
                 cursor: pointer;
+                user-select: none;
             }
 
             & > div:not(:last-of-type) {
