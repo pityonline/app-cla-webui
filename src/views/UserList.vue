@@ -353,6 +353,7 @@
             cursor: pointer;
             background: linear-gradient(to right, #97DB30, #319E55);
             margin-bottom: 1rem;
+            user-select: none;
         }
 
         & .button:focus {
