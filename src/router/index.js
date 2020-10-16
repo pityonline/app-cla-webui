@@ -152,5 +152,16 @@ const router = new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
     routes
+});
+router.beforeEach((to, from, next) => {
+    if (from.path === '/signedRepo/resetPassword' || from.path === '/rootManager/resetPassword') {
+        if (this.$store.state.loginInfo.initial_pw_changed) {
+            next()
+        }else{
+            next(from.path)
+        }
+    }else{
+        next()
+    }
 })
 export default router
