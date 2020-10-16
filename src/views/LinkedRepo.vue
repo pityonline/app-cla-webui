@@ -345,6 +345,7 @@
 <script>
     import {mapActions} from 'vuex'
     import * as url from '../until/api'
+    import * as until from '../until/until'
     import pdfReader from "@components/PdfReader";
     import pdf from 'vue-pdf'
     import http from '../until/http'
@@ -365,7 +366,7 @@
                 orgTableData: '',
                 address:this.$store.state.domain,
                 url: '',
-                signRouter: '/sign',
+                signRouter: this.$store.state.signRouter,
                 pdfSrc: '',
                 numPages: undefined,
                 docInfo: {},
@@ -462,7 +463,7 @@
                 } else{
                     params = `${row.platform}/${row.org_id}`
                 }
-                let base64Params =  window.btoa(encodeURIComponent(params));
+                let base64Params =  until.strToBase64(params)
                 let url = `${this.address}${this.signRouter}/${base64Params}`
                 window.open(url)
             },

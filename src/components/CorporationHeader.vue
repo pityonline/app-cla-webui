@@ -13,13 +13,13 @@
                         </div>
                         <div v-if="menuVisible" id="menuOption" >
                             <div v-if="userInfo[orgValue].role==='admin'" @click="openOrCloseMenu('a')">
-                                user
+                                manager
                             </div>
                             <div v-else @click="openOrCloseMenu('b')">
                                 employee
                             </div>
                             <div v-if="userInfo[orgValue].role==='admin'" @click="openOrCloseMenu('c')">
-                                create user
+                                create manager
                             </div>
                             <div @click="openOrCloseMenu('d')">
                                 reset password

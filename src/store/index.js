@@ -6,6 +6,7 @@ import * as url from '../until/api'
 Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
+        signRouter:'/sign',
         claChoose: sessionStorage.getItem('claChoose') || undefined,
         orgChoose: sessionStorage.getItem('orgChoose') || undefined,
         repositoryChoose: sessionStorage.getItem('repositoryChoose') || undefined,

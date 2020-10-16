@@ -18,12 +18,14 @@
 </template>
 
 <script>
+    import * as until from '../until/until'
     export default {
         name: "ReLoginDialog",
         props: ['dialogVisible', 'message', 'title'],
         data() {
             return {
                 domain: this.$store.state.domain,
+                signRouter:this.$store.state.signRouter,
             }
         },
         methods: {
@@ -36,7 +38,10 @@
                 date.setTime(date.getTime() - 10000);
                 document.cookie = `_mark=; expire=${date.toUTCString()}; Domain=${this.domain}; path=/`;
                 let repoInfo = this.$store.state.repoInfo
-                let path = repoInfo.repo_id ? `/sign/${repoInfo.platform}/${repoInfo.org_id}/${repoInfo.repo_id}` : `/sign/${repoInfo.platform}/${repoInfo.org_id}`
+                let params = repoInfo.repo_id ? `${repoInfo.platform}/${repoInfo.org_id}/${repoInfo.repo_id}` : `${repoInfo.platform}/${repoInfo.org_id}`
+
+                let path =`${this.signRouter}/${until.strToBase64(params)}`
+
                 this.$router.replace(path)
 
             },
