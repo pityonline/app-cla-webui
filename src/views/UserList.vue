@@ -3,7 +3,7 @@
     <el-row id="userList" class="marginTop1rem">
 
         <el-col>
-            <p id="tabName">Manager</p>
+            <p id="tabName" >Manager</p>
             <el-row class="tableBox">
                 <el-col>
                     <el-row>
@@ -360,6 +360,7 @@
         }
 
         & #tabName {
+            user-select: none;
             font-family: Roboto-Regular, sans-serif;
             font-size: 2rem;
             text-align: left;
