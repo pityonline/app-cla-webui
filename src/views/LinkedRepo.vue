@@ -408,7 +408,7 @@
                     headers:this.uploadHeaders
                 }).then(res=>{
                     let data = res.data.data
-                    new Promise((resolve,reject)=>{
+                    let count = res.data.data.length
                         data.forEach((item,index)=>{
                             new Promise((resolve,reject)=>{
                                 let claName = this.getClaName(item.cla_id)
@@ -416,16 +416,14 @@
                             }).then(res=>{
                                 Object.assign(data[index],{claName:res})
                                 console.log(res);
+                                count--
+                                if (count === 0) {
+                                    this.tableData=data
+                                    console.log(data);
+                                }
                             },err=>{
                             })
                         })
-                        resolve()
-                    }).then(res=>{
-                        this.tableData=data
-                        console.log(data);
-                    })
-
-
                 }).catch(err=>{
                 })
             },
