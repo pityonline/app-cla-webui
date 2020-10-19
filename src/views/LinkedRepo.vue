@@ -9,12 +9,9 @@
                         :row-class-name="tableRowClassName"
                         style="width: 100%;">
                     <el-table-column
-
                             prop="Organization"
                             label="Organization">
-
                     </el-table-column>
-
                 </el-table>
             </el-col>
             <el-col :span="21" class="tableStyle">
@@ -418,13 +415,13 @@
                                 Object.assign(data[index],{claName:res})
                                 console.log(res);
                                 count--
-                                if (count === 0) {
-                                    this.tableData=data
-                                    console.log(data);
-                                }
                             },err=>{
                             })
                         })
+                    if (count === 0) {
+                        this.tableData=data
+                        console.log(data);
+                    }
                 }).catch(err=>{
                 })
             },
