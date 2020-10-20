@@ -27,18 +27,18 @@
                                     <el-input v-else v-model="ruleForm[item.id]" size="small"
                                               @blur="setMyForm(item.type,ruleForm[item.id])"></el-input>
                                 </el-form-item>
-                                <el-form-item
-                                        v-if="loginType==='corporation'"
-                                        label="Verify Code"
-                                        :required="rules.code[0].required"
-                                        prop="code">
+                                <!--<el-form-item-->
+                                        <!--v-if="loginType==='corporation'"-->
+                                        <!--label="Verify Code"-->
+                                        <!--:required="rules.code[0].required"-->
+                                        <!--prop="code">-->
 
-                                    <el-input v-model="ruleForm.code" size="small">
-                                        <el-button slot="append" :disabled="sendBtText!=='send code'"
-                                                   @click="sendCode()">{{sendBtText}}
-                                        </el-button>
-                                    </el-input>
-                                </el-form-item>
+                                    <!--<el-input v-model="ruleForm.code" size="small">-->
+                                        <!--<el-button slot="append" :disabled="sendBtText!=='send code'"-->
+                                                   <!--@click="sendCode()">{{sendBtText}}-->
+                                        <!--</el-button>-->
+                                    <!--</el-input>-->
+                                <!--</el-form-item>-->
                                 <div class="borderClass fontSize12"><span style="color: #F56C6C;">*</span>{{desc.metadataDesc}}
                                 </div>
                                 <div class="marginTop1rem fontSize12">
