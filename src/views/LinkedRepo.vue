@@ -418,10 +418,14 @@
                             },err=>{
                             })
                         })
-                    if (count === 0) {
-                        this.tableData=data
-                        console.log(data);
-                    }
+                    let setDataInterval = setInterval(function () {
+                        if (count === 0) {
+                            this.tableData=data
+                            console.log(data);
+                            clearInterval(setDataInterval)
+                        }
+                    },100)
+
                 }).catch(err=>{
                 })
             },
