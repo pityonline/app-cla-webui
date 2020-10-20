@@ -359,18 +359,7 @@
         data() {
             return {
                 clickRow:0,
-                tableData:[{apply_to: "corporation",
-                    claName: "corporation-cla",
-                    cla_id: "5f841ca410b8d1184dfb1584",
-                    cla_language: "english",
-                    enabled: true,
-                    id: "5f8900ba10b8d1184dfba05a",
-                    org_email: "ouchengle@gmail.com",
-                    org_id: "cla-test",
-                    org_signature_uploaded: true,
-                    platform: "gitee",
-                    repo_id: "test1",
-                    submitter: "gitee/ouchengle"}],
+                tableData:[],
                 orgTableData: [],
                 address:this.$store.state.domain,
                 url: '',
@@ -429,9 +418,9 @@
                             },err=>{
                             })
                         })
-                    let setDataInterval = setInterval(function () {
+                    let setDataInterval = setInterval( ()=> {
                         if (count === 0) {
-                            // this.tableData=data
+                            this.tableData=data
                             console.log(data);
                             clearInterval(setDataInterval)
                         }
