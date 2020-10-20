@@ -431,7 +431,7 @@
                         })
                     let setDataInterval = setInterval(function () {
                         if (count === 0) {
-                            this.tableData=data
+                            // this.tableData=data
                             console.log(data);
                             clearInterval(setDataInterval)
                         }
