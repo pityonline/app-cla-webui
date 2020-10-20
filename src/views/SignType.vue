@@ -9,16 +9,16 @@
                         <div>
 
                             <button class="button" @click="submit('corporation')">
-                                Corporation
+                               Sign As Corporation
                             </button>
                         </div>
                         <div>
                             <button class="button" @click="submit('employee')">
-                                Employee
+                                Sign As Employee
                             </button>
                         </div>
                         <button class="button" @click="submit('individual')">
-                            Individual
+                            Sign As Individual
                         </button>
                     </div>
                 </el-col>
