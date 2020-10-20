@@ -359,8 +359,8 @@
         data() {
             return {
                 clickRow:0,
-                tableData:'',
-                orgTableData: '',
+                tableData:[],
+                orgTableData: [],
                 address:this.$store.state.domain,
                 url: '',
                 signRouter: this.$store.state.signRouter,
