@@ -6,7 +6,6 @@
                 <router-view></router-view>
             </el-col>
         </el-row>
-
         <el-dialog
                 width="20%"
                 title=""
@@ -24,9 +23,7 @@
         </el-dialog>
         <Footer></Footer>
     </div>
-
 </template>
-
 <script>
     import * as url from '../until/api'
     import * as until from '../until/until'
@@ -75,7 +72,6 @@
             }
         },
         methods: {
-
             checkPdf() {
             },
             changeActive(id, active) {
@@ -94,7 +90,6 @@
                 this.deleteUserVisible = true;
                 this.deleteId = id
             },
-
             deleteContributor() {
                 this.$axios({
                     url: `/api${url.deleteCon}/${this.deleteId}`,
@@ -132,7 +127,6 @@
                             this.$router.push('/signedRepo/resetPassword');
                         }
                         break;
-
                     case 'f':
                         this.loginOut()
                         break;

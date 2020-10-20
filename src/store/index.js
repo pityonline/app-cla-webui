@@ -39,6 +39,7 @@ export default new Vuex.Store({
         dialogVisible: false,
         dialogMessage: '',
         reTryDialogVisible:false,
+        signSuccessDialogVisible:false,
     },
     mutations: {
         setReady(state, data) {
@@ -139,6 +140,10 @@ export default new Vuex.Store({
         },
         errorCodeSet(state, obj) {
             state.reTryDialogVisible = obj.dialogVisible;
+            state.dialogMessage = obj.dialogMessage
+        },
+        setSignSuccess(state, obj) {
+            state.signSuccessDialogVisible = obj.dialogVisible;
             state.dialogMessage = obj.dialogMessage
         },
         setCorpToken(state, token) {

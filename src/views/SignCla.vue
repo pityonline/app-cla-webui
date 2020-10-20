@@ -70,6 +70,8 @@
                        :title="reLoginDialogTitle"></ReLoginDialog>
         <ReTryDialog :dialogVisible="reTryDialogVisible" :message="reLoginMsg"
                      :title="reLoginDialogTitle"></ReTryDialog>
+        <SignSuccessDialog :dialogVisible="signSuccessDialogVisible" :message="reLoginMsg"
+                           :title="reLoginDialogTitle"></SignSuccessDialog>
     </el-row>
 </template>
 
@@ -83,6 +85,7 @@
     import axios from '../until/axios'
     import ReLoginDialog from '../components/ReLoginDialog'
     import ReTryDialog from '../components/ReTryDialog'
+    import SignSuccessDialog from '../components/SignSuccessDialog'
 
     export default {
 
@@ -130,12 +133,16 @@
             reTryDialogVisible() {
                 return this.$store.state.reTryDialogVisible
             },
+            signSuccessDialogVisible() {
+                return this.$store.state.signSuccessDialogVisible
+            },
         },
         components: {
             Header,
             Footer,
             ReLoginDialog,
             ReTryDialog,
+            SignSuccessDialog,
         }
         ,
         data() {
@@ -547,7 +554,7 @@
                     } else if (this.$store.state.loginType === 'employee') {
                         this.tipsMessage = 'We have sent a notification email to your email address. Please check it,And email the administrator of your company to audit'
                     }
-                    this.$store.commit('errorSet', {
+                    this.$store.commit('setSignSuccess', {
                         dialogVisible: true,
                         dialogMessage: this.tipsMessage,
                     });

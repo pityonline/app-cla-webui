@@ -456,7 +456,7 @@
             toSignPage(row) {
                 let params = ''
                 if (row.repo_id) {
-                    params = `${row.platform}/${row.org_id}/${row.repo_id}`
+                    params = `${row.platform}/${row.org_id}/${row.repo_id}63`
                 } else{
                     params = `${row.platform}/${row.org_id}`
                 }
@@ -649,7 +649,6 @@
                 }
                 return new Blob([u8arr], {type: 'pdf'});
             },
-
             getTableData() {
                 let interval = setInterval(() => {
                     if (this.$store.state.tableData) {
@@ -703,7 +702,6 @@
                 }
 
             },
-            /*获取用户名并显示*/
             getUserInfo(access_token, refresh_token) {
                 let obj = {access_token: access_token};
                 this.$axios({
@@ -733,7 +731,6 @@
             editHandleClick(index) {
                 this.editDialogVisible = true
             },
-
             unlinkHandleClick(scope) {
                 this.unlinkId = scope.row.id;
                 this.unLinkDialogVisible = true
@@ -741,7 +738,6 @@
             checkCorporationList(item) {
                 this.$router.push({path: '/corporationList', query: {item: item}})
             },
-            /*查看CLA签署状态*/
             checkCla() {
                 this.$router.push('/signCla')
             },

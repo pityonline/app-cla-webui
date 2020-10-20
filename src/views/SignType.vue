@@ -64,6 +64,7 @@
             ...mapActions(['setTokenAct', 'setLoginTypeAct', 'setRepoInfoAct', 'errorAct']),
             getRepoInfo() {
                 let params = window.location.href.split('/sign/')[1]
+                params.split('/')[1]
                 let args = until.base64ToStr(params).split('/');
                 this.platform = args[0];
                 this.org = args[1];

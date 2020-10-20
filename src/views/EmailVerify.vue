@@ -3,25 +3,22 @@
         <HeaderPure></HeaderPure>
         <el-row id="section">
             <el-col :offset="9" :span="6">
-                <el-form :model="ruleForm" ref="ruleForm" :rules="rules"  label-width="20%">
-                    <el-form-item label="email" prop="email">
-                        <el-input placeholder="email"></el-input>
-                    </el-form-item>
-                    <el-form-item label="name" prop="name">
-                        <el-input placeholder="name"></el-input>
-                    </el-form-item>
-                    <el-form-item label="country" prop="country">
-                        <el-input placeholder="country"></el-input>
-                    </el-form-item>
-                    <el-form-item label="language" prop="language">
-                        <el-input placeholder="language"></el-input>
-                    </el-form-item>
-                    <el-form-item >
-                        <el-button style="width: 100%;" type="primary"  @click="submit('ruleForm')">SUBMIT</el-button>
-                    </el-form-item>
-                </el-form>
+
             </el-col>
         </el-row>
+        <el-dialog
+                title="Mailbox verification"
+                :visible.sync="dialogVisible"
+                :close-on-press-escape="false"
+                :close-on-click-modal="false"
+                width="30%">
+            <el-row>
+                <el-col align="center">
+                    <p>{{message}}</p>
+
+                </el-col>
+            </el-row>
+        </el-dialog>
         <Footer></Footer>
     </div>
 </template>
@@ -31,6 +28,8 @@
     import Footer from '@components/Footer'
     import * as url from '../until/api'
     import * as until from '../until/until'
+    import http from '../until/http'
+
     window.onresize = () => {
         // console.log(until.getClientHeight());
         if (until.getClientHeight() > document.getElementById('emailVerify').offsetHeight) {
@@ -43,7 +42,7 @@
             HeaderPure,
             Footer,
         },
-        data(){
+        data() {
             let verifyEmail = (rule, value, callback) => {
                 let email = value;
                 console.log(email);
@@ -54,17 +53,17 @@
                     callback(new Error('邮箱格式有误'))
                 }
             }
-            return{
-                homeClass:{
-                    height:'',
+            return {
+                homeClass: {
+                    height: '',
                 },
-                ruleForm:{
-                    email:'',
-                    name:'',
-                    country:'',
-                    language:'',
+                ruleForm: {
+                    email: '',
+                    name: '',
+                    country: '',
+                    language: '',
                 },
-                rules:{
+                rules: {
                     name: [
                         {required: true, message: '请输入姓名', trigger: 'blur'},
                         {min: 2, max: 10, message: '长度在 2 到 10 个字符', trigger: 'blur'}
@@ -87,34 +86,41 @@
 
             }
         },
-        methods:{
+        methods: {
+            verifyEmail() {
+                http({
+                        url: `${url.enableEmployee}/${email}`,
+                        method: 'put',
+                        data: data,
+                    }
+                ).then(res => {
+                    this.message = 'sign cla successfully'
+                }).catch(err => {
+                    this.message='sign cla fail'
+                    console.log(err);
+                });
+            },
+
             /*设置页面高度*/
 
             setClientHeight() {
                 this.$nextTick(() => {
-                    console.log(until.getClientHeight(),document.getElementById('emailVerify').offsetHeight);
-                    if ( until.getClientHeight() > document.getElementById('emailVerify').offsetHeight ) {
+                    console.log(until.getClientHeight(), document.getElementById('emailVerify').offsetHeight);
+                    if (until.getClientHeight() > document.getElementById('emailVerify').offsetHeight) {
                         console.log('>>>');
                         document.getElementById("emailVerify").style.height = until.getClientHeight() + 'px'
                     }
 
-                    console.log(until.getClientHeight(),document.getElementById('emailVerify').offsetHeight);
+                    console.log(until.getClientHeight(), document.getElementById('emailVerify').offsetHeight);
 
 
-                })},
-            submit(formName){
-                this.$refs[formName].validate((valid) => {
-                    if (valid) {
-                        console.log('发邮件');;
-                    } else {
-                        console.log('error submit!!');
-                        return false;
-                    }
-                });
-            },
+                })
+            }
         },
-         created() {
-         },
+        created() {
+            this.verifyEmail()
+        }
+        ,
         mounted() {
             this.setClientHeight();
         }
@@ -122,9 +128,10 @@
 </script>
 
 <style scoped lang="less">
-    #emailVerify{
+    #emailVerify {
         display: flex;
         flex-direction: column;
+
         #section {
             flex-grow: 1;
             padding: 10rem 0;

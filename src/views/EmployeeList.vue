@@ -13,15 +13,13 @@
                                 prop="email"
                                 label="Email">
                         </el-table-column>
-
                         <el-table-column
                                 label="status"
                                 align="center">
                             <template slot-scope="scope">
                                 <el-row class="mySwitch">
-
                                     <el-switch
-                                            @change="changeActtive(scope.row.cla_org_id,scope.row.email,scope.row.enabled)"
+                                            @change="changeActive(scope.row.cla_org_id,scope.row.email,scope.row.enabled)"
                                             v-model="scope.row.enabled"
                                             class="mySwitch"
                                             :disabled="scope.row.enabled"
@@ -63,10 +61,6 @@
                             :data="activePageData"
                             align="center"
                             style="width: 100%;">
-                        <!--<el-table-column-->
-                        <!--prop="name"-->
-                        <!--label="Name">-->
-                        <!--</el-table-column>  -->
                         <el-table-column
                                 prop="email"
                                 label="Email">
@@ -77,10 +71,9 @@
                             <template slot-scope="scope">
                                 <el-row class="mySwitch">
                                     <el-switch
-                                            @change="changeActtive(scope.row.cla_org_id,scope.row.email,scope.row.enabled)"
+                                            @change="changeActive(scope.row.cla_org_id,scope.row.email,scope.row.enabled)"
                                             v-model="scope.row.enabled"
                                             class="mySwitch"
-
                                             width="3rem"
                                             active-color="#409EFF"
                                             active-text="active"
@@ -126,13 +119,11 @@
                      :dialogVisible="corpReTryDialogVisible"></reTryDialog>
     </div>
 </template>
-
 <script>
     import * as url from '../until/api'
     import http from '../until/http'
     import corpReLoginDialog from '../components/CorpReLoginDialog'
     import reTryDialog from '../components/ReTryDialog'
-
     export default {
         name: "EmployeeList",
         components: {
@@ -165,8 +156,7 @@
             },
             corpReLoginDialogVisible() {
                 return this.$store.state.dialogVisible
-            }
-            ,
+            },
             corpReLoginMsg() {
                 return this.$store.state.dialogMessage
             },
@@ -176,7 +166,6 @@
             corpReTryDialogVisible() {
                 return this.$store.state.reTryDialogVisible
             },
-
         },
         methods: {
             getInactivePageData() {
@@ -286,7 +275,7 @@
                 }
                 this.deleteUserVisible = true
             },
-            changeActtive(cla_org_id, email, enabled) {
+            changeActive(cla_org_id, email, enabled) {
                 let data = {
                     enabled: enabled
                 }
@@ -352,7 +341,6 @@
                     }
                 })
             },
-
             getEmployee() {
                 http({
                     url: url.queryEmployee,
