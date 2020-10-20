@@ -7,12 +7,8 @@
                 <el-col :offset="4" :span="16">
                     <p class="contentTitle">"<span>{{org}}</span><span
                             v-if="repo">/{{repo}}</span><span>" {{apply_to}} </span>Contributor License Agreement</p>
-
-
                     <el-row class="marginTop3rem" id="claBox">
                     </el-row>
-
-
                     <el-row class="marginTop3rem form">
                         <el-col>
                             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="left"
@@ -32,7 +28,7 @@
                                               @blur="setMyForm(item.type,ruleForm[item.id])"></el-input>
                                 </el-form-item>
                                 <el-form-item
-                                        v-if="loginType==='corporation'&&rules.code"
+                                        v-if="loginType==='corporation'||'employee'&&rules.code"
                                         label="Verify Code"
                                         :required="rules.code[0].required"
                                         prop="code">
