@@ -28,7 +28,7 @@
                                               @blur="setMyForm(item.type,ruleForm[item.id])"></el-input>
                                 </el-form-item>
                                 <el-form-item
-                                        v-if="loginType==='employee'"
+                                        v-if="loginType==='individual'"
                                         label="Verify Code"
                                         :required="rules.code[0].required"
                                         prop="code">
