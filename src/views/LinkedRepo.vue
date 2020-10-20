@@ -421,7 +421,7 @@
                     let setDataInterval = setInterval( ()=> {
                         if (count === 0) {
                             this.tableData=data
-                            console.log(data);
+                            console.log(this.tableData);
                             clearInterval(setDataInterval)
                         }
                     },100)
@@ -460,7 +460,7 @@
             toSignPage(row) {
                 let params = ''
                 if (row.repo_id) {
-                    params = `${row.platform}/${row.org_id}/${row.repo_id}63`
+                    params = `${row.platform}/${row.org_id}63/${row.repo_id}`
                 } else{
                     params = `${row.platform}/${row.org_id}`
                 }
