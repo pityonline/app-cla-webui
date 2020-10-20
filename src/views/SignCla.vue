@@ -14,19 +14,19 @@
                             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="left"
                                      label-width="25%"
                                      class="demo-ruleForm">
-                                <el-form-item v-for="(item,index) in fields"
-                                              :label="item.title"
-                                              :required="item.required"
-                                              :prop="item.id">
-                                    <el-input v-if="item.type==='email'" :readonly="loginType!=='corporation'"
-                                              v-model="ruleForm[item.id]"
-                                              size="small" @blur="setMyForm(item.type,ruleForm[item.id])"></el-input>
+                                <!--<el-form-item v-for="(item,index) in fields"-->
+                                              <!--:label="item.title"-->
+                                              <!--:required="item.required"-->
+                                              <!--:prop="item.id">-->
+                                    <!--<el-input v-if="item.type==='email'" :readonly="loginType!=='corporation'"-->
+                                              <!--v-model="ruleForm[item.id]"-->
+                                              <!--size="small" @blur="setMyForm(item.type,ruleForm[item.id])"></el-input>-->
 
-                                    <el-input v-else-if="item.type==='date'" readonly="" v-model="ruleForm[item.id]"
-                                              size="small" @blur="setMyForm(item.type,ruleForm[item.id])"></el-input>
-                                    <el-input v-else v-model="ruleForm[item.id]" size="small"
-                                              @blur="setMyForm(item.type,ruleForm[item.id])"></el-input>
-                                </el-form-item>
+                                    <!--<el-input v-else-if="item.type==='date'" readonly="" v-model="ruleForm[item.id]"-->
+                                              <!--size="small" @blur="setMyForm(item.type,ruleForm[item.id])"></el-input>-->
+                                    <!--<el-input v-else v-model="ruleForm[item.id]" size="small"-->
+                                              <!--@blur="setMyForm(item.type,ruleForm[item.id])"></el-input>-->
+                                <!--</el-form-item>-->
                                 <el-form-item
                                         label="Verify Code"
                                         :required="rules.code[0].required"
