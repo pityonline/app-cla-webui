@@ -65,7 +65,7 @@
             getRepoInfo() {
                 let params = window.location.href.split('/sign/')[1]
                 let repoInfoParams = params.substring(0,params.indexOf('/'));
-                let orgAddress = params.substring(params.indexOf('/'));
+                let orgAddress = params.substring(params.indexOf('/')+1);
                 sessionStorage.setItem('orgAddress',orgAddress)
                 let args = until.base64ToStr(repoInfoParams).split('/');
                 this.platform = args[0];
