@@ -24,6 +24,10 @@ const routes = [
                 component: () => import('../views/SignType.vue')
             },
             {
+                path: '/sign/:params/:orgAddress',
+                component: () => import('../views/SignType.vue')
+            },
+            {
                 path: '/platformSelect',
                 name: 'PlatformSelect',
                 component: () => import('../views/PlatformSelect.vue')
