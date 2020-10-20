@@ -241,7 +241,7 @@
                 if (reg.test(email)) {
                     http({
                         url: `${url.sendVerifyCode}/${this.cla_org_id}/${this.myForm.email}`,
-                        method: 'put',
+                        method: 'post',
                     }).then(res => {
                         this.$message.closeAll();
                         this.$message.success('Please fill in the verification code in the email to continue signing');
@@ -530,13 +530,14 @@
                         admin_email: this.myForm.email,
                         enabled: true,
                         info: info,
-                        verifi_code: this.ruleForm.code
+                        verification_code: this.ruleForm.code
                     }
                 } else if (this.$store.state.loginType === 'employee') {
                     myUrl = `${url.employee_signing}/${this.cla_org_id}`;
                     obj = {
                         name: this.myForm.name,
                         email: this.myForm.email,
+                        verification_code: this.ruleForm.code,
                         info: info,
                     }
                 }

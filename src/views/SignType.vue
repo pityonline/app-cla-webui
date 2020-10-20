@@ -64,8 +64,10 @@
             ...mapActions(['setTokenAct', 'setLoginTypeAct', 'setRepoInfoAct', 'errorAct']),
             getRepoInfo() {
                 let params = window.location.href.split('/sign/')[1]
-                params.split('/')[1]
-                let args = until.base64ToStr(params).split('/');
+                let repoInfoParams = params.substring(0,params.indexOf('/'));
+                let orgAddress = params.substring(params.indexOf('/'));
+                sessionStorage.setItem('orgAddress',orgAddress)
+                let args = until.base64ToStr(repoInfoParams).split('/');
                 this.platform = args[0];
                 this.org = args[1];
                 if (args[2]) {

@@ -460,7 +460,7 @@
             toSignPage(row) {
                 let params = ''
                 if (row.repo_id) {
-                    params = `${row.platform}/${row.org_id}63/${row.repo_id}`
+                    params = `${row.platform}/${row.org_id}/${row.repo_id}`
                 } else{
                     params = `${row.platform}/${row.org_id}`
                 }
