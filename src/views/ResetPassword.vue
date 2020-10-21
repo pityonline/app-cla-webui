@@ -126,6 +126,7 @@
                     method: 'patch',
                     data: obj,
                 }).then(res => {
+                    this.$store.commit('setPwdIsChanged',true)
                     this.$message.closeAll()
                     this.$message.success('success')
                     if (this.$route.path === '/signedRepo/resetPassword') {

@@ -41,8 +41,14 @@ export default new Vuex.Store({
         reTryDialogVisible:false,
         signSuccessDialogVisible:false,
         signReLoginDialogVisible:false,
+        pwdIsChanged:false,
     },
     mutations: {
+        setPwdIsChanged(state, data) {
+            state.pwdIsChanged = data;
+            state.tableData = data.tableData;
+            sessionStorage.setItem('pwdIsChanged', data);
+        },
         setReady(state, data) {
             state.ready = data.ready;
             state.tableData = data.tableData;
