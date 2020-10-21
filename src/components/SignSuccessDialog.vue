@@ -35,7 +35,7 @@
                     dialogMessage: '',
                 })
 
-                window.parent.location.href=until.base64ToStr(sessionStorage.getItem('orgAddress'))
+                window.location.href=until.base64ToStr(sessionStorage.getItem('orgAddress'))
 
             },
         },
