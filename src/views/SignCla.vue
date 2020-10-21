@@ -68,6 +68,8 @@
                      :title="reLoginDialogTitle"></ReTryDialog>
         <SignSuccessDialog :dialogVisible="signSuccessDialogVisible" :message="reLoginMsg"
                            :title="reLoginDialogTitle"></SignSuccessDialog>
+        <SignReLoginDialog :dialogVisible="signReLoginDialogVisible" :message="reLoginMsg"
+                           :title="reLoginDialogTitle"></SignReLoginDialog>
     </el-row>
 </template>
 
@@ -82,6 +84,7 @@
     import ReLoginDialog from '../components/ReLoginDialog'
     import ReTryDialog from '../components/ReTryDialog'
     import SignSuccessDialog from '../components/SignSuccessDialog'
+    import SignReLoginDialog from '../components/SignReLoginDialog'
 
     export default {
 
@@ -132,6 +135,9 @@
             signSuccessDialogVisible() {
                 return this.$store.state.signSuccessDialogVisible
             },
+            signReLoginDialogVisible() {
+                return this.$store.state.signReLoginDialogVisible
+            },
         },
         components: {
             Header,
@@ -139,6 +145,7 @@
             ReLoginDialog,
             ReTryDialog,
             SignSuccessDialog,
+            SignReLoginDialog,
         }
         ,
         data() {
@@ -551,10 +558,18 @@
                     } else if (this.$store.state.loginType === 'employee') {
                         this.tipsMessage = 'We have sent a notification email to your email address. Please check it,And email the administrator of your company to audit'
                     }
-                    this.$store.commit('setSignSuccess', {
-                        dialogVisible: true,
-                        dialogMessage: this.tipsMessage,
-                    });
+                    if (sessionStorage.getItem('orgAddress')) {
+                        this.$store.commit('setSignSuccess', {
+                            dialogVisible: true,
+                            dialogMessage: this.tipsMessage,
+                        });
+                    }else{
+                        this.$store.commit('setSignReLogin', {
+                            dialogVisible: true,
+                            dialogMessage: this.tipsMessage,
+                        });
+                    }
+
                 }).catch(err => {
                     this.errorAct(err)
                 })
