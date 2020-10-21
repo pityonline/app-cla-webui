@@ -117,7 +117,7 @@
                            } else {
                                this.setCorpTokenAct(data[0].token)
                                Object.assign(userInfo, {orgValue: 0})
-                               this.$store.commit('setPwdIsChanged',userInfo[0].initial_pw_changed)
+                               this.$store.commit('setPwdIsChanged',data[0].initial_pw_changed)
                                this.setLoginInfoAct(userInfo)
                                if (data[0].role === 'admin') {
                                    if (data[0].initial_pw_changed) {
