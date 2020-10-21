@@ -70,6 +70,7 @@
                     let orgAddress = params.substring(params.indexOf('/')+1);
                     sessionStorage.setItem('orgAddress',orgAddress)
                 }else{
+                    sessionStorage.removeItem('orgAddress')
                     repoInfoParams=params
                 }
                 let args = until.base64ToStr(repoInfoParams).split('/');
