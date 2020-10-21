@@ -157,6 +157,7 @@ const router = new VueRouter({
     base: process.env.BASE_URL,
     routes
 });
+
 router.beforeEach((to, from, next) => {
     if (from.path === '/signedRepo/resetPassword' || from.path === '/rootManager/resetPassword') {
         if (to.path === '/corporationManagerLogin') {

@@ -131,7 +131,7 @@
                     if (this.$route.path === '/signedRepo/resetPassword') {
                         this.$router.push('/employeeList')
                     }else{
-                        this.$router.push('/userList')
+                        this.$router.push('/managerList')
                     }
                 }).catch(err => {
                     if (err.data.hasOwnProperty('data')) {
