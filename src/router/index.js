@@ -163,7 +163,7 @@ router.beforeEach((to, from, next) => {
         if (to.path === '/corporationManagerLogin') {
             next()
         } else {
-            if (JSON.parse(sessionStorage.getItem('loginInfo')).userInfo[0].initial_pw_changed) {
+            if (sessionStorage.getItem('pwdIsChanged')==='true') {
                 next()
             } else {
                 // next(from.path)
