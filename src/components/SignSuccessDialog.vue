@@ -37,7 +37,7 @@
 
                 let path =sessionStorage.getItem('orgAddress')
 
-                this.$router.push(path)
+                window.location(path)
 
             },
         },
