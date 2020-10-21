@@ -18,7 +18,6 @@
 </template>
 
 <script>
-    import * as until from '../until/until'
     export default {
         name: "SignSuccessDialog",
         props: ['dialogVisible', 'message', 'title'],
@@ -35,9 +34,7 @@
                     dialogMessage: '',
                 })
 
-                let path =sessionStorage.getItem('orgAddress')
-
-                window.location(path)
+                window.location.href=sessionStorage.getItem('orgAddress')
 
             },
         },
