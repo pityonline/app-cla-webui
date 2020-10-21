@@ -101,7 +101,7 @@
                     this.$message.closeAll()
                     this.$message.success('success')
                     setTimeout(() => {
-                        this.$router.push('/userList')
+                        this.$router.push('/managerList')
                     }, 500)
                 }).catch(err => {
                     if (err.data.hasOwnProperty('data')) {

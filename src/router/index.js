@@ -166,7 +166,7 @@ router.beforeEach((to, from, next) => {
             if (JSON.parse(sessionStorage.getItem('loginInfo')).userInfo[0].initial_pw_changed) {
                 next()
             } else {
-                next(from.path)
+                // next(from.path)
             }
         }
     } else {
