@@ -18,6 +18,7 @@
 </template>
 
 <script>
+    import * as until from '../until/until'
     export default {
         name: "SignSuccessDialog",
         props: ['dialogVisible', 'message', 'title'],
@@ -34,7 +35,7 @@
                     dialogMessage: '',
                 })
 
-                window.location.href=sessionStorage.getItem('orgAddress')
+                window.location.href=until.base64ToStr(sessionStorage.getItem('orgAddress'))
 
             },
         },
