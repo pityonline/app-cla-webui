@@ -146,6 +146,7 @@
 <script>
     import * as url from '../until/api'
     import pdfReader from "@components/PdfReader";
+    import http from '../until/http'
 
     export default {
         name: "CorporationList",
@@ -257,20 +258,12 @@
                 return this.$confirm(`Are you sure you want to remove it ${file.name}？`);
             },
             getCorporationInfo() {
-                this.$axios({
-                    url: `/api${url.corporation_signing}`,
+                http({
+                    url: `${url.corporation_signing}/${this.item.org_id}`,
                     params: {
-                        platform: this.item.platform,
-                        org_id: this.item.org_id,
                         repo_id: this.item.repo_id,
                         cla_language: this.item.cla_language
                     },
-                    headers: {
-                        'Token': this.$store.state.access_token,
-                        'Access-Token': this.access_token,
-                        'Refresh-Token': this.refresh_token,
-                        'User': `${this.platform}/${this.user.userName}`
-                    }
                 }).then(resp => {
                     console.log(resp);
                     this.tableData = resp.data.data[this.item.id];

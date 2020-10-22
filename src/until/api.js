@@ -12,6 +12,7 @@ export const getLinkedRepoList = '/v1/org-cla'                                  
 export const unLinkRepository = '/v1/org-cla'                                          //解除绑定开源项目 delete
 export const individual_signing = '/v1/individual-signing'                             //个人签署协议 方式post 参数/cla_org_id,  name,email,info
 export const corporation_signing = '/v1/corporation-signing'                           //企业签署协议 方式post 参数  cla_org_id,email,info
+export const getCorporationSigning = '/v1/corporation-signing'                           //拉取已签署的企业列表 method:get params  /org_id,repo_id,cla_language
 export const active_corporation = '/v1/corporation-signing'                            //激活企业     方式put 参数  cla_org_id,corporation_name,admin_email,enabled
 export const employee_signing = '/v1/employee-signing'                                 //企业个人签署协议 方式post 参数 /cla_org_id,  name,email,info,verification_code
 export const verifyCode = '/v1/verifyCode'                                             //签署协议 参数
