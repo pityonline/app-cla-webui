@@ -940,7 +940,7 @@
         flex-direction: column;
         box-sizing: border-box;
         overflow: hidden;
-        background-color: #F5F5F5;
+        /*background-color: #F5F5F5;*/
         .itemBox{
             border-radius: 1.25rem;
             box-shadow: 0 0 20px 10px #F3F3F3;
