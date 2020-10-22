@@ -30,7 +30,7 @@
         },
         methods: {
             clickGoHome() {
-                this.$store.commit('errorSet', {
+                this.$store.commit('setSignReLogin', {
                     dialogVisible: false,
                     dialogMessage: '',
                 })
