@@ -1095,13 +1095,7 @@
             flex-grow: 1;
             background-color: #F5F5F5;
             text-align: left;
-
-
-            & > div:nth-of-type(3) {
-                padding: 4rem 0 2rem 0;
-                font-size: 1.3rem;
-                color: #2C3E50;
-            }
+            
         }
     }
     .tableStyle {
