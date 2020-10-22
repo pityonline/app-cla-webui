@@ -79,14 +79,16 @@
                 </div>
             </div>
             <div>
-                <p style="font-size: 1.2rem">④ Edit your metaData
-                    <el-tooltip class="item" effect="dark"
-                                content="The information you want contributors to fill in when they sign the cla.Title and type are required, otherwise the field will fail to be added"
-                                placement="right">
-                        <svg-icon icon-class="bangzhu"></svg-icon>
-                    </el-tooltip>
-                </p>
-                <el-row style="margin: 0 -10px">
+                <div>
+                    <p style="font-size: 1.2rem">④ Edit your metaData
+                        <el-tooltip class="item" effect="dark"
+                                    content="The information you want contributors to fill in when they sign the cla.Title and type are required, otherwise the field will fail to be added"
+                                    placement="right">
+                            <svg-icon icon-class="bangzhu"></svg-icon>
+                        </el-tooltip>
+                    </p>
+                </div>
+                <el-row style="padding: 0 2rem">
                     <el-col :span="5" class="typeCol">
                         <el-radio v-model="metadataType" @change="changeRadio" label="individual">Individual Contributor</el-radio>
                     </el-col>
