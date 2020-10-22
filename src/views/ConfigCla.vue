@@ -59,11 +59,11 @@
                 </div>
                 <div style="padding: 0 2rem">
                     <el-row :gutter="20">
-                        <el-col :span="16">
+                        <el-col :span="20">
                             <el-input v-model="cla_Link">
                             </el-input>
                         </el-col>
-                        <el-col :span="8">
+                        <el-col :span="4">
                             <el-select v-model="claLanguageValue"
                                        placeholder="select language"
                                        style="width: 100%"
@@ -183,7 +183,7 @@
 
             </div>
             <div class="btDiv">
-                <el-button style="width: 8rem;text-align: center" size="medium" type="primary">
+                <el-button @click="binding" style="width: 8rem;text-align: center" size="medium" type="primary">
                     LINK
                 </el-button>
             </div>
@@ -351,6 +351,7 @@
     import Header from '@components/NewHeader'
     import Footer from '@components/NewFooter'
     import {mapActions} from 'vuex'
+    import http from '../until/http'
 
     window.onresize = () => {
         if (until.getClientHeight() > document.getElementById('configCla').offsetHeight) {
@@ -542,6 +543,83 @@
         },
         methods: {
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
+            checkMetadata() {
+                let newArr = this.customMetadataArr.concat(this.metadataArr);
+                for (let i = 0; i < newArr.length; i++) {
+                    for (let j = i+1; j < newArr.length; j++) {
+                        if (newArr[i].title === newArr[j].title) {
+                            return false;
+                        }
+                    }
+                }
+                return true;
+            },
+            editMetadata(){
+                let fields = [];
+                if (this.checkMetadata()) {
+                    this.metadataArr.forEach((item, index) => {
+                        fields.push({
+                            id:index+'',
+                            title: item.title,
+                            type: item.type,
+                            description: item.description,
+                            required: item.required,
+                        })
+                    })
+                    for(let i=0 ;i<this.customMetadataArr.length;i++) {
+                        if (this.customMetadataArr[i].title !== '' && this.customMetadataArr[i].type !== '') {
+                            fields.push({
+                                id: this.metadataArr.length + i + '',
+                                title: this.customMetadataArr[i].title,
+                                type: this.customMetadataArr[i].type,
+                                description: this.customMetadataArr[i].description,
+                                required: this.customMetadataArr[i].required,
+                            })
+                        }
+                    }
+
+                } else {
+                    this.$message.closeAll();
+                    this.$message.error('The title is repeated')
+                }
+                return fields
+            },
+            binding(){
+                let obj = {}
+                let cla ={url:this.cla_Link,language:this.claLanguageValue,fields:this.editMetadata()}
+                if (this.repositoryChoose) {
+                    obj = {
+                        repo_id: `${this.repositoryOptions[this.repositoryValue].repoName}`,
+                        org_email: this.email,
+                        platform: this.platform,
+                        org_id: `${this.orgOptions[this.orgValue].label}`,
+                        apply_to: this.metadataType,
+                        cla: cla,
+                    };
+                } else {
+                    obj = {
+                        repo_id: '',
+                        org_email: this.email,
+                        platform: this.platform,
+                        org_id: `${this.orgOptions[this.orgValue].label}`,
+                        apply_to: this.metadataType,
+                        cla: cla,
+                    };
+                }
+                http({
+                    url: url.linkRepository,
+                    method: 'post',
+                    data: obj,
+                }).then(res => {
+                    this.$message.closeAll();
+                    this.$message.success('success')
+                    this.$router.push('/home')
+                }).catch(err => {
+                    this.linkLoading = false
+                    this.$message.closeAll();
+                    this.$message.error(err.response.data)
+                })
+            },
             changeLanguage(){
 
             },
