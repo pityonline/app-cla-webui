@@ -241,8 +241,14 @@
             sendCode() {
                 let reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$");
                 let email = this.myForm.email
+                let myHttp = ''
+                if(this.$store.state.loginType === 'individual' || this.$store.state.loginType === 'employee'){
+                    myHttp=http
+                }else {
+                    myHttp=axios
+                }
                 if (reg.test(email)) {
-                    http({
+                    myHttp({
                         url: `${url.sendVerifyCode}/${this.cla_org_id}/${this.myForm.email}`,
                         method: 'post',
                     }).then(res => {
