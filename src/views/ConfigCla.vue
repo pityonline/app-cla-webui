@@ -50,70 +50,12 @@
             </div>
             <div>
                 <div style="font-size: 1.2rem;padding: .5rem">
-                    ② Choose a CLA
-                    <span @click="createCLA()"
-                          style="font-size: .8rem;text-decoration: underline;cursor: pointer">(don't have one?)
-                                    </span>
+                    ② Paste a link
                 </div>
+                <el-input v-model="cla_Link">
 
-                <div style="padding: 0 2rem 1rem 2rem">
-                    <el-collapse v-model="activeNames" @change="handleChange">
-                        <el-collapse-item title="cla filter" name="1">
-                            <el-row :gutter="10">
-                                <el-col :span="12">
-                                    <el-select
-                                            v-model="claTypeValue"
-                                            placeholder="cla type"
-                                            size="medium"
-                                            clearable=""
-                                            @change="claTypeChange">
-                                        <el-option
-                                                v-for="item in claTypeOptions"
-                                                :key="item.value"
-                                                :label="item.label"
-                                                :value="item.value">
-                                        </el-option>
-                                    </el-select>
-                                </el-col>
-                                <el-col :span="12">
-                                    <el-select
-                                            v-model="claLanguageValue"
-                                            placeholder="language"
-                                            size="medium"
-                                            clearable=""
-                                            @change="claLanguageChange">
-                                        <el-option
-                                                v-for="item in languageOptions"
-                                                :key="item.value"
-                                                :label="item.label"
-                                                :value="item.value">
-                                        </el-option>
-                                    </el-select>
-                                </el-col>
-                            </el-row>
+                </el-input>
 
-                        </el-collapse-item>
-                    </el-collapse>
-                </div>
-                <div style="padding: 0 2rem">
-                    <el-select
-                            ref="claSelect"
-                            v-model="claValue"
-                            placeholder="select cla"
-                            @visible-change="claVisibleChange"
-                            style="width: 100%"
-                            size="medium"
-                            filterable
-                            @change="changeCla">
-                        <el-option
-                                v-for="item in claOptions"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value">
-                        </el-option>
-                    </el-select>
-
-                </div>
             </div>
             <div>
                 <div style="font-size: 1.2rem;padding: .5rem">
@@ -599,6 +541,7 @@
         },
         data() {
             return {
+                cla_Link:'',
                 metadataArr: [{
                     title: 'Name',
                     type: 'name',
