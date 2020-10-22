@@ -149,6 +149,11 @@
                     </div>
                 </div>
             </div>
+            <div>
+                <el-button type="primary">
+                    LINK
+                </el-button>
+            </div>
 
             <el-row>
                 <el-row v-if="showConfigForm">
