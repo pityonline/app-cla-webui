@@ -3,18 +3,211 @@
         <Header></Header>
 
         <el-col :offset="4" :span="16" id="section">
+            <div style="padding-bottom: 1.5rem;font-size: 1.3rem">Configure CLA</div>
+            <div>
+                <div style="font-size: 1.2rem;padding: .5rem">
+                    ① Choose a org or repository
+                </div>
+                <div style="padding: 0 2rem">
+                    <el-row :gutter="20">
+                        <el-col :span="12">
+                            <el-select v-model="orgValue"
+                                       placeholder="select org"
+                                       style="width: 100%"
+                                       size="medium"
+                                       clearable
+                                       filterable
+                                       @visible-change="orgVisibleChange"
+                                       @change="changeOrg">
+                                <el-option
+                                        v-for="item in orgOptions"
+                                        :key="item.value"
+                                        :label="item.label"
+                                        :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </el-col>
+                        <el-col :span="12">
+                            <el-select v-model="repositoryValue"
+                                       placeholder="select repo"
+                                       style="width: 100%"
+                                       size="medium"
+                                       clearable=""
+                                       filterable
+                                       @visible-change="repoVisibleChange"
+                                       @change="changeRepository">
+                                <el-option
+                                        v-for="item in repositoryOptions"
+                                        :key="item.value"
+                                        :label="item.label"
+                                        :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </el-col>
+                    </el-row>
 
-            <div id="configBtDiv">
-                <el-steps :active="active" finish-status="success">
-                    <el-step title="step 1"></el-step>
-                    <el-step title="step 2"></el-step>
-                    <el-step title="step 3"></el-step>
-                </el-steps>
-                <el-button v-if="!showConfigForm" class="configBt" type="primary"
-                           @click="configCla()">
-                    Configure CLA
-                </el-button>
+                </div>
             </div>
+            <div>
+                <div style="font-size: 1.2rem;padding: .5rem">
+                    ② Choose a CLA
+                    <span @click="createCLA()"
+                          style="font-size: .8rem;text-decoration: underline;cursor: pointer">(don't have one?)
+                                    </span>
+                </div>
+
+                <div style="padding: 0 2rem 1rem 2rem">
+                    <el-collapse v-model="activeNames" @change="handleChange">
+                        <el-collapse-item title="cla filter" name="1">
+                            <el-row :gutter="10">
+                                <el-col :span="12">
+                                    <el-select
+                                            v-model="claTypeValue"
+                                            placeholder="cla type"
+                                            size="medium"
+                                            clearable=""
+                                            @change="claTypeChange">
+                                        <el-option
+                                                v-for="item in claTypeOptions"
+                                                :key="item.value"
+                                                :label="item.label"
+                                                :value="item.value">
+                                        </el-option>
+                                    </el-select>
+                                </el-col>
+                                <el-col :span="12">
+                                    <el-select
+                                            v-model="claLanguageValue"
+                                            placeholder="language"
+                                            size="medium"
+                                            clearable=""
+                                            @change="claLanguageChange">
+                                        <el-option
+                                                v-for="item in languageOptions"
+                                                :key="item.value"
+                                                :label="item.label"
+                                                :value="item.value">
+                                        </el-option>
+                                    </el-select>
+                                </el-col>
+                            </el-row>
+
+                        </el-collapse-item>
+                    </el-collapse>
+                </div>
+                <div style="padding: 0 2rem">
+                    <el-select
+                            ref="claSelect"
+                            v-model="claValue"
+                            placeholder="select cla"
+                            @visible-change="claVisibleChange"
+                            style="width: 100%"
+                            size="medium"
+                            filterable
+                            @change="changeCla">
+                        <el-option
+                                v-for="item in claOptions"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                        </el-option>
+                    </el-select>
+
+                </div>
+            </div>
+            <div>
+                <div style="font-size: 1.2rem;padding: .5rem">
+                    ③ Email
+                    <span @click="toAuthorizedEmail()"
+                          style="font-size: .8rem;text-decoration: underline;cursor: pointer">(click to grant authorized email)
+                                    </span>
+                </div>
+                <div style="padding: 0 2rem">
+                    <el-input
+                            readonly=""
+                            @input="verifyEmail"
+                            size="medium"
+                            placeholder="authorization email"
+                            v-model="email">
+
+                    </el-input>
+                </div>
+            </div>
+            <div>
+                <p>Edit your metaData
+                    <el-tooltip class="item" effect="dark"
+                                content="The information you want contributors to fill in when they sign the cla.Title and type are required, otherwise the field will fail to be added"
+                                placement="right">
+                        <svg-icon icon-class="bangzhu"></svg-icon>
+                    </el-tooltip>
+                </p>
+                <el-row style="margin: 0 -10px">
+                    <el-col :span="5" class="typeCol">
+                        <el-radio v-model="metadataType" @change="changeRadio" label="individual">Individual Contributor</el-radio>
+                    </el-col>
+                    <el-col :span="5" class="typeCol">
+                        <el-radio v-model="metadataType" @change="changeRadio" label="corporation">Legal Entity Contributor</el-radio>
+                    </el-col>
+
+                </el-row>
+                <div>
+                    <div>
+                        <el-row style="padding: 0.5rem 0;" type="flex" align="middle" :gutter="20"
+                                v-for="(item,index) in metadataArr">
+                            <el-col :span="5">
+                                <el-input v-model="item.title" size="medium" readonly="">
+
+                                </el-input>
+                            </el-col>
+                            <el-col :span="5">
+                                <el-input v-model="item.type" size="medium" readonly></el-input>
+                            </el-col>
+                            <el-col :span="5">
+                                <el-input v-model="item.description" size="medium" readonly></el-input>
+                            </el-col>
+                            <el-col :span="5" style="height: 100%">
+                                <el-checkbox v-model="item.required" disabled="">required</el-checkbox>
+                            </el-col>
+                        </el-row>
+
+                    </div>
+                    <div>
+                        <el-row style="padding: 0.5rem 0;" type="flex" align="middle" :gutter="20"
+                                v-for="(item,index) in customMetadataArr">
+                            <el-col :span="5">
+                                <el-input v-model="item.title" size="medium"
+                                          placeholder="please input title">
+
+                                </el-input>
+                            </el-col>
+                            <el-col :span="5">
+                                <el-select style="width: 100%" v-model="item.type"
+                                           placeholder="select dataType"
+                                           size="medium">
+                                    <el-option
+                                            v-for="i in dataTypeOptions"
+                                            :key="i.value"
+                                            :label="i.label"
+                                            :value="i.value">
+                                    </el-option>
+                                </el-select>
+                            </el-col>
+                            <el-col :span="5" style="height: 100%">
+                                <el-input v-model="item.description" size="medium"
+                                          placeholder="description"></el-input>
+                            </el-col>
+                            <el-col :span="5" style="height: 100%">
+                                <el-checkbox v-model="item.required">required</el-checkbox>
+                            </el-col>
+                            <el-col :span="4">
+                                <el-button @click="addRow(index)" size="medium">+</el-button>
+                                <el-button @click="myDeleteRow(index)" size="medium">-</el-button>
+                            </el-col>
+                        </el-row>
+                    </div>
+                </div>
+            </div>
+
             <el-row>
                 <el-row v-if="showConfigForm">
                     <div style="padding-bottom: 1.5rem;font-size: 1.3rem">Configure CLA</div>
@@ -406,6 +599,43 @@
         },
         data() {
             return {
+                metadataArr: [{
+                    title: 'Name',
+                    type: 'name',
+                    description: 'your name',
+                    required: true,
+                }, {
+                    title: 'E-Mail',
+                    type: 'email',
+                    description: 'your email',
+                    required: true,
+                },
+                    //     {
+                    //     title: 'Date',
+                    //     type: 'date',
+                    //     description: 'the date of today',
+                    //     required: true,
+                    // },
+                ],
+                metadataType: 'individual',
+                customMetadataArr:[{
+                    title: '',
+                    type: '',
+                    description: '',
+                    required: true,
+                }],
+                individualCustomMetadataArr: [{
+                    title: '',
+                    type: '',
+                    description: '',
+                    required: true,
+                }],
+                corporationCustomMetadataArr: [{
+                    title: '',
+                    type: '',
+                    description: '',
+                    required: true,
+                }],
                 org_id: '',
                 org: '',
                 emailTypeArr: [{value: 'Gmail', label: 'Gmail'}],
@@ -474,6 +704,64 @@
         },
         methods: {
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
+            addRow(index) {
+                this.customMetadataArr.splice(index + 1, 0, {
+                    title: '',
+                    type: '',
+                    description: '',
+                    required: true,
+                })
+
+            },
+            myDeleteRow(index) {
+                if (this.customMetadataArr.length===1) {
+                    this.customMetadataArr[0].type=''
+                    this.customMetadataArr[0].title=''
+                    this.customMetadataArr[0].description=''
+                }else{
+                    this.customMetadataArr.splice(index, 1);
+                }
+
+            },
+            changeRadio(){
+                if (this.metadataType==='individual'){
+                    this. metadataArr=[{
+                        title: 'Name',
+                        type: 'name',
+                        description: 'your name',
+                        required: true,
+                    }, {
+                        title: 'E-Mail',
+                        type: 'email',
+                        description: 'your email',
+                        required: true,
+                    },]
+                    this.customMetadataArr=this.individualCustomMetadataArr;
+                } else if(this.metadataType==='corporation'){
+                    this.metadataArr = [
+                        {
+                            title: 'Corporation Name',
+                            type: 'corporationName',
+                            description: 'your corporation email',
+                            required: true,
+                        },
+
+                        {
+                            title: 'Name',
+                            type: 'name',
+                            description: 'your name',
+                            required: true,
+                        },
+                        {
+                            title: 'E-Mail',
+                            type: 'email',
+                            description: 'your email',
+                            required: true,
+                        },];
+                    this.customMetadataArr=this.corporationCustomMetadataArr;
+
+                }
+            },
             authorizeEmail() {
                 let myUrl = ''
                 switch (this.emailType) {
@@ -941,7 +1229,9 @@
     #configBtDiv {
         text-align: left;
         padding-top: 3rem;
-
+        .typeCol {
+            padding: .5rem 10px;
+        }
         & > .configBt {
             font-size: 1.2rem;
         }

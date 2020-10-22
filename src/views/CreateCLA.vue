@@ -118,6 +118,8 @@
                         </el-row>
                     </div>
                 </div>
+
+
                 <div style="margin-top: 1rem;display: flex;justify-content: space-between">
                     <el-button size="medium" v-loading.fullscreen.lock="fullscreenLoading" :disabled="!verifyNotNull()"
                                type="primary"
@@ -281,8 +283,8 @@
             },
             myDeleteRow(index) {
                 if (this.customMetadataArr.length===1) {
-                    this.customMetadataArr[0].type=''
-                    this.customMetadataArr[0].title=''
+                    this.customMetadataArr[0].type='';
+                    this.customMetadataArr[0].title='';
                     this.customMetadataArr[0].description=''
                 }else{
                     this.customMetadataArr.splice(index, 1);
