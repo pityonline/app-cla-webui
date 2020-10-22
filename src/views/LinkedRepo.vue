@@ -400,10 +400,8 @@
                 this.getLinkedRepoList(row.Organization)
             },
             getLinkedRepoList(org_id){
-                this.$axios({
-                    url:`/api${url.getLinkedRepoList}/${this.platform}/${org_id}`,
-                    params:{repo_id:'',apply_to:''},
-                    headers:this.uploadHeaders
+                http({
+                    url:url.getLinkedRepoList,
                 }).then(res=>{
                     let data = res.data.data
                     let count = res.data.data.length
