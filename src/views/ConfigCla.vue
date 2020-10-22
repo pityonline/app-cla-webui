@@ -52,9 +52,12 @@
                 <div style="font-size: 1.2rem;padding: .5rem">
                     ② Paste a link
                 </div>
-                <el-input v-model="cla_Link">
+                <div style="padding: 0 2rem">
+                    <el-input v-model="cla_Link">
 
-                </el-input>
+                    </el-input>
+                </div>
+
 
             </div>
             <div>
@@ -76,7 +79,7 @@
                 </div>
             </div>
             <div>
-                <p>④ Edit your metaData
+                <p style="font-size: 1.2rem">④ Edit your metaData
                     <el-tooltip class="item" effect="dark"
                                 content="The information you want contributors to fill in when they sign the cla.Title and type are required, otherwise the field will fail to be added"
                                 placement="right">
