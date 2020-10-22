@@ -60,7 +60,7 @@
                 <div style="padding: 0 2rem">
                     <el-row :gutter="20">
                         <el-col :span="20">
-                            <el-input v-model="cla_Link">
+                            <el-input size="medium" v-model="cla_Link">
                             </el-input>
                         </el-col>
                         <el-col :span="4">
