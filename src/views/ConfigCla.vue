@@ -4,7 +4,7 @@
 
         <el-col :offset="4" :span="16" id="section">
             <div style="padding-bottom: 1.5rem;font-size: 1.3rem">Configure CLA</div>
-            <div>
+            <div class="itemBox">
                 <div style="font-size: 1.2rem;padding: .5rem">
                     ① Choose a org or repository
                 </div>
@@ -48,7 +48,7 @@
 
                 </div>
             </div>
-            <div>
+            <div class="itemBox">
                 <div style="font-size: 1.2rem;padding: .5rem">
                     ② Paste a link
                 </div>
@@ -60,7 +60,7 @@
 
 
             </div>
-            <div>
+            <div class="itemBox">
                 <div style="font-size: 1.2rem;padding: .5rem">
                     ③ Email
                     <span @click="toAuthorizedEmail()"
@@ -78,7 +78,7 @@
                     </el-input>
                 </div>
             </div>
-            <div>
+            <div class="itemBox">
                 <div style="padding: .5rem">
                     <p style="font-size: 1.2rem">④ Edit your metaData
                         <el-tooltip class="item" effect="dark"
@@ -158,7 +158,7 @@
 
             </div>
             <div class="btDiv">
-                <el-button style="width: 4rem" size="medium" type="primary">
+                <el-button style="width: 8rem;text-align: center" size="medium" type="primary">
                     LINK
                 </el-button>
             </div>
@@ -318,149 +318,6 @@
             </el-row>
         </el-col>
         <Footer></Footer>
-        <el-dialog
-                top="5vh"
-                title=""
-                :visible.sync="authorizeDialogVisible"
-                width="35%">
-            <div style="text-align: left">
-                <p class="dialogDesc">Why link organizations?</p>
-                <p>If you link an organization with your CLA, CLA system sets a web hook on your organization and
-                    listens to Pull Requests of all repositories in the organization. That means that your CLA becomes
-                    active for each existing and future repositories of your organization.</p>
-                <p class="dialogDesc">How can I link an organization?</p>
-                <p>CLA system needs an additional authorization from you to be able to create web hooks for
-                    organizations. To grant CLA system appropriate rights just click on the button below. For more
-                    information on Authorization scopes see github documentation</p>
-                <div
-                        class="linkBt pointer"
-                        style="font-size: 1.1rem"
-                        @click="getOrgPermission()">
-
-                    Yes,let's go for it
-
-                </div>
-            </div>
-
-        </el-dialog>
-        <el-dialog
-                top="5vh"
-                title=""
-                :visible.sync="createCLADialogVisible"
-                width="35%">
-            <div style="text-align: left">
-                <p class="dialogDesc">How can I create a CLA Gist?</p>
-                <p>To <span @click="toCreateCLA()" style="cursor: pointer;text-decoration: underline;color: blue">createCLA</span>
-                    enter a file name and paste
-                    the content of your CLA.</p>
-                <p class="dialogDesc">What happens if I edit the Gist file?</p>
-                <p>CLA system will always show you the current version of your Gist file. Users who accept your CLA
-                    sign the current version. If you change the content of your CLA, each contributor has to accept the
-                    new version when they create a new pull request.</p>
-            </div>
-            <span slot="footer" class="dialog-footer">
-
-  </span>
-        </el-dialog>
-        <el-dialog
-                top="5vh"
-                title=""
-                :visible.sync="shareDialogVisible"
-                width="35%">
-            <div style="text-align: left">
-                <p class="dialogDesc">What happens if I choose to share the gist with multiple repos or orgs?</p>
-                <p>Contributors will simply need to sign only once for any of the repos or orgs linked with the same
-                    shared gist.</p>
-                <p class="dialogDesc">Are previous CLA signatures still valid after I choose to share the gist with
-                    multiple repos or orgs?</p>
-                <p>Yes, but the scope of the previous signatures are still limited to the previous repo or org.</p>
-                <p class="dialogDesc">What happens if I uncheck the box and choose NOT to share the gist any more?</p>
-                <p>Previous contributors that have signed the shared gist will have to sign again.</p>
-            </div>
-            <span slot="footer" class="dialog-footer">
-
-  </span>
-        </el-dialog>
-        <el-dialog
-                top="5vh"
-                title=""
-                :visible.sync="linkDialogVisible"
-                width="35%">
-            <div>
-                <p class="dialogDesc">Would you like to link this CLA
-                    to your repository?</p>
-                <div>
-                    <el-row>
-                        <svg-icon style="width: 100%;height: 100%" icon-class="popup_link"></svg-icon>
-                    </el-row>
-                    <el-row>
-                        <el-col :offset="6" :span="5" v-if="claChoose">
-                        </el-col>
-                        <el-col :offset="2" :span="5" v-if="orgChoose&&repositoryChoose">
-                        </el-col>
-                        <el-col :offset="2" :span="5" v-if="orgChoose&&!repositoryChoose">
-                        </el-col>
-                    </el-row>
-                </div>
-                <div style="padding: 0 3rem;color: #409EFF">
-
-                </div>
-                <div style="padding: 2rem 6rem;text-align: left;font-size: 1.3rem">
-                    <p style="text-align: center">CLA system will...</p>
-                    <ul>
-                        <li>Create a webhook in your repository and listen for pull requests</li>
-                        <li>Set a pull request CLA status</li>
-                        <li>Comment on pull requests</li>
-                    </ul>
-                </div>
-                <span slot="footer" class="dialog-footer">
-                    <el-button @click="linkDialogVisible = false">Cancel</el-button>
-                    <el-button v-loading.fullscreen.lock="linkLoading" type="primary" @click="linkRepository()">Yes,Let's do this!</el-button>
-                </span>
-            </div>
-        </el-dialog>
-        <el-dialog
-                top="5vh"
-                title=""
-                :visible.sync="emailDialogVisible"
-                width="35%">
-            <div>
-                <p class="dialogDesc">You need to select an email address for your organization to contact</p>
-                <div>
-
-                    <el-row>
-                        <el-col :offset="6" :span="12">
-                            <el-select
-                                    placeholder="Select email type"
-                                    size="medium"
-                                    filterable
-                                    v-model="emailType"
-                                    @change="changeEmailType">
-                                <el-option
-                                        v-for="item in emailTypeArr"
-                                        :key="item.value"
-                                        :value="item.value"
-                                        :label="item.label">
-                                </el-option>
-                            </el-select>
-                        </el-col>
-                    </el-row>
-                </div>
-                <div style="padding: 0 3rem;color: #409EFF">
-                </div>
-                <div style="padding: 2rem 6rem;text-align: left;font-size: 1.3rem">
-                    <p style="text-align: center">CLA system will...</p>
-                    <ul>
-                        <li>Send the white list management account number to the enterprise through the mailbox</li>
-                        <li>Send PDF signature documents to the signer through this email address</li>
-                    </ul>
-                </div>
-                <span slot="footer" class="dialog-footer">
-                    <el-button @click="emailDialogVisible = false">Cancel</el-button>
-                    <el-button v-loading.fullscreen.lock="linkLoading" type="primary" @click="authorizeEmail()">Yes,Let's do this!</el-button>
-                </span>
-            </div>
-        </el-dialog>
     </div>
 </template>
 <script>
@@ -1084,6 +941,13 @@
         box-sizing: border-box;
         overflow: hidden;
         background-color: #F5F5F5;
+        .itemBox{
+            border-radius: 1.25rem;
+            box-shadow: 0 0 20px 10px #F3F3F3;
+            padding: 2rem;
+            margin-bottom: 2rem;
+
+        }
         .btDiv{
             margin: 1rem 0;
             text-align: center;
@@ -1095,7 +959,7 @@
             flex-grow: 1;
             background-color: #F5F5F5;
             text-align: left;
-            
+
         }
     }
     .tableStyle {
