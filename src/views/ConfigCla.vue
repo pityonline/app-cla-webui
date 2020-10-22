@@ -752,14 +752,14 @@
             configCla() {
                 this.$store.commit('setShowConfigForm', 'true')
                 this.showConfigForm = true;
-                this.home.height = 'auto'
+                this.configClaStyle.height = 'auto'
                 this.getOrgsInfo()
             },
             setClientHeight() {
                 this.$nextTick(() => {
-                    until.getClientHeight() > document.getElementById('home').offsetHeight ?
-                        this.home.height = until.getClientHeight() + 'px' :
-                        this.home.height = document.getElementById('home').offsetHeight
+                    until.getClientHeight() > document.getElementById('configCla').offsetHeight ?
+                        this.configClaStyle.height = until.getClientHeight() + 'px' :
+                        this.configClaStyle.height = document.getElementById('configCla').offsetHeight
                 })
             },
             change(value) {
@@ -947,7 +947,7 @@
         }
     }
 
-    #home {
+    #configCla {
         padding-top: 4rem;
         display: flex;
         flex-direction: column;
