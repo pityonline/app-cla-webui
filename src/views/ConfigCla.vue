@@ -948,7 +948,6 @@
     }
 
     #configCla {
-        padding-top: 4rem;
         display: flex;
         flex-direction: column;
         box-sizing: border-box;
