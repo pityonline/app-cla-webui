@@ -957,7 +957,7 @@
         }
         & > div:nth-of-type(2) {
             flex-grow: 1;
-            background-color: #F5F5F5;
+            /*background-color: #F5F5F5;*/
             text-align: left;
 
         }
