@@ -615,9 +615,8 @@
                     this.$message.success('success')
                     this.$router.push('/home')
                 }).catch(err => {
-                    this.linkLoading = false
                     this.$message.closeAll();
-                    this.$message.error(err.response.data)
+                    this.$message.error(err.data.error_message)
                 })
             },
             changeLanguage(){
