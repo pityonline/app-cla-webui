@@ -1,10 +1,15 @@
 <template>
-    <div id="home" :style="home">
+    <div id="configCla" :style="configClaStyle">
         <Header></Header>
 
         <el-col :offset="4" :span="16" id="section">
 
             <div id="configBtDiv">
+                <el-steps :active="active" finish-status="success">
+                    <el-step title="step 1"></el-step>
+                    <el-step title="step 2"></el-step>
+                    <el-step title="step 3"></el-step>
+                </el-steps>
                 <el-button v-if="!showConfigForm" class="configBt" type="primary"
                            @click="configCla()">
                     Configure CLA
@@ -163,14 +168,6 @@
                     </el-row>
                 </el-row>
             </el-row>
-            <div>
-                <el-tabs v-model="activeName" @tab-click="tabsHandleClick">
-                    <el-tab-pane label="Linked Repositories" name="first" style="margin-top: 1rem">
-
-                    </el-tab-pane>
-                </el-tabs>
-                <router-view></router-view>
-            </div>
         </el-col>
         <Footer></Footer>
         <el-dialog
@@ -321,17 +318,17 @@
 <script>
     import * as url from '../until/api'
     import * as until from '../until/until'
-    import Header from '@components/Header'
-    import Footer from '@components/Footer'
+    import Header from '@components/NewHeader'
+    import Footer from '@components/NewFooter'
     import {mapActions} from 'vuex'
 
     window.onresize = () => {
-        if (until.getClientHeight() > document.getElementById('home').offsetHeight) {
-            document.getElementById("home").style.height = until.getClientHeight() + 'px'
+        if (until.getClientHeight() > document.getElementById('configCla').offsetHeight) {
+            document.getElementById("configCla").style.height = until.getClientHeight() + 'px'
         }
     }
     export default {
-        name: "Home",
+        name: "ConfigCla",
         components: {
             Header,
             Footer,
@@ -465,7 +462,7 @@
                 fileNumber: '',
                 lineNumber: '',
                 gistUrl: '',
-                home: {
+                configClaStyle: {
                     height: '',
                 },
                 user: {
@@ -753,11 +750,10 @@
                 this.setClientHeight()
             },
             configCla() {
-                // this.$store.commit('setShowConfigForm', 'true')
-                // this.showConfigForm = true;
-                // this.home.height = 'auto'
-                // this.getOrgsInfo()
-                this.$router.push('/configCla')
+                this.$store.commit('setShowConfigForm', 'true')
+                this.showConfigForm = true;
+                this.home.height = 'auto'
+                this.getOrgsInfo()
             },
             setClientHeight() {
                 this.$nextTick(() => {

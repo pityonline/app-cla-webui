@@ -753,11 +753,10 @@
                 this.setClientHeight()
             },
             configCla() {
-                // this.$store.commit('setShowConfigForm', 'true')
-                // this.showConfigForm = true;
-                // this.home.height = 'auto'
-                // this.getOrgsInfo()
-                this.$router.push('/configCla')
+                this.$store.commit('setShowConfigForm', 'true')
+                this.showConfigForm = true;
+                this.home.height = 'auto'
+                this.getOrgsInfo()
             },
             setClientHeight() {
                 this.$nextTick(() => {

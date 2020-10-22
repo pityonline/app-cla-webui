@@ -121,6 +121,11 @@ const routes = [
         component: () => import('../views/CreateCLA.vue')
     },
     {
+        path: '/configCla',
+        name: 'ConfigCla',
+        component: () => import('../views/ConfigCla.vue')
+    },
+    {
         path: '/privacy',
         name: 'Privacy',
         component: () => import('../views/Privacy.vue')
