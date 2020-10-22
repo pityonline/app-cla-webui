@@ -76,7 +76,7 @@
                 </div>
             </div>
             <div>
-                <p>Edit your metaData
+                <p>④ Edit your metaData
                     <el-tooltip class="item" effect="dark"
                                 content="The information you want contributors to fill in when they sign the cla.Title and type are required, otherwise the field will fail to be added"
                                 placement="right">
@@ -149,8 +149,8 @@
                     </div>
                 </div>
             </div>
-            <div>
-                <el-button type="primary">
+            <div class="btDiv">
+                <el-button style="width: 4rem" size="medium" type="primary">
                     LINK
                 </el-button>
             </div>
@@ -1070,6 +1070,32 @@
 </script>
 
 <style scoped lang="less">
+    #configCla {
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        overflow: hidden;
+        background-color: #F5F5F5;
+        .btDiv{
+            margin: 1rem 0;
+            text-align: center;
+        }
+        .typeCol {
+            padding: .5rem 10px;
+        }
+        & > div:nth-of-type(2) {
+            flex-grow: 1;
+            background-color: #F5F5F5;
+            text-align: left;
+
+
+            & > div:nth-of-type(3) {
+                padding: 4rem 0 2rem 0;
+                font-size: 1.3rem;
+                color: #2C3E50;
+            }
+        }
+    }
     .tableStyle {
         margin-bottom: 2rem;
         padding: 3rem;
@@ -1177,32 +1203,11 @@
     #configBtDiv {
         text-align: left;
         padding-top: 3rem;
-        .typeCol {
-            padding: .5rem 10px;
-        }
+
         & > .configBt {
             font-size: 1.2rem;
         }
     }
 
-    #configCla {
-        display: flex;
-        flex-direction: column;
-        box-sizing: border-box;
-        overflow: hidden;
-        background-color: #F5F5F5;
 
-        & > div:nth-of-type(2) {
-            flex-grow: 1;
-            background-color: #F5F5F5;
-            text-align: left;
-
-
-            & > div:nth-of-type(3) {
-                padding: 4rem 0 2rem 0;
-                font-size: 1.3rem;
-                color: #2C3E50;
-            }
-        }
-    }
 </style>
