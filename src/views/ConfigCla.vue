@@ -51,6 +51,11 @@
             <div class="itemBox">
                 <div style="font-size: 1.2rem;padding: .5rem">
                     ② Paste a link and declare the language
+                    <el-tooltip class="item" effect="dark"
+                                content="Paste a link to the original data of a CLA in the repository"
+                                placement="right">
+                        <svg-icon icon-class="bangzhu"></svg-icon>
+                    </el-tooltip>
                 </div>
                 <div style="padding: 0 2rem">
                     <el-row :gutter="20">
@@ -538,7 +543,7 @@
         methods: {
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
             changeLanguage(){
-                
+
             },
             addRow(index) {
                 this.customMetadataArr.splice(index + 1, 0, {
