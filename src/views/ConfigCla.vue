@@ -50,12 +50,32 @@
             </div>
             <div class="itemBox">
                 <div style="font-size: 1.2rem;padding: .5rem">
-                    ② Paste a link
+                    ② Paste a link and declare the language
                 </div>
                 <div style="padding: 0 2rem">
-                    <el-input v-model="cla_Link">
+                    <el-row :gutter="20">
+                        <el-col :span="16">
+                            <el-input v-model="cla_Link">
+                            </el-input>
+                        </el-col>
+                        <el-col :span="8">
+                            <el-select v-model="claLanguageValue"
+                                       placeholder="select language"
+                                       style="width: 100%"
+                                       size="medium"
+                                       clearable
+                                       filterable
+                                       @change="changeLanguage">
+                                <el-option
+                                        v-for="item in languageOptions"
+                                        :key="item.value"
+                                        :label="item.label"
+                                        :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </el-col>
+                    </el-row>
 
-                    </el-input>
                 </div>
 
 
@@ -455,7 +475,7 @@
                 emailType: '',
                 emailDialogVisible: false,
                 filterChange: true,
-                claLanguageValue: '',
+                claLanguageValue: 'english',
                 claTypeValue: '',
                 claTypeOptions: [{label: 'individual', value: 'individual'}, {
                     label: 'corporation',
@@ -517,6 +537,9 @@
         },
         methods: {
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
+            changeLanguage(){
+                
+            },
             addRow(index) {
                 this.customMetadataArr.splice(index + 1, 0, {
                     title: '',
