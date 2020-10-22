@@ -3,7 +3,7 @@
         <Header></Header>
 
         <el-col :offset="4" :span="16" id="section">
-            <div style="padding-bottom: 1.5rem;font-size: 1.3rem">Configure CLA</div>
+            <div style="padding: 2rem 0;font-size: 1.3rem">Configure CLA</div>
             <div class="itemBox">
                 <div style="font-size: 1.2rem;padding: .5rem">
                     ① Choose a org or repository
