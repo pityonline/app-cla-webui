@@ -283,9 +283,9 @@
         methods: {
             tabsHandleClick(tab, event) {
                 console.log(tab);
-                if (tab.index === 0) {
+                if (tab.index === '0') {
                     this.getCorporationInfo()
-                }else if (tab.index === 1) {
+                }else if (tab.index === '1') {
                     this.getClaInfo()
                 }
             },
