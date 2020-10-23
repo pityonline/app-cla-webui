@@ -355,7 +355,7 @@
                     url: `${url.getClaInfo}/${this.item.id}/cla`,
                 }).then(resp => {
                     console.log(resp);
-                    this.claData = resp.data.data[this.item.id];
+                    this.claData = resp.data.data;
                 }).catch(err => {
                 })
             },

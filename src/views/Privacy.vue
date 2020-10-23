@@ -63,7 +63,7 @@
         },
 
         created() {
-            this.init()
+            // this.init()
         },
         mounted() {
             this.setClientHeight()
