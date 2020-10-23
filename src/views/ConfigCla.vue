@@ -587,6 +587,7 @@
             binding(){
                 let obj = {}
                 let cla ={url:this.cla_Link,language:this.claLanguageValue,fields:this.editMetadata()}
+                console.log(cla);
                 if (this.repositoryChoose) {
                     obj = {
                         repo_id: `${this.repositoryOptions[this.repositoryValue].repoName}`,

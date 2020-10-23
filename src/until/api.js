@@ -1,7 +1,7 @@
 export const login = '/v1/login'                                                       //loginIn
 export const getUserInfo = 'https://gitee.com/api/v5/user'                             //获取用户信息  参数  access_token
 export const uploadCla = '/v1/cla'                                                     //上传Cla post 参数  text,name,language,user
-export const getClaInfo = '/v1/org-cla'                                                    //获取cla get  params /org_cla_id
+export const getClaInfo = '/v1/org-cla'                                                    //获取cla get  params /${org_cla_id}/cla
 export const delCla = '/v1/cla'                                                        //删除cla delete
 export const uploadMeta = '/v1/cla-metadata'                                           //上传metadata get
 export const getMeta = '/v1/cla-metadata'                                              //获取metadata get

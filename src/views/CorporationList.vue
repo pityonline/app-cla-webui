@@ -271,8 +271,14 @@
                 this.item = this.$route.query.item
                 sessionStorage.setItem('item', JSON.stringify(this.$route.query.item))
             }
-            this.item.apply_to==='corporation'?this.activeName='first':this.activeName='second'
-            this.getCorporationInfo()
+            if (this.item.apply_to==='corporation'){
+                this.activeName='first'
+                this.getCorporationInfo()
+            } else{
+                this.activeName='second'
+                this.getClaInfo()
+            }
+
         },
         methods: {
             tabsHandleClick(tab, event) {
@@ -345,7 +351,7 @@
             },
             getClaInfo(){
                 http({
-                    url: `${url.getClaInfo}/${this.item.id}`,
+                    url: `${url.getClaInfo}/${this.item.id}/cla`,
                 }).then(resp => {
                     console.log(resp);
                     this.claData = resp.data.data[this.item.id];
