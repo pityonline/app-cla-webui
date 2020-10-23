@@ -416,7 +416,7 @@
                     let count = res.data.data.length
                         data.forEach((item,index)=>{
                             new Promise((resolve,reject)=>{
-                                let claName = this.getClaName(item.cla_id)
+                                let claName = this.getClaName(item.id)
                                 resolve(claName)
                             }).then(res=>{
                                 Object.assign(data[index],{claName:res})

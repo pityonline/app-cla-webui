@@ -345,7 +345,7 @@
             },
             getClaInfo(){
                 http({
-                    url: `${url.getClaInfo}/${this.item.org_id}`,
+                    url: `${url.getClaInfo}/${this.item.id}`,
                 }).then(resp => {
                     console.log(resp);
                     this.claData = resp.data.data[this.item.id];
