@@ -274,7 +274,6 @@
         },
         methods: {
             tabsHandleClick(tab, event) {
-                tab.index === '0' ? this.$router.push('/linkedRepo') : this.$router.push('/signedRepoLogin')
             },
             upload(fileObj) {
                 const formData = new FormData()

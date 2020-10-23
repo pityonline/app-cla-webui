@@ -529,7 +529,6 @@
                 }
             },
             tabsHandleClick(tab, event) {
-                tab.index === '0' ? this.$router.push('/linkedRepo') : this.$router.push('/signedRepoLogin')
             },
             getOrgPermission() {
                 if (this.platform === 'gitee') {

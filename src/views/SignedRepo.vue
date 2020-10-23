@@ -138,7 +138,7 @@
                                             <!--inactive-color="#EBEEF5">-->
                                             <!--</el-switch>-->
                                             <!--</div>-->
-                                           
+
 
                                         </template>
                                     </el-table-column>
@@ -290,25 +290,11 @@
                 tableDataOther: [{repository: 'ooo', cla: 'test', sharedGist: 'Yes', contributors: '0',},],
                 tableTotal: 0,
                 currentPage: 1,
-                inactiveData: [{id: 0, name: 'jack', email: '10577507@qq.com', tel: '15632486433', isUsed: false}, {
-                    id: 1,
-                    name: 'Rose',
-                    email: '105507@163.com',
-                    tel: '18832486437',
-                    isUsed: false
-                }],
-                activeData: [{id: 0, name: 'tom', email: '10577507@qq.com', tel: '15632486433', isUsed: true}, {
-                    id: 1,
-                    name: 'helen',
-                    email: '105507@163.com',
-                    tel: '18832486437',
-                    isUsed: true
-                }]
+                inactiveData: []
             }
         },
         methods: {
             tabsHandleClick(tab, event) {
-                // tab.index === '0' ? this.$router.push('/linkedRepo') : this.$router.push('/signedRepoLogin')
             },
             upload(fileObj) {
                 const formData = new FormData()
@@ -401,28 +387,6 @@
                 }).catch(err => {
                     this.$message.closeAll()
                     this.$message.error('failed')
-                })
-            },
-            changeActive(cla_org_id, corporation_name, admin_email, enabled) {
-                let data = {
-                    cla_org_id: cla_org_id,
-                    corporation_name: corporation_name,
-                    admin_email: admin_email,
-                    enabled: enabled
-                }
-                this.$axios({
-                    url: `/api${url.active_corporation}`,
-                    method: 'put',
-                    data: data,
-                    headers: {
-                        'Token': this.$store.state.access_token,
-                        'Access-Token': this.access_token,
-                        'Refresh-Token': this.refresh_token,
-                        'User': `${this.platform}/${this.user.userName}`
-                    }
-                }).then(res => {
-                    this.getCorporationInfo()
-                }).catch(err => {
                 })
             },
             checkPdf() {
