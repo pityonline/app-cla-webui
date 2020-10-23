@@ -233,7 +233,7 @@
         data() {
             return {
                 claData:'',
-                activeName: 'first',
+                activeName: '',
                 uploadHeaders: {
                     'Token': this.$store.state.access_token,
                 },
