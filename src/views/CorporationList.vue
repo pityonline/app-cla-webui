@@ -1,75 +1,152 @@
 <template>
     <div>
-        <div class="tableStyle">
-            <el-table
-                    :data="tableData"
-                    align="center"
-                    style="width: 100%;">
-                <el-table-column
-                        prop="corporation_name"
-                        label="CorporationName">
+        <el-tabs v-model="activeName" @tab-click="tabsHandleClick">
+            <el-tab-pane label="Signed Corporation" name="first" style="margin-top: 1rem">
+                <div class="tableStyle">
+                    <el-table
+                            :data="tableData"
+                            align="center"
+                            style="width: 100%;">
+                        <el-table-column
+                                prop="corporation_name"
+                                label="CorporationName">
 
-                </el-table-column>
-                <el-table-column
-                        prop="admin_name"
-                        label="AdminName">
-                </el-table-column>
+                        </el-table-column>
+                        <el-table-column
+                                prop="admin_name"
+                                label="AdminName">
+                        </el-table-column>
 
-                <el-table-column
-                        prop="admin_email"
-                        label="Email">
-                </el-table-column>
+                        <el-table-column
+                                prop="admin_email"
+                                label="Email">
+                        </el-table-column>
 
-                <el-table-column
-                        label="PDF"
-                        align="center">
+                        <el-table-column
+                                label="PDF"
+                                align="center">
 
-                    <template slot-scope="scope">
-                        <el-popover
-                                width="80"
-                                trigger="hover"
-                                placement="right">
+                            <template slot-scope="scope">
+                                <el-popover
+                                        width="80"
+                                        trigger="hover"
+                                        placement="right">
 
-                            <div class="menuBT">
-                                <el-button @click="uploadClaFile(scope.row)" style="margin-left: 10px" type=""
-                                           size="mini">upload
+                                    <div class="menuBT">
+                                        <el-button @click="uploadClaFile(scope.row)" style="margin-left: 10px" type=""
+                                                   size="mini">upload
+                                        </el-button>
+                                        <el-button @click="downloadClaFile(scope.row)" type="" size="mini">download</el-button>
+                                        <el-button @click="previewClaFile(scope.row)" type="" size="mini">preview</el-button>
+                                    </div>
+
+                                    <svg-icon slot="reference" class="pointer" icon-class="pdf" @click=""/>
+
+                                </el-popover>
+                            </template>
+                        </el-table-column>
+                        <el-table-column
+                                align="center">
+
+                            <template slot-scope="scope">
+                                <!--<div class="mySwitch" style="display: inline-block">-->
+                                <!--<el-switch-->
+                                <!--@change="changeActive(scope.row.cla_org_id,scope.row.corporation_name,scope.row.admin_email,true)"-->
+                                <!--v-model="scope.row.enabled"-->
+                                <!--class="mySwitch"-->
+                                <!--:disabled="scope.row.enabled"-->
+                                <!--width="100"-->
+                                <!--active-color="#409EFF"-->
+                                <!--active-text="active"-->
+                                <!--inactive-text="inactive"-->
+                                <!--inactive-color="#EBEEF5">-->
+                                <!--</el-switch>-->
+                                <!--</div>-->
+                                <el-button :disabled="scope.row.administrator_enabled" style="margin-left: 1rem" type="primary"
+                                           size="mini"
+                                           @click="createRoot(scope.row.admin_email)">Create Administrator
                                 </el-button>
-                                <el-button @click="downloadClaFile(scope.row)" type="" size="mini">download</el-button>
-                                <el-button @click="previewClaFile(scope.row)" type="" size="mini">preview</el-button>
-                            </div>
 
-                            <svg-icon slot="reference" class="pointer" icon-class="pdf" @click=""/>
+                            </template>
+                        </el-table-column>
 
-                        </el-popover>
-                    </template>
-                </el-table-column>
-                <el-table-column
-                        align="center">
+                    </el-table>
+                </div>
+            </el-tab-pane>
+            <el-tab-pane label="Bound CLA" name="second" style="margin-top: 1rem">
+                <div class="tableStyle">
+                    <el-table
+                            :data="tableData"
+                            align="center"
+                            style="width: 100%;">
+                        <el-table-column
+                                prop="corporation_name"
+                                label="CorporationName">
 
-                    <template slot-scope="scope">
-                        <!--<div class="mySwitch" style="display: inline-block">-->
-                            <!--<el-switch-->
-                                    <!--@change="changeActive(scope.row.cla_org_id,scope.row.corporation_name,scope.row.admin_email,true)"-->
-                                    <!--v-model="scope.row.enabled"-->
-                                    <!--class="mySwitch"-->
-                                    <!--:disabled="scope.row.enabled"-->
-                                    <!--width="100"-->
-                                    <!--active-color="#409EFF"-->
-                                    <!--active-text="active"-->
-                                    <!--inactive-text="inactive"-->
-                                    <!--inactive-color="#EBEEF5">-->
-                            <!--</el-switch>-->
-                        <!--</div>-->
-                        <el-button :disabled="scope.row.administrator_enabled" style="margin-left: 1rem" type="primary"
-                                   size="mini"
-                                   @click="createRoot(scope.row.admin_email)">Create Administrator
-                        </el-button>
+                        </el-table-column>
+                        <el-table-column
+                                prop="admin_name"
+                                label="AdminName">
+                        </el-table-column>
 
-                    </template>
-                </el-table-column>
+                        <el-table-column
+                                prop="admin_email"
+                                label="Email">
+                        </el-table-column>
 
-            </el-table>
-        </div>
+                        <el-table-column
+                                label="PDF"
+                                align="center">
+
+                            <template slot-scope="scope">
+                                <el-popover
+                                        width="80"
+                                        trigger="hover"
+                                        placement="right">
+
+                                    <div class="menuBT">
+                                        <el-button @click="uploadClaFile(scope.row)" style="margin-left: 10px" type=""
+                                                   size="mini">upload
+                                        </el-button>
+                                        <el-button @click="downloadClaFile(scope.row)" type="" size="mini">download</el-button>
+                                        <el-button @click="previewClaFile(scope.row)" type="" size="mini">preview</el-button>
+                                    </div>
+
+                                    <svg-icon slot="reference" class="pointer" icon-class="pdf" @click=""/>
+
+                                </el-popover>
+                            </template>
+                        </el-table-column>
+                        <el-table-column
+                                align="center">
+
+                            <template slot-scope="scope">
+                                <!--<div class="mySwitch" style="display: inline-block">-->
+                                <!--<el-switch-->
+                                <!--@change="changeActive(scope.row.cla_org_id,scope.row.corporation_name,scope.row.admin_email,true)"-->
+                                <!--v-model="scope.row.enabled"-->
+                                <!--class="mySwitch"-->
+                                <!--:disabled="scope.row.enabled"-->
+                                <!--width="100"-->
+                                <!--active-color="#409EFF"-->
+                                <!--active-text="active"-->
+                                <!--inactive-text="inactive"-->
+                                <!--inactive-color="#EBEEF5">-->
+                                <!--</el-switch>-->
+                                <!--</div>-->
+                                <el-button :disabled="scope.row.administrator_enabled" style="margin-left: 1rem" type="primary"
+                                           size="mini"
+                                           @click="createRoot(scope.row.admin_email)">Create Administrator
+                                </el-button>
+
+                            </template>
+                        </el-table-column>
+
+                    </el-table>
+                </div>
+            </el-tab-pane>
+        </el-tabs>
+
         <!--<div class="paginationClass">-->
         <!--<el-pagination-->
         <!--background-->
@@ -104,12 +181,11 @@
                                     :on-success="handleSuccess"
                                     :before-remove="beforeRemove"
                                     :auto-upload="false"
-
                                     :on-exceed="handleExceed"
                                     :file-list="fileList">
-                                <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
+                                <el-button slot="trigger" size="small" type="primary">select </el-button>
                                 <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">
-                                    上传到服务器
+                                    upload
                                 </el-button>
                                 <!--<div slot="tip" class="el-upload__tip">文件不超过500kb</div>-->
                             </el-upload>
@@ -156,6 +232,7 @@
 
         data() {
             return {
+                activeName: 'first',
                 uploadHeaders: {
                     'Token': this.$store.state.access_token,
                 },
@@ -196,6 +273,9 @@
             this.getCorporationInfo()
         },
         methods: {
+            tabsHandleClick(tab, event) {
+                tab.index === '0' ? this.$router.push('/linkedRepo') : this.$router.push('/signedRepoLogin')
+            },
             upload(fileObj) {
                 const formData = new FormData()
                 formData.append('pdf', fileObj.file)

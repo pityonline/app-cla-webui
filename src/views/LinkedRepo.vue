@@ -1,5 +1,10 @@
 <template>
     <div>
+        <el-tabs v-model="activeName" @tab-click="tabsHandleClick">
+            <el-tab-pane label="Linked Repositories" name="first" style="margin-top: 1rem">
+
+            </el-tab-pane>
+        </el-tabs>
         <el-row :gutter="20">
             <el-col :span="3" class="orgTableStyle tableStyle">
                 <el-table
@@ -358,6 +363,7 @@
         },
         data() {
             return {
+                activeName: 'first',
                 clickRow:0,
                 tableData:[],
                 orgTableData: [],
@@ -389,6 +395,9 @@
         },
         methods: {
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct', 'setTableDataAct']),
+            tabsHandleClick(tab, event) {
+                tab.index === '0' ? this.$router.push('/linkedRepo') : this.$router.push('/signedRepoLogin')
+            },
             tableRowClassName({row, rowIndex}) {
                 if (rowIndex === this.clickRow) {
                     return 'warning-row';
