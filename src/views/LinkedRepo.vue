@@ -341,7 +341,7 @@
         </el-dialog>
         <!--<div id="pop">-->
         <!--</div>-->
-        <ReLoginDialog ></ReLoginDialog>
+        <ReLoginDialog></ReLoginDialog>
     </div>
 </template>
 <script>
@@ -364,10 +364,10 @@
         data() {
             return {
                 activeName: 'first',
-                clickRow:0,
-                tableData:[],
+                clickRow: 0,
+                tableData: [],
                 orgTableData: [],
-                address:this.$store.state.domain,
+                address: this.$store.state.domain,
                 url: '',
                 signRouter: this.$store.state.signRouter,
                 pdfSrc: '',
@@ -404,45 +404,46 @@
                 }
                 return '';
             },
-            clickOrg(row, column, cell, event){
-                this.clickRow=row.value
+            clickOrg(row, column, cell, event) {
+                this.clickRow = row.value
                 this.getLinkedRepoList(row.Organization)
             },
-            getLinkedRepoList(org_id){
+            getLinkedRepoList(org_id) {
                 http({
-                    url:url.getLinkedRepoList,
-                }).then(res=>{
+                    url: url.getLinkedRepoList,
+                }).then(res => {
                     let data = res.data.data
                     let count = res.data.data.length
-                        data.forEach((item,index)=>{
-                            new Promise((resolve,reject)=>{
-                                let claName = this.getClaName(item.id)
-                                resolve(claName)
-                            }).then(res=>{
-                                Object.assign(data[index],{claName:res})
-                                console.log(res);
-                                count--
-                            },err=>{
-                            })
+                    data.forEach((item, index) => {
+                        new Promise((resolve, reject) => {
+                            let claName = this.getClaName(item.id)
+                            resolve(claName)
+                        }).then(res => {
+                            Object.assign(data[index], {claName: res})
+                            console.log(res);
+                            count--
+                        }, err => {
                         })
-                    let setDataInterval = setInterval( ()=> {
+                    })
+                    let setDataInterval = setInterval(() => {
                         if (count === 0) {
-                            this.tableData=data
+                            this.tableData = data
                             console.log(this.tableData);
                             clearInterval(setDataInterval)
                         }
-                    },100)
+                    }, 100)
 
-                }).catch(err=>{
+                }).catch(err => {
                 })
             },
-            async  getClaName(cla_id){
-                let name=''
-               await this.$axios({
+            async getClaName(org_cla_id) {
+                let name = ''
+                await this.$axios({
                     url: `/api${url.getClaInfo}/${cla_id}`,
+                    params: {org_cla_id: org_cla_id},
                     headers: this.uploadHeaders
                 }).then(resp => {
-                    name= resp.data.data.name
+                    name = resp.data.data.name
 
                 }).catch(err => {
                 })
@@ -468,10 +469,10 @@
                 let params = ''
                 if (row.repo_id) {
                     params = `${row.platform}/${row.org_id}/${row.repo_id}`
-                } else{
+                } else {
                     params = `${row.platform}/${row.org_id}`
                 }
-                let base64Params =  until.strToBase64(params)
+                let base64Params = until.strToBase64(params)
                 let url = `${this.address}${this.signRouter}/${base64Params}`
                 window.open(url)
             },
@@ -480,10 +481,10 @@
             },
             handleSuccess(file, fileList) {
                 console.log(file, fileList);
-                this.fileList=[]
+                this.fileList = []
                 this.$message.closeAll()
                 this.$message.success('success')
-                this.uploadOrgDialogVisible=false
+                this.uploadOrgDialogVisible = false
             },
             handleRemove(file, fileList) {
                 console.log(file, fileList);
@@ -792,6 +793,7 @@
     .el-table .warning-row {
         background: #8CC5FF;
     }
+
     .el-popover {
         min-width: 7rem;
     }
@@ -801,9 +803,11 @@
         padding: 3rem 0;
         background-color: white;
     }
-    .orgTableStyle{
+
+    .orgTableStyle {
         cursor: pointer;
     }
+
     .paginationClass {
         text-align: center;
         margin-bottom: 1rem;
