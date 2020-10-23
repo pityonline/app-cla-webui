@@ -341,8 +341,51 @@
                     </el-row>
                 </el-row>
             </el-row>
+
         </el-col>
         <Footer></Footer>
+        <el-dialog
+                top="5vh"
+                title=""
+                :visible.sync="emailDialogVisible"
+                width="35%">
+            <div>
+                <p class="dialogDesc">You need to select an email address for your organization to contact</p>
+                <div>
+
+                    <el-row>
+                        <el-col :offset="6" :span="12">
+                            <el-select
+                                    placeholder="Select email type"
+                                    size="medium"
+                                    filterable
+                                    v-model="emailType"
+                                    @change="changeEmailType">
+                                <el-option
+                                        v-for="item in emailTypeArr"
+                                        :key="item.value"
+                                        :value="item.value"
+                                        :label="item.label">
+                                </el-option>
+                            </el-select>
+                        </el-col>
+                    </el-row>
+                </div>
+                <div style="padding: 0 3rem;color: #409EFF">
+                </div>
+                <div style="padding: 2rem 6rem;text-align: left;font-size: 1.3rem">
+                    <p style="text-align: center">CLA system will...</p>
+                    <ul>
+                        <li>Send the white list management account number to the enterprise through the mailbox</li>
+                        <li>Send PDF signature documents to the signer through this email address</li>
+                    </ul>
+                </div>
+                <span slot="footer" class="dialog-footer">
+                    <el-button @click="emailDialogVisible = false">Cancel</el-button>
+                    <el-button v-loading.fullscreen.lock="linkLoading" type="primary" @click="authorizeEmail()">Yes,Let's do this!</el-button>
+                </span>
+            </div>
+        </el-dialog>
     </div>
 </template>
 <script>
