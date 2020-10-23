@@ -164,11 +164,6 @@
                 </el-row>
             </el-row>
             <div>
-                <el-tabs v-model="activeName" @tab-click="tabsHandleClick">
-                    <el-tab-pane label="Linked Repositories" name="first" style="margin-top: 1rem">
-
-                    </el-tab-pane>
-                </el-tabs>
                 <router-view></router-view>
             </div>
         </el-col>
