@@ -77,7 +77,7 @@
                 <div class="tableStyle">
                     cla
                     <el-table
-                            :data="claTable"
+                            :data="claData"
                             align="center"
                             style="width: 100%;">
                         <el-table-column
@@ -233,6 +233,7 @@
 
         data() {
             return {
+                claData:'',
                 activeName: 'first',
                 uploadHeaders: {
                     'Token': this.$store.state.access_token,
@@ -344,14 +345,10 @@
             },
             getClaInfo(){
                 http({
-                    url: `${url.corporation_signing}/${this.item.org_id}`,
-                    params: {
-                        repo_id: this.item.repo_id,
-                        cla_language: this.item.cla_language
-                    },
+                    url: `${url.getClaInfo}/${this.item.org_id}`,
                 }).then(resp => {
                     console.log(resp);
-                    this.tableData = resp.data.data[this.item.id];
+                    this.claData = resp.data.data[this.item.id];
                 }).catch(err => {
                 })
             },
