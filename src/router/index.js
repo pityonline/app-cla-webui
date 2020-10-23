@@ -121,7 +121,7 @@ const routes = [
         component: () => import('../views/CreateCLA.vue')
     },
     {
-        path: '/configCla',
+        path: '/bind-cla',
         name: 'ConfigCla',
         component: () => import('../views/ConfigCla.vue')
     },

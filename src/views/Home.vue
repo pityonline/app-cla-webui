@@ -752,7 +752,7 @@
                 // this.showConfigForm = true;
                 // this.home.height = 'auto'
                 // this.getOrgsInfo()
-                this.$router.push('/configCla')
+                this.$router.push('/bind-cla')
             },
             setClientHeight() {
                 this.$nextTick(() => {
