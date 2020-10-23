@@ -233,7 +233,7 @@
         data() {
             return {
                 claData:'',
-                activeName: '',
+                activeName: 'first',
                 uploadHeaders: {
                     'Token': this.$store.state.access_token,
                 },
@@ -282,6 +282,7 @@
         },
         methods: {
             tabsHandleClick(tab, event) {
+                console.log(tab);
                 if (tab.index === 0) {
                     this.getCorporationInfo()
                 }else if (tab.index === 1) {

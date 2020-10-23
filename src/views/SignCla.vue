@@ -153,7 +153,7 @@
                 domain: this.$store.state.domain,
                 tipsTitle: '',
                 // tipsMessage: 'Signed successfully.We have sent a notification email to your email address. Please check it',
-                tipsMessage: 'Signed successfully',
+                tipsMessage: 'Signed successfully,The system will send a notification email to your email',
                 tipsDialogVisible: false,
                 signPageData: '',
                 cla_org_id: '',
@@ -253,7 +253,7 @@
                         method: 'post',
                     }).then(res => {
                         this.$message.closeAll();
-                        this.$message.success('Please fill in the verification code in the email to continue signing');
+                        this.$message.success('Please fill in the verification code in the email input field to continue signing');
                         let second = 60;
                         let codeInterval = setInterval(() => {
                             if (second !== 0) {
@@ -602,7 +602,7 @@
                             this.signCla();
                         } else {
                             this.$message.closeAll()
-                            this.$message.error('Please read the privacy statement')
+                            this.$message.error('Please read the privacy statement and check the box')
                         }
                     } else {
                         return false;
