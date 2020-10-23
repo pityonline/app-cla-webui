@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-tabs v-model="activeName" @tab-click="tabsHandleClick">
-            <el-tab-pane label="Signed Corporation" name="first" style="margin-top: 1rem">
+            <el-tab-pane v-if="this.item.apply_to==='corporation'" label="Signed Corporation" name="first" style="margin-top: 1rem">
                 <div class="tableStyle">
                     <el-table
                             :data="tableData"
@@ -73,9 +73,8 @@
                     </el-table>
                 </div>
             </el-tab-pane>
-            <el-tab-pane label= CLA" name="second" style="margin-top: 1rem">
+            <el-tab-pane label= "CLA" name="second" style="margin-top: 1rem">
                 <div class="tableStyle">
-                    cla
                     <el-table
                             :data="claData"
                             align="center"
