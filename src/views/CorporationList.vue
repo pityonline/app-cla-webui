@@ -271,6 +271,7 @@
                 this.item = this.$route.query.item
                 sessionStorage.setItem('item', JSON.stringify(this.$route.query.item))
             }
+            this.item.apply_to==='corporation'?this.activeName='first':this.activeName='second'
             this.getCorporationInfo()
         },
         methods: {
