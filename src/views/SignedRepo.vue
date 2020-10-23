@@ -138,10 +138,7 @@
                                             <!--inactive-color="#EBEEF5">-->
                                             <!--</el-switch>-->
                                             <!--</div>-->
-                                            <el-button :disabled="scope.row.administrator_enabled" style="margin-left: 1rem" type="primary"
-                                                       size="mini"
-                                                       @click="createRoot(scope.row.admin_email)">Create Administrator
-                                            </el-button>
+                                           
 
                                         </template>
                                     </el-table-column>
@@ -311,7 +308,7 @@
         },
         methods: {
             tabsHandleClick(tab, event) {
-                tab.index === '0' ? this.$router.push('/linkedRepo') : this.$router.push('/signedRepoLogin')
+                // tab.index === '0' ? this.$router.push('/linkedRepo') : this.$router.push('/signedRepoLogin')
             },
             upload(fileObj) {
                 const formData = new FormData()
