@@ -73,10 +73,11 @@
                     </el-table>
                 </div>
             </el-tab-pane>
-            <el-tab-pane label="Bound CLA" name="second" style="margin-top: 1rem">
+            <el-tab-pane label= CLA" name="second" style="margin-top: 1rem">
                 <div class="tableStyle">
+                    cla
                     <el-table
-                            :data="tableData"
+                            :data="claTable"
                             align="center"
                             style="width: 100%;">
                         <el-table-column
@@ -274,6 +275,11 @@
         },
         methods: {
             tabsHandleClick(tab, event) {
+                if (tab.index === 0) {
+                    this.getCorporationInfo()
+                }else if (tab.index === 1) {
+                    this.getClaInfo()
+                }
             },
             upload(fileObj) {
                 const formData = new FormData()
@@ -335,6 +341,19 @@
             },
             beforeRemove(file, fileList) {
                 return this.$confirm(`Are you sure you want to remove it ${file.name}？`);
+            },
+            getClaInfo(){
+                http({
+                    url: `${url.corporation_signing}/${this.item.org_id}`,
+                    params: {
+                        repo_id: this.item.repo_id,
+                        cla_language: this.item.cla_language
+                    },
+                }).then(resp => {
+                    console.log(resp);
+                    this.tableData = resp.data.data[this.item.id];
+                }).catch(err => {
+                })
             },
             getCorporationInfo() {
                 http({
