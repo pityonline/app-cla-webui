@@ -439,7 +439,7 @@
             async getClaName(org_cla_id) {
                 let name = ''
                 await this.$axios({
-                    url: `/api${url.getClaInfo}/${cla_id}`,
+                    url: `/api${url.getClaInfo}`,
                     params: {org_cla_id: org_cla_id},
                     headers: this.uploadHeaders
                 }).then(resp => {
