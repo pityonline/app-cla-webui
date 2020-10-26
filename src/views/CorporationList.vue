@@ -388,7 +388,7 @@
                     this.getCorporationInfo()
                 }).catch(err => {
                     this.$message.closeAll()
-                    this.$message.error('failed')
+                    this.$message.error('Please upload PDF first')
                 })
             },
             changeActive(cla_org_id, corporation_name, admin_email, enabled) {
