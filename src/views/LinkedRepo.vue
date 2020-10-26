@@ -107,7 +107,7 @@
                         <template slot-scope="scope">
                             <el-button size="mini" @click="toSignPage(scope.row)">Sign</el-button>
                             <el-button size="mini" @click="copyAddress(scope.row)">copy address</el-button>
-                            <el-input id="signAddressInput" v-model="signAddress" style="display: none"></el-input>
+                            <input id="signAddressInput" style="display: none">
 
                         </template>
                     </el-table-column>
@@ -478,7 +478,7 @@
                 let base64Params = until.strToBase64(params)
                 let url = `${this.address}${this.signRouter}/${base64Params}`
                 let input = document.getElementById('signAddressInput')
-                this.signAddress=url
+                input.value = url
                 input.select();
                 document.execCommand('copy')
 
