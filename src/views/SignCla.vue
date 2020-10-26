@@ -150,6 +150,7 @@
         ,
         data() {
             return {
+                signRouter:'/sign',
                 serverAddress:'Hong Kong',
                 domain: this.$store.state.domain,
                 tipsTitle: '',
