@@ -478,7 +478,7 @@
                 let base64Params = until.strToBase64(params)
                 let url = `${this.address}${this.signRouter}/${base64Params}`
                 let input = document.getElementById('signAddressInput')
-                input.value = url
+                this.signAddress=url
                 input.select();
                 document.execCommand('copy')
 
