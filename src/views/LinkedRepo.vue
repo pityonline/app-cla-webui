@@ -458,7 +458,7 @@
                 console.log(data);
                 let orgData = [];
                 data.forEach((item,index)=>{
-                    orgData.push(item.org_id)
+                    orgData.push({Organization:item.org_id})
                 })
                 this.orgTableData = orgData
             },
