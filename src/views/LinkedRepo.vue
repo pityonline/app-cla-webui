@@ -457,9 +457,17 @@
             getOrgTableData(data) {
                 console.log(data);
                 let orgData = [];
-                data.forEach((item,index)=>{
-                    orgData.push({Organization:item.org_id})
+                data.forEach((item, index) => {
+                    orgData.push({Organization: item.org_id})
                 })
+                for (let i = 0; i < orgData.length; i++) {
+                    for (let j = i + 1; j < orgData.length; j++) {
+                        if (orgData[i].org_id === orgData[j].org_id) {
+                            orgData.splice(j,1)
+                            j--
+                        }
+                    }
+                }
                 this.orgTableData = orgData
             },
             copyAddress(row) {
