@@ -107,7 +107,7 @@
                         <template slot-scope="scope">
                             <el-button size="mini" @click="toSignPage(scope.row)">Sign</el-button>
                             <el-button size="mini" @click="copyAddress(scope.row)">copy address</el-button>
-                            <input id="signAddressInput" style="display: none">
+                            <input id="signAddressInput" >
 
                         </template>
                     </el-table-column>
