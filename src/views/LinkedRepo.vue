@@ -366,6 +366,7 @@
         },
         data() {
             return {
+                organization:'',
                 boundTableData:'',
                 signAddress: '',
                 activeName: 'first',
@@ -405,7 +406,7 @@
             },
             tableRowClassName({row, rowIndex}) {
                 console.log(row);
-                if (rowIndex === this.clickRow) {
+                if (row.Organization === this.organization) {
                     return 'warning-row';
                 }
                 return '';
@@ -413,7 +414,7 @@
             getBoundTableData(){
                 let data=[]
                 this.tableData.forEach((item,index)=>{
-                    if (item.org_id === row.Organization) {
+                    if (item.org_id === this.organization) {
                         data.push(item)
                     }
                 })
@@ -422,7 +423,7 @@
             clickOrg(row, column, cell, event) {
                 console.log(row);
 
-                this.clickRow = row.value
+                this.organization = row.Organization
                this.getBoundTableData()
 
             },
@@ -483,6 +484,7 @@
                     }
                 }
                 this.orgTableData = orgData
+                this.organization=this.orgTableData[0].Organization
             },
             copyAddress(row) {
                 let params = ''
