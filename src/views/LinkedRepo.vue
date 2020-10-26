@@ -404,21 +404,26 @@
                 tab.index === '0' ? this.$router.push('/linkedRepo') : this.$router.push('/signedRepoLogin')
             },
             tableRowClassName({row, rowIndex}) {
+                console.log(row);
                 if (rowIndex === this.clickRow) {
                     return 'warning-row';
                 }
                 return '';
             },
-            clickOrg(row, column, cell, event) {
-                console.log(row);
+            getBoundTableData(){
                 let data=[]
-                this.clickRow = row.value
                 this.tableData.forEach((item,index)=>{
                     if (item.org_id === row.Organization) {
                         data.push(item)
                     }
                 })
                 this.boundTableData=data
+            },
+            clickOrg(row, column, cell, event) {
+                console.log(row);
+
+                this.clickRow = row.value
+               this.getBoundTableData()
 
             },
             getLinkedRepoList() {
