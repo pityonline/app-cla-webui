@@ -106,6 +106,9 @@
                             label="Sign">
                         <template slot-scope="scope">
                             <el-button size="mini" @click="toSignPage(scope.row)">Sign</el-button>
+                            <el-button size="mini" @click="copyAddress(scope.row)">copy address</el-button>
+                            <el-input id="signAddressInput" v-model="signAddress" style="display: none"></el-input>
+
                         </template>
                     </el-table-column>
                 </el-table>
@@ -363,6 +366,7 @@
         },
         data() {
             return {
+                signAddress: '',
                 activeName: 'first',
                 clickRow: 0,
                 tableData: [],
@@ -463,6 +467,21 @@
                     this.getLinkedRepoList(res.data[0].login)
                 }).catch(err => {
                 })
+            },
+            copyAddress(row) {
+                let params = ''
+                if (row.repo_id) {
+                    params = `${row.platform}/${row.org_id}/${row.repo_id}`
+                } else {
+                    params = `${row.platform}/${row.org_id}`
+                }
+                let base64Params = until.strToBase64(params)
+                let url = `${this.address}${this.signRouter}/${base64Params}`
+                let input = document.getElementById('signAddressInput')
+                input.value = url
+                input.select();
+                document.execCommand('copy')
+
             },
             toSignPage(row) {
                 let params = ''
