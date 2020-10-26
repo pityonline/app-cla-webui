@@ -366,6 +366,7 @@
         },
         data() {
             return {
+                organization:'',
                 signAddress: '',
                 activeName: 'first',
                 clickRow: 0,
@@ -410,6 +411,7 @@
             },
             clickOrg(row, column, cell, event) {
                 this.clickRow = row.value
+                this.organization = row.Organization
                 this.getLinkedRepoList(row.Organization)
             },
             getLinkedRepoList(org_id) {
@@ -794,7 +796,7 @@
                         userName: this.$store.state.user.userName,
                         platform: this.$store.state.platform
                     }
-                    this.getLinkedRepoListAct(data)
+                    this.getLinkedRepoList(this.organization)
                 }).catch(err => {
                     this.$message.closeAll()
                     this.$message.error(err.response.data)
