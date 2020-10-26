@@ -456,7 +456,11 @@
             },
             getOrgTableData(data) {
                 console.log(data);
-                // this.orgTableData = data
+                let orgData = [];
+                data.forEach((item,index)=>{
+                    orgData.push(item.org_id)
+                })
+                this.orgTableData = orgData
             },
             copyAddress(row) {
                 let params = ''
