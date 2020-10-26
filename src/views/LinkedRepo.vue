@@ -462,7 +462,7 @@
                 })
                 for (let i = 0; i < orgData.length; i++) {
                     for (let j = i + 1; j < orgData.length; j++) {
-                        if (orgData[i].org_id === orgData[j].org_id) {
+                        if (orgData[i].Organization === orgData[j].Organization) {
                             orgData.splice(j,1)
                             j--
                         }
