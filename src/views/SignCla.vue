@@ -253,7 +253,7 @@
                         method: 'post',
                     }).then(res => {
                         this.$message.closeAll();
-                        this.$message.success('Please fill in the verification code in the email input field to continue signing');
+                        this.$message.success('Please fill the email address first.');
                         let second = 60;
                         let codeInterval = setInterval(() => {
                             if (second !== 0) {
@@ -308,7 +308,7 @@
                     if (this.myForm.email === '') {
                         this.$store.commit('errorSet', {
                             dialogVisible: true,
-                            dialogMessage: `Your ${this.platform} account has not been bound to the main mailbox. Please bind it and try again`,
+                            dialogMessage: `Sorry, it is failed to fetch your email from ${this.platform}. Please set the primary email on setting page of gitee.`,
                         })
                     }
                     for (let item of this.fields) {
@@ -560,9 +560,9 @@
                     data: obj,
                 }).then(res => {
                     if (this.$store.state.loginType === 'corporation') {
-                        this.tipsMessage = 'We have sent a notification email to your email address. Please check it.And please complete the signature according to the prompt in the email'
+                        this.tipsMessage = ' An email has been sent to you. Please complete the signing according to the steps in the email.'
                     } else if (this.$store.state.loginType === 'employee') {
-                        this.tipsMessage = 'We have sent a notification email to your email address. Please check it,And email the administrator of your company to audit'
+                        this.tipsMessage = 'An email has been sent to you. Please take a look to review the signing.'
                     }
                     if (sessionStorage.getItem('orgAddress')) {
                         this.$store.commit('setSignSuccess', {
@@ -602,7 +602,7 @@
                             this.signCla();
                         } else {
                             this.$message.closeAll()
-                            this.$message.error('Please read the privacy statement and check the box')
+                            this.$message.error('Please check the box about privacy statement.')
                         }
                     } else {
                         return false;
