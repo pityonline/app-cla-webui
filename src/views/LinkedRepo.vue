@@ -48,8 +48,8 @@
                     </el-table-column>
                     <el-table-column
                             align="center"
-                            label="Original Signature">
-                        <template slot-scope="scope">
+                            label="Empty Signature">
+                        <template v-if="scope.row.apply_to==='corporation'" slot-scope="scope">
                             <el-popover
                                     width="80"
                                     trigger="hover"
@@ -69,7 +69,7 @@
                     <el-table-column
                             align="center"
                             label="Org Signature">
-                        <template slot-scope="scope">
+                        <template v-if="scope.row.apply_to==='corporation'" slot-scope="scope">
                             <el-popover
                                     width="80"
                                     trigger="hover"

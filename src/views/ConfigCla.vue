@@ -116,11 +116,10 @@
                 <div style="padding: 0 2rem">
                     <el-row>
                         <el-col :span="5" class="typeCol">
-                            <el-radio v-model="metadataType" @change="changeRadio" label="individual">Individual Contributor</el-radio>
+                            <el-radio v-model="metadataType" @change="changeRadio" label="individual">For Individual </el-radio>
                         </el-col>
                         <el-col :span="5" class="typeCol">
-                            <el-radio v-model="metadataType" @change="changeRadio" label="corporation">Legal Entity Contributor</el-radio>
-                        </el-col>
+                            <el-radio v-model="metadataType" @change="changeRadio" label="corporation">For Corporation
 
                     </el-row>
                     <div>
