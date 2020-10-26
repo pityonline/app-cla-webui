@@ -44,7 +44,7 @@
                                 <div class="marginTop1rem fontSize12">
                                     <el-checkbox v-model="isRead"><span>I have read the <span
                                             class="privacy" @click="viewPrivacy">Privacy Policy</span> and hereby consent to
-                                        the processing of my data by "{{repo}}"</span>
+                                        the processing of my data by <span class="privacy" @click="toIndex()">CLA signing platform</span> in {{serverAddress}}.</span>
                                     </el-checkbox>
                                 </div>
                                 <el-form-item label-width="0" class="marginTop1rem signBtBox">
@@ -150,6 +150,7 @@
         ,
         data() {
             return {
+                serverAddress:'Hong Kong',
                 domain: this.$store.state.domain,
                 tipsTitle: '',
                 // tipsMessage: 'Signed successfully.We have sent a notification email to your email address. Please check it',
@@ -205,8 +206,24 @@
         }
         ,
         methods: {
-            ...
-                mapActions(['setTokenAct', 'setRepoInfoAct', 'viewPrivacy', 'errorAct']),
+            ...mapActions(['setTokenAct', 'setRepoInfoAct', 'viewPrivacy', 'errorAct']),
+            toIndex(){
+                let date = new Date();
+                date.setTime(date.getTime() - 10000);
+                document.cookie = `_mark=; expire=${date.toUTCString()}; Domain=${this.domain}; path=/`;
+
+
+                let repoInfo = this.$store.state.repoInfo
+                let params = repoInfo.repo_id ? `${repoInfo.platform}/${repoInfo.org_id}/${repoInfo.repo_id}` : `${repoInfo.platform}/${repoInfo.org_id}`
+                let path='';
+                if (sessionStorage.getItem('orgAddress')) {
+                    path = `${this.signRouter}/${until.strToBase64(params)}/${sessionStorage.getItem('orgAddress')}`
+                }else{
+                    path = `${this.signRouter}/${until.strToBase64(params)}`
+                }
+
+                this.$router.replace(path)
+            },
             async verifyTel(rule, value, callback) {
                 if (value) {
                     let reg = /^1[3456789]\d{9}$/;
