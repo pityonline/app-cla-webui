@@ -3,11 +3,12 @@
     <el-row id="userList" class="marginTop1rem">
 
         <el-col>
-            <p id="tabName" >Manager</p>
+            <p id="tabName">Manager</p>
             <el-row class="tableBox">
                 <el-col>
                     <el-row>
-                        <el-col align="right">
+                        <el-col class="actionRow">
+                            <button class="button" @click="createManager">Create Manager</button>
                             <button class="button" @click="multipleChoice=true">Batch</button>
                         </el-col>
                     </el-row>
@@ -136,6 +137,9 @@
         },
         methods: {
             ...mapActions(['setUserLimitAct']),
+            createManager() {
+                this.$router.push('/createManager');
+            },
             cancel() {
                 this.$refs.multipleTable.clearSelection();
                 this.multipleChoice = false
@@ -292,14 +296,20 @@
 
 <style lang="less">
     @import "../assets/font/css/Roboto-Regular.css";
-    #userList {
 
-        .tableBox{
+    #userList {
+        .actionRow {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .tableBox {
             border-radius: 1.5rem;
             margin-bottom: 2rem;
             padding: 3rem;
             background-color: white;
         }
+
         & .tableClass {
             border: 1px solid black;
             border-radius: 1.5rem;
@@ -308,6 +318,7 @@
         & .marginTop1rem {
             margin-top: 1rem;
         }
+
         & .el-dialog {
             border-radius: 1rem;
         }
@@ -397,12 +408,13 @@
         & .el-table__body-wrapper {
             margin: 0 1rem;
         }
-        .el-table__body tr:not(:last-of-type) td{
+
+        .el-table__body tr:not(:last-of-type) td {
             border-bottom: 1px dashed lightgrey;
         }
 
-        .el-table::before{
-            height:0;
+        .el-table::before {
+            height: 0;
         }
 
 
