@@ -21,7 +21,7 @@
             </el-col>
             <el-col :span="21" class="tableStyle">
                 <el-table
-                        :data="tableData"
+                        :data="boundTableData"
                         align="center"
                         style="width: 100%;">
                     <el-table-column
@@ -366,6 +366,7 @@
         },
         data() {
             return {
+                boundTableData:'',
                 signAddress: '',
                 activeName: 'first',
                 clickRow: 0,
@@ -409,8 +410,16 @@
                 return '';
             },
             clickOrg(row, column, cell, event) {
+                console.log(row);
+                let data=[]
                 this.clickRow = row.value
-                this.getLinkedRepoList()
+                this.tableData.forEach((item,index)=>{
+                    if (item.org_id === row.Organization) {
+                        data.push(item)
+                    }
+                })
+                this.boundTableData=data
+
             },
             getLinkedRepoList() {
                 http({
