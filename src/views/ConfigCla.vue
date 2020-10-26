@@ -116,11 +116,13 @@
                 <div style="padding: 0 2rem">
                     <el-row>
                         <el-col :span="5" class="typeCol">
-                            <el-radio v-model="metadataType" @change="changeRadio" label="individual">For Individual </el-radio>
+                            <el-radio v-model="metadataType" @change="changeRadio" label="individual">For Individual
+                            </el-radio>
                         </el-col>
                         <el-col :span="5" class="typeCol">
                             <el-radio v-model="metadataType" @change="changeRadio" label="corporation">For Corporation
-
+                            </el-radio>
+                        </el-col>
                     </el-row>
                     <div>
                         <div>
@@ -326,7 +328,7 @@
         },
         data() {
             return {
-                cla_Link:'',
+                cla_Link: '',
                 metadataArr: [{
                     title: 'Name',
                     type: 'name',
@@ -345,12 +347,18 @@
                     //     required: true,
                     // },
                 ],
-                dataTypeOptions: [{label: 'name', value:  'name'},{label: 'corporationName', value:  'corporationName'}, {label: 'date', value: 'date'}, {
+                dataTypeOptions: [{label: 'name', value: 'name'}, {
+                    label: 'corporationName',
+                    value: 'corporationName'
+                }, {label: 'date', value: 'date'}, {
                     label: 'telephone',
                     value: 'telephone'
-                }, {label: 'address', value:  'address'}, {label: 'email', value: 'email'}, {label: 'fax', value: 'fax'}],
+                }, {label: 'address', value: 'address'}, {label: 'email', value: 'email'}, {
+                    label: 'fax',
+                    value: 'fax'
+                }],
                 metadataType: 'individual',
-                customMetadataArr:[{
+                customMetadataArr: [{
                     title: '',
                     type: '',
                     description: '',
@@ -439,7 +447,7 @@
             checkMetadata() {
                 let newArr = this.customMetadataArr.concat(this.metadataArr);
                 for (let i = 0; i < newArr.length; i++) {
-                    for (let j = i+1; j < newArr.length; j++) {
+                    for (let j = i + 1; j < newArr.length; j++) {
                         if (newArr[i].title === newArr[j].title) {
                             return false;
                         }
@@ -447,19 +455,19 @@
                 }
                 return true;
             },
-            editMetadata(){
+            editMetadata() {
                 let fields = [];
                 if (this.checkMetadata()) {
                     this.metadataArr.forEach((item, index) => {
                         fields.push({
-                            id:index+'',
+                            id: index + '',
                             title: item.title,
                             type: item.type,
                             description: item.description,
                             required: item.required,
                         })
                     })
-                    for(let i=0 ;i<this.customMetadataArr.length;i++) {
+                    for (let i = 0; i < this.customMetadataArr.length; i++) {
                         if (this.customMetadataArr[i].title !== '' && this.customMetadataArr[i].type !== '') {
                             fields.push({
                                 id: this.metadataArr.length + i + '',
@@ -477,9 +485,9 @@
                 }
                 return fields
             },
-            binding(){
+            binding() {
                 let obj = {}
-                let cla ={url:this.cla_Link,language:this.claLanguageValue,fields:this.editMetadata()}
+                let cla = {url: this.cla_Link, language: this.claLanguageValue, fields: this.editMetadata()}
                 console.log(cla);
                 if (this.repositoryChoose) {
                     obj = {
@@ -515,7 +523,7 @@
                     this.$message.error(err.data.error_message)
                 })
             },
-            changeLanguage(){
+            changeLanguage() {
 
             },
             addRow(index) {
@@ -528,18 +536,18 @@
 
             },
             myDeleteRow(index) {
-                if (this.customMetadataArr.length===1) {
-                    this.customMetadataArr[0].type=''
-                    this.customMetadataArr[0].title=''
-                    this.customMetadataArr[0].description=''
-                }else{
+                if (this.customMetadataArr.length === 1) {
+                    this.customMetadataArr[0].type = ''
+                    this.customMetadataArr[0].title = ''
+                    this.customMetadataArr[0].description = ''
+                } else {
                     this.customMetadataArr.splice(index, 1);
                 }
 
             },
-            changeRadio(){
-                if (this.metadataType==='individual'){
-                    this. metadataArr=[{
+            changeRadio() {
+                if (this.metadataType === 'individual') {
+                    this.metadataArr = [{
                         title: 'Name',
                         type: 'name',
                         description: 'your name',
@@ -550,8 +558,8 @@
                         description: 'your email',
                         required: true,
                     },]
-                    this.customMetadataArr=this.individualCustomMetadataArr;
-                } else if(this.metadataType==='corporation'){
+                    this.customMetadataArr = this.individualCustomMetadataArr;
+                } else if (this.metadataType === 'corporation') {
                     this.metadataArr = [
                         {
                             title: 'Corporation Name',
@@ -572,7 +580,7 @@
                             description: 'your email',
                             required: true,
                         },];
-                    this.customMetadataArr=this.corporationCustomMetadataArr;
+                    this.customMetadataArr = this.corporationCustomMetadataArr;
 
                 }
             },
@@ -942,20 +950,24 @@
         box-sizing: border-box;
         overflow: hidden;
         /*background-color: #F5F5F5;*/
-        .itemBox{
+
+        .itemBox {
             border-radius: 1.25rem;
             box-shadow: 0 0 20px 10px #F3F3F3;
             padding: 2rem;
             margin-bottom: 2rem;
 
         }
-        .btDiv{
+
+        .btDiv {
             margin: 1rem 0;
             text-align: center;
         }
+
         .typeCol {
             padding: .5rem 10px;
         }
+
         & > div:nth-of-type(2) {
             flex-grow: 1;
             /*background-color: #F5F5F5;*/
@@ -963,6 +975,7 @@
 
         }
     }
+
     .tableStyle {
         margin-bottom: 2rem;
         padding: 3rem;

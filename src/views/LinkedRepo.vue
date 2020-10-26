@@ -366,7 +366,6 @@
         },
         data() {
             return {
-                organization:'',
                 signAddress: '',
                 activeName: 'first',
                 clickRow: 0,
@@ -396,7 +395,7 @@
             }
         },
         created() {
-            this.getOrgTableData();
+            this.getLinkedRepoList();
         },
         methods: {
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct', 'setTableDataAct']),
@@ -411,10 +410,9 @@
             },
             clickOrg(row, column, cell, event) {
                 this.clickRow = row.value
-                this.organization = row.Organization
-                this.getLinkedRepoList(row.Organization)
+                this.getLinkedRepoList()
             },
-            getLinkedRepoList(org_id) {
+            getLinkedRepoList() {
                 http({
                     url: url.getLinkedRepoList,
                 }).then(res => {
@@ -435,9 +433,10 @@
                         if (count === 0) {
                             this.tableData = data
                             console.log(this.tableData);
+                            this.getOrgTableData(data)
                             clearInterval(setDataInterval)
                         }
-                    }, 100)
+                    }, 20)
 
                 }).catch(err => {
                 })
@@ -455,20 +454,9 @@
                 return name
 
             },
-            getOrgTableData() {
-                let obj = {access_token: this.$store.state.platform_token, admin: true, page: 1, per_page: 10};
-                this.$axios({
-                    url: url.getOrgsInfo,
-                    params: obj,
-                }).then(res => {
-                    let orgOptions = [];
-                    res.data.forEach((item, index) => {
-                        orgOptions.push({value: index, Organization: item.login, id: item.id});
-                    })
-                    this.orgTableData = orgOptions
-                    this.getLinkedRepoList(res.data[0].login)
-                }).catch(err => {
-                })
+            getOrgTableData(data) {
+                console.log(data);
+                // this.orgTableData = data
             },
             copyAddress(row) {
                 let params = ''
@@ -796,7 +784,7 @@
                         userName: this.$store.state.user.userName,
                         platform: this.$store.state.platform
                     }
-                    this.getLinkedRepoList(this.organization)
+                    this.getLinkedRepoList()
                 }).catch(err => {
                     this.$message.closeAll()
                     this.$message.error(err.response.data)
