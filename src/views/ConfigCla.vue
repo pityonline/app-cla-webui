@@ -360,13 +360,13 @@
                     title: '',
                     type: '',
                     description: '',
-                    required: true,
+                    required: false,
                 }],
                 corporationCustomMetadataArr: [{
                     title: '',
                     type: '',
                     description: '',
-                    required: true,
+                    required: false,
                 }],
                 org_id: '',
                 org: '',
@@ -523,7 +523,7 @@
                     title: '',
                     type: '',
                     description: '',
-                    required: true,
+                    required: false,
                 })
 
             },
