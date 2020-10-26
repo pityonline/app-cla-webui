@@ -485,6 +485,7 @@
                 }
                 this.orgTableData = orgData
                 this.organization=this.orgTableData[0].Organization
+                this.getBoundTableData()
             },
             copyAddress(row) {
                 let params = ''
