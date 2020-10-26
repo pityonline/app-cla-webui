@@ -7,8 +7,8 @@
             <el-row class="tableBox">
                 <el-col>
                     <el-row>
-                        <el-col align="left">
-                            <button class="button" @click="multipleChoice=true">Multiple choice</button>
+                        <el-col align="right">
+                            <button class="button" @click="multipleChoice=true">Batch</button>
                         </el-col>
                     </el-row>
                     <el-row>

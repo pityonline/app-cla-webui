@@ -5,7 +5,7 @@
                 <div class="formBack">
                     <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="0">
                         <el-form-item :required="true" label="" prop="userName">
-                            <el-input v-model="ruleForm.userName" autocomplete="off" placeholder="Account"></el-input>
+                            <el-input v-model="ruleForm.userName" autocomplete="off" placeholder="Email"></el-input>
                         </el-form-item>
                         <el-form-item :required="true" label="" prop="pwd">
                             <el-input type="password" v-model="ruleForm.pwd" autocomplete="off"
