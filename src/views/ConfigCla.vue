@@ -382,14 +382,14 @@
                 emailType: '',
                 emailDialogVisible: false,
                 filterChange: true,
-                claLanguageValue: 'english',
+                claLanguageValue: 'English',
                 claTypeValue: '',
                 claTypeOptions: [{label: 'individual', value: 'individual'}, {
                     label: 'corporation',
                     value: 'corporation'
                 }],
-                languageOptions: [{label: 'english', value: 'english'}, {label: 'chinese', value: 'chinese'}, {
-                    label: 'japanese',
+                languageOptions: [{label: 'English', value: 'english'}, {label: 'Chinese', value: 'chinese'}, {
+                    label: 'Japanese',
                     value: 'japanese'
                 }],
                 createMetadataDialogVisible: false,

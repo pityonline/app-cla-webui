@@ -484,7 +484,7 @@
                     }
                 }
                 this.orgTableData = orgData
-                this.organization=this.orgTableData[0].Organization
+                this.orgTableData.length>0?this.organization=this.orgTableData[0].Organization:this.organization=[]
                 this.getBoundTableData()
             },
             copyAddress(row) {

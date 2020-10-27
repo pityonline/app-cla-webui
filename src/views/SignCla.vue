@@ -154,8 +154,7 @@
                 serverAddress:'Hong Kong',
                 domain: this.$store.state.domain,
                 tipsTitle: '',
-                // tipsMessage: 'Signed successfully.We have sent a notification email to your email address. Please check it',
-                tipsMessage: 'Signed successfully,The system will send a notification email to your email',
+                tipsMessage: 'An email has been sent to you. Please take a look to review the signing.',
                 tipsDialogVisible: false,
                 signPageData: '',
                 cla_org_id: '',
@@ -193,10 +192,10 @@
                 value: 0,
                 languageOptions: [{
                     value: 0,
-                    label: 'english'
+                    label: 'English'
                 }, {
                     value: 1,
-                    label: 'chinese'
+                    label: 'Chinese'
                 },],
                 metadataArr: [],
                 checkCLAClass: {
