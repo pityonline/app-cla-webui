@@ -208,9 +208,9 @@
         methods: {
             ...mapActions(['setTokenAct', 'setRepoInfoAct', 'viewPrivacy', 'errorAct']),
             toIndex(){
-                // let date = new Date();
-                // date.setTime(date.getTime() - 10000);
-                // document.cookie = `_mark=; expire=${date.toUTCString()}; Domain=${this.domain}; path=/`;
+                let date = new Date();
+                date.setTime(date.getTime() - 10000);
+                document.cookie = `_mark=; expire=${date.toUTCString()}; Domain=${this.domain}; path=/`;
 
 
                 let repoInfo = this.$store.state.repoInfo
@@ -221,8 +221,7 @@
                 }else{
                     path = `${this.signRouter}/${until.strToBase64(params)}`
                 }
-
-                this.$router.replace(path)
+                this.$router.push(path)
             },
             async verifyTel(rule, value, callback) {
                 if (value) {
