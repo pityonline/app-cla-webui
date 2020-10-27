@@ -63,11 +63,6 @@ const routes = [
                 name: 'CorporationList',
                 component: () => import('../views/CorporationList.vue')
             },
-            {
-                path: '/signedRepoLogin',
-                name: 'SignedRepoLogin',
-                component: () => import('../views/SignedRepoLogin.vue')
-            },
         ]
     },
     {

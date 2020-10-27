@@ -245,7 +245,6 @@
                     userName: this.$store.state.user.userName,
                     userId: this.$store.state.user.userId,
                 },
-                msg: 'Welcome to Your Vue.js App',
                 docInfo: {},
                 previewDialogVisible: false,
                 form: {file: ''},
@@ -345,7 +344,7 @@
                 console.log(file);
             },
             handleExceed(files, fileList) {
-                this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+                this.$message.warning(`msgCurrently, 1 file is limited to be selected. ${files.length} files are selected this time, and a total of ${files.length + fileList.length} files are selected`);
             },
             beforeRemove(file, fileList) {
                 return this.$confirm(`Are you sure you want to remove it ${file.name}？`);

@@ -270,7 +270,7 @@
                         method: 'post',
                     }).then(res => {
                         this.$message.closeAll();
-                        this.$message.success('Please fill the email address first.');
+                        this.$message.success('An email with a verification code has been sent to your email address');
                         let second = 60;
                         let codeInterval = setInterval(() => {
                             if (second !== 0) {
@@ -325,7 +325,7 @@
                     if (this.myForm.email === '') {
                         this.$store.commit('errorSet', {
                             dialogVisible: true,
-                            dialogMessage: `Sorry, it is failed to fetch your email from ${this.platform}. Please set the primary email on setting page of gitee.`,
+                            dialogMessage: `Sorry, it is failed to fetch your email from ${this.platform}. Please set the primary email on setting page of ${this.platform}.`,
                         })
                     }
                     for (let item of this.fields) {
@@ -440,6 +440,7 @@
             setClaText(key) {
                 let form = {}
                 let rules = {}
+                console.log(key,this.signPageData[key].text);
                 document.getElementById('claBox').innerHTML = this.signPageData[key].text;
                 for (let i = 0; i < this.signPageData[key].fields.length; i++) {
                     for (let j = i + 1; j < this.signPageData[key].fields.length; j++) {

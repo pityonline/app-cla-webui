@@ -173,7 +173,7 @@ export default new Vuex.Store({
                     case 'cla.no_cla_binding':
                         commit('errorSet', {
                             dialogVisible: true,
-                            dialogMessage: 'Individual signature CLA is not bound, unable to sign',
+                            dialogMessage: 'CLA is not bound, unable to sign',
                         });
                         break;
                     case 'cla.has_signed':
@@ -251,13 +251,13 @@ export default new Vuex.Store({
                     case 'cla.num_of_corp_managers_exceeded':
                         commit('errorCodeSet', {
                             dialogVisible: true,
-                            dialogMessage: 'The added administrator exceeds the limit',
+                            dialogMessage: 'The added manager exceeds the limit',
                         });
                         break;
                     case 'cla.corp_manager_exists':
                         commit('errorCodeSet', {
                             dialogVisible: true,
-                            dialogMessage: 'The added administrator already exists',
+                            dialogMessage: 'The added manager already exists',
                         });
                         break;
                     case 'cla.not_same_corp':
