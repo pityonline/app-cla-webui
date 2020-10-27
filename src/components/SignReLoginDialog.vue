@@ -1,7 +1,7 @@
 <template>
     <el-row>
         <el-dialog
-                :title=""
+                title=""
                 :visible.sync="dialogVisible"
                 :close-on-press-escape="false"
                 :show-close="false"
