@@ -1,8 +1,8 @@
 <template>
-    <el-row  @keydown.native="submitForm('ruleForm')" style="height: 100%">
+    <el-row  style="height: 100%">
         <el-col  align="right" class="formBox">
             <div class="formBack_Box">
-                <div class="formBack">
+                <div class="formBack"  @keydown.native="pressEnter">
                     <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="0">
                         <el-form-item :required="true" label="" prop="userName">
                             <el-input v-model="ruleForm.userName" autocomplete="off" placeholder="Email"></el-input>
@@ -93,6 +93,11 @@
         inject:['setClientHeight'],
         methods: {
             ...mapActions(['setLoginInfoAct','setCorpTokenAct']),
+            pressEnter(){
+                if (event.keyCode === 13) {
+                    this.submitForm('ruleForm')
+                }
+            },
             findPwd() {
             },
             login(userName, pwd) {
