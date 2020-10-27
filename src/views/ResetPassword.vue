@@ -5,15 +5,15 @@
             <el-form class="resetPwdForm" :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px">
                 <el-form-item label="" prop="oldPassword" label-width="0">
                     <el-input placeholder="please input old password" clearable="" type="password"
-                              v-model="ruleForm.oldPassword"></el-input>
+                              v-model="ruleForm.oldPassword" @keydown.native="pressEnter"></el-input>
                 </el-form-item>
                 <el-form-item label="" prop="newPassword" label-width="0">
                     <el-input placeholder="please input new password" clearable="" type="password"
-                              v-model="ruleForm.newPassword"></el-input>
+                              v-model="ruleForm.newPassword" @keydown.native="pressEnter"></el-input>
                 </el-form-item>
                 <el-form-item label="" prop="checkPwd" label-width="0">
                     <el-input placeholder="Please enter the new password again" clearable="" type="password"
-                              v-model="ruleForm.checkPwd"></el-input>
+                              v-model="ruleForm.checkPwd" @keydown.native="pressEnter"></el-input>
                 </el-form-item>
                 <el-form-item label-width="0">
                     <button class="button" type="button" @click="submit('ruleForm')">Submit</button>
@@ -113,7 +113,11 @@
             }
         },
         methods: {
-
+            pressEnter(){
+                if (event.keyCode === 13) {
+                    this.submit('ruleForm')
+                }
+            },
             resetPassword() {
                 let obj = {
                     cla_org_id: this.cla_org_id,

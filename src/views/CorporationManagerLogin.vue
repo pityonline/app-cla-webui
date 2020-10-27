@@ -94,7 +94,6 @@
         methods: {
             ...mapActions(['setLoginInfoAct','setCorpTokenAct']),
             pressEnter(){
-                console.log(event.keyCode);
                 if (event.keyCode === 13) {
                     this.submitForm('ruleForm')
                 }
