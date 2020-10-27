@@ -6,7 +6,7 @@
                 <el-row class="emailRow" gutter="20" v-for="(item,index) in emails">
                     <el-col :span="16">
                         <el-input
-                                placeholder="please input email" clearable="" size="medium" v-model="item.email">
+                                placeholder="please input email" clearable="" size="medium" v-model="item.email" @keydown.native="pressEnter">
                         </el-input>
                     </el-col>
                     <el-col :span="8" align="right">
@@ -68,6 +68,11 @@
             }
         },
         methods: {
+            pressEnter(){
+                if (event.keyCode === 13) {
+                    this.createUser();
+                }
+            },
             addRow(index) {
                 if (Number(this.$store.state.userLimit) + this.emails.length >= this.limit) {
                     this.$message.closeAll()
@@ -159,8 +164,6 @@
                 })
             },
         },
-        created() {
-        }
     }
 </script>
 

@@ -97,12 +97,12 @@ const routes = [
             {
                 path: '/managerList',
                 name: 'ManagerList',
-                component: () => import('../views/UserList.vue'),
+                component: () => import('../views/ManagerList.vue'),
             },
             {
                 path: '/createManager',
                 name: 'CreateManager',
-                component: () => import('../views/CreateUser.vue'),
+                component: () => import('../views/CreateManager.vue'),
             },
             {
                 path: '/rootManager/resetPassword',
