@@ -1,7 +1,7 @@
 <template>
     <el-row>
         <el-dialog
-                :title="title"
+                :title=""
                 :visible.sync="dialogVisible"
                 :close-on-press-escape="false"
                 :show-close="false"
@@ -37,11 +37,9 @@
                 let date = new Date();
                 date.setTime(date.getTime() - 10000);
                 document.cookie = `_mark=; expire=${date.toUTCString()}; Domain=${this.domain}; path=/`;
-                let repoInfo = this.$store.state.repoInfo
-                let params = repoInfo.repo_id ? `${repoInfo.platform}/${repoInfo.org_id}/${repoInfo.repo_id}` : `${repoInfo.platform}/${repoInfo.org_id}`
-
-                let path =`${this.signRouter}/${until.strToBase64(params)}`
-
+                let repoInfo = this.$store.state.repoInfo;
+                let params = repoInfo.repo_id ? `${repoInfo.platform}/${repoInfo.org_id}/${repoInfo.repo_id}` : `${repoInfo.platform}/${repoInfo.org_id}`;
+                let path =`${this.signRouter}/${until.strToBase64(params)}`;
                 this.$router.replace(path)
 
             },
