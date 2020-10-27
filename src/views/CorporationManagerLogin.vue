@@ -1,5 +1,5 @@
 <template>
-    <el-row @keydown="submitForm('ruleForm')" style="height: 100%">
+    <el-row onkeydown="submitForm('ruleForm')" @keydown.native="submitForm('ruleForm')" style="height: 100%">
         <el-col  align="right" class="formBox">
             <div class="formBack_Box">
                 <div class="formBack">
