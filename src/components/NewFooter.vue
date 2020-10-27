@@ -4,8 +4,8 @@
             <div class="box" @click="join">
                 <span class="join_us" >JOIN US</span>
             </div>
-            <div class="box" @click="join">
-                <span class="copyright" @click="viewPrivacy">©2020 Draven.Designed by LA-Studio</span>
+            <div class="box" @click="viewPrivacy">
+                <span class="copyright" >©2020 Draven.Designed by LA-Studio</span>
             </div>
 
         </el-col>
@@ -25,9 +25,9 @@
             join(){
                 window.open('https://github.com/opensourceways/app-cla-server')
             },
-            // viewPrivacy(){
-            //     window.open('/privacy')
-            // },
+            viewPrivacy(){
+                // window.open('/privacy')
+            },
         },
     }
 </script>
@@ -47,19 +47,18 @@
     }
 
     .box {
+        cursor: pointer;
         display: flex;
         flex-direction: column;
         justify-content: center;
     }
 
     .copyright {
-        cursor: pointer;
         font-size: .5rem;
         /*font-family: HuaweiSans-Light,sans-serif;*/
     }
 
     .join_us {
         font-size: 1.8rem;
-        cursor: pointer;
     }
 </style>
