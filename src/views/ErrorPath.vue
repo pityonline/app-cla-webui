@@ -1,6 +1,8 @@
 <template>
     <el-row>
-        Invalid link
+        <el-col style="margin: 10rem;font-size: 2rem">
+            Invalid link
+        </el-col>
     </el-row>
 </template>
 
