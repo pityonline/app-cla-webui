@@ -1,11 +1,10 @@
 <template>
     <el-row align="middle" style="border-top:2px solid #F2F2F2;">
         <el-col class="footer" :offset="4" :span="16">
-            <div class="box">
-                <span class="join_us" @click="join">JOIN US</span>
+            <div class="box" @click="join">
+                <span class="join_us" >JOIN US</span>
             </div>
-            <div class="box">
-
+            <div class="box" @click="join">
                 <span class="copyright" @click="viewPrivacy">©2020 Draven.Designed by LA-Studio</span>
             </div>
 

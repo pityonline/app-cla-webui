@@ -142,7 +142,7 @@
                 this.$emit('clickItem', command);
             },
             toHome() {
-                this.$router.push('/home')
+                this.$router.push('/managerList')
             },
             loginOut() {
 
