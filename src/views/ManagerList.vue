@@ -7,7 +7,7 @@
             <el-row class="tableBox">
                 <el-col>
                     <el-row>
-                        <el-col class="left">
+                        <el-col align="left">
                             <button class="button" @click="createManager">Create Manager</button>
                             <!--<button class="button" @click="multipleChoice=true">Batch</button>-->
                         </el-col>

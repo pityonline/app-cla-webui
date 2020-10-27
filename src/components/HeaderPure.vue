@@ -3,7 +3,7 @@
         <el-col :offset="4" :span="16">
             <el-row>
                 <el-col :span="12" align="left">
-                    <svg-icon class="pointer" @click="toHome()" id="svg_logo" icon-class="qianshu"/>
+                    <svg-icon class="pointer" @click="toHome()" id="svg_logo" icon-class="logo"/>
                 </el-col>
                 <el-col :span="12" align="right">
                     <el-select
