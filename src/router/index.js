@@ -136,20 +136,16 @@ const routes = [
         component: () => import('../views/SignCla.vue')
     },
     {
-        path: '/verifyPage',
-        name: 'VerifyPage',
-        component: () => import('../views/VerifyPage.vue')
-    },
-    {
         path: '/findPwd',
         name: 'FindPwd',
         component: () => import('../views/FindPwd.vue')
     },
     {
-        path: '/emailVerify',
-        name: 'EmailVerify',
-        component: () => import('../views/EmailVerify.vue')
+        path: '*',
+        name: 'ErrorPath',
+        component: () => import('../views/ErrorPath.vue')
     },
+
 ]
 
 const router = new VueRouter({
