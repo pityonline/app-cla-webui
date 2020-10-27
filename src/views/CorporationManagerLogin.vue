@@ -5,11 +5,11 @@
                 <div class="formBack"  >
                     <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="0">
                         <el-form-item :required="true" label="" prop="userName">
-                            <el-input v-model="ruleForm.userName" autocomplete="off" placeholder="Email" @keydown="pressEnter"></el-input>
+                            <el-input v-model="ruleForm.userName" autocomplete="off" placeholder="Email" @keydown.native="pressEnter"></el-input>
                         </el-form-item>
                         <el-form-item :required="true" label="" prop="pwd">
                             <el-input type="password" v-model="ruleForm.pwd" autocomplete="off"
-                                      placeholder="Password" @keydown="pressEnter"></el-input>
+                                      placeholder="Password" @keydown.native="pressEnter"></el-input>
                         </el-form-item>
                         <el-form-item style="text-align: right">
                             <span class="pointer" @click="findPwd" id="forgetPwd">Forget the password?</span>
