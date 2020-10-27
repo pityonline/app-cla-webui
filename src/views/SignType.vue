@@ -9,7 +9,7 @@
                         <div>
 
                             <button class="button" @click="submit('corporation')">
-                               Sign As Corporation
+                                Sign As Corporation
                             </button>
                         </div>
                         <div>
@@ -64,16 +64,18 @@
             ...mapActions(['setTokenAct', 'setLoginTypeAct', 'setRepoInfoAct', 'errorAct']),
             getRepoInfo() {
                 let params = window.location.href.split('/sign/')[1]
-                let repoInfoParams=''
+                let repoInfoParams = ''
                 if (params.indexOf('/') !== -1) {
-                     repoInfoParams = params.substring(0,params.indexOf('/'));
-                    let orgAddress = params.substring(params.indexOf('/')+1);
-                    sessionStorage.setItem('orgAddress',orgAddress)
-                }else{
+                    repoInfoParams = params.substring(0, params.indexOf('/'));
+                    let orgAddress = params.substring(params.indexOf('/') + 1);
+                    sessionStorage.setItem('orgAddress', orgAddress)
+                } else {
                     sessionStorage.removeItem('orgAddress')
-                    repoInfoParams=params
+                    repoInfoParams = params
                 }
-                let args = until.base64ToStr(repoInfoParams).split('/');
+                let arg = until.base64ToStr(repoInfoParams)
+                console.log(arg);
+                let args = arg.split('/');
                 this.platform = args[0];
                 this.org = args[1];
                 if (args[2]) {

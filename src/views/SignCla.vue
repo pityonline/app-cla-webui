@@ -201,10 +201,8 @@
                 checkCLAClass: {
                     height: '',
                 },
-
             }
-        }
-        ,
+        },
         methods: {
             ...mapActions(['setTokenAct', 'setRepoInfoAct', 'viewPrivacy', 'errorAct']),
             toIndex(){
