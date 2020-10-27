@@ -369,7 +369,7 @@
                 if (Object.keys(data).length) {
                     this.languageOptions = []
                     for (let key in data) {
-                        if (data[key].language === 'english') {
+                        if (data[key].language === 'English') {
                             this.value = key;
                             this.cla_org_id = key
                             this.setClaText(key)
@@ -440,7 +440,6 @@
             setClaText(key) {
                 let form = {}
                 let rules = {}
-                console.log(key,this.signPageData[key].text);
                 document.getElementById('claBox').innerHTML = this.signPageData[key].text;
                 for (let i = 0; i < this.signPageData[key].fields.length; i++) {
                     for (let j = i + 1; j < this.signPageData[key].fields.length; j++) {
