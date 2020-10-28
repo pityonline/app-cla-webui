@@ -128,20 +128,21 @@
             background-repeat: no-repeat;
             background-position: 40rem center;
             background-size: 55rem;
-            .typeShadow {
-                box-shadow: 0 0 20px 10px #F3F3F3;
-            }
-            .pointer {
-                cursor: pointer;
-            }
-            .SignTypeIcon {
-                width: 5rem;
-                height: 5rem;
-                margin: 1rem;
-            }
-            .SignTypeBox{
-                height: 16rem;
-            }
+
+        }
+        .typeShadow {
+            box-shadow: 0 0 20px 10px #F3F3F3;
+        }
+        .pointer {
+            cursor: pointer;
+        }
+        .SignTypeIcon {
+            width: 5rem;
+            height: 5rem;
+            margin: 1rem;
+        }
+        .SignTypeBox{
+            height: 16rem;
         }
     }
     .title {
