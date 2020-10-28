@@ -9,7 +9,6 @@ export const strToBase64 = (params) => {
         return false
     }
 };
-window.btoa(encodeURIComponent(params));
 export const base64ToStr = (params) => {
     try {
         window.decodeURIComponent(window.atob(params))
