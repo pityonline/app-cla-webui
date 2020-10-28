@@ -105,7 +105,7 @@
             </div>
             <div class="itemBox">
                 <div style="padding: .5rem">
-                    <p style="font-size: 1.2rem">④ Edit your metaData
+                    <p style="font-size: 1.2rem">④ Edit CLA's Fields
                         <el-tooltip class="item" effect="dark"
                                     content="The information you want contributors to fill in when they sign the cla.Title and type are required, otherwise the field will fail to be added"
                                     placement="right">

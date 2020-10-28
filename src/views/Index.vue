@@ -22,6 +22,36 @@
                     </el-row>
                 </el-col>
             </el-row>
+            <el-row>
+                <el-col :offset="4" :span="16">
+                    <el-row>
+                        Signing CLA Guide for...
+                    </el-row>
+                    <el-row>
+                        <el-col :span="8" :class="{'typeShadow':signType==='corporation'}" @click="clickSignTypeGuide('corporation')">
+                            <div>
+                                <svg-icon icon-class="qiye" class="SignType"></svg-icon>
+                                <span>Corporation</span>
+                            </div>
+                        </el-col>
+                        <el-col :span="8" :class="{'typeShadow':signType==='employee'}" @click="clickSignTypeGuide('employee')">
+                            <div>
+                                <svg-icon icon-class="lingdai" class="SignType"></svg-icon>
+                                <span>Employee</span>
+                            </div>
+                        </el-col>
+                        <el-col :span="8" :class="{'typeShadow':signType==='individual'}" @click="clickSignTypeGuide('individual')">
+                            <div>
+                                <svg-icon icon-class="geren" class="SignType"></svg-icon>
+                                <span>Individual</span>
+                            </div>
+                        </el-col>
+                    </el-row>
+                    <el-row>
+                        liucheng
+                    </el-row>
+                </el-col>
+            </el-row>
             <NewFooter></NewFooter>
         </el-col>
     </el-row>
@@ -46,6 +76,7 @@
         },
         data() {
             return {
+                signType:'corporation',
                 transparentDiv: {
                     height: '',
                 },
@@ -61,6 +92,9 @@
         },
         methods: {
             ...mapActions(['setPlatformAct']),
+            clickSignTypeGuide(type){
+                this.signType=type;
+            },
             setClientHeight() {
                 this.$nextTick(() => {
                     if (until.getClientHeight() > document.getElementById('transparentDiv').offsetHeight) {
@@ -104,7 +138,9 @@
             background-repeat: no-repeat;
             background-position: 40rem center;
             background-size: 55rem;
-
+        .typeShadow{
+            box-shadow: 0 0 20px 10px #F3F3F3;
+        }
         }
     }
 </style>
