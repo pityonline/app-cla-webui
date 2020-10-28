@@ -71,10 +71,8 @@
                     repoInfoParams = params
                 }
                 let arg = until.base64ToStr(repoInfoParams)
-                console.log(arg);
                 if (arg) {
                     let args = arg.split('/');
-                    console.log(args);
                     if (args.length < 2) {
                         this.$router.push({name: 'ErrorPath'})
                     } else {
@@ -90,7 +88,6 @@
                 } else {
                     this.$router.push({name: 'ErrorPath'})
                 }
-
             },
             submit(loginType) {
                 this.setLoginTypeAct(loginType)
