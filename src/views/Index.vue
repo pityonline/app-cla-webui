@@ -4,7 +4,7 @@
             <NewHeader></NewHeader>
             <el-row id="section" :style="sectionStyle">
                 <el-col :offset="4" :span="16" style="height: 100%">
-                    <el-row  style="height: 100%">
+                    <el-row style="height: 100%">
                         <el-col :span="14" class="title">
                             <div>
                                 <div class="name">
@@ -28,22 +28,25 @@
                         Signing CLA Guide for...
                     </el-row>
                     <el-row>
-                        <el-col :span="8" :class="{'typeShadow':signType==='corporation'}" @click="clickSignTypeGuide('corporation')">
+                        <el-col :span="8" class="pointer" :class="{'typeShadow':signType==='corporation'}"
+                                @click="clickSignTypeGuide('corporation')">
                             <div>
-                                <svg-icon icon-class="qiye" class="SignType"></svg-icon>
-                                <span>Corporation</span>
+                                <svg-icon icon-class="qiye" class="SignTypeIcon"></svg-icon>
+                                <p>Corporation</p>
                             </div>
                         </el-col>
-                        <el-col :span="8" :class="{'typeShadow':signType==='employee'}" @click="clickSignTypeGuide('employee')">
+                        <el-col :span="8" class="pointer" :class="{'typeShadow':signType==='employee'}"
+                                @click="clickSignTypeGuide('employee')">
                             <div>
-                                <svg-icon icon-class="lingdai" class="SignType"></svg-icon>
-                                <span>Employee</span>
+                                <svg-icon icon-class="lingdai" class="SignTypeIcon"></svg-icon>
+                                <p>Employee</p>
                             </div>
                         </el-col>
-                        <el-col :span="8" :class="{'typeShadow':signType==='individual'}" @click="clickSignTypeGuide('individual')">
+                        <el-col :span="8" class="pointer" :class="{'typeShadow':signType==='individual'}"
+                                @click="clickSignTypeGuide('individual')">
                             <div>
-                                <svg-icon icon-class="geren" class="SignType"></svg-icon>
-                                <span>Individual</span>
+                                <svg-icon icon-class="geren" class="SignTypeIcon"></svg-icon>
+                                <p>Individual</p>
                             </div>
                         </el-col>
                     </el-row>
@@ -62,6 +65,7 @@
     import * as until from '../until/until'
     import Select from '@components/Select'
     import {mapActions} from 'vuex'
+
     window.onresize = () => {
         if (until.getClientHeight() > document.getElementById('transparentDiv').offsetHeight) {
             document.getElementById("transparentDiv").style.height = until.getClientHeight() + 'px';
@@ -76,24 +80,24 @@
         },
         data() {
             return {
-                signType:'corporation',
+                signType: 'corporation',
                 transparentDiv: {
                     height: '',
                 },
-                sectionStyle:{
-                    height:'',
+                sectionStyle: {
+                    height: '',
                 },
             }
         },
-        provide () {
+        provide() {
             return {
                 setClientHeight: this.setClientHeight
             }
         },
         methods: {
             ...mapActions(['setPlatformAct']),
-            clickSignTypeGuide(type){
-                this.signType=type;
+            clickSignTypeGuide(type) {
+                this.signType = type;
             },
             setClientHeight() {
                 this.$nextTick(() => {
@@ -108,11 +112,12 @@
         }
     }
 </script>
-<style scoped  lang="less">
+<style scoped lang="less">
     @import "../assets/font/css/Roboto-Bold.css";
     @import "../assets/font/css/Roboto-Black.css";
     @import "../assets/font/css/Roboto-Light.css";
     @import "../assets/font/css/Roboto-Regular.css";
+
     .title {
         height: 100%;
         display: flex;
@@ -120,14 +125,17 @@
         justify-content: center;
         text-align: left
     }
+
     .name {
         font-family: Roboto-Regular, sans-serif;
         font-size: 3rem;
     }
+
     .description {
         font-family: Roboto-Regular, sans-serif;
         font-size: 1.5rem;
     }
+
     .index {
         display: flex;
         flex-direction: column;
@@ -138,9 +146,17 @@
             background-repeat: no-repeat;
             background-position: 40rem center;
             background-size: 55rem;
-        .typeShadow{
-            box-shadow: 0 0 20px 10px #F3F3F3;
-        }
+            .typeShadow {
+                box-shadow: 0 0 20px 10px #F3F3F3;
+            }
+            .pointer {
+                cursor: pointer;
+            }
+            .SignTypeIcon {
+                width: 5rem;
+                height: 5rem;
+                margin: 1rem;
+            }
         }
     }
 </style>
