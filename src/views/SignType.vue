@@ -87,7 +87,7 @@
                     }
                     this.setRepoInfoAct({platform: this.platform, org_id: this.org, repo_id: this.repo});
                 }else{
-                    this.$router.push('*')
+                    this.$router.push({name:'ErrorPath'})
                 }
 
             },
