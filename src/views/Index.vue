@@ -27,22 +27,22 @@
                     <el-row class="guideTitle">
                         Signing CLA Guide for...
                     </el-row>
-                    <el-row>
-                        <el-col :span="8" style="cursor: pointer" :class="{'typeShadow':signType==='corporation'}"
+                    <el-row align="middle">
+                        <el-col :span="8" class="SignTypeCol" :class="{'typeShadow':signType==='corporation'}"
                                 @click="clickSignTypeGuide('corporation')">
                             <div class="SignTypeBox">
                                 <svg-icon icon-class="qiye" class="SignTypeIcon"></svg-icon>
                                 <p>Corporation</p>
                             </div>
                         </el-col>
-                        <el-col :span="8" style="cursor: pointer" :class="{'typeShadow':signType==='employee'}"
+                        <el-col :span="8" class="SignTypeCol" :class="{'typeShadow':signType==='employee'}"
                                 @click="clickSignTypeGuide('employee')">
                             <div class="SignTypeBox">
                                 <svg-icon icon-class="yuangong" class="SignTypeIcon"></svg-icon>
                                 <p>Employee</p>
                             </div>
                         </el-col>
-                        <el-col :span="8" style="cursor: pointer" :class="{'typeShadow':signType==='individual'}"
+                        <el-col :span="8" class="SignTypeCol" :class="{'typeShadow':signType==='individual'}"
                                 @click="clickSignTypeGuide('individual')">
                             <div class="SignTypeBox">
                                 <svg-icon icon-class="geren" class="SignTypeIcon"></svg-icon>
@@ -133,8 +133,11 @@
         .typeShadow {
             box-shadow: 0 0 20px 10px #F3F3F3;
         }
-        .pointer {
+        .SignTypeCol {
             cursor: pointer;
+            height: 16rem;
+            font-size: 1.5rem;
+            font-family: Roboto-Bold,sans-serif;
         }
         .SignTypeIcon {
             width: 5rem;
@@ -142,9 +145,7 @@
             margin: 1rem;
         }
         .SignTypeBox{
-            height: 16rem;
-            font-size: 1.5rem;
-            font-family: Roboto-Bold,sans-serif;
+
         }
         .guideTitle{
             font-size:2.5rem ;
