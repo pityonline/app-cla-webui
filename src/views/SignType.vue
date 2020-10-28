@@ -75,19 +75,23 @@
                 }
                 let arg = until.base64ToStr(repoInfoParams)
                 console.log(arg);
-                if (arg){
+                if (arg) {
                     let args = arg.split('/');
                     console.log(args);
-                    this.platform = args[0];
-                    this.org = args[1];
-                    if (args[2]) {
-                        this.repo = args[2]
+                    if (args.length < 2) {
+                        this.$router.push({name: 'ErrorPath'})
                     } else {
-                        this.repo = ''
+                        this.platform = args[0];
+                        this.org = args[1];
+                        if (args[2]) {
+                            this.repo = args[2]
+                        } else {
+                            this.repo = ''
+                        }
+                        this.setRepoInfoAct({platform: this.platform, org_id: this.org, repo_id: this.repo});
                     }
-                    this.setRepoInfoAct({platform: this.platform, org_id: this.org, repo_id: this.repo});
-                }else{
-                    this.$router.push({name:'ErrorPath'})
+                } else {
+                    this.$router.push({name: 'ErrorPath'})
                 }
 
             },
