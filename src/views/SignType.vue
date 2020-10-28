@@ -47,13 +47,10 @@
             reLoginMsg() {
                 return this.$store.state.dialogMessage
             },
-            reLoginDialogTitle() {
-                return this.$store.state.repoInfo.repo_id ? `"${this.$store.state.repoInfo.org_id}/${this.$store.state.repoInfo.repo_id}" prompt you` :
-                    `"${this.$store.state.repoInfo.org_id}" prompt you`
-            },
         },
         data() {
             return {
+                reLoginDialogTitle:'',
                 platform: '',
                 org: '',
                 repo: '',
