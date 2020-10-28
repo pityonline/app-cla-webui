@@ -143,10 +143,12 @@
         }
         .SignTypeBox{
             height: 16rem;
+            font-size: 1.5rem;
+            font-family: Roboto-Bold,sans-serif;
         }
         .guideTitle{
             font-size:2.5rem ;
-            margin: 1rem 0;
+            margin: 5rem 0;
         }
     }
     .title {
