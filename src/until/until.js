@@ -4,14 +4,14 @@ export const setMinHeight = (box, inner) => {
 };
 export const strToBase64 = (params) => {
     try {
-        window.btoa(encodeURIComponent(params))
+        return window.btoa(encodeURIComponent(params))
     } catch (e) {
         return false
     }
 };
 export const base64ToStr = (params) => {
     try {
-        window.decodeURIComponent(window.atob(params))
+        return window.decodeURIComponent(window.atob(params))
     } catch (e) {
         return false
     }
