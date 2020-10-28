@@ -24,27 +24,27 @@
             </el-row>
             <el-row>
                 <el-col :offset="4" :span="16">
-                    <el-row>
+                    <el-row class="guideTitle">
                         Signing CLA Guide for...
                     </el-row>
                     <el-row>
-                        <el-col :span="8" class="pointer" :class="{'typeShadow':signType==='corporation'}"
+                        <el-col :span="8" style="cursor: pointer" :class="{'typeShadow':signType==='corporation'}"
                                 @click="clickSignTypeGuide('corporation')">
-                            <div>
+                            <div class="SignTypeBox">
                                 <svg-icon icon-class="qiye" class="SignTypeIcon"></svg-icon>
                                 <p>Corporation</p>
                             </div>
                         </el-col>
-                        <el-col :span="8" class="pointer" :class="{'typeShadow':signType==='employee'}"
+                        <el-col :span="8" style="cursor: pointer" :class="{'typeShadow':signType==='employee'}"
                                 @click="clickSignTypeGuide('employee')">
-                            <div>
-                                <svg-icon icon-class="lingdai" class="SignTypeIcon"></svg-icon>
+                            <div class="SignTypeBox">
+                                <svg-icon icon-class="yuangong" class="SignTypeIcon"></svg-icon>
                                 <p>Employee</p>
                             </div>
                         </el-col>
-                        <el-col :span="8" class="pointer" :class="{'typeShadow':signType==='individual'}"
+                        <el-col :span="8" style="cursor: pointer" :class="{'typeShadow':signType==='individual'}"
                                 @click="clickSignTypeGuide('individual')">
-                            <div>
+                            <div class="SignTypeBox">
                                 <svg-icon icon-class="geren" class="SignTypeIcon"></svg-icon>
                                 <p>Individual</p>
                             </div>
@@ -97,6 +97,7 @@
         methods: {
             ...mapActions(['setPlatformAct']),
             clickSignTypeGuide(type) {
+                console.log(type);
                 this.signType = type;
             },
             setClientHeight() {
@@ -117,25 +118,6 @@
     @import "../assets/font/css/Roboto-Black.css";
     @import "../assets/font/css/Roboto-Light.css";
     @import "../assets/font/css/Roboto-Regular.css";
-
-    .title {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        text-align: left
-    }
-
-    .name {
-        font-family: Roboto-Regular, sans-serif;
-        font-size: 3rem;
-    }
-
-    .description {
-        font-family: Roboto-Regular, sans-serif;
-        font-size: 1.5rem;
-    }
-
     .index {
         display: flex;
         flex-direction: column;
@@ -157,6 +139,28 @@
                 height: 5rem;
                 margin: 1rem;
             }
+            .SignTypeBox{
+                height: 16rem;
+            }
         }
     }
+    .title {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: left
+    }
+
+    .name {
+        font-family: Roboto-Regular, sans-serif;
+        font-size: 3rem;
+    }
+
+    .description {
+        font-family: Roboto-Regular, sans-serif;
+        font-size: 1.5rem;
+    }
+
+
 </style>
