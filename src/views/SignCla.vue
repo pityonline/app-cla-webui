@@ -242,7 +242,7 @@
             },
             async verifyFormEmail(rule, value, callback) {
                 let email = value.trim();
-                let reg = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*\\.[a-zA-Z]{2,6}$/;
+                let reg = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z]{2,6}$/;
                 if (reg.test(email)) {
                     callback();
                 } else {
