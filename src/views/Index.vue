@@ -29,21 +29,21 @@
                     </el-row>
                     <el-row align="middle">
                         <el-col :span="8" class="SignTypeCol" :class="{'typeShadow':signType==='corporation'}"
-                                @click="clickSignTypeGuide('corporation')">
+                                @click.native="clickSignTypeGuide('corporation')">
                             <div class="SignTypeBox">
                                 <svg-icon icon-class="qiye" class="SignTypeIcon"></svg-icon>
                                 <p>Corporation</p>
                             </div>
                         </el-col>
                         <el-col :span="8" class="SignTypeCol" :class="{'typeShadow':signType==='employee'}"
-                                @click="clickSignTypeGuide('employee')">
+                                @click.native="clickSignTypeGuide('employee')">
                             <div class="SignTypeBox">
                                 <svg-icon icon-class="yuangong" class="SignTypeIcon"></svg-icon>
                                 <p>Employee</p>
                             </div>
                         </el-col>
                         <el-col :span="8" class="SignTypeCol" :class="{'typeShadow':signType==='individual'}"
-                                @click="clickSignTypeGuide('individual')">
+                                @click.native="clickSignTypeGuide('individual')">
                             <div class="SignTypeBox">
                                 <svg-icon icon-class="geren" class="SignTypeIcon"></svg-icon>
                                 <p>Individual</p>
