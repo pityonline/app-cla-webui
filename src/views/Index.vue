@@ -144,6 +144,10 @@
         .SignTypeBox{
             height: 16rem;
         }
+        .guideTitle{
+            font-size:2.5rem ;
+            margin: 1rem 0;
+        }
     }
     .title {
         height: 100%;
