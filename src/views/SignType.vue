@@ -6,12 +6,12 @@
                 <el-col :offset="4" :span="16" style="height: 100%">
                     <el-row style="height: 100%">
                         <el-col style="height: 100%"  :span="14" >
-                                <div class="name">
-                                    <div>
-                                        <p>Contributor License Agreement</p>
-                                    </div>
-                                    <span>Sign</span>
-                                </div>
+                                <!--<div class="name">-->
+                                    <!--<div>-->
+                                        <!--<p>Contributor License Agreement</p>-->
+                                    <!--</div>-->
+                                    <!--<span>Sign</span>-->
+                                <!--</div>-->
                         </el-col>
                         <el-col :span="10" style="height: 100%;">
                             <el-row class="signType" style="height: 100%">
@@ -331,6 +331,7 @@
     }
 
     .name {
+        text-align: left;
         font-family: Roboto-Regular, sans-serif;
         font-size: 3rem;
     }
