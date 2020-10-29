@@ -2,7 +2,7 @@
     <el-row  style="height: 100%">
         <el-col  align="right" class="formBox">
             <div class="formBack_Box">
-                <div class="formBack"  >
+                <div class="formBack">
                     <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="0">
                         <el-form-item :required="true" label="" prop="userName">
                             <el-input v-model="ruleForm.userName" autocomplete="off" placeholder="Email" @keydown.native="pressEnter"></el-input>

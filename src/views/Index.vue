@@ -3,18 +3,23 @@
         <el-col class="index" id="transparentDiv" :style="transparentDiv">
             <NewHeader></NewHeader>
             <el-row id="section" :style="sectionStyle">
-                <el-col :offset="5" :span="14" style="height: 100%">
-                    <el-row style="height: 100%">
-                        <el-col :span="14" class="title">
-                            <div>
-                                <div class="name">
-                                    <div>
-                                        <p>Contributor License Agreement</p>
+                <el-col :offset="5" :span="14" >
+                    <el-row class="actionBox">
+                        <div class="backgroundBox">
+                            <img src="../assets/images/backgroundx1.png" alt="">
+                        </div>
+                        <el-col :span="14" style="height: 100%">
+                            <el-row style="height: 100%">
+                                <el-col class="title" style="height: 100%">
+                                    <div class="name">
+                                        <div>
+                                            <p>Contributor License Agreement</p>
+                                        </div>
+                                        <span>Sign</span>
                                     </div>
-                                    <span>Sign</span>
-                                </div>
-                                <!--<p class="description">Easily handle Contributor License Agreements (CLAs)</p>-->
-                            </div>
+                                </el-col>
+
+                            </el-row>
                         </el-col>
                         <el-col :span="10" style="height: 100%;">
                             <router-view></router-view>
@@ -131,6 +136,18 @@
             font-size:2.5rem ;
             margin: 5rem 0;
         }
+    }
+    .backgroundBox {
+        background-repeat: no-repeat;
+        position: absolute;
+        overflow: hidden;
+        top: 120px;
+        left: 230px;
+
+    }
+    .actionBox {
+        position: relative;
+        height: 720px;
     }
     .title {
         height: 100%;
