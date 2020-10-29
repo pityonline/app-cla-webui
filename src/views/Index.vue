@@ -22,7 +22,7 @@
                     </el-row>
                 </el-col>
             </el-row>
-            <el-row>
+            <el-row v-if="showGuide">
                 <el-col :offset="4" :span="16">
                     <el-row class="guideTitle">
                         Signing CLA Guide for...
@@ -84,8 +84,12 @@
             NewHeader,
             NewFooter
         },
+        watch: {
+            '$route':'getPath'
+        },
         data() {
             return {
+                showGuide:false,
                 signType: 'corporation',
                 transparentDiv: {
                     height: '',
@@ -102,6 +106,10 @@
         },
         methods: {
             ...mapActions(['setPlatformAct']),
+            getPath(){
+                console.log(this.$route.path);
+                this.showGuide = this.$route.path === '/sign';
+            },
             clickSignTypeGuide(type) {
                 console.log(type);
                 this.signType = type;
