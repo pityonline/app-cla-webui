@@ -6,15 +6,12 @@
                 <el-col :offset="4" :span="16" style="height: 100%">
                     <el-row style="height: 100%">
                         <el-col style="height: 100%"  :span="14" >
-                            <div class="title">
                                 <div class="name">
                                     <div>
                                         <p>Contributor License Agreement</p>
                                     </div>
                                     <span>Sign</span>
                                 </div>
-                                <!--<p class="description">Easily handle Contributor License Agreements (CLAs)</p>-->
-                            </div>
                         </el-col>
                         <el-col :span="10" style="height: 100%;">
                             <el-row class="signType" style="height: 100%">
