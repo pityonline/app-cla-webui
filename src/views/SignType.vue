@@ -5,7 +5,7 @@
             <el-row id="section" :style="sectionStyle">
                 <el-col :offset="4" :span="16" style="height: 100%">
                     <el-row style="height: 100%">
-                        <el-col style="height: 100%"  :span="14" >
+                        <el-col style="height: 100%"  :span="10" >
                             <el-row style="height: 100%" >
                                 <div class="title">
                                     <div class="name">
