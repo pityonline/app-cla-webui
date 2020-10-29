@@ -5,8 +5,8 @@
             <el-row id="section" :style="sectionStyle">
                 <el-col :offset="4" :span="16" style="height: 100%">
                     <el-row style="height: 100%">
-                        <el-col :span="14" >
-                            <div class="title">
+                        <el-col style="height: 100%" class="title" :span="14" >
+                            <div >
                                 <div class="name">
                                     <div>
                                         <p>Contributor License Agreement</p>
@@ -326,7 +326,6 @@
         }
     }
     .title {
-        height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
