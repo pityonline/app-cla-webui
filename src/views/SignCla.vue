@@ -560,7 +560,7 @@
                     myUrl = `${url.corporation_signing}/${this.cla_org_id}`;
                     obj = {
                         corporation_name: this.myForm.corporationName,
-                        admin_name: this.myForm.name,
+                        admin_name: this.myForm.authorized,
                         admin_email: this.myForm.email,
                         enabled: true,
                         info: info,
