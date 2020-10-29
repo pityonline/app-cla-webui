@@ -18,11 +18,10 @@
                                 @selection-change="handleSelectionChange"
                                 ref="multipleTable"
                                 :data="tableData">
-
-                            <!--<el-table-column-->
-                            <!--prop="name"-->
-                            <!--label="userName">-->
-                            <!--</el-table-column>-->
+                            <el-table-column
+                            prop="name"
+                            label="Manager Name">
+                            </el-table-column>
                             <el-table-column
                                     prop="email"
                                     label="email">

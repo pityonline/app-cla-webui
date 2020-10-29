@@ -1,12 +1,17 @@
 <template>
     <el-row id="createUser">
-        <el-col :offset="6" :span="12">
+        <el-col :offset="5" :span="14">
             <p id="tabName">Create Manager</p>
             <el-row class="createUserBack">
-                <el-row class="emailRow" gutter="20" v-for="(item,index) in emails">
-                    <el-col :span="16">
+                <el-row class="emailRow" gutter="20" v-for="(item,index) in data">
+                    <el-col :span="4">
                         <el-input
-                                placeholder="please input email" clearable="" size="medium" v-model="item.email" @keydown.native="pressEnter">
+                                placeholder="please input name" clearable="" size="medium" v-model="item.name">
+                        </el-input>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-input
+                                placeholder="please input email" clearable="" size="medium" v-model="item.email">
                         </el-input>
                     </el-col>
                     <el-col :span="8" align="right">
@@ -63,7 +68,7 @@
         data() {
 
             return {
-                emails: [{email: ''}],
+                data:[{name:'',email:''}],
                 limit: 5,
             }
         },
@@ -74,30 +79,36 @@
                 }
             },
             addRow(index) {
-                if (Number(this.$store.state.userLimit) + this.emails.length >= this.limit) {
+                if (Number(this.$store.state.userLimit) + this.data.length >= this.limit) {
                     this.$message.closeAll()
                     this.$message.error(`Create up to ${this.limit} users`)
                 } else {
-                    this.emails.splice(index + 1, 0, {email: ''})
+                    this.data.splice(index + 1, 0, {name:'',email: ''})
                 }
 
             },
             myDeleteRow(index) {
-                if (this.emails.length === 1) {
-                    this.emails[0].email = ''
+                if (this.data.length === 1) {
+                    this.data[0].name = ''
+                    this.data[0].email = ''
 
                 } else {
-                    this.emails.splice(index, 1);
+                    this.data.splice(index, 1);
                 }
             },
             createUser() {
-                let myEmails = []
-                this.emails.forEach(item => {
-                    if (item.email.trim()!==''){
-                        myEmails.push(item.email.trim())
+                let managers = []
+                this.data.forEach(item => {
+                    if ((item.email.trim() !== '' && item.name.trim() === '')||(item.email.trim() === '' && item.name.trim() !== '')) {
+                        this.$store.commit('errorCodeSet', {
+                            dialogVisible: true,
+                            dialogMessage: 'Please fill in the complete information.',
+                        });
+                    }else if (item.email.trim()!==''&&item.name.trim()!==''){
+                        managers.push({name:item.name.trim(),email:item.email.trim()})
                     }
                 })
-                let obj = {emails: myEmails}
+                let obj = {managers: managers}
                 http({
                     url: url.addEmployeeManager,
                     method: 'post',
