@@ -468,6 +468,17 @@
                                 },
                             ],
                         })
+                    }else if (item.type === 'title') {
+                        Object.assign(this.myForm, {title: ''})
+                        item.required && Object.assign(rules, {
+                            [item.id]: [
+                                {
+                                    required: item.required,
+                                    message: 'please input title',
+                                    trigger: ['blur', 'change']
+                                },
+                            ],
+                        })
                     }else if (item.type === 'authorized') {
                         Object.assign(this.myForm, {authorized: ''})
                         item.required && Object.assign(rules, {
