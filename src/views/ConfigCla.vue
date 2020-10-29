@@ -50,7 +50,7 @@
             </div>
             <div class="itemBox">
                 <div style="font-size: 1.2rem;padding: .5rem">
-                    ② Paste a link and declare the language
+                    ② Paste a link of a CLA file
                     <el-tooltip class="item" effect="dark"
                                 content="Paste a link to the original data of a CLA in the repository"
                                 placement="right">
@@ -59,26 +59,26 @@
                 </div>
                 <div style="padding: 0 2rem">
                     <el-row :gutter="20">
-                        <el-col :span="20">
+                        <el-col >
                             <el-input size="medium" v-model="cla_Link">
                             </el-input>
                         </el-col>
-                        <el-col :span="4">
-                            <el-select v-model="claLanguageValue"
-                                       placeholder="select language"
-                                       style="width: 100%"
-                                       size="medium"
-                                       clearable
-                                       filterable
-                                       @change="changeLanguage">
-                                <el-option
-                                        v-for="item in languageOptions"
-                                        :key="item.value"
-                                        :label="item.label"
-                                        :value="item.value">
-                                </el-option>
-                            </el-select>
-                        </el-col>
+                        <!--<el-col :span="4">-->
+                            <!--<el-select v-model="claLanguageValue"-->
+                                       <!--placeholder="select language"-->
+                                       <!--style="width: 100%"-->
+                                       <!--size="medium"-->
+                                       <!--clearable-->
+                                       <!--filterable-->
+                                       <!--@change="changeLanguage">-->
+                                <!--<el-option-->
+                                        <!--v-for="item in languageOptions"-->
+                                        <!--:key="item.value"-->
+                                        <!--:label="item.label"-->
+                                        <!--:value="item.value">-->
+                                <!--</el-option>-->
+                            <!--</el-select>-->
+                        <!--</el-col>-->
                     </el-row>
 
                 </div>
@@ -382,9 +382,9 @@
                     label: 'corporation',
                     value: 'corporation'
                 }],
-                languageOptions: [{label: 'English', value: 'english'}, {label: 'Chinese', value: 'chinese'}, {
+                languageOptions: [{label: 'English', value: 'English'}, {label: 'Chinese', value: 'Chinese'}, {
                     label: 'Japanese',
-                    value: 'japanese'
+                    value: 'Japanese'
                 }],
                 createMetadataDialogVisible: false,
                 linkLoading: false,
