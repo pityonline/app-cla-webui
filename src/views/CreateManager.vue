@@ -1,6 +1,6 @@
 <template>
     <el-row id="createUser">
-        <el-col :offset="5" :span="14">
+        <el-col>
             <p id="tabName">Create Manager</p>
             <el-row class="createUserBack">
                 <el-row class="emailRow" gutter="20" v-for="(item,index) in data">
