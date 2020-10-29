@@ -5,24 +5,25 @@
             <el-row id="section" :style="sectionStyle">
                 <el-col :offset="4" :span="16" style="height: 100%">
                     <el-row style="height: 100%">
-                        <el-col style="height: 100%"  :span="14" >
-                            <el-row  style="height: 100%">
+                        <el-col :span="14" style="height: 100%"  >
+                            <el-row class="signType" style="height: 100%">
                                 <el-col  style="height: 100%">
-                                    <el-row style="height: 100%">
-                                        <el-col align="left" class="buttonBox">
-                                            <div>
-                                                <div class="name">
-                                                    <div>
-                                                        <p>Contributor License Agreement</p>
-                                                    </div>
-                                                    <span>Sign</span>
+                                    <el-row style="height: 50%">
+                                    </el-row>
+                                    <el-row style="height: 50%">
+                                        <el-col align="right" class="buttonBox">
+                                            <div class="name">
+                                                <div>
+                                                    <p>Contributor License Agreement</p>
                                                 </div>
+                                                <span>Sign</span>
                                             </div>
                                         </el-col>
                                     </el-row>
                                 </el-col>
+                                <ReTryDialog :dialogVisible="reTryDialogVisible" :message="reLoginMsg"
+                                             :title="reLoginDialogTitle"></ReTryDialog>
                             </el-row>
-
                         </el-col>
                         <el-col :span="10" style="height: 100%;">
                             <el-row class="signType" style="height: 100%">
