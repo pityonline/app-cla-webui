@@ -19,14 +19,7 @@ const routes = [
                 name: 'LoginTypeSelect',
                 component: () => import('../views/LoginTypeSelect.vue')
             },
-            {
-                path: '/sign/:params',
-                component: () => import('../views/SignType.vue')
-            },
-            {
-                path: '/sign/:params/:orgAddress',
-                component: () => import('../views/SignType.vue')
-            },
+
             {
                 path: '/platformSelect',
                 name: 'PlatformSelect',
@@ -109,6 +102,14 @@ const routes = [
                 name: 'rootManagerResetPassword',
                 component: () => import('../views/ResetPassword.vue'),
             },]
+    },
+    {
+        path: '/sign/:params',
+        component: () => import('../views/SignType.vue')
+    },
+    {
+        path: '/sign/:params/:orgAddress',
+        component: () => import('../views/SignType.vue')
     },
     {
         path: '/createCLA',
