@@ -100,11 +100,6 @@
 
         & > #section {
             flex-grow: 1;
-            background-image: url("../assets/images/backgroundx2.png");
-            background-repeat: no-repeat;
-            background-position: 40rem center;
-            background-size: 55rem;
-
         }
         .guideBox{
             box-shadow:0 10px 20px 10px #F3F3F3;
