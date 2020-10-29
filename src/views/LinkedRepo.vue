@@ -55,9 +55,9 @@
                                     trigger="hover"
                                     placement="right">
                                 <div class="menuBT">
-                                    <el-button style="margin-left: 10px" @click="previewOriginalSignature(scope.row)"
-                                               type="" size="mini">preview
-                                    </el-button>
+                                    <!--<el-button style="margin-left: 10px" @click="previewOriginalSignature(scope.row)"-->
+                                               <!--type="" size="mini">preview-->
+                                    <!--</el-button>-->
                                     <el-button @click="downloadOriginalSignature(scope.row)" type="" size="mini">
                                         download
                                     </el-button>
@@ -81,8 +81,8 @@
                                     </el-button>
                                     <el-button @click="downloadOrgSignature(scope.row)" type="" size="mini">download
                                     </el-button>
-                                    <el-button @click="previewOrgSignature(scope.row)" type="" size="mini">preview
-                                    </el-button>
+                                    <!--<el-button @click="previewOrgSignature(scope.row)" type="" size="mini">preview-->
+                                    <!--</el-button>-->
                                 </div>
 
                                 <svg-icon slot="reference" class="pointer" icon-class="pdf"/>
@@ -663,6 +663,7 @@
                     url: `/api${url.downloadSignature}/${row.id}`,
                     method: 'get',
                 }).then(res => {
+                    console.log(res.data.data);
                     let URL = this.dataURLtoBlob(res.data.data.pdf);
                     var reader = new FileReader();
                     reader.readAsDataURL(URL);

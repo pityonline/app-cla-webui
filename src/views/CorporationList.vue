@@ -109,7 +109,7 @@
                                                    size="mini">upload
                                         </el-button>
                                         <el-button @click="downloadClaFile(scope.row)" type="" size="mini">download</el-button>
-                                        <el-button @click="previewClaFile(scope.row)" type="" size="mini">preview</el-button>
+                                        <!--<el-button @click="previewClaFile(scope.row)" type="" size="mini">preview</el-button>-->
                                     </div>
 
                                     <svg-icon slot="reference" class="pointer" icon-class="pdf" @click=""/>
