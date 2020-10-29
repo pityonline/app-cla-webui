@@ -536,6 +536,7 @@
                 })
                 this.ruleForm = form
                 this.rules = rules
+                console.log(this.ruleForm, this.rules);
             },
             toHome() {
                 this.$router.push('/home')
