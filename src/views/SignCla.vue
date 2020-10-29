@@ -468,6 +468,17 @@
                                 },
                             ],
                         })
+                    }else if (item.type === 'authorized') {
+                        Object.assign(this.myForm, {authorized: ''})
+                        item.required && Object.assign(rules, {
+                            [item.id]: [
+                                {
+                                    required: item.required,
+                                    message: 'please input name of Authorized Representative',
+                                    trigger: ['blur', 'change']
+                                },
+                            ],
+                        })
                     } else if (item.type === 'adminEmail') {
                         Object.assign(this.myForm, {adminEmail: ''})
                         item.required && Object.assign(rules, {

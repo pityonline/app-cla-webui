@@ -339,14 +339,7 @@
                     type: 'email',
                     description: 'your email',
                     required: true,
-                },
-                    //     {
-                    //     title: 'Date',
-                    //     type: 'date',
-                    //     description: 'the date of today',
-                    //     required: true,
-                    // },
-                ],
+                },],
                 dataTypeOptions: [{label: 'name', value: 'name'}, {
                     label: 'corporationName',
                     value: 'corporationName'
@@ -356,7 +349,8 @@
                 }, {label: 'address', value: 'address'}, {label: 'email', value: 'email'}, {
                     label: 'fax',
                     value: 'fax'
-                }],
+                },
+                ],
                 metadataType: 'individual',
                 customMetadataArr: [{
                     title: '',
@@ -523,9 +517,6 @@
                     this.$message.error(err.data.error_message)
                 })
             },
-            changeLanguage() {
-
-            },
             addRow(index) {
                 this.customMetadataArr.splice(index + 1, 0, {
                     title: '',
@@ -561,23 +552,30 @@
                     this.customMetadataArr = this.individualCustomMetadataArr;
                 } else if (this.metadataType === 'corporation') {
                     this.metadataArr = [
+
+                        {
+                            title: 'Authorized Representative',
+                            type: 'authorized',
+                            description: 'name of Authorized Representative',
+                            required: true,
+                        },
+                        {
+                            title: 'Title',
+                            type: 'title',
+                            description: 'position of Authorized Representative',
+                            required: true,
+                        },
                         {
                             title: 'Corporation Name',
                             type: 'corporationName',
-                            description: 'your corporation email',
+                            description: 'corporation name',
                             required: true,
                         },
 
                         {
-                            title: 'Name',
-                            type: 'name',
-                            description: 'your name',
-                            required: true,
-                        },
-                        {
                             title: 'E-Mail',
                             type: 'email',
-                            description: 'your email',
+                            description: 'corporation email',
                             required: true,
                         },];
                     this.customMetadataArr = this.corporationCustomMetadataArr;
