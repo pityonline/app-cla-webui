@@ -50,8 +50,14 @@
                             </div>
                         </el-col>
                     </el-row>
-                    <el-row>
-                        liucheng
+                    <el-row v-if="signType==='corporation'" class="guideBox">
+                       corporation guide
+                    </el-row>
+                    <el-row v-if="signType==='employee'" class="guideBox">
+                        employee guide
+                    </el-row>
+                    <el-row v-if="signType==='individual'" class="guideBox">
+                        individual guide
                     </el-row>
                 </el-col>
             </el-row>
@@ -130,8 +136,21 @@
             background-size: 55rem;
 
         }
+        .guideBox{
+            box-shadow:
+                    0 0 0 0 #FFFFFF,
+                    0 0 20px 10px #F3F3F3,
+                    0 0 20px 10px #F3F3F3,
+                    0 0 20px 10px #F3F3F3;
+            margin-bottom: 5rem;
+            padding-top:4rem;
+            padding-bottom: 10rem;
+        }
         .typeShadow {
-            box-shadow: 0 0 20px 10px #F3F3F3;
+            box-shadow: 0 0 20px 10px #F3F3F3,
+                        0 0 20px 10px #F3F3F3,
+                        0 0 20px 10px #F3F3F3,
+                        0 0 0 0 #FFFFFF;
         }
         .SignTypeCol {
             cursor: pointer;
