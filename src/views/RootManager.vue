@@ -2,7 +2,7 @@
     <div id="rootManager" :style="section">
         <Header @clickItem="clickItem" :user="user"></Header>
         <el-row>
-            <el-col :offset="4" :span="16">
+            <el-col :offset="5" :span="14">
 
 
                 <router-view></router-view>

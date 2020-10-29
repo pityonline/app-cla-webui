@@ -1,6 +1,6 @@
 <template>
     <el-row class="headerBox">
-        <el-col class="header" :offset="4" :span="16">
+        <el-col class="header" :offset="5" :span="14">
             <div class="box">
                 <svg-icon icon-class="logo" class="icon"></svg-icon>
             </div>
@@ -75,7 +75,7 @@
         /*top: 0;*/
         /*left: 0;*/
         border-bottom: 2px solid #F2F2F2;
-        height: 4.5rem;
+        height: 5.5rem;
         width: 100%;
         /*z-index: 10;*/
 

@@ -1,6 +1,6 @@
 <template>
     <el-row align="middle" style="border-top:2px solid #F2F2F2;">
-        <el-col class="footer" :offset="4" :span="16">
+        <el-col class="footer" :offset="5" :span="14">
             <div class="box" @click="join">
                 <span class="join_us" >JOIN US</span>
             </div>
@@ -43,7 +43,7 @@
         font-family: HuaweiSans-Regular, sans-serif;
         display: flex;
         justify-content: space-between;
-        height: 4.5rem;
+        height: 5.5rem;
     }
 
     .box {

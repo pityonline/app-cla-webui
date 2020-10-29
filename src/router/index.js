@@ -111,11 +111,7 @@ const routes = [
         path: '/sign/:params/:orgAddress',
         component: () => import('../views/SignType.vue')
     },
-    {
-        path: '/createCLA',
-        name: 'CreateCLA',
-        component: () => import('../views/CreateCLA.vue')
-    },
+
     {
         path: '/bind-cla',
         name: 'ConfigCla',
@@ -126,11 +122,7 @@ const routes = [
         name: 'Privacy',
         component: () => import('../views/Privacy.vue')
     },
-    {
-        path: '/createMetadata',
-        name: 'CreateMetadata',
-        component: () => import('../views/CreateMetadata.vue')
-    },
+
     {
         path: '/sign-cla',
         name: 'SignCla',

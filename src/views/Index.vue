@@ -3,7 +3,7 @@
         <el-col class="index" id="transparentDiv" :style="transparentDiv">
             <NewHeader></NewHeader>
             <el-row id="section" :style="sectionStyle">
-                <el-col :offset="4" :span="16" style="height: 100%">
+                <el-col :offset="5" :span="14" style="height: 100%">
                     <el-row style="height: 100%">
                         <el-col :span="14" class="title">
                             <div>
@@ -19,45 +19,6 @@
                         <el-col :span="10" style="height: 100%;">
                             <router-view></router-view>
                         </el-col>
-                    </el-row>
-                </el-col>
-            </el-row>
-            <el-row v-if="showGuide">
-                <el-col :offset="4" :span="16">
-                    <el-row class="guideTitle">
-                        Signing CLA Guide for...
-                    </el-row>
-                    <el-row >
-                        <el-col :span="8" class="SignTypeCol" :class="{'typeShadow':signType==='corporation'}"
-                                @click.native="clickSignTypeGuide('corporation')">
-                            <div class="SignTypeBox">
-                                <svg-icon icon-class="qiye" class="SignTypeIcon"></svg-icon>
-                                <p>Corporation</p>
-                            </div>
-                        </el-col>
-                        <el-col :span="8" class="SignTypeCol" :class="{'typeShadow':signType==='employee'}"
-                                @click.native="clickSignTypeGuide('employee')">
-                            <div class="SignTypeBox">
-                                <svg-icon icon-class="yuangong" class="SignTypeIcon"></svg-icon>
-                                <p>Employee</p>
-                            </div>
-                        </el-col>
-                        <el-col :span="8" class="SignTypeCol" :class="{'typeShadow':signType==='individual'}"
-                                @click.native="clickSignTypeGuide('individual')">
-                            <div class="SignTypeBox">
-                                <svg-icon icon-class="geren" class="SignTypeIcon"></svg-icon>
-                                <p>Individual</p>
-                            </div>
-                        </el-col>
-                    </el-row>
-                    <el-row v-if="signType==='corporation'" class="guideBox">
-                       corporation guide
-                    </el-row>
-                    <el-row v-if="signType==='employee'" class="guideBox">
-                        employee guide
-                    </el-row>
-                    <el-row v-if="signType==='individual'" class="guideBox">
-                        individual guide
                     </el-row>
                 </el-col>
             </el-row>

@@ -1,96 +1,99 @@
 <template>
     <el-row class="index" id="transparentDiv" :style="transparentDiv">
-            <NewHeader></NewHeader>
-            <el-row id="section" :style="sectionStyle">
-                <el-col :offset="4" :span="16">
-                    <el-row style="height: 620px">
-                        <el-col :span="14" style="height: 100%"  >
-                            <el-row  style="height: 100%">
-                                <el-col class="title" style="height: 100%">
-                                            <div class="name">
-                                                <div>
-                                                    <p>Contributor License Agreement</p>
-                                                </div>
-                                                <span>Sign</span>
-                                            </div>
-                                </el-col>
+        <NewHeader></NewHeader>
+        <el-row id="section" :style="sectionStyle">
+            <div class="backgroundBox">
+                <img src="../assets/images/backgroundx1.png" alt="">
+            </div>
+            <el-col :offset="4" :span="16">
+                <el-row style="height: 680px">
+                    <el-col :span="14" style="height: 100%">
+                        <el-row style="height: 100%">
+                            <el-col class="title" style="height: 100%">
+                                <div class="name">
+                                    <div>
+                                        <p>Contributor License Agreement</p>
+                                    </div>
+                                    <span>Sign</span>
+                                </div>
+                            </el-col>
 
-                            </el-row>
-                        </el-col>
-                        <el-col :span="10" style="height: 100%;">
-                            <el-row class="signType" style="height: 100%">
-                                <el-col id="sign" style="height: 100%">
-                                    <el-row style="height: 50%">
-                                    </el-row>
-                                    <el-row style="height: 50%">
-                                        <el-col align="right" class="buttonBox">
-                                            <div id="btBox">
-                                                <div>
+                        </el-row>
+                    </el-col>
+                    <el-col :span="10" style="height: 100%;">
+                        <el-row class="signType" style="height: 100%">
+                            <el-col id="sign" style="height: 100%">
+                                <el-row style="height: 50%">
+                                </el-row>
+                                <el-row style="height: 50%">
+                                    <el-col align="right" class="buttonBox">
+                                        <div id="btBox">
+                                            <div>
 
-                                                    <button class="button" @click="submit('corporation')">
-                                                        Sign As Corporation
-                                                    </button>
-                                                </div>
-                                                <div>
-                                                    <button class="button" @click="submit('employee')">
-                                                        Sign As Employee
-                                                    </button>
-                                                </div>
-                                                <button class="button" @click="submit('individual')">
-                                                    Sign As Individual
+                                                <button class="button" @click="submit('corporation')">
+                                                    Sign As Corporation
                                                 </button>
                                             </div>
-                                        </el-col>
-                                    </el-row>
-                                </el-col>
-                                <ReTryDialog :dialogVisible="reTryDialogVisible" :message="reLoginMsg"
-                                             :title="reLoginDialogTitle"></ReTryDialog>
-                            </el-row>
-                        </el-col>
-                    </el-row>
-                    <el-row>
-                        <el-col>
-                            <el-row class="guideTitle">
-                                Signing CLA Guide for...
-                            </el-row>
-                            <el-row >
-                                <el-col :span="8" class="SignTypeCol" :class="{'typeShadow':signType==='corporation'}"
-                                        @click.native="clickSignTypeGuide('corporation')">
-                                    <div class="SignTypeBox">
-                                        <svg-icon icon-class="qiye" class="SignTypeIcon"></svg-icon>
-                                        <p>Corporation</p>
-                                    </div>
-                                </el-col>
-                                <el-col :span="8" class="SignTypeCol" :class="{'typeShadow':signType==='employee'}"
-                                        @click.native="clickSignTypeGuide('employee')">
-                                    <div class="SignTypeBox">
-                                        <svg-icon icon-class="yuangong" class="SignTypeIcon"></svg-icon>
-                                        <p>Employee</p>
-                                    </div>
-                                </el-col>
-                                <el-col :span="8" class="SignTypeCol" :class="{'typeShadow':signType==='individual'}"
-                                        @click.native="clickSignTypeGuide('individual')">
-                                    <div class="SignTypeBox">
-                                        <svg-icon icon-class="geren" class="SignTypeIcon"></svg-icon>
-                                        <p>Individual</p>
-                                    </div>
-                                </el-col>
-                            </el-row>
-                            <el-row v-if="signType==='corporation'" class="guideBox">
-                                corporation guide
-                            </el-row>
-                            <el-row v-if="signType==='employee'" class="guideBox">
-                                employee guide
-                            </el-row>
-                            <el-row v-if="signType==='individual'" class="guideBox">
-                                individual guide
-                            </el-row>
-                        </el-col>
-                    </el-row>
-                </el-col>
-            </el-row>
+                                            <div>
+                                                <button class="button" @click="submit('employee')">
+                                                    Sign As Employee
+                                                </button>
+                                            </div>
+                                            <button class="button" @click="submit('individual')">
+                                                Sign As Individual
+                                            </button>
+                                        </div>
+                                    </el-col>
+                                </el-row>
+                            </el-col>
+                            <ReTryDialog :dialogVisible="reTryDialogVisible" :message="reLoginMsg"
+                                         :title="reLoginDialogTitle"></ReTryDialog>
+                        </el-row>
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <el-col>
+                        <el-row class="guideTitle">
+                            Signing CLA Guide for...
+                        </el-row>
+                        <el-row>
+                            <el-col :span="8" class="SignTypeCol" :class="{'typeShadow':signType==='corporation'}"
+                                    @click.native="clickSignTypeGuide('corporation')">
+                                <div class="SignTypeBox">
+                                    <svg-icon icon-class="qiye" class="SignTypeIcon"></svg-icon>
+                                    <p>Corporation</p>
+                                </div>
+                            </el-col>
+                            <el-col :span="8" class="SignTypeCol" :class="{'typeShadow':signType==='employee'}"
+                                    @click.native="clickSignTypeGuide('employee')">
+                                <div class="SignTypeBox">
+                                    <svg-icon icon-class="yuangong" class="SignTypeIcon"></svg-icon>
+                                    <p>Employee</p>
+                                </div>
+                            </el-col>
+                            <el-col :span="8" class="SignTypeCol" :class="{'typeShadow':signType==='individual'}"
+                                    @click.native="clickSignTypeGuide('individual')">
+                                <div class="SignTypeBox">
+                                    <svg-icon icon-class="geren" class="SignTypeIcon"></svg-icon>
+                                    <p>Individual</p>
+                                </div>
+                            </el-col>
+                        </el-row>
+                        <el-row v-if="signType==='corporation'" class="guideBox">
+                            corporation guide
+                        </el-row>
+                        <el-row v-if="signType==='employee'" class="guideBox">
+                            employee guide
+                        </el-row>
+                        <el-row v-if="signType==='individual'" class="guideBox">
+                            individual guide
+                        </el-row>
+                    </el-col>
+                </el-row>
+            </el-col>
+        </el-row>
 
-            <NewFooter></NewFooter>
+        <NewFooter></NewFooter>
     </el-row>
 </template>
 <script>
@@ -116,10 +119,8 @@
             NewFooter,
             ReTryDialog,
         },
-        watch: {
-
-        },
-        computed:{
+        watch: {},
+        computed: {
             reTryDialogVisible() {
                 return this.$store.state.reTryDialogVisible
             },
@@ -129,7 +130,7 @@
         },
         data() {
             return {
-                reLoginDialogTitle:'',
+                reLoginDialogTitle: '',
                 platform: '',
                 org: '',
                 repo: '',
@@ -149,7 +150,7 @@
             }
         },
         methods: {
-            ...mapActions(['setPlatformAct','setLoginTypeAct', 'setRepoInfoAct', 'errorAct']),
+            ...mapActions(['setPlatformAct', 'setLoginTypeAct', 'setRepoInfoAct', 'errorAct']),
             getRepoInfo() {
                 let params = window.location.href.split('/sign/')[1]
                 let repoInfoParams = ''
@@ -218,7 +219,7 @@
                 })
             },
         },
-        created(){
+        created() {
             this.setCookie();
             this.getRepoInfo();
         },
@@ -233,19 +234,25 @@
     @import "../assets/font/css/Roboto-Black.css";
     @import "../assets/font/css/Roboto-Light.css";
     @import "../assets/font/css/Roboto-Regular.css";
+
     .index {
         display: flex;
         flex-direction: column;
 
         & > #section {
+            position: relative;
             flex-grow: 1;
-            background-image: url("../assets/images/backgroundx2.png");
-            background-repeat: no-repeat;
-            background-position: 40rem center;
-            background-size: 55rem;
 
         }
 
+        .backgroundBox {
+            background-repeat: no-repeat;
+            position: absolute;
+            overflow: hidden;
+            top: 210px;
+            left: 630px;
+
+        }
 
         .signType {
             font-family: Roboto-Bold, sans-serif;
@@ -295,37 +302,44 @@
         .disabledButton:focus {
             outline: none;
         }
-        .guideBox{
-            box-shadow:0 10px 20px 10px #F3F3F3;
+
+        .guideBox {
+            box-shadow: 0 10px 20px 10px #F3F3F3;
             margin-bottom: 5rem;
-            padding-top:4rem;
+            padding-top: 4rem;
             padding-bottom: 10rem;
         }
+
         .typeShadow {
             box-shadow: 0 -10px 20px 10px #F3F3F3;
         }
+
         .SignTypeCol {
             cursor: pointer;
             height: 16rem;
             font-size: 1.5rem;
-            font-family: Roboto-Bold,sans-serif;
+            font-family: Roboto-Bold, sans-serif;
             display: flex;
             justify-content: center;
             flex-direction: column;
         }
+
         .SignTypeIcon {
             width: 5rem;
             height: 5rem;
             margin: 1rem;
         }
-        .SignTypeBox{
+
+        .SignTypeBox {
 
         }
-        .guideTitle{
-            font-size:2.5rem ;
+
+        .guideTitle {
+            font-size: 2.5rem;
             margin: 5rem 0;
         }
     }
+
     .title {
         height: 100%;
         display: flex;

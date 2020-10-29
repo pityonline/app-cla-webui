@@ -2,7 +2,7 @@
     <div id="signedRepo" :style="section">
         <CorporationHeader @clickItem="clickItem" :user="user"></CorporationHeader>
         <el-row style="padding-top: 2rem">
-            <el-col :offset="4" :span="16">
+            <el-col :offset="5" :span="14">
                 <router-view></router-view>
             </el-col>
         </el-row>
