@@ -5,17 +5,22 @@
             <el-row id="section" :style="sectionStyle">
                 <el-col :offset="4" :span="16" style="height: 100%">
                     <el-row style="height: 100%">
-                        <el-col style="height: 100%"  :span="10" >
-                            <el-row style="height: 100%" >
-                                <div class="title">
-                                    <div class="name">
-                                        <div>
-                                            <p>Contributor License Agreement</p>
-                                        </div>
-                                        <span>Sign</span>
-                                    </div>
-                                </div>
-
+                        <el-col style="height: 100%"  :span="14" >
+                            <el-row  style="height: 100%">
+                                <el-col  style="height: 100%">
+                                    <el-row style="height: 100%">
+                                        <el-col align="left" class="buttonBox">
+                                            <div>
+                                                <div class="name">
+                                                    <div>
+                                                        <p>Contributor License Agreement</p>
+                                                    </div>
+                                                    <span>Sign</span>
+                                                </div>
+                                            </div>
+                                        </el-col>
+                                    </el-row>
+                                </el-col>
                             </el-row>
 
                         </el-col>
@@ -333,7 +338,6 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        text-align: left
     }
 
     .name {
