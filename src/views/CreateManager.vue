@@ -217,7 +217,8 @@
         }
 
         & .submitBt {
-            width: 6rem;
+            margin: 1rem 0;
+            width: 10rem;
             height: 3rem;
             border-radius: 1.5rem;
             border: none;
