@@ -85,7 +85,16 @@
             NewFooter
         },
         watch: {
-            '$route':'getPath'
+            $route(to,from){
+                console.log(to.path);
+            },
+            // $route: {
+            //     handler: function(val, oldVal){
+            //         console.log(val);
+            //     },
+            //     // 深度观察监听
+            //     deep: true
+            // }
         },
         data() {
             return {
