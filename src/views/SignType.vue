@@ -5,8 +5,8 @@
             <el-row id="section" :style="sectionStyle">
                 <el-col :offset="4" :span="16" style="height: 100%">
                     <el-row style="height: 100%">
-                        <el-col :span="14" class="title">
-                            <div>
+                        <el-col :span="14" >
+                            <div class="title">
                                 <div class="name">
                                     <div>
                                         <p>Contributor License Agreement</p>
