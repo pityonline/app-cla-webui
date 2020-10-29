@@ -114,44 +114,44 @@
                             case 'cla.invalid_token':
                                 this.$store.commit('errorSet', {
                                     dialogVisible: true,
-                                    dialogMessage: 'token expired, please login again',
+                                    dialogMessage: 'Token expired, please login again.',
                                 });
                                 break;
                             case 'cla.missing_token':
                                 this.$store.commit('errorSet', {
                                     dialogVisible: true,
-                                    dialogMessage: 'Token does not exist, please login again',
+                                    dialogMessage: 'Token invalid, please login again.',
                                 });
                                 break;
                             case 'cla.unknown_token':
                                 this.$store.commit('errorSet', {
                                     dialogVisible: true,
-                                    dialogMessage: 'token unknown, please login again',
+                                    dialogMessage: 'Token invalid, please login again.',
                                 });
                                 break;
 
                             case 'cla.num_of_corp_managers_exceeded':
                                 this.$store.commit('errorCodeSet', {
                                     dialogVisible: true,
-                                    dialogMessage: 'The added administrator exceeds the limit',
+                                    dialogMessage: 'The number of managers exceeds the limit.',
                                 });
                                 break;
                             case 'cla.corp_manager_exists':
                                 this.$store.commit('errorCodeSet', {
                                     dialogVisible: true,
-                                    dialogMessage: 'The added administrator already exists',
+                                    dialogMessage: 'The name is exists already.',
                                 });
                                 break;
                             case 'cla.not_same_corp':
                                 this.$store.commit('errorCodeSet', {
                                     dialogVisible: true,
-                                    dialogMessage: 'The mailbox does not belong to the company mailbox',
+                                    dialogMessage: 'Email does not belong to the corporation.',
                                 });
                                 break;
                             case 'cla.invalid_parameter':
                                 this.$store.commit('errorCodeSet', {
                                     dialogVisible: true,
-                                    dialogMessage: 'can not add/delete administrator yourself',
+                                    dialogMessage: 'Email for manager should be different from Administrator’s.',
                                 });
                                 break;
                             case 'cla.system_error':

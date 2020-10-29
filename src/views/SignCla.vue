@@ -227,15 +227,15 @@
                     if (reg.test(value)) {
                         callback();
                     } else {
-                        callback(new Error('telephone format error'))
+                        callback(new Error('An invalid telephone number.'))
                     }
                 } else {
-                    callback(new Error('please input telephone'))
+                    callback(new Error('Please enter the telephone number of corporation'))
                 }
             },
             async verifyAddr(rule, value, callback) {
                 if (!value) {
-                    callback(new Error('please input address'))
+                    callback(new Error('Please enter the address of corporation'))
                 } else {
                     callback();
                 }
@@ -246,7 +246,7 @@
                 if (reg.test(email)) {
                     callback();
                 } else {
-                    callback(new Error('Email format error'))
+                    callback(new Error('An invalid E-mail address.'))
                 }
             },
             setMyForm(type, value) {
@@ -267,7 +267,7 @@
                         method: 'post',
                     }).then(res => {
                         this.$message.closeAll();
-                        this.$message.success('An email with a verification code has been sent to your email address');
+                        this.$message.success('A verification code is sent to your Email.');
                         let second = 60;
                         let codeInterval = setInterval(() => {
                             if (second !== 0) {
@@ -283,7 +283,7 @@
                     })
                 } else {
                     this.$message.closeAll()
-                    this.$message.error('Please fill in the correct email address in the email box')
+                    this.$message.error('Please enter the Email address.')
                 }
 
 
@@ -463,7 +463,7 @@
                             [item.id]: [
                                 {
                                     required: item.required,
-                                    message: 'please input corporationName',
+                                    message: 'Please enter the name of corporation.',
                                     trigger: ['blur', 'change']
                                 },
                             ],
@@ -474,7 +474,7 @@
                             [item.id]: [
                                 {
                                     required: item.required,
-                                    message: 'please input title',
+                                    message: 'Please enter the title of representative.',
                                     trigger: ['blur', 'change']
                                 },
                             ],
@@ -485,18 +485,7 @@
                             [item.id]: [
                                 {
                                     required: item.required,
-                                    message: 'please input name of Authorized Representative',
-                                    trigger: ['blur', 'change']
-                                },
-                            ],
-                        })
-                    } else if (item.type === 'adminEmail') {
-                        Object.assign(this.myForm, {adminEmail: ''})
-                        item.required && Object.assign(rules, {
-                            [item.id]: [
-                                {
-                                    required: item.required,
-                                    message: 'please input adminEmail',
+                                    message: 'Please enter the name of representative.',
                                     trigger: ['blur', 'change']
                                 },
                             ],
@@ -541,7 +530,7 @@
                 Object.assign(rules, {
                     code: [{
                         required: true,
-                        message: 'Please enter the verification code',
+                        message: 'Please enter the verification code.',
                         trigger: ['blur', 'change']
                     },]
                 })
@@ -639,7 +628,7 @@
                             this.signCla();
                         } else {
                             this.$message.closeAll()
-                            this.$message.error('Please check the box about privacy statement.')
+                            this.$message.error('Please review the privacy statement .')
                         }
                     } else {
                         return false;

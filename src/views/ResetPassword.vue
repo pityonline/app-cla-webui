@@ -65,27 +65,27 @@
         data() {
             var validatePass = (rule, value, callback) => {
                 if (value === '') {
-                    callback(new Error('please input old password'));
+                    callback(new Error('Please enter old password.'));
                 } else if (value === this.ruleForm.newPassword) {
-                    callback(new Error('The new password cannot be the same as the old password'));
+                    callback(new Error('The new password cannot be the same as old one.'));
                 } else {
                     callback();
                 }
             };
             var validatePass2 = (rule, value, callback) => {
                 if (value === '') {
-                    callback(new Error('please input new password'));
+                    callback(new Error('Please enter the new password.'));
                 } else if (value === this.ruleForm.oldPassword) {
-                    callback(new Error('The new password cannot be the same as the old password'));
+                    callback(new Error('The new password cannot be the same as old one.'));
                 } else {
                     callback();
                 }
             };
             var validatePass3 = (rule, value, callback) => {
                 if (value === '') {
-                    callback(new Error('please input the new password again'));
+                    callback(new Error('Please repeat the new password.'));
                 } else if (value !== this.ruleForm.newPassword) {
-                    callback(new Error('The two passwords are not the same'));
+                    callback(new Error('The repeated password is not the same as the first one.'));
                 } else {
                     callback();
                 }
@@ -144,40 +144,22 @@
                             case 'cla.invalid_token':
                                 this.$store.commit('errorSet', {
                                     dialogVisible: true,
-                                    dialogMessage: 'token expired, please login again',
+                                    dialogMessage: 'Token expired, please login again.',
                                 });
                                 break;
                             case 'cla.missing_token':
                                 this.$store.commit('errorSet', {
                                     dialogVisible: true,
-                                    dialogMessage: 'Token does not exist, please login again',
+                                    dialogMessage: 'Token invalid, please login again.',
                                 });
                                 break;
                             case 'cla.unknown_token':
                                 this.$store.commit('errorSet', {
                                     dialogVisible: true,
-                                    dialogMessage: 'token unknown, please login again',
+                                    dialogMessage: 'Token invalid, please login again.',
                                 });
                                 break;
 
-                            case 'cla.num_of_corp_managers_exceeded':
-                                this.$store.commit('errorCodeSet', {
-                                    dialogVisible: true,
-                                    dialogMessage: 'The added administrator exceeds the limit',
-                                });
-                                break;
-                            case 'cla.corp_manager_exists':
-                                this.$store.commit('errorCodeSet', {
-                                    dialogVisible: true,
-                                    dialogMessage: 'The added administrator already exists',
-                                });
-                                break;
-                            case 'cla.not_same_corp':
-                                this.$store.commit('errorCodeSet', {
-                                    dialogVisible: true,
-                                    dialogMessage: 'The mailbox does not belong to the company mailbox',
-                                });
-                                break;
                                 case 'cla.invalid_parameter':
                                 this.$store.commit('errorCodeSet', {
                                     dialogVisible: true,
@@ -187,7 +169,7 @@
                             case 'cla.invalid_account_or_pw':
                                 this.$store.commit('errorCodeSet', {
                                     dialogVisible: true,
-                                    dialogMessage: 'Old password error,please try again',
+                                    dialogMessage: 'The old password is invalid, please try again.',
                                 });
                                 break;
                             case 'cla.system_error':

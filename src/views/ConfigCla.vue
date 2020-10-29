@@ -475,7 +475,7 @@
 
                 } else {
                     this.$message.closeAll();
-                    this.$message.error('The title is repeated')
+                    this.$message.error('Same titles are filled.')
                 }
                 return fields
             },
@@ -562,7 +562,7 @@
                         {
                             title: 'Title',
                             type: 'title',
-                            description: 'position of Authorized Representative',
+                            description: 'title of Authorized Representative',
                             required: true,
                         },
                         {

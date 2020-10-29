@@ -344,7 +344,7 @@
                 console.log(file);
             },
             handleExceed(files, fileList) {
-                this.$message.warning(`msgCurrently, 1 file is limited to be selected. ${files.length} files are selected this time, and a total of ${files.length + fileList.length} files are selected`);
+                this.$message.warning(`Only one files can be uploaded.`);
             },
             beforeRemove(file, fileList) {
                 return this.$confirm(`Are you sure you want to remove it ${file.name}？`);
@@ -387,7 +387,7 @@
                     this.getCorporationInfo()
                 }).catch(err => {
                     this.$message.closeAll()
-                    this.$message.error('Please upload PDF first')
+                    this.$message.error('Please upload PDF first.')
                 })
             },
             changeActive(cla_org_id, corporation_name, admin_email, enabled) {

@@ -173,13 +173,13 @@ export default new Vuex.Store({
                     case 'cla.no_cla_binding':
                         commit('errorSet', {
                             dialogVisible: true,
-                            dialogMessage: 'CLA is not bound, unable to sign',
+                            dialogMessage: 'There is no CLA to sign for organization.',
                         });
                         break;
                     case 'cla.has_signed':
                         commit('errorSet', {
                             dialogVisible: true,
-                            dialogMessage: 'You have signed it. Please do not repeat it',
+                            dialogMessage: 'The CLA has been signed before.',
                         });
                         break;
                     case 'cla.invalid_parameter':
@@ -191,31 +191,31 @@ export default new Vuex.Store({
                     case 'cla.has_not_signed':
                         commit('errorSet', {
                             dialogVisible: true,
-                            dialogMessage: 'The company has not yet signed',
+                            dialogMessage: 'Your corporation has not signed.',
                         });
                         break;
                     case 'cla.invalid_token':
                         commit('errorSet', {
                             dialogVisible: true,
-                            dialogMessage: 'token expired, please login again',
+                            dialogMessage: 'Token expired, please login again.',
                         });
                         break;
                     case 'cla.missing_token':
                         commit('errorSet', {
                             dialogVisible: true,
-                            dialogMessage: 'Token does not exist, please login again',
+                            dialogMessage: 'Token invalid, please login again.',
                         });
                         break;
                     case 'cla.unknown_token':
                         commit('errorSet', {
                             dialogVisible: true,
-                            dialogMessage: 'token unknown, please login again',
+                            dialogMessage: 'Token invalid, please login again.',
                         });
                         break;
                     case 'cla.uncompleted_signing':
                         commit('errorSet', {
                             dialogVisible: true,
-                            dialogMessage: 'The enterprise has not completed the signing process',
+                            dialogMessage: 'The signing process of corporation is not finish yet.',
                         });
                         break;
                     case 'cla.unknown_email_platform':
@@ -227,49 +227,49 @@ export default new Vuex.Store({
                     case 'cla.failed_to_send_email':
                         commit('errorCodeSet', {
                             dialogVisible: true,
-                            dialogMessage: 'Failed to send mail,please try again',
+                            dialogMessage: 'Failed to send mail.',
                         });
                         break;
                     case 'cla.wrong_verification_code':
                         commit('errorCodeSet', {
                             dialogVisible: true,
-                            dialogMessage: 'Verification code error, please try again',
+                            dialogMessage: 'Verification code error.',
                         });
                         break;
                     case 'cla.expired_verification_code':
                         commit('errorCodeSet', {
                             dialogVisible: true,
-                            dialogMessage: 'Verification code expired, please try again',
+                            dialogMessage: 'Verification code expired.',
                         });
                         break;
                     case 'cla.pdf_has_not_uploaded':
                         commit('errorSet', {
                             dialogVisible: true,
-                            dialogMessage: 'The organization has not uploaded the PDF signature page',
+                            dialogMessage: 'Signature of organization is not uploaded.',
                         });
                         break;
                     case 'cla.num_of_corp_managers_exceeded':
                         commit('errorCodeSet', {
                             dialogVisible: true,
-                            dialogMessage: 'The added manager exceeds the limit',
+                            dialogMessage: 'The number of managers exceeds the limit.',
                         });
                         break;
                     case 'cla.corp_manager_exists':
                         commit('errorCodeSet', {
                             dialogVisible: true,
-                            dialogMessage: 'The added manager already exists',
+                            dialogMessage: 'The name is exists already.',
                         });
                         break;
                     case 'cla.not_same_corp':
                         commit('errorCodeSet', {
                             dialogVisible: true,
-                            dialogMessage: 'The mailbox does not belong to the company mailbox',
+                            dialogMessage: 'Email does not belong to the corporation.',
                         });
                         break;
                     case 'cla.not_ready_to_sign':
                         commit('errorSet', {
                             dialogVisible: true,
-                            dialogMessage: 'The organization is not ready',
+                            dialogMessage: 'The organization is not ready.',
                         });
                         break;
                     case 'cla.system_error':

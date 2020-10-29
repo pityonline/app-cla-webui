@@ -57,7 +57,7 @@
         data() {
             var validateAccount = (rule, value, callback) => {
                 if (value === '') {
-                    callback(new Error('please input account number'));
+                    callback(new Error('Please enter the Email.'));
                 }else {
                     callback()
                 }
@@ -65,7 +65,7 @@
             };
             var validatePass = (rule, value, callback) => {
                 if (value === '') {
-                    callback(new Error('please input password'));
+                    callback(new Error('please enter the password.'));
                 }else{
                     callback()
                 }
@@ -145,7 +145,7 @@
                    }else{
                        this.$store.commit('errorCodeSet', {
                            dialogVisible: true,
-                           dialogMessage: 'Wrong user name or password, please try again',
+                           dialogMessage: 'Username or password is wrong, please try again.',
                        })
                    }
 

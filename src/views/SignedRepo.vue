@@ -6,22 +6,6 @@
                 <router-view></router-view>
             </el-col>
         </el-row>
-
-        <el-dialog
-                width="20%"
-                title=""
-                align="center"
-                :visible.sync="deleteUserVisible">
-            <el-row align="center">
-                确定删除？
-            </el-row>
-            <el-row align="center" class="marginTop1rem contentTitle">
-
-                <el-button type="primary" size="medium" @click="deleteContributor()">确定</el-button>
-                <el-button size="medium" @click="deleteUserVisible=false">取消</el-button>
-            </el-row>
-
-        </el-dialog>
         <Footer></Footer>
     </div>
 
@@ -53,7 +37,6 @@
                     height: '',
                 },
                 deleteId: '',
-                deleteUserVisible: false,
                 listDialogVisible: false,
                 tableDataOther: [{repository: 'ooo', cla: 'test', sharedGist: 'Yes', contributors: '0',},],
                 tableTotal: 0,
@@ -89,10 +72,6 @@
                     this.$message.closeAll()
                     this.$message.error(err.response.data)
                 })
-            },
-            clickDelete(id) {
-                this.deleteUserVisible = true;
-                this.deleteId = id
             },
             deleteContributor() {
                 this.$axios({
