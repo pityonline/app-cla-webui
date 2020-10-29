@@ -27,7 +27,7 @@
                     <el-row class="guideTitle">
                         Signing CLA Guide for...
                     </el-row>
-                    <el-row align="middle">
+                    <el-row >
                         <el-col :span="8" class="SignTypeCol" :class="{'typeShadow':signType==='corporation'}"
                                 @click.native="clickSignTypeGuide('corporation')">
                             <div class="SignTypeBox">
@@ -138,6 +138,9 @@
             height: 16rem;
             font-size: 1.5rem;
             font-family: Roboto-Bold,sans-serif;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
         }
         .SignTypeIcon {
             width: 5rem;
