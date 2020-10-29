@@ -1,6 +1,6 @@
 <template>
     <div id="employeeList">
-        <p id="tabName" >Employee</p>
+        <p id="tabName">Employee</p>
         <el-tabs v-model="active">
             <el-tab-pane label="inactive" name="first" style="margin-top: 1rem">
                 <div style="margin-bottom: 1rem" class="tableStyle">
@@ -128,6 +128,7 @@
     import http from '../until/http'
     import corpReLoginDialog from '../components/CorpReLoginDialog'
     import reTryDialog from '../components/ReTryDialog'
+
     export default {
         name: "EmployeeList",
         components: {
@@ -373,19 +374,23 @@
 
 <style lang="less">
     @import "../assets/font/css/Roboto-Regular.css";
+
     #employeeList {
         & .el-dialog {
             border-radius: 1rem;
         }
+
         & #tabName {
             user-select: none;
             font-family: Roboto-Regular, sans-serif;
             font-size: 2rem;
             text-align: left;
         }
+
         .el-tabs__active-bar {
             background-color: #319E55;
         }
+
         .el-tabs__item.is-active {
             color: #319E55;
         }
@@ -393,18 +398,22 @@
         .el-tabs__item:hover {
             color: #319E55;
         }
+
         .el-tabs__item {
             font-size: 1.5rem;
         }
+
         & .tableStyle {
             margin-bottom: 2rem;
             padding: 3rem;
             background-color: white;
             border-radius: 1.5rem;
         }
+
         & .el-dialog__body {
             padding-top: 0;
         }
+
         & .cancelBt {
             width: 5rem;
             height: 2rem;
@@ -507,8 +516,9 @@
         & .mySwitch .el-switch__label.is-active {
             display: block;
         }
+
         &
-        & .mySwitch .el-switch__label .el-switch__label--left .is-active span {
+        & .mySwitch .el-switch__label--left .is-active span {
             color: #7B7B7B;
         }
 
