@@ -507,8 +507,9 @@
         & .mySwitch .el-switch__label.is-active {
             display: block;
         }
-        & .mySwitch .el-switch__label.is-active span {
-            color: #575757;
+        &
+        & .mySwitch .el-switch__label .el-switch__label--left .is-active span {
+            color: #7B7B7B;
         }
 
         .el-switch.is-checked .el-switch__core {
