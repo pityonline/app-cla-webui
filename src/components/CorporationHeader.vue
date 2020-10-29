@@ -24,9 +24,9 @@
                             <div @click="openOrCloseMenu('d')">
                                 reset password
                             </div>
-                            <div v-if="userInfo[orgValue].role==='admin'" @click="openOrCloseMenu('e')">
-                                my cla
-                            </div>
+                            <!--<div v-if="userInfo[orgValue].role==='admin'" @click="openOrCloseMenu('e')">-->
+                                <!--my cla-->
+                            <!--</div>-->
                             <div @click="openOrCloseMenu('f')">
                                 login out
                             </div>
