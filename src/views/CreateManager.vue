@@ -4,17 +4,17 @@
             <p id="tabName">Create Manager</p>
             <el-row class="createUserBack">
                 <el-row class="emailRow" gutter="20" v-for="(item,index) in data">
-                    <el-col :span="4">
+                    <el-col :span="8">
                         <el-input
                                 placeholder="please input name" clearable="" size="medium" v-model="item.name">
                         </el-input>
                     </el-col>
-                    <el-col :span="12">
+                    <el-col :span="10">
                         <el-input
                                 placeholder="please input email" clearable="" size="medium" v-model="item.email">
                         </el-input>
                     </el-col>
-                    <el-col :span="8" align="right">
+                    <el-col :span="6" align="right">
                         <button class="deleteBt" @click="myDeleteRow(index)">-</button>
                         <button class="button" @click="addRow(index)">+</button>
                     </el-col>
