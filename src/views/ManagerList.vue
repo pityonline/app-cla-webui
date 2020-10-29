@@ -20,15 +20,15 @@
                                 :data="tableData">
                             <el-table-column
                             prop="name"
-                            label="Manager Name">
+                            label="Name">
                             </el-table-column>
                             <el-table-column
                                     prop="email"
-                                    label="email">
+                                    label="Email">
                             </el-table-column>
                             <el-table-column
                                     prop="role"
-                                    label='role'>
+                                    label='Role'>
                             </el-table-column>
                             <el-table-column
                                     v-if="!multipleChoice"
@@ -151,10 +151,10 @@
                 this.emails = [];
                 if (this.multipleChoice) {
                     this.multipleSelection.forEach(item => {
-                        this.emails.push(item.email)
+                        this.emails.push({email:item.email})
                     })
                 } else {
-                    this.emails.push(row.email)
+                    this.emails.push({email:row.email})
                 }
                 this.deleteUserVisible = true
 
@@ -206,7 +206,7 @@
             },
             submit() {
                 let obj = {
-                    emails: this.emails
+                    managers: this.emails
                 }
                 http({
                     url: url.deleteEmployeeManager,

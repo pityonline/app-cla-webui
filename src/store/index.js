@@ -191,7 +191,7 @@ export default new Vuex.Store({
                     case 'cla.no_corp_manager':
                         commit('errorSet', {
                             dialogVisible: true,
-                            dialogMessage: 'No manager has been set up',
+                            dialogMessage: 'Your company has not added any managers for this project.You can\'t sign',
                         });
                         break;
                     case 'cla.has_not_signed':
