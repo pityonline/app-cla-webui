@@ -1,6 +1,6 @@
 <template>
     <div class="corpHeader">
-        <el-col class="header" :offset="4" :span="16">
+        <el-col class="header" :offset="5" :span="14">
             <div class="box">
                 <svg-icon  @click="toHome()" icon-class="logo" class="icon"></svg-icon>
             </div>
