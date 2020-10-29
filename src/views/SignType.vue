@@ -1,6 +1,5 @@
 <template>
-    <el-row>
-        <el-col class="index" id="transparentDiv" :style="transparentDiv">
+    <el-row class="index" id="transparentDiv" :style="transparentDiv">
             <NewHeader></NewHeader>
             <el-row id="section" :style="sectionStyle">
                 <el-col :offset="4" :span="16" style="height: 100%">
@@ -98,7 +97,6 @@
                 </el-col>
             </el-row>
             <NewFooter></NewFooter>
-        </el-col>
     </el-row>
 </template>
 <script>
