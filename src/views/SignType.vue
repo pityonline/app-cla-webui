@@ -2,11 +2,11 @@
     <el-row class="index" id="transparentDiv" :style="transparentDiv">
         <NewHeader></NewHeader>
         <el-row id="section" :style="sectionStyle">
-            <div class="backgroundBox">
-                <img src="../assets/images/backgroundx1.png" alt="">
-            </div>
-            <el-col :offset="4" :span="16">
-                <el-row style="height: 680px">
+            <el-col :offset="5" :span="14">
+                <el-row class="actionBox">
+                    <div class="backgroundBox">
+                        <img src="../assets/images/backgroundx1.png" alt="">
+                    </div>
                     <el-col :span="14" style="height: 100%">
                         <el-row style="height: 100%">
                             <el-col class="title" style="height: 100%">
@@ -236,21 +236,26 @@
     @import "../assets/font/css/Roboto-Regular.css";
 
     .index {
+
         display: flex;
         flex-direction: column;
 
         & > #section {
-            position: relative;
             flex-grow: 1;
 
+        }
+
+        .actionBox {
+            position: relative;
+            height: 720px;
         }
 
         .backgroundBox {
             background-repeat: no-repeat;
             position: absolute;
             overflow: hidden;
-            top: 210px;
-            left: 630px;
+            top: 120px;
+            left: 230px;
 
         }
 
@@ -271,7 +276,7 @@
         }
 
         .button {
-            width: 15rem;
+            width: 17rem;
             height: 4rem;
             border-radius: 2rem;
             border: none;
