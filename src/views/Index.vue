@@ -85,16 +85,7 @@
             NewFooter
         },
         watch: {
-            $route(to,from){
-                console.log(to.path);
-            },
-            // $route: {
-            //     handler: function(val, oldVal){
-            //         console.log(val);
-            //     },
-            //     // 深度观察监听
-            //     deep: true
-            // }
+
         },
         data() {
             return {
@@ -115,10 +106,6 @@
         },
         methods: {
             ...mapActions(['setPlatformAct']),
-            getPath(){
-                console.log(this.$route.path);
-                this.showGuide = this.$route.path === '/sign';
-            },
             clickSignTypeGuide(type) {
                 console.log(type);
                 this.signType = type;

@@ -1,46 +1,124 @@
 <template>
-    <el-row class="signType" style="height: 100%">
-        <el-col id="sign" style="height: 100%">
-            <el-row style="height: 50%">
-            </el-row>
-            <el-row style="height: 50%">
-                <el-col align="right" class="buttonBox">
-                    <div id="btBox">
-                        <div>
+    <el-row>
+        <el-col class="index" id="transparentDiv" :style="transparentDiv">
+            <NewHeader></NewHeader>
+            <el-row id="section" :style="sectionStyle">
+                <el-col :offset="4" :span="16" style="height: 100%">
+                    <el-row style="height: 100%">
+                        <el-col :span="14" class="title">
+                            <div>
+                                <div class="name">
+                                    <div>
+                                        <p>Contributor License Agreement</p>
+                                    </div>
+                                    <span>Sign</span>
+                                </div>
+                                <!--<p class="description">Easily handle Contributor License Agreements (CLAs)</p>-->
+                            </div>
+                        </el-col>
+                        <el-col :span="10" style="height: 100%;">
+                            <el-row class="signType" style="height: 100%">
+                                <el-col id="sign" style="height: 100%">
+                                    <el-row style="height: 50%">
+                                    </el-row>
+                                    <el-row style="height: 50%">
+                                        <el-col align="right" class="buttonBox">
+                                            <div id="btBox">
+                                                <div>
 
-                            <button class="button" @click="submit('corporation')">
-                                Sign As Corporation
-                            </button>
-                        </div>
-                        <div>
-                            <button class="button" @click="submit('employee')">
-                                Sign As Employee
-                            </button>
-                        </div>
-                        <button class="button" @click="submit('individual')">
-                            Sign As Individual
-                        </button>
-                    </div>
+                                                    <button class="button" @click="submit('corporation')">
+                                                        Sign As Corporation
+                                                    </button>
+                                                </div>
+                                                <div>
+                                                    <button class="button" @click="submit('employee')">
+                                                        Sign As Employee
+                                                    </button>
+                                                </div>
+                                                <button class="button" @click="submit('individual')">
+                                                    Sign As Individual
+                                                </button>
+                                            </div>
+                                        </el-col>
+                                    </el-row>
+                                </el-col>
+                                <ReTryDialog :dialogVisible="reTryDialogVisible" :message="reLoginMsg"
+                                             :title="reLoginDialogTitle"></ReTryDialog>
+                            </el-row>
+                        </el-col>
+                    </el-row>
                 </el-col>
             </el-row>
+            <el-row>
+                <el-col :offset="4" :span="16">
+                    <el-row class="guideTitle">
+                        Signing CLA Guide for...
+                    </el-row>
+                    <el-row >
+                        <el-col :span="8" class="SignTypeCol" :class="{'typeShadow':signType==='corporation'}"
+                                @click.native="clickSignTypeGuide('corporation')">
+                            <div class="SignTypeBox">
+                                <svg-icon icon-class="qiye" class="SignTypeIcon"></svg-icon>
+                                <p>Corporation</p>
+                            </div>
+                        </el-col>
+                        <el-col :span="8" class="SignTypeCol" :class="{'typeShadow':signType==='employee'}"
+                                @click.native="clickSignTypeGuide('employee')">
+                            <div class="SignTypeBox">
+                                <svg-icon icon-class="yuangong" class="SignTypeIcon"></svg-icon>
+                                <p>Employee</p>
+                            </div>
+                        </el-col>
+                        <el-col :span="8" class="SignTypeCol" :class="{'typeShadow':signType==='individual'}"
+                                @click.native="clickSignTypeGuide('individual')">
+                            <div class="SignTypeBox">
+                                <svg-icon icon-class="geren" class="SignTypeIcon"></svg-icon>
+                                <p>Individual</p>
+                            </div>
+                        </el-col>
+                    </el-row>
+                    <el-row v-if="signType==='corporation'" class="guideBox">
+                       corporation guide
+                    </el-row>
+                    <el-row v-if="signType==='employee'" class="guideBox">
+                        employee guide
+                    </el-row>
+                    <el-row v-if="signType==='individual'" class="guideBox">
+                        individual guide
+                    </el-row>
+                </el-col>
+            </el-row>
+            <NewFooter></NewFooter>
         </el-col>
-        <ReTryDialog :dialogVisible="reTryDialogVisible" :message="reLoginMsg"
-                     :title="reLoginDialogTitle"></ReTryDialog>
     </el-row>
 </template>
 <script>
-    import * as url from '../until/api'
-    import {mapActions} from 'vuex'
+    import NewHeader from '@components/NewHeader'
+    import NewFooter from '@components/NewFooter'
     import * as until from '../until/until'
+    import * as url from '../until/api'
     import http from '../until/http'
+    import Select from '@components/Select'
+    import {mapActions} from 'vuex'
     import ReTryDialog from '../components/ReTryDialog'
 
+    window.onresize = () => {
+        if (until.getClientHeight() > document.getElementById('transparentDiv').offsetHeight) {
+            document.getElementById("transparentDiv").style.height = until.getClientHeight() + 'px';
+        }
+    }
     export default {
-        name: "SignType",
+        name: 'Login',
         components: {
+            Select,
+            NewHeader,
+            NewFooter,
             ReTryDialog,
         },
-        computed: {
+        watch: {
+
+        },
+        computed:{
             reTryDialogVisible() {
                 return this.$store.state.reTryDialogVisible
             },
@@ -55,10 +133,22 @@
                 org: '',
                 repo: '',
                 domain: this.$store.state.domain,
+                signType: 'corporation',
+                transparentDiv: {
+                    height: '',
+                },
+                sectionStyle: {
+                    height: '',
+                },
+            }
+        },
+        provide() {
+            return {
+                setClientHeight: this.setClientHeight
             }
         },
         methods: {
-            ...mapActions(['setTokenAct', 'setLoginTypeAct', 'setRepoInfoAct', 'errorAct']),
+            ...mapActions(['setPlatformAct','setLoginTypeAct', 'setRepoInfoAct', 'errorAct']),
             getRepoInfo() {
                 let params = window.location.href.split('/sign/')[1]
                 let repoInfoParams = ''
@@ -115,66 +205,143 @@
                 date.setTime(date.getTime() - 10000);
                 document.cookie = `_mark=; expire=${date.toUTCString()}; Domain=${this.domain}; path=/`;
             },
+            clickSignTypeGuide(type) {
+                console.log(type);
+                this.signType = type;
+            },
+            setClientHeight() {
+                this.$nextTick(() => {
+                    if (until.getClientHeight() > document.getElementById('transparentDiv').offsetHeight) {
+                        this.transparentDiv.height = until.getClientHeight() + 'px'
+                    }
+                })
+            },
         },
-
-        created() {
+        created(){
             this.setCookie();
             this.getRepoInfo();
         },
         mounted() {
             until.setMinHeight('sign', 'btBox')
+            this.setClientHeight();
         }
     }
 </script>
 <style scoped lang="less">
     @import "../assets/font/css/Roboto-Bold.css";
+    @import "../assets/font/css/Roboto-Black.css";
+    @import "../assets/font/css/Roboto-Light.css";
+    @import "../assets/font/css/Roboto-Regular.css";
+    .index {
+        display: flex;
+        flex-direction: column;
 
-    .signType {
-        font-family: Roboto-Bold, sans-serif;
+        & > #section {
+            flex-grow: 1;
+            background-image: url("../assets/images/backgroundx2.png");
+            background-repeat: no-repeat;
+            background-position: 40rem center;
+            background-size: 55rem;
 
-        & > div {
+        }
+
+
+        .signType {
+            font-family: Roboto-Bold, sans-serif;
+
+            & > div {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+        }
+
+        .buttonBox {
+            height: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+        }
+
+        .button {
+            width: 15rem;
+            height: 4rem;
+            border-radius: 2rem;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            background: linear-gradient(to right, #97DB30, #319E55);
+            margin: 1.2rem 0;
+        }
+
+        .button:focus {
+            outline: none;
+        }
+
+        .disabledButton {
+            width: 15rem;
+            height: 4rem;
+            border-radius: 2rem;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            /*background: linear-gradient(to right, #97DB30, #319E55);*/
+            background-color: lightgrey;
+            margin: 1.2rem 0;
+        }
+
+        .disabledButton:focus {
+            outline: none;
+        }
+        .guideBox{
+            box-shadow:0 10px 20px 10px #F3F3F3;
+            margin-bottom: 5rem;
+            padding-top:4rem;
+            padding-bottom: 10rem;
+        }
+        .typeShadow {
+            box-shadow: 0 -10px 20px 10px #F3F3F3;
+        }
+        .SignTypeCol {
+            cursor: pointer;
+            height: 16rem;
+            font-size: 1.5rem;
+            font-family: Roboto-Bold,sans-serif;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .SignTypeIcon {
+            width: 5rem;
+            height: 5rem;
+            margin: 1rem;
+        }
+        .SignTypeBox{
+
+        }
+        .guideTitle{
+            font-size:2.5rem ;
+            margin: 5rem 0;
         }
     }
-
-    .buttonBox {
+    .title {
         height: 100%;
         display: flex;
         flex-direction: column;
+        justify-content: center;
+        text-align: left
     }
 
-    .button {
-        width: 15rem;
-        height: 4rem;
-        border-radius: 2rem;
-        border: none;
-        color: white;
+    .name {
+        font-family: Roboto-Regular, sans-serif;
+        font-size: 3rem;
+    }
+
+    .description {
+        font-family: Roboto-Regular, sans-serif;
         font-size: 1.5rem;
-        cursor: pointer;
-        background: linear-gradient(to right, #97DB30, #319E55);
-        margin: 1.2rem 0;
     }
 
-    .button:focus {
-        outline: none;
-    }
 
-    .disabledButton {
-        width: 15rem;
-        height: 4rem;
-        border-radius: 2rem;
-        border: none;
-        color: white;
-        font-size: 1.5rem;
-        cursor: pointer;
-        /*background: linear-gradient(to right, #97DB30, #319E55);*/
-        background-color: lightgrey;
-        margin: 1.2rem 0;
-    }
-
-    .disabledButton:focus {
-        outline: none;
-    }
 </style>
