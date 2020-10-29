@@ -137,20 +137,13 @@
 
         }
         .guideBox{
-            box-shadow:
-                    0 0 0 0 #FFFFFF,
-                    0 0 20px 10px #F3F3F3,
-                    0 0 20px 10px #F3F3F3,
-                    0 0 20px 10px #F3F3F3;
+            box-shadow:0 10px 20px 10px #F3F3F3;
             margin-bottom: 5rem;
             padding-top:4rem;
             padding-bottom: 10rem;
         }
         .typeShadow {
-            box-shadow: 0 0 20px 10px #F3F3F3,
-                        0 0 20px 10px #F3F3F3,
-                        0 0 20px 10px #F3F3F3,
-                        0 0 0 0 #FFFFFF;
+            box-shadow: 0 -10px 20px 10px #F3F3F3;
         }
         .SignTypeCol {
             cursor: pointer;
