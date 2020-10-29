@@ -188,6 +188,12 @@ export default new Vuex.Store({
                             dialogMessage: 'The parameter is invalid and cannot be signed',
                         });
                         break;
+                    case 'cla.no_corp_manager':
+                        commit('errorSet', {
+                            dialogVisible: true,
+                            dialogMessage: 'No manager has been set up',
+                        });
+                        break;
                     case 'cla.has_not_signed':
                         commit('errorSet', {
                             dialogVisible: true,

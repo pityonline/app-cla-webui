@@ -102,8 +102,8 @@
             },
             login(userName, pwd) {
                 let obj = {
-                    user: userName,
-                    password: pwd
+                    user: userName.trim(),
+                    password: pwd.trim()
                 };
                http({
                     url:  url.corporationManagerAuth,
