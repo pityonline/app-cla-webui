@@ -21,17 +21,17 @@
             font-size: 18px;
         }
     }
-    @media screen and (min-width:1200px) and (max-width:1920px) {
+    @media screen and (min-width:1120px) and (max-width:1920px) {
         html {
             font-size: 16px;
         }
     }
-    @media screen and (min-width:800px) and (max-width:1200px) {
+    @media screen and (min-width:768px) and (max-width:1120px) {
         html {
             font-size: 14px;
         }
     }
-    @media screen and  (max-width:800px) {
+    @media screen and  (max-width:768px) {
         html {
             font-size: 12px;
         }
