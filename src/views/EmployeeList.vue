@@ -518,7 +518,7 @@
         }
 
         &
-        & .mySwitch .el-switch__label--left .is-active span {
+        & .mySwitch .el-switch__label--left span {
             color: #7B7B7B;
         }
 
