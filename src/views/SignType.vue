@@ -12,7 +12,9 @@
                             <el-col class="title" style="height: 100%">
                                 <div class="name">
                                     <div>
-                                        <p>Contributor License Agreement</p>
+                                        <p>Contributor</p>
+                                        <p>License</p>
+                                        <p>Agreement</p>
                                     </div>
                                     <span>Sign</span>
                                 </div>
@@ -54,39 +56,364 @@
                 <el-row>
                     <el-col>
                         <el-row class="guideTitle">
-                            Signing CLA Guide for...
+                            Signing CLA Guide for
                         </el-row>
                         <el-row>
                             <el-col :span="8" class="SignTypeCol" :class="{'typeShadow':signType==='corporation'}"
                                     @click.native="clickSignTypeGuide('corporation')">
                                 <div class="SignTypeBox">
-                                    <svg-icon icon-class="qiye" class="SignTypeIcon"></svg-icon>
+                                    <svg-icon icon-class="Enterprise" class="SignTypeIcon"></svg-icon>
                                     <p>Corporation</p>
+                                </div>
+                                <div v-if="signType==='corporation'" class="coverBox">
                                 </div>
                             </el-col>
                             <el-col :span="8" class="SignTypeCol" :class="{'typeShadow':signType==='employee'}"
                                     @click.native="clickSignTypeGuide('employee')">
                                 <div class="SignTypeBox">
-                                    <svg-icon icon-class="yuangong" class="SignTypeIcon"></svg-icon>
+                                    <svg-icon icon-class="Employee" class="SignTypeIcon"></svg-icon>
                                     <p>Employee</p>
+                                </div>
+                                <div v-if="signType==='employee'" class="coverBox">
                                 </div>
                             </el-col>
                             <el-col :span="8" class="SignTypeCol" :class="{'typeShadow':signType==='individual'}"
                                     @click.native="clickSignTypeGuide('individual')">
                                 <div class="SignTypeBox">
-                                    <svg-icon icon-class="geren" class="SignTypeIcon"></svg-icon>
+                                    <svg-icon icon-class="Individual" class="SignTypeIcon"></svg-icon>
                                     <p>Individual</p>
+                                </div>
+                                <div v-if="signType==='individual'" class="coverBox">
                                 </div>
                             </el-col>
                         </el-row>
                         <el-row v-if="signType==='corporation'" class="guideBox">
-                            corporation guide
+                            <div class="stepCoverBox">
+
+                            </div>
+                            <el-col>
+                                <el-row class="stepBox">
+                                    <el-col :offset="10" :span="4">
+                                        <svg-icon class="stepIcon" icon-class="click"></svg-icon>
+                                    </el-col>
+                                    <el-col :span="10" class="textCol">
+                                        <div class="rightText">
+                                            Click <span>Sign as Corporation</span> to go to the CLA signing page.
+                                        </div>
+                                    </el-col>
+                                </el-row>
+                                <el-row>
+
+                                    <el-col class="lineBox" :offset="10" :span="4">
+                                        <div class="greenLine">
+
+                                        </div>
+                                    </el-col>
+
+                                </el-row>
+
+                                <el-row class="stepBox">
+                                    <el-col :span="10" class="textCol">
+                                        <div class="leftText">
+                                            Fill in the information and submit for signature.
+                                        </div>
+                                    </el-col>
+                                    <el-col class="iconBox" :span="4">
+                                        <svg-icon class="stepIcon" icon-class="sign"></svg-icon>
+                                    </el-col>
+                                    <el-col :span="10">
+                                        <div>
+
+                                        </div>
+                                    </el-col>
+                                </el-row>
+                                <el-row>
+
+                                    <el-col class="lineBox" :offset="10" :span="4">
+                                        <div class="greenLine">
+
+                                        </div>
+                                    </el-col>
+
+                                </el-row>
+                                <el-row class="stepBox">
+
+                                    <el-col :offset="10" :span="4">
+                                        <svg-icon class="stepIcon" icon-class="send"></svg-icon>
+                                    </el-col>
+                                    <el-col :span="10" class="textCol">
+                                        <div class="rightText">
+                                            Receive an e-mail from the community to sign the enterprise CLA. Follow the
+                                            instructions in the e-mail to sign the CLA.
+                                        </div>
+                                    </el-col>
+                                </el-row>
+                                <el-row>
+
+                                    <el-col class="lineBox" :offset="10" :span="4">
+                                        <div class="greenLine">
+
+                                        </div>
+                                    </el-col>
+
+                                </el-row>
+                                <el-row class="stepBox">
+                                    <el-col :span="10" class="textCol">
+                                        <div class="leftText">
+                                            The community administrator approves the CLA file signed by the enterprise
+                                            and enables the administrator account of the enterprise in the community.
+                                        </div>
+                                    </el-col>
+                                    <el-col :span="4">
+                                        <svg-icon class="stepIcon" icon-class="auth"></svg-icon>
+                                    </el-col>
+                                    <el-col :span="10">
+                                        <div>
+
+                                        </div>
+                                    </el-col>
+                                </el-row>
+                                <el-row>
+
+                                    <el-col class="lineBox" :offset="10" :span="4">
+                                        <div class="greenLine">
+
+                                        </div>
+                                    </el-col>
+
+                                </el-row>
+                                <el-row class="stepBox">
+
+                                    <el-col :offset="10" :span="4">
+                                        <svg-icon class="stepIcon" icon-class="success"></svg-icon>
+                                    </el-col>
+                                    <el-col :span="10" class="textCol">
+                                        <div class="rightText">
+                                            Receive an e-mail containing the administrator account, indicating that the
+                                            CLA is signed successfully.
+                                        </div>
+                                    </el-col>
+                                </el-row>
+                                <el-row>
+
+                                    <el-col class="lineBox" :offset="10" :span="4">
+                                        <div class="greenLine">
+
+                                        </div>
+                                    </el-col>
+
+                                </el-row>
+                                <el-row class="stepBox">
+                                    <el-col :span="10" class="textCol">
+                                        <div class="leftText">
+                                            Log in to the <span>CLA signing platform</span>, add an employee as
+                                            administrator, and download the enterprise CLA file.
+                                        </div>
+                                    </el-col>
+                                    <el-col :span="4">
+                                        <svg-icon class="stepIcon" icon-class="manage"></svg-icon>
+                                    </el-col>
+                                    <el-col :span="10">
+                                        <div>
+                                        </div>
+                                    </el-col>
+                                </el-row>
+                            </el-col>
                         </el-row>
                         <el-row v-if="signType==='employee'" class="guideBox">
-                            employee guide
+                            <el-col>
+                                <el-row class="stepBox">
+                                    <el-col :offset="10" :span="4">
+                                        <svg-icon class="stepIcon" icon-class="click"></svg-icon>
+                                    </el-col>
+                                    <el-col :span="10" class="textCol">
+                                        <div class="rightText">
+                                            Click <span>Sign as Employee</span> to go to the Gitee authorization page.
+                                        </div>
+                                    </el-col>
+                                </el-row>
+                                <el-row>
+
+                                    <el-col class="lineBox" :offset="10" :span="4">
+                                        <div class="greenLine">
+
+                                        </div>
+                                    </el-col>
+
+                                </el-row>
+
+                                <el-row class="stepBox">
+                                    <el-col :span="10" class="textCol">
+                                        <div class="leftText">
+                                            Agree to access your Gitee account on the CLA signing platform and go to the employee CLA signing page.
+                                        </div>
+                                    </el-col>
+                                    <el-col class="iconBox" :span="4">
+                                        <svg-icon class="stepIcon" icon-class="sign"></svg-icon>
+                                    </el-col>
+                                    <el-col :span="10">
+                                        <div>
+
+                                        </div>
+                                    </el-col>
+                                </el-row>
+                                <el-row>
+
+                                    <el-col class="lineBox" :offset="10" :span="4">
+                                        <div class="greenLine">
+
+                                        </div>
+                                    </el-col>
+
+                                </el-row>
+                                <el-row class="stepBox">
+
+                                    <el-col :offset="10" :span="4">
+                                        <svg-icon class="stepIcon" icon-class="send"></svg-icon>
+                                    </el-col>
+                                    <el-col :span="10" class="textCol">
+                                        <div class="rightText">
+                                            Fill in the information and submit for signature.
+                                        </div>
+                                    </el-col>
+                                </el-row>
+                                <el-row>
+
+                                    <el-col class="lineBox" :offset="10" :span="4">
+                                        <div class="greenLine">
+
+                                        </div>
+                                    </el-col>
+
+                                </el-row>
+                                <el-row class="stepBox">
+                                    <el-col :span="10" class="textCol">
+                                        <div class="leftText">
+                                            Wait for the administrator of your enterprise in the community to activate the signed CLA file you submitted.
+                                        </div>
+                                    </el-col>
+                                    <el-col :span="4">
+                                        <svg-icon class="stepIcon" icon-class="auth"></svg-icon>
+                                    </el-col>
+                                    <el-col :span="10">
+                                        <div>
+
+                                        </div>
+                                    </el-col>
+                                </el-row>
+                                <el-row>
+
+                                    <el-col class="lineBox" :offset="10" :span="4">
+                                        <div class="greenLine">
+
+                                        </div>
+                                    </el-col>
+
+                                </el-row>
+                                <el-row class="stepBox">
+
+                                    <el-col :offset="10" :span="4">
+                                        <svg-icon class="stepIcon" icon-class="success"></svg-icon>
+                                    </el-col>
+                                    <el-col :span="10" class="textCol">
+                                        <div class="rightText">
+                                            Receive an e-mail indicating that the CLA is signed and activated.
+                                        </div>
+                                    </el-col>
+                                </el-row>
+                                <el-row>
+
+                                    <el-col class="lineBox" :offset="10" :span="4">
+                                        <div class="greenLine">
+
+                                        </div>
+                                    </el-col>
+
+                                </el-row>
+                            </el-col>
                         </el-row>
                         <el-row v-if="signType==='individual'" class="guideBox">
-                            individual guide
+                            <el-col>
+                                <el-row class="stepBox">
+                                    <el-col :offset="10" :span="4">
+                                        <svg-icon class="stepIcon" icon-class="click"></svg-icon>
+                                    </el-col>
+                                    <el-col :span="10" class="textCol">
+                                        <div class="rightText">
+                                            Click <span>Sign as Individual</span> to go to the Gitee authorization page.
+                                        </div>
+                                    </el-col>
+                                </el-row>
+                                <el-row>
+
+                                    <el-col class="lineBox" :offset="10" :span="4">
+                                        <div class="greenLine">
+
+                                        </div>
+                                    </el-col>
+
+                                </el-row>
+
+                                <el-row class="stepBox">
+                                    <el-col :span="10" class="textCol">
+                                        <div class="leftText">
+                                            Agree to access your Gitee account on the CLA signing platform and go to the individual CLA signing page.
+                                        </div>
+                                    </el-col>
+                                    <el-col class="iconBox" :span="4">
+                                        <svg-icon class="stepIcon" icon-class="sign"></svg-icon>
+                                    </el-col>
+                                    <el-col :span="10">
+                                        <div>
+
+                                        </div>
+                                    </el-col>
+                                </el-row>
+                                <el-row>
+
+                                    <el-col class="lineBox" :offset="10" :span="4">
+                                        <div class="greenLine">
+
+                                        </div>
+                                    </el-col>
+
+                                </el-row>
+                                <el-row class="stepBox">
+
+                                    <el-col :offset="10" :span="4">
+                                        <svg-icon class="stepIcon" icon-class="send"></svg-icon>
+                                    </el-col>
+                                    <el-col :span="10" class="textCol">
+                                        <div class="rightText">
+                                            Fill in the information and submit for signature.
+                                        </div>
+                                    </el-col>
+                                </el-row>
+                                <el-row>
+
+                                    <el-col class="lineBox" :offset="10" :span="4">
+                                        <div class="greenLine">
+
+                                        </div>
+                                    </el-col>
+
+                                </el-row>
+                                <el-row class="stepBox">
+                                    <el-col :span="10" class="textCol">
+                                        <div class="leftText">
+                                            Receive an e-mail indicating that the the CLA is signed and activated.
+                                        </div>
+                                    </el-col>
+                                    <el-col :span="4">
+                                        <svg-icon class="stepIcon" icon-class="success"></svg-icon>
+                                    </el-col>
+                                    <el-col :span="10">
+                                        <div>
+
+                                        </div>
+                                    </el-col>
+                                </el-row>
+                            </el-col>
                         </el-row>
                     </el-col>
                 </el-row>
@@ -276,6 +603,7 @@
         }
 
         .button {
+            font-family: Roboto-Regular, sans-serif;
             width: 17rem;
             height: 4rem;
             border-radius: 2rem;
@@ -309,14 +637,25 @@
         }
 
         .guideBox {
+            color: #B5B5B5;
+            font-family: Roboto-Regular, sans-serif;
             box-shadow: 0 10px 20px 10px #F3F3F3;
             margin-bottom: 5rem;
             padding-top: 4rem;
             padding-bottom: 10rem;
+            position: relative;
+            .stepCoverBox{
+                position: absolute;
+                width: 100%;
+                height: 20px;
+                top: 0;
+                left: 0;
+                background-color: white;
+            }
         }
 
         .typeShadow {
-            box-shadow: 0 -10px 20px 10px #F3F3F3;
+            box-shadow: 0 -10px 20px 10px #f3f3f3;
         }
 
         .SignTypeCol {
@@ -327,6 +666,16 @@
             display: flex;
             justify-content: center;
             flex-direction: column;
+            position: relative;
+            .coverBox{
+                width: 100%;
+                height: 40px;
+                position: absolute;
+                bottom: -20px;
+                left: 0;
+                z-index: 1;
+                background-color: white;
+            }
         }
 
         .SignTypeIcon {
@@ -336,13 +685,71 @@
         }
 
         .SignTypeBox {
-
+            p {
+                font-family: Roboto-Regular, sans-serif;
+                font-size: 1.5rem;
+            }
         }
 
         .guideTitle {
+            font-family: Roboto-Regular,sans-serif;
             font-size: 2.5rem;
+            color: #565656;
             margin: 5rem 0;
         }
+    }
+
+    .iconBox {
+        font-size: 0;
+    }
+
+    .stepBox {
+        height: 80px;
+
+        .stepIcon {
+            width: 80px;
+            height: 80px;
+        }
+    }
+
+    .rightText {
+        line-height: 2rem;
+        padding-right: 80px;
+        text-align: left;
+
+        span {
+            font-family: Roboto-Bold, sans-serif;
+        }
+    }
+
+    .leftText {
+        line-height: 2rem;
+        text-align: right;
+        padding-left: 80px;
+
+        span {
+            color: #3CA550;
+        }
+    }
+
+    .textCol {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .lineBox {
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+    }
+
+    .greenLine {
+        width: 3px;
+        height: 140px;
+        background-color: #7DCB39;
+
     }
 
     .title {
@@ -355,7 +762,9 @@
 
     .name {
         font-family: Roboto-Regular, sans-serif;
-        font-size: 3rem;
+        color: #424242;
+        font-size: 5rem;
+        line-height: 20px;
     }
 
     .description {
