@@ -312,9 +312,6 @@
                     return Number(this.$store.state.repositoryValue)
                 }
             },
-            showConfigForm() {
-                return `${this.$store.state.showConfigForm}` === 'true'
-            },
         },
         watch: {
             $route(to, from) {
@@ -442,7 +439,7 @@
                 let newArr = this.customMetadataArr.concat(this.metadataArr);
                 for (let i = 0; i < newArr.length; i++) {
                     for (let j = i + 1; j < newArr.length; j++) {
-                        if (newArr[i].title === newArr[j].title) {
+                        if (newArr[i].title === newArr[j].title||newArr[i].type === newArr[j].type) {
                             return false;
                         }
                     }
@@ -475,14 +472,13 @@
 
                 } else {
                     this.$message.closeAll();
-                    this.$message.error('Same titles are filled.')
+                    this.$message.error('Same titles or types are filled.')
                 }
                 return fields
             },
             binding() {
                 let obj = {}
                 let cla = {url: this.cla_Link, language: this.claLanguageValue, fields: this.editMetadata()}
-                console.log(cla);
                 if (this.repositoryChoose) {
                     obj = {
                         repo_id: `${this.repositoryOptions[this.repositoryValue].repoName}`,
@@ -636,16 +632,6 @@
             tabsHandleClick(tab, event) {
                 tab.index === '0' ? this.$router.push('/linkedRepo') : this.$router.push('/signedRepoLogin')
             },
-            getOrgPermission() {
-                if (this.platform === 'gitee') {
-                } else {
-                }
-            },
-            listChangePage(page) {
-            },
-            newWindow() {
-                // window.open()
-            },
             openLinkDialog() {
                 (this.orgChoose && this.claChoose && this.isEmail) && (this.linkDialogVisible = true)
             },
@@ -659,84 +645,6 @@
                     return false
                 }
             },
-            linkRepository() {
-                let obj = {}
-                if (this.repositoryChoose) {
-                    obj = {
-                        repo_id: `${this.repositoryOptions[this.repositoryValue].repoName}`,
-                        cla_id: this.claOptions[this.claValue].id,
-                        org_email: this.email,
-                        platform: this.platform,
-                        org_id: `${this.orgOptions[this.orgValue].label}`,
-                        cla_language: this.claOptions[this.claValue].language,
-                        submitter: `${this.platform}/${this.$store.state.user.userName}`,
-                        metadata_id: '',
-                    };
-                } else {
-                    obj = {
-                        repo_id: '',
-                        cla_id: this.claOptions[this.claValue].id,
-                        org_email: this.email,
-                        platform: this.platform,
-                        org_id: `${this.orgOptions[this.orgValue].label}`,
-                        cla_language: this.claOptions[this.claValue].language,
-                        submitter: `${this.platform}/${this.$store.state.user.userName}`,
-                        metadata_id: '',
-                    };
-                }
-                // console.log(obj);
-                this.$axios({
-                    url: '/api' + url.linkRepository,
-                    method: 'post',
-                    data: obj,
-                    headers: {
-                        'Token': this.$store.state.access_token,
-                        'Access-Token': this.access_token,
-                        'Refresh-Token': this.refresh_token,
-                        'User': `${this.platform}/${this.user.userName}`
-                    }
-                }).then(res => {
-                    this.linkLoading = false;
-                    this.$message.success('success')
-                    this.$store.commit('setClaValue', '')
-                    this.$store.commit('setRepositoryValue', '')
-                    this.$store.commit('setClaChoose', false)
-                    this.$store.commit('setRepositoryChoose', false)
-                    this.email = '';
-                    document.cookie = '';
-                    this.linkDialogVisible = false;
-                    let data = {
-                        access_token: this.$store.state.access_token,
-                        refresh_token: this.$store.state.refresh_token,
-                        userName: this.$store.state.user.userName,
-                        platform: this.platform
-                    }
-                    // this.getLinkedRepoListAct(data)
-                }).catch(err => {
-                    this.linkLoading = false
-                    this.$message.closeAll();
-                    this.$message.error(err.response.data)
-                })
-            },
-            checkCla() {
-                this.$router.push('/checkCla')
-            },
-            editHandleClick(index) {
-                this.editDialogVisible = true
-            },
-            toCreateCLA() {
-                this.$router.push('/createCLA')
-                this.$router.push('/createCLA')
-            },
-            toCreateMetadata() {
-                this.$router.push('/createMetadata')
-            },
-            claVisibleChange(visible) {
-                if (visible && this.filterChange) {
-                    this.getCLA();
-                    this.filterChange = false;
-                }
-            },
             orgVisibleChange(visible) {
                 if (visible) {
                     this.getOrgsInfo();
@@ -746,18 +654,6 @@
                 if (visible && this.org) {
                     this.getRepositoriesOfOrg(this.org, this.org_id);
                 }
-            },
-            changeCla(value) {
-                this.$store.commit('setClaValue', value)
-                this.$store.commit('setClaChoose', true)
-                this.showPreviewCla = true
-                this.previewText = this.claOptions[value].text;
-            },
-            createCLA() {
-                this.createCLADialogVisible = true
-            },
-            createMetadata() {
-                this.createMetadataDialogVisible = true
             },
             authorize() {
                 this.authorizeDialogVisible = true
@@ -851,17 +747,6 @@
                     }
                 }).catch(err => {
                 })
-            },
-            closeConfigForm() {
-                this.$store.commit('setShowConfigForm', 'false')
-                this.showConfigForm = false
-                this.setClientHeight()
-            },
-            configCla() {
-                this.$store.commit('setShowConfigForm', 'true')
-                this.showConfigForm = true;
-                this.configClaStyle.height = 'auto'
-                this.getOrgsInfo()
             },
             setClientHeight() {
                 this.$nextTick(() => {
