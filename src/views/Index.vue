@@ -13,9 +13,11 @@
                                 <el-col class="title" style="height: 100%">
                                     <div class="name">
                                         <div>
-                                            <p>Contributor License Agreement</p>
+                                            <p><span>C</span>ontributor</p>
+                                            <p><span>L</span>icense</p>
+                                            <p><span>A</span>greement</p>
                                         </div>
-                                        <span>Sign</span>
+                                        <!--<span>Sign</span>-->
                                     </div>
                                 </el-col>
 
@@ -154,7 +156,15 @@
 
     .name {
         font-family: Roboto-Regular, sans-serif;
-        font-size: 3rem;
+        color: #424242;
+        font-size: 5rem;
+        line-height: 30px;
+        p{
+            span{
+                font-family: Roboto-Bold, sans-serif;
+                font-weight: bold;
+            }
+        }
     }
 
     .description {
