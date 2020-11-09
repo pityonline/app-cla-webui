@@ -9,10 +9,12 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@panter/vue-i18next": "^0.15.2",
     "axios": "^0.19.2",
     "core-js": "^3.6.5",
     "downloadjs": "^1.4.7",
     "element-ui": "^2.13.2",
+    "i18next": "^19.8.3",
     "js": "^0.1.0",
     "js-md5": "^0.7.3",
     "less-loader": "^6.1.1",

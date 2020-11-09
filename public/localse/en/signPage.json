@@ -1,14 +1,12 @@
 {
+  "claTitle": "Contributor License Agreement",
   "corp": "Corporation",
   "emp": "Employee",
   "individual": "Individual",
-  "guideTitle": "Signing CLA Guide for",
-  "corpStep1": "Click Sign as Corporation to go to the CLA signing page.",
-  "corpStep2": "Fill in the information and submit for signature.",
-  "corpStep3": "Receive an e-mail from the community to sign the enterprise CLA. Follow the instructions in the e-mail to sign the CLA.",
-  "corpStep4": "The community administrator approves the CLA file signed by the enterprise and enables the administrator account of the enterprise in the community.",
-  "corpStep5": "Receive an e-mail containing the administrator account, indicating that the CLA is signed successfully.",
-  "corpStep6_1": "Log in to the",
-  "corpStep6_2":"add an employee as administrator, and download the enterprise CLA file.",
+  "requireText": "require field.",
+  "checkBoxText1": "I have read the",
+  "checkBoxText2": "and hereby consent to the processing of my data by",
+  "checkBoxText3": "in Hong Kong.",
+  "privacy": "Privacy Policy",
   "claSignPlatform": "CLA signing platform"
 }
