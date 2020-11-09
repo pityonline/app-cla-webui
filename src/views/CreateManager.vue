@@ -6,7 +6,7 @@
                 <el-row class="emailRow" gutter="20" v-for="(item,index) in data">
                     <el-col :span="6">
                         <el-input
-                                placeholder="please input name" @blur="setAcount(item.name,item.acount)" clearable="" size="medium" v-model="item.name">
+                                placeholder="please input name" @blur="setAcount(item.name,item.id)" clearable="" size="medium" v-model="item.name">
                         </el-input>
                     </el-col>
                     <el-col :span="8">
@@ -16,7 +16,7 @@
                     </el-col>
                     <el-col :span="6">
                         <el-input
-                                placeholder="please input acount" clearable="" size="medium" v-model="item.acount">
+                                placeholder="please input id" clearable="" size="medium" v-model="item.id">
                         </el-input>
                     </el-col>
                     <el-col :span="4" align="right">
@@ -73,17 +73,18 @@
         data() {
 
             return {
-                data:[{name:'',email:'',acount:''}],
+                data:[{name:'',email:'',id:''}],
                 limit: 5,
             }
         },
         methods: {
-            setAcount(name,acount){
-                console.log('setAcount');
+            setAcount(name,id){
+                console.log('setId');
                 let reg = /[a-zA-Z0-9_.]+/;
                 let myName = name.trim()
-                if (reg.test(myName)&&acount.trim()===''){
-                    acount=myName
+                if (reg.test(myName)&&id.trim()===''){
+                    id=myName
+                    console.log(id);
                 }
             },
             pressEnter(){
@@ -96,7 +97,7 @@
                     this.$message.closeAll()
                     this.$message.error(`Create up to ${this.limit} users`)
                 } else {
-                    this.data.splice(index + 1, 0, {name:'',email: '',acount:''})
+                    this.data.splice(index + 1, 0, {name:'',email: '',id:''})
                 }
 
             },
@@ -104,7 +105,7 @@
                 if (this.data.length === 1) {
                     this.data[0].name = ''
                     this.data[0].email = ''
-                    this.data[0].acount = ''
+                    this.data[0].id = ''
 
                 } else {
                     this.data.splice(index, 1);
@@ -115,7 +116,7 @@
                 this.data.forEach(item => {
                     let email = item.email.trim();
                     let name = item.name.trim();
-                    let id = item.acount.trim();
+                    let id = item.id.trim();
 
                     if (!((email === '' && name === ''&&id === '')||(email !== '' && name !== ''&& id !== ''))){
                         this.$store.commit('errorCodeSet', {
