@@ -1,0 +1,14 @@
+{
+  "corp": "Corporation",
+  "emp": "Employee",
+  "individual": "Individual",
+  "guideTitle": "Signing CLA Guide for",
+  "corpStep1": "Click Sign as Corporation to go to the CLA signing page.",
+  "corpStep2": "Fill in the information and submit for signature.",
+  "corpStep3": "Receive an e-mail from the community to sign the enterprise CLA. Follow the instructions in the e-mail to sign the CLA.",
+  "corpStep4": "The community administrator approves the CLA file signed by the enterprise and enables the administrator account of the enterprise in the community.",
+  "corpStep5": "Receive an e-mail containing the administrator account, indicating that the CLA is signed successfully.",
+  "corpStep6": "Log in to the CLA signing platform, add an employee as administrator, and download the enterprise CLA file.",
+  "claSignPlatform": "CLA signing platform"
+
+}
