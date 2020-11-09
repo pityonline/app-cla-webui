@@ -6,7 +6,7 @@
                 <el-row class="emailRow" gutter="20" v-for="(item,index) in data">
                     <el-col :span="6">
                         <el-input
-                                placeholder="please input name" @blur="setAcount(item.name,item.id)" clearable="" size="medium" v-model="item.name">
+                                placeholder="please input name" @blur="setAcount(item.name,index)" clearable="" size="medium" v-model="item.name">
                         </el-input>
                     </el-col>
                     <el-col :span="8">
@@ -78,13 +78,13 @@
             }
         },
         methods: {
-            setAcount(name,id){
+            setAcount(name,index){
                 console.log('setId');
                 let reg = /^[a-zA-Z0-9_.]+/;
                 let myName = name.trim()
-                if (reg.test(myName)&&id.trim()===''){
-                    id=myName
-                    console.log(id);
+                if (reg.test(myName)&&this.data[index].id.trim()===''){
+                    this.data[index].id=myName
+                    console.log(this.data[index].id);
                 }
             },
             pressEnter(){

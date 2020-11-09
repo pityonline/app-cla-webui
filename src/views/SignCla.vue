@@ -323,7 +323,7 @@
                     if (this.myForm.email === '') {
                         this.$store.commit('setSignReLogin', {
                             dialogVisible: true,
-                            dialogMessage: `Sorry, it is failed to fetch the primary email from your ${this.platform} account. Please check the email setting and try again.`,
+                            dialogMessage: `Sorry, it is failed to fetch the email for committing code from your ${this.platform} account. Please check the email setting and try again.`,
                         })
                     }
                     for (let item of this.fields) {
@@ -335,7 +335,7 @@
                 }).catch(err => {
                     this.$store.commit('setSignReLogin',{
                         dialogVisible: true,
-                        dialogMessage: `Email access is not authorized, please reAuthorize`
+                        dialogMessage: `You didn't authorize us to access your email. Please check and try again.`
                     })
                 })
             },
