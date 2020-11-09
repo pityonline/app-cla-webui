@@ -1,12 +1,12 @@
 {
   "claTitle": "Contributor License Agreement",
-  "corp": "Corporation",
-  "emp": "Employee",
-  "individual": "Individual",
-  "requireText": "require field.",
-  "checkBoxText1": "I have read the",
-  "checkBoxText2": "and hereby consent to the processing of my data by",
-  "checkBoxText3": "in Hong Kong.",
-  "privacy": "Privacy Policy",
-  "claSignPlatform": "CLA signing platform"
+  "corp": "企业",
+  "emp": "员工",
+  "individual": "个人",
+  "requireText": "为必填项",
+  "checkBoxText1": "我已经阅读了",
+  "privacy": "隐私政策",
+  "checkBoxText2": "，并同意在香港通过",
+  "claSignPlatform": "CLA签署平台",
+  "checkBoxText3": "处理我的数据"
 }
