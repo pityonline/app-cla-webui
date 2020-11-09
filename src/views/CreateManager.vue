@@ -80,7 +80,7 @@
         methods: {
             setAcount(name,id){
                 console.log('setId');
-                let reg = /[a-zA-Z0-9_.]+/;
+                let reg = /^[a-zA-Z0-9_.]+/;
                 let myName = name.trim()
                 if (reg.test(myName)&&id.trim()===''){
                     id=myName
