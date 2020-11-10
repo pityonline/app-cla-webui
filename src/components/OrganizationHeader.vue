@@ -66,7 +66,7 @@
             return {
                 language: 'English',
                 value: 0,
-                options: [{value: 0, label: 'English'}, {value: 1, label: 'Chinese'}, {value: 2, label: 'Japanese'}],
+                options: [{value: 0, label: 'English'}, {value: 1, label: 'Chinese'}],
                 visible: {
                     visibility: 'hidden',
                 },
@@ -87,25 +87,28 @@
         methods: {
             openOrCloseMenu(command) {
                 this.menuVisible = !this.menuVisible
-                this.$emit('clickItem', command);
             },
 
-            clickSelect() {
-                document.getElementById('my_option').style.visibility = 'hidden'
-            },
+
             handleCommand(command) {
-                this.$emit('clickItem', command);
+                switch (command) {
+                    case 'a':
+                        this.toHome()
+                        break;
+
+                    case 'b':
+                        this.loginOut()
+                        break;
+                }
             },
             toHome() {
-                this.$router.push('/managerList')
+                this.$router.push('/home')
             },
             loginOut() {
+                sessionStorage.clear();
                 this.$router.push('/')
             },
-            newWindow() {
-                // window.open('https://github.com/ouchengle/Test','_black')
-                // window.open('https://github.com/ouchengle')
-            },
+
         },
     }
 </script>

@@ -6,32 +6,64 @@
             </div>
 
             <div>
-
-                <div class="my_select_box">
-                    <el-row class="my_select" @click.native="clickSelect()">
-                        <el-col :span="20" class="select_content">
-                            {{language}}
-                        </el-col>
-                        <el-col :span="4" class="select_content">
-                            <svg-icon icon-class="arrow"></svg-icon>
-                        </el-col>
-                    </el-row>
-                    <div id="my_option" :class="visible">
-                        <div
-                                v-for="item in options"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value">
-                            <div style="width: 100%">
-                                <div>
-                                    <div class="mark">
+                <div>
+                    <div class="menuBox">
+                        <div class="userImgBox" id="imgBox">
+                            <svg-icon id="defaultImg" class="userImg" @click.native="openOrCloseMenu()"
+                                      icon-class="default-user"></svg-icon>
+                        </div>
+                        <div v-if="menuVisible" id="menuOption">
+                            <div  @click="handleCommand('a')">
+                                {{$t('header.home')}}
+                            </div>
+                            <div @click="handleCommand('b')">
+                                {{$t('header.manager')}}
+                            </div>
+                            <div @click="handleCommand('c')">
+                                {{$t('header.emp')}}
+                            </div>
+                            <div @click="handleCommand('d')">
+                                {{$t('header.createManager')}}
+                            </div>
+                            <div @click="handleCommand('e')">
+                                {{$t('header.resetPwd')}}
+                            </div>
+                            <!--<div @click="handleCommand('f')">-->
+                                <!-- {{$t('header.corpCla')}}-->
+                            <!--</div>-->
+                            <div @click="handleCommand('g')">
+                                {{$t('header.loginOut')}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="my_select_box">
+                        <el-row id="my_select" class="my_select" @click.native="clickSelect()">
+                            <el-col id="select_content" :span="20" class="select_content">
+                                {{language}}
+                            </el-col>
+                            <el-col id="select_icon_box" :span="4" class="select_content">
+                                <svg-icon id="select_icon" icon-class="arrow"></svg-icon>
+                            </el-col>
+                        </el-row>
+                        <div id="my_option" :class="{'visible':isActive}">
+                            <div
+                                    v-for="item in options"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value">
+                                <div style="width: 100%" @click="chooseLng(item.value)">
+                                    <div>
+                                        <div :class="{'isShow':value!==item.value,'mark':item.label}">
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div>
-                                    {{item.label}}
-                                </div>
+                                    <div>
+                                        {{item.label}}
+                                    </div>
 
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -46,49 +78,186 @@
         name: "NewHeader",
         data() {
             return {
+                menuVisible: false,
+                isActive: true,
                 language: 'English',
                 value: 0,
-                options: [{value: 0, label: 'English'}, {value: 1, label: '中文'}, {value: 2, label: '日语'}],
+                options: [{value: 0, label: 'English'}, {value: 1, label: '中文'}],
                 visible: {
                     visibility: 'hidden',
                 },
             }
         },
+
         methods: {
-            changeLng() {
-                let curLng = this.$i18n.i18next.language
-                this.$i18n.i18next.changeLanguage(curLng.indexOf('zh')>-1?'zh':'en');
+            openOrCloseMenu() {
+                this.menuVisible = !this.menuVisible
+            },
+            handleCommand(command) {
+                switch (command) {
+                    case 'a':
+                        this.toHome()
+                        break;
+                    case 'b':
+                        this.toManager()
+                        break;
+                    case 'c':
+                        this.toEmployee()
+                        break;
+                    case 'd':
+                        this.toCreateManager()
+                        break;
+                    case 'e':
+                        this.toResetPwd()
+                        break;
+                    case 'f':
+                        this.toCLA()
+                        break;
+                    case 'g':
+                        this.loginOut()
+                        break;
+                }
+            },
+            toHome() {
+                console.log('tohome');
+                this.$router.push('/home')
+            },
+            toManager() {
+                this.$router.push('/managerList')
+            },
+            toEmployee() {
+                this.$router.push('/employeeList')
+            },
+            toCreateManager() {
+                this.$router.push('/createManager')
+            },
+            toResetPwd() {
+                this.$router.push('/resetPassword')
+            },
+            toCLA() {
+                this.$router.push('/home')
+            },
+            loginOut() {
+
+                sessionStorage.clear();
+                this.$router.push('/')
+            },
+            chooseLng(value) {
+                if (this.value !== value) {
+                    this.value = value
+                    localStorage.setItem('lang', value)
+                    this.language = this.options[value].label;
+                    switch (value) {
+                        case 0:
+                            this.$i18n.locale = 'en-us';
+                            break;
+                        case 1:
+                            this.$i18n.locale = 'zh-cn';
+                            break;
+                    }
+                }
+                this.isActive = true;
+
             },
             clickSelect() {
-                console.log('clickSelect');
-                document.getElementById('my_option').style.visibility = 'hidden'
+                this.isActive = !this.isActive;
+            },
+            init() {
+                this.value = parseInt(localStorage.getItem('lang'))
+                switch (this.value) {
+                    case 0:
+                        this.language = 'English';
+                        this.$i18n.locale = 'en-us';
+                        break;
+                    case 1:
+                        this.language = '中文';
+                        this.$i18n.locale = 'zh-cn';
+                        break;
+                }
             },
         },
+        created() {
+            this.init();
+        },
+        mounted() {
+            document.addEventListener('click', e => {
+                if (e.target.id !== 'my_select' && e.target.id !== 'select_content' && e.target.id !== 'select_icon_box' && e.target.id !== 'select_icon') {
+                    this.isActive = true;
+                }
+                if (e.target.id !== 'defaultImg' && e.target.id !== 'imgBox') {
+                    this.menuVisible = false
+                }
+            })
+        }
     }
 </script>
 
 <style scoped lang="less">
-
+    .visible {
+        visibility: hidden;
+    }
 
     .pointer {
         cursor: pointer;
     }
+    .menuBox {
+        position: relative;
+        height: 2.6rem;
+    }
 
+    .userImgBox {
+        cursor: pointer;
+        height: 2.6rem;
+        width: 2.6rem;
+        overflow: hidden;
+        border-radius: 1.3rem;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 10;
+
+        & .userImg {
+            height: 2.6rem;
+            width: 2.6rem;
+        }
+    }
+
+    #menuOption {
+        border: 1px solid black;
+        border-radius: 1.3rem;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 9;
+        background-color: white;
+        white-space: pre;
+        width: 10rem;
+        & > div {
+            height: 2.6rem;
+            line-height: 2.6rem;
+            margin: 0 1rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        & > div:not(:last-of-type) {
+            border-bottom: 1px solid black;
+        }
+    }
     .headerBox {
-        /*position: fixed;*/
-        /*top: 0;*/
-        /*left: 0;*/
         border-bottom: 2px solid #F2F2F2;
         height: 5.5rem;
         width: 100%;
-        /*z-index: 10;*/
 
-        & .mark {
-            visibility: hidden;
+        .mark {
             height: 6px;
             width: 6px;
             border-radius: 50%;
             background-color: #2E9C55;
+        }
+
+        .isShow {
+            visibility: hidden;
         }
 
         & .my_box {
@@ -108,7 +277,6 @@
         }
 
         & .my_select_box {
-            /*font-size: 1.2rem;*/
             height: 2.6rem;
             width: 8rem;
             position: relative;
@@ -186,8 +354,6 @@
 
         & .ul_box > div {
             box-sizing: border-box;
-            /*padding: 2.6rem 0 0 0;*/
-            /*overflow: hidden;*/
             width: 8rem;
             height: 2.6rem;
             border: 1px solid black;
@@ -206,11 +372,22 @@
             justify-content: space-between;
         }
 
-        & .header > div {
+        & .header > div:nth-of-type(1) {
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
+        & .header > div:nth-of-type(2) {
+            display: flex;
+            justify-content: space-between;
+            &>div{
+                margin-left: 1rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+        }
+
 
     }
 

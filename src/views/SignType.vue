@@ -16,7 +16,6 @@
                                         <p><span>L</span>icense</p>
                                         <p><span>A</span>greement</p>
                                     </div>
-                                    <!--<span>Sign</span>-->
                                 </div>
                             </el-col>
 
@@ -33,16 +32,16 @@
                                             <div>
 
                                                 <button class="button" @click="submit('corporation')">
-                                                    Sign As {{ $t('signType:corp') }}
+                                                   {{ $t('signType.corpBt') }}
                                                 </button>
                                             </div>
                                             <div>
                                                 <button class="button" @click="submit('employee')">
-                                                    Sign As {{ $t('signType:emp') }}
+                                                    {{ $t('signType.empBt') }}
                                                 </button>
                                             </div>
                                             <button class="button" @click="submit('individual')">
-                                                Sign As {{ $t('signType:individual') }}
+                                               {{ $t('signType.individualBt') }}
                                             </button>
                                         </div>
                                     </el-col>
@@ -55,14 +54,14 @@
                 <el-row>
                     <el-col>
                         <el-row class="guideTitle">
-                            {{ $t('signType:guideTitle') }}
+                            {{ $t('signType.guideTitle') }}
                         </el-row>
                         <el-row>
                             <el-col :span="8" class="SignTypeCol" :class="{'typeShadow':signType==='corporation'}"
                                     @click.native="clickSignTypeGuide('corporation')">
                                 <div class="SignTypeBox">
                                     <svg-icon icon-class="Enterprise" class="SignTypeIcon"></svg-icon>
-                                    <p>{{ $t('signType:corp') }}</p>
+                                    <p>{{ $t('signType.corp') }}</p>
                                 </div>
                                 <div v-if="signType==='corporation'" class="coverBox">
                                 </div>
@@ -71,7 +70,7 @@
                                     @click.native="clickSignTypeGuide('employee')">
                                 <div class="SignTypeBox">
                                     <svg-icon icon-class="Employee" class="SignTypeIcon"></svg-icon>
-                                    <p>{{ $t('signType:emp') }}</p>
+                                    <p>{{ $t('signType.emp') }}</p>
                                 </div>
                                 <div v-if="signType==='employee'" class="coverBox">
                                 </div>
@@ -80,7 +79,7 @@
                                     @click.native="clickSignTypeGuide('individual')">
                                 <div class="SignTypeBox">
                                     <svg-icon icon-class="Individual" class="SignTypeIcon"></svg-icon>
-                                    <p>{{ $t('signType:individual') }}</p>
+                                    <p>{{ $t('signType.individual') }}</p>
                                 </div>
                                 <div v-if="signType==='individual'" class="coverBox">
                                 </div>
@@ -97,7 +96,7 @@
                                     </el-col>
                                     <el-col :span="10" class="textCol">
                                         <div class="rightText">
-                                            {{ $t('signType:corpStep1_1') }}<span> {{ $t('signType:corpBt') }} </span>{{ $t('signType:corpStep1_2') }}
+                                            {{ $t('signType.corpStep1_1') }}<span>{{ $t('signType.corpBt') }}</span>{{ $t('signType.corpStep1_2') }}
                                         </div>
                                     </el-col>
                                 </el-row>
@@ -114,7 +113,7 @@
                                 <el-row class="stepBox">
                                     <el-col :span="10" class="textCol">
                                         <div class="leftText">
-                                            {{ $t('signType:corpStep2') }}
+                                            {{ $t('signType.corpStep2') }}
                                         </div>
                                     </el-col>
                                     <el-col class="iconBox" :span="4">
@@ -142,7 +141,7 @@
                                     </el-col>
                                     <el-col :span="10" class="textCol">
                                         <div class="rightText">
-                                            {{ $t('signType:corpStep3') }}
+                                            {{ $t('signType.corpStep3') }}
                                         </div>
                                     </el-col>
                                 </el-row>
@@ -158,7 +157,7 @@
                                 <el-row class="stepBox">
                                     <el-col :span="10" class="textCol">
                                         <div class="leftText">
-                                            {{ $t('signType:corpStep4') }}
+                                            {{ $t('signType.corpStep4') }}
                                         </div>
                                     </el-col>
                                     <el-col :span="4">
@@ -186,7 +185,7 @@
                                     </el-col>
                                     <el-col :span="10" class="textCol">
                                         <div class="rightText">
-                                            {{ $t('signType:corpStep5') }}
+                                            {{ $t('signType.corpStep5') }}
                                         </div>
                                     </el-col>
                                 </el-row>
@@ -202,7 +201,7 @@
                                 <el-row class="stepBox">
                                     <el-col :span="10" class="textCol">
                                         <div class="leftText">
-                                            {{ $t('signType:corpStep6_1') }}<span> {{ $t('signType:claSignPlatform') }} </span>{{ $t('signType:corpStep6_2') }}
+                                            {{ $t('signType.corpStep6_1') }}<span>{{ $t('signType.claSignPlatform') }}</span>{{ $t('signType.corpStep6_2') }}
                                         </div>
                                     </el-col>
                                     <el-col :span="4">
@@ -223,7 +222,7 @@
                                     </el-col>
                                     <el-col :span="10" class="textCol">
                                         <div class="rightText">
-                                            Click <span>Sign as Employee</span> to go to the Gitee authorization page.
+                                            {{ $t('signType.corpStep1_1') }}<span>{{ $t('signType.empBt') }}</span>{{ $t('signType.corpStep1_2') }}
                                         </div>
                                     </el-col>
                                 </el-row>
@@ -240,8 +239,7 @@
                                 <el-row class="stepBox">
                                     <el-col :span="10" class="textCol">
                                         <div class="leftText">
-                                            Agree to access your Gitee account on the CLA signing platform and go to the
-                                            employee CLA signing page.
+                                            {{ $t('signType.empStep2') }}
                                         </div>
                                     </el-col>
                                     <el-col class="iconBox" :span="4">
@@ -269,7 +267,7 @@
                                     </el-col>
                                     <el-col :span="10" class="textCol">
                                         <div class="rightText">
-                                            Fill in the information and submit for signature.
+                                            {{ $t('signType.corpStep2') }}
                                         </div>
                                     </el-col>
                                 </el-row>
@@ -285,8 +283,7 @@
                                 <el-row class="stepBox">
                                     <el-col :span="10" class="textCol">
                                         <div class="leftText">
-                                            Wait for the administrator of your enterprise in the community to activate
-                                            the signed CLA file you submitted.
+                                            {{ $t('signType.empStep4') }}
                                         </div>
                                     </el-col>
                                     <el-col :span="4">
@@ -314,19 +311,11 @@
                                     </el-col>
                                     <el-col :span="10" class="textCol">
                                         <div class="rightText">
-                                            Receive an e-mail indicating that the CLA is signed and activated.
+                                            {{ $t('signType.empStep5') }}
                                         </div>
                                     </el-col>
                                 </el-row>
-                                <el-row>
 
-                                    <el-col class="lineBox" :offset="10" :span="4">
-                                        <div class="greenLine">
-
-                                        </div>
-                                    </el-col>
-
-                                </el-row>
                             </el-col>
                         </el-row>
                         <el-row v-if="signType==='individual'" class="guideBox">
@@ -337,7 +326,7 @@
                                     </el-col>
                                     <el-col :span="10" class="textCol">
                                         <div class="rightText">
-                                            Click <span>Sign as Individual</span> to go to the Gitee authorization page.
+                                            {{ $t('signType.corpStep1_1') }}<span>{{ $t('signType.individualBt') }}</span>{{ $t('signType.corpStep1_2') }}
                                         </div>
                                     </el-col>
                                 </el-row>
@@ -354,8 +343,7 @@
                                 <el-row class="stepBox">
                                     <el-col :span="10" class="textCol">
                                         <div class="leftText">
-                                            Agree to access your Gitee account on the CLA signing platform and go to the
-                                            individual CLA signing page.
+                                            {{ $t('signType.individualStep2') }}
                                         </div>
                                     </el-col>
                                     <el-col class="iconBox" :span="4">
@@ -383,7 +371,7 @@
                                     </el-col>
                                     <el-col :span="10" class="textCol">
                                         <div class="rightText">
-                                            Fill in the information and submit for signature.
+                                            {{ $t('signType.corpStep2') }}
                                         </div>
                                     </el-col>
                                 </el-row>
@@ -399,7 +387,7 @@
                                 <el-row class="stepBox">
                                     <el-col :span="10" class="textCol">
                                         <div class="leftText">
-                                            Receive an e-mail indicating that the the CLA is signed and activated.
+                                            {{ $t('signType.individualStep4') }}
                                         </div>
                                     </el-col>
                                     <el-col :span="4">
@@ -479,9 +467,6 @@
         },
         methods: {
             ...mapActions(['setPlatformAct', 'setLoginTypeAct', 'setRepoInfoAct', 'errorAct']),
-            getBase64Params() {
-
-            },
             getRepoInfo() {
                 let params = window.location.href.split('/sign/')[1]
                 let repoInfoParams = ''
