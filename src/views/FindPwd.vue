@@ -13,7 +13,7 @@
 </template>
 
 <script>
-    import Footer from '@components/Footer'
+    import Footer from '@components/NewFooter'
     import * as until from '../until/until'
     import * as url from '../until/api'
 
