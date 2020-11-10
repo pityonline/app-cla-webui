@@ -13,22 +13,22 @@
                         </div>
                         <div v-if="menuVisible" id="menuOption">
                             <div v-if="userInfo[orgValue].role==='admin'" @click="openOrCloseMenu('a')">
-                                Manager
+                                {{$t('corpHeader.manager')}}
                             </div>
                             <div v-else @click="openOrCloseMenu('b')">
-                                Employee
+                                {{$t('corpHeader.emp')}}
                             </div>
                             <div v-if="userInfo[orgValue].role==='admin'" @click="openOrCloseMenu('c')">
-                                Create manager
+                                {{$t('corpHeader.createManager')}}
                             </div>
                             <div @click="openOrCloseMenu('d')">
-                                Reset password
+                                {{$t('corpHeader.resetPwd')}}
                             </div>
                             <!--<div v-if="userInfo[orgValue].role==='admin'" @click="openOrCloseMenu('e')">-->
-                            <!--my cla-->
+                            <!--{{$t('corpHeader.corpCla')}}-->
                             <!--</div>-->
                             <div @click="openOrCloseMenu('f')">
-                                Login out
+                                {{$t('corpHeader.loginOut')}}
                             </div>
                         </div>
                     </div>
@@ -89,7 +89,7 @@
                 userName: this.user.userName,
                 language: 'English',
                 value: 0,
-                options: [{value: 0, label: 'English'}, {value: 1, label: '中文'}, {value: 2, label: '日语'}],
+                options: [{value: 0, label: 'English'}, {value: 1, label: '中文'},],
                 visible: {
                     visibility: 'hidden',
                 },
