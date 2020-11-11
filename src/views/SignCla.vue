@@ -33,7 +33,7 @@
                                         prop="code">
 
                                     <el-input v-model="ruleForm.code" size="small">
-                                        <el-button slot="append" :disabled="sendBtText!=='send code'"
+                                        <el-button slot="append" :disabled="sendBtText!==$t('signPage.sendCode')"
                                                    @click="sendCode()">{{sendBtText}}
                                         </el-button>
                                     </el-input>
@@ -105,7 +105,7 @@
                 }
             },
             org() {
-                let org = this.$store.state.repoInfo.org_id
+                let org = this.$store.state.repoInfo.org_id;
                 if (org.length > 1) {
                     return org.charAt(0).toUpperCase() + org.substring(1)
                 } else {
@@ -189,8 +189,8 @@
                 document.cookie = `_mark=; expire=${date.toUTCString()}; Domain=${this.domain}; path=/`;
 
 
-                let repoInfo = this.$store.state.repoInfo
-                let params = repoInfo.repo_id ? `${repoInfo.platform}/${repoInfo.org_id}/${repoInfo.repo_id}` : `${repoInfo.platform}/${repoInfo.org_id}`
+                let repoInfo = this.$store.state.repoInfo;
+                let params = repoInfo.repo_id ? `${repoInfo.platform}/${repoInfo.org_id}/${repoInfo.repo_id}` : `${repoInfo.platform}/${repoInfo.org_id}`;
                 let path = '';
                 if (sessionStorage.getItem('orgAddress')) {
                     path = `${this.signRouter}/${until.strToBase64(params)}/${sessionStorage.getItem('orgAddress')}`
@@ -232,7 +232,7 @@
             },
             sendCode() {
                 let reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$");
-                let email = this.myForm.email
+                let email = this.myForm.email;
                 let myHttp = ''
                 if (this.$store.state.loginType === 'individual' || this.$store.state.loginType === 'employee') {
                     myHttp = http
@@ -313,7 +313,7 @@
                         }
                     })
                 } else {
-                    this.$message.closeAll()
+                    this.$message.closeAll();
                     this.$message.error(this.$t('tips.not_fill_email'))
                 }
 
@@ -860,21 +860,6 @@
                     }
                 })
             },
-            clearForm() {
-                if (this.$store.state.loginType === 'employee' || this.$store.state.loginType === 'individual') {
-                    for (let key in this.ruleForm) {
-                        if (key !== '1' && key !== '2') {
-                            this.ruleForm[key] = ''
-                        }
-                    }
-                } else {
-                    for (let key in this.ruleForm) {
-                        if (key !== '3') {
-                            this.ruleForm[key] = ''
-                        }
-                    }
-                }
-            },
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
@@ -911,6 +896,21 @@
                     this.$message.error(err.response.data)
                 })
             },
+            clearForm() {
+                if (this.$store.state.loginType === 'employee' || this.$store.state.loginType === 'individual') {
+                    for (let key in this.ruleForm) {
+                        if (key !== '1' && key !== '2') {
+                            this.ruleForm[key] = ''
+                        }
+                    }
+                } else {
+                    for (let key in this.ruleForm) {
+                        if (key !== '3') {
+                            this.ruleForm[key] = ''
+                        }
+                    }
+                }
+            },
             resetForm(formName) {
                 this.$refs[formName].resetFields();
             },
@@ -924,11 +924,10 @@
         }
         ,
         created() {
-            this.getCookieData()
-            new Promise(resolve => {
+            this.getCookieData();
+            new Promise((resolve,reject) => {
                 this.getSignPage(resolve);
-            }, reject => {
-            }).then(res => {
+            }, ).then(res => {
                 this.getNowDate()
             }, err => {
             })
