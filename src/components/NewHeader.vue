@@ -166,6 +166,7 @@
                 this.isActive = !this.isActive;
             },
             init() {
+                console.log(this.$store.loginInfo);
                 this.role = this.$store.loginInfo.userInfo[0].role;
                 console.log(this.role);
                 if ( sessionStorage.getItem('showHeaderMenu')==='false'){
