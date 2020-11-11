@@ -356,7 +356,7 @@
             async getClaName(org_cla_id) {
                 let name = ''
                 await http({
-                    url: `/api${url.getClaInfo}/${org_cla_id}/cla`,
+                    url: `${url.getClaInfo}/${org_cla_id}/cla`,
                 }).then(resp => {
                     name = resp.data.data.name
                 }).catch(err => {
