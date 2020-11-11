@@ -167,6 +167,7 @@
             },
             init() {
                 this.role = this.$store.loginInfo.userInfo[0].role;
+                console.log(this.role);
                 if ( sessionStorage.getItem('showHeaderMenu')==='false'){
                    this.showHeaderMenu=false
                 }else if (sessionStorage.getItem('showHeaderMenu') === 'corp') {
