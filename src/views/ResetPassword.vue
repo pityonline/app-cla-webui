@@ -133,7 +133,7 @@
                     this.$store.commit('setPwdIsChanged',true)
                     this.$message.closeAll()
                     this.$message.success('success')
-                    if (this.$route.path === '/signedRepo/resetPassword') {
+                    if (this.$store.state.loginInfo.userInfo[0].role==='manager') {
                         this.$router.push('/employeeList')
                     }else{
                         this.$router.push('/managerList')
