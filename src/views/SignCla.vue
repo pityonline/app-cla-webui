@@ -2,7 +2,7 @@
     <el-row id="checkCLA" :style="checkCLAClass">
         <Header></Header>
 
-        <el-row id="section">
+        <div id="section">
             <el-row v-if="!isSendCode" class="content">
                 <el-col :offset="5" :span="14">
                     <p class="contentTitle"><span>{{apply_to}}</span>{{ $t('signPage.claTitle') }}</p>
@@ -42,7 +42,8 @@
                                 </div>
                                 <div class="marginTop1rem fontSize12">
                                     <el-checkbox v-model="isRead"><span>{{$t('signPage.checkBoxText1')}}<span
-                                            class="privacy" @click="">{{$t('signPage.privacy')}}</span>{{$t('signPage.checkBoxText2')}}<span class="privacy" @click="toIndex()">{{$t('signPage.claSignPlatform')}}</span>{{$t('signPage.checkBoxText3')}}</span>
+                                            class="privacy" @click="">{{$t('signPage.privacy')}}</span>{{$t('signPage.checkBoxText2')}}<span
+                                            class="privacy" @click="toIndex()">{{$t('signPage.claSignPlatform')}}</span>{{$t('signPage.checkBoxText3')}}</span>
                                     </el-checkbox>
                                 </div>
                                 <el-form-item label-width="0" class="marginTop1rem signBtBox">
@@ -56,7 +57,7 @@
                 </el-col>
             </el-row>
 
-        </el-row>
+        </div>
 
         <Footer></Footer>
         <ReLoginDialog :dialogVisible="reLoginDialogVisible" :message="reLoginMsg"></ReLoginDialog>
@@ -130,8 +131,13 @@
             signReLoginDialogVisible() {
                 return this.$store.state.signReLoginDialogVisible
             },
-            sendBtText(){
-                return this.$t('signPage.sendCode')
+            sendBtText: {
+                get() {
+                    return this.$t('signPage.sendCode')
+                },
+                set(){
+                    return
+                }
             },
         },
         components: {
@@ -148,7 +154,7 @@
                 signRouter: '/sign',
                 domain: this.$store.state.domain,
                 tipsTitle: '',
-                tipsMessage:this.$t('tips.individual_sign'),
+                tipsMessage: this.$t('tips.individual_sign'),
                 tipsDialogVisible: false,
                 signPageData: '',
                 cla_org_id: '',
@@ -245,12 +251,12 @@
                         method: 'post',
                     }).then(res => {
                         this.$message.closeAll();
-                        this.$message.success({message:this.$t('tips.sending_email'),duration:8000});
+                        this.$message.success({message: this.$t('tips.sending_email'), duration: 8000});
                         let second = 60;
                         let codeInterval = setInterval(() => {
                             if (second !== 0) {
                                 second--;
-                                this.sendBtText = this.$t('signPage.reSendCode',{second:second})
+                                this.sendBtText = this.$t('signPage.reSendCode', {second: second})
                             } else {
                                 this.sendBtText = this.$t('signPage.sendCode');
                                 clearInterval(codeInterval)
@@ -263,7 +269,7 @@
                                 case 'cla.invalid_parameter':
                                     this.$store.commit('setSignReLogin', {
                                         dialogVisible: true,
-                                        dialogMessage:  this.$t('tips.invalid_parameter'),
+                                        dialogMessage: this.$t('tips.invalid_parameter'),
                                     });
                                     break;
                                 case 'cla.invalid_token':
@@ -275,13 +281,13 @@
                                 case 'cla.missing_token':
                                     this.$store.commit('setSignReLogin', {
                                         dialogVisible: true,
-                                        dialogMessage:this.$t('tips.missing_token'),
+                                        dialogMessage: this.$t('tips.missing_token'),
                                     });
                                     break;
                                 case 'cla.unknown_token':
                                     this.$store.commit('setSignReLogin', {
                                         dialogVisible: true,
-                                        dialogMessage:this.$t('tips.unknown_token'),
+                                        dialogMessage: this.$t('tips.unknown_token'),
                                     });
                                     break;
 
@@ -305,10 +311,10 @@
                                     });
                                     break;
                             }
-                        }else{
+                        } else {
                             this.$store.commit('errorCodeSet', {
                                 dialogVisible: true,
-                                dialogMessage:this.$t('tips.system_error'),
+                                dialogMessage: this.$t('tips.system_error'),
                             })
                         }
                     })
@@ -344,7 +350,7 @@
                 }).then(res => {
                     if (res.data.length > 0) {
                         for (let item of res.data) {
-                            if (item.scope[0]&&item.scope[0] === 'primary') {
+                            if (item.scope[0] && item.scope[0] === 'primary') {
                                 this.myForm.email = item.email;
                                 break
                             }
@@ -354,7 +360,7 @@
                     if (this.myForm.email === '') {
                         this.$store.commit('setSignReLogin', {
                             dialogVisible: true,
-                            dialogMessage: this.$t('tips.not_commit_email',{platform:this.platform}),
+                            dialogMessage: this.$t('tips.not_commit_email', {platform: this.platform}),
                         })
                     }
                     for (let item of this.fields) {
@@ -364,7 +370,7 @@
                         }
                     }
                 }).catch(err => {
-                    this.$store.commit('setSignReLogin',{
+                    this.$store.commit('setSignReLogin', {
                         dialogVisible: true,
                         dialogMessage: this.$t('tips.not_authorize_email')
                     })
@@ -386,7 +392,7 @@
                         let date = new Date();
                         date.setTime(date.getTime() - 10000);
                         document.cookie = `_mark=1; expire=${date.toUTCString()}; Domain=${this.domain}; path=/`;
-                        this.$store.commit('setSignToken',data);
+                        this.$store.commit('setSignToken', data);
                     }
 
 
@@ -435,7 +441,7 @@
                                 case 'cla.invalid_parameter':
                                     this.$store.commit('setSignReLogin', {
                                         dialogVisible: true,
-                                        dialogMessage:  this.$t('tips.invalid_parameter'),
+                                        dialogMessage: this.$t('tips.invalid_parameter'),
                                     });
                                     break;
                                 case 'cla.no_corp_manager':
@@ -459,13 +465,13 @@
                                 case 'cla.missing_token':
                                     this.$store.commit('setSignReLogin', {
                                         dialogVisible: true,
-                                        dialogMessage:this.$t('tips.missing_token'),
+                                        dialogMessage: this.$t('tips.missing_token'),
                                     });
                                     break;
                                 case 'cla.unknown_token':
                                     this.$store.commit('setSignReLogin', {
                                         dialogVisible: true,
-                                        dialogMessage:this.$t('tips.unknown_token'),
+                                        dialogMessage: this.$t('tips.unknown_token'),
                                     });
                                     break;
                                 case 'cla.uncompleted_signing':
@@ -505,10 +511,10 @@
                                     });
                                     break;
                             }
-                        }else{
+                        } else {
                             this.$store.commit('errorCodeSet', {
                                 dialogVisible: true,
-                                dialogMessage:this.$t('tips.system_error'),
+                                dialogMessage: this.$t('tips.system_error'),
                             })
                         }
                     })
@@ -533,7 +539,7 @@
                                 case 'cla.invalid_parameter':
                                     this.$store.commit('setSignReLogin', {
                                         dialogVisible: true,
-                                        dialogMessage:  this.$t('tips.invalid_parameter'),
+                                        dialogMessage: this.$t('tips.invalid_parameter'),
                                     });
                                     break;
                                 case 'cla.no_corp_manager':
@@ -557,13 +563,13 @@
                                 case 'cla.missing_token':
                                     this.$store.commit('setSignReLogin', {
                                         dialogVisible: true,
-                                        dialogMessage:this.$t('tips.missing_token'),
+                                        dialogMessage: this.$t('tips.missing_token'),
                                     });
                                     break;
                                 case 'cla.unknown_token':
                                     this.$store.commit('setSignReLogin', {
                                         dialogVisible: true,
-                                        dialogMessage:this.$t('tips.unknown_token'),
+                                        dialogMessage: this.$t('tips.unknown_token'),
                                     });
                                     break;
                                 case 'cla.uncompleted_signing':
@@ -603,10 +609,10 @@
                                     });
                                     break;
                             }
-                        }else{
+                        } else {
                             this.$store.commit('errorCodeSet', {
                                 dialogVisible: true,
-                                dialogMessage:this.$t('tips.system_error'),
+                                dialogMessage: this.$t('tips.system_error'),
                             })
                         }
                     })
@@ -650,7 +656,11 @@
                         Object.assign(this.myForm, {name: ''})
                         item.required && Object.assign(rules, {
                             [item.id]: [
-                                {required: item.required, message:this.$t('tips.fill_name'), trigger: ['blur', 'change']},
+                                {
+                                    required: item.required,
+                                    message: this.$t('tips.fill_name'),
+                                    trigger: ['blur', 'change']
+                                },
                             ],
                         })
                     } else if (item.type === 'corporationName') {
@@ -690,7 +700,11 @@
                         Object.assign(this.myForm, {date: ''})
                         item.required && Object.assign(rules, {
                             [item.id]: [
-                                {required: item.required, message: this.$t('tips.fill_date'), trigger: ['blur', 'change']}],
+                                {
+                                    required: item.required,
+                                    message: this.$t('tips.fill_date'),
+                                    trigger: ['blur', 'change']
+                                }],
                         })
                     } else if (item.type === 'email') {
                         Object.assign(this.myForm, {email: ''})
@@ -799,7 +813,7 @@
                             case 'cla.invalid_parameter':
                                 this.$store.commit('setSignReLogin', {
                                     dialogVisible: true,
-                                    dialogMessage:  this.$t('tips.invalid_parameter'),
+                                    dialogMessage: this.$t('tips.invalid_parameter'),
                                 });
                                 break;
                             case 'cla.invalid_token':
@@ -811,13 +825,13 @@
                             case 'cla.missing_token':
                                 this.$store.commit('setSignReLogin', {
                                     dialogVisible: true,
-                                    dialogMessage:this.$t('tips.missing_token'),
+                                    dialogMessage: this.$t('tips.missing_token'),
                                 });
                                 break;
                             case 'cla.unknown_token':
                                 this.$store.commit('setSignReLogin', {
                                     dialogVisible: true,
-                                    dialogMessage:this.$t('tips.unknown_token'),
+                                    dialogMessage: this.$t('tips.unknown_token'),
                                 });
                                 break;
                             case 'cla.failed_to_send_email':
@@ -852,10 +866,10 @@
                                 });
                                 break;
                         }
-                    }else{
+                    } else {
                         this.$store.commit('errorCodeSet', {
                             dialogVisible: true,
-                            dialogMessage:this.$t('tips.system_error'),
+                            dialogMessage: this.$t('tips.system_error'),
                         })
                     }
                 })
@@ -925,9 +939,9 @@
         ,
         created() {
             this.getCookieData();
-            new Promise((resolve,reject) => {
+            new Promise((resolve, reject) => {
                 this.getSignPage(resolve);
-            }, ).then(res => {
+            },).then(res => {
                 this.getNowDate()
             }, err => {
             })
