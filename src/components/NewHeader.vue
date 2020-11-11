@@ -181,7 +181,9 @@
                 this.isActive = !this.isActive;
             },
             init() {
-                this.role = this.$store.state.loginInfo.userInfo[0].role;
+                if (this.$store.state.loginInfo){
+                    this.role = this.$store.state.loginInfo.userInfo[0].role;
+                }
                 if ( sessionStorage.getItem('showHeaderMenu')==='false'){
                    this.showHeaderMenu=false
                 }else if (sessionStorage.getItem('showHeaderMenu') === 'corp') {
