@@ -1,6 +1,6 @@
 <template>
     <div id="rootManager" :style="section">
-        <Header @clickItem="clickItem" :user="user"></Header>
+        <Header></Header>
         <el-row>
             <el-col :offset="5" :span="14">
 
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-    import Header from '@components/CorporationHeader'
+    import Header from '@components/NewHeader'
     import Footer from '@components/NewFooter'
     import * as until from '../until/until'
     import pdfReader from "@components/PdfReader";
