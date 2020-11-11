@@ -182,7 +182,7 @@
             }
         },
         methods: {
-            ...mapActions(['setTokenAct', 'setRepoInfoAct', 'viewPrivacy', 'errorAct']),
+            ...mapActions(['setTokenAct', 'setRepoInfoAct', 'viewPrivacy']),
             toIndex() {
                 let date = new Date();
                 date.setTime(date.getTime() - 10000);
@@ -257,7 +257,60 @@
                             }
                         }, 1000)
                     }).catch(err => {
-                        this.errorAct(err)
+                        if (err.data.hasOwnProperty('data')) {
+                            switch (err.data.data.error_code) {
+
+                                case 'cla.invalid_parameter':
+                                    this.$store.commit('setSignReLogin', {
+                                        dialogVisible: true,
+                                        dialogMessage:  this.$t('tips.invalid_parameter'),
+                                    });
+                                    break;
+                                case 'cla.invalid_token':
+                                    this.$store.commit('setSignReLogin', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.invalid_token'),
+                                    });
+                                    break;
+                                case 'cla.missing_token':
+                                    this.$store.commit('setSignReLogin', {
+                                        dialogVisible: true,
+                                        dialogMessage:this.$t('tips.missing_token'),
+                                    });
+                                    break;
+                                case 'cla.unknown_token':
+                                    this.$store.commit('setSignReLogin', {
+                                        dialogVisible: true,
+                                        dialogMessage:this.$t('tips.unknown_token'),
+                                    });
+                                    break;
+
+                                case 'cla.failed_to_send_email':
+                                    this.$store.commit('errorCodeSet', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.failed_to_send_email'),
+                                    });
+                                    break;
+
+                                case 'cla.not_same_corp':
+                                    this.$store.commit('errorCodeSet', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.not_same_corp'),
+                                    });
+                                    break;
+                                case 'cla.system_error':
+                                    this.$store.commit('errorCodeSet', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.system_error'),
+                                    });
+                                    break;
+                            }
+                        }else{
+                            this.$store.commit('errorCodeSet', {
+                                dialogVisible: true,
+                                dialogMessage:this.$t('tips.system_error'),
+                            })
+                        }
                     })
                 } else {
                     this.$message.closeAll()
@@ -371,7 +424,93 @@
                     }).then(res => {
                         this.setData(res, resolve)
                     }).catch(err => {
-                        this.errorAct(err)
+                        if (err.data.hasOwnProperty('data')) {
+                            switch (err.data.data.error_code) {
+                                case 'cla.no_cla_binding':
+                                    this.$store.commit('setSignReLogin', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.no_cla_binding'),
+                                    });
+                                    break;
+                                case 'cla.invalid_parameter':
+                                    this.$store.commit('setSignReLogin', {
+                                        dialogVisible: true,
+                                        dialogMessage:  this.$t('tips.invalid_parameter'),
+                                    });
+                                    break;
+                                case 'cla.no_corp_manager':
+                                    this.$store.commit('setSignReLogin', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.no_corp_manager'),
+                                    });
+                                    break;
+                                case 'cla.has_not_signed':
+                                    this.$store.commit('setSignReLogin', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.has_not_signed'),
+                                    });
+                                    break;
+                                case 'cla.invalid_token':
+                                    this.$store.commit('setSignReLogin', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.invalid_token'),
+                                    });
+                                    break;
+                                case 'cla.missing_token':
+                                    this.$store.commit('setSignReLogin', {
+                                        dialogVisible: true,
+                                        dialogMessage:this.$t('tips.missing_token'),
+                                    });
+                                    break;
+                                case 'cla.unknown_token':
+                                    this.$store.commit('setSignReLogin', {
+                                        dialogVisible: true,
+                                        dialogMessage:this.$t('tips.unknown_token'),
+                                    });
+                                    break;
+                                case 'cla.uncompleted_signing':
+                                    this.$store.commit('setSignReLogin', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.uncompleted_signing'),
+                                    });
+                                    break;
+                                case 'cla.unknown_email_platform':
+                                    this.$store.commit('errorCodeSet', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.unknown_email_platform'),
+                                    });
+                                    break;
+                                case 'cla.pdf_has_not_uploaded':
+                                    this.$store.commit('setSignReLogin', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.pdf_has_not_uploaded'),
+                                    });
+                                    break;
+                                case 'cla.not_same_corp':
+                                    this.$store.commit('errorCodeSet', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.not_same_corp'),
+                                    });
+                                    break;
+                                case 'cla.not_ready_to_sign':
+                                    this.$store.commit('setSignReLogin', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.not_ready_to_sign'),
+                                    });
+                                    break;
+                                case 'cla.system_error':
+                                    this.$store.commit('errorCodeSet', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.system_error'),
+                                    });
+                                    break;
+                            }
+                        }else{
+                            this.$store.commit('errorCodeSet', {
+                                dialogVisible: true,
+                                dialogMessage:this.$t('tips.system_error'),
+                            })
+                        }
                     })
                 } else {
                     applyTo = 'corporation';
@@ -383,7 +522,93 @@
                     }).then(res => {
                         this.setData(res, resolve)
                     }).catch(err => {
-                        this.errorAct(err)
+                        if (err.data.hasOwnProperty('data')) {
+                            switch (err.data.data.error_code) {
+                                case 'cla.no_cla_binding':
+                                    this.$store.commit('setSignReLogin', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.no_cla_binding'),
+                                    });
+                                    break;
+                                case 'cla.invalid_parameter':
+                                    this.$store.commit('setSignReLogin', {
+                                        dialogVisible: true,
+                                        dialogMessage:  this.$t('tips.invalid_parameter'),
+                                    });
+                                    break;
+                                case 'cla.no_corp_manager':
+                                    this.$store.commit('setSignReLogin', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.no_corp_manager'),
+                                    });
+                                    break;
+                                case 'cla.has_not_signed':
+                                    this.$store.commit('setSignReLogin', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.has_not_signed'),
+                                    });
+                                    break;
+                                case 'cla.invalid_token':
+                                    this.$store.commit('setSignReLogin', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.invalid_token'),
+                                    });
+                                    break;
+                                case 'cla.missing_token':
+                                    this.$store.commit('setSignReLogin', {
+                                        dialogVisible: true,
+                                        dialogMessage:this.$t('tips.missing_token'),
+                                    });
+                                    break;
+                                case 'cla.unknown_token':
+                                    this.$store.commit('setSignReLogin', {
+                                        dialogVisible: true,
+                                        dialogMessage:this.$t('tips.unknown_token'),
+                                    });
+                                    break;
+                                case 'cla.uncompleted_signing':
+                                    this.$store.commit('setSignReLogin', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.uncompleted_signing'),
+                                    });
+                                    break;
+                                case 'cla.unknown_email_platform':
+                                    this.$store.commit('errorCodeSet', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.unknown_email_platform'),
+                                    });
+                                    break;
+                                case 'cla.pdf_has_not_uploaded':
+                                    this.$store.commit('setSignReLogin', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.pdf_has_not_uploaded'),
+                                    });
+                                    break;
+                                case 'cla.not_same_corp':
+                                    this.$store.commit('errorCodeSet', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.not_same_corp'),
+                                    });
+                                    break;
+                                case 'cla.not_ready_to_sign':
+                                    this.$store.commit('setSignReLogin', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.not_ready_to_sign'),
+                                    });
+                                    break;
+                                case 'cla.system_error':
+                                    this.$store.commit('errorCodeSet', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.system_error'),
+                                    });
+                                    break;
+                            }
+                        }else{
+                            this.$store.commit('errorCodeSet', {
+                                dialogVisible: true,
+                                dialogMessage:this.$t('tips.system_error'),
+                            })
+                        }
                     })
                 }
 
@@ -563,7 +788,76 @@
                     });
 
                 }).catch(err => {
-                    this.errorAct(err)
+                    if (err.data.hasOwnProperty('data')) {
+                        switch (err.data.data.error_code) {
+                            case 'cla.has_signed':
+                                this.$store.commit('setSignReLogin', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.has_signed'),
+                                });
+                                break;
+                            case 'cla.invalid_parameter':
+                                this.$store.commit('setSignReLogin', {
+                                    dialogVisible: true,
+                                    dialogMessage:  this.$t('tips.invalid_parameter'),
+                                });
+                                break;
+                            case 'cla.invalid_token':
+                                this.$store.commit('setSignReLogin', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.invalid_token'),
+                                });
+                                break;
+                            case 'cla.missing_token':
+                                this.$store.commit('setSignReLogin', {
+                                    dialogVisible: true,
+                                    dialogMessage:this.$t('tips.missing_token'),
+                                });
+                                break;
+                            case 'cla.unknown_token':
+                                this.$store.commit('setSignReLogin', {
+                                    dialogVisible: true,
+                                    dialogMessage:this.$t('tips.unknown_token'),
+                                });
+                                break;
+                            case 'cla.failed_to_send_email':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.failed_to_send_email'),
+                                });
+                                break;
+                            case 'cla.wrong_verification_code':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.wrong_verification_code'),
+                                });
+                                break;
+                            case 'cla.expired_verification_code':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.expired_verification_code'),
+                                });
+                                break;
+
+                            case 'cla.not_same_corp':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.not_same_corp'),
+                                });
+                                break;
+                            case 'cla.system_error':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.system_error'),
+                                });
+                                break;
+                        }
+                    }else{
+                        this.$store.commit('errorCodeSet', {
+                            dialogVisible: true,
+                            dialogMessage:this.$t('tips.system_error'),
+                        })
+                    }
                 })
             },
             clearForm() {
