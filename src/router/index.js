@@ -154,7 +154,7 @@ router.beforeEach((to, from, next) => {
     } else {
         next()
     }
-    if (to.path === '/sign'||to.path === '/sign-cla'||to.path === '/index'||to.path === '/platformSelect'||to.path === '/corporationManagerLogin'||to.path === '/orgSelect') {
+    if (to.path === '/sign/:params'||to.path === '/sign/:params/:orgAddress'||to.path === '/sign-cla'||to.path === '/index'||to.path === '/platformSelect'||to.path === '/corporationManagerLogin'||to.path === '/orgSelect') {
         sessionStorage.setItem('showHeaderMenu','false')
     }else if (to.path === '/home' || to.path === '/linkedRepo'||to.path === '/corporationList'||to.path === '/bind-cla') {
         sessionStorage.setItem('showHeaderMenu','org')
