@@ -102,10 +102,12 @@ const routes = [
     },
     {
         path: '/sign/:params',
+        name:'SignType',
         component: () => import('../views/SignType.vue')
     },
     {
         path: '/sign/:params/:orgAddress',
+        name:'SignType_back',
         component: () => import('../views/SignType.vue')
     },
 
@@ -154,7 +156,8 @@ router.beforeEach((to, from, next) => {
     } else {
         next()
     }
-    if (to.path === '/sign/:params'||to.path === '/sign/:params/:orgAddress'||to.path === '/sign-cla'||to.path === '/index'||to.path === '/platformSelect'||to.path === '/corporationManagerLogin'||to.path === '/orgSelect') {
+    console.log(to);
+    if (to.name === 'SignType'||to.name === 'SignType_back'||to.path === '/sign-cla'||to.path === '/index'||to.path === '/platformSelect'||to.path === '/corporationManagerLogin'||to.path === '/orgSelect') {
         sessionStorage.setItem('showHeaderMenu','false')
     }else if (to.path === '/home' || to.path === '/linkedRepo'||to.path === '/corporationList'||to.path === '/bind-cla') {
         sessionStorage.setItem('showHeaderMenu','org')

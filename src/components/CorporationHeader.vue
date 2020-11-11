@@ -13,22 +13,22 @@
                         </div>
                         <div v-if="menuVisible" id="menuOption">
                             <div v-if="userInfo[orgValue].role==='admin'" @click="openOrCloseMenu('a')">
-                                {{$t('corpHeader.manager')}}
+                                {{$t('header.manager')}}
                             </div>
                             <div v-else @click="openOrCloseMenu('b')">
-                                {{$t('corpHeader.emp')}}
+                                {{$t('header.emp')}}
                             </div>
                             <div v-if="userInfo[orgValue].role==='admin'" @click="openOrCloseMenu('c')">
-                                {{$t('corpHeader.createManager')}}
+                                {{$t('header.createManager')}}
                             </div>
                             <div @click="openOrCloseMenu('d')">
-                                {{$t('corpHeader.resetPwd')}}
+                                {{$t('header.resetPwd')}}
                             </div>
                             <!--<div v-if="userInfo[orgValue].role==='admin'" @click="openOrCloseMenu('e')">-->
                             <!--{{$t('corpHeader.corpCla')}}-->
                             <!--</div>-->
                             <div @click="openOrCloseMenu('f')">
-                                {{$t('corpHeader.loginOut')}}
+                                {{$t('header.loginOut')}}
                             </div>
                         </div>
                     </div>

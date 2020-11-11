@@ -13,22 +13,22 @@
                                       icon-class="default-user"></svg-icon>
                         </div>
                         <div v-if="menuVisible" id="menuOption">
-                            <div  @click="handleCommand('a')">
+                            <div v-if="loginRole==='org'" @click="handleCommand('a')">
                                 {{$t('header.home')}}
                             </div>
-                            <div @click="handleCommand('b')">
+                            <div v-if="loginRole==='corp'&&role==='admin'" @click="handleCommand('b')">
                                 {{$t('header.manager')}}
                             </div>
-                            <div @click="handleCommand('c')">
+                            <div v-if="loginRole==='corp'&&role==='manager'" @click="handleCommand('c')">
                                 {{$t('header.emp')}}
                             </div>
-                            <div @click="handleCommand('d')">
+                            <div v-if="loginRole==='corp'&&role==='admin'" @click="handleCommand('d')">
                                 {{$t('header.createManager')}}
                             </div>
-                            <div @click="handleCommand('e')">
+                            <div v-if="loginRole==='corp'" @click="handleCommand('e')">
                                 {{$t('header.resetPwd')}}
                             </div>
-                            <!--<div @click="handleCommand('f')">-->
+                            <!--<div v-if="loginRole==='corp'&&role===admin" @click="handleCommand('f')">-->
                                 <!-- {{$t('header.corpCla')}}-->
                             <!--</div>-->
                             <div @click="handleCommand('g')">
@@ -78,6 +78,7 @@
         name: "NewHeader",
         data() {
             return {
+                role:'',
                 loginRole:'',
                 showHeaderMenu:true,
                 menuVisible: false,
@@ -165,6 +166,7 @@
                 this.isActive = !this.isActive;
             },
             init() {
+                this.role = this.$store.loginInfo.userInfo[0].role;
                 if ( sessionStorage.getItem('showHeaderMenu')==='false'){
                    this.showHeaderMenu=false
                 }else if (sessionStorage.getItem('showHeaderMenu') === 'corp') {
