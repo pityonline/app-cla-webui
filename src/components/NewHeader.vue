@@ -141,7 +141,7 @@
                 this.$router.push('/home')
             },
             loginOut() {
-
+                console.log(' loginOut');
                 sessionStorage.clear();
                 this.$router.push('/')
             },
@@ -166,9 +166,8 @@
                 this.isActive = !this.isActive;
             },
             init() {
-                console.log(JSON.parse(sessionStorage.getItem('loginInfo')));
+                console.log(this.$store.state.loginInfo.userInfo[0].role);
                 this.role = JSON.parse(sessionStorage.getItem('loginInfo')).userInfo[0].role;
-                console.log(this.role);
                 if ( sessionStorage.getItem('showHeaderMenu')==='false'){
                    this.showHeaderMenu=false
                 }else if (sessionStorage.getItem('showHeaderMenu') === 'corp') {
