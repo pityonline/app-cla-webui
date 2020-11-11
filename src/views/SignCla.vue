@@ -1033,7 +1033,7 @@
             right: 0;
             top: 0;
             background: linear-gradient(to right, #97DB30, #319E55);
-            width: 10rem;
+            width: 11rem;
             height: 2.5rem;
             border-radius: 1.25rem;
             padding: 0;
