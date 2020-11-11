@@ -74,11 +74,6 @@ const routes = [
                 path: '/employeeList',
                 name: 'EmployeeList',
                 component: () => import('../views/EmployeeList.vue'),
-            },
-            {
-                path: '/resetPassword',
-                name: 'ResetPassword',
-                component: () => import('../views/ResetPassword.vue'),
             },]
     },
     {
@@ -147,7 +142,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
     window.scrollTo(0, 0);
-    if (from.path === '/signedRepo/resetPassword' || from.path === '/rootManager/resetPassword') {
+    if (from.path === '/resetPassword') {
         if (to.path === '/corporationManagerLogin') {
             next()
         } else {
@@ -158,6 +153,13 @@ router.beforeEach((to, from, next) => {
         }
     } else {
         next()
+    }
+    if (to.path === '/sign'||to.path === '/sign-cla'||to.path === '/index'||to.path === '/platformSelect'||to.path === '/corporationManagerLogin'||to.path === '/orgSelect') {
+        sessionStorage.setItem('showHeaderMenu','false')
+    }else if (to.path === '/home' || to.path === '/linkedRepo'||to.path === '/corporationList'||to.path === '/bind-cla') {
+        sessionStorage.setItem('showHeaderMenu','org')
+    }else{
+        sessionStorage.setItem('showHeaderMenu','corp')
     }
 })
 router.afterEach((to, from, next) => {
