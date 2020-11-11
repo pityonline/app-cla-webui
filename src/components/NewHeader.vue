@@ -122,28 +122,43 @@
                 }
             },
             toHome() {
-                console.log('tohome');
-                this.$router.push('/home')
+                if (this.$route.path !== '/home') {
+                    this.$router.push('/home')
+                }
+
             },
             toManager() {
-                this.$router.push('/managerList')
+                if (this.$route.path !== '/managerList') {
+                    this.$router.push('/managerList')
+                }
             },
             toEmployee() {
-                this.$router.push('/employeeList')
+                if (this.$route.path !== '/employeeList') {
+                    this.$router.push('/employeeList')
+                }
             },
             toCreateManager() {
-                this.$router.push('/createManager')
+                if (this.$route.path !== '/createManager') {
+                    this.$router.push('/createManager')
+                }
             },
             toResetPwd() {
-                this.$router.push('/resetPassword')
+                if (this.$route.path !== '/resetPassword') {
+                    this.$router.push('/resetPassword')
+                }
             },
             toCLA() {
-                this.$router.push('/home')
+                // if (this.$route.path !== '/resetPassword') {
+                //     this.$router.push('/resetPassword')
+                // }
             },
             loginOut() {
-                console.log(' loginOut');
                 sessionStorage.clear();
-                this.$router.push('/')
+                if (this.loginRole === 'corp') {
+                    this.$router.push('/corporationManagerLogin')
+                }else{
+                    this.$router.push('/')
+                }
             },
             chooseLng(value) {
                 if (this.value !== value) {
@@ -166,8 +181,7 @@
                 this.isActive = !this.isActive;
             },
             init() {
-                console.log(this.$store.state.loginInfo.userInfo[0].role);
-                this.role = JSON.parse(sessionStorage.getItem('loginInfo')).userInfo[0].role;
+                this.role = this.$store.state.loginInfo.userInfo[0].role;
                 if ( sessionStorage.getItem('showHeaderMenu')==='false'){
                    this.showHeaderMenu=false
                 }else if (sessionStorage.getItem('showHeaderMenu') === 'corp') {
