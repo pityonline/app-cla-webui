@@ -1,6 +1,6 @@
 <template>
     <div id="home" :style="home">
-        <Header @clickItem="clickItem"></Header>
+        <Header></Header>
         <el-col :offset="5" :span="14" id="section">
             <router-view></router-view>
         </el-col>
@@ -10,7 +10,7 @@
 <script>
     import * as url from '../until/api'
     import * as until from '../until/until'
-    import Header from '@components/OrganizationHeader'
+    import Header from '@components/NewHeader'
     import Footer from '@components/NewFooter'
     import {mapActions} from 'vuex'
 
