@@ -9,7 +9,7 @@
                 width="30%">
             <div class="titleBox">
                 <svg-icon icon-class="fail_icon" class="dialogIcon"></svg-icon>
-                <span>Failed</span>
+                <span>{{$t('tips.failedTitle')}}</span>
             </div>
             <el-row>
                 <el-col align="center">
@@ -25,7 +25,7 @@
     export default {
 
         name: "ReLoginDialog",
-        props: ['dialogVisible', 'message', 'title'],
+        props: ['dialogVisible', 'message'],
 
         data() {
             return {

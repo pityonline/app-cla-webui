@@ -188,122 +188,122 @@ export default new Vuex.Store({
                     case 'cla.no_cla_binding':
                         commit('setSignReLogin', {
                             dialogVisible: true,
-                            dialogMessage: 'There is no CLA to sign for organization.',
+                            dialogMessage: this.$t('tips.no_cla_binding'),
                         });
                         break;
                     case 'cla.has_signed':
                         commit('setSignReLogin', {
                             dialogVisible: true,
-                            dialogMessage: 'The CLA has been signed before.',
+                            dialogMessage: this.$t('tips.has_signed'),
                         });
                         break;
                     case 'cla.invalid_parameter':
                         commit('setSignReLogin', {
                             dialogVisible: true,
-                            dialogMessage: 'The parameter is invalid and cannot be signed',
+                            dialogMessage:  this.$t('tips.invalid_parameter'),
                         });
                         break;
                     case 'cla.no_corp_manager':
                         commit('setSignReLogin', {
                             dialogVisible: true,
-                            dialogMessage: 'Your company has not added any managers for this project.You can\'t sign',
+                            dialogMessage: this.$t('tips.no_corp_manager'),
                         });
                         break;
                     case 'cla.has_not_signed':
                         commit('setSignReLogin', {
                             dialogVisible: true,
-                            dialogMessage: 'Your corporation has not signed.',
+                            dialogMessage: this.$t('tips.has_not_signed'),
                         });
                         break;
                     case 'cla.invalid_token':
                         commit('setSignReLogin', {
                             dialogVisible: true,
-                            dialogMessage: 'Token expired, please login again.',
+                            dialogMessage: this.$t('tips.invalid_token'),
                         });
                         break;
                     case 'cla.missing_token':
                         commit('setSignReLogin', {
                             dialogVisible: true,
-                            dialogMessage: 'Token invalid, please login again.',
+                            dialogMessage:this.$t('tips.missing_token'),
                         });
                         break;
                     case 'cla.unknown_token':
                         commit('setSignReLogin', {
                             dialogVisible: true,
-                            dialogMessage: 'Token invalid, please login again.',
+                            dialogMessage:this.$t('tips.unknown_token'),
                         });
                         break;
                     case 'cla.uncompleted_signing':
                         commit('setSignReLogin', {
                             dialogVisible: true,
-                            dialogMessage: 'The signing process of corporation is not finish yet.',
+                            dialogMessage: this.$t('tips.uncompleted_signing'),
                         });
                         break;
                     case 'cla.unknown_email_platform':
                         commit('errorCodeSet', {
                             dialogVisible: true,
-                            dialogMessage: 'This type of mailbox is not supported at the moment',
+                            dialogMessage: this.$t('tips.unknown_email_platform'),
                         });
                         break;
                     case 'cla.failed_to_send_email':
                         commit('errorCodeSet', {
                             dialogVisible: true,
-                            dialogMessage: 'Failed to send mail.',
+                            dialogMessage: this.$t('tips.failed_to_send_email'),
                         });
                         break;
                     case 'cla.wrong_verification_code':
                         commit('errorCodeSet', {
                             dialogVisible: true,
-                            dialogMessage: 'Verification code error.',
+                            dialogMessage: this.$t('tips.wrong_verification_code'),
                         });
                         break;
                     case 'cla.expired_verification_code':
                         commit('errorCodeSet', {
                             dialogVisible: true,
-                            dialogMessage: 'Verification code expired.',
+                            dialogMessage: this.$t('tips.expired_verification_code'),
                         });
                         break;
                     case 'cla.pdf_has_not_uploaded':
                         commit('setSignReLogin', {
                             dialogVisible: true,
-                            dialogMessage: 'Signature of organization is not uploaded.',
+                            dialogMessage: this.$t('tips.pdf_has_not_uploaded'),
                         });
                         break;
                     case 'cla.num_of_corp_managers_exceeded':
                         commit('errorCodeSet', {
                             dialogVisible: true,
-                            dialogMessage: 'The number of managers exceeds the limit.',
+                            dialogMessage:this.$t('tips.num_of_corp_managers_exceeded'),
                         });
                         break;
                     case 'cla.corp_manager_exists':
                         commit('errorCodeSet', {
                             dialogVisible: true,
-                            dialogMessage: 'The name is exists already.',
+                            dialogMessage: this.$t('tips.corp_manager_exists'),
                         });
                         break;
                     case 'cla.not_same_corp':
                         commit('errorCodeSet', {
                             dialogVisible: true,
-                            dialogMessage: 'Email does not belong to the corporation.',
+                            dialogMessage: this.$t('tips.not_same_corp'),
                         });
                         break;
                     case 'cla.not_ready_to_sign':
                         commit('setSignReLogin', {
                             dialogVisible: true,
-                            dialogMessage: 'The organization is not ready.',
+                            dialogMessage: this.$t('tips.not_ready_to_sign'),
                         });
                         break;
                     case 'cla.system_error':
                         commit('errorCodeSet', {
                             dialogVisible: true,
-                            dialogMessage: 'System error, please try again',
+                            dialogMessage: this.$t('tips.system_error'),
                         });
                         break;
                 }
             }else{
                 commit('errorCodeSet', {
                     dialogVisible: true,
-                    dialogMessage: 'System error, please try again',
+                    dialogMessage:this.$t('tips.system_error'),
                 })
             }
         },
@@ -346,7 +346,6 @@ export default new Vuex.Store({
                     let tableData = [];
                     let count = res.data.length;
                     res.data.forEach((item, index) => {
-                        // console.log(index);
                         tableData.push({
                             id: item.id,
                             repository: `${item.org_id}/${item.repo_id}`,
@@ -359,10 +358,8 @@ export default new Vuex.Store({
                             contributors: '0',
                         });
                         ((index, item, length, {commit}, tableData) => {
-                            // console.log(index, tableData, item, length);
                             if (item.apply_to === 'corporation') {
                                 count++;
-                                // console.log(data);
                                 axios({
                                     url: `/api${url.corporation_signing}`,
                                     params: {
@@ -384,10 +381,8 @@ export default new Vuex.Store({
                                     });
                                     if (--count === 0) {
                                         let obj = {tableData: tableData, ready: true};
-                                        // console.log(tableData);
                                         commit('setReady', obj);
                                     }
-                                    // console.log(tableData);
                                 }).catch(err => {
                                 })
                             }
