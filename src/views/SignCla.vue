@@ -1179,7 +1179,6 @@
             }
 
             & > .content {
-                padding: 1rem;
                 text-align: left;
 
 
