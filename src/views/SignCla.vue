@@ -134,11 +134,11 @@
             },
             sendBtTextFromLang: {
                 get: function () {
-                    if (this.$t('signPage.sendCode') === this.sendBtText) {
+                    if (this.$t('signPage.sendCode')) {
                         this.sendBtText=this.$t('signPage.sendCode')
                         return this.sendBtText;
 
-                    } else if (this.$t('signPage.reSendCode') === this.sendBtText) {
+                    } else if (this.$t('signPage.reSendCode')) {
                         this.sendBtText=this.$t('signPage.reSendCode')
                         return this.sendBtText;
                     }
