@@ -495,10 +495,15 @@
                     }
                     let params = '';
                     let repoInfo = this.$store.state.repoInfo;
+                    this.platform = repoInfo.platform;
+                    this.org = repoInfo.org_id;
+
                     if (repoInfo.repo_id) {
+                        this.repo = repoInfo.repo_id;
                         params = `${repoInfo.platform}/${repoInfo.org_id}/${repoInfo.repo_id}`
                     } else {
                         params = `${repoInfo.platform}/${repoInfo.org_id}`
+                        this.repo = ''
                     }
                     let base64Params = until.strToBase64(params);
                     this.$router.replace(`${this.$store.state.signRouter}/${base64Params}`);
