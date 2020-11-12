@@ -469,11 +469,11 @@
             ...mapActions([ 'setLoginTypeAct', 'setRepoInfoAct']),
             getRepoInfo() {
                 let params = window.location.href.split('/sign/')[1];
-                let cookie = document.cookie;
                 if (params === 'auth_failed') {
+                    let cookie = document.cookie;
                     let cookieArr = cookie.split(';');
                     for (let i =0;i<cookieArr.length;i++){
-                        let cookieKeyValue = cookieArr[i].split('=')
+                        let cookieKeyValue = cookieArr[i].split('=');
                         if (cookieKeyValue[0].trim()==="error_code") {
                             switch(cookieKeyValue[1]){
                                 case 'auth_failed':
@@ -481,7 +481,7 @@
                                     this.$store.commit('errorCodeSet', {
                                         dialogVisible: true,
                                         dialogMessage: this.$t('tips.system_error'),
-                                    })
+                                    });
                                     break;
                                 case 'unauthorized':
                                     this.$store.commit('errorCodeSet', {
@@ -490,6 +490,7 @@
                                     });
                                     break;
                             }
+                            break;
                         }
                     }
                     let params = '';
