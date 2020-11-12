@@ -468,34 +468,50 @@
         methods: {
             ...mapActions([ 'setLoginTypeAct', 'setRepoInfoAct']),
             getRepoInfo() {
-                let params = window.location.href.split('/sign/')[1]
-                let repoInfoParams = ''
-                if (params.indexOf('/') !== -1) {
-                    repoInfoParams = params.substring(0, params.indexOf('/'));
-                    let orgAddress = params.substring(params.indexOf('/') + 1);
-                    sessionStorage.setItem('orgAddress', orgAddress)
-                } else {
-                    sessionStorage.removeItem('orgAddress')
-                    repoInfoParams = params
-                }
-                let arg = until.base64ToStr(repoInfoParams)
-                if (arg) {
-                    let args = arg.split('/');
-                    if (args.length < 2) {
-                        this.$router.push({name: 'ErrorPath'})
+                let params = window.location.href.split('/sign/')[1];
+                let cookie = document.cookie;
+                console.log(cookie);
+                if (params === 'auth_failed') {
+                    let params = '';
+                    let repoInfo=this.$store.state.repoInfo;
+                    if (repoInfo.repo_id) {
+                        params = `${repoInfo.platform}/${repoInfo.org_id}/${repoInfo.repo_id}`
                     } else {
-                        this.platform = args[0];
-                        this.org = args[1];
-                        if (args[2]) {
-                            this.repo = args[2]
-                        } else {
-                            this.repo = ''
-                        }
-                        this.setRepoInfoAct({platform: this.platform, org_id: this.org, repo_id: this.repo});
+                        params = `${repoInfo.platform}/${repoInfo.org_id}`
                     }
-                } else {
-                    this.$router.push({name: 'ErrorPath'})
+                    let base64Params = until.strToBase64(params);
+                    this.$router.replace(`${this.$store.state.signRouter}/${base64Params}`)
+                }else{
+                    let repoInfoParams = '';
+                    if (params.indexOf('/') !== -1) {
+                        repoInfoParams = params.substring(0, params.indexOf('/'));
+                        let orgAddress = params.substring(params.indexOf('/') + 1);
+                        sessionStorage.setItem('orgAddress', orgAddress)
+                    } else {
+                        sessionStorage.removeItem('orgAddress');
+                        repoInfoParams = params
+                    }
+                    let arg = until.base64ToStr(repoInfoParams);
+                    if (arg) {
+                        let args = arg.split('/');
+                        if (args.length < 2) {
+                            this.$router.push({name: 'ErrorPath'})
+                        } else {
+                            this.platform = args[0];
+                            this.org = args[1];
+                            if (args[2]) {
+                                this.repo = args[2]
+                            } else {
+                                this.repo = ''
+                            }
+                            this.setRepoInfoAct({platform: this.platform, org_id: this.org, repo_id: this.repo});
+                        }
+                    } else {
+                        this.$router.push({name: 'ErrorPath'})
+                    }
+
                 }
+
             },
             submit(loginType) {
                 this.setLoginTypeAct(loginType)
