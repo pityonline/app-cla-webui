@@ -467,7 +467,21 @@
         },
         methods: {
             ...mapActions([ 'setLoginTypeAct', 'setRepoInfoAct']),
+            setLangLocale(){
+                if(parseInt(localStorage.getItem('lang'))){
+                    this.value =parseInt(localStorage.getItem('lang'))
+                }
+                switch (this.value) {
+                    case 0:
+                        this.$i18n.locale = 'en-us';
+                        break;
+                    case 1:
+                        this.$i18n.locale = 'zh-cn';
+                        break;
+                }
+            },
             getRepoInfo() {
+                this.setLangLocale();
                 let params = window.location.href.split('/sign/')[1];
                 if (params === 'auth_failed') {
                     let cookie = document.cookie;
@@ -480,7 +494,7 @@
                                     console.log(this.$i18n.locale,this.$t('tips.not_authorize_email'),'case');
                                     this.$store.commit('errorCodeSet', {
                                         dialogVisible: true,
-                                        dialogMessage: this.$t('tips.system_error'),
+                                        dialogMessage: this.$t('tips.not_authorize_email'),
                                     });
                                     break;
                                 case 'unauthorized':

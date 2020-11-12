@@ -181,18 +181,6 @@
                 this.isActive = !this.isActive;
             },
             init() {
-                if (this.$store.state.loginInfo){
-                    this.role = this.$store.state.loginInfo.userInfo[0].role;
-                }
-                if ( sessionStorage.getItem('showHeaderMenu')==='false'){
-                   this.showHeaderMenu=false
-                }else if (sessionStorage.getItem('showHeaderMenu') === 'corp') {
-                    this.showHeaderMenu=true;
-                    this.loginRole = 'corp';
-                }else{
-                    this.showHeaderMenu=true;
-                    this.loginRole = 'org';
-                }
                 if(parseInt(localStorage.getItem('lang'))){
                     this.value =parseInt(localStorage.getItem('lang'))
                 }
@@ -206,6 +194,19 @@
                         this.$i18n.locale = 'zh-cn';
                         break;
                 }
+                if (this.$store.state.loginInfo){
+                    this.role = this.$store.state.loginInfo.userInfo[0].role;
+                }
+                if ( sessionStorage.getItem('showHeaderMenu')==='false'){
+                   this.showHeaderMenu=false
+                }else if (sessionStorage.getItem('showHeaderMenu') === 'corp') {
+                    this.showHeaderMenu=true;
+                    this.loginRole = 'corp';
+                }else{
+                    this.showHeaderMenu=true;
+                    this.loginRole = 'org';
+                }
+
             },
         },
         created() {
