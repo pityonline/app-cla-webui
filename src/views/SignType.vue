@@ -407,8 +407,7 @@
         </el-row>
 
         <NewFooter></NewFooter>
-        <ReTryDialog :dialogVisible="reTryDialogVisible" :message="reLoginMsg"
-                     :title="reLoginDialogTitle"></ReTryDialog>
+        <ReTryDialog :dialogVisible="reTryDialogVisible" :message="reLoginMsg"></ReTryDialog>
     </el-row>
 </template>
 <script>
@@ -446,7 +445,6 @@
         data() {
             return {
                 base64Params: '',
-                reLoginDialogTitle: '',
                 platform: '',
                 org: '',
                 repo: '',
@@ -470,12 +468,10 @@
             getRepoInfo() {
                 let params = window.location.href.split('/sign/')[1];
                 let cookie = document.cookie;
-                console.log(cookie);
                 if (params === 'auth_failed') {
                     let cookieArr = cookie.split(';');
                     for (let i =0;i<cookieArr.length;i++){
                         let cookieKeyValue = cookieArr[i].split('=')
-                        console.log(cookieKeyValue);
                         if (cookieKeyValue[0].trim()==="error_code") {
                             switch(cookieKeyValue[1]){
                                 case 'auth_failed':
@@ -507,7 +503,6 @@
                     }
                     let base64Params = until.strToBase64(params);
                     this.$router.replace(`${this.$store.state.signRouter}/${base64Params}`);
-                    // window.location=`${this.domain}${this.$store.state.signRouter}/${base64Params}`
                 }else{
                     let repoInfoParams = '';
                     if (params.indexOf('/') !== -1) {
