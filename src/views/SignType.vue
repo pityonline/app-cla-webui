@@ -501,7 +501,7 @@
                         params = `${repoInfo.platform}/${repoInfo.org_id}`
                     }
                     let base64Params = until.strToBase64(params);
-                    this.$router.push(`${this.$store.state.signRouter}/${base64Params}`)
+                    window.location=`${this.domain}${this.$store.state.signRouter}/${base64Params}`
                 }else{
                     let repoInfoParams = '';
                     if (params.indexOf('/') !== -1) {
