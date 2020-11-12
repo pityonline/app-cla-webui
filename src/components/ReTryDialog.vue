@@ -13,7 +13,7 @@
             </div>
             <el-row>
                 <el-col align="center">
-                    <p>{{dialogMessage}}</p>
+                    <p>{{message}}</p>
                     <button class="dialogBt" @click="reTry()">{{$t('tips.dialogBt')}}</button>
                 </el-col>
             </el-row>
@@ -26,12 +26,6 @@
 
         name: "ReLoginDialog",
         props: ['dialogVisible', 'message'],
-        computed:{
-            dialogMessage(){
-                console.log(this.message);
-                return this.message;
-            },
-        },
         data() {
             return {
             }
