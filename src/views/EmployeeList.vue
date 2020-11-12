@@ -369,6 +369,7 @@
     @import "../assets/font/css/Roboto-Regular.css";
 
     #employeeList {
+        padding-top: 2rem;
         & .el-dialog {
             border-radius: 1rem;
         }

@@ -1,6 +1,6 @@
 <template>
 
-    <el-row id="userList" class="marginTop1rem">
+    <el-row id="userList">
 
         <el-col>
             <p id="tabName">Manager</p>
@@ -262,6 +262,7 @@
     @import "../assets/font/css/Roboto-Regular.css";
 
     #userList {
+        padding-top: 2rem;
         .actionRow {
             display: flex;
             justify-content: space-between;
