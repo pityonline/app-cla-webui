@@ -33,7 +33,8 @@
                                         prop="code">
 
                                     <el-input v-model="ruleForm.code" size="small">
-                                        <el-button slot="append" :disabled="sendBtTextFromLang!==$t('signPage.sendCode')"
+                                        <el-button slot="append"
+                                                   :disabled="sendBtTextFromLang!==$t('signPage.sendCode')"
                                                    @click="sendCode()">{{sendBtTextFromLang}}
                                         </el-button>
                                     </el-input>
@@ -132,14 +133,16 @@
                 return this.$store.state.signReLoginDialogVisible
             },
             sendBtTextFromLang: {
-                get:function() {
-                    if (this.$t('signPage.sendCode')||this.$t('signPage.reSendCode')){
+                get: function () {
+                    if (this.$t('signPage.sendCode') === this.sendBtText) {
+                        return this.$t('signPage.sendCode')
 
+                    } else if (this.$t('signPage.reSendCode') === this.sendBtText) {
+                        return this.$t('signPage.reSendCode')
                     }
-                    return this.sendBtText;
                 },
-                set:function(value){
-                    this.sendBtText=value
+                set: function (value) {
+                    this.sendBtText = value
                 }
             },
         },
@@ -154,7 +157,8 @@
         ,
         data() {
             return {
-                sendBtText:this.$t('signPage.sendCode'),
+                second:'',
+                sendBtText: this.$t('signPage.sendCode'),
                 signRouter: '/sign',
                 domain: this.$store.state.domain,
                 tipsTitle: '',
