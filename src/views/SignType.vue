@@ -472,15 +472,34 @@
                 let cookie = document.cookie;
                 console.log(cookie);
                 if (params === 'auth_failed') {
+                    let cookieArr = cookie.split(';');
+                    for (let i =0;i<cookieArr.length;i++){
+                        if (cookieArr[i].split('=')[0]==="error_code") {
+                            switch(cookieArr[i].split('=')[1]===''){
+                                case 'auth_failed':
+                                    this.$store.commit('errorCodeSet', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.not_authorize_email'),
+                                    });
+                                    break;
+                                case 'unauthorized':
+                                    this.$store.commit('errorCodeSet', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.not_authorize_email'),
+                                    });
+                                    break;
+                            }
+                        }
+                    }
                     let params = '';
-                    let repoInfo=this.$store.state.repoInfo;
+                    let repoInfo = this.$store.state.repoInfo;
                     if (repoInfo.repo_id) {
                         params = `${repoInfo.platform}/${repoInfo.org_id}/${repoInfo.repo_id}`
                     } else {
                         params = `${repoInfo.platform}/${repoInfo.org_id}`
                     }
                     let base64Params = until.strToBase64(params);
-                    this.$router.replace(`${this.$store.state.signRouter}/${base64Params}`)
+                    this.$router.push(`${this.$store.state.signRouter}/${base64Params}`)
                 }else{
                     let repoInfoParams = '';
                     if (params.indexOf('/') !== -1) {
@@ -519,18 +538,11 @@
                     if (loginType === 'individual' || loginType === 'employee') {
                         http({
                             url: `${url.getAuthCodeUrl}/${this.platform}/sign`,
-                            params: {success_redirect: '/sign-cla', failure_redirect: `/sign`,}
                         }).then(res => {
                             window.location.href = res.data.data.url
                         }).catch(err => {
                             if (err.data.hasOwnProperty('data')) {
                                 switch (err.data.data.error_code) {
-                                    case 'cla.no_cla_binding':
-                                        this.$store.commit('setSignReLogin', {
-                                            dialogVisible: true,
-                                            dialogMessage:this.$t('tips.no_cla_binding'),
-                                        });
-                                        break;
                                     case 'cla.invalid_parameter':
                                         let repoInfo = this.$store.state.repoInfo
                                         let params = repoInfo.repo_id ? `${repoInfo.platform}/${repoInfo.org_id}/${repoInfo.repo_id}` : `${repoInfo.platform}/${repoInfo.org_id}`
@@ -541,12 +553,6 @@
                                             path = `${this.signRouter}/${until.strToBase64(params)}`
                                         }
                                         this.$router.replace(path)
-                                        break;
-                                    case 'cla.has_not_signed':
-                                        this.$store.commit('setSignReLogin', {
-                                            dialogVisible: true,
-                                            dialogMessage: this.$t('tips.has_not_signed'),
-                                        });
                                         break;
                                     case 'cla.invalid_token':
                                         this.$store.commit('setSignReLogin', {
@@ -564,26 +570,6 @@
                                         this.$store.commit('setSignReLogin', {
                                             dialogVisible: true,
                                             dialogMessage: this.$t('tips.unknown_token'),
-                                        });
-                                        break;
-                                    case 'cla.uncompleted_signing':
-                                        this.$store.commit('setSignReLogin', {
-                                            dialogVisible: true,
-                                            dialogMessage: this.$t('tips.uncompleted_signing'),
-                                        });
-                                        break;
-
-                                    case 'cla.pdf_has_not_uploaded':
-                                        this.$store.commit('setSignReLogin', {
-                                            dialogVisible: true,
-                                            dialogMessage: this.$t('tips.pdf_has_not_uploaded'),
-                                        });
-                                        break;
-
-                                    case 'cla.not_ready_to_sign':
-                                        this.$store.commit('setSignReLogin', {
-                                            dialogVisible: true,
-                                            dialogMessage:this.$t('tips.not_ready_to_sign'),
                                         });
                                         break;
                                     case 'cla.system_error':
