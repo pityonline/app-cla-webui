@@ -474,8 +474,10 @@
                 if (params === 'auth_failed') {
                     let cookieArr = cookie.split(';');
                     for (let i =0;i<cookieArr.length;i++){
-                        if (cookieArr[i].split('=')[0]==="error_code") {
-                            switch(cookieArr[i].split('=')[1]===''){
+                        let cookieKeyValue = cookieArr[i].split('=')
+                        console.log(cookieKeyValue);
+                        if (cookieKeyValue[0].trim()==="error_code") {
+                            switch(cookieKeyValue[1]===''){
                                 case 'auth_failed':
                                     this.$store.commit('errorCodeSet', {
                                         dialogVisible: true,
