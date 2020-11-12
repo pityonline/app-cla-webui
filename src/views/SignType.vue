@@ -477,7 +477,7 @@
                         if (cookieKeyValue[0].trim()==="error_code") {
                             switch(cookieKeyValue[1]){
                                 case 'auth_failed':
-                                    console.log(this.$t('tips.not_authorize_email','case'));
+                                    console.log(this.$t('tips.not_authorize_email'),'case');
                                     this.$store.commit('errorCodeSet', {
                                         dialogVisible: true,
                                         dialogMessage: this.$t('tips.not_authorize_email'),
