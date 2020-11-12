@@ -167,4 +167,12 @@ router.beforeEach((to, from, next) => {
 router.afterEach((to, from, next) => {
     window.scrollTo(0, 0);
 });
+router.onError((error) => {
+    const pattern = /Loading chunk (\d)+ failed/g;
+    const isChunkLoadFailed = error.message.match(pattern);
+    const targetPath = router.history.pending.fullPath;
+    if (isChunkLoadFailed) {
+        router.replace(targetPath);
+    }
+});
 export default router
