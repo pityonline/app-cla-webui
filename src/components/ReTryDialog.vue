@@ -14,7 +14,7 @@
             <el-row>
                 <el-col align="center">
                     <p>{{message}}</p>
-                    <button class="dialogBt" @click="reTry()">OK</button>
+                    <button class="dialogBt" @click="reTry()">{{$t('tips.dialogBt')}}</button>
                 </el-col>
             </el-row>
         </el-dialog>
