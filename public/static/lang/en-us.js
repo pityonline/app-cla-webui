@@ -41,6 +41,7 @@ module.exports = {
     tips:{
         failedTitle:'Failed',
         successTitle:'Successfully',
+        dialogBt:'OK',
         no_cla_binding:'There is no CLA to sign for organization.',
         has_signed:'The CLA has been signed before.',
         invalid_parameter:'The parameter is invalid and cannot be signed',

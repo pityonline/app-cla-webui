@@ -40,6 +40,7 @@ module.exports = {
     tips:{
         failedTitle:'失败',
         successTitle:'成功',
+        dialogBt:'确定',
         no_cla_binding:'该组织没有可签署的贡献者许可协议',
         has_signed:'已签署过这份贡献者许可协议',
         invalid_parameter:'参数无效，无法签署',

@@ -14,7 +14,7 @@
             <el-row>
                 <el-col align="center">
                     <p class="messageBox">{{message}}</p>
-                    <button class="dialogBt" @click="clickGoHome()">OK</button>
+                    <button class="dialogBt" @click="clickGoHome()">{{$t('tips.dialogBt')}}</button>
                 </el-col>
             </el-row>
         </el-dialog>
