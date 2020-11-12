@@ -133,7 +133,6 @@
             },
             sendBtTextFromLang: {
                 get:function() {
-                    this.sendBtText=this.$t('signPage.sendCode')
                     return this.sendBtText
                 },
                 set:function(value){
@@ -152,7 +151,7 @@
         ,
         data() {
             return {
-                sendBtText:'',
+                sendBtText:this.$t('signPage.sendCode'),
                 signRouter: '/sign',
                 domain: this.$store.state.domain,
                 tipsTitle: '',
