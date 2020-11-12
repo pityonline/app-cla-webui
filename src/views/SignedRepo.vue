@@ -1,7 +1,7 @@
 <template>
     <div id="signedRepo" :style="section">
         <CorporationHeader></CorporationHeader>
-        <el-row style="padding-top: 2rem">
+        <el-row>
             <el-col :offset="5" :span="14">
                 <router-view></router-view>
             </el-col>
