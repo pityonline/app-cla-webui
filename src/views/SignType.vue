@@ -480,8 +480,8 @@
                                     console.log(this.$t('tips.not_authorize_email'),'case');
                                     this.$store.commit('errorCodeSet', {
                                         dialogVisible: true,
-                                        dialogMessage: this.$t('tips.not_authorize_email'),
-                                    });
+                                        dialogMessage: this.$t('tips.system_error'),
+                                    })
                                     break;
                                 case 'unauthorized':
                                     this.$store.commit('errorCodeSet', {
