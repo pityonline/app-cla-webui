@@ -134,17 +134,19 @@
             },
             sendBtTextFromLang: {
                 get: function () {
-                    if (this.$t('signPage.sendCode')) {
-                        this.sendBtText=this.$t('signPage.sendCode')
                         return this.sendBtText;
-
-                    } else if (this.$t('signPage.reSendCode'),{second:this.second}) {
-                        this.sendBtText=this.$t('signPage.reSendCode',{second:this.second})
-                        return this.sendBtText;
-                    }
                 },
                 set: function (value) {
                     this.sendBtText = value
+                }
+            },
+        },
+        watch:{
+            '$i18n.locale'(){
+                if(this.sendBtTextFromLang==='send code'||this.sendBtTextFromLang==='发送验证码'){
+                    this.sendBtTextFromLang=this.$t('signPage.sendCode')
+                }else{
+                    this.sendBtTextFromLang=this.$t('signPage.reSendCode',{second:this.second})
                 }
             },
         },
