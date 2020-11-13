@@ -3,13 +3,13 @@
     <el-row id="userList">
 
         <el-col>
-            <p id="tabName">Manager</p>
+            <p id="tabName">{{$t('header.manager')}}</p>
             <el-row class="tableBox">
                 <el-col>
                     <el-row>
                         <el-col align="left">
-                            <button class="button" @click="createManager">Create Manager</button>
-                            <!--<button class="button" @click="multipleChoice=true">Batch</button>-->
+                            <button class="button" @click="createManager">{{$t('header.createManager')}}</button>
+                            <!--<button class="button" @click="multipleChoice=true">{{$t('corp.batch')}}</button>-->
                         </el-col>
                     </el-row>
                     <el-row>
@@ -19,30 +19,30 @@
                                 ref="multipleTable"
                                 :data="tableData">
                             <el-table-column
-                            prop="id"
-                            label="Id">
+                                    prop="id"
+                                    :label="$t('corp.id')">
                             </el-table-column>
                             <el-table-column
                                     prop="name"
-                                    label="Name">
+                                    :label="$t('corp.name')">
                             </el-table-column>
                             <el-table-column
                                     prop="email"
-                                    label="Email">
+                                    :label="$t('corp.email')">
                             </el-table-column>
                             <el-table-column
                                     prop="role"
-                                    label='Role'>
+                                    :label="$t('corp.role')">
                             </el-table-column>
                             <el-table-column
-                                    label="Operation"
+                                    :label="$t('corp.operation')"
                                     v-if="!multipleChoice"
                                     key="2"
                                     align="center"
                                     width="200">
                                 <template slot-scope="scope">
                                     <button class="deleteBt" @click="deleteUser(scope.row)">
-                                        Delete
+                                        {{$t('corp.delete')}}
                                     </button>
                                 </template>
                             </el-table-column>
@@ -57,17 +57,15 @@
                     </el-row>
                     <el-row style="margin-top: 20px" v-if="multipleChoice">
                         <el-col align="left">
-                            <button class="deleteBt" @click="deleteUser()">Delete</button>
-                            <button class="cancelBt" @click="cancel()">Cancel</button>
+                            <button class="deleteBt" @click="deleteUser()">{{$t('corp.delete')}}</button>
+                            <button class="cancelBt" @click="cancel()">{{$t('corp.cancel')}}</button>
                         </el-col>
                     </el-row>
                 </el-col>
             </el-row>
 
-            <corpReLoginDialog :title="corpReLoginDialogTitle" :message="corpReLoginMsg"
-                               :dialogVisible="corpReLoginDialogVisible"></corpReLoginDialog>
-            <reTryDialog :title="corpReLoginDialogTitle" :message="corpReLoginMsg"
-                         :dialogVisible="corpReTryDialogVisible"></reTryDialog>
+            <corpReLoginDialog :message="corpReLoginMsg" :dialogVisible="corpReLoginDialogVisible"></corpReLoginDialog>
+            <reTryDialog :message="corpReLoginMsg" :dialogVisible="corpReTryDialogVisible"></reTryDialog>
         </el-col>
 
 
@@ -78,12 +76,12 @@
                 :show-close="false"
                 :visible.sync="deleteUserVisible">
             <el-row align="center">
-                Are you sure to delete ?
+                {{$t('corp.deleteTips')}}
             </el-row>
             <el-row align="center" class="marginTop1rem contentTitle">
 
-                <button class="deleteBt" @click="submit()">Yes</button>
-                <button class="cancelBt" @click="deleteUserVisible=false">No</button>
+                <button class="deleteBt" @click="submit()">{{$t('corp.yes')}}</button>
+                <button class="cancelBt" @click="deleteUserVisible=false">{{$t('corp.no')}}</button>
             </el-row>
 
         </el-dialog>
@@ -114,9 +112,6 @@
             ,
             corpReLoginMsg() {
                 return this.$store.state.dialogMessage
-            },
-            corpReLoginDialogTitle() {
-                return `cla sign prompt you`
             },
             corpReTryDialogVisible() {
                 return this.$store.state.reTryDialogVisible
@@ -156,10 +151,10 @@
                 this.emails = [];
                 if (this.multipleChoice) {
                     this.multipleSelection.forEach(item => {
-                        this.emails.push({email:item.email})
+                        this.emails.push({email: item.email})
                     })
                 } else {
-                    this.emails.push({email:row.email})
+                    this.emails.push({email: row.email})
                 }
                 this.deleteUserVisible = true
 
@@ -176,33 +171,33 @@
                             case 'cla.invalid_token':
                                 this.$store.commit('errorSet', {
                                     dialogVisible: true,
-                                    dialogMessage: 'Token expired, please login again.',
+                                    dialogMessage: this.$t('tips.invalid_token'),
                                 });
                                 break;
                             case 'cla.missing_token':
                                 this.$store.commit('errorSet', {
                                     dialogVisible: true,
-                                    dialogMessage: 'Token invalid, please login again.',
+                                    dialogMessage: this.$t('tips.missing_token'),
                                 });
                                 break;
                             case 'cla.unknown_token':
                                 this.$store.commit('errorSet', {
                                     dialogVisible: true,
-                                    dialogMessage: 'Token invalid, please login again.',
+                                    dialogMessage: this.$t('tips.unknown_token'),
                                 });
                                 break;
 
                             case 'cla.system_error':
                                 this.$store.commit('errorCodeSet', {
                                     dialogVisible: true,
-                                    dialogMessage: 'System error, please try again',
+                                    dialogMessage: this.$t('tips.system_error'),
                                 });
                                 break;
                         }
                     } else {
                         this.$store.commit('errorCodeSet', {
                             dialogVisible: true,
-                            dialogMessage: 'System error, please try again',
+                            dialogMessage: this.$t('tips.system_error'),
                         })
                     }
                 })
@@ -224,32 +219,32 @@
                             case 'cla.invalid_token':
                                 this.$store.commit('errorSet', {
                                     dialogVisible: true,
-                                    dialogMessage: 'Token expired, please login again.',
+                                    dialogMessage: this.$t('tips.invalid_token'),
                                 });
                                 break;
                             case 'cla.missing_token':
                                 this.$store.commit('errorSet', {
                                     dialogVisible: true,
-                                    dialogMessage: 'Token invalid, please login again.',
+                                    dialogMessage: this.$t('tips.missing_token'),
                                 });
                                 break;
                             case 'cla.unknown_token':
                                 this.$store.commit('errorSet', {
                                     dialogVisible: true,
-                                    dialogMessage: 'Token invalid, please login again.',
+                                    dialogMessage: this.$t('tips.unknown_token'),
                                 });
                                 break;
                             case 'cla.system_error':
                                 this.$store.commit('errorCodeSet', {
                                     dialogVisible: true,
-                                    dialogMessage: 'System error, please try again',
+                                    dialogMessage: this.$t('tips.system_error'),
                                 });
                                 break;
                         }
                     } else {
                         this.$store.commit('errorCodeSet', {
                             dialogVisible: true,
-                            dialogMessage: 'System error, please try again',
+                            dialogMessage: this.$t('tips.system_error'),
                         })
                     }
                 })
@@ -263,6 +258,7 @@
 
     #userList {
         padding-top: 2rem;
+
         .actionRow {
             display: flex;
             justify-content: space-between;
@@ -342,7 +338,6 @@
             font-size: 2rem;
             text-align: left;
         }
-
 
 
         & .el-checkbox__inner {

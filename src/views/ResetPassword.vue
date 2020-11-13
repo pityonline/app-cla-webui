@@ -1,18 +1,18 @@
 <template>
     <el-row>
         <el-col class="resetPwdFormBox" :offset="6" :span="12">
-            <p id="tabName">Reset Password</p>
+            <p id="tabName">{{$t('header.resetPwd')}}</p>
             <el-form class="resetPwdForm" :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px">
                 <el-form-item label="" prop="oldPassword" label-width="0">
-                    <el-input placeholder="please input old password" clearable="" type="password"
+                    <el-input :placeholder="$t('corp.input_old_pwd')" clearable="" type="password"
                               v-model="ruleForm.oldPassword" @keydown.native="pressEnter"></el-input>
                 </el-form-item>
                 <el-form-item label="" prop="newPassword" label-width="0">
-                    <el-input placeholder="please input new password" clearable="" type="password"
+                    <el-input :placeholder="$t('corp.input_new_pwd')" clearable="" type="password"
                               v-model="ruleForm.newPassword" @keydown.native="pressEnter"></el-input>
                 </el-form-item>
                 <el-form-item label="" prop="checkPwd" label-width="0">
-                    <el-input placeholder="Please enter the new password again" clearable="" type="password"
+                    <el-input :placeholder="$t('corp.input_new_pwd_again')" clearable="" type="password"
                               v-model="ruleForm.checkPwd" @keydown.native="pressEnter"></el-input>
                 </el-form-item>
                 <el-form-item label-width="0">
@@ -20,10 +20,8 @@
                     <button class="cancelBt" type="reset" @click="reset('ruleForm')">Reset</button>
                 </el-form-item>
             </el-form>
-            <corpReLoginDialog :title="corpReLoginDialogTitle" :message="corpReLoginMsg"
-                               :dialogVisible="corpReLoginDialogVisible"></corpReLoginDialog>
-            <reTryDialog :title="corpReLoginDialogTitle" :message="corpReLoginMsg"
-                         :dialogVisible="corpReTryDialogVisible"></reTryDialog>
+            <corpReLoginDialog  :message="corpReLoginMsg" :dialogVisible="corpReLoginDialogVisible"></corpReLoginDialog>
+            <reTryDialog  :message="corpReLoginMsg" :dialogVisible="corpReTryDialogVisible"></reTryDialog>
         </el-col>
     </el-row>
 </template>
@@ -55,9 +53,6 @@
             corpReLoginMsg() {
                 return this.$store.state.dialogMessage
             },
-            corpReLoginDialogTitle() {
-                return `cla sign prompt you`
-            },
             corpReTryDialogVisible() {
                 return this.$store.state.reTryDialogVisible
             },
@@ -65,27 +60,27 @@
         data() {
             var validatePass = (rule, value, callback) => {
                 if (value === '') {
-                    callback(new Error('Please enter old password.'));
+                    callback(new Error(this.$t('corp.input_old_pwd')));
                 } else if (value === this.ruleForm.newPassword) {
-                    callback(new Error('The new password cannot be the same as old one.'));
+                    callback(new Error(this.$t('corp.newPwd_diff_with_oldPwd')));
                 } else {
                     callback();
                 }
             };
             var validatePass2 = (rule, value, callback) => {
                 if (value === '') {
-                    callback(new Error('Please enter the new password.'));
+                    callback(new Error(this.$t('corp.input_new_pwd')));
                 } else if (value === this.ruleForm.oldPassword) {
-                    callback(new Error('The new password cannot be the same as old one.'));
+                    callback(new Error(this.$t('corp.newPwd_diff_with_oldPwd')));
                 } else {
                     callback();
                 }
             };
             var validatePass3 = (rule, value, callback) => {
                 if (value === '') {
-                    callback(new Error('Please repeat the new password.'));
+                    callback(new Error(this.$t('corp.input_new_pwd_again')));
                 } else if (value !== this.ruleForm.newPassword) {
-                    callback(new Error('The repeated password is not the same as the first one.'));
+                    callback(new Error(this.$t('corp.newPwd_diff')));
                 } else {
                     callback();
                 }
@@ -132,7 +127,7 @@
                 }).then(res => {
                     this.$store.commit('setPwdIsChanged',true)
                     this.$message.closeAll()
-                    this.$message.success('success')
+                    this.$message.success(this.$t('tips.successTitle'))
                     if (this.$store.state.loginInfo.userInfo[0].role==='manager') {
                         this.$router.push('/employeeList')
                     }else{
@@ -144,45 +139,45 @@
                             case 'cla.invalid_token':
                                 this.$store.commit('errorSet', {
                                     dialogVisible: true,
-                                    dialogMessage: 'Token expired, please login again.',
+                                    dialogMessage: this.$t('tips.invalid_token'),
                                 });
                                 break;
                             case 'cla.missing_token':
                                 this.$store.commit('errorSet', {
                                     dialogVisible: true,
-                                    dialogMessage: 'Token invalid, please login again.',
+                                    dialogMessage: this.$t('tips.missing_token'),
                                 });
                                 break;
                             case 'cla.unknown_token':
                                 this.$store.commit('errorSet', {
                                     dialogVisible: true,
-                                    dialogMessage: 'Token invalid, please login again.',
+                                    dialogMessage: this.$t('tips.unknown_token'),
                                 });
                                 break;
 
                                 case 'cla.invalid_parameter':
                                 this.$store.commit('errorCodeSet', {
                                     dialogVisible: true,
-                                    dialogMessage: 'invalid_parameter,please try again',
+                                    dialogMessage: this.$t('tips.invalid_parameter'),
                                 });
                                 break;
                             case 'cla.invalid_account_or_pw':
                                 this.$store.commit('errorCodeSet', {
                                     dialogVisible: true,
-                                    dialogMessage: 'The old password is invalid, please try again.',
+                                    dialogMessage:  this.$t('tips.invalid_account_or_pw'),
                                 });
                                 break;
                             case 'cla.system_error':
                                 this.$store.commit('errorCodeSet', {
                                     dialogVisible: true,
-                                    dialogMessage: 'System error, please try again',
+                                    dialogMessage: this.$t('tips.system_error'),
                                 });
                                 break;
                         }
                     } else {
                         this.$store.commit('errorCodeSet', {
                             dialogVisible: true,
-                            dialogMessage: 'System error, please try again',
+                            dialogMessage:this.$t('tips.system_error'),
                         })
                     }
                 })

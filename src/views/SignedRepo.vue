@@ -1,6 +1,6 @@
 <template>
     <div id="signedRepo" :style="section">
-        <CorporationHeader></CorporationHeader>
+        <Header></Header>
         <el-row>
             <el-col :offset="5" :span="14">
                 <router-view></router-view>
@@ -14,7 +14,7 @@
 <script>
     import * as url from '../until/api'
     import * as until from '../until/until'
-    import CorporationHeader from '@components/NewHeader'
+    import Header from '@components/NewHeader'
     import Footer from '@components/NewFooter'
 
     window.onresize = () => {
@@ -25,7 +25,7 @@
     export default {
         name: "SignedRepo",
         components: {
-            CorporationHeader,
+            Header,
             Footer,
         },
         data() {

@@ -3,8 +3,6 @@
         <Header></Header>
         <el-row>
             <el-col :offset="5" :span="14">
-
-
                 <router-view></router-view>
             </el-col>
         </el-row>
@@ -76,37 +74,6 @@
         },
 
         methods: {
-
-            clickItem(command) {
-                switch (command) {
-                    case 'a':
-                        if (this.$route.path !== '/managerList') {
-                            this.$router.push('/managerList');
-                        }
-                        break;
-                    case 'c':
-                        if (this.$route.path !== '/createManager') {
-                            this.$router.push('/createManager');
-                        }
-                        break;
-                    case 'd':
-                        if (this.$route.path !== '/rootManager/resetPassword') {
-                            this.$router.push('/rootManager/resetPassword');
-                        }
-                        break;
-                    case 'e':
-                        this.previewDialogVisible = true
-                        break;
-
-                    case 'f':
-                        this.loginOut()
-                        break;
-                }
-            },
-            loginOut() {
-                sessionStorage.clear();
-                this.$router.push('/corporationManagerLogin')
-            },
             setClientHeight() {
                 this.$nextTick(() => {
                     until.getClientHeight() > document.getElementById('rootManager').offsetHeight ?
