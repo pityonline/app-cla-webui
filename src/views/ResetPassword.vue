@@ -16,8 +16,8 @@
                               v-model="ruleForm.checkPwd" @keydown.native="pressEnter"></el-input>
                 </el-form-item>
                 <el-form-item label-width="0">
-                    <button class="button" type="button" @click="submit('ruleForm')">Submit</button>
-                    <button class="cancelBt" type="reset" @click="reset('ruleForm')">Reset</button>
+                    <button class="button" type="button" @click="submit('ruleForm')">{{$t('corp.submit')}}</button>
+                    <button class="cancelBt" type="reset" @click="reset('ruleForm')">{{$t('corp.reset')}}</button>
                 </el-form-item>
             </el-form>
             <corpReLoginDialog  :message="corpReLoginMsg" :dialogVisible="corpReLoginDialogVisible"></corpReLoginDialog>

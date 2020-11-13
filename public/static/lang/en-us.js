@@ -108,6 +108,7 @@ module.exports = {
         yes:'Yes',
         no:'No',
         submit:'Submit',
+        reset:'Reset',
         manager_limit:'Create up to {limit} manager',
         fill_complete:'Please fill in the complete information.',
         input_old_pwd:'please input old password',
