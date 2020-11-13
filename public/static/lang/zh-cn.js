@@ -119,7 +119,8 @@ module.exports = {
         pwd:'密码',
         forget_pwd:'忘记密码？',
         login_in:'登陆',
-
+        inactive:'未激活',
+        active:'已激活',
 
 
     },

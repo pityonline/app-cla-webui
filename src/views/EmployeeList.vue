@@ -1,8 +1,8 @@
 <template>
     <div id="employeeList">
-        <p id="tabName">Employee</p>
+        <p id="tabName">{{$t('signType')}}</p>
         <el-tabs v-model="active">
-            <el-tab-pane label="inactive" name="first" style="margin-top: 1rem">
+            <el-tab-pane :label="$t('corp.inactive')" name="first" style="margin-top: 1rem">
                 <div style="margin-bottom: 1rem" class="tableStyle">
                     <el-table
                             class="tableClass"
@@ -29,8 +29,8 @@
                                             :disabled="scope.row.enabled"
                                             width="3rem"
                                             active-color="#409EFF"
-                                            active-text="active"
-                                            inactive-text="inactive"
+                                            :active-text="$t('corp.active')"
+                                            :inactive-text="$t('corp.inactive')"
                                             inactive-color="#EBEEF5">
                                     </el-switch>
 
@@ -57,7 +57,7 @@
                     </el-pagination>
                 </div>
             </el-tab-pane>
-            <el-tab-pane label="active" name="second" style="margin-top: 1rem">
+            <el-tab-pane :label="$t('corp.active')" name="second" style="margin-top: 1rem">
                 <div style="margin-bottom: 1rem" class="tableStyle">
                     <el-table
                             class="tableClass"
@@ -83,8 +83,8 @@
                                             class="mySwitch"
                                             width="3rem"
                                             active-color="#409EFF"
-                                            active-text="active"
-                                            inactive-text="inactive"
+                                            :active-text="$t('corp.active')"
+                                            :inactive-text="$t('corp.inactive')"
                                             inactive-color="#EBEEF5">
                                     </el-switch>
                                 </el-row>
