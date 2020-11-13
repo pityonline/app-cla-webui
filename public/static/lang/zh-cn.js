@@ -121,7 +121,9 @@ module.exports = {
         login_in:'登陆',
         inactive:'未激活',
         active:'已激活',
-
-
+    },
+    index:{
+        org_login: '组织管理员',
+        corp_login: '企业管理员',
     },
 }
