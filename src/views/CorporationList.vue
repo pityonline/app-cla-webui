@@ -258,6 +258,10 @@
             }
 
         },
+        mounted(){
+            this.setClientHeight();
+        },
+        inject:['setClientHeight'],
         methods: {
             tabsHandleClick(tab, event) {
                 if (tab.index === '0') {

@@ -99,91 +99,91 @@
                     </el-input>
                 </div>
             </div>
-            <!--<div class="itemBox">-->
-                <!--<div style="padding: .5rem">-->
-                    <!--<p style="font-size: 1.2rem">④ Edit CLA's Fields-->
-                        <!--<el-tooltip class="item" effect="dark"-->
-                                    <!--content="The information you want contributors to fill in when they sign the cla.Title and type are required, otherwise the field will fail to be added"-->
-                                    <!--placement="right">-->
-                            <!--<svg-icon icon-class="bangzhu"></svg-icon>-->
-                        <!--</el-tooltip>-->
-                    <!--</p>-->
-                <!--</div>-->
-                <!--<div style="padding: 0 2rem">-->
-                    <!--<el-row>-->
-                        <!--<el-col :span="5" class="typeCol">-->
-                            <!--<el-radio v-model="metadataType" @change="changeRadio" label="individual">For Individual-->
-                            <!--</el-radio>-->
-                        <!--</el-col>-->
-                        <!--<el-col :span="5" class="typeCol">-->
-                            <!--<el-radio v-model="metadataType" @change="changeRadio" label="corporation">For Corporation-->
-                            <!--</el-radio>-->
-                        <!--</el-col>-->
-                    <!--</el-row>-->
-                    <!--<div>-->
-                        <!--<div>-->
-                            <!--<el-row style="padding: 0.5rem 0;" type="flex" align="middle" :gutter="20"-->
-                                    <!--v-for="(item,index) in metadataArr">-->
-                                <!--<el-col :span="5">-->
-                                    <!--<el-input disabled="" v-model="item.title" size="medium" readonly="">-->
+            <div class="itemBox">
+                <div style="padding: .5rem">
+                    <p style="font-size: 1.2rem">④ Edit CLA's Fields
+                        <el-tooltip class="item" effect="dark"
+                                    content="The information you want contributors to fill in when they sign the cla.Title and type are required, otherwise the field will fail to be added"
+                                    placement="right">
+                            <svg-icon icon-class="bangzhu"></svg-icon>
+                        </el-tooltip>
+                    </p>
+                </div>
+                <div style="padding: 0 2rem">
+                    <el-row>
+                        <el-col :span="5" class="typeCol">
+                            <el-radio v-model="metadataType" @change="changeRadio" label="individual">For Individual
+                            </el-radio>
+                        </el-col>
+                        <el-col :span="5" class="typeCol">
+                            <el-radio v-model="metadataType" @change="changeRadio" label="corporation">For Corporation
+                            </el-radio>
+                        </el-col>
+                    </el-row>
+                    <div>
+                        <div>
+                            <el-row style="padding: 0.5rem 0;" type="flex" align="middle" :gutter="20"
+                                    v-for="(item,index) in metadataArr">
+                                <el-col :span="5">
+                                    <el-input disabled="" v-model="item.title" size="medium" readonly="">
 
-                                    <!--</el-input>-->
-                                <!--</el-col>-->
-                                <!--<el-col :span="5">-->
-                                    <!--<el-input disabled="" v-model="item.type" size="medium" readonly></el-input>-->
-                                <!--</el-col>-->
-                                <!--<el-col :span="5">-->
-                                    <!--<el-input disabled="" v-model="item.description" size="medium" readonly></el-input>-->
-                                <!--</el-col>-->
-                                <!--<el-col :span="5" style="height: 100%">-->
-                                    <!--<el-checkbox v-model="item.required" disabled="">required</el-checkbox>-->
-                                <!--</el-col>-->
-                            <!--</el-row>-->
+                                    </el-input>
+                                </el-col>
+                                <el-col :span="5">
+                                    <el-input disabled="" v-model="item.type" size="medium" readonly></el-input>
+                                </el-col>
+                                <el-col :span="5">
+                                    <el-input disabled="" v-model="item.description" size="medium" readonly></el-input>
+                                </el-col>
+                                <el-col :span="5" style="height: 100%">
+                                    <el-checkbox v-model="item.required" disabled="">required</el-checkbox>
+                                </el-col>
+                            </el-row>
 
-                        <!--</div>-->
-                        <!--<div>-->
-                            <!--<el-row style="padding: 0.5rem 0;" type="flex" align="middle" :gutter="20"-->
-                                    <!--v-for="(item,index) in customMetadataArr">-->
-                                <!--<el-col :span="5">-->
-                                    <!--<el-input v-model="item.title" size="medium"-->
-                                              <!--placeholder="please input title">-->
+                        </div>
+                        <div>
+                            <el-row style="padding: 0.5rem 0;" type="flex" align="middle" :gutter="20"
+                                    v-for="(item,index) in customMetadataArr">
+                                <el-col :span="5">
+                                    <el-input v-model="item.title" size="medium"
+                                              placeholder="please input title">
 
-                                    <!--</el-input>-->
-                                <!--</el-col>-->
-                                <!--<el-col :span="5">-->
-                                    <!--<el-select style="width: 100%" v-model="item.type"-->
-                                               <!--placeholder="select data type"-->
-                                               <!--size="medium">-->
-                                        <!--<el-option-->
-                                                <!--v-for="i in dataTypeOptions"-->
-                                                <!--:key="i.value"-->
-                                                <!--:label="i.label"-->
-                                                <!--:value="i.value">-->
-                                        <!--</el-option>-->
-                                    <!--</el-select>-->
-                                <!--</el-col>-->
-                                <!--<el-col :span="5" style="height: 100%">-->
-                                    <!--<el-input v-model="item.description" size="medium"-->
-                                              <!--placeholder="description"></el-input>-->
-                                <!--</el-col>-->
-                                <!--<el-col :span="5" style="height: 100%">-->
-                                    <!--<el-checkbox v-model="item.required">required</el-checkbox>-->
-                                <!--</el-col>-->
-                                <!--<el-col :span="4">-->
-                                    <!--<el-button @click="addRow(index)" size="medium">+</el-button>-->
-                                    <!--<el-button @click="myDeleteRow(index)" size="medium">-</el-button>-->
-                                <!--</el-col>-->
-                            <!--</el-row>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
+                                    </el-input>
+                                </el-col>
+                                <el-col :span="5">
+                                    <el-select style="width: 100%" v-model="item.type"
+                                               placeholder="select data type"
+                                               size="medium">
+                                        <el-option
+                                                v-for="i in dataTypeOptions"
+                                                :key="i.value"
+                                                :label="i.label"
+                                                :value="i.value">
+                                        </el-option>
+                                    </el-select>
+                                </el-col>
+                                <el-col :span="5" style="height: 100%">
+                                    <el-input v-model="item.description" size="medium"
+                                              placeholder="description"></el-input>
+                                </el-col>
+                                <el-col :span="5" style="height: 100%">
+                                    <el-checkbox v-model="item.required">required</el-checkbox>
+                                </el-col>
+                                <el-col :span="4">
+                                    <el-button @click="addRow(index)" size="medium">+</el-button>
+                                    <el-button @click="myDeleteRow(index)" size="medium">-</el-button>
+                                </el-col>
+                            </el-row>
+                        </div>
+                    </div>
+                </div>
 
-            <!--</div>-->
-            <!--<div class="btDiv">-->
-                <!--<el-button @click="binding" style="width: 8rem;text-align: center" size="medium" type="primary">-->
-                    <!--LINK-->
-                <!--</el-button>-->
-            <!--</div>-->
+            </div>
+            <div class="btDiv">
+                <el-button @click="binding" style="width: 8rem;text-align: center" size="medium" type="primary">
+                    LINK
+                </el-button>
+            </div>
 
 
         </div>
