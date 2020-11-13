@@ -22,7 +22,7 @@
                                 align="center">
                             <template slot-scope="scope">
                                 <el-row class="mySwitch">
-                                    <el-col>
+                                    <el-col :span="12">
                                         <el-switch
                                                 @change="changeActive(scope.row.cla_org_id,scope.row.email,scope.row.enabled)"
                                                 v-model="scope.row.enabled"
@@ -34,6 +34,9 @@
                                                 :inactive-text="$t('corp.inactive')"
                                                 inactive-color="#EBEEF5">
                                         </el-switch>
+
+                                    </el-col>
+                                    <el-col :span="12">
                                         <button class="deleteBt"
                                                 @click="deleteEmployee(scope.row.cla_org_id,scope.row.email,scope.row.enabled)">
                                             {{$t('corp.delete')}}
