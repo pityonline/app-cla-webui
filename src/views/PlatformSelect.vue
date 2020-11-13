@@ -13,7 +13,7 @@
                         <div class="icon_box ">
                             <div class="loginBt">
                                 <button class="button" @click="getLoginUrl('gitee')">
-                                    Login in
+                                    {{$t('corp.login_in')}}
                                 </button>
                             </div>
 
@@ -32,7 +32,7 @@
                 <!--<div class="icon_box">-->
                 <!--<div class="loginBt">-->
                 <!--<button class="button" @click="getLoginUrl('github')">-->
-                <!--Login in-->
+                <!--{{$t('corp.login_in')}}-->
                 <!--</button>-->
                 <!--</div>-->
 
@@ -41,8 +41,7 @@
                 <!--</div>-->
                 <!--</el-col>-->
             </el-row>
-            <reTryDialog :title="corpReLoginDialogTitle" :message="corpReLoginMsg"
-                         :dialogVisible="corpReTryDialogVisible"></reTryDialog>
+            <reTryDialog  :message="corpReLoginMsg" :dialogVisible="corpReTryDialogVisible"></reTryDialog>
         </el-col>
     </el-row>
 
@@ -63,9 +62,7 @@
             corpReLoginMsg() {
                 return this.$store.state.dialogMessage
             },
-            corpReLoginDialogTitle() {
-                return `cla sign prompt you`
-            },
+
             corpReTryDialogVisible() {
                 return this.$store.state.reTryDialogVisible
             },
@@ -98,19 +95,19 @@
                                     case 'cla.invalid_token':
                                         this.$store.commit('errorSet', {
                                             dialogVisible: true,
-                                            dialogMessage: 'token expired, please login again',
+                                            dialogMessage: this.$t('tips.invalid_token')
                                         });
                                         break;
                                     case 'cla.missing_token':
                                         this.$store.commit('errorSet', {
                                             dialogVisible: true,
-                                            dialogMessage: 'Token does not exist, please login again',
+                                            dialogMessage:this.$t('tips.missing_token')
                                         });
                                         break;
                                     case 'cla.unknown_token':
                                         this.$store.commit('errorSet', {
                                             dialogVisible: true,
-                                            dialogMessage: 'token unknown, please login again',
+                                            dialogMessage:this.$t('tips.unknown_token')
                                         });
                                         break;
                                     case 'cla.invalid_parameter':
@@ -120,14 +117,14 @@
                                     case 'cla.system_error':
                                         this.$store.commit('errorCodeSet', {
                                             dialogVisible: true,
-                                            dialogMessage: 'System error, please try again',
+                                            dialogMessage: this.$t('tips.system_error')
                                         });
                                         break;
                                 }
                             } else {
                                 this.$store.commit('errorCodeSet', {
                                     dialogVisible: true,
-                                    dialogMessage: 'System error, please try again',
+                                    dialogMessage: this.$t('tips.system_error')
                                 })
                             }
                         })
