@@ -81,6 +81,10 @@ module.exports = {
         fill_verification_code:'请输入验证码',
         review_privacy:'请查看隐私声明',
         not_fill_id:'请输入ID',
+        invalid_account_or_pw:'旧密码无效，请重试',
+        fill_pwd:'请输入密码',
+        id_pwd_err:'账号或者密码错误，请重试',
+
     },
     header:{
         home:'首页',
@@ -91,5 +95,31 @@ module.exports = {
         corpCla:'CLA',
         loginOut:'退出',
     },
+    corp:{
+        id:'账号',
+        name:'姓名',
+        email:'邮箱',
+        role:'角色',
+        operation:'操作',
+        delete:'删除',
+        cancel:'取消',
+        batch:'多选',
+        deleteTips:'确定删除？',
+        yes:'是',
+        no:'否',
+        submit:'提交',
+        manager_limit:'最多创建{limit}个管理员',
+        fill_complete:'请填写完整的信息',
+        input_old_pwd:'请输入旧密码',
+        input_new_pwd:'请输入新密码',
+        input_new_pwd_again:'请再次输入新密码',
+        newPwd_diff_with_oldPwd:'新密码不能与旧密码相同',
+        newPwd_diff:'两次输入的密码不同',
+        pwd:'密码',
+        forget_pwd:'忘记密码？',
+        login_in:'登陆',
 
+
+
+    },
 }

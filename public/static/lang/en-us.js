@@ -83,6 +83,8 @@ module.exports = {
         review_privacy:'Please review the privacy statement.',
         not_fill_id:'Please enter the id.',
         invalid_account_or_pw:'The old password is invalid, please try again.',
+        fill_pwd:'please enter the password.',
+        id_pwd_err:'ID or password is wrong, please try again.',
     },
     header:{
         home:'Home',
@@ -106,13 +108,17 @@ module.exports = {
         yes:'Yes',
         no:'No',
         submit:'Submit',
-        manager_limit:'Create up to {limit} users',
+        manager_limit:'Create up to {limit} manager',
         fill_complete:'Please fill in the complete information.',
         input_old_pwd:'please input old password',
         input_new_pwd:'please input new password',
         input_new_pwd_again:'Please enter the new password again',
         newPwd_diff_with_oldPwd:'The new password cannot be the same as old one.',
         newPwd_diff:'The repeated password is not the same as the first one.',
+        pwd:'Password',
+        forget_pwd:'Forget the password?',
+        login_in:'Login in',
+
     },
 
 };
