@@ -265,7 +265,7 @@
 
             },
             orgValue() {
-                if (this.$store.state.orgValue === undefined || this.$store.state.orgValue === '') {
+                if (this.$store.state.orgValue === undefined || this.$store.state.orgValue === ''||this.$store.state.orgValue === 'undefined') {
                     console.log(this.$store.state.orgValue,'if');
                     return this.$store.state.orgValue
                 } else {
@@ -274,7 +274,7 @@
                 }
             },
             repositoryValue() {
-                if (this.$store.state.repositoryValue === undefined || this.$store.state.repositoryValue === '') {
+                if (this.$store.state.repositoryValue === undefined || this.$store.state.repositoryValue === ''||this.$store.state.repositoryValue === 'undefined') {
                     console.log(this.$store.state.repositoryValue,'if');
                     return this.$store.state.repositoryValue
                 } else {
@@ -617,7 +617,7 @@
                     url: url.getOrgsInfo,
                     params: obj,
                 }).then(res => {
-                    if (res.status === 200) {
+                    if (res.status === 200){
                         let orgOptions = [];
                         res.data.forEach((item, index) => {
                             orgOptions.push({value: index, label: item.login, id: item.id});
@@ -640,14 +640,14 @@
             },
             getCookieData() {
                 if (document.cookie !== '') {
-                    let cookieArr = document.cookie.split('; ')
-                    let email = ''
+                    let cookieArr = document.cookie.split('; ');
+                    let email = '';
                     cookieArr.forEach((item, index) => {
                         let arr = item.split('=');
                         if (arr[0] === 'email') {
                             email = arr[1]
                         }
-                    })
+                    });
                     this.email = email;
                     if (email !== '') {
                         this.$store.commit('setIsEmail', true)
@@ -657,7 +657,7 @@
             },
         },
         created() {
-            this.getCookieData()
+            this.getCookieData();
             this.getOrgsInfo()
         },
         mounted() {
