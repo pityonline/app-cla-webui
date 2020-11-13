@@ -50,7 +50,7 @@
 
         },
         mounted() {
-            this.setClientHeight();
+            // this.setClientHeight();
         },
 
     };
