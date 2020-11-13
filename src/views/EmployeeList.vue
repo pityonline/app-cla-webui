@@ -22,7 +22,7 @@
                                 align="center">
                             <template slot-scope="scope">
                                 <el-row class="mySwitch">
-                                    <el-col :span="12">
+                                    <el-col :offset="4" :span="8">
                                         <el-switch
                                                 @change="changeActive(scope.row.cla_org_id,scope.row.email,scope.row.enabled)"
                                                 v-model="scope.row.enabled"
@@ -36,7 +36,7 @@
                                         </el-switch>
 
                                     </el-col>
-                                    <el-col :span="12">
+                                    <el-col :span="8">
                                         <button class="deleteBt"
                                                 @click="deleteEmployee(scope.row.cla_org_id,scope.row.email,scope.row.enabled)">
                                             {{$t('corp.delete')}}
