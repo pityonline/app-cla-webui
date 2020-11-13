@@ -1,6 +1,6 @@
 <template>
     <div id="employeeList">
-        <p id="tabName">{{$t('signType')}}</p>
+        <p id="tabName">{{$t('signType.emp')}}</p>
         <el-tabs v-model="active">
             <el-tab-pane :label="$t('corp.inactive')" name="first" style="margin-top: 1rem">
                 <div style="margin-bottom: 1rem" class="tableStyle">
