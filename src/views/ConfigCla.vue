@@ -234,7 +234,6 @@
 <script>
     import * as url from '../until/api'
     import * as until from '../until/until'
-    import {mapActions} from 'vuex'
     import http from '../until/http'
 
     window.onresize = () => {
