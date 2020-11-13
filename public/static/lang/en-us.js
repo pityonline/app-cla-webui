@@ -119,6 +119,8 @@ module.exports = {
         pwd:'Password',
         forget_pwd:'Forget the password?',
         login_in:'Login in',
+        inactive:'inactive',
+        active:'active',
 
     },
 
