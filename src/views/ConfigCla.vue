@@ -441,7 +441,6 @@
                             platform: this.platform,
                             org_id: `${this.orgOptions[this.orgValue].label}`,
                             apply_to: this.metadataType,
-                            submitter: `${this.platform}/${this.$store.state.user.userName}`,
                             cla: cla,
                         };
                     } else {
@@ -451,7 +450,6 @@
                             platform: this.platform,
                             org_id: `${this.orgOptions[this.orgValue].label}`,
                             apply_to: this.metadataType,
-                            submitter: `${this.platform}/${this.$store.state.user.userName}`,
                             cla: cla,
                         };
                     }
