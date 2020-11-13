@@ -1,9 +1,12 @@
 <template>
     <div id="home" :style="home">
         <Header></Header>
-        <el-col :offset="5" :span="14" id="section">
-            <router-view></router-view>
-        </el-col>
+        <el-row>
+            <el-col :offset="5" :span="14" id="section">
+                <router-view></router-view>
+            </el-col>
+        </el-row>
+
         <Footer></Footer>
     </div>
 </template>
@@ -70,13 +73,6 @@
         & > div:nth-of-type(2) {
             flex-grow: 1;
             text-align: left;
-
-
-            & > div:nth-of-type(3) {
-                padding: 4rem 0 2rem 0;
-                font-size: 1.3rem;
-                color: #2C3E50;
-            }
         }
 
         .el-dropdown-link {
