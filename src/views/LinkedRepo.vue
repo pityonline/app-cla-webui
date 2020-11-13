@@ -243,6 +243,7 @@
             pdf,
             ReLoginDialog,
         },
+        inject:['setClientHeight'],
         computed: {
             address() {
                 return this.$store.state.domain
@@ -346,6 +347,7 @@
                         if (count === 0) {
                             this.tableData = data
                             this.getOrgTableData(data)
+                            this.setClientHeight();
                             clearInterval(setDataInterval)
                         }
                     }, 20)
