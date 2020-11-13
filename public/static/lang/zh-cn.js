@@ -80,6 +80,7 @@ module.exports = {
         fill_date:'请输入日期',
         fill_verification_code:'请输入验证码',
         review_privacy:'请查看隐私声明',
+        not_fill_id:'请输入ID',
     },
     header:{
         home:'首页',
