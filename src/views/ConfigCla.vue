@@ -312,6 +312,7 @@
                 }
             },
         },
+        inject:['setClientHeight'],
         data() {
             return {
                 cla_Link: '',
@@ -650,7 +651,7 @@
 
                 })
             },
-            setClientHeight() {
+            clientHeight() {
                 this.$nextTick(() => {
                     until.getClientHeight() > document.getElementById('configCla').offsetHeight ?
                         this.configClaStyle.height = until.getClientHeight() + 'px' :
