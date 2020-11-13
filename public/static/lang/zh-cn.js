@@ -108,6 +108,7 @@ module.exports = {
         yes:'是',
         no:'否',
         submit:'提交',
+        reset:'重置',
         manager_limit:'最多创建{limit}个管理员',
         fill_complete:'请填写完整的信息',
         input_old_pwd:'请输入旧密码',
