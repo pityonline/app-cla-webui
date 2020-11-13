@@ -25,7 +25,7 @@ export default new Vuex.Store({
         tableData: sessionStorage.getItem('tableData') || undefined,
         ready: Boolean(sessionStorage.getItem('ready') || undefined),
         platform: sessionStorage.getItem('platform') || undefined,
-        domain: 'https://clasign.osinfra.cn',
+        domain: 'https://test-clasign.osinfra.cn',
         access_token: sessionStorage.getItem('token') || undefined,
         refresh_token: sessionStorage.getItem('refresh_token') || undefined,
         platform_token: sessionStorage.getItem('platform_token') || undefined,
