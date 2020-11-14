@@ -341,10 +341,16 @@
                     let access_token, refresh_token, platform_token, _mark = '';
                     cookieArr.forEach((item, index) => {
                         let arr = item.split('=');
-                        arr[0] === 'access_token' ? access_token = arr[1] : arr[0] === 'refresh_token' ? refresh_token = arr[1] : arr[0] === 'platform_token' ? platform_token = arr[1] : platform_token = '';
                         if (arr[0] === '_mark') {
                             _mark = arr[1]
-                        }
+                        }else if(arr[0]==='refresh_token'){
+				refresh_token=arr[1];
+			}else if(arr[0]==='platform_token'){
+                                 platform_token=arr[1];
+			}else if(arr[0]==='access_token'){
+				access_token=arr[1];
+			}	
+			
                     })
                     if (!_mark) {
                         let data = {access_token, refresh_token, platform_token};
