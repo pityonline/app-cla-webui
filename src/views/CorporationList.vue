@@ -253,7 +253,7 @@
                 this.getCorporationInfo()
             } else if (this.item.apply_to === 'individual') {
                 this.activeName = 'second';
-                this.getClaInfo()
+             //   this.getClaInfo()
             }
 
         },
@@ -266,7 +266,7 @@
                 if (tab.index === '0') {
                     this.getCorporationInfo()
                 } else if (tab.index === '1') {
-                    this.getClaInfo()
+                 //   this.getClaInfo()
                 }
             },
             upload(fileObj) {
