@@ -284,6 +284,7 @@
             }
         },
         created() {
+            console.log('linkedRepoCreate');
             this.setDomain();
             new Promise((resolve,reject)=>{
                 this.clearPageSession();
@@ -295,6 +296,30 @@
                    this.getLinkedRepoList();
                })
             },err=>{})
+
+        },
+        beforeCreate(){
+            console.log('linkedRepobeforeCreate');
+        },
+        beforeMount(){
+            console.log('linkedRepobeforeMount');
+        },
+        mounted() {
+            console.log('linkedRepomounted');
+            // this.setClientHeight();
+        },
+        beforeUpdate() {
+            console.log('linkedRepobeforeUpdate');
+        },
+        updated() {
+            console.log('linkedRepoUpdate');
+        },
+        beforeDestroy() {
+            console.log('linkedRepobeforeDestroy');
+
+        },
+        destroyed() {
+            console.log('linkedRepoDestroy');
 
         },
         methods: {
