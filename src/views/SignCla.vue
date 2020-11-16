@@ -229,12 +229,12 @@
                         callback(new Error('An invalid telephone number.'))
                     }
                 } else {
-                    callback(new Error('Please enter the telephone number of corporation'))
+                    callback(new Error('Please enter the telephone number'))
                 }
             },
             async verifyAddr(rule, value, callback) {
                 if (!value) {
-                    callback(new Error('Please enter the address of corporation'))
+                    callback(new Error('Please enter the address'))
                 } else {
                     callback();
                 }
