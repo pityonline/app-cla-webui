@@ -336,6 +336,7 @@
                     })
 
                 }).catch(err => {
+                    console.log(err);
                 })
             },
             getCorporationInfo() {
@@ -352,6 +353,7 @@
                     })
 
                 }).catch(err => {
+                    console.log(err);
                 })
             },
             createRoot(email) {
