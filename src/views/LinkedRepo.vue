@@ -312,7 +312,7 @@
             console.log('linkedRepobeforeUpdate');
         },
         updated() {
-            this.setClientHeight();
+            //this.setClientHeight();
             console.log('linkedRepoUpdate');
         },
         beforeDestroy() {

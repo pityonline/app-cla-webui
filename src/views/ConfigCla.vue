@@ -661,7 +661,7 @@
             this.getOrgsInfo()
         },
         mounted() {
-            this.setClientHeight();
+            //this.setClientHeight();
             window.onresize = () => {
                 if (until.getClientHeight() > document.getElementById('configCla').offsetHeight) {
                     document.getElementById("configCla").style.height = until.getClientHeight() + 'px'

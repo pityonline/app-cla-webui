@@ -258,7 +258,7 @@
 
         },
         mounted(){
-            this.setClientHeight();
+           // this.setClientHeight();
         },
         inject:['setClientHeight'],
         methods: {
@@ -335,7 +335,7 @@
                     console.log(resp.data.data);
                     this.claData = resp.data.data;
                     this.$nextTick(()=>{
-                       this.setClientHeight();
+                      // this.setClientHeight();
                     })
 
                 }).catch(err => {
@@ -354,7 +354,7 @@
                 }).then(resp => {
                     this.tableData = resp.data.data[this.item.id];
                     this.$nextTick(()=>{
-                       this.setClientHeight();
+                       //this.setClientHeight();
                     })
 
                 }).catch(err => {
