@@ -176,6 +176,7 @@ export default new Vuex.Store({
            sessionStorage.setItem('domain',domain)
         },
 
+
     },
     actions: {
         setCorpTokenAct({commit}, token) {

@@ -331,6 +331,10 @@
                     url: `${url.getClaInfo}/${this.item.id}/cla`,
                 }).then(resp => {
                     this.claData = resp.data.data;
+                    this.$nextTick(()=>{
+                       this.setClientHeight();
+                    })
+
                 }).catch(err => {
                 })
             },
@@ -343,6 +347,10 @@
                     },
                 }).then(resp => {
                     this.tableData = resp.data.data[this.item.id];
+                    this.$nextTick(()=>{
+                       this.setClientHeight();
+                    })
+
                 }).catch(err => {
                 })
             },
