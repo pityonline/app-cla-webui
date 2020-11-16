@@ -312,6 +312,7 @@
             console.log('linkedRepobeforeUpdate');
         },
         updated() {
+            this.setClientHeight();
             console.log('linkedRepoUpdate');
         },
         beforeDestroy() {
@@ -373,7 +374,7 @@
                         if (count === 0) {
                             this.tableData = data
                             this.getOrgTableData(data)
-                            this.setClientHeight();
+
                             clearInterval(setDataInterval)
                         }
                     }, 20)
