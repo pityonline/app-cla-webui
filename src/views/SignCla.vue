@@ -78,7 +78,7 @@
     import * as until from '../until/until'
     import * as url from '../until/api'
     import {mapActions} from 'vuex'
-    import http from '../until/http'
+    import http from '../until/sign_http'
     import axios from '../until/axios'
     import ReLoginDialog from '../components/ReLoginDialog'
     import ReTryDialog from '../components/ReTryDialog'
@@ -93,13 +93,13 @@
                 return this.$store.state.loginType
             },
             platform_token() {
-                return this.$store.state.platform_token
+                return this.$store.state.sign_platform_token
             },
             access_token() {
-                return this.$store.state.access_token
+                return this.$store.state.sign_access_token
             },
             refresh_token() {
-                return this.$store.state.refresh_token
+                return this.$store.state.sign_refresh_token
             },
             apply_to() {
                 if (this.$store.state.loginType === 'individual' || this.$store.state.loginType === 'employee') {
@@ -336,34 +336,32 @@
                 })
             },
             getCookieData() {
-                if (document.cookie !== '') {
-                    let cookieArr = document.cookie.split('; ')
-                    let access_token, refresh_token, platform_token, _mark = '';
-                    cookieArr.forEach((item, index) => {
-                        let arr = item.split('=');
-                        if (arr[0] === '_mark') {
-                            _mark = arr[1]
-                        }else if(arr[0]==='refresh_token'){
-				refresh_token=arr[1];
-			}else if(arr[0]==='platform_token'){
-                                 platform_token=arr[1];
-			}else if(arr[0]==='access_token'){
-				access_token=arr[1];
-			}	
+		if(sessionStorage.getItem('sign_platform_token')){
+		}else if (document.cookie !== '') {
+                   	 let cookieArr = document.cookie.split('; ')
+                         let access_token, refresh_token, platform_token, _mark = '';
+                         cookieArr.forEach((item, index) => {
+                       		 let arr = item.split('=');
+                       		 if (arr[0] === '_mark') {
+                           	 _mark = arr[1]
+                       		 }else if(arr[0]==='refresh_token'){
+					refresh_token=arr[1];
+				}else if(arr[0]==='platform_token'){
+                                	 platform_token=arr[1];
+				}else if(arr[0]==='access_token'){
+					access_token=arr[1];
+				}		
 			
-                    })
-                    if (!_mark) {
-                        let data = {access_token, refresh_token, platform_token};
-                        let date = new Date();
-                        date.setTime(date.getTime() - 10000);
-                        document.cookie = `_mark=1; expire=${date.toUTCString()}; Domain=${this.domain}; path=/`;
-                        this.setTokenAct(data);
-                    }
-
-
-                }
-
-            },
+                    	})
+                   	 if (!_mark) {
+                       	      let data = {access_token, refresh_token, platform_token};
+                      	      let date = new Date();
+                              date.setTime(date.getTime() - 10000);
+                              document.cookie = `_mark=1; expire=${date.toUTCString()}; Domain=${this.domain}; path=/`;
+                              this.$store.commit('setSignPlatformToken',data);
+                   	  }
+           	    }
+	     },
             setData(res, argRes) {
                 let data = res.data.data;
                 this.signPageData = data

@@ -41,8 +41,21 @@ export default new Vuex.Store({
         signSuccessDialogVisible:false,
         signReLoginDialogVisible:false,
         pwdIsChanged:false,
+	sign_platform_token:sessionStorage.getItem('sign_platform_token') || undefined,    
+	sign_access_token: sessionStorage.getItem('sign_access_token') || undefined,
+        sign_refresh_token: sessionStorage.getItem('sign_refresh_token') || undefined,
+
     },
     mutations: {
+	 setSignPlatformToken(state,data){
+	    state.sign_access_token = data.access_token;
+            state.sign_refresh_token = data.refresh_token;
+            state.sign_platform_token = data.platform_token;
+            sessionStorage.setItem('sign_access_token', data.access_token);
+            sessionStorage.setItem('sign_refresh_token', data.refresh_token);
+            sessionStorage.setItem('sign_platform_token', data.platform_token);
+		 
+	 },
         setPwdIsChanged(state, data) {
             state.pwdIsChanged = data;
             state.tableData = data.tableData;

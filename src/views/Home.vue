@@ -629,24 +629,38 @@
                 this.$store.commit('setTableData', undefined)
             },
             getCookieData() {
-                if (document.cookie !== '') {
-                    let cookieArr = document.cookie.split('; ')
-                    let access_token, refresh_token, platform_token = '';
-                    let email = ''
-                    cookieArr.forEach((item, index) => {
-                        let arr = item.split('=');
-                        arr[0] === 'access_token' ? access_token = arr[1] : arr[0] === 'refresh_token' ? refresh_token = arr[1] :
-                            arr[0] === 'email' ? email = arr[1] : arr[0] === 'platform_token' ? platform_token = arr[1] : platform_token = '';
-                    })
-                    this.email = email;
-                    if (email !== '') {
-                        this.$store.commit('setIsEmail', true)
-                    }
+		if(this.$store.state.platform_token){	
+			let data = {access_token:this.$store.state.access_token,refresh_token:this.$store.state.refresh_token,platform_token:this.$store.state.platform_token};
+                    this.getUserInfo(this.$store.state.access_token,this.$store.state.refresh_token, this.$store.state.platform_token)
+		}else if (document.cookie !== '') {
+                     let cookieArr = document.cookie.split('; ')
+                     let access_token, refresh_token, platform_token = '';
+                     let email = ''
+                     cookieArr.forEach((item, index) => {
+			 let arr = item.split('=');
+			 if (arr[0] === 'email') {
+                                 email = arr[1]
+                                 }else if(arr[0]==='refresh_token'){
+                                        refresh_token=arr[1];
+                                }else if(arr[0]==='platform_token'){
+                                         platform_token=arr[1];
+                                }else if(arr[0]==='access_token'){
+                                        access_token=arr[1];
+                                }
+
+                     })
+                     this.email = email;
+                     if (email) {
+                         this.$store.commit('setIsEmail', true)
+                     }
                     let data = {access_token, refresh_token, platform_token};
-                    this.setTokenAct(data);
-                    this.getUserInfo(access_token, refresh_token, platform_token)
-                }
-            },
+                     this.setTokenAct(data);
+                     this.getUserInfo(access_token, refresh_token, platform_token)
+               
+
+		}
+
+         },
             getUserInfo(access_token, refresh_token, platform_token) {
                 let obj = {access_token: platform_token};
                 this.$axios({
