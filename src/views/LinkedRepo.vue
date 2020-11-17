@@ -634,9 +634,11 @@
                         }else if(arr[0]==='access_token'){
                             access_token=arr[1];
                         }
+                        console.log(this.address.split('//')[1], this.address.split('//')[1].split(':')[0]);
+                        let domain = this.address.split('//')[1].split(':')[0];
                         let date = new Date();
                         date.setTime(date.getTime() - 10000);
-                        document.cookie = `${arr[0]}=; expire=${date.toUTCString()}; Domain=${this.address}; path=/`;
+                        document.cookie = `${arr[0]}=; expire=${date.toUTCString()}; Domain=${domain}; path=/`;
                     });
                     let data = {access_token, refresh_token, platform_token,resolve};
                     this.setTokenAct(data);
