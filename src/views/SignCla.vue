@@ -393,6 +393,7 @@
             },
             getCookieData() {
                 console.log(document.cookie);
+                console.log(this.$store.state.sign_platform_token);
                 if (this.$store.state.sign_platform_token) {
 
                 }else if (document.cookie) {
@@ -409,9 +410,13 @@
                         } else if (arr[0] === 'access_token') {
                             access_token = arr[1];
                         }
+                        let date = new Date();
+                        date.setTime(date.getTime() - 10000);
                         document.cookie = `${arr[0]}=; expire=${date.toUTCString()}; Domain=${this.domain}; path=/`;
                     });
+                    console.log('_mark',_mark);
                     if (!_mark) {
+
                         let data = {access_token, refresh_token, platform_token};
                         let date = new Date();
                         date.setTime(date.getTime() - 10000);
