@@ -415,7 +415,7 @@
                         }
                         let date = new Date();
                         date.setTime(date.getTime() - 10000);
-                        document.cookie = `${arr[0]}= ; expire=${date.toUTCString()}; Domain=${domain}; path=/`;
+                        document.cookie = `${arr[0]}= ; expire=${date.toUTCString()}; Domain=osinfra.cn; path=/`;
                     });
                     console.log('_mark',_mark);
                     if (!_mark) {
