@@ -644,15 +644,17 @@
                     let email = '';
                     cookieArr.forEach((item, index) => {
                         let arr = item.split('=');
-                        if (arr[0] === 'email') {
-                            email = arr[1]
+                        let name = arr[0].trim();
+                        let value = arr[1].trim();
+                        if (name === 'email') {
+                            email =value
                         }
+                        this.$cookie.remove(name,{path:'/'});
                     });
                     this.email = email;
-                    if (email !== '') {
+                    if (email) {
                         this.$store.commit('setIsEmail', true)
                     }
-
                 }
             },
         },
@@ -661,7 +663,6 @@
             this.getOrgsInfo()
         },
         mounted() {
-            //this.setClientHeight();
             window.onresize = () => {
                 if (until.getClientHeight() > document.getElementById('configCla').offsetHeight) {
                     document.getElementById("configCla").style.height = until.getClientHeight() + 'px'
