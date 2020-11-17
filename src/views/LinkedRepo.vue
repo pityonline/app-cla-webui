@@ -284,7 +284,6 @@
             }
         },
         created() {
-            console.log('linkedRepoCreate');
             this.setDomain();
             new Promise((resolve, reject) => {
                 this.getCookieData(resolve)
@@ -324,7 +323,6 @@
 
             },
             getLinkedRepoList() {
-                console.log('getLinkedRepoList');
                 http({
                     url: url.getLinkedRepoList,
                 }).then(res => {
@@ -547,7 +545,6 @@
                 http({
                     url: `${url.downloadSignature}/${row.id}`,
                 }).then(res => {
-                    console.log(res);
                     let URL = this.dataURLtoBlob(res.data.data.pdf);
                     var reader = new FileReader();
                     reader.readAsDataURL(URL);
@@ -620,18 +617,13 @@
 
             },
             getCookieData(resolve) {
-                console.log(document.cookie);
                 if (document.cookie) {
-                    let cookieArr = document.cookie.split('; ')
+                    let cookieArr = document.cookie.split(';')
                     let access_token, refresh_token, platform_token = '';
-                    let domain = this.address.split('//')[1].split(':')[0];
-                    console.log(domain);
-                    let date = new Date();
-                    date.setTime(date.getTime() - 10000);
                     cookieArr.forEach((item, index) => {
                         let arr = item.split('=');
-                        let name = arr[0];
-                        let value = arr[1];
+                        let name = arr[0].trim();
+                        let value = arr[1].trim();
                         if (name === 'refresh_token') {
                             refresh_token = value;
                         } else if (name === 'platform_token') {

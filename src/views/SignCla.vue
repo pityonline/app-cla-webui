@@ -390,11 +390,7 @@
             },
 
             getCookieData(resolve) {
-                console.log(document.cookie);
-                console.log(this.$store.state.sign_platform_token);
-                if (this.$store.state.sign_platform_token) {
-                    resolve('complete');
-                } else if (document.cookie) {
+                if (document.cookie) {
                     let cookieArr = document.cookie.split(';');
                     let access_token, refresh_token, platform_token, _mark = '';
                     let domain = this.address.split('//')[1].split(':')[0].trim();
@@ -403,8 +399,7 @@
                     cookieArr.forEach((item, index) => {
                         let arr = item.split('=');
                         let name = arr[0].trim();
-                        let value = arr[1].trim()
-                        l
+                        let value = arr[1].trim();
                         if (name === '_mark') {
                             _mark = value
                         } else if (name === 'refresh_token') {
@@ -414,21 +409,12 @@
                         } else if (name === 'access_token') {
                             access_token = value;
                         }
-                        let date = new Date();
-                        date.setTime(date.getTime() - 10000);
-                        document.cookie = `${arr[0]}= ; expire=${date.toUTCString()}; Domain=${domain}; path=/`;
+                        this.$cookie.remove(name, {path: '/'});
                     });
-                    console.log('_mark', _mark);
-                    if (!_mark) {
-
-                        let data = {access_token, refresh_token, platform_token,resolve};
-                        let date = new Date();
-                        date.setTime(date.getTime() - 10000);
-                        document.cookie = `_mark=1; expire=${date.toUTCString()}; Domain=${domain}; path=/`;
-                        this.$store.commit('setSignToken', data);
-                    }
-
-
+                    let data = {access_token, refresh_token, platform_token, resolve};
+                    this.$store.commit('setSignToken', data);
+                } else {
+                    resolve('complete');
                 }
 
             },
