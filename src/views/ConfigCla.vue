@@ -568,15 +568,15 @@
                 this.$store.commit('setOrgValue', value)
                 if (value === '') {
                     this.org = '';
-                    this.org_id = ''
-                    this.$store.commit('setOrgChoose', false)
-                    this.$store.commit('setRepositoryValue', undefined)
-                    this.$store.commit('setRepositoryChoose', false)
+                    this.org_id = '';
+                    this.$store.commit('setOrgChoose', false);
+                    this.$store.commit('setRepositoryValue', undefined);
+                    this.$store.commit('setRepositoryChoose', false);
                     this.$store.commit('setRepositoryOptions', undefined)
                 } else {
                     this.org = this.orgOptions[value].label;
-                    this.org_id = this.orgOptions[value].id
-                    this.$store.commit('setOrgChoose', true)
+                    this.org_id = this.orgOptions[value].id;
+                    this.$store.commit('setOrgChoose', true);
                     this.getRepositoriesOfOrg(this.orgOptions[value].label, this.orgOptions[value].id)
                 }
 
@@ -655,13 +655,20 @@
               if (document.cookie) {
 
               }  else{
+                  this.$store.commit('setOrgOption',[])
+                  this.$store.commit('setOrgValue','')
+                  this.$store.commit('setOrgChoose','')
+                  this.$store.commit('setRepositoryOptions',[])
+                  this.$store.commit('setRepositoryChoose','')
+                  this.$store.commit('setRepositoryValue','')
+                  this.$store.commit('setIsEmail','')
                   sessionStorage.removeItem('orgOptions');
                   sessionStorage.removeItem('orgValue');
                   sessionStorage.removeItem('orgChoose');
                   sessionStorage.removeItem('repositoryOptions');
                   sessionStorage.removeItem('repositoryChoose');
                   sessionStorage.removeItem('repositoryValue');
-                  sessionStorage.removeItem('setIsEmail');
+                  sessionStorage.removeItem('isEmail');
               }
             },
         },
