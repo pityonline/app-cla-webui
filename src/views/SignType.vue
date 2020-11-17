@@ -201,7 +201,7 @@
                                 <el-row class="stepBox">
                                     <el-col :span="10" class="textCol">
                                         <div class="leftText">
-                                            {{ $t('signType.corpStep6_1') }}<span>{{ $t('signType.claSignPlatform') }}</span>{{ $t('signType.corpStep6_2') }}
+                                            {{ $t('signType.corpStep6_1') }}<span  @click="toCorpLogin()">{{ $t('signType.claSignPlatform') }}</span>{{ $t('signType.corpStep6_2') }}
                                         </div>
                                     </el-col>
                                     <el-col :span="4">
@@ -441,6 +441,9 @@
             reLoginMsg() {
                 return this.$store.state.dialogMessage
             },
+            domain() {
+                return this.$store.state.domain
+            },
         },
         data() {
             return {
@@ -448,7 +451,6 @@
                 platform: '',
                 org: '',
                 repo: '',
-                domain: this.$store.state.domain,
                 signType: 'corporation',
                 transparentDiv: {
                     height: '',
@@ -465,6 +467,10 @@
         },
         methods: {
             ...mapActions([ 'setLoginTypeAct', 'setRepoInfoAct']),
+            toCorpLogin(){
+                this.$store.commit('setLoginType','corporationManager');
+                this.$router.push('/corporationManagerLogin')
+            },
             setLangLocale(){
                 if(parseInt(localStorage.getItem('lang'))){
                     this.value =parseInt(localStorage.getItem('lang'))
@@ -617,7 +623,8 @@
             setCookie() {
                 let date = new Date();
                 date.setTime(date.getTime() - 10000);
-                document.cookie = `_mark=; expire=${date.toUTCString()}; Domain=${this.domain}; path=/`;
+                let domain = this.domain.split('//')[1].split(':')[0];
+                document.cookie = `_mark=; expire=${date.toUTCString()}; Domain=${domain}; path=/`;
             },
             clickSignTypeGuide(type) {
                 this.signType = type;
@@ -822,6 +829,7 @@
         padding-left: 80px;
 
         span {
+            cursor: pointer;
             color: #3CA550;
         }
     }

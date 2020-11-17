@@ -51,34 +51,10 @@
 
 
         },
-        beforeCreate(){
-            console.log('homebeforeCreate');
-        },
-        created(){
-            console.log('homeCreate');
-        },
-        beforeMount(){
-            console.log('homebeforeMount');
-        },
-        mounted() {
-            console.log('homemounted');
-            // this.setClientHeight();
-        },
-        beforeUpdate() {
-            console.log('homebeforeUpdate');
-        },
         updated() {
             this.setClientHeight();
             console.log('homeUpdate');
         },
-        beforeDestroy() {
-            console.log('homebeforeDestroy');
-
-        },
-        destroyed() {
-            console.log('homeDestroy');
-
-        }
 
     };
 

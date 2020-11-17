@@ -64,7 +64,7 @@
                                     <!--<el-button style="margin-left: 10px" @click="previewOriginalSignature(scope.row)"-->
                                     <!--type="" size="mini">preview-->
                                     <!--</el-button>-->
-                                    <el-button @click="downloadEmptySignature(scope.row)"  size="mini">
+                                    <el-button @click="downloadEmptySignature(scope.row)" size="mini">
                                         download
                                     </el-button>
                                 </div>
@@ -84,7 +84,7 @@
                                     <el-button @click="uploadOrgSignature(scope.row)"
                                                size="mini">upload
                                     </el-button>
-                                    <el-button @click="downloadOrgSignature(scope.row)"  size="mini">download
+                                    <el-button @click="downloadOrgSignature(scope.row)" size="mini">download
                                     </el-button>
                                     <!--<el-button @click="previewOrgSignature(scope.row)" type="" size="mini">preview-->
                                     <!--</el-button>-->
@@ -243,7 +243,7 @@
             pdf,
             ReLoginDialog,
         },
-        inject:['setClientHeight'],
+        inject: ['setClientHeight'],
         computed: {
             address() {
                 return this.$store.state.domain
@@ -286,11 +286,11 @@
         created() {
             console.log('linkedRepoCreate');
             this.setDomain();
-            new Promise((resolve,reject)=>{
+            new Promise((resolve, reject) => {
                 this.getCookieData(resolve)
-            }).then(res=>{
-                   this.getLinkedRepoList();
-               })
+            }).then(res => {
+                this.getLinkedRepoList();
+            })
 
         },
         methods: {
@@ -344,7 +344,6 @@
                         if (count === 0) {
                             this.tableData = data
                             this.getOrgTableData(data)
-
                             clearInterval(setDataInterval)
                         }
                     }, 20)
@@ -622,30 +621,30 @@
             },
             getCookieData(resolve) {
                 console.log(document.cookie);
-              if (document.cookie) {
+                if (document.cookie) {
                     let cookieArr = document.cookie.split('; ')
                     let access_token, refresh_token, platform_token = '';
+                    let domain = this.address.split('//')[1].split(':')[0];
+                    console.log(domain);
+                    let date = new Date();
+                    date.setTime(date.getTime() - 10000);
                     cookieArr.forEach((item, index) => {
                         let arr = item.split('=');
-                       if(arr[0]==='refresh_token'){
-                            refresh_token=arr[1];
-                        }else if(arr[0]==='platform_token'){
-                            platform_token=arr[1];
-                        }else if(arr[0]==='access_token'){
-                            access_token=arr[1];
+                        if (arr[0] === 'refresh_token') {
+                            refresh_token = arr[1];
+                        } else if (arr[0] === 'platform_token') {
+                            platform_token = arr[1];
+                        } else if (arr[0] === 'access_token') {
+                            access_token = arr[1];
                         }
-                        console.log(this.address.split('//')[1], this.address.split('//')[1].split(':')[0]);
-                        let domain = this.address.split('//')[1].split(':')[0];
-                        let date = new Date();
-                        date.setTime(date.getTime() - 10000);
                         document.cookie = `${arr[0]}=; expire=${date.toUTCString()}; Domain=${domain}; path=/`;
                     });
-                    let data = {access_token, refresh_token, platform_token,resolve};
+                    let data = {access_token, refresh_token, platform_token, resolve};
                     this.setTokenAct(data);
 
-                }else{
-                  resolve('complete');
-              }
+                } else {
+                    resolve('complete');
+                }
             },
 
             unlinkHandleClick(scope) {
@@ -713,7 +712,7 @@
 
 <style lang="less">
     .el-popover {
-        min-width: 6rem ;
+        min-width: 6rem;
 
         .pdfBT {
             display: flex;
@@ -728,12 +727,11 @@
         }
 
     }
+
     #linkedRepo {
         .el-table .warning-row {
             background: #8CC5FF;
         }
-
-
 
 
         .tableStyle {
