@@ -41,6 +41,12 @@
                     this.$router.push('/signCla')
                 }
             },
+            clearSessionStorage(){
+                sessionStorage.clear();
+            },
+        },
+        created(){
+            this.clearSessionStorage();
         },
         mounted() {
             until.setMinHeight('loginType','btBox')
