@@ -260,6 +260,9 @@
         mounted(){
            // this.setClientHeight();
         },
+        updated(){
+            console.log('corp_updated');
+        },
         inject:['setClientHeight'],
         methods: {
             tabsHandleClick(tab, event) {
