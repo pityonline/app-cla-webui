@@ -134,19 +134,19 @@
             },
             sendBtTextFromLang: {
                 get: function () {
-                        return this.sendBtText;
+                    return this.sendBtText;
                 },
                 set: function (value) {
                     this.sendBtText = value
                 }
             },
         },
-        watch:{
-            '$i18n.locale'(){
-                if(this.sendBtTextFromLang==='send code'||this.sendBtTextFromLang==='发送验证码'){
-                    this.sendBtTextFromLang=this.$t('signPage.sendCode')
-                }else{
-                    this.sendBtTextFromLang=this.$t('signPage.reSendCode',{second:this.second})
+        watch: {
+            '$i18n.locale'() {
+                if (this.sendBtTextFromLang === 'send code' || this.sendBtTextFromLang === '发送验证码') {
+                    this.sendBtTextFromLang = this.$t('signPage.sendCode')
+                } else {
+                    this.sendBtTextFromLang = this.$t('signPage.reSendCode', {second: this.second})
                 }
             },
         },
@@ -161,7 +161,7 @@
         ,
         data() {
             return {
-                second:'',
+                second: '',
                 sendBtText: this.$t('signPage.sendCode'),
                 signRouter: '/sign',
                 domain: this.$store.state.domain,
@@ -388,17 +388,29 @@
                     })
                 })
             },
+            clearCookie(){
+
+            },
             getCookieData() {
-                if (document.cookie !== '') {
+                console.log(document.cookie);
+                if (this.$store.state.sign_platform_token) {
+
+                }else if (document.cookie) {
                     let cookieArr = document.cookie.split('; ')
                     let access_token, refresh_token, platform_token, _mark = '';
                     cookieArr.forEach((item, index) => {
                         let arr = item.split('=');
-                        arr[0] === 'access_token' ? access_token = arr[1] : arr[0] === 'refresh_token' ? refresh_token = arr[1] : arr[0] === 'platform_token' ? platform_token = arr[1] : platform_token = '';
                         if (arr[0] === '_mark') {
                             _mark = arr[1]
+                        } else if (arr[0] === 'refresh_token') {
+                            refresh_token = arr[1];
+                        } else if (arr[0] === 'platform_token') {
+                            platform_token = arr[1];
+                        } else if (arr[0] === 'access_token') {
+                            access_token = arr[1];
                         }
-                    })
+                        document.cookie = `${arr[0]}=; expire=${date.toUTCString()}; Domain=${this.domain}; path=/`;
+                    });
                     if (!_mark) {
                         let data = {access_token, refresh_token, platform_token};
                         let date = new Date();
@@ -942,9 +954,9 @@
             },
             setClientHeight() {
                 this.$nextTick(() => {
-                    until.getClientHeight() > document.getElementById('checkCLA').offsetHeight ?
-                        this.checkCLAClass.height = until.getClientHeight() + 'px' :
-                        this.checkCLAClass.height = document.getElementById('checkCLA').offsetHeight
+                    if (until.getClientHeight() > document.getElementById('checkCLA').offsetHeight ){
+                        document.getElementById('checkCLA').style.minHeight = until.getClientHeight() + 'px'
+                    }
                 })
             },
         }
