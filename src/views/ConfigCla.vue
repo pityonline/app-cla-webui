@@ -282,6 +282,9 @@
                     return Number(this.$store.state.repositoryValue)
                 }
             },
+            cla_Link(){
+                return this.$store.state.cla_link;
+            },
         },
         watch: {
             $route(to, from) {
@@ -296,7 +299,6 @@
         inject:['setClientHeight'],
         data() {
             return {
-                cla_Link: '',
                 metadataArr: [{
                     title: 'Name',
                     type: 'name',
@@ -662,6 +664,7 @@
                   this.$store.commit('setRepositoryChoose','')
                   this.$store.commit('setRepositoryValue','')
                   this.$store.commit('setIsEmail','')
+                  this.$store.commit('setClaLink','')
                   sessionStorage.removeItem('orgOptions');
                   sessionStorage.removeItem('orgValue');
                   sessionStorage.removeItem('orgChoose');
@@ -669,6 +672,7 @@
                   sessionStorage.removeItem('repositoryChoose');
                   sessionStorage.removeItem('repositoryValue');
                   sessionStorage.removeItem('isEmail');
+                  sessionStorage.removeItem('cla_Link');
               }
             },
         },
