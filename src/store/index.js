@@ -73,6 +73,7 @@ export default new Vuex.Store({
             sessionStorage.setItem('sign_access_token', data.access_token);
             sessionStorage.setItem('sign_refresh_token', data.refresh_token);
             sessionStorage.setItem('sign_platform_token', data.platform_token);
+            data.resolve('complete')
         },
         setLoginUser(state, data) {
             state.user.userId = data.userId;

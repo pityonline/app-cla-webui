@@ -388,42 +388,43 @@
                     })
                 })
             },
-            clearCookie(){
 
-            },
-            getCookieData() {
+            getCookieData(resolve) {
                 console.log(document.cookie);
                 console.log(this.$store.state.sign_platform_token);
                 if (this.$store.state.sign_platform_token) {
-
-                }else if (document.cookie) {
-                    let cookieArr = document.cookie.split('; ');
+                    resolve('complete');
+                } else if (document.cookie) {
+                    let cookieArr = document.cookie.split(';');
                     let access_token, refresh_token, platform_token, _mark = '';
-                    let domain = this.address.split('//')[1].split(':')[0];
+                    let domain = this.address.split('//')[1].split(':')[0].trim();
                     let date = new Date();
                     date.setTime(date.getTime() - 10000);
                     cookieArr.forEach((item, index) => {
                         let arr = item.split('=');
-                        if (arr[0] === '_mark') {
-                            _mark = arr[1]
-                        } else if (arr[0] === 'refresh_token') {
-                            refresh_token = arr[1];
-                        } else if (arr[0] === 'platform_token') {
-                            platform_token = arr[1];
-                        } else if (arr[0] === 'access_token') {
-                            access_token = arr[1];
+                        let name = arr[0].trim();
+                        let value = arr[1].trim()
+                        l
+                        if (name === '_mark') {
+                            _mark = value
+                        } else if (name === 'refresh_token') {
+                            refresh_token = value;
+                        } else if (name === 'platform_token') {
+                            platform_token = value;
+                        } else if (name === 'access_token') {
+                            access_token = value;
                         }
                         let date = new Date();
                         date.setTime(date.getTime() - 10000);
-                        document.cookie = `${arr[0]}= ; expire=${date.toUTCString()}; Domain=${this.domain}; path=/`;
+                        document.cookie = `${arr[0]}= ; expire=${date.toUTCString()}; Domain=${domain}; path=/`;
                     });
-                    console.log('_mark',_mark);
+                    console.log('_mark', _mark);
                     if (!_mark) {
 
-                        let data = {access_token, refresh_token, platform_token};
+                        let data = {access_token, refresh_token, platform_token,resolve};
                         let date = new Date();
                         date.setTime(date.getTime() - 10000);
-                        document.cookie = `_mark=1; expire=${date.toUTCString()}; Domain=${this.domain}; path=/`;
+                        document.cookie = `_mark=1; expire=${date.toUTCString()}; Domain=${domain}; path=/`;
                         this.$store.commit('setSignToken', data);
                     }
 
@@ -962,7 +963,7 @@
             },
             setClientHeight() {
                 this.$nextTick(() => {
-                    if (until.getClientHeight() > document.getElementById('checkCLA').offsetHeight ){
+                    if (until.getClientHeight() > document.getElementById('checkCLA').offsetHeight) {
                         document.getElementById('checkCLA').style.minHeight = until.getClientHeight() + 'px'
                     }
                 })
@@ -970,12 +971,14 @@
         }
         ,
         created() {
-            this.getCookieData();
             new Promise((resolve, reject) => {
-                this.getSignPage(resolve);
-            },).then(res => {
+                this.getCookieData(resolve);
+            }).then(res => {
+                return new Promise((resolve, reject) => {
+                    this.getSignPage(resolve);
+                })
+            }).then(res => {
                 this.getNowDate()
-            }, err => {
             })
         }
         ,
