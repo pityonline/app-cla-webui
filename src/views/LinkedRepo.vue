@@ -294,6 +294,7 @@
         },
         updated(){
             console.log('linkedRepo_updated');
+            this.setClientHeight();
         },
         methods: {
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'setTableDataAct']),
