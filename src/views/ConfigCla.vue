@@ -282,9 +282,9 @@
                     return Number(this.$store.state.repositoryValue)
                 }
             },
-            cla_Link(){
-                return this.$store.state.cla_link;
-            },
+            // cla_Link(){
+            //     return this.$store.state.cla_link;
+            // },
         },
         watch: {
             $route(to, from) {
@@ -299,6 +299,7 @@
         inject:['setClientHeight'],
         data() {
             return {
+                cla_link:this.$store.state.cla_link,
                 metadataArr: [{
                     title: 'Name',
                     type: 'name',
@@ -672,7 +673,7 @@
                   sessionStorage.removeItem('repositoryChoose');
                   sessionStorage.removeItem('repositoryValue');
                   sessionStorage.removeItem('isEmail');
-                  sessionStorage.removeItem('cla_Link');
+                  sessionStorage.removeItem('cla_link');
               }
             },
         },
