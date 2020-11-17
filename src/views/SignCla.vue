@@ -397,7 +397,7 @@
                 if (this.$store.state.sign_platform_token) {
 
                 }else if (document.cookie) {
-                    let cookieArr = document.cookie.split('; ')
+                    let cookieArr = document.cookie.split('; ');
                     let access_token, refresh_token, platform_token, _mark = '';
                     cookieArr.forEach((item, index) => {
                         let arr = item.split('=');
@@ -412,7 +412,7 @@
                         }
                         let date = new Date();
                         date.setTime(date.getTime() - 10000);
-                        document.cookie = `${arr[0]}=; expire=${date.toUTCString()}; Domain=${this.domain}; path=/`;
+                        document.cookie = `${arr[0]}= ; expire=${date.toUTCString()}; Domain=${this.domain}; path=/`;
                     });
                     console.log('_mark',_mark);
                     if (!_mark) {
