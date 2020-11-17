@@ -287,15 +287,11 @@
             console.log('linkedRepoCreate');
             this.setDomain();
             new Promise((resolve,reject)=>{
-                this.clearPageSession();
+                this.getCookieData(resolve)
                 resolve('complete')
             }).then(res=>{
-               return new Promise(resolve=>{
-                   this.getCookieData(resolve)
-               }).then(res=>{
                    this.getLinkedRepoList();
                })
-            },err=>{})
 
         },
         beforeCreate(){
@@ -651,18 +647,21 @@
 
             },
             getCookieData(resolve) {
-                if (document.cookie !== '') {
+                if (this.$store.state.platform_token) {
+                    resolve('complete')
+                }else if (document.cookie) {
                     let cookieArr = document.cookie.split('; ')
-                    let access_token, refresh_token, platform_token,email = '';
+                    let access_token, refresh_token, platform_token = '';
                     cookieArr.forEach((item, index) => {
                         let arr = item.split('=');
-                        arr[0] === 'access_token' ? access_token = arr[1] : arr[0] === 'refresh_token' ? refresh_token = arr[1] :
-                            arr[0] === 'email' ? email = arr[1] : arr[0] === 'platform_token' ? platform_token = arr[1] : platform_token = '';
-                    })
-                    this.email = email;
-                    if (email !== '') {
-                        this.$store.commit('setIsEmail', true)
-                    }
+                       if(arr[0]==='refresh_token'){
+                            refresh_token=arr[1];
+                        }else if(arr[0]==='platform_token'){
+                            platform_token=arr[1];
+                        }else if(arr[0]==='access_token'){
+                            access_token=arr[1];
+                        }
+                    });
                     let data = {access_token, refresh_token, platform_token};
                     this.setTokenAct(data);
                     resolve('complete')
