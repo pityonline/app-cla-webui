@@ -617,6 +617,7 @@
                     url: url.getOrgsInfo,
                     params: obj,
                 }).then(res => {
+                    console.log(res);
                     if (res.status === 200){
                         let orgOptions = [];
                         res.data.forEach((item, index) => {
@@ -650,8 +651,22 @@
                     }
                 }
             },
+            init(){
+              if (document.cookie) {
+
+              }  else{
+                  sessionStorage.removeItem('orgOptions');
+                  sessionStorage.removeItem('orgValue');
+                  sessionStorage.removeItem('orgChoose');
+                  sessionStorage.removeItem('repositoryOptions');
+                  sessionStorage.removeItem('repositoryChoose');
+                  sessionStorage.removeItem('repositoryValue');
+                  sessionStorage.removeItem('setIsEmail');
+              }
+            },
         },
         created() {
+            this.init();
             this.getCookieData();
             this.getOrgsInfo()
         },

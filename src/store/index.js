@@ -16,7 +16,7 @@ export default new Vuex.Store({
         orgValue: sessionStorage.getItem('orgValue') || undefined,
         claOptions: sessionStorage.getItem('claOptions') || undefined,
         repositoryOptions: sessionStorage.getItem('repositoryOptions') || undefined,
-        orgOptions: sessionStorage.getItem('orgOptions') || undefined,
+        orgOptions: JSON.parse(sessionStorage.getItem('orgOptions')) || undefined,
         showConfigForm: sessionStorage.getItem('showConfigForm') || undefined,
         userLimit: sessionStorage.getItem('userLimit') || undefined,
         loginInfo: JSON.parse(sessionStorage.getItem('loginInfo')) || undefined,
