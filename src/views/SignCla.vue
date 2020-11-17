@@ -393,9 +393,6 @@
                 if (document.cookie) {
                     let cookieArr = document.cookie.split(';');
                     let access_token, refresh_token, platform_token, _mark = '';
-                    let domain = this.address.split('//')[1].split(':')[0].trim();
-                    let date = new Date();
-                    date.setTime(date.getTime() - 10000);
                     cookieArr.forEach((item, index) => {
                         let arr = item.split('=');
                         let name = arr[0].trim();
