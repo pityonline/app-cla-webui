@@ -44,11 +44,15 @@ export default new Vuex.Store({
         signSuccessDialogVisible:false,
         signReLoginDialogVisible:false,
         pwdIsChanged:false,
+        cla_link:sessionStorage.getItem('cla_link') || undefined,
     },
     mutations: {
+        setClaLink(state,cla_link){
+            state.cla_link=cla_link;
+            sessionStorage.setItem('cla_link', cla_link);
+        },
         setPwdIsChanged(state, data) {
             state.pwdIsChanged = data;
-            state.tableData = data.tableData;
             sessionStorage.setItem('pwdIsChanged', data);
         },
         setReady(state, data) {
