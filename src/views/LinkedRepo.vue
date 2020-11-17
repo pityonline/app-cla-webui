@@ -630,14 +630,16 @@
                     date.setTime(date.getTime() - 10000);
                     cookieArr.forEach((item, index) => {
                         let arr = item.split('=');
-                        if (arr[0] === 'refresh_token') {
-                            refresh_token = arr[1];
-                        } else if (arr[0] === 'platform_token') {
-                            platform_token = arr[1];
-                        } else if (arr[0] === 'access_token') {
-                            access_token = arr[1];
+                        let name = arr[0];
+                        let value = arr[1];
+                        if (name === 'refresh_token') {
+                            refresh_token = value;
+                        } else if (name === 'platform_token') {
+                            platform_token = value;
+                        } else if (name === 'access_token') {
+                            access_token = value;
                         }
-                        document.cookie = `${arr[0]}=; expire=${date.toLocaleString()}; Domain=${domain}; path=/`;
+                        this.$cookie.remove(name,{path:'/'});
                     });
                     let data = {access_token, refresh_token, platform_token, resolve};
                     this.setTokenAct(data);
