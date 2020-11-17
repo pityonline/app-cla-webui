@@ -254,28 +254,28 @@
                 this.getCorporationInfo()
             } else if (this.item.apply_to === 'individual') {
                 this.activeName = 'second';
-             //   this.getClaInfo()
+                //   this.getClaInfo()
             }
 
         },
-        mounted(){
+        mounted() {
             console.log('corp_mounted');
-           // this.setClientHeight();
+            this.setClientHeight();
         },
-        beforeUpdate(){
+        beforeUpdate() {
             console.log('corp_beforeUpdate');
         },
-        updated(){
+        updated() {
             console.log('corp_updated');
             this.setClientHeight()
         },
-        inject:['setClientHeight'],
+        inject: ['setClientHeight'],
         methods: {
             tabsHandleClick(tab, event) {
                 if (tab.index === '0') {
                     this.getCorporationInfo()
                 } else if (tab.index === '1') {
-                 //   this.getClaInfo()
+                    //   this.getClaInfo()
                 }
             },
             upload(fileObj) {
@@ -343,8 +343,8 @@
                     console.log(resp);
                     console.log(resp.data.data);
                     this.claData = resp.data.data;
-                    this.$nextTick(()=>{
-                      // this.setClientHeight();
+                    this.$nextTick(() => {
+                        // this.setClientHeight();
                     })
 
                 }).catch(err => {
@@ -362,8 +362,8 @@
                     },
                 }).then(resp => {
                     this.tableData = resp.data.data[this.item.id];
-                    this.$nextTick(()=>{
-                       //this.setClientHeight();
+                    this.$nextTick(() => {
+                        //this.setClientHeight();
                     })
 
                 }).catch(err => {
