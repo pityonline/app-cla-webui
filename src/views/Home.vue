@@ -54,6 +54,7 @@
 
         },
         updated() {
+            console.log('home_updated');
             this.setClientHeight();
         },
 

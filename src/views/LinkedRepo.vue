@@ -292,6 +292,9 @@
             })
 
         },
+        updated(){
+            console.log('linkedRepo_updated');
+        },
         methods: {
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'setTableDataAct']),
             configCla() {
