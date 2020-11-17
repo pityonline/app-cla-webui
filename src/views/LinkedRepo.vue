@@ -621,10 +621,8 @@
 
             },
             getCookieData(resolve) {
-                console.log(this.$store.state.platform_token);
-                if (this.$store.state.platform_token) {
-                    resolve('complete')
-                }else if (document.cookie) {
+                console.log(document.cookie);
+              if (document.cookie) {
                     let cookieArr = document.cookie.split('; ')
                     let access_token, refresh_token, platform_token = '';
                     cookieArr.forEach((item, index) => {
@@ -643,7 +641,9 @@
                     let data = {access_token, refresh_token, platform_token,resolve};
                     this.setTokenAct(data);
 
-                }
+                }else{
+                  resolve('complete');
+              }
             },
 
             unlinkHandleClick(scope) {
