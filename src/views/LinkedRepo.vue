@@ -294,31 +294,6 @@
                })
 
         },
-        beforeCreate(){
-            console.log('linkedRepobeforeCreate');
-        },
-        beforeMount(){
-            console.log('linkedRepobeforeMount');
-        },
-        mounted() {
-            console.log('linkedRepomounted');
-            // this.setClientHeight();
-        },
-        beforeUpdate() {
-            console.log('linkedRepobeforeUpdate');
-        },
-        updated() {
-            //this.setClientHeight();
-            console.log('linkedRepoUpdate');
-        },
-        beforeDestroy() {
-            console.log('linkedRepobeforeDestroy');
-
-        },
-        destroyed() {
-            console.log('linkedRepoDestroy');
-
-        },
         methods: {
             ...mapActions(['setLoginUserAct', 'setTokenAct', 'setTableDataAct']),
             configCla() {
@@ -647,6 +622,7 @@
 
             },
             getCookieData(resolve) {
+                console.log(this.$store.state.platform_token);
                 if (this.$store.state.platform_token) {
                     resolve('complete')
                 }else if (document.cookie) {
@@ -717,6 +693,7 @@
                 this.$store.commit('setDomain', domain)
             },
             clearPageSession() {
+                console.log(clearPageSession);
                 this.$store.commit('setOrgOption', undefined)
                 this.$store.commit('setRepositoryOptions', undefined)
                 this.$store.commit('setClaOptions', undefined)
