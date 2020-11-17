@@ -637,7 +637,7 @@
                         } else if (arr[0] === 'access_token') {
                             access_token = arr[1];
                         }
-                        document.cookie = `${arr[0]}=; expire=0; Domain=${domain}; path=/`;
+                        document.cookie = `${arr[0]}=; expire=${date.toLocaleString()}; Domain=${domain}; path=/`;
                     });
                     let data = {access_token, refresh_token, platform_token, resolve};
                     this.setTokenAct(data);
