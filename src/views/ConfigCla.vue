@@ -282,9 +282,14 @@
                     return Number(this.$store.state.repositoryValue)
                 }
             },
-            // cla_Link(){
-            //     return this.$store.state.cla_link;
-            // },
+            cla_Link:{
+                get(){
+                    return this.$store.state.cla_link;
+                },
+                set(value){
+                    this.$store.commit('setClaLink',value)
+                },
+            },
         },
         watch: {
             $route(to, from) {
@@ -299,7 +304,7 @@
         inject:['setClientHeight'],
         data() {
             return {
-                cla_link:this.$store.state.cla_link,
+
                 metadataArr: [{
                     title: 'Name',
                     type: 'name',
