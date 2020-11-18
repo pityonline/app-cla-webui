@@ -112,11 +112,11 @@
                 <div style="padding: 0 2rem">
                     <el-row>
                         <el-col :span="5" class="typeCol">
-                            <el-radio v-model="metadataType" @change="changeRadio" label="individual">For Individual
+                            <el-radio v-model="metadataType"  label="individual">For Individual
                             </el-radio>
                         </el-col>
                         <el-col :span="5" class="typeCol">
-                            <el-radio v-model="metadataType" @change="changeRadio" label="corporation">For Corporation
+                            <el-radio v-model="metadataType"  label="corporation">For Corporation
                             </el-radio>
                         </el-col>
                     </el-row>
@@ -603,54 +603,6 @@
                     }
                 }
 
-            },
-            changeRadio() {
-                // if (this.metadataType === 'individual') {
-                //     this.metadataArr = [{
-                //         title: 'Name',
-                //         type: 'name',
-                //         description: 'your name',
-                //         required: true,
-                //     }, {
-                //         title: 'E-Mail',
-                //         type: 'email',
-                //         description: 'your email',
-                //         required: true,
-                //     },]
-                //     this.customMetadataArr = this.individualCustomMetadataArr;
-                // } else if (this.metadataType === 'corporation') {
-                //     this.metadataArr = [
-                //
-                //         {
-                //             title: 'Authorized Representative',
-                //             type: 'authorized',
-                //             description: 'name of Authorized Representative',
-                //             required: true,
-                //         },
-                //         {
-                //             title: 'Title',
-                //             type: 'title',
-                //             description: 'title of Authorized Representative',
-                //             required: true,
-                //         },
-                //         {
-                //             title: 'Corporation Name',
-                //             type: 'corporationName',
-                //             description: 'corporation name',
-                //             required: true,
-                //         },
-                //
-                //         {
-                //             title: 'E-Mail',
-                //             type: 'email',
-                //             description: 'corporation email',
-                //             required: true,
-                //         },];
-                //     this.customMetadataArr = this.corporationCustomMetadataArr;
-                //
-                // }
-                // this.$store.commit('setMetadataType', this.metadataType);
-                // this.$store.commit('setCusMetadataArr', this.customMetadataArr)
             },
             toAuthorizedEmail() {
                 this.emailDialogVisible = true;
