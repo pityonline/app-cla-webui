@@ -8,7 +8,7 @@
             <div>
                 <div>
                     <div v-if="showHeaderMenu" class="menuBox">
-                        <div class="userImgBox" id="imgBox" @click="openOrCloseMenu()">
+                        <div class="userImgBox" id="imgBox" @click.self.stop="openOrCloseMenu()">
                             <svg-icon id="defaultImg" class="userImg"
                                       icon-class="default-user" ></svg-icon>
                         </div>
