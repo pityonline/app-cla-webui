@@ -7,10 +7,10 @@
 
             <div>
                 <div>
-                    <div  v-if="showHeaderMenu" class="menuBox">
-                        <div class="userImgBox" id="imgBox" >
+                    <div v-if="showHeaderMenu" class="menuBox">
+                        <div class="userImgBox" id="imgBox">
                             <svg-icon id="defaultImg" class="userImg"
-                                      icon-class="default-user" @click="openOrCloseMenu()"></svg-icon>
+                                      icon-class="default-user" @click="openOrCloseMenu(event)"></svg-icon>
                         </div>
                         <div v-if="menuVisible" id="menuOption">
                             <div v-if="loginRole==='org'" @click="handleCommand('a')">
@@ -29,7 +29,7 @@
                                 {{$t('header.resetPwd')}}
                             </div>
                             <!--<div v-if="loginRole==='corp'&&role===admin" @click="handleCommand('f')">-->
-                                <!-- {{$t('header.corpCla')}}-->
+                            <!-- {{$t('header.corpCla')}}-->
                             <!--</div>-->
                             <div @click="handleCommand('g')">
                                 {{$t('header.loginOut')}}
@@ -78,9 +78,9 @@
         name: "NewHeader",
         data() {
             return {
-                role:'',
-                loginRole:'',
-                showHeaderMenu:true,
+                role: '',
+                loginRole: '',
+                showHeaderMenu: true,
                 menuVisible: false,
                 isActive: true,
                 language: 'English',
@@ -93,8 +93,9 @@
         },
 
         methods: {
-            openOrCloseMenu() {
-                console.log('openOrCloseMenu');
+            openOrCloseMenu(event) {
+                console.log('openOrCloseMenu'event);
+                event.stopImmediatePropagation();
                 this.menuVisible = !this.menuVisible
             },
             handleCommand(command) {
@@ -157,7 +158,7 @@
                 sessionStorage.clear();
                 if (this.loginRole === 'corp') {
                     this.$router.push('/corporationManagerLogin')
-                }else{
+                } else {
                     this.$router.push('/')
                 }
             },
@@ -182,8 +183,8 @@
                 this.isActive = !this.isActive;
             },
             init() {
-                if(parseInt(localStorage.getItem('lang'))){
-                    this.value =parseInt(localStorage.getItem('lang'))
+                if (parseInt(localStorage.getItem('lang'))) {
+                    this.value = parseInt(localStorage.getItem('lang'))
                 }
                 switch (this.value) {
                     case 0:
@@ -195,16 +196,16 @@
                         this.$i18n.locale = 'zh-cn';
                         break;
                 }
-                if (this.$store.state.loginInfo){
+                if (this.$store.state.loginInfo) {
                     this.role = this.$store.state.loginInfo.userInfo[0].role;
                 }
-                if ( sessionStorage.getItem('showHeaderMenu')==='false'){
-                   this.showHeaderMenu=false
-                }else if (sessionStorage.getItem('showHeaderMenu') === 'corp') {
-                    this.showHeaderMenu=true;
+                if (sessionStorage.getItem('showHeaderMenu') === 'false') {
+                    this.showHeaderMenu = false
+                } else if (sessionStorage.getItem('showHeaderMenu') === 'corp') {
+                    this.showHeaderMenu = true;
                     this.loginRole = 'corp';
-                }else{
-                    this.showHeaderMenu=true;
+                } else {
+                    this.showHeaderMenu = true;
                     this.loginRole = 'org';
                 }
 
@@ -218,8 +219,8 @@
                 if (e.target.id !== 'my_select' && e.target.id !== 'select_content' && e.target.id !== 'select_icon_box' && e.target.id !== 'select_icon') {
                     this.isActive = true;
                 }
-                if (e.target.id !== 'defaultImg'&&e.target.id !== 'imgBox') {
-                    console.log(e.target,e.target.id);
+                if (e.target.id !== 'defaultImg' && e.target.id !== 'imgBox') {
+                    console.log(e.target, e.target.id);
                     this.menuVisible = false
                 }
             })
@@ -235,6 +236,7 @@
     .pointer {
         cursor: pointer;
     }
+
     .menuBox {
         position: relative;
         height: 2.6rem;
@@ -268,6 +270,7 @@
         background-color: white;
         white-space: pre;
         width: 10rem;
+
         & > div {
             height: 2.6rem;
             line-height: 2.6rem;
@@ -280,6 +283,7 @@
             border-bottom: 1px solid black;
         }
     }
+
     .headerBox {
         border-bottom: 2px solid #F2F2F2;
         height: 5.5rem;
@@ -418,10 +422,12 @@
             flex-direction: column;
             justify-content: center;
         }
+
         & .header > div:nth-of-type(2) {
             display: flex;
             justify-content: space-between;
-            &>div{
+
+            & > div {
                 margin-left: 1rem;
                 display: flex;
                 flex-direction: column;
