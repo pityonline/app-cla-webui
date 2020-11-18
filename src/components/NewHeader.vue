@@ -8,9 +8,9 @@
             <div>
                 <div>
                     <div  v-if="showHeaderMenu" class="menuBox">
-                        <div class="userImgBox" id="imgBox" @click.native="openOrCloseMenu()">
+                        <div class="userImgBox" id="imgBox" @click="openOrCloseMenu()">
                             <svg-icon id="defaultImg" class="userImg"
-                                      icon-class="default-user" @click.native="openOrCloseMenu()"></svg-icon>
+                                      icon-class="default-user" ></svg-icon>
                         </div>
                         <div v-if="menuVisible" id="menuOption">
                             <div v-if="loginRole==='org'" @click="handleCommand('a')">
