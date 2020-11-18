@@ -243,7 +243,7 @@
     }
 
     .userImgBox {
-        background-color: gray;
+        background-color: white;
         cursor: pointer;
         height: 2.6rem;
         width: 2.6rem;
