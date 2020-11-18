@@ -45,8 +45,18 @@ export default new Vuex.Store({
         signReLoginDialogVisible:false,
         pwdIsChanged:false,
         cla_link:sessionStorage.getItem('cla_link') || undefined,
+        metadataType:sessionStorage.getItem('metadataType') || undefined,
+        customMetadataArr:JSON.parse(sessionStorage.getItem('customMetadataArr')) || undefined,
     },
     mutations: {
+        setCusMetadataArr(state,customMetadataArr){
+            state.customMetadataArr=customMetadataArr;
+            sessionStorage.setItem('customMetadataArr', JSON.stringify(customMetadataArr));
+        },
+        setMetadataType(state,metadataType){
+            state.metadataType=metadataType;
+            sessionStorage.setItem('metadataType', metadataType);
+        },
         setClaLink(state,cla_link){
             state.cla_link=cla_link;
             sessionStorage.setItem('cla_link', cla_link);
