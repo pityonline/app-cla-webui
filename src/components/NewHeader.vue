@@ -8,9 +8,9 @@
             <div>
                 <div>
                     <div  v-if="showHeaderMenu" class="menuBox">
-                        <div class="userImgBox" id="imgBox" @click="openOrCloseMenu()">
+                        <div class="userImgBox" id="imgBox" >
                             <svg-icon id="defaultImg" class="userImg"
-                                      icon-class="default-user" ></svg-icon>
+                                      icon-class="default-user" @click="openOrCloseMenu()"></svg-icon>
                         </div>
                         <div v-if="menuVisible" id="menuOption">
                             <div v-if="loginRole==='org'" @click="handleCommand('a')">
@@ -218,7 +218,7 @@
                     this.isActive = true;
                 }
                 if (e.target.id !== 'defaultImg'&&e.target.id !== 'imgBox') {
-                    console.log(e.target.id);
+                    console.log(e.target,e.target.id);
                     this.menuVisible = false
                 }
             })
