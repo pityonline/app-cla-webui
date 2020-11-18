@@ -40,7 +40,7 @@
                 <div>
                     <div class="my_select_box">
                         <el-row id="my_select" class="my_select" @click.native="clickSelect()">
-                            <el-col id="select_content" :span="20" class="select_content" user-select="none">
+                            <el-col id="select_content" :span="20" class="select_content">
                                 {{language}}
                             </el-col>
                             <el-col id="select_icon_box" :span="4" class="select_content">
@@ -336,6 +336,11 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            -webkit-touch-callout: none;
+            user-select: none;
         }
 
         & #my_option {
