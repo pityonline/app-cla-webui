@@ -680,16 +680,16 @@
               if (document.cookie) {
 
               }  else{
-                  this.$store.commit('setOrgOption',[])
-                  this.$store.commit('setOrgValue','')
-                  this.$store.commit('setOrgChoose','')
-                  this.$store.commit('setRepositoryOptions',[])
-                  this.$store.commit('setRepositoryChoose','')
-                  this.$store.commit('setRepositoryValue','')
-                  this.$store.commit('setIsEmail','')
-                  this.$store.commit('setClaLink','')
-                  this.$store.commit('setCusMetadataArr',[])
-                  this.$store.commit('setMetadataType','individual')
+                  this.$store.commit('setOrgOption',[]);
+                  this.$store.commit('setOrgValue','');
+                  this.$store.commit('setOrgChoose','');
+                  this.$store.commit('setRepositoryOptions',[]);
+                  this.$store.commit('setRepositoryChoose','');
+                  this.$store.commit('setRepositoryValue','');
+                  this.$store.commit('setIsEmail','');
+                  this.$store.commit('setClaLink','');
+                  this.$store.commit('setCusMetadataArr',this.individualCustomMetadataArr);
+                  this.$store.commit('setMetadataType','individual');
                   sessionStorage.removeItem('orgOptions');
                   sessionStorage.removeItem('orgValue');
                   sessionStorage.removeItem('orgChoose');
