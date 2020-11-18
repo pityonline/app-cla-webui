@@ -58,7 +58,7 @@
                 <div style="padding: 0 2rem">
                     <el-row :gutter="20">
                         <el-col>
-                            <el-input placeholder="Paste a link" size="medium" v-model="cla_Link">
+                            <el-input placeholder="Paste a link" size="medium" v-model="cla_link">
                             </el-input>
                         </el-col>
                         <!--<el-col :span="4">-->
@@ -282,12 +282,28 @@
                     return Number(this.$store.state.repositoryValue)
                 }
             },
-            cla_Link:{
+            cla_link:{
                 get(){
                     return this.$store.state.cla_link;
                 },
                 set(value){
                     this.$store.commit('setClaLink',value)
+                },
+            },
+            metadataType:{
+                get(){
+                    return this.$store.state.metadataType;
+                },
+                set(value){
+                    this.$store.commit('setMetadataType',value)
+                },
+            },
+            customMetadataArr:{
+                get(){
+                    return this.$store.state.customMetadataArr;
+                },
+                set(value){
+                    this.$store.commit('setCusMetadataArr',value)
                 },
             },
         },
@@ -304,7 +320,6 @@
         inject:['setClientHeight'],
         data() {
             return {
-
                 metadataArr: [{
                     title: 'Name',
                     type: 'name',
@@ -327,13 +342,13 @@
                     value: 'fax'
                 },
                 ],
-                metadataType: 'individual',
-                customMetadataArr: [{
-                    title: '',
-                    type: '',
-                    description: '',
-                    required: false,
-                }],
+
+                // customMetadataArr: [{
+                //     title: '',
+                //     type: '',
+                //     description: '',
+                //     required: false,
+                // }],
                 individualCustomMetadataArr: [{
                     title: '',
                     type: '',
@@ -427,7 +442,7 @@
                 let obj = {}
                 let metadata = this.editMetadata()
                 if (metadata) {
-                    let cla = {url: this.cla_Link, language: this.claLanguageValue, fields: metadata}
+                    let cla = {url: this.cla_link, language: this.claLanguageValue, fields: metadata}
                     if (this.repositoryChoose) {
                         obj = {
                             repo_id: `${this.repositoryOptions[this.repositoryValue].repoName}`,
@@ -472,7 +487,7 @@
                     description: '',
                     required: false,
                 })
-
+                this.$store.commit('setCusMetadataArr',this.customMetadataArr)
             },
             myDeleteRow(index) {
                 if (this.customMetadataArr.length === 1) {
@@ -482,7 +497,7 @@
                 } else {
                     this.customMetadataArr.splice(index, 1);
                 }
-
+                this.$store.commit('setCusMetadataArr',this.customMetadataArr)
             },
             changeRadio() {
                 if (this.metadataType === 'individual') {
@@ -529,6 +544,8 @@
                     this.customMetadataArr = this.corporationCustomMetadataArr;
 
                 }
+                this.$store.commit('setMetadataType',this.metadataType);
+                this.$store.commit('setCusMetadataArr',this.customMetadataArr)
             },
             toAuthorizedEmail() {
                 this.emailDialogVisible = true
@@ -671,6 +688,8 @@
                   this.$store.commit('setRepositoryValue','')
                   this.$store.commit('setIsEmail','')
                   this.$store.commit('setClaLink','')
+                  this.$store.commit('setCusMetadataArr',[])
+                  this.$store.commit('setMetadataType','individual')
                   sessionStorage.removeItem('orgOptions');
                   sessionStorage.removeItem('orgValue');
                   sessionStorage.removeItem('orgChoose');
@@ -679,6 +698,7 @@
                   sessionStorage.removeItem('repositoryValue');
                   sessionStorage.removeItem('isEmail');
                   sessionStorage.removeItem('cla_link');
+                  sessionStorage.removeItem('customMetadataArr');
               }
             },
         },
