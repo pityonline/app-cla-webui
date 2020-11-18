@@ -745,6 +745,8 @@
                 })
             },
             getOrgsInfo() {
+                console.log(this.individualCustomMetadataArr);
+                console.log(this.corporationCustomMetadataArr);
                 let obj = {access_token: this.$store.state.platform_token, admin: true, page: 1, per_page: 100};
                 this.$axios({
                     url: url.getOrgsInfo,
@@ -786,6 +788,7 @@
             },
             init() {
                 if (document.cookie) {
+                    //data init
                     this.individualCustomMetadataArr=this.$store.state.individualCustomMetadataArr;
                     this.corporationCustomMetadataArr=this.$store.state.corporationCustomMetadataArr;
                 } else {
