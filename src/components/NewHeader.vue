@@ -8,8 +8,8 @@
             <div>
                 <div>
                     <div  v-if="showHeaderMenu" class="menuBox">
-                        <div class="userImgBox" id="imgBox">
-                            <svg-icon id="defaultImg" class="userImg" @click.native="openOrCloseMenu()"
+                        <div class="userImgBox" id="imgBox" @click.native="openOrCloseMenu()">
+                            <svg-icon id="defaultImg" class="userImg"
                                       icon-class="default-user"></svg-icon>
                         </div>
                         <div v-if="menuVisible" id="menuOption">
@@ -217,7 +217,7 @@
                 if (e.target.id !== 'my_select' && e.target.id !== 'select_content' && e.target.id !== 'select_icon_box' && e.target.id !== 'select_icon') {
                     this.isActive = true;
                 }
-                if (e.target.id !== 'defaultImg' && e.target.id !== 'imgBox') {
+                if (e.target.id !== 'defaultImg'&&e.target.id !== 'imgBox') {
                     this.menuVisible = false
                 }
             })
@@ -236,6 +236,7 @@
     .menuBox {
         position: relative;
         height: 2.6rem;
+        width: 8rem;
     }
 
     .userImgBox {

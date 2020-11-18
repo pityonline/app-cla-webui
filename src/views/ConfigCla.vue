@@ -779,7 +779,6 @@
             }
         },
         updated() {
-            console.log('configCla_updated');
             this.setClientHeight();
         },
     };
