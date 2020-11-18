@@ -120,10 +120,10 @@
                             </el-radio>
                         </el-col>
                     </el-row>
-                    <div>
+                    <div v-if="metadataType==='individual'">
                         <div>
                             <el-row style="padding: 0.5rem 0;" type="flex" align="middle" :gutter="20"
-                                    v-for="(item,index) in metadataArr">
+                                    v-for="(item,index) in individualMetadataArr">
                                 <el-col :span="5">
                                     <el-input disabled="" v-model="item.title" size="medium" readonly="">
 
@@ -143,7 +143,63 @@
                         </div>
                         <div>
                             <el-row style="padding: 0.5rem 0;" type="flex" align="middle" :gutter="20"
-                                    v-for="(item,index) in customMetadataArr">
+                                    v-for="(item,index) in individualCustomMetadataArr">
+                                <el-col :span="5">
+                                    <el-input v-model="item.title" size="medium"
+                                              placeholder="please input title">
+
+                                    </el-input>
+                                </el-col>
+                                <el-col :span="5">
+                                    <el-select style="width: 100%" v-model="item.type"
+                                               placeholder="select data type"
+                                               size="medium">
+                                        <el-option
+                                                v-for="i in dataTypeOptions"
+                                                :key="i.value"
+                                                :label="i.label"
+                                                :value="i.value">
+                                        </el-option>
+                                    </el-select>
+                                </el-col>
+                                <el-col :span="5" style="height: 100%">
+                                    <el-input v-model="item.description" size="medium"
+                                              placeholder="description"></el-input>
+                                </el-col>
+                                <el-col :span="5" style="height: 100%">
+                                    <el-checkbox v-model="item.required">required</el-checkbox>
+                                </el-col>
+                                <el-col :span="4">
+                                    <el-button @click="addRow(index)" size="medium">+</el-button>
+                                    <el-button @click="myDeleteRow(index)" size="medium">-</el-button>
+                                </el-col>
+                            </el-row>
+                        </div>
+                    </div>
+                    <div v-if="metadataType==='corporation'">
+                        <div>
+                            <el-row style="padding: 0.5rem 0;" type="flex" align="middle" :gutter="20"
+                                    v-for="(item,index) in corporationMetadataArr">
+                                <el-col :span="5">
+                                    <el-input disabled="" v-model="item.title" size="medium" readonly="">
+
+                                    </el-input>
+                                </el-col>
+                                <el-col :span="5">
+                                    <el-input disabled="" v-model="item.type" size="medium" readonly></el-input>
+                                </el-col>
+                                <el-col :span="5">
+                                    <el-input disabled="" v-model="item.description" size="medium" readonly></el-input>
+                                </el-col>
+                                <el-col :span="5" style="height: 100%">
+                                    <el-checkbox v-model="item.required" disabled="">required</el-checkbox>
+                                </el-col>
+                            </el-row>
+
+                        </div>
+                        <div>
+                            <el-row style="padding: 0.5rem 0;" type="flex" align="middle" :gutter="20"
+                                    v-for="(item,index) in corporationCustomMetadataArr">
                                 <el-col :span="5">
                                     <el-input v-model="item.title" size="medium"
                                               placeholder="please input title">
@@ -265,45 +321,45 @@
 
             },
             orgValue() {
-                if (this.$store.state.orgValue === undefined || this.$store.state.orgValue === ''||this.$store.state.orgValue === 'undefined') {
-                    console.log(this.$store.state.orgValue,'if');
+                if (this.$store.state.orgValue === undefined || this.$store.state.orgValue === '' || this.$store.state.orgValue === 'undefined') {
+                    console.log(this.$store.state.orgValue, 'if');
                     return this.$store.state.orgValue
                 } else {
-                    console.log(this.$store.state.orgValue,'else');
+                    console.log(this.$store.state.orgValue, 'else');
                     return Number(this.$store.state.orgValue)
                 }
             },
             repositoryValue() {
-                if (this.$store.state.repositoryValue === undefined || this.$store.state.repositoryValue === ''||this.$store.state.repositoryValue === 'undefined') {
-                    console.log(this.$store.state.repositoryValue,'if');
+                if (this.$store.state.repositoryValue === undefined || this.$store.state.repositoryValue === '' || this.$store.state.repositoryValue === 'undefined') {
+                    console.log(this.$store.state.repositoryValue, 'if');
                     return this.$store.state.repositoryValue
                 } else {
-                    console.log(this.$store.state.repositoryValue,'else');
+                    console.log(this.$store.state.repositoryValue, 'else');
                     return Number(this.$store.state.repositoryValue)
                 }
             },
-            cla_link:{
-                get(){
+            cla_link: {
+                get() {
                     return this.$store.state.cla_link;
                 },
-                set(value){
-                    this.$store.commit('setClaLink',value)
+                set(value) {
+                    this.$store.commit('setClaLink', value)
                 },
             },
-            metadataType:{
-                get(){
+            metadataType: {
+                get() {
                     return this.$store.state.metadataType;
                 },
-                set(value){
-                    this.$store.commit('setMetadataType',value)
+                set(value) {
+                    this.$store.commit('setMetadataType', value)
                 },
             },
-            customMetadataArr:{
-                get(){
+            customMetadataArr: {
+                get() {
                     return this.$store.state.customMetadataArr;
                 },
-                set(value){
-                    this.$store.commit('setCusMetadataArr',value)
+                set(value) {
+                    this.$store.commit('setCusMetadataArr', value)
                 },
             },
         },
@@ -317,7 +373,7 @@
                 }
             },
         },
-        inject:['setClientHeight'],
+        inject: ['setClientHeight'],
         data() {
             return {
                 metadataArr: [{
@@ -343,18 +399,51 @@
                 },
                 ],
 
-                // customMetadataArr: [{
-                //     title: '',
-                //     type: '',
-                //     description: '',
-                //     required: false,
-                // }],
+                customMetadataArr: [],
+                individualMetadataArr: [{
+                    title: 'Name',
+                    type: 'name',
+                    description: 'your name',
+                    required: true,
+                }, {
+                    title: 'E-Mail',
+                    type: 'email',
+                    description: 'your email',
+                    required: true,
+                },],
                 individualCustomMetadataArr: [{
                     title: '',
                     type: '',
                     description: '',
                     required: false,
                 }],
+                corporationMetadataArr: [
+
+                    {
+                        title: 'Authorized Representative',
+                        type: 'authorized',
+                        description: 'name of Authorized Representative',
+                        required: true,
+                    },
+                    {
+                        title: 'Title',
+                        type: 'title',
+                        description: 'title of Authorized Representative',
+                        required: true,
+                    },
+                    {
+                        title: 'Corporation Name',
+                        type: 'corporationName',
+                        description: 'corporation name',
+                        required: true,
+                    },
+
+                    {
+                        title: 'E-Mail',
+                        type: 'email',
+                        description: 'corporation email',
+                        required: true,
+                    },],
                 corporationCustomMetadataArr: [{
                     title: '',
                     type: '',
@@ -399,7 +488,12 @@
         },
         methods: {
             checkMetadata() {
-                let newArr = this.customMetadataArr.concat(this.metadataArr);
+                let newArr = [];
+                if (this.metadataType === 'individual') {
+                    newArr = this.individualMetadataArr.concat(this.individualCustomMetadataArr);
+                } else {
+                    newArr = this.corporationMetadataArr.concat(this.corporationCustomMetadataArr);
+                }
                 for (let i = 0; i < newArr.length; i++) {
                     for (let j = i + 1; j < newArr.length; j++) {
                         if (newArr[i].title === newArr[j].title || newArr[i].type === newArr[j].type) {
@@ -407,36 +501,27 @@
                         }
                     }
                 }
-                return true;
+                return newArr;
             },
             editMetadata() {
                 let fields = [];
-                if (this.checkMetadata()) {
-                    this.metadataArr.forEach((item, index) => {
-                        fields.push({
-                            id: index + '',
-                            title: item.title,
-                            type: item.type,
-                            description: item.description,
-                            required: item.required,
-                        })
-                    })
-                    for (let i = 0; i < this.customMetadataArr.length; i++) {
-                        if (this.customMetadataArr[i].title !== '' && this.customMetadataArr[i].type !== '') {
+                let metadataArr = this.checkMetadata();
+                if (metadataArr) {
+                    metadataArr.forEach((item, index) => {
+                        if (metadataArr[i].title !== '' && metadataArr[i].type !== '') {
                             fields.push({
-                                id: this.metadataArr.length + i + '',
-                                title: this.customMetadataArr[i].title,
-                                type: this.customMetadataArr[i].type,
-                                description: this.customMetadataArr[i].description,
-                                required: this.customMetadataArr[i].required,
+                                id: index + '',
+                                title: item.title,
+                                type: item.type,
+                                description: item.description,
+                                required: item.required,
                             })
                         }
-                    }
+                    })
                     return fields
                 } else {
                     return false
                 }
-
             },
             binding() {
                 let obj = {}
@@ -481,71 +566,94 @@
 
             },
             addRow(index) {
-                this.customMetadataArr.splice(index + 1, 0, {
-                    title: '',
-                    type: '',
-                    description: '',
-                    required: false,
-                })
-                this.$store.commit('setCusMetadataArr',this.customMetadataArr)
+                if (this.metadataType === 'individual') {
+                    this.individualCustomMetadataArr.splice(index + 1, 0, {
+                        title: '',
+                        type: '',
+                        description: '',
+                        required: false,
+                    });
+                    this.$store.commit('setIndividualCustomMetadataArr', this.individualCustomMetadataArr)
+                }else{
+                    this.corporationCustomMetadataArr.splice(index + 1, 0, {
+                        title: '',
+                        type: '',
+                        description: '',
+                        required: false,
+                    });
+                    this.$store.commit('setCorporationCustomMetadataArr', this.corporationCustomMetadataArr)
+                }
+
             },
             myDeleteRow(index) {
-                if (this.customMetadataArr.length === 1) {
-                    this.customMetadataArr[0].type = ''
-                    this.customMetadataArr[0].title = ''
-                    this.customMetadataArr[0].description = ''
-                } else {
-                    this.customMetadataArr.splice(index, 1);
+                if (this.metadataType === 'individual') {
+                    if (this.individualCustomMetadataArr.length === 1) {
+                        this.individualCustomMetadataArr[0].type = ''
+                        this.individualCustomMetadataArr[0].title = ''
+                        this.individualCustomMetadataArr[0].description = ''
+                    } else {
+                        this.individualCustomMetadataArr.splice(index, 1);
+                    }
+                    this.$store.commit('setIndividualCustomMetadataArr', this.individualCustomMetadataArr)
+                }else{
+                    if (this.corporationCustomMetadataArr.length === 1) {
+                        this.corporationCustomMetadataArr[0].type = ''
+                        this.corporationCustomMetadataArr[0].title = ''
+                        this.corporationCustomMetadataArr[0].description = ''
+                    } else {
+                        this.corporationCustomMetadataArr.splice(index, 1);
+                    }
+                    this.$store.commit('setCorporationCustomMetadataArr', this.corporationCustomMetadataArr)
                 }
-                this.$store.commit('setCusMetadataArr',this.customMetadataArr)
+
             },
             changeRadio() {
-                if (this.metadataType === 'individual') {
-                    this.metadataArr = [{
-                        title: 'Name',
-                        type: 'name',
-                        description: 'your name',
-                        required: true,
-                    }, {
-                        title: 'E-Mail',
-                        type: 'email',
-                        description: 'your email',
-                        required: true,
-                    },]
-                    this.customMetadataArr = this.individualCustomMetadataArr;
-                } else if (this.metadataType === 'corporation') {
-                    this.metadataArr = [
-
-                        {
-                            title: 'Authorized Representative',
-                            type: 'authorized',
-                            description: 'name of Authorized Representative',
-                            required: true,
-                        },
-                        {
-                            title: 'Title',
-                            type: 'title',
-                            description: 'title of Authorized Representative',
-                            required: true,
-                        },
-                        {
-                            title: 'Corporation Name',
-                            type: 'corporationName',
-                            description: 'corporation name',
-                            required: true,
-                        },
-
-                        {
-                            title: 'E-Mail',
-                            type: 'email',
-                            description: 'corporation email',
-                            required: true,
-                        },];
-                    this.customMetadataArr = this.corporationCustomMetadataArr;
-
-                }
-                this.$store.commit('setMetadataType',this.metadataType);
-                this.$store.commit('setCusMetadataArr',this.customMetadataArr)
+                // if (this.metadataType === 'individual') {
+                //     this.metadataArr = [{
+                //         title: 'Name',
+                //         type: 'name',
+                //         description: 'your name',
+                //         required: true,
+                //     }, {
+                //         title: 'E-Mail',
+                //         type: 'email',
+                //         description: 'your email',
+                //         required: true,
+                //     },]
+                //     this.customMetadataArr = this.individualCustomMetadataArr;
+                // } else if (this.metadataType === 'corporation') {
+                //     this.metadataArr = [
+                //
+                //         {
+                //             title: 'Authorized Representative',
+                //             type: 'authorized',
+                //             description: 'name of Authorized Representative',
+                //             required: true,
+                //         },
+                //         {
+                //             title: 'Title',
+                //             type: 'title',
+                //             description: 'title of Authorized Representative',
+                //             required: true,
+                //         },
+                //         {
+                //             title: 'Corporation Name',
+                //             type: 'corporationName',
+                //             description: 'corporation name',
+                //             required: true,
+                //         },
+                //
+                //         {
+                //             title: 'E-Mail',
+                //             type: 'email',
+                //             description: 'corporation email',
+                //             required: true,
+                //         },];
+                //     this.customMetadataArr = this.corporationCustomMetadataArr;
+                //
+                // }
+                // this.$store.commit('setMetadataType', this.metadataType);
+                // this.$store.commit('setCusMetadataArr', this.customMetadataArr)
             },
             toAuthorizedEmail() {
                 this.emailDialogVisible = true
@@ -643,7 +751,7 @@
                     params: obj,
                 }).then(res => {
                     console.log(res);
-                    if (res.status === 200){
+                    if (res.status === 200) {
                         let orgOptions = [];
                         res.data.forEach((item, index) => {
                             orgOptions.push({value: index, label: item.login, id: item.id});
@@ -666,9 +774,9 @@
                         let name = arr[0].trim();
                         let value = arr[1].trim();
                         if (name === 'email') {
-                            email =value
+                            email = value
                         }
-                        this.$cookie.remove(name,{path:'/'});
+                        this.$cookie.remove(name, {path: '/'});
                     });
                     this.email = email;
                     if (email) {
@@ -676,30 +784,32 @@
                     }
                 }
             },
-            init(){
-              if (document.cookie) {
+            init() {
+                if (document.cookie) {
+                    this.individualCustomMetadataArr=this.$store.state.individualCustomMetadataArr;
+                    this.corporationCustomMetadataArr=this.$store.state.corporationCustomMetadataArr;
+                } else {
+                    this.$store.commit('setOrgOption', []);
+                    this.$store.commit('setOrgValue', '');
+                    this.$store.commit('setOrgChoose', '');
+                    this.$store.commit('setRepositoryOptions', []);
+                    this.$store.commit('setRepositoryChoose', '');
+                    this.$store.commit('setRepositoryValue', '');
+                    this.$store.commit('setIsEmail', '');
+                    this.$store.commit('setClaLink', '');
+                    this.$store.commit('setIndividualCustomMetadataArr', this.individualCustomMetadataArr);
+                    this.$store.commit('setCorporationCustomMetadataArr', this.corporationCustomMetadataArr);
+                    this.$store.commit('setMetadataType', 'individual');
+                    sessionStorage.removeItem('orgOptions');
+                    sessionStorage.removeItem('orgValue');
+                    sessionStorage.removeItem('orgChoose');
+                    sessionStorage.removeItem('repositoryOptions');
+                    sessionStorage.removeItem('repositoryChoose');
+                    sessionStorage.removeItem('repositoryValue');
+                    sessionStorage.removeItem('isEmail');
+                    sessionStorage.removeItem('cla_link');
 
-              }  else{
-                  this.$store.commit('setOrgOption',[]);
-                  this.$store.commit('setOrgValue','');
-                  this.$store.commit('setOrgChoose','');
-                  this.$store.commit('setRepositoryOptions',[]);
-                  this.$store.commit('setRepositoryChoose','');
-                  this.$store.commit('setRepositoryValue','');
-                  this.$store.commit('setIsEmail','');
-                  this.$store.commit('setClaLink','');
-                  this.$store.commit('setCusMetadataArr',this.individualCustomMetadataArr);
-                  this.$store.commit('setMetadataType','individual');
-                  sessionStorage.removeItem('orgOptions');
-                  sessionStorage.removeItem('orgValue');
-                  sessionStorage.removeItem('orgChoose');
-                  sessionStorage.removeItem('repositoryOptions');
-                  sessionStorage.removeItem('repositoryChoose');
-                  sessionStorage.removeItem('repositoryValue');
-                  sessionStorage.removeItem('isEmail');
-                  sessionStorage.removeItem('cla_link');
-                  sessionStorage.removeItem('customMetadataArr');
-              }
+                }
             },
         },
         created() {
@@ -714,7 +824,7 @@
                 }
             }
         },
-        updated(){
+        updated() {
             console.log('configCla_updated');
             this.setClientHeight();
         },
