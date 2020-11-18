@@ -94,7 +94,7 @@
 
         methods: {
             openOrCloseMenu(event) {
-                console.log('openOrCloseMenu'event);
+                console.log('openOrCloseMenu',event);
                 event.stopImmediatePropagation();
                 this.menuVisible = !this.menuVisible
             },
