@@ -10,7 +10,7 @@
                     <div v-if="showHeaderMenu" class="menuBox">
                         <div class="userImgBox" id="imgBox">
                             <svg-icon id="defaultImg" class="userImg"
-                                      icon-class="default-user" @click="openOrCloseMenu(event)"></svg-icon>
+                                      icon-class="default-user" @click.self="openOrCloseMenu(event)"></svg-icon>
                         </div>
                         <div v-if="menuVisible" id="menuOption">
                             <div v-if="loginRole==='org'" @click="handleCommand('a')">
@@ -93,9 +93,8 @@
         },
 
         methods: {
-            openOrCloseMenu(event) {
-                console.log('openOrCloseMenu',event);
-                event.stopImmediatePropagation();
+            openOrCloseMenu() {
+                console.log('openOrCloseMenu');
                 this.menuVisible = !this.menuVisible
             },
             handleCommand(command) {
