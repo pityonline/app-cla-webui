@@ -1,7 +1,7 @@
 <template>
     <div id="configCla" :style="configClaStyle">
         <div id="section">
-            <div style="padding: 2rem 0;font-size: 1.3rem">Configure CLA</div>
+            <div class="pageTitle">Configure CLA</div>
             <div class="itemBox">
                 <div style="font-size: 1.2rem;padding: .5rem">
                     ① Choose a organization or repository
@@ -112,11 +112,11 @@
                 <div style="padding: 0 2rem">
                     <el-row>
                         <el-col :span="5" class="typeCol">
-                            <el-radio v-model="metadataType"  label="individual">For Individual
+                            <el-radio v-model="metadataType" label="individual">For Individual
                             </el-radio>
                         </el-col>
                         <el-col :span="5" class="typeCol">
-                            <el-radio v-model="metadataType"  label="corporation">For Corporation
+                            <el-radio v-model="metadataType" label="corporation">For Corporation
                             </el-radio>
                         </el-col>
                     </el-row>
@@ -574,7 +574,7 @@
                         description: '',
                         required: false,
                     });
-                }else{
+                } else {
                     this.corporationCustomMetadataArr.splice(index + 1, 0, {
                         title: '',
                         type: '',
@@ -593,7 +593,7 @@
                     } else {
                         this.individualCustomMetadataArr.splice(index, 1);
                     }
-                }else{
+                } else {
                     if (this.corporationCustomMetadataArr.length === 1) {
                         this.corporationCustomMetadataArr[0].type = ''
                         this.corporationCustomMetadataArr[0].title = ''
@@ -740,8 +740,8 @@
             },
             init() {
                 if (document.cookie) {
-                    this.individualCustomMetadataArr=this.$store.state.individualCustomMetadataArr;
-                    this.corporationCustomMetadataArr=this.$store.state.corporationCustomMetadataArr;
+                    this.individualCustomMetadataArr = this.$store.state.individualCustomMetadataArr;
+                    this.corporationCustomMetadataArr = this.$store.state.corporationCustomMetadataArr;
                 } else {
                     this.$store.commit('setOrgOption', []);
                     this.$store.commit('setOrgValue', '');
@@ -816,6 +816,15 @@
             flex-grow: 1;
             text-align: left;
 
+            .pageTitle {
+                padding: 2rem 0;
+                font-size: 1.3rem;
+                -moz-user-select: none;
+                -webkit-user-select: none;
+                -ms-user-select: none;
+                -webkit-touch-callout: none;
+                user-select: none;
+            }
         }
     }
 
