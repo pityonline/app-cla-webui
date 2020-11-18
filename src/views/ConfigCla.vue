@@ -573,7 +573,6 @@
                         description: '',
                         required: false,
                     });
-                    this.$store.commit('setIndividualCustomMetadataArr', this.individualCustomMetadataArr)
                 }else{
                     this.corporationCustomMetadataArr.splice(index + 1, 0, {
                         title: '',
@@ -581,7 +580,6 @@
                         description: '',
                         required: false,
                     });
-                    this.$store.commit('setCorporationCustomMetadataArr', this.corporationCustomMetadataArr)
                 }
 
             },
@@ -594,7 +592,6 @@
                     } else {
                         this.individualCustomMetadataArr.splice(index, 1);
                     }
-                    this.$store.commit('setIndividualCustomMetadataArr', this.individualCustomMetadataArr)
                 }else{
                     if (this.corporationCustomMetadataArr.length === 1) {
                         this.corporationCustomMetadataArr[0].type = ''
@@ -603,7 +600,6 @@
                     } else {
                         this.corporationCustomMetadataArr.splice(index, 1);
                     }
-                    this.$store.commit('setCorporationCustomMetadataArr', this.corporationCustomMetadataArr)
                 }
 
             },
@@ -656,9 +652,12 @@
                 // this.$store.commit('setCusMetadataArr', this.customMetadataArr)
             },
             toAuthorizedEmail() {
-                this.emailDialogVisible = true
+                this.emailDialogVisible = true;
+                this.$store.commit('setIndividualCustomMetadataArr', this.individualCustomMetadataArr);
+                this.$store.commit('setCorporationCustomMetadataArr', this.corporationCustomMetadataArr);
             },
             authorizeEmail() {
+
                 let myUrl = ''
                 switch (this.emailType) {
                     case 'G-Mail':
