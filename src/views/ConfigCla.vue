@@ -507,10 +507,9 @@
             editMetadata() {
                 let fields = [];
                 let metadataArr = this.checkMetadata();
-                console.log('editMetadata',metadataArr);
                 if (metadataArr) {
                     metadataArr.forEach((item, index) => {
-                        if (metadataArr[i].title !== '' && metadataArr[i].type !== '') {
+                        if (metadataArr[index].title !== '' && metadataArr[index].type !== '') {
                             fields.push({
                                 id: index + '',
                                 title: item.title,
@@ -519,7 +518,7 @@
                                 required: item.required,
                             })
                         }
-                    })
+                    });
                     return fields
                 } else {
                     return false
