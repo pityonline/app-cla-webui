@@ -94,6 +94,7 @@
 
         methods: {
             openOrCloseMenu() {
+                console.log('openOrCloseMenu');
                 this.menuVisible = !this.menuVisible
             },
             handleCommand(command) {
