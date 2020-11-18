@@ -8,9 +8,9 @@
             <div>
                 <div>
                     <div v-if="showHeaderMenu" class="menuBox">
-                        <div class="userImgBox" id="imgBox">
+                        <div class="userImgBox" id="imgBox" @click.self="openOrCloseMenu(event)">
                             <svg-icon id="defaultImg" class="userImg"
-                                      icon-class="default-user" @click.self="openOrCloseMenu(event)"></svg-icon>
+                                      icon-class="default-user" ></svg-icon>
                         </div>
                         <div v-if="menuVisible" id="menuOption">
                             <div v-if="loginRole==='org'" @click="handleCommand('a')">
@@ -254,6 +254,10 @@
         z-index: 5;
 
         & .userImg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 4;
             height: 2.6rem;
             width: 2.6rem;
         }
