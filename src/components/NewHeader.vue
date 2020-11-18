@@ -263,7 +263,7 @@
         position: absolute;
         right: 0;
         top: 0;
-        z-index: 9;
+        z-index: 4;
         background-color: white;
         white-space: pre;
         width: 10rem;
