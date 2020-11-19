@@ -127,5 +127,9 @@ module.exports = {
        org_login: 'Organization Manager',
        corp_login: 'Corporation Manager',
     },
+    org:{
+        corp_signed_pdf:'The enterprise has completed the signed PDF',
+        resend_tip:'If the enterprise does not receive the email containing the PDF that needs the enterprise signature after signing, you can click here to resend',
+    },
 
 };
