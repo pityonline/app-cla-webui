@@ -8,9 +8,12 @@
             <div>
                 <div>
                     <div v-if="showHeaderMenu" class="menuBox">
-                        <div class="userImgBox" id="imgBox" @click.self.stop="openOrCloseMenu()">
+                        <div class="userImgBox" id="imgBox">
+                            <div id="svgCover" class="svgCover" @click="openOrCloseMenu()">
+
+                            </div>
                             <svg-icon id="defaultImg" class="userImg"
-                                      icon-class="default-user" ></svg-icon>
+                                      icon-class="default-user"></svg-icon>
                         </div>
                         <div v-if="menuVisible" id="menuOption">
                             <div v-if="loginRole==='org'" @click="handleCommand('a')">
@@ -218,7 +221,7 @@
                 if (e.target.id !== 'my_select' && e.target.id !== 'select_content' && e.target.id !== 'select_icon_box' && e.target.id !== 'select_icon') {
                     this.isActive = true;
                 }
-                if (e.target.id !== 'defaultImg' && e.target.id !== 'imgBox') {
+                if (e.target.id !== 'svgCover') {
                     console.log(e.target, e.target.id);
                     this.menuVisible = false
                 }
@@ -243,7 +246,7 @@
     }
 
     .userImgBox {
-        background-color: white;
+
         cursor: pointer;
         height: 2.6rem;
         width: 2.6rem;
@@ -254,11 +257,21 @@
         top: 0;
         z-index: 5;
 
+        .svgCover {
+            background-color: white;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 3;
+            height: 2.6rem;
+            width: 2.6rem;
+        }
+
         & .userImg {
             position: absolute;
             top: 0;
             left: 0;
-            z-index: 4;
+            z-index: 2;
             height: 2.6rem;
             width: 2.6rem;
         }
