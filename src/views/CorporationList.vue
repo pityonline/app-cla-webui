@@ -344,8 +344,6 @@
                 })
             },
             getCorporationInfo() {
-                console.log('getCorporationInfo');
-
                 http({
                     url: `${url.corporation_signing}/${this.item.org_id}`,
                     params: {
@@ -359,7 +357,7 @@
                     })
 
                 }).catch(err => {
-                    console.log(err);
+                    // console.log(err);
                 })
             },
             resendPDF(email){
