@@ -25,7 +25,7 @@
 
                         <el-table-column>
                             <template slot="header" slot-scope="scope">
-                                <el-tooltip effect="dark" :content="$t('corp.corp_signed_pdf')" placement="top">
+                                <el-tooltip effect="dark" :content="$t('org.corp_signed_pdf')" placement="top">
                                     <span>PDF</span>
                                 </el-tooltip>
                             </template>
@@ -57,7 +57,7 @@
                                            size="mini"
                                            @click="createRoot(scope.row.admin_email)">Create Administrator
                                 </el-button>
-                                <el-tooltip effect="dark" :content="$t('corp.resend_tip')" placement="top">
+                                <el-tooltip effect="dark" :content="$t('org.resend_tip')" placement="top">
                                     <el-button  type="primary"
                                                 size="mini"
                                                 @click="resendPDF(scope.row.admin_email)">Resend PDF
@@ -368,16 +368,22 @@
                 })
             },
             resendPDF(email){
+                let resend_url = '';
+                if (this.item.repo_id) {
+                    resend_url=`${url.resend_pdf}/${this.item.org_id}:${this.item.repo_id}/${email}`
+                }else{
+                    resend_url=`${url.resend_pdf}/${this.item.org_id}/${email}`
+                }
                 http({
-                    url: `${url.resend_pdf}/${this.item.id}/${email}`,
+                    url: resend_url,
                     method: 'post',
                 }).then(res => {
                     console.log(res);
                     this.$message.closeAll()
-                    this.$message.success('success')
-                    this.getCorporationInfo()
+                    this.$message.success('success');
                 }).catch(err => {
-                    console.log(err);
+                    this.$message.closeAll()
+                    this.$message.success('failed');
                 })
             },
             createRoot(email) {
