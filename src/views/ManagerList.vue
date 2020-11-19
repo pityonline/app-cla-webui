@@ -14,6 +14,7 @@
                     </el-row>
                     <el-row>
                         <el-table
+                                :empty-text="$t('corp.no_data')"
                                 class="tableClass"
                                 @selection-change="handleSelectionChange"
                                 ref="multipleTable"
