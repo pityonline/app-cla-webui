@@ -201,7 +201,7 @@
                                 <el-row class="stepBox">
                                     <el-col :span="10" class="textCol">
                                         <div class="leftText">
-                                            {{ $t('signType.corpStep6_1') }}<span  @click="toCorpLogin()">{{ $t('signType.claSignPlatform') }}</span>{{ $t('signType.corpStep6_2') }}
+                                            {{ $t('signType.corpStep6_1') }}<span  @click="toCorpLogin()">{{ $t('signType.admin_platform') }}</span>{{ $t('signType.corpStep6_2') }}
                                         </div>
                                     </el-col>
                                     <el-col :span="4">
