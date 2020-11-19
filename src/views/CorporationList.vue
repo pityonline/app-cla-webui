@@ -5,6 +5,7 @@
                          style="margin-top: 1rem">
                 <div class="tableStyle">
                     <el-table
+                            :empty-text="$t{'corp.no_data'}"
                             :data="tableData"
                             align="center"
                             style="width: 100%;">
@@ -64,6 +65,7 @@
             <el-tab-pane label="CLA" name="second" style="margin-top: 1rem">
                 <div class="tableStyle">
                     <el-table
+                            empty-text="No data"
                             :data="claData"
                             align="center"
                             style="width: 100%;">

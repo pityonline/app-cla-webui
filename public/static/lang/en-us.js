@@ -121,7 +121,7 @@ module.exports = {
         login_in:'Login in',
         inactive:'inactive',
         active:'active',
-
+        no_data:'No data',
     },
     index:{
        org_login: 'Organization Manager',
