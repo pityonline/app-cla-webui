@@ -18,7 +18,7 @@
     window.onresize = () => {
         console.log('home_onresize');
         if (until.getClientHeight() > document.getElementById('home').offsetHeight) {
-            document.getElementById("home").style.height = until.getClientHeight() + 'px'
+            document.getElementById("home").style.minHeight = until.getClientHeight() + 'px'
         }
     };
     export default {
