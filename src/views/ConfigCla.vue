@@ -291,13 +291,7 @@
     import * as url from '../until/api'
     import * as until from '../until/until'
     import http from '../until/http'
-
-    window.onresize = () => {
-        console.log('config_onresize');
-        if (until.getClientHeight() > document.getElementById('configCla').offsetHeight) {
-            document.getElementById("configCla").style.height = until.getClientHeight() + 'px'
-        }
-    };
+    
     export default {
         name: "ConfigCla",
         computed: {
