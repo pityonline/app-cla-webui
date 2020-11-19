@@ -128,4 +128,8 @@ module.exports = {
         org_login: '组织管理员',
         corp_login: '企业管理员',
     },
+    org:{
+        corp_signed_pdf:'企业已完成签名的PDF',
+        resend_tip:'如果企业签署之后未收到包含需要企业签名的PDF的邮件，你可以点击这里重新发送',
+    },
 }
