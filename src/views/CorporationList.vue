@@ -26,6 +26,11 @@
 
                         <el-table-column
                                 label="PDF">
+                            <template slot-scope="scope" slot="header">
+                                <el-tooltip effect="dark" content="The enterprise has completed the signed PDF" placement="top">
+                                    <span>PDF</span>
+                                </el-tooltip>
+                            </template>
 
                             <template slot-scope="scope">
                                 <el-popover
@@ -55,6 +60,10 @@
                                            size="mini"
                                            @click="createRoot(scope.row.admin_email)">Create Administrator
                                 </el-button>
+                                <el-button :disabled="scope.row.admin_added" type="primary"
+                                           size="mini"
+                                           @click="createRoot(scope.row.admin_email)">Create Administrator
+                                </el-button>
 
                             </template>
                         </el-table-column>
@@ -65,7 +74,7 @@
             <el-tab-pane label="CLA" name="second" style="margin-top: 1rem">
                 <div class="tableStyle">
                     <el-table
-                            empty-text="No data"
+                            :empty-text="$t{'corp.no_data'}"
                             :data="claData"
                             align="center"
                             style="width: 100%;">
