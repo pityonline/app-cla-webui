@@ -97,7 +97,6 @@
 
         methods: {
             openOrCloseMenu() {
-                console.log('openOrCloseMenu');
                 this.menuVisible = !this.menuVisible
             },
             handleCommand(command) {
@@ -222,7 +221,6 @@
                     this.isActive = true;
                 }
                 if (e.target.id !== 'svgCover') {
-                    console.log(e.target, e.target.id);
                     this.menuVisible = false
                 }
             })
@@ -265,6 +263,7 @@
             z-index: 3;
             height: 2.6rem;
             width: 2.6rem;
+            border-radius: 1.3rem;
         }
 
         & .userImg {
