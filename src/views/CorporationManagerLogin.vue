@@ -4,7 +4,7 @@
             <div class="formBack_Box">
                 <div class="formBack">
                     <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="0">
-                        <el-form-item :required="true"  prop="userName">
+                        <el-form-item :required="true" prop="userName">
                             <el-input v-model="ruleForm.userName" autocomplete="off" :placeholder="$t('corp.id')"
                                       @keydown.native="pressEnter"></el-input>
                         </el-form-item>
@@ -25,7 +25,7 @@
                 </div>
             </div>
 
-            <reTryDialog  :message="corpReLoginMsg" :dialogVisible="corpReTryDialogVisible"></reTryDialog>
+            <reTryDialog :message="corpReLoginMsg" :dialogVisible="corpReTryDialogVisible"></reTryDialog>
         </el-col>
 
     </el-row>
@@ -142,9 +142,8 @@
                             dialogMessage: this.$t('tips.id_pwd_err'),
                         })
                     }
-
-
                 }).catch(err => {
+                    console.log(err);
                     if (err.data.hasOwnProperty('data')) {
                         switch (err.data.data.error_code) {
                             case 'cla.invalid_token':
@@ -163,6 +162,12 @@
                                 this.$store.commit('errorSet', {
                                     dialogVisible: true,
                                     dialogMessage: this.$t('tips.unknown_token'),
+                                });
+                                break;
+                            case 'cla.no_db_record':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.id_pwd_err'),
                                 });
                                 break;
 
