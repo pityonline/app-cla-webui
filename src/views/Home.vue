@@ -70,11 +70,12 @@
         flex-direction: column;
         box-sizing: border-box;
         overflow: hidden;
-        background-color: #f9f9f9;
+
 
         & > div:nth-of-type(2) {
             flex-grow: 1;
             text-align: left;
+            background-color: #f9f9f9;
         }
 
         .el-dropdown-link {

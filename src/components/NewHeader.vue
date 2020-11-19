@@ -258,7 +258,7 @@
         z-index: 5;
 
         .svgCover {
-            background-color: white;
+            background-color: transparent;
             position: absolute;
             top: 0;
             left: 0;
