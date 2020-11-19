@@ -245,7 +245,6 @@
         },
 
         created() {
-            console.log('corp_created');
             this.item = JSON.parse(this.$route.query.item)
             if (this.item.apply_to === 'corporation') {
                 this.activeName = 'first';
