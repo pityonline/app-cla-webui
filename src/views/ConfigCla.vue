@@ -564,7 +564,6 @@
                 }
             },
             changeOrg(value) {
-                console.log(value);
                 this.$store.commit('setOrgValue', value)
                 if (value === '') {
                     this.org = '';
