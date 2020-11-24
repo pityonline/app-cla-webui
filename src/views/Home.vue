@@ -43,7 +43,6 @@
                 this.$nextTick(() => {
                     console.log(until.getClientHeight(), document.getElementById('home').offsetHeight);
                     if (until.getClientHeight() > document.getElementById('home').offsetHeight) {
-                        document.getElementById("home").style.height = until.getClientHeight() + 'px'
                         // this.home.height = until.getClientHeight() + 'px';
 
                     }
