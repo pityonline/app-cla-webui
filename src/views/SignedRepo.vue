@@ -1,6 +1,6 @@
 <template>
     <div id="signedRepo" :style="section">
-        <CorporationHeader></CorporationHeader>
+        <CorporationHeader @clickItem="clickItem" :user="user"></CorporationHeader>
         <el-row style="padding-top: 2rem">
             <el-col :offset="5" :span="14">
                 <router-view></router-view>
@@ -14,7 +14,7 @@
 <script>
     import * as url from '../until/api'
     import * as until from '../until/until'
-    import CorporationHeader from '@components/NewHeader'
+    import CorporationHeader from '@components/CorporationHeader'
     import Footer from '@components/NewFooter'
 
     window.onresize = () => {
