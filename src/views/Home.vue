@@ -44,6 +44,8 @@
                     console.log(until.getClientHeight(), document.getElementById('home').offsetHeight);
                     if (until.getClientHeight() > document.getElementById('home').offsetHeight) {
                         document.getElementById("home").style.minHeight = until.getClientHeight() + 'px'
+                        // this.home.height = until.getClientHeight() + 'px';
+
                     }
                 })
             },
