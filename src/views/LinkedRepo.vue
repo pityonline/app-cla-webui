@@ -288,6 +288,7 @@
             this.setDomain();
             new Promise((resolve,reject)=>{
                 this.getCookieData(resolve)
+                resolve('complete')
             }).then(res=>{
                    this.getLinkedRepoList();
                })
@@ -636,13 +637,10 @@
                         }else if(arr[0]==='access_token'){
                             access_token=arr[1];
                         }
-                        let date = new Date();
-                        date.setTime(date.getTime() - 10000);
-                        document.cookie = `${arr[0]}= ; expire=${date.toUTCString()}; Domain=${this.domain}; path=/`;
                     });
-                    let data = {access_token, refresh_token, platform_token,resolve};
+                    let data = {access_token, refresh_token, platform_token};
                     this.setTokenAct(data);
-
+                    resolve('complete')
                 }
             },
 
