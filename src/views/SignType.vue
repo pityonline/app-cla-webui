@@ -620,7 +620,12 @@
                     }
                 }
             },
-
+            setCookie() {
+                let date = new Date();
+                date.setTime(date.getTime() - 10000);
+                let domain = this.domain.split('//')[1].split(':')[0].trim();
+                document.cookie = `_mark=; expire=${date.toUTCString()}; Domain=${domain}; path=/`;
+            },
             clickSignTypeGuide(type) {
                 this.signType = type;
             },
@@ -637,6 +642,7 @@
         },
         created() {
             this.setDomain();
+            this.setCookie();
             this.getRepoInfo();
         },
         mounted() {
