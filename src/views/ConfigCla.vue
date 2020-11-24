@@ -320,15 +320,19 @@
             },
             orgValue() {
                 if (this.$store.state.orgValue === undefined || this.$store.state.orgValue === '' || this.$store.state.orgValue === 'undefined') {
+                    console.log(this.$store.state.orgValue, 'if');
                     return this.$store.state.orgValue
                 } else {
+                    console.log(this.$store.state.orgValue, 'else');
                     return Number(this.$store.state.orgValue)
                 }
             },
             repositoryValue() {
                 if (this.$store.state.repositoryValue === undefined || this.$store.state.repositoryValue === '' || this.$store.state.repositoryValue === 'undefined') {
+                    console.log(this.$store.state.repositoryValue, 'if');
                     return this.$store.state.repositoryValue
                 } else {
+                    console.log(this.$store.state.repositoryValue, 'else');
                     return Number(this.$store.state.repositoryValue)
                 }
             },
@@ -495,6 +499,7 @@
                         }
                     }
                 }
+                console.log('checkMetadata', newArr);
                 return newArr;
             },
             editMetadata() {
@@ -642,6 +647,7 @@
                 }
             },
             changeOrg(value) {
+                console.log(value);
                 this.$store.commit('setOrgValue', value)
                 if (value === '') {
                     this.org = '';
@@ -689,11 +695,14 @@
                 })
             },
             getOrgsInfo() {
+                console.log(this.individualCustomMetadataArr);
+                console.log(this.corporationCustomMetadataArr);
                 let obj = {access_token: this.$store.state.platform_token, admin: true, page: 1, per_page: 100};
                 this.$axios({
                     url: url.getOrgsInfo,
                     params: obj,
                 }).then(res => {
+                    console.log(res);
                     if (res.status === 200) {
                         let orgOptions = [];
                         res.data.forEach((item, index) => {
