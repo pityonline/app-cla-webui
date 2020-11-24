@@ -79,10 +79,12 @@
         },
         methods: {
             setAcount(name,index){
-                let reg = /^[a-zA-Z0-9_.]+$/;
+                console.log('setId');
+                let reg = /^[a-zA-Z0-9_.]+/;
                 let myName = name.trim()
                 if (reg.test(myName)&&this.data[index].id.trim()===''){
                     this.data[index].id=myName
+                    console.log(this.data[index].id);
                 }
             },
             pressEnter(){
