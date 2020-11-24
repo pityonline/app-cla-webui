@@ -35,7 +35,7 @@ module.exports = {
         claSignPlatform: " CLA signing platform ",
         checkBoxText3: "in Hong Kong.",
         sendCode:'send code',
-        reSendCode:'{second}s can resend',
+        reSendCode:'s can resend',
         sign:'SIGN',
     },
     tips:{

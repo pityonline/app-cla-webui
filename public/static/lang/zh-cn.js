@@ -34,7 +34,7 @@ module.exports = {
         claSignPlatform: "CLA签署平台",
         checkBoxText3: "处理我的数据",
         sendCode:'发送验证码',
-        reSendCode:'{second}秒重发',
+        reSendCode:'秒重发',
         sign:'签 署',
     },
     tips:{

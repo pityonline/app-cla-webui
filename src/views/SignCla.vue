@@ -130,9 +130,6 @@
             signReLoginDialogVisible() {
                 return this.$store.state.signReLoginDialogVisible
             },
-            sendBtText(){
-                return this.$t('signPage.sendCode')
-            },
         },
         components: {
             Header,
@@ -152,6 +149,7 @@
                 tipsDialogVisible: false,
                 signPageData: '',
                 cla_org_id: '',
+                sendBtText: this.$t('signPage.sendCode'),
                 claOrgIdArr: [],
                 fields: [],
                 claIdArr: [],
@@ -250,7 +248,7 @@
                         let codeInterval = setInterval(() => {
                             if (second !== 0) {
                                 second--;
-                                this.sendBtText = this.$t('signPage.reSendCode',{second:second})
+                                this.sendBtText = second + this.$t('signPage.reSendCode')
                             } else {
                                 this.sendBtText = this.$t('signPage.sendCode');
                                 clearInterval(codeInterval)
