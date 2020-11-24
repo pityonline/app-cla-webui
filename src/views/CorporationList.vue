@@ -51,7 +51,7 @@
                         </el-table-column>
 
                         <el-table-column
-                                min-width="200"
+                                min-width="300"
                                 label="Operation">
                             <template slot-scope="scope">
                                 <el-button :disabled="scope.row.admin_added" type="primary"
