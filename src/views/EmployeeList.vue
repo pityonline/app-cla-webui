@@ -368,7 +368,8 @@
     @import "../assets/font/css/Roboto-Regular.css";
 
     #employeeList {
-        padding: 2rem 0;
+        padding-top: 2rem;
+
         & .el-dialog {
             border-radius: 1rem;
         }
@@ -401,6 +402,10 @@
             padding: 3rem;
             background-color: white;
             border-radius: 1.5rem;
+        }
+
+        & .el-dialog__body {
+
         }
 
         & .cancelBt {
