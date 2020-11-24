@@ -135,12 +135,10 @@
             sendBtTextFromLang: {
                 get: function () {
                     if (this.$t('signPage.sendCode') === this.sendBtText) {
-                        this.sendBtText=this.$t('signPage.sendCode')
-                        return this.sendBtText;
+                        return this.$t('signPage.sendCode')
 
                     } else if (this.$t('signPage.reSendCode') === this.sendBtText) {
-                        this.sendBtText=this.$t('signPage.reSendCode')
-                        return this.sendBtText;
+                        return this.$t('signPage.reSendCode')
                     }
                 },
                 set: function (value) {
