@@ -5,7 +5,7 @@
         <el-row id="section">
             <el-row v-if="!isSendCode" class="content">
                 <el-col :offset="5" :span="14">
-                    <p class="contentTitle"><span>{{apply_to}}</span>{{ $t('signPage.claTitle') }}</p>
+                    <p class="contentTitle"><span>{{apply_to}} </span>Contributor License Agreement</p>
                     <el-row class="marginTop3rem" id="claBox">
                     </el-row>
                     <el-row class="marginTop3rem form">
@@ -38,16 +38,17 @@
                                         </el-button>
                                     </el-input>
                                 </el-form-item>
-                                <div class="borderClass fontSize12"><span style="color: #F56C6C;">*</span>{{$t('signPage.requireText')}}
+                                <div class="borderClass fontSize12"><span style="color: #F56C6C;">*</span>{{desc.metadataDesc}}
                                 </div>
                                 <div class="marginTop1rem fontSize12">
-                                    <el-checkbox v-model="isRead"><span>{{$t('signPage.checkBoxText1')}}<span
-                                            class="privacy" @click="">{{$t('signPage.privacy')}}</span>{{$t('signPage.checkBoxText2')}}<span class="privacy" @click="toIndex()">{{$t('signPage.claSignPlatform')}}</span>{{$t('signPage.checkBoxText3')}}</span>
+                                    <el-checkbox v-model="isRead"><span>I have read the <span
+                                            class="privacy" @click="">Privacy Policy</span> and hereby consent to
+                                        the processing of my data by <span class="privacy" @click="toIndex()">CLA signing platform</span> in {{serverAddress}}.</span>
                                     </el-checkbox>
                                 </div>
                                 <el-form-item label-width="0" class="marginTop1rem signBtBox">
                                     <button class="button" type="button" @click="submitForm('ruleForm')">
-                                        {{$t('signPage.sign')}}
+                                        {{desc.sign}}
                                     </button>
                                 </el-form-item>
                             </el-form>
@@ -101,11 +102,11 @@
             },
             apply_to() {
                 if (this.$store.state.loginType === 'individual') {
-                    return this.$t('signPage.individual')
+                    return 'Individual'
                 } else if (this.$store.state.loginType === 'corporation') {
-                    return this.$t('signPage.corp')
+                    return 'Corporation'
                 } else if (this.$store.state.loginType === 'employee') {
-                    return this.$t('signPage.emp')
+                    return 'Employee'
                 }
             },
             org() {
@@ -157,7 +158,7 @@
                 tipsDialogVisible: false,
                 signPageData: '',
                 cla_org_id: '',
-                sendBtText: this.$t('signPage.sendCode'),
+                sendBtText: 'send code',
                 claOrgIdArr: [],
                 fields: [],
                 claIdArr: [],
@@ -271,9 +272,9 @@
                         let codeInterval = setInterval(() => {
                             if (second !== 0) {
                                 second--;
-                                this.sendBtText = second + this.$t('signPage.reSendCode')
+                                this.sendBtText = second + 's ' + 'can resend'
                             } else {
-                                this.sendBtText = this.$t('signPage.sendCode');
+                                this.sendBtText = 'send code';
                                 clearInterval(codeInterval)
                             }
                         }, 1000)
@@ -381,6 +382,7 @@
                 }
             },
             getSignPage(resolve) {
+                this.changeDesc('english');
                 let applyTo = '';
                 if (this.$store.state.loginType === 'individual' || this.$store.state.loginType === 'employee') {
                     applyTo = 'individual';
@@ -409,7 +411,18 @@
                 }
 
             },
-
+            changeLanguage(value) {
+                this.changeDesc(this.languageOptions[value].label);
+                this.setClaText(value)
+                this.cla_org_id = value
+            },
+            changeDesc(language) {
+                if (language === 'english') {
+                    this.desc = this.enDesc;
+                } else if (language === 'chinese') {
+                    this.desc = this.cnDesc;
+                }
+            },
             getUserInfo(platform_token) {
                 let obj = {access_token: platform_token};
                 this.$axios({

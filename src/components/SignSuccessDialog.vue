@@ -9,7 +9,7 @@
                 width="30%">
             <div class="titleBox">
                 <svg-icon icon-class="chenggong" class="dialogIcon"></svg-icon>
-                <span>{{$t('tips.successTitle')}}</span>
+                <span>Successfully</span>
             </div>
             <el-row>
                 <el-col align="center">

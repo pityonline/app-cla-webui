@@ -39,11 +39,12 @@ const routes = [
     },
     {
         path: '/home',
+        name: 'Home',
         component: () => import('../views/Home.vue'),
         children: [
             {
                 path: '/',
-                redirect:'/linkedRepo'
+                component: () => import('../views/LinkedRepo.vue')
             },
             {
                 path: '/linkedRepo',
@@ -64,6 +65,7 @@ const routes = [
     },
     {
         path: '/signedRepo',
+        name: 'SignedRepo',
         component: () => import('../views/SignedRepo.vue'),
         children: [
             {
@@ -76,13 +78,14 @@ const routes = [
                 component: () => import('../views/EmployeeList.vue'),
             },
             {
-                path: '/resetPassword',
-                name: 'ResetPassword',
+                path: '/signedRepo/resetPassword',
+                name: 'signedRepoResetPassword',
                 component: () => import('../views/ResetPassword.vue'),
             },]
     },
     {
         path: '/rootManager',
+        name: 'RootManager',
         component: () => import('../views/RootManager.vue'),
         children: [
             {
@@ -100,8 +103,8 @@ const routes = [
                 component: () => import('../views/CreateManager.vue'),
             },
             {
-                path: '/resetPassword',
-                name: 'resetPassword',
+                path: '/rootManager/resetPassword',
+                name: 'rootManagerResetPassword',
                 component: () => import('../views/ResetPassword.vue'),
             },]
     },
