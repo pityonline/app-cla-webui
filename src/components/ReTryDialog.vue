@@ -28,7 +28,6 @@
         props: ['dialogVisible', 'message'],
         computed:{
             dialogMessage(){
-                console.log(this.message);
                 return this.message;
             },
         },
