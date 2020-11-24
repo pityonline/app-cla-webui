@@ -22,23 +22,24 @@
                                 align="center">
                             <template slot-scope="scope">
                                 <el-row class="mySwitch">
-                                    <el-col>
-                                        <el-switch
-                                                @change="changeActive(scope.row.cla_org_id,scope.row.email,scope.row.enabled)"
-                                                v-model="scope.row.enabled"
-                                                class="mySwitch"
-                                                :disabled="scope.row.enabled"
-                                                width="3rem"
-                                                active-color="#409EFF"
-                                                :active-text="$t('corp.active')"
-                                                :inactive-text="$t('corp.inactive')"
-                                                inactive-color="#EBEEF5">
-                                        </el-switch>
-                                        <button class="deleteBt"
-                                                @click="deleteEmployee(scope.row.cla_org_id,scope.row.email,scope.row.enabled)">
-                                            {{$t('corp.delete')}}
-                                        </button>
-                                    </el-col>
+                                    <el-switch
+                                            @change="changeActive(scope.row.cla_org_id,scope.row.email,scope.row.enabled)"
+                                            v-model="scope.row.enabled"
+                                            class="mySwitch"
+                                            :disabled="scope.row.enabled"
+                                            width="3rem"
+                                            active-color="#409EFF"
+                                            :active-text="$t('corp.active')"
+                                            :inactive-text="$t('corp.inactive')"
+                                            inactive-color="#EBEEF5">
+                                    </el-switch>
+
+
+                                    <button class="deleteBt"
+                                            @click="deleteEmployee(scope.row.cla_org_id,scope.row.email,scope.row.enabled)">
+                                        {{$t('corp.delete')}}
+                                    </button>
+
                                 </el-row>
 
                             </template>
@@ -119,7 +120,7 @@
 
         </el-dialog>
         <corpReLoginDialog :message="corpReLoginMsg" :dialogVisible="corpReLoginDialogVisible"></corpReLoginDialog>
-        <reTryDialog :message="corpReLoginMsg" :dialogVisible="corpReTryDialogVisible"></reTryDialog>
+        <reTryDialog  :message="corpReLoginMsg" :dialogVisible="corpReTryDialogVisible"></reTryDialog>
     </div>
 </template>
 <script>
@@ -174,7 +175,7 @@
                 data = this.inactiveData.slice((this.inactiveCurrentPage - 1) * this.pageSize, this.inactiveCurrentPage * this.pageSize)
                 if (data.length === 0 && this.inactiveCurrentPage > 1) {
                     this.inactiveCurrentPage--
-                    return this.getInactivePageData()
+                   return this.getInactivePageData()
                 } else {
                     return data
                 }
@@ -184,18 +185,18 @@
                 data = this.activeData.slice((this.activeCurrentPage - 1) * this.pageSize, this.activeCurrentPage * this.pageSize)
                 if (data.length === 0 && this.activeCurrentPage > 1) {
                     this.activeCurrentPage--
-                    return this.getActivePageData()
+                   return this.getActivePageData()
                 } else {
                     return data
                 }
             },
             changeActivePage(page) {
                 this.activeCurrentPage = page;
-                this.activePageData = this.getActivePageData()
+                this.activePageData=this.getActivePageData()
             },
             changeInActivePage(page) {
                 this.inactiveCurrentPage = page;
-                this.inactivePageData = this.getInactivePageData()
+                this.inactivePageData=this.getInactivePageData()
             },
             submitDelete() {
                 let obj = {enabled: this.deleteData.enabled}
@@ -321,7 +322,7 @@
                             case 'cla.invalid_token':
                                 this.$store.commit('errorSet', {
                                     dialogVisible: true,
-                                    dialogMessage: this.$t('tips.invalid_token')
+                                    dialogMessage:this.$t('tips.invalid_token')
                                 });
                                 break;
                             case 'cla.missing_token':
@@ -364,7 +365,6 @@
 
     #employeeList {
         padding-top: 2rem;
-
         & .el-dialog {
             border-radius: 1rem;
         }
@@ -569,8 +569,7 @@
         .el-pagination button:disabled:hover {
             color: #c0c4cc;
         }
-
-        .el-pagination button:disabled {
+        .el-pagination button:disabled{
             cursor: auto;
         }
     }
