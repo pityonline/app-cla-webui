@@ -218,7 +218,6 @@
                     this.isActive = true;
                 }
                 if (e.target.id !== 'defaultImg'&&e.target.id !== 'imgBox') {
-                    console.log(e.target.id);
                     this.menuVisible = false
                 }
             })
@@ -249,7 +248,7 @@
         position: absolute;
         right: 0;
         top: 0;
-        z-index: 5;
+        z-index: 10;
 
         & .userImg {
             height: 2.6rem;
