@@ -138,7 +138,7 @@
                         this.sendBtText=this.$t('signPage.sendCode')
                         return this.sendBtText;
 
-                    } else if (this.$t('signPage.reSendCode'),{second:this.second}) {
+                    } else if (this.$t('signPage.reSendCode')) {
                         this.sendBtText=this.$t('signPage.reSendCode',{second:this.second})
                         return this.sendBtText;
                     }
