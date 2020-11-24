@@ -7,22 +7,13 @@
                 <el-col align="right" class="buttonBox">
                     <div id="btBox">
                         <div>
-                            <el-tooltip :content="$t('index.org_bt_tip')" placement="top" effect="light" popper-class="my_tooltip">
-                                <button class="button" @click="submit('orgManager')">
-                                    {{$t('index.org_login')}}
-                                </button>
-                            </el-tooltip>
-
+                            <button class="button" @click="submit('orgManager')">
+                                {{$t('index.org_login')}}
+                            </button>
                         </div>
-                        <div>
-                            <el-tooltip :content="$t('index.corp_bt_tip')" placement="top" effect="light" popper-class="my_tooltip">
-                                <button class="button" @click="submit('corporationManager')">
-                                    {{$t('index.corp_login')}}
-                                </button>
-                            </el-tooltip>
-                        </div>
-
-
+                        <button class="button" @click="submit('corporationManager')">
+                            {{$t('index.corp_login')}}
+                        </button>
                     </div>
                 </el-col>
             </el-row>
@@ -62,15 +53,10 @@
         }
     }
 </script>
-<style  lang="less">
+<style scoped lang="less">
     @import "../assets/font/css/Roboto-Bold.css";
     @import "../assets/font/css/Roboto-Regular.css";
-    .my_tooltip{
-        font-size: 1rem;
-        width: 30rem;
-        line-height: 2rem;
-        border-radius: 1rem;
-    }
+
     .loginTypeSelect {
         font-family: Roboto-Bold, sans-serif;
 
@@ -79,7 +65,6 @@
             flex-direction: column;
             justify-content: space-between;
         }
-
     }
 
     .buttonBox {
@@ -92,7 +77,7 @@
         border-radius: 4px 0 0 4px;
     }
     .button {
-        width: 22rem;
+        width: 17rem;
         height: 4rem;
         border-radius: 2rem;
         border: none;

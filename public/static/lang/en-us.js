@@ -131,10 +131,8 @@ module.exports = {
         manager_email_same_with_admin:'Administrator cannot be added as employee manager',
     },
     index:{
-       org_login: 'Opensource Community Manager',
+       org_login: 'Organization Manager',
        corp_login: 'Corporation Manager',
-        org_bt_tip:'If you are an opensource community manager, please click this button to log in and manage the signing information',
-        corp_bt_tip:'If you are an corporation administrator or manager, please click this button to log in and manage the signing information',
     },
     org:{
         corp_signed_pdf:'The enterprise has completed the signed PDF',
