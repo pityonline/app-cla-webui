@@ -33,16 +33,16 @@
                                             <div>
 
                                                 <button class="button" @click="submit('corporation')">
-                                                    Sign As {{ $t('signType:corp') }}
+                                                    Sign As Corporation
                                                 </button>
                                             </div>
                                             <div>
                                                 <button class="button" @click="submit('employee')">
-                                                    Sign As {{ $t('signType:emp') }}
+                                                    Sign As Employee
                                                 </button>
                                             </div>
                                             <button class="button" @click="submit('individual')">
-                                                Sign As {{ $t('signType:individual') }}
+                                                Sign As Individual
                                             </button>
                                         </div>
                                     </el-col>
@@ -55,14 +55,14 @@
                 <el-row>
                     <el-col>
                         <el-row class="guideTitle">
-                            {{ $t('signType:guideTitle') }}
+                            Signing CLA Guide for
                         </el-row>
                         <el-row>
                             <el-col :span="8" class="SignTypeCol" :class="{'typeShadow':signType==='corporation'}"
                                     @click.native="clickSignTypeGuide('corporation')">
                                 <div class="SignTypeBox">
                                     <svg-icon icon-class="Enterprise" class="SignTypeIcon"></svg-icon>
-                                    <p>{{ $t('signType:corp') }}</p>
+                                    <p>Corporation</p>
                                 </div>
                                 <div v-if="signType==='corporation'" class="coverBox">
                                 </div>
@@ -71,7 +71,7 @@
                                     @click.native="clickSignTypeGuide('employee')">
                                 <div class="SignTypeBox">
                                     <svg-icon icon-class="Employee" class="SignTypeIcon"></svg-icon>
-                                    <p>{{ $t('signType:emp') }}</p>
+                                    <p>Employee</p>
                                 </div>
                                 <div v-if="signType==='employee'" class="coverBox">
                                 </div>
@@ -80,7 +80,7 @@
                                     @click.native="clickSignTypeGuide('individual')">
                                 <div class="SignTypeBox">
                                     <svg-icon icon-class="Individual" class="SignTypeIcon"></svg-icon>
-                                    <p>{{ $t('signType:individual') }}</p>
+                                    <p>Individual</p>
                                 </div>
                                 <div v-if="signType==='individual'" class="coverBox">
                                 </div>
