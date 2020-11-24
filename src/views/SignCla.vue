@@ -258,9 +258,9 @@
                         let codeInterval = setInterval(() => {
                             if (second !== 0) {
                                 second--;
-                                this.sendBtTextFromLang = this.$t('signPage.reSendCode', {second: second})
+                                this.sendBtText = this.$t('signPage.reSendCode', {second: second})
                             } else {
-                                this.sendBtTextFromLang = this.$t('signPage.sendCode');
+                                this.sendBtText = this.$t('signPage.sendCode');
                                 clearInterval(codeInterval)
                             }
                         }, 1000)
