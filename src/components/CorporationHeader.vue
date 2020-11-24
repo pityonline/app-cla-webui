@@ -97,7 +97,8 @@
 
             }
         },
-
+        created() {
+        },
         mounted() {
             document.addEventListener('click', (e) => {
                 if (e.target.id !== 'menuOption' && e.target.id !== 'defaultImg' && e.target.id !== 'imgBox') {
@@ -124,7 +125,10 @@
             loginOut() {
                 this.$router.push('/')
             },
-
+            newWindow() {
+                // window.open('https://github.com/ouchengle/Test','_black')
+                // window.open('https://github.com/ouchengle')
+            },
         },
     }
 </script>

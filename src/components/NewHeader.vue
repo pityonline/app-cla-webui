@@ -7,7 +7,7 @@
 
             <div>
                 <div>
-                    <div  v-if="showHeaderMenu" class="menuBox">
+                    <div class="menuBox">
                         <div class="userImgBox" id="imgBox">
                             <svg-icon id="defaultImg" class="userImg" @click.native="openOrCloseMenu()"
                                       icon-class="default-user"></svg-icon>
@@ -78,8 +78,6 @@
         name: "NewHeader",
         data() {
             return {
-                loginRole:'',
-                showHeaderMenu:true,
                 menuVisible: false,
                 isActive: true,
                 language: 'English',
@@ -165,18 +163,7 @@
                 this.isActive = !this.isActive;
             },
             init() {
-                if ( sessionStorage.getItem('showHeaderMenu')==='false'){
-                   this.showHeaderMenu=false
-                }else if (sessionStorage.getItem('showHeaderMenu') === 'corp') {
-                    this.showHeaderMenu=true;
-                    this.loginRole = 'corp';
-                }else{
-                    this.showHeaderMenu=true;
-                    this.loginRole = 'org';
-                }
-                if(parseInt(localStorage.getItem('lang'))){
-                    this.value =parseInt(localStorage.getItem('lang'))
-                }
+                this.value = parseInt(localStorage.getItem('lang'))
                 switch (this.value) {
                     case 0:
                         this.language = 'English';
