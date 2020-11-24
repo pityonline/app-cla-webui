@@ -4,20 +4,20 @@
             <div class="formBack_Box">
                 <div class="formBack">
                     <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="0">
-                        <el-form-item :required="true"  prop="userName">
-                            <el-input v-model="ruleForm.userName" autocomplete="off" :placeholder="$t('corp.id')"
+                        <el-form-item :required="true" label="" prop="userName">
+                            <el-input v-model="ruleForm.userName" autocomplete="off" placeholder="Email"
                                       @keydown.native="pressEnter"></el-input>
                         </el-form-item>
                         <el-form-item :required="true" label="" prop="pwd">
                             <el-input type="password" v-model="ruleForm.pwd" autocomplete="off"
-                                      :placeholder="$t('corp.pwd')" @keydown.native="pressEnter"></el-input>
+                                      placeholder="Password" @keydown.native="pressEnter"></el-input>
                         </el-form-item>
                         <el-form-item style="text-align: right">
-                            <span class="pointer" @click="findPwd" id="forgetPwd">{{$t('corp.forget_pwd')}}</span>
+                            <span class="pointer" @click="findPwd" id="forgetPwd">Forget the password?</span>
                         </el-form-item>
                         <el-form-item style="text-align: center">
                             <button class="button" type="button" @click="submitForm('ruleForm')">
-                                {{$t('corp.login_in')}}
+                                Login in
                             </button>
                         </el-form-item>
                     </el-form>
@@ -25,7 +25,8 @@
                 </div>
             </div>
 
-            <reTryDialog  :message="corpReLoginMsg" :dialogVisible="corpReTryDialogVisible"></reTryDialog>
+            <reTryDialog :title="corpReLoginDialogTitle" :message="corpReLoginMsg"
+                         :dialogVisible="corpReTryDialogVisible"></reTryDialog>
         </el-col>
 
     </el-row>
@@ -48,6 +49,9 @@
             corpReLoginMsg() {
                 return this.$store.state.dialogMessage
             },
+            corpReLoginDialogTitle() {
+                return `cla sign prompt you`
+            },
             corpReTryDialogVisible() {
                 return this.$store.state.reTryDialogVisible
             },
@@ -55,7 +59,7 @@
         data() {
             var validateAccount = (rule, value, callback) => {
                 if (value === '') {
-                    callback(new Error(this.$t('tips.not_fill_email')));
+                    callback(new Error('Please enter the Email.'));
                 } else {
                     callback()
                 }
@@ -63,7 +67,7 @@
             };
             var validatePass = (rule, value, callback) => {
                 if (value === '') {
-                    callback(new Error(this.$t('tips.fill_pwd')));
+                    callback(new Error('please enter the password.'));
                 } else {
                     callback()
                 }
@@ -139,7 +143,7 @@
                     } else {
                         this.$store.commit('errorCodeSet', {
                             dialogVisible: true,
-                            dialogMessage: this.$t('tips.id_pwd_err'),
+                            dialogMessage: 'Username or password is wrong, please try again.',
                         })
                     }
 
@@ -150,33 +154,51 @@
                             case 'cla.invalid_token':
                                 this.$store.commit('errorSet', {
                                     dialogVisible: true,
-                                    dialogMessage: this.$t('tips.invalid_token'),
+                                    dialogMessage: 'token expired, please login again',
                                 });
                                 break;
                             case 'cla.missing_token':
                                 this.$store.commit('errorSet', {
                                     dialogVisible: true,
-                                    dialogMessage: this.$t('tips.missing_token'),
+                                    dialogMessage: 'Token does not exist, please login again',
                                 });
                                 break;
                             case 'cla.unknown_token':
                                 this.$store.commit('errorSet', {
                                     dialogVisible: true,
-                                    dialogMessage: this.$t('tips.unknown_token'),
+                                    dialogMessage: 'token unknown, please login again',
                                 });
                                 break;
 
+                            case 'cla.num_of_corp_managers_exceeded':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: 'The added administrator exceeds the limit',
+                                });
+                                break;
+                            case 'cla.corp_manager_exists':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: 'The added administrator already exists',
+                                });
+                                break;
+                            case 'cla.not_same_corp':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: 'The mailbox does not belong to the company mailbox',
+                                });
+                                break;
                             case 'cla.system_error':
                                 this.$store.commit('errorCodeSet', {
                                     dialogVisible: true,
-                                    dialogMessage: this.$t('tips.system_error'),
+                                    dialogMessage: 'System error, please try again',
                                 });
                                 break;
                         }
                     } else {
                         this.$store.commit('errorCodeSet', {
                             dialogVisible: true,
-                            dialogMessage: this.$t('tips.system_error'),
+                            dialogMessage: 'System error, please try again',
                         })
                     }
                 })
