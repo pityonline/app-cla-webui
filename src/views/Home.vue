@@ -8,6 +8,7 @@
     </div>
 </template>
 <script>
+    import * as url from '../until/api'
     import * as until from '../until/until'
     import Header from '@components/NewHeader'
     import Footer from '@components/NewFooter'
@@ -38,9 +39,27 @@
         },
         methods: {
             ...mapActions(['setLoginUserAct', 'setTokenAct']),
+            clickItem(command) {
+                switch (command) {
+                    case 'a':
+                        if (this.$route.path !== '/home') {
+                            this.$router.push('/home');
+                        }
+                        break;
+
+                    case 'b':
+                        this.loginOut()
+                        break;
+                }
+            },
+            loginOut() {
+                sessionStorage.clear();
+                this.$router.push('/')
+            },
+
+
             setClientHeight() {
                 this.$nextTick(() => {
-                    console.log(until.getClientHeight(), document.getElementById('home').offsetHeight);
                     until.getClientHeight() > document.getElementById('home').offsetHeight ?
                         this.home.height = until.getClientHeight() + 'px' :
                         this.home.height = document.getElementById('home').offsetHeight
