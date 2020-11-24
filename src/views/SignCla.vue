@@ -132,11 +132,11 @@
                 return this.$store.state.signReLoginDialogVisible
             },
             sendBtTextFromLang: {
-                get:function() {
+                get:()=> {
                     this.sendBtText=this.$t('signPage.sendCode')
                     return this.sendBtText
                 },
-                set:function(value){
+                set:(value)=>{
                     this.sendBtText=value
                 }
             },
