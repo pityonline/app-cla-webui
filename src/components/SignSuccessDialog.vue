@@ -26,7 +26,7 @@
 
     export default {
         name: "SignSuccessDialog",
-        props: ['dialogVisible', 'message'],
+        props: ['dialogVisible', 'message', 'title'],
         data() {
             return {
                 domain: this.$store.state.domain,

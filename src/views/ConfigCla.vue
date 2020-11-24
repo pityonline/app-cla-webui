@@ -393,6 +393,7 @@
             }
         },
         methods: {
+            ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
             checkMetadata() {
                 let newArr = this.customMetadataArr.concat(this.metadataArr);
                 for (let i = 0; i < newArr.length; i++) {
@@ -473,7 +474,7 @@
                     })
                 } else {
                     this.$message.closeAll();
-                    this.$message.error(this.$t('tips.title_type_repeat'))
+                    this.$message.error('Same titles or types are filled.')
                 }
 
             },

@@ -24,7 +24,7 @@
 <script>
     export default {
         name: "ReLoginDialog",
-        props: ['dialogVisible', 'message'],
+        props: ['dialogVisible', 'message', 'title'],
         data() {
             return {
             }

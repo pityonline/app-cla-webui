@@ -59,10 +59,14 @@
         </el-row>
 
         <Footer></Footer>
-        <ReLoginDialog :dialogVisible="reLoginDialogVisible" :message="reLoginMsg"></ReLoginDialog>
-        <ReTryDialog :dialogVisible="reTryDialogVisible" :message="reLoginMsg"></ReTryDialog>
-        <SignSuccessDialog :dialogVisible="signSuccessDialogVisible" :message="reLoginMsg"></SignSuccessDialog>
-        <SignReLoginDialog :dialogVisible="signReLoginDialogVisible" :message="reLoginMsg"></SignReLoginDialog>
+        <ReLoginDialog :dialogVisible="reLoginDialogVisible" :message="reLoginMsg"
+                       :title="reLoginDialogTitle"></ReLoginDialog>
+        <ReTryDialog :dialogVisible="reTryDialogVisible" :message="reLoginMsg"
+                     :title="reLoginDialogTitle"></ReTryDialog>
+        <SignSuccessDialog :dialogVisible="signSuccessDialogVisible" :message="reLoginMsg"
+                           :title="reLoginDialogTitle"></SignSuccessDialog>
+        <SignReLoginDialog :dialogVisible="signReLoginDialogVisible" :message="reLoginMsg"
+                           :title="reLoginDialogTitle"></SignReLoginDialog>
     </el-row>
 </template>
 
@@ -120,7 +124,10 @@
             reLoginMsg() {
                 return this.$store.state.dialogMessage
             },
-
+            reLoginDialogTitle() {
+                return this.$store.state.repoInfo.repo_id ? `"${this.$store.state.repoInfo.org_id}/${this.$store.state.repoInfo.repo_id}" prompt you` :
+                    `"${this.$store.state.repoInfo.org_id}" prompt you`
+            },
             reTryDialogVisible() {
                 return this.$store.state.reTryDialogVisible
             },
@@ -143,9 +150,10 @@
         data() {
             return {
                 signRouter: '/sign',
+                serverAddress: 'Hong Kong',
                 domain: this.$store.state.domain,
                 tipsTitle: '',
-                tipsMessage:this.$t('tips.individual_sign'),
+                tipsMessage: 'Thanks for your sign.',
                 tipsDialogVisible: false,
                 signPageData: '',
                 cla_org_id: '',
@@ -153,6 +161,21 @@
                 claOrgIdArr: [],
                 fields: [],
                 claIdArr: [],
+                desc: '',
+                enDesc: {
+                    personalContributor: 'Individual Contributor',
+                    comContributor: 'Legal Entity Contributor',
+                    metadataDesc: ' require field. ',
+                    sign: 'SIGN',
+                    reset: 'RESET',
+                },
+                cnDesc: {
+                    personalContributor: '个人贡献者',
+                    comContributor: '企业贡献者',
+                    metadataDesc: '为必填项',
+                    sign: '签署',
+                    reset: '重置',
+                },
                 isVerify: false,
                 isSendCode: false,
                 verifyCode: '',
@@ -203,15 +226,15 @@
                     if (reg.test(value)) {
                         callback();
                     } else {
-                        callback(new Error(this.$t('tips.invalid_telephone_num')))
+                        callback(new Error('An invalid telephone number.'))
                     }
                 } else {
-                    callback(new Error(this.$t('tips.not_fill_telephone_num')))
+                    callback(new Error('Please enter the telephone number of corporation'))
                 }
             },
             async verifyAddr(rule, value, callback) {
                 if (!value) {
-                    callback(new Error(this.$t('tips.not_fill_address')))
+                    callback(new Error('Please enter the address of corporation'))
                 } else {
                     callback();
                 }
@@ -222,7 +245,7 @@
                 if (reg.test(email)) {
                     callback();
                 } else {
-                    callback(new Error(this.$t('tips.invalid_email')))
+                    callback(new Error('An invalid E-mail address.'))
                 }
             },
             setMyForm(type, value) {
@@ -243,7 +266,7 @@
                         method: 'post',
                     }).then(res => {
                         this.$message.closeAll();
-                        this.$message.success({message:this.$t('tips.sending_email'),duration:8000});
+                        this.$message.success({message:'A verification code is sent to your Email.',duration:8000});
                         let second = 60;
                         let codeInterval = setInterval(() => {
                             if (second !== 0) {
@@ -259,7 +282,7 @@
                     })
                 } else {
                     this.$message.closeAll()
-                    this.$message.error(this.$t('tips.not_fill_email'))
+                    this.$message.error('Please enter the Email address.')
                 }
 
 
@@ -299,7 +322,7 @@
                     if (this.myForm.email === '') {
                         this.$store.commit('setSignReLogin', {
                             dialogVisible: true,
-                            dialogMessage: this.$t('tips.not_commit_email',{platform:this.platform}),
+                            dialogMessage: `Sorry, it is failed to fetch the email for committing code from your ${this.platform} account. Please check the email setting and try again.`,
                         })
                     }
                     for (let item of this.fields) {
@@ -311,7 +334,7 @@
                 }).catch(err => {
                     this.$store.commit('setSignReLogin',{
                         dialogVisible: true,
-                        dialogMessage: this.$t('tips.not_authorize_email')
+                        dialogMessage: `You didn't authorize us to access your email. Please check and try again.`
                     })
                 })
             },
@@ -351,7 +374,7 @@
                             resolve('complete')
                         } else {
                             this.$message.closeAll()
-                            this.$message.error(this.$t('tips.lang_error'))
+                            this.$message.error('Language wrong')
                         }
                         this.languageOptions.push({value: key, label: data[key].language})
                     }
@@ -423,7 +446,7 @@
                         Object.assign(this.myForm, {name: ''})
                         item.required && Object.assign(rules, {
                             [item.id]: [
-                                {required: item.required, message:this.$t('tips.fill_name'), trigger: ['blur', 'change']},
+                                {required: item.required, message: 'please input name', trigger: ['blur', 'change']},
                             ],
                         })
                     } else if (item.type === 'corporationName') {
@@ -432,7 +455,7 @@
                             [item.id]: [
                                 {
                                     required: item.required,
-                                    message: this.$t('tips.fill_corp_name'),
+                                    message: 'Please enter the name of corporation.',
                                     trigger: ['blur', 'change']
                                 },
                             ],
@@ -443,7 +466,7 @@
                             [item.id]: [
                                 {
                                     required: item.required,
-                                    message: this.$t('tips.fill_representative_title'),
+                                    message: 'Please enter the title of representative.',
                                     trigger: ['blur', 'change']
                                 },
                             ],
@@ -454,7 +477,7 @@
                             [item.id]: [
                                 {
                                     required: item.required,
-                                    message: this.$t('tips.fill_representative_name'),
+                                    message: 'Please enter the name of representative.',
                                     trigger: ['blur', 'change']
                                 },
                             ],
@@ -463,7 +486,7 @@
                         Object.assign(this.myForm, {date: ''})
                         item.required && Object.assign(rules, {
                             [item.id]: [
-                                {required: item.required, message: this.$t('tips.fill_date'), trigger: ['blur', 'change']}],
+                                {required: item.required, message: 'please input date', trigger: ['blur', 'change']}],
                         })
                     } else if (item.type === 'email') {
                         Object.assign(this.myForm, {email: ''})
@@ -499,7 +522,7 @@
                 Object.assign(rules, {
                     code: [{
                         required: true,
-                        message: this.$t('tips.fill_verification_code'),
+                        message: 'Please enter the verification code.',
                         trigger: ['blur', 'change']
                     },]
                 })
@@ -551,9 +574,9 @@
                     data: obj,
                 }).then(res => {
                     if (this.$store.state.loginType === 'corporation') {
-                        this.tipsMessage = this.$t('tips.corp_sign')
+                        this.tipsMessage = ' An email has been sent to you. Please complete the signing according to the steps in the email.'
                     } else if (this.$store.state.loginType === 'employee') {
-                        this.tipsMessage = this.$t('tips.emp_sign')
+                        this.tipsMessage = 'An email has been sent to you. Please take a look to review the signing.'
                     }
                     this.$store.commit('setSignSuccess', {
                         dialogVisible: true,
@@ -586,7 +609,7 @@
                             this.signCla();
                         } else {
                             this.$message.closeAll()
-                            this.$message.error(this.$t('tips.review_privacy'))
+                            this.$message.error('Please review the privacy statement .')
                         }
                     } else {
                         return false;

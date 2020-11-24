@@ -466,7 +466,7 @@
             }
         },
         methods: {
-            ...mapActions([ 'setLoginTypeAct', 'setRepoInfoAct']),
+            ...mapActions(['setPlatformAct', 'setLoginTypeAct', 'setRepoInfoAct', 'errorAct']),
             getRepoInfo() {
                 let params = window.location.href.split('/sign/')[1]
                 let repoInfoParams = ''
@@ -512,7 +512,7 @@
                                     case 'cla.no_cla_binding':
                                         this.$store.commit('setSignReLogin', {
                                             dialogVisible: true,
-                                            dialogMessage:this.$t('tips.no_cla_binding'),
+                                            dialogMessage: 'There is no CLA to sign for organization.',
                                         });
                                         break;
                                     case 'cla.invalid_parameter':
@@ -529,58 +529,58 @@
                                     case 'cla.has_not_signed':
                                         this.$store.commit('setSignReLogin', {
                                             dialogVisible: true,
-                                            dialogMessage: this.$t('tips.has_not_signed'),
+                                            dialogMessage: 'Your corporation has not signed.',
                                         });
                                         break;
                                     case 'cla.invalid_token':
                                         this.$store.commit('setSignReLogin', {
                                             dialogVisible: true,
-                                            dialogMessage: this.$t('tips.invalid_token'),
+                                            dialogMessage: 'Token expired, please login again.',
                                         });
                                         break;
                                     case 'cla.missing_token':
                                         this.$store.commit('setSignReLogin', {
                                             dialogVisible: true,
-                                            dialogMessage:this.$t('tips.missing_token'),
+                                            dialogMessage: 'Token invalid, please login again.',
                                         });
                                         break;
                                     case 'cla.unknown_token':
                                         this.$store.commit('setSignReLogin', {
                                             dialogVisible: true,
-                                            dialogMessage: this.$t('tips.unknown_token'),
+                                            dialogMessage: 'Token invalid, please login again.',
                                         });
                                         break;
                                     case 'cla.uncompleted_signing':
                                         this.$store.commit('setSignReLogin', {
                                             dialogVisible: true,
-                                            dialogMessage: this.$t('tips.uncompleted_signing'),
+                                            dialogMessage: 'The signing process of corporation is not finish yet.',
                                         });
                                         break;
 
                                     case 'cla.pdf_has_not_uploaded':
                                         this.$store.commit('setSignReLogin', {
                                             dialogVisible: true,
-                                            dialogMessage: this.$t('tips.pdf_has_not_uploaded'),
+                                            dialogMessage: 'Signature of organization is not uploaded.',
                                         });
                                         break;
 
                                     case 'cla.not_ready_to_sign':
                                         this.$store.commit('setSignReLogin', {
                                             dialogVisible: true,
-                                            dialogMessage:this.$t('tips.not_ready_to_sign'),
+                                            dialogMessage: 'The organization is not ready.',
                                         });
                                         break;
                                     case 'cla.system_error':
                                         this.$store.commit('errorCodeSet', {
                                             dialogVisible: true,
-                                            dialogMessage: this.$t('tips.system_error'),
+                                            dialogMessage: 'System error, please try again',
                                         });
                                         break;
                                 }
                             } else {
                                 this.$store.commit('errorCodeSet', {
                                     dialogVisible: true,
-                                    dialogMessage: this.$t('tips.system_error'),
+                                    dialogMessage: 'System error, please try again',
                                 })
                             }
                         })
