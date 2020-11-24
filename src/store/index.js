@@ -46,17 +46,12 @@ export default new Vuex.Store({
         pwdIsChanged:false,
         cla_link:sessionStorage.getItem('cla_link') || undefined,
         metadataType:sessionStorage.getItem('metadataType') || undefined,
-        individualCustomMetadataArr:JSON.parse(sessionStorage.getItem('individualCustomMetadataArr')) || undefined,
-        corporationCustomMetadataArr:JSON.parse(sessionStorage.getItem('corporationCustomMetadataArr')) || undefined,
+        customMetadataArr:JSON.parse(sessionStorage.getItem('customMetadataArr')) || undefined,
     },
     mutations: {
-        setIndividualCustomMetadataArr(state,individualCustomMetadataArr){
-            state.individualCustomMetadataArr=individualCustomMetadataArr;
-            sessionStorage.setItem('individualCustomMetadataArr', JSON.stringify(individualCustomMetadataArr));
-        },
-        setCorporationCustomMetadataArr(state,corporationCustomMetadataArr){
-            state.corporationCustomMetadataArr=corporationCustomMetadataArr;
-            sessionStorage.setItem('corporationCustomMetadataArr', JSON.stringify(corporationCustomMetadataArr));
+        setCusMetadataArr(state,customMetadataArr){
+            state.customMetadataArr=customMetadataArr;
+            sessionStorage.setItem('customMetadataArr', JSON.stringify(customMetadataArr));
         },
         setMetadataType(state,metadataType){
             state.metadataType=metadataType;
