@@ -11,6 +11,7 @@
     import * as until from '../until/until'
     import Header from '@components/NewHeader'
     import Footer from '@components/NewFooter'
+    import {mapActions} from 'vuex'
 
     window.onresize = () => {
         if (until.getClientHeight() > document.getElementById('home').offsetHeight) {
@@ -25,18 +26,18 @@
         },
         data() {
             return {
+                listCurrentPage: 1,
+                access_token: this.$store.state.access_token,
+                refresh_token: this.$store.state.refresh_token,
+                platform_token: this.$store.state.platform_token,
 
                 home: {
                     height: '',
                 },
             }
         },
-        provide(){
-            return{
-                setClientHeight:this.setClientHeight
-            }
-        },
         methods: {
+            ...mapActions(['setLoginUserAct', 'setTokenAct']),
             setClientHeight() {
                 this.$nextTick(() => {
                     console.log(until.getClientHeight(), document.getElementById('home').offsetHeight);
