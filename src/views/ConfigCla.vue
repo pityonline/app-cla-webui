@@ -628,6 +628,13 @@
 
                 })
             },
+            clientHeight() {
+                this.$nextTick(() => {
+                    until.getClientHeight() > document.getElementById('configCla').offsetHeight ?
+                        this.configClaStyle.height = until.getClientHeight() + 'px' :
+                        this.configClaStyle.height = document.getElementById('configCla').offsetHeight
+                })
+            },
             change(value) {
                 this.value = value;
             },
@@ -664,7 +671,6 @@
         },
         updated(){
             console.log('configCla_updated');
-            this.setClientHeight();
         },
     };
 
