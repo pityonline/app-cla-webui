@@ -108,10 +108,8 @@
                     method: 'post',
                     data: obj,
                 }).then(res => {
-                    let data = [];
-                    if (res.data) {
-                        data = res.data.data
-                    }
+                    console.log(res);
+                    let data = res.data.data
                     if (data.length) {
                         new Promise((resolve, reject) => {
                             let userInfo = {userInfo: data}
