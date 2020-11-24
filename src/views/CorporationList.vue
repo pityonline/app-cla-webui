@@ -327,7 +327,6 @@
                 return this.$confirm(`Are you sure you want to remove it ${file.name}？`);
             },
             getClaInfo() {
-                console.log('getClaInfo');
                 http({
                     url: `${url.getClaInfo}/${this.item.id}/cla`,
                 }).then(resp => {
@@ -341,8 +340,6 @@
                 })
             },
             getCorporationInfo() {
-                console.log('getCorporationInfo');
-
                 http({
                     url: `${url.corporation_signing}/${this.item.org_id}`,
                     params: {
