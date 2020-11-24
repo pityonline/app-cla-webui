@@ -501,13 +501,11 @@
                         }
                     }
                 }
-                console.log('checkMetadata', newArr);
                 return newArr;
             },
             editMetadata() {
                 let fields = [];
                 let metadataArr = this.checkMetadata();
-                console.log('editMetadata',metadataArr);
                 if (metadataArr) {
                     metadataArr.forEach((item, index) => {
                         if (metadataArr[i].title !== '' && metadataArr[i].type !== '') {
@@ -529,7 +527,7 @@
                 let obj = {}
                 let metadata = this.editMetadata()
                 if (metadata) {
-                    let cla = {url: this.cla_link.trim(), language: this.claLanguageValue, fields: metadata}
+                    let cla = {url: this.cla_link, language: this.claLanguageValue, fields: metadata}
                     if (this.repositoryChoose) {
                         obj = {
                             repo_id: `${this.repositoryOptions[this.repositoryValue].repoName}`,
@@ -789,6 +787,7 @@
             },
             init() {
                 if (document.cookie) {
+                    //data init
                     this.individualCustomMetadataArr=this.$store.state.individualCustomMetadataArr;
                     this.corporationCustomMetadataArr=this.$store.state.corporationCustomMetadataArr;
                 } else {
