@@ -42,6 +42,7 @@
             setClientHeight() {
                 this.$nextTick(() => {
                     document.getElementById("home").style.minHeight='0px';
+                    console.log('getClientHeight===',until.getClientHeight(), '\noffsetHeight===',document.getElementById('home').offsetHeight);
                     if (until.getClientHeight() > document.getElementById('home').offsetHeight) {
                         document.getElementById("home").style.minHeight = until.getClientHeight() + 'px'
                     }else{
@@ -54,6 +55,7 @@
 
         },
         updated() {
+            console.log('home_updated');
             this.setClientHeight();
         },
 

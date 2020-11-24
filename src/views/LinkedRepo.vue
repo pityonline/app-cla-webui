@@ -293,6 +293,7 @@
 
         },
         updated(){
+            console.log('linkedRepo_updated');
             this.setClientHeight();
         },
         methods: {
