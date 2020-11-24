@@ -123,9 +123,5 @@ module.exports = {
         active:'active',
 
     },
-    index:{
-       org_login: 'Organization Manager',
-       corp_login: 'Corporation Manager',
-    },
 
 };

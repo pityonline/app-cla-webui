@@ -8,11 +8,11 @@
                     <div id="btBox">
                         <div>
                             <button class="button" @click="submit('orgManager')">
-                                {{$t('index.org_login')}}
+                                Organization Manager
                             </button>
                         </div>
                         <button class="button" @click="submit('corporationManager')">
-                            {{$t('index.corp_login')}}
+                            Corporation Manager
                         </button>
                     </div>
                 </el-col>
