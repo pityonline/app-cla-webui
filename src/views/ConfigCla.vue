@@ -250,6 +250,9 @@
             orgChoose() {
                 return `${this.$store.state.orgChoose}` === 'true';
             },
+            claChoose() {
+                return `${this.$store.state.claChoose}` === 'true';
+            },
             isEmail() {
                 return `${this.$store.state.isEmail}` === 'true';
             },
@@ -264,21 +267,32 @@
                 }
 
             },
+            claOptions() {
+                try {
+                    return JSON.parse(this.$store.state.claOptions)
+                } catch (e) {
+                    return this.$store.state.claOptions
+                }
+
+            },
             orgValue() {
                 if (this.$store.state.orgValue === undefined || this.$store.state.orgValue === '') {
-                    console.log(this.$store.state.orgValue,'if');
                     return this.$store.state.orgValue
                 } else {
-                    console.log(this.$store.state.orgValue,'else');
                     return Number(this.$store.state.orgValue)
+                }
+            },
+            claValue() {
+                if (this.$store.state.claValue === undefined || this.$store.state.claValue === '') {
+                    return this.$store.state.claValue
+                } else {
+                    return Number(this.$store.state.claValue)
                 }
             },
             repositoryValue() {
                 if (this.$store.state.repositoryValue === undefined || this.$store.state.repositoryValue === '') {
-                    console.log(this.$store.state.repositoryValue,'if');
                     return this.$store.state.repositoryValue
                 } else {
-                    console.log(this.$store.state.repositoryValue,'else');
                     return Number(this.$store.state.repositoryValue)
                 }
             },
@@ -553,6 +567,9 @@
             tabsHandleClick(tab, event) {
                 tab.index === '0' ? this.$router.push('/linkedRepo') : this.$router.push('/signedRepoLogin')
             },
+            openLinkDialog() {
+                (this.orgChoose && this.claChoose && this.isEmail) && (this.linkDialogVisible = true)
+            },
             orgVisibleChange(visible) {
                 if (visible) {
                     this.getOrgsInfo();
@@ -589,7 +606,7 @@
                 }
             },
             getRepositoriesOfOrg(org, org_id) {
-                let obj = {access_token: this.$store.state.platform_token, org: org, page: 1, per_page: 100};
+                let obj = {access_token: this.$store.state.platform_token, org: org, page: 1, per_page: 10};
                 this.$axios({
                     url: `https://gitee.com/api/v5/orgs/${org}/repos`,
                     params: obj,
@@ -611,7 +628,7 @@
                 })
             },
             getOrgsInfo() {
-                let obj = {access_token: this.$store.state.platform_token, admin: true, page: 1, per_page: 100};
+                let obj = {access_token: this.$store.state.platform_token, admin: true, page: 1, per_page: 10};
                 this.$axios({
                     url: url.getOrgsInfo,
                     params: obj,
