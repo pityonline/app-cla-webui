@@ -19,12 +19,8 @@
                                 ref="multipleTable"
                                 :data="tableData">
                             <el-table-column
-                            prop="id"
-                            label="Id">
-                            </el-table-column>
-                            <el-table-column
-                                    prop="name"
-                                    label="Name">
+                            prop="name"
+                            label="Name">
                             </el-table-column>
                             <el-table-column
                                     prop="email"
