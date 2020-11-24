@@ -53,6 +53,7 @@
         },
         updated() {
             this.setClientHeight();
+            console.log('homeUpdate');
         },
 
     };
