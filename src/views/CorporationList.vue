@@ -257,9 +257,14 @@
 
         },
         mounted() {
+            console.log('corp_mounted');
             this.setClientHeight();
         },
+        beforeUpdate() {
+            console.log('corp_beforeUpdate');
+        },
         updated() {
+            console.log('corp_updated');
             this.setClientHeight()
         },
         inject: ['setClientHeight'],
