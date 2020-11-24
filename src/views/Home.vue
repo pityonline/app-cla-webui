@@ -25,6 +25,7 @@
         },
         data() {
             return {
+
                 home: {
                     height: '',
                 },
