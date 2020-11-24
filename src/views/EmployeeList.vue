@@ -5,7 +5,6 @@
             <el-tab-pane :label="$t('corp.inactive')" name="first" style="margin-top: 1rem">
                 <div style="margin-bottom: 1rem" class="tableStyle">
                     <el-table
-                            :empty-text="$t('corp.no_data')"
                             class="tableClass"
                             :data="inactivePageData"
                             align="center"
@@ -63,7 +62,6 @@
             <el-tab-pane :label="$t('corp.active')" name="second" style="margin-top: 1rem">
                 <div style="margin-bottom: 1rem" class="tableStyle">
                     <el-table
-                            :empty-text="$t('corp.no_data')"
                             class="tableClass"
                             :data="activePageData"
                             align="center"

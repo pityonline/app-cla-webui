@@ -16,7 +16,6 @@
                 element-loading-background="rgba(255, 255, 255, 1)">
             <el-col :span="3" class="orgTableStyle tableStyle">
                 <el-table
-                        empty-text="No data"
                         :data="orgTableData"
                         align="center"
                         @cell-click="clickOrg"
@@ -30,7 +29,6 @@
             </el-col>
             <el-col :span="21" class="tableStyle">
                 <el-table
-                        empty-text="No data"
                         :data="boundTableData"
                         style="width: 100%;">
                     <el-table-column
