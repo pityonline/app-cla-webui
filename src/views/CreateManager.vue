@@ -110,20 +110,22 @@
                 }
             },
             createUser() {
-                let managers = [];
-                let isCreate = true;
+                let managers = []
                 this.data.forEach(item => {
                     let email = item.email.trim();
                     let name = item.name.trim();
                     let id = item.id.trim();
 
                     if (!((email === '' && name === '' && id === '') || (email !== '' && name !== '' && id !== ''))) {
-                        isCreate = false;
+                        this.$store.commit('errorCodeSet', {
+                            dialogVisible: true,
+                            dialogMessage: this.$t('corp.fill_complete'),
+                        });
                     } else if (email !== '' && name !== '' && id !== '') {
                         managers.push({name: name, email: email, id: id})
                     }
                 });
-                if (managers.length && isCreate) {
+                if (managers.length) {
                     let obj = {managers: managers}
                     http({
                         url: url.addEmployeeManager,
@@ -195,11 +197,6 @@
                             })
                         }
                     })
-                }else{
-                    this.$store.commit('errorCodeSet', {
-                        dialogVisible: true,
-                        dialogMessage: this.$t('corp.fill_complete'),
-                    });
                 }
 
             },
