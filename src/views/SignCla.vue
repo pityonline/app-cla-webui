@@ -139,7 +139,7 @@
                         return this.sendBtText;
 
                     } else if (this.$t('signPage.reSendCode')) {
-                        this.sendBtText=this.$t('signPage.reSendCode',{second:this.second})
+                        this.sendBtText=this.$t('signPage.reSendCode')
                         return this.sendBtText;
                     }
                 },
@@ -262,11 +262,11 @@
                     }).then(res => {
                         this.$message.closeAll();
                         this.$message.success({message: this.$t('tips.sending_email'), duration: 8000});
-                        this.second = 60;
+                        let second = 60;
                         let codeInterval = setInterval(() => {
-                            if (this.second !== 0) {
-                                this.second--;
-                                this.sendBtTextFromLang = this.$t('signPage.reSendCode', {second: this.second})
+                            if (second !== 0) {
+                                second--;
+                                this.sendBtTextFromLang = this.$t('signPage.reSendCode', {second: second})
                             } else {
                                 this.sendBtTextFromLang = this.$t('signPage.sendCode');
                                 clearInterval(codeInterval)
