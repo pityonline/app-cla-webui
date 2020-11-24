@@ -289,8 +289,9 @@
 </template>
 <script>
     import * as url from '../until/api'
+    import * as until from '../until/until'
     import http from '../until/http'
-
+    
     export default {
         name: "ConfigCla",
         computed: {
