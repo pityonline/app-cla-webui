@@ -133,10 +133,8 @@
             },
             sendBtTextFromLang: {
                 get:function() {
-                    if (this.$t('signPage.sendCode')||this.$t('signPage.reSendCode')){
 
-                    }
-                    return this.sendBtText;
+                    return this.sendBtText
                 },
                 set:function(value){
                     this.sendBtText=value
@@ -154,7 +152,7 @@
         ,
         data() {
             return {
-                sendBtText:this.$t('signPage.sendCode'),
+                // sendBtText:this.$t('signPage.sendCode'),
                 signRouter: '/sign',
                 domain: this.$store.state.domain,
                 tipsTitle: '',
@@ -942,6 +940,7 @@
         }
         ,
         created() {
+            this.sendBtTextFromLang=this.$t('signPage.sendCode')
             this.getCookieData();
             new Promise((resolve, reject) => {
                 this.getSignPage(resolve);
