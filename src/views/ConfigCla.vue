@@ -669,9 +669,6 @@
                 }
             }
         },
-        updated(){
-            console.log('configCla_updated');
-        },
     };
 
 </script>
