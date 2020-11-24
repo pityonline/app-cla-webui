@@ -379,7 +379,7 @@
                             repo_id: this.$store.state.repoInfo.repo_id,
                         },
                     }).then(res => {
-                        this.setData(res, resolve)
+                        this.setData(res, argRes)
                     }).catch(err => {
                         this.errorAct(err)
                     })
