@@ -1,22 +1,22 @@
 <template>
     <el-row id="createUser">
         <el-col>
-            <p id="tabName">{{$t('header.createManager')}}</p>
+            <p id="tabName">Create Manager</p>
             <el-row class="createUserBack">
                 <el-row class="emailRow" gutter="20" v-for="(item,index) in data">
                     <el-col :span="6">
                         <el-input
-                                :placeholder="$t('tips.fill_name')" @blur="setAcount(item.name,index)" clearable="" size="medium" v-model="item.name">
+                                placeholder="please input name" @blur="setAcount(item.name,index)" clearable="" size="medium" v-model="item.name">
                         </el-input>
                     </el-col>
                     <el-col :span="8">
                         <el-input
-                                :placeholder="$t('tips.not_fill_email')" clearable="" size="medium" v-model="item.email">
+                                placeholder="please input email" clearable="" size="medium" v-model="item.email">
                         </el-input>
                     </el-col>
                     <el-col :span="6">
                         <el-input
-                                :placeholder="$t('tips.not_fill_id')" clearable="" size="medium" v-model="item.id">
+                                placeholder="please input id" clearable="" size="medium" v-model="item.id">
                         </el-input>
                     </el-col>
                     <el-col :span="4" align="right">
@@ -27,13 +27,13 @@
 
                 <el-row align="middle">
                     <el-col align="center">
-                        <button class="submitBt" @click="createUser()">{{$t('corp.submit')}}</button>
+                        <button class="submitBt" @click="createUser()">Submit</button>
                     </el-col>
                 </el-row>
             </el-row>
 
-            <corpReLoginDialog  :message="corpReLoginMsg" :dialogVisible="corpReLoginDialogVisible"></corpReLoginDialog>
-            <reTryDialog  :message="corpReLoginMsg" :dialogVisible="corpReTryDialogVisible"></reTryDialog>
+            <corpReLoginDialog :title="corpReLoginDialogTitle" :message="corpReLoginMsg" :dialogVisible="corpReLoginDialogVisible"></corpReLoginDialog>
+            <reTryDialog :title="corpReLoginDialogTitle" :message="corpReLoginMsg" :dialogVisible="corpReTryDialogVisible"></reTryDialog>
         </el-col>
     </el-row>
 </template>
@@ -63,6 +63,9 @@
             corpReLoginMsg() {
                 return this.$store.state.dialogMessage
             },
+            corpReLoginDialogTitle() {
+                return `cla sign prompt you`
+            },
             corpReTryDialogVisible() {
                 return this.$store.state.reTryDialogVisible
             },
@@ -90,7 +93,7 @@
             addRow(index) {
                 if (Number(this.$store.state.userLimit) + this.data.length >= this.limit) {
                     this.$message.closeAll()
-                    this.$message.error(this.$t('corp.manager_limit',{limit:this.limit}))
+                    this.$message.error(`Create up to ${this.limit} users`)
                 } else {
                     this.data.splice(index + 1, 0, {name:'',email: '',id:''})
                 }
@@ -116,7 +119,7 @@
                     if (!((email === '' && name === ''&&id === '')||(email !== '' && name !== ''&& id !== ''))){
                         this.$store.commit('errorCodeSet', {
                             dialogVisible: true,
-                            dialogMessage: this.$t('corp.fill_complete'),
+                            dialogMessage: 'Please fill in the complete information.',
                         });
                     }else if (email!==''&&name!==''&&id!==''){
                         managers.push({name:name,email:email,id:id})
@@ -129,7 +132,7 @@
                     data: obj,
                 }).then(res => {
                     this.$message.closeAll()
-                    this.$message.success( this.$t('tips.successTitle'))
+                    this.$message.success('success')
                     setTimeout(() => {
                         this.$router.push('/managerList')
                     }, 500)
@@ -139,57 +142,57 @@
                             case 'cla.invalid_token':
                                 this.$store.commit('errorSet', {
                                     dialogVisible: true,
-                                    dialogMessage:this.$t('tips.invalid_token'),
+                                    dialogMessage: 'Token expired, please login again.',
                                 });
                                 break;
                             case 'cla.missing_token':
                                 this.$store.commit('errorSet', {
                                     dialogVisible: true,
-                                    dialogMessage: this.$t('tips.missing_token'),
+                                    dialogMessage: 'Token invalid, please login again.',
                                 });
                                 break;
                             case 'cla.unknown_token':
                                 this.$store.commit('errorSet', {
                                     dialogVisible: true,
-                                    dialogMessage:this.$t('tips.unknown_token'),
+                                    dialogMessage: 'Token invalid, please login again.',
                                 });
                                 break;
 
                             case 'cla.num_of_corp_managers_exceeded':
                                 this.$store.commit('errorCodeSet', {
                                     dialogVisible: true,
-                                    dialogMessage: this.$t('tips.num_of_corp_managers_exceeded'),
+                                    dialogMessage: 'The number of managers exceeds the limit.',
                                 });
                                 break;
                             case 'cla.corp_manager_exists':
                                 this.$store.commit('errorCodeSet', {
                                     dialogVisible: true,
-                                    dialogMessage: this.$t('tips.corp_manager_exists'),
+                                    dialogMessage: 'The name is exists already.',
                                 });
                                 break;
                             case 'cla.not_same_corp':
                                 this.$store.commit('errorCodeSet', {
                                     dialogVisible: true,
-                                    dialogMessage: this.$t('tips.not_same_corp'),
+                                    dialogMessage: 'Email does not belong to the corporation.',
                                 });
                                 break;
                             case 'cla.invalid_parameter':
                                 this.$store.commit('errorCodeSet', {
                                     dialogVisible: true,
-                                    dialogMessage: this.$t('tips.invalid_parameter'),
+                                    dialogMessage: 'Email for manager should be different from Administrator’s.',
                                 });
                                 break;
                             case 'cla.system_error':
                                 this.$store.commit('errorCodeSet', {
                                     dialogVisible: true,
-                                    dialogMessage: this.$t('tips.system_error'),
+                                    dialogMessage: 'System error, please try again',
                                 });
                                 break;
                         }
                     }else{
                         this.$store.commit('errorCodeSet', {
                             dialogVisible: true,
-                            dialogMessage:this.$t('tips.system_error'),
+                            dialogMessage: 'System error, please try again',
                         })
                     }
                 })

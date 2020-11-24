@@ -11,14 +11,14 @@
                             style="width: 100%;">
                         <el-table-column
                                 prop="name"
-                                :label="$t('corp.name')">
+                                label="Name">
                         </el-table-column>
                         <el-table-column
                                 prop="email"
-                                :label="$t('corp.email')">
+                                label="Email">
                         </el-table-column>
                         <el-table-column
-                                :label="$t('corp.operation')"
+                                label="Operation"
                                 align="center">
                             <template slot-scope="scope">
                                 <el-row class="mySwitch">
@@ -37,7 +37,7 @@
 
                                     <button class="deleteBt"
                                             @click="deleteEmployee(scope.row.cla_org_id,scope.row.email,scope.row.enabled)">
-                                        {{$t('corp.delete')}}
+                                        Delete
                                     </button>
 
                                 </el-row>
@@ -66,11 +66,11 @@
                             style="width: 100%;">
                         <el-table-column
                                 prop="name"
-                                :label="$t('corp.name')">
+                                label="Name">
                         </el-table-column>
                         <el-table-column
                                 prop="email"
-                                :label="$t('corp.email')">
+                                label="Email">
                         </el-table-column>
                         <el-table-column
                                 label="status"
@@ -111,16 +111,18 @@
                 :show-close="false"
                 :visible.sync="deleteUserVisible">
             <el-row align="center">
-                {{$t('corp.deleteTips')}}
+                Are you sure to delete ?
             </el-row>
             <el-row align="center" class="marginTop1rem contentTitle">
-                <button class="deleteBt" @click="submitDelete()">{{$t('corp.yes')}}</button>
-                <button class="cancelBt" @click="deleteUserVisible=false">{{$t('corp.no')}}</button>
+                <button class="deleteBt" @click="submitDelete()">Yes</button>
+                <button class="cancelBt" @click="deleteUserVisible=false">No</button>
             </el-row>
 
         </el-dialog>
-        <corpReLoginDialog :message="corpReLoginMsg" :dialogVisible="corpReLoginDialogVisible"></corpReLoginDialog>
-        <reTryDialog  :message="corpReLoginMsg" :dialogVisible="corpReTryDialogVisible"></reTryDialog>
+        <corpReLoginDialog :title="corpReLoginDialogTitle" :message="corpReLoginMsg"
+                           :dialogVisible="corpReLoginDialogVisible"></corpReLoginDialog>
+        <reTryDialog :title="corpReLoginDialogTitle" :message="corpReLoginMsg"
+                     :dialogVisible="corpReTryDialogVisible"></reTryDialog>
     </div>
 </template>
 <script>
@@ -165,6 +167,9 @@
             corpReLoginMsg() {
                 return this.$store.state.dialogMessage
             },
+            corpReLoginDialogTitle() {
+                return `cla sign prompt you`
+            },
             corpReTryDialogVisible() {
                 return this.$store.state.reTryDialogVisible
             },
@@ -208,39 +213,39 @@
                     this.getEmployee()
                     this.deleteUserVisible = false
                     this.$message.closeAll();
-                    this.$message.success(this.$t('tips.successTitle'))
+                    this.$message.success('success')
                 }).catch(err => {
                     if (err.data.hasOwnProperty('data')) {
                         switch (err.data.data.error_code) {
                             case 'cla.invalid_token':
                                 this.$store.commit('errorSet', {
                                     dialogVisible: true,
-                                    dialogMessage: this.$t('tips.invalid_token'),
+                                    dialogMessage: 'Token expired, please login again.',
                                 });
                                 break;
                             case 'cla.missing_token':
                                 this.$store.commit('errorSet', {
                                     dialogVisible: true,
-                                    dialogMessage: this.$t('tips.missing_token'),
+                                    dialogMessage: 'Token invalid, please login again.',
                                 });
                                 break;
                             case 'cla.unknown_token':
                                 this.$store.commit('errorSet', {
                                     dialogVisible: true,
-                                    dialogMessage: this.$t('tips.unknown_token'),
+                                    dialogMessage: 'Token invalid, please login again.',
                                 });
                                 break;
                             case 'cla.system_error':
                                 this.$store.commit('errorCodeSet', {
                                     dialogVisible: true,
-                                    dialogMessage: this.$t('tips.system_error'),
+                                    dialogMessage: 'System error, please try again',
                                 });
                                 break;
                         }
                     } else {
                         this.$store.commit('errorCodeSet', {
                             dialogVisible: true,
-                            dialogMessage: this.$t('tips.system_error'),
+                            dialogMessage: 'System error, please try again',
                         })
                     }
                 })
@@ -269,32 +274,32 @@
                             case 'cla.invalid_token':
                                 this.$store.commit('errorSet', {
                                     dialogVisible: true,
-                                    dialogMessage: this.$t('tips.invalid_token')
+                                    dialogMessage: 'Token expired, please login again.',
                                 });
                                 break;
                             case 'cla.missing_token':
                                 this.$store.commit('errorSet', {
                                     dialogVisible: true,
-                                    dialogMessage: this.$t('tips.missing_token')
+                                    dialogMessage: 'Token invalid, please login again.',
                                 });
                                 break;
                             case 'cla.unknown_token':
                                 this.$store.commit('errorSet', {
                                     dialogVisible: true,
-                                    dialogMessage: this.$t('tips.unknown_token')
+                                    dialogMessage: 'Token invalid, please login again.',
                                 });
                                 break;
                             case 'cla.system_error':
                                 this.$store.commit('errorCodeSet', {
                                     dialogVisible: true,
-                                    dialogMessage: this.$t('tips.system_error')
+                                    dialogMessage: 'System error, please try again',
                                 });
                                 break;
                         }
                     } else {
                         this.$store.commit('errorCodeSet', {
                             dialogVisible: true,
-                            dialogMessage: this.$t('tips.system_error')
+                            dialogMessage: 'System error, please try again',
                         })
                     }
                 })
@@ -322,33 +327,33 @@
                             case 'cla.invalid_token':
                                 this.$store.commit('errorSet', {
                                     dialogVisible: true,
-                                    dialogMessage:this.$t('tips.invalid_token')
+                                    dialogMessage: 'Token expired, please login again.',
                                 });
                                 break;
                             case 'cla.missing_token':
                                 this.$store.commit('errorSet', {
                                     dialogVisible: true,
-                                    dialogMessage: this.$t('tips.missing_token')
+                                    dialogMessage: 'Token invalid, please login again.',
                                 });
                                 break;
                             case 'cla.unknown_token':
                                 this.$store.commit('errorSet', {
                                     dialogVisible: true,
-                                    dialogMessage: this.$t('tips.unknown_token')
+                                    dialogMessage: 'Token invalid, please login again.',
                                 });
                                 break;
 
                             case 'cla.system_error':
                                 this.$store.commit('errorCodeSet', {
                                     dialogVisible: true,
-                                    dialogMessage: this.$t('tips.system_error')
+                                    dialogMessage: 'System error, please try again',
                                 });
                                 break;
                         }
                     } else {
                         this.$store.commit('errorCodeSet', {
                             dialogVisible: true,
-                            dialogMessage: this.$t('tips.system_error')
+                            dialogMessage: 'System error, please try again',
                         })
                     }
                 })
