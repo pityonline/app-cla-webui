@@ -79,10 +79,9 @@
         },
         methods: {
             setAcount(name,acount){
-                console.log('setAcount');
                 let reg = /[a-zA-Z0-9_.]+/;
                 let myName = name.trim()
-                if (reg.test(myName)&&acount.trim()===''){
+                if (reg.test(myName)&&acount.trim()!==''){
                     acount=myName
                 }
             },
@@ -115,15 +114,15 @@
                 this.data.forEach(item => {
                     let email = item.email.trim();
                     let name = item.name.trim();
-                    let id = item.acount.trim();
+                    let acount = item.acount.trim();
 
-                    if (!((email === '' && name === ''&&id === '')||(email !== '' && name !== ''&& id !== ''))){
+                    if (!((email === '' && name === ''&&acount === '')||(email !== '' && name !== ''&& acount !== ''))){
                         this.$store.commit('errorCodeSet', {
                             dialogVisible: true,
                             dialogMessage: 'Please fill in the complete information.',
                         });
-                    }else if (email!==''&&name!==''&&id!==''){
-                        managers.push({name:name,email:email,id:id})
+                    }else if (email!==''&&name!==''&&acount!==''){
+                        managers.push({name:name,email:email,acount:acount})
                     }
                 })
                 let obj = {managers: managers}
