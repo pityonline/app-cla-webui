@@ -51,7 +51,6 @@
                         </el-table-column>
 
                         <el-table-column
-                                min-width="300"
                                 label="Operation">
                             <template slot-scope="scope">
                                 <el-button :disabled="scope.row.admin_added" type="primary"
@@ -384,7 +383,7 @@
                     this.$message.success('success');
                 }).catch(err => {
                     this.$message.closeAll()
-                    this.$message.error('failed');
+                    this.$message.success('failed');
                 })
             },
             createRoot(email) {
