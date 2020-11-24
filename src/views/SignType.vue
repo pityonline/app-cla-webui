@@ -97,7 +97,7 @@
                                     </el-col>
                                     <el-col :span="10" class="textCol">
                                         <div class="rightText">
-                                            {{ $t('signType:corpStep1_1') }}<span> {{ $t('signType:corpBt') }} </span>{{ $t('signType:corpStep1_2') }}
+                                            Click <span>Sign as Corporation</span> to go to the CLA signing page.
                                         </div>
                                     </el-col>
                                 </el-row>
@@ -114,7 +114,7 @@
                                 <el-row class="stepBox">
                                     <el-col :span="10" class="textCol">
                                         <div class="leftText">
-                                            {{ $t('signType:corpStep2') }}
+                                            Fill in the information and submit for signature.
                                         </div>
                                     </el-col>
                                     <el-col class="iconBox" :span="4">
@@ -142,7 +142,8 @@
                                     </el-col>
                                     <el-col :span="10" class="textCol">
                                         <div class="rightText">
-                                            {{ $t('signType:corpStep3') }}
+                                            Receive an e-mail from the community to sign the enterprise CLA. Follow the
+                                            instructions in the e-mail to sign the CLA.
                                         </div>
                                     </el-col>
                                 </el-row>
@@ -158,7 +159,8 @@
                                 <el-row class="stepBox">
                                     <el-col :span="10" class="textCol">
                                         <div class="leftText">
-                                            {{ $t('signType:corpStep4') }}
+                                            The community administrator approves the CLA file signed by the enterprise
+                                            and enables the administrator account of the enterprise in the community.
                                         </div>
                                     </el-col>
                                     <el-col :span="4">
@@ -186,7 +188,8 @@
                                     </el-col>
                                     <el-col :span="10" class="textCol">
                                         <div class="rightText">
-                                            {{ $t('signType:corpStep5') }}
+                                            Receive an e-mail containing the administrator account, indicating that the
+                                            CLA is signed successfully.
                                         </div>
                                     </el-col>
                                 </el-row>
@@ -202,7 +205,8 @@
                                 <el-row class="stepBox">
                                     <el-col :span="10" class="textCol">
                                         <div class="leftText">
-                                            {{ $t('signType:corpStep6_1') }}<span> {{ $t('signType:claSignPlatform') }} </span>{{ $t('signType:corpStep6_2') }}
+                                            Log in to the <span>CLA signing platform</span>, add an employee as
+                                            administrator, and download the enterprise CLA file.
                                         </div>
                                     </el-col>
                                     <el-col :span="4">
