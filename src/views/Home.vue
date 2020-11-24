@@ -42,10 +42,9 @@
             setClientHeight() {
                 this.$nextTick(() => {
                     console.log(until.getClientHeight(), document.getElementById('home').offsetHeight);
-                    if (until.getClientHeight() > document.getElementById('home').offsetHeight) {
-                        this.home.height = until.getClientHeight() + 'px' ;
-
-                    }
+                    until.getClientHeight() > document.getElementById('home').offsetHeight ?
+                        this.home.height = until.getClientHeight() + 'px' :
+                        this.home.height = document.getElementById('home').offsetHeight
                 })
             },
 
