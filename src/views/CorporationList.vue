@@ -267,7 +267,6 @@
         },
         updated(){
             console.log('corp_updated');
-            this.setClientHeight()
         },
         inject:['setClientHeight'],
         methods: {
