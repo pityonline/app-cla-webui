@@ -122,7 +122,7 @@
                 }
             },
             toHome() {
-                if (this.$route.path !== '/linkedRepo') {
+                if (this.$route.path !== '/home') {
                     this.$router.push('/home')
                 }
 
