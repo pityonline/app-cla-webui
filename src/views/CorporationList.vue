@@ -5,13 +5,14 @@
                          style="margin-top: 1rem">
                 <div class="tableStyle">
                     <el-table
-                            :empty-text="$t('corp.no_data')"
+                            :empty-text="$t{'corp.no_data'}"
                             :data="tableData"
                             align="center"
                             style="width: 100%;">
                         <el-table-column
                                 prop="corporation_name"
                                 label="Corporation Name">
+
                         </el-table-column>
                         <el-table-column
                                 prop="admin_name"
@@ -23,12 +24,14 @@
                                 label="Email">
                         </el-table-column>
 
-                        <el-table-column>
-                            <template slot="header" slot-scope="scope">
+                        <el-table-column
+                                label="PDF">
+                            <template slot-scope="scope" slot="header">
                                 <el-tooltip effect="dark" content="The enterprise has completed the signed PDF" placement="top">
                                     <span>PDF</span>
                                 </el-tooltip>
                             </template>
+
                             <template slot-scope="scope">
                                 <el-popover
                                         width="80"
@@ -49,9 +52,9 @@
                                 </el-popover>
                             </template>
                         </el-table-column>
-
                         <el-table-column
                                 label="Operation">
+
                             <template slot-scope="scope">
                                 <el-button :disabled="scope.row.admin_added" type="primary"
                                            size="mini"
@@ -71,7 +74,7 @@
             <el-tab-pane label="CLA" name="second" style="margin-top: 1rem">
                 <div class="tableStyle">
                     <el-table
-                            :empty-text="$t('corp.no_data')"
+                            :empty-text="$t{'corp.no_data'}"
                             :data="claData"
                             align="center"
                             style="width: 100%;">
@@ -91,7 +94,9 @@
                         </el-table-column>
 
                         <el-table-column
-                                label="PDF">
+                                label="PDF"
+                                align="center">
+
                             <template slot-scope="scope">
                                 <el-popover
                                         width="80"
@@ -112,11 +117,23 @@
                                 </el-popover>
                             </template>
                         </el-table-column>
-
                         <el-table-column
                                 align="center">
 
                             <template slot-scope="scope">
+                                <!--<div class="mySwitch" style="display: inline-block">-->
+                                <!--<el-switch-->
+                                <!--@change="changeActive(scope.row.cla_org_id,scope.row.corporation_name,scope.row.admin_email,true)"-->
+                                <!--v-model="scope.row.enabled"-->
+                                <!--class="mySwitch"-->
+                                <!--:disabled="scope.row.enabled"-->
+                                <!--width="100"-->
+                                <!--active-color="#409EFF"-->
+                                <!--active-text="active"-->
+                                <!--inactive-text="inactive"-->
+                                <!--inactive-color="#EBEEF5">-->
+                                <!--</el-switch>-->
+                                <!--</div>-->
                                 <el-button :disabled="scope.row.administrator_enabled" style="margin-left: 1rem"
                                            type="primary"
                                            size="mini"
