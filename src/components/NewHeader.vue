@@ -55,10 +55,6 @@
             }
         },
         methods: {
-            changeLng() {
-                let curLng = this.$i18n.i18next.language
-                this.$i18n.i18next.changeLanguage(curLng.indexOf('zh')>-1?'zh':'en');
-            },
             clickSelect() {
                 console.log('clickSelect');
                 document.getElementById('my_option').style.visibility = 'hidden'
