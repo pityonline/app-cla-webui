@@ -25,7 +25,7 @@
 
                         <el-table-column>
                             <template slot="header" slot-scope="scope">
-                                <el-tooltip effect="dark" :content="$t('corp.corp_signed_pdf')" placement="top">
+                                <el-tooltip effect="dark" content="The enterprise has completed the signed PDF" placement="top">
                                     <span>PDF</span>
                                 </el-tooltip>
                             </template>
@@ -57,13 +57,10 @@
                                            size="mini"
                                            @click="createRoot(scope.row.admin_email)">Create Administrator
                                 </el-button>
-                                <el-tooltip effect="dark" :content="$t('corp.resend_tip')" placement="top">
-                                    <el-button  type="primary"
-                                                size="mini"
-                                                @click="resendPDF(scope.row.admin_email)">Resend PDF
-                                    </el-button>
-                                </el-tooltip>
-
+                                <el-button :disabled="scope.row.admin_added" type="primary"
+                                           size="mini"
+                                           @click="createRoot(scope.row.admin_email)">Create Administrator
+                                </el-button>
 
                             </template>
                         </el-table-column>
@@ -363,19 +360,6 @@
                         //this.setClientHeight();
                     })
 
-                }).catch(err => {
-                    console.log(err);
-                })
-            },
-            resendPDF(email){
-                http({
-                    url: `${url.resend_pdf}/${this.item.id}/${email}`,
-                    method: 'post',
-                }).then(res => {
-                    console.log(res);
-                    this.$message.closeAll()
-                    this.$message.success('success')
-                    this.getCorporationInfo()
                 }).catch(err => {
                     console.log(err);
                 })
