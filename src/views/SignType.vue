@@ -436,9 +436,11 @@
 
         computed: {
             reTryDialogVisible() {
+                console.log(this.$store.state.reTryDialogVisible);
                 return this.$store.state.reTryDialogVisible
             },
             reLoginMsg() {
+                console.log(this.$store.state.dialogMessage);
                 return this.$store.state.dialogMessage
             },
         },
