@@ -16,6 +16,7 @@
     import Footer from '@components/NewFooter'
 
     window.onresize = () => {
+        console.log('home_onresize');
         if (until.getClientHeight() > document.getElementById('home').offsetHeight) {
             document.getElementById("home").style.minHeight = until.getClientHeight() + 'px'
         }
