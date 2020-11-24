@@ -328,7 +328,6 @@
 
             },
             getLinkedRepoList() {
-                console.log('getLinkedRepoList');
                 http({
                     url: url.getLinkedRepoList,
                 }).then(res => {
