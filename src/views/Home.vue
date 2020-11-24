@@ -38,7 +38,7 @@
             }
         },
         methods: {
-            ...mapActions(['setLoginUserAct', 'setTokenAct']),
+            ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct']),
             clickItem(command) {
                 switch (command) {
                     case 'a':

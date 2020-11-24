@@ -297,7 +297,7 @@
 
         },
         methods: {
-            ...mapActions(['setLoginUserAct', 'setTokenAct', 'setTableDataAct']),
+            ...mapActions(['setLoginUserAct', 'setTokenAct', 'getLinkedRepoListAct', 'setTableDataAct']),
             configCla() {
                 this.$router.push('/bind-cla')
             },
