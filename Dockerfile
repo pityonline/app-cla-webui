@@ -5,6 +5,7 @@ MAINTAINER TommyLike<tommylikehu@gmail.com>
 RUN mkdir -p /home/cla-webui
 WORKDIR /home/cla-webui
 COPY . /home/cla-webui
+RUN npm config set registry https://mirrors.huaweicloud.com/repository/npm/
 RUN npm install -g vue && \
     npm install && \
     npm run build

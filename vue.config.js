@@ -25,7 +25,7 @@ module.exports = {
 
         proxy: {
             '/api': {
-                target: 'http://159.138.58.253:8080',
+                target: 'http://cla-backend:8080',
                 secure: false,
                 changeOrigin: true,
                 pathRewrite: {
@@ -62,7 +62,3 @@ module.exports = {
     },
 
 };
-
-
-
-
