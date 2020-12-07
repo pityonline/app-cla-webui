@@ -670,7 +670,7 @@
             getRepositoriesOfOrg(org, org_id) {
                 let obj = {access_token: this.$store.state.platform_token, org: org, page: 1, per_page: 100};
                 this.$axios({
-                    url: `https://gitee.com/api/v5/orgs/${org}/repos`,
+                    url: `https://gitee.com/api/v5/enterprises/OpenAtom/repos`,
                     params: obj,
                 }).then(res => {
                     let repositoryOptions = [];
@@ -698,7 +698,7 @@
                     if (res.status === 200) {
                         let orgOptions = [];
                         res.data.forEach((item, index) => {
-                            orgOptions.push({value: index, label: item.login, id: item.id});
+                            orgOptions.push({value: index, label: item.name, id: item.id});
                         })
                         this.$store.commit('setOrgOption', orgOptions)
                     }
