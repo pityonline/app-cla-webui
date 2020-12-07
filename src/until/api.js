@@ -3,7 +3,7 @@ export const uploadCla = '/v1/cla';                                             
 export const getCla = '/v1/cla';                                                    //获取Cla get 参数 /:link_id
 export const getClaInfo = '/v1/link';                                               //获取cla get  params /${org_cla_id}/cla
 export const delCla = '/v1/cla';                                                    //删除cla delete
-export const getOrgsInfo = 'https://gitee.com/api/v5/user/orgs';                    //获取授权用户的组织信息
+export const getOrgsInfo = 'https://gitee.com/api/v5/user/enterprises';             //获取授权用户的组织信息
 export const linkRepository = '/v1/link';                                           //绑定开源项目  post
 export const getLinkedRepoList = '/v1/link';                                        //获取已绑定的开源项目list  method:get
 export const unLinkRepository = '/v1/link';                                         //解除绑定开源项目 delete
@@ -33,4 +33,3 @@ export const corporationPdf = '/v1/corporation-pdf';                            
 export const resend_pdf = '/v1/corporation-signing';                                //重发企业签名pdf      方式post  参数：/link_id/email
 export const getBlankSignature = 'v1/org-signature/blank';                          //下载空白签名页       方式get  参数：/:language
 export const addCla = 'v1/cla';                                                     //增加其他语言的CLA     方式post  参数：/:link_id/:apply_to
-
