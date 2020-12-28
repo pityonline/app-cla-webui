@@ -16,4 +16,8 @@ export const base64ToStr = (params) => {
         return false
     }
 };
+export const getNowDateToTime=()=>{
+    let date = new Date();
+    return date.getTime();
+};
 

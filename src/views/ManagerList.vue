@@ -165,10 +165,10 @@
                     url: `${url.queryEmployeeManager}`,
                 }).then(res => {
                     this.tableData = res.data.data;
-                    this.$store.commit('setManagerList',res.data.data)
+                    this.$store.commit('setManagerList', res.data.data);
                     this.setUserLimitAct(res.data.data.length)
                 }).catch(err => {
-                    if (err.data.hasOwnProperty('data')) {
+                    if (err.data && err.data.hasOwnProperty('data')) {
                         switch (err.data.data.error_code) {
                             case 'cla.invalid_token':
                                 this.$store.commit('errorSet', {
@@ -195,6 +195,12 @@
                                     dialogMessage: this.$t('tips.system_error'),
                                 });
                                 break;
+                            default :
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.unknown_error'),
+                                });
+                                break;
                         }
                     } else {
                         this.$store.commit('errorCodeSet', {
@@ -207,7 +213,7 @@
             submit() {
                 let obj = {
                     managers: this.emails
-                }
+                };
                 http({
                     url: url.deleteEmployeeManager,
                     method: 'delete',
@@ -216,7 +222,7 @@
                     this.getEmployeeManager();
                     this.deleteUserVisible = false
                 }).catch(err => {
-                    if (err.data.hasOwnProperty('data')) {
+                    if (err.data && err.data.hasOwnProperty('data')) {
                         switch (err.data.data.error_code) {
                             case 'cla.invalid_token':
                                 this.$store.commit('errorSet', {
@@ -240,6 +246,12 @@
                                 this.$store.commit('errorCodeSet', {
                                     dialogVisible: true,
                                     dialogMessage: this.$t('tips.system_error'),
+                                });
+                                break;
+                            default :
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.unknown_error'),
                                 });
                                 break;
                         }

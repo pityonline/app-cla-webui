@@ -6,11 +6,14 @@ import * as url from '../until/api'
 Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
-        signRouter:'/sign',
+        chooseRepo: sessionStorage.getItem('chooseRepo') || undefined,
+        chooseOrg: sessionStorage.getItem('chooseOrg') || undefined,
+        signRouter: '/sign',
         claChoose: sessionStorage.getItem('claChoose') || undefined,
         orgChoose: sessionStorage.getItem('orgChoose') || undefined,
         repositoryChoose: sessionStorage.getItem('repositoryChoose') || undefined,
         isEmail: sessionStorage.getItem('isEmail') || undefined,
+        email: sessionStorage.getItem('email') || undefined,
         repositoryValue: sessionStorage.getItem('repositoryValue') || undefined,
         claValue: sessionStorage.getItem('claValue') || undefined,
         orgValue: sessionStorage.getItem('orgValue') || undefined,
@@ -25,13 +28,13 @@ export default new Vuex.Store({
         tableData: sessionStorage.getItem('tableData') || undefined,
         ready: Boolean(sessionStorage.getItem('ready') || undefined),
         platform: sessionStorage.getItem('platform') || undefined,
-        domain:sessionStorage.getItem('domain') || undefined,
+        domain: sessionStorage.getItem('domain') || undefined,
         access_token: sessionStorage.getItem('token') || undefined,
         refresh_token: sessionStorage.getItem('refresh_token') || undefined,
         platform_token: sessionStorage.getItem('platform_token') || undefined,
-        sign_access_token :sessionStorage.getItem('sign_access_token') || undefined,
-        sign_refresh_token :sessionStorage.getItem('sign_refresh_token') || undefined,
-        sign_platform_token :sessionStorage.getItem('sign_platform_token') || undefined,
+        sign_access_token: sessionStorage.getItem('sign_access_token') || undefined,
+        sign_refresh_token: sessionStorage.getItem('sign_refresh_token') || undefined,
+        sign_platform_token: sessionStorage.getItem('sign_platform_token') || undefined,
         user: {
             userId: sessionStorage.getItem('userId') || undefined,
             userName: sessionStorage.getItem('userName') || undefined,
@@ -40,40 +43,116 @@ export default new Vuex.Store({
         },
         dialogVisible: false,
         dialogMessage: '',
-        reTryDialogVisible:false,
-        signSuccessDialogVisible:false,
-        signReLoginDialogVisible:false,
-        pwdIsChanged:false,
-        cla_link:sessionStorage.getItem('cla_link') || undefined,
-        metadataType:sessionStorage.getItem('metadataType') || undefined,
-        individualCustomMetadataArr:JSON.parse(sessionStorage.getItem('individualCustomMetadataArr')) || undefined,
-        corporationCustomMetadataArr:JSON.parse(sessionStorage.getItem('corporationCustomMetadataArr')) || undefined,
-        managerList:JSON.parse(sessionStorage.getItem('managerList')) || undefined,
-        corpItem:JSON.parse(sessionStorage.getItem('corpItem')) || undefined,
+        reTryDialogVisible: false,
+        signSuccessDialogVisible: false,
+        signReLoginDialogVisible: false,
+        pwdIsChanged: false,
+        cla_link: sessionStorage.getItem('cla_link') || undefined,
+        metadataType: sessionStorage.getItem('metadataType') || undefined,
+        individualCustomMetadataArr: JSON.parse(sessionStorage.getItem('individualCustomMetadataArr')) || undefined,
+        corporationCustomMetadataArr: JSON.parse(sessionStorage.getItem('corporationCustomMetadataArr')) || undefined,
+        managerList: JSON.parse(sessionStorage.getItem('managerList')) || undefined,
+        corpItem: JSON.parse(sessionStorage.getItem('corpItem')) || undefined,
+        orgAlias: sessionStorage.getItem('orgAlias') || undefined,
+        claLinkIndividual: sessionStorage.getItem('claLinkIndividual') || undefined,
+        claLinkCorp: sessionStorage.getItem('claLinkCorp') || undefined,
+        individualMetadata: JSON.parse(sessionStorage.getItem('individualMetadata')) || undefined,
+        corporationMetadata: JSON.parse(sessionStorage.getItem('corporationMetadata')) || undefined,
+        corpFD: JSON.parse(sessionStorage.getItem('corpFD')) || undefined,
+        individualLanguage: sessionStorage.getItem('individualLanguage') || undefined,
+        corpLanguage: sessionStorage.getItem('corpLanguage') || undefined,
+        corpFDName: sessionStorage.getItem('corpFDName') || undefined,
+        claData: JSON.parse(sessionStorage.getItem('claData')) || undefined,
+        sign_email: sessionStorage.getItem('sign_email') || undefined,
+        sign_user: sessionStorage.getItem('sign_user') || undefined,
     },
     mutations: {
-        setCorpItem(state,data){
+        setSignEmail(state, data) {
+            state.sign_email = data;
+            sessionStorage.setItem('sign_email', data);
+        },
+        setSignUser(state, data) {
+            state.sign_user = data;
+            sessionStorage.setItem('sign_user', data);
+        },
+        setClaData(state, data) {
+            state.claData = data;
+            sessionStorage.setItem('claData', JSON.stringify(data));
+        },
+        setCorpItem(state, data) {
             state.corpItem = data;
-            sessionStorage.setItem('corpItem',JSON.stringify(data));
+            sessionStorage.setItem('corpItem', JSON.stringify(data));
         },
-        setManagerList(state,data){
+        setCorpLanguage(state, data) {
+            state.corpLanguage = data;
+            sessionStorage.setItem('corpLanguage', data);
+        },
+        setIndividualLanguage(state, data) {
+            state.individualLanguage = data;
+            sessionStorage.setItem('individualLanguage', data);
+        },
+        setCorpFDName(state, data) {
+            state.corpFDName = data;
+            sessionStorage.setItem('corpFDName', data);
+        },
+        setCorpFD(state, data) {
+            state.corpFD = data;
+            sessionStorage.setItem('corpFD', JSON.stringify(data));
+        },
+        setEmail(state, data) {
+            state.email = data;
+            sessionStorage.setItem('email', data);
+        },
+        setIsEmail(state, isEmail) {
+            state.isEmail = isEmail;
+            sessionStorage.setItem('isEmail', isEmail);
+        },
+        setIndividualMetadata(state, data) {
+            state.individualMetadata = data;
+            sessionStorage.setItem('individualMetadata', JSON.stringify(data));
+        },
+        setCorpMetadata(state, data) {
+            state.corporationMetadata = data;
+            sessionStorage.setItem('corporationMetadata', JSON.stringify(data));
+        },
+        setClaLinkCorp(state, data) {
+            state.claLinkCorp = data;
+            sessionStorage.setItem('claLinkCorp', data);
+        },
+        setClaLinkIndividual(state, data) {
+            state.claLinkIndividual = data;
+            sessionStorage.setItem('claLinkIndividual', data);
+        },
+        setOrgAlias(state, data) {
+            state.orgAlias = data;
+            sessionStorage.setItem('orgAlias', data);
+        },
+        setChooseRepo(state, data) {
+            state.chooseRepo = data;
+            sessionStorage.setItem('chooseRepo', data);
+        },
+        setChooseOrg(state, data) {
+            state.chooseOrg = data;
+            sessionStorage.setItem('chooseOrg', data);
+        },
+        setManagerList(state, data) {
             state.managerList = data;
-            sessionStorage.setItem('managerList',JSON.stringify(data));
+            sessionStorage.setItem('managerList', JSON.stringify(data));
         },
-        setIndividualCustomMetadataArr(state,individualCustomMetadataArr){
-            state.individualCustomMetadataArr=individualCustomMetadataArr;
+        setIndividualCustomMetadataArr(state, individualCustomMetadataArr) {
+            state.individualCustomMetadataArr = individualCustomMetadataArr;
             sessionStorage.setItem('individualCustomMetadataArr', JSON.stringify(individualCustomMetadataArr));
         },
-        setCorporationCustomMetadataArr(state,corporationCustomMetadataArr){
-            state.corporationCustomMetadataArr=corporationCustomMetadataArr;
+        setCorporationCustomMetadataArr(state, corporationCustomMetadataArr) {
+            state.corporationCustomMetadataArr = corporationCustomMetadataArr;
             sessionStorage.setItem('corporationCustomMetadataArr', JSON.stringify(corporationCustomMetadataArr));
         },
-        setMetadataType(state,metadataType){
-            state.metadataType=metadataType;
+        setMetadataType(state, metadataType) {
+            state.metadataType = metadataType;
             sessionStorage.setItem('metadataType', metadataType);
         },
-        setClaLink(state,cla_link){
-            state.cla_link=cla_link;
+        setClaLink(state, cla_link) {
+            state.cla_link = cla_link;
             sessionStorage.setItem('cla_link', cla_link);
         },
         setPwdIsChanged(state, data) {
@@ -174,10 +253,6 @@ export default new Vuex.Store({
             state.repositoryChoose = repositoryChoose;
             sessionStorage.setItem('repositoryChoose', repositoryChoose);
         },
-        setIsEmail(state, isEmail) {
-            state.isEmail = isEmail;
-            sessionStorage.setItem('isEmail', isEmail);
-        },
         setTableData(state, data) {
             state.tableData = data;
             sessionStorage.setItem('tableData', JSON.stringify(data));
@@ -202,9 +277,9 @@ export default new Vuex.Store({
             state.access_token = token;
             sessionStorage.setItem('token', token);
         },
-        setDomain(state,domain){
-            state.domain=domain
-           sessionStorage.setItem('domain',domain)
+        setDomain(state, domain) {
+            state.domain = domain
+            sessionStorage.setItem('domain', domain)
         },
 
 

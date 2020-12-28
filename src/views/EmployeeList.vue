@@ -175,20 +175,20 @@
         },
         methods: {
             getInactivePageData() {
-                let data = []
-                data = this.inactiveData.slice((this.inactiveCurrentPage - 1) * this.pageSize, this.inactiveCurrentPage * this.pageSize)
+                let data = [];
+                data = this.inactiveData.slice((this.inactiveCurrentPage - 1) * this.pageSize, this.inactiveCurrentPage * this.pageSize);
                 if (data.length === 0 && this.inactiveCurrentPage > 1) {
-                    this.inactiveCurrentPage--
+                    this.inactiveCurrentPage--;
                     return this.getInactivePageData()
                 } else {
                     return data
                 }
             },
             getActivePageData() {
-                let data = []
-                data = this.activeData.slice((this.activeCurrentPage - 1) * this.pageSize, this.activeCurrentPage * this.pageSize)
+                let data = [];
+                data = this.activeData.slice((this.activeCurrentPage - 1) * this.pageSize, this.activeCurrentPage * this.pageSize);
                 if (data.length === 0 && this.activeCurrentPage > 1) {
-                    this.activeCurrentPage--
+                    this.activeCurrentPage--;
                     return this.getActivePageData()
                 } else {
                     return data
@@ -203,18 +203,18 @@
                 this.inactivePageData = this.getInactivePageData()
             },
             submitDelete() {
-                let obj = {enabled: this.deleteData.enabled}
+                let obj = {enabled: this.deleteData.enabled};
                 http({
                     url: `${url.enableEmployee}/${this.deleteData.email}`,
                     method: 'delete',
                     data: obj,
                 }).then(res => {
-                    this.getEmployee()
-                    this.deleteUserVisible = false
+                    this.getEmployee();
+                    this.deleteUserVisible = false;
                     this.$message.closeAll();
                     this.$message.success(this.$t('tips.successTitle'))
                 }).catch(err => {
-                    if (err.data.hasOwnProperty('data')) {
+                    if (err.data && err.data.hasOwnProperty('data')) {
                         switch (err.data.data.error_code) {
                             case 'cla.invalid_token':
                                 this.$store.commit('errorSet', {
@@ -240,6 +240,12 @@
                                     dialogMessage: this.$t('tips.system_error'),
                                 });
                                 break;
+                            default :
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.unknown_error'),
+                                });
+                                break;
                         }
                     } else {
                         this.$store.commit('errorCodeSet', {
@@ -260,7 +266,7 @@
             changeActive(cla_org_id, email, enabled) {
                 let data = {
                     enabled: enabled
-                }
+                };
                 http({
                     url: `${url.enableEmployee}/${email}`,
                     method: 'put',
@@ -268,7 +274,7 @@
                 }).then(res => {
                     this.getEmployee()
                 }).catch(err => {
-                    if (err.data.hasOwnProperty('data')) {
+                    if (err.data && err.data.hasOwnProperty('data')) {
                         switch (err.data.data.error_code) {
                             case 'cla.invalid_token':
                                 this.$store.commit('errorSet', {
@@ -294,6 +300,12 @@
                                     dialogMessage: this.$t('tips.system_error')
                                 });
                                 break;
+                            default :
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.unknown_error'),
+                                });
+                                break;
                         }
                     } else {
                         this.$store.commit('errorCodeSet', {
@@ -310,18 +322,15 @@
                     this.inactiveData = [];
                     this.activeData = [];
                     let data = res.data.data;
-                    for (let key in data) {
-                        data[key].forEach((item, index) => {
-                            Object.assign(item, {cla_org_id: key})
-                            item.enabled === false ? this.inactiveData.push(item) : this.activeData.push(item)
-                        })
-                    }
-                    this.inactivePageData = this.getInactivePageData()
-                    this.activePageData = this.getActivePageData()
-                    this.inactiveTotal = this.inactiveData.length
+                    data.forEach((item, index) => {
+                        item.enabled === false ? this.inactiveData.push(item) : this.activeData.push(item)
+                    });
+                    this.inactivePageData = this.getInactivePageData();
+                    this.activePageData = this.getActivePageData();
+                    this.inactiveTotal = this.inactiveData.length;
                     this.activeTotal = this.activeData.length
                 }).catch(err => {
-                    if (err.data.hasOwnProperty('data')) {
+                    if (err.data && err.data.hasOwnProperty('data')) {
                         switch (err.data.data.error_code) {
                             case 'cla.invalid_token':
                                 this.$store.commit('errorSet', {
@@ -346,6 +355,12 @@
                                 this.$store.commit('errorCodeSet', {
                                     dialogVisible: true,
                                     dialogMessage: this.$t('tips.system_error')
+                                });
+                                break;
+                            default :
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.unknown_error'),
                                 });
                                 break;
                         }
@@ -369,6 +384,7 @@
 
     #employeeList {
         padding: 2rem 0;
+
         & .el-dialog {
             border-radius: 1rem;
         }

@@ -32,7 +32,7 @@
                                 {{$t('header.resetPwd')}}
                             </div>
                             <!--<div v-if="loginRole==='corp'&&role===admin" @click="handleCommand('f')">-->
-                            <!-- {{$t('header.corpCla')}}-->
+                             <!--{{$t('header.corpCla')}}-->
                             <!--</div>-->
                             <div @click="handleCommand('g')">
                                 {{$t('header.loginOut')}}

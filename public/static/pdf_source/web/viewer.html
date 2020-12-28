@@ -34,7 +34,6 @@ See https://github.com/adobe-type-tools/cmap-resources
 
     <!-- This snippet is used in production (included from viewer.html) -->
     <link rel="resource" type="application/l10n" href="locale/locale.properties">
-    <script src="../build/pdf.js"></script>
     <script type="text/javascript">
         var DEFAULT_URL = "";
         var pdfUrl = document.location.search.substring(1);
@@ -46,7 +45,7 @@ See https://github.com/adobe-type-tools/cmap-resources
             var pdfAsDataUri = sessionStorage.getItem("pdf_base64");//这里就是pdf文件的base64码，我是通过session传递base64的
             DEFAULT_URL = convertDataURIToBinary(pdfAsDataUri);
             console.log(DEFAULT_URL);
-            window.URL.createObjectURL(DEFAULT_URL)
+            // window.URL.createObjectURL(DEFAULT_URL)
             var reader = new FileReader();
             reader.readAsDataURL(DEFAULT_URL);
             reader.onload = function (e) {
@@ -65,7 +64,7 @@ See https://github.com/adobe-type-tools/cmap-resources
                     const a = document.createElement('a');
                     a.download = 'preview.pdf'; // 这里写你的文件名
                     a.href = e.target.result;
-                    document.body.appendChild(a)
+                    document.body.appendChild(a);
                     a.click();
                     document.body.removeChild(a)
                 }
@@ -73,32 +72,39 @@ See https://github.com/adobe-type-tools/cmap-resources
 
             //编码转换
             function convertDataURIToBinary(dataURI) {
-                console.log(dataURI);
-                //[RFC2045]中有规定：Base64一行不能超过76字符，超过则添加回车换行符。因此需要把base64字段中的换行符，回车符给去掉。
-                // var base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
-                // console.log(dataURI.indexOf(BASE64_MARKER), BASE64_MARKER.length);
-                // var newUrl = dataURI.substring(base64Index).replace(/[\n\r]/g, '');
-                var newUrl = dataURI.replace(/[\n\r]/g, '');
-                console.log(newUrl);
-                var raw = window.atob(newUrl);//这个方法在ie内核下无法正常解析。
+                // console.log(dataURI);
+                // //[RFC2045]中有规定：Base64一行不能超过76字符，超过则添加回车换行符。因此需要把base64字段中的换行符，回车符给去掉。
+                // // var base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
+                // // console.log(dataURI.indexOf(BASE64_MARKER), BASE64_MARKER.length);
+                // // var newUrl = dataURI.substring(base64Index).replace(/[\n\r]/g, '');
+                // var newUrl = dataURI.replace(/[\n\r]/g, '');
+                // // var raw = window.atob(newUrl);//这个方法在ie内核下无法正常解析。
                 // var raw = window.atob((dataURI).replace(/-/g, "+").replace(/_/g, "/").replace(/%/g, '%25'));
-                // var raw = window.atob(dataURI);//这个方法在ie内核下无法正常解析。
-                console.log(raw);
-                var rawLength = raw.length;
-                console.log(rawLength);
-                //转换成pdf.js能直接解析的Uint8Array类型
-                var array = new Uint8Array(new ArrayBuffer(rawLength));
-                // var array = new Uint8Array(rawLength);
-                for (i = 0; i < rawLength; i++) {
-                    // array[i] = raw.charCodeAt(i) & 0xff;
-                    array[i] = raw.charCodeAt(i);
+                // console.log(raw);
+                // var rawLength = raw.length;
+                // console.log(rawLength);
+                // //转换成pdf.js能直接解析的Uint8Array类型
+                // var array = new Uint8Array(new ArrayBuffer(rawLength));
+                // // var array = new Uint8Array(rawLength);
+                // for (i = 0; i < rawLength; i++) {
+                //     // array[i] = raw.charCodeAt(i) & 0xff;
+                //     array[i] = raw.charCodeAt(i);
+                // }
+                // console.log(array);
+                // // return array;
+                // return new Blob([array], { type: 'pdf' });
+                let bstr = atob(dataURI)
+                let n = bstr.length;
+                let u8arr = new Uint8Array(n);
+                while (n--) {
+                    u8arr[n] = bstr.charCodeAt(n);
                 }
-                console.log(array);
-                // return array;
-                return new Blob([array], { type: 'pdf' });
+                return new Blob([u8arr], {type: 'pdf'});
             }
         }
     </script>
+    <script src="../build/pdf.js"></script>
+
 
     <script src="viewer.js"></script>
 

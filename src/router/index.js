@@ -43,7 +43,7 @@ const routes = [
         children: [
             {
                 path: '/',
-                redirect:'/linkedRepo'
+                redirect: '/linkedRepo'
             },
             {
                 path: '/linkedRepo',
@@ -57,8 +57,37 @@ const routes = [
             },
             {
                 path: '/bind-cla',
-                name: 'ConfigCla',
-                component: () => import('../views/ConfigCla.vue')
+                component: () => import('../views/ConfigCla.vue'),
+                children: [
+                    {
+                        path: '/',
+                        redirect: '/config-org',
+                    },
+                    {
+                        path: '/config-org',
+                        name: 'ConfigOrg',
+                        component: () => import('../views/ConfigOrg.vue')
+                    },
+                    {
+                        path: '/config-cla-link',
+                        name: 'ConfigClaLink',
+                        component: () => import('../views/ConfigClaLink.vue')
+                    },
+                    {
+                        path: '/config-fields',
+                        name: 'ConfigFields',
+                        component: () => import('../views/ConfigFields.vue')
+                    },
+                    {
+                        path: '/config-email',
+                        name: 'ConfigEmail',
+                        component: () => import('../views/ConfigEmail.vue')
+                    },
+                    {
+                        path: '/config-check',
+                        name: 'ConfigCheck',
+                        component: () => import('../views/ConfigCheck.vue')
+                    },]
             },
         ]
     },
@@ -102,12 +131,12 @@ const routes = [
     },
     {
         path: '/sign/:params',
-        name:'SignType',
+        name: 'SignType',
         component: () => import('../views/SignType.vue')
     },
     {
         path: '/sign/:params/:orgAddress',
-        name:'SignType_back',
+        name: 'SignType_back',
         component: () => import('../views/SignType.vue')
     },
 
@@ -156,12 +185,15 @@ router.beforeEach((to, from, next) => {
     } else {
         next()
     }
-    if (to.name === 'SignType'||to.name === 'SignType_back'||to.path === '/sign-cla'||to.path === '/index'||to.path === '/platformSelect'||to.path === '/corporationManagerLogin'||to.path === '/orgSelect') {
-        sessionStorage.setItem('showHeaderMenu','false')
-    }else if (to.path === '/home' || to.path === '/linkedRepo'||to.path === '/corporationList'||to.path === '/bind-cla') {
-        sessionStorage.setItem('showHeaderMenu','org')
-    }else{
-        sessionStorage.setItem('showHeaderMenu','corp')
+    if (to.name === 'SignType' || to.name === 'SignType_back' || to.path === '/sign-cla' || to.path === '/index'
+        || to.path === '/platformSelect' || to.path === '/corporationManagerLogin' || to.path === '/orgSelect') {
+        sessionStorage.setItem('showHeaderMenu', 'false')
+    } else if (to.path === '/home' || to.path === '/linkedRepo' || to.path === '/corporationList' || to.path === '/bind-cla'
+        || to.path === '/config-org' || to.path === '/config-cla-link' || to.path === '/config-fields'
+        || to.path === '/config-email' || to.path === '/config-check') {
+        sessionStorage.setItem('showHeaderMenu', 'org')
+    } else {
+        sessionStorage.setItem('showHeaderMenu', 'corp')
     }
 })
 router.afterEach((to, from, next) => {

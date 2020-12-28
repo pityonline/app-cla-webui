@@ -78,12 +78,11 @@
             submit() {
             },
             getLoginUrl(platform) {
-                this.setPlatformAct(platform)
+                this.setPlatformAct(platform);
                 let interval = setInterval(() => {
                     if (this.$store.state.platform) {
                         http({
                             url: `${url.getAuthCodeUrl}/${platform}/login`,
-                            params:{success_redirect:'/home',failure_redirect:'/platformSelect',}
                         }).then(res => {
                             window.location.href=res.data.data.url
                         }).catch(err => {
@@ -117,6 +116,12 @@
                                             dialogMessage: this.$t('tips.system_error')
                                         });
                                         break;
+                                    default :
+                                        this.$store.commit('errorCodeSet', {
+                                            dialogVisible: true,
+                                            dialogMessage: this.$t('tips.unknown_error'),
+                                        });
+                                        break;
                                 }
                             } else {
                                 this.$store.commit('errorCodeSet', {
@@ -124,17 +129,11 @@
                                     dialogMessage: this.$t('tips.system_error')
                                 })
                             }
-                        })
+                        });
                         clearInterval(interval)
                     }
                 }, 100)
-
             },
-            login(url){
-                let params = url.split('/api')
-
-            },
-
         },
         created() {
             this.setClientHeight()

@@ -3,7 +3,6 @@
         <el-col class="footer" :offset="5" :span="14">
             <div class="box" @click="join">
                 <svg-icon icon-class="github" class="footerIcon"></svg-icon>
-                <!--<span class="join_us">JOIN US</span>-->
             </div>
             <div class="box" @click="viewPrivacy">
                 <span class="copyright">©2020 Draven.Designed by LA-Studio</span>
