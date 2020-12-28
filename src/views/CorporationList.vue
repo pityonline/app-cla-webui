@@ -38,9 +38,9 @@
                                     <div class="menuBT">
                                         <el-button @click="uploadClaFile(scope.row)" size="mini">upload
                                         </el-button>
-                                        <el-button @click="downloadClaFile(scope.row)" size="mini">download
+                                        <el-button v-if="scope.row.pdf_uploaded" @click="downloadClaFile(scope.row)" size="mini">download
                                         </el-button>
-                                        <el-button @click="previewClaFile(scope.row)" type="" size="mini">preview
+                                        <el-button v-if="scope.row.pdf_uploaded" @click="previewClaFile(scope.row)" type="" size="mini">preview
                                         </el-button>
                                     </div>
 
@@ -59,7 +59,7 @@
                                            @click="createRoot(scope.row.admin_email)">Create Administrator
                                 </el-button>
                                 <el-tooltip effect="dark" :content="$t('org.resend_tip')" placement="top">
-                                    <el-button type="primary"
+                                    <el-button :disabled="scope.row.pdf_uploaded" type="primary"
                                                size="mini"
                                                @click="openResendPdf(scope.row.admin_email)">Resend Email
                                     </el-button>
@@ -135,12 +135,9 @@
                                         placement="right">
 
                                     <div class="menuBT">
-                                        <el-button @click="uploadOrgSignature(scope.row)"
-                                                   type=""
-                                                   size="mini">upload
-                                        </el-button>
-                                        <!--<el-button @click="downloadOrgSignature(scope.row)" type="" size="mini">download</el-button>-->
-                                        <!--<el-button @click="previewOrgSignature(scope.row)" type="" size="mini">preview</el-button>-->
+                                        <!--<el-button @click="uploadOrgSignature(scope.row)" size="mini">upload</el-button>-->
+                                        <el-button @click="downloadOrgSignature(scope.row)" type="" size="mini">download</el-button>
+                                        <el-button @click="previewOrgSignature(scope.row)" type="" size="mini">preview</el-button>
                                     </div>
 
                                     <svg-icon slot="reference" class="pointer" icon-class="pdf" @click=""/>
@@ -243,8 +240,6 @@
     import pdf from 'vue-pdf'
     import ReLoginDialog from '../components/ReLoginDialog'
     import download from 'downloadjs'
-
-
     export default {
         name: "CorporationList",
         components: {
@@ -279,7 +274,6 @@
                 tableData: [],
                 currentPage: 1,
                 tableTotal: 0,
-                pdfBase64: `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`,
             }
         },
         inject: ['setClientHeight'],
@@ -305,40 +299,40 @@
             previewOrgSignature(row) {
             },
             downloadOrgSignature(row) {
-                http({
-                    url: `${url.downloadSignature}/${row.id}`,
-                }).then(res => {
-                    if (res.data.data.pdf) {
-                        let URL = this.dataURLtoBlob(res.data.data.pdf);
-                        var reader = new FileReader();
-                        reader.readAsDataURL(URL);
-                        reader.onload = function (e) {
-                            if (window.navigator.msSaveOrOpenBlob) {
-                                var bstr = atob(e.target.result.split(",")[1]);
-                                var n = bstr.length;
-                                var u8arr = new Uint8Array(n);
-                                while (n--) {
-                                    u8arr[n] = bstr.charCodeAt(n);
-                                }
-                                var blob = new Blob([u8arr]);
-                                window.navigator.msSaveOrOpenBlob(blob, `${row.language}_signature.pdf`);
-                            } else {
-                                const a = document.createElement('a');
-                                a.download = `${row.language}_signature.pdf`;
-                                a.href = e.target.result;
-                                document.body.appendChild(a);
-                                a.click();
-                                document.body.removeChild(a)
-                            }
-                        }
-                    } else {
-                        this.$store.commit('errorCodeSet', {
-                            dialogVisible: true,
-                            dialogMessage: this.$t('tips.not_upload_file'),
-                        })
-                    }
-                }).catch(err => {
-                })
+                // http({
+                //     url: `${url.downloadSignature}/${row.id}`,
+                // }).then(res => {
+                //     if (res.data.data.pdf) {
+                //         let URL = this.dataURLtoBlob(res.data.data.pdf);
+                //         var reader = new FileReader();
+                //         reader.readAsDataURL(URL);
+                //         reader.onload = function (e) {
+                //             if (window.navigator.msSaveOrOpenBlob) {
+                //                 var bstr = atob(e.target.result.split(",")[1]);
+                //                 var n = bstr.length;
+                //                 var u8arr = new Uint8Array(n);
+                //                 while (n--) {
+                //                     u8arr[n] = bstr.charCodeAt(n);
+                //                 }
+                //                 var blob = new Blob([u8arr]);
+                //                 window.navigator.msSaveOrOpenBlob(blob, `${row.language}_signature.pdf`);
+                //             } else {
+                //                 const a = document.createElement('a');
+                //                 a.download = `${row.language}_signature.pdf`;
+                //                 a.href = e.target.result;
+                //                 document.body.appendChild(a);
+                //                 a.click();
+                //                 document.body.removeChild(a)
+                //             }
+                //         }
+                //     } else {
+                //         this.$store.commit('errorCodeSet', {
+                //             dialogVisible: true,
+                //             dialogMessage: this.$t('tips.not_upload_file'),
+                //         })
+                //     }
+                // }).catch(err => {
+                // })
             },
             converData(data) {
                 // data = data.replace(/[\n\r]/g, '');
@@ -418,7 +412,6 @@
 
                     }
                 }).catch(err => {
-
                 });
             },
             getCorporationInfo() {
@@ -462,15 +455,6 @@
                     window.open(`../../static/pdf_source/web/viewer.html?file=${encodeURIComponent(url)}`)
                 }).catch(err => {
                 })
-            },
-            dataURLtoBlob(dataurl) {
-                let bstr = atob(dataurl)
-                let n = bstr.length;
-                let u8arr = new Uint8Array(n);
-                while (n--) {
-                    u8arr[n] = bstr.charCodeAt(n);
-                }
-                return new Blob([u8arr], {type: 'pdf'});
             },
             downloadClaFile(row) {
                 http({
@@ -590,6 +574,17 @@
 <style lang="less">
     #corporationList {
         padding-top: 3rem;
+
+        #pop {
+            position: relative;
+            text-align: center;
+            z-index: 9;
+
+            canvas {
+                margin: 20px auto;
+                display: block;
+            }
+        }
 
         #pop {
             position: relative;
