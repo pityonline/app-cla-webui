@@ -43,16 +43,13 @@
         if (until.getClientHeight() > document.getElementById('transparentDiv').offsetHeight) {
             document.getElementById("transparentDiv").style.height = until.getClientHeight() + 'px';
         }
-    }
+    };
     export default {
         name: 'Login',
         components: {
             Select,
             NewHeader,
             NewFooter
-        },
-        watch: {
-
         },
         data() {
             return {
@@ -122,7 +119,6 @@
             left: 280px;
         }
     }
-
     .index {
         display: flex;
         flex-direction: column;

@@ -828,6 +828,7 @@
     import * as until from '../until/until'
     import * as url from '../until/api'
     import http from '../until/http'
+    import isMobile from 'is-mobile'
     import Select from '@components/Select'
     import {mapActions} from 'vuex'
     import ReTryDialog from '../components/ReTryDialog'
@@ -878,16 +879,7 @@
         methods: {
             ...mapActions(['setLoginTypeAct', 'setRepoInfoAct']),
             browserRedirect() {
-                var sUserAgent = navigator.userAgent.toLowerCase();
-                var bIsIpad = sUserAgent.match(/ipad/i) === "ipad";
-                var bIsIphoneOs = sUserAgent.match(/iphone os/i) === "iphone os";
-                var bIsMidp = sUserAgent.match(/midp/i) === "midp";
-                var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) === "rv:1.2.3.4";
-                var bIsUc = sUserAgent.match(/ucweb/i) === "ucweb";
-                var bIsAndroid = sUserAgent.match(/android/i) === "android";
-                var bIsCE = sUserAgent.match(/windows ce/i) === "windows ce";
-                var bIsWM = sUserAgent.match(/windows mobile/i) === "windows mobile";
-                this.isMobile = bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM;
+                this.isMobile = isMobile();
             },
             toCorpLogin() {
                 this.$store.commit('setLoginType', 'corporationManager');
@@ -1086,9 +1078,9 @@
         },
         mounted() {
             if (this.isMobile) {
-                until.setMinHeight('sign', 'btBox');
-            } else {
                 until.setMinHeight('mobile_sign', 'mobile_btBox');
+            } else {
+                until.setMinHeight('sign', 'btBox');
             }
             this.setClientHeight();
         }
@@ -1186,6 +1178,7 @@
             display: flex;
             flex-direction: column;
         }
+
         .mobile_button {
             font-family: Roboto-Regular, sans-serif;
             width: 100%;
@@ -1202,6 +1195,7 @@
         .mobile_button:focus {
             outline: none;
         }
+
         .button {
             font-family: Roboto-Regular, sans-serif;
             width: 17rem;
@@ -1367,6 +1361,7 @@
     .mobile_name {
 
     }
+
     .name {
         font-family: Roboto-Regular, sans-serif;
         color: #424242;

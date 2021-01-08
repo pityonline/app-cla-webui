@@ -2,36 +2,35 @@
     <el-row id="configTwo">
         <div class="itemBox">
             <div class="stepTitle">
-                ③ Paste a url of a CLA file
+                ③ {{$t('org.config_cla_paste_url_title')}}
                 <el-tooltip class="item" effect="light"
-                            content="Paste a url to the original data of a CLA in the repository"
+                            :content="$t('org.config_cla_paste_url_title_tooltips')"
                             placement="right">
                     <svg-icon icon-class="bangzhu"></svg-icon>
                 </el-tooltip>
             </div>
             <div>
                 <div class="margin-top-1rem">
-                    Individual CLA url
+                    {{$t('org.config_cla_paste_individual_url')}}
                 </div>
                 <div class="margin-top-1rem">
-                    You need to paste here a url to the original data from the gitee repository, which is the cla
-                    protocol,
-                    applied to individual signatures
+                    {{$t('org.config_cla_individual_url_desc')}}
                 </div>
                 <div class="margin-top-1rem">
                     <el-row class="margin-top-1rem">
                         <el-col>
-                            <el-input placeholder="Paste a link" size="medium" v-model="cla_link_individual">
+                            <el-input :placeholder="$t('org.config_cla_url_placeholder')" size="medium"
+                                      v-model="cla_link_individual">
                             </el-input>
                         </el-col>
                     </el-row>
                     <el-row class="margin-top-1rem">
-                        Individual CLA language
+                        {{$t('org.config_cla_individual_lang')}}
                     </el-row>
                     <el-row class="margin-top-1rem">
                         <el-col>
                             <el-select v-model="individualClaLanguageValue"
-                                       placeholder="select language"
+                                       :placeholder="$t('org.config_cla_select_lang')"
                                        style="width: 100%"
                                        size="medium"
                                        clearable
@@ -50,31 +49,29 @@
             </div>
             <div class="margin-top-2rem">
                 <div class="margin-top-1rem">
-                    If you need your community support corporation to sign up for CLA, please complete the following
-                    information. If not, please ignore it
+                    {{$t('org.config_cla_corp_url')}}
                 </div>
                 <div class="margin-top-1rem">
-                    Corporation CLA url
+                    {{$t('org.config_cla_paste_corp_url')}}
                 </div>
                 <div class="margin-top-1rem">
-                    You need to paste here a url to the original data from the gitee repository, which is the cla
-                    protocol,
-                    applied to corporation signatures
+                    {{$t('org.config_cla_corp_url_desc')}}
                 </div>
                 <div class="margin-top-1rem">
                     <el-row>
                         <el-col>
-                            <el-input placeholder="Paste a link" size="medium" v-model="cla_link_corporation">
+                            <el-input :placeholder="$t('org.config_cla_url_placeholder')" size="medium"
+                                      v-model="cla_link_corporation">
                             </el-input>
                         </el-col>
                     </el-row>
                     <div class="margin-top-1rem">
-                        Corporation CLA language
+                        {{$t('org.config_cla_corp_lang')}}
                     </div>
                     <el-row class="margin-top-1rem">
                         <el-col>
                             <el-select v-model="corpClaLanguageValue"
-                                       placeholder="select language"
+                                       :placeholder="$t('org.config_cla_select_lang')"
                                        style="width: 100%"
                                        size="medium"
                                        clearable
@@ -90,46 +87,66 @@
                         </el-col>
                     </el-row>
                     <div class="margin-top-1rem">
-                        Upload signature file
+                        {{$t('org.config_cla_upload_file_title')}}
                     </div>
                     <div class="margin-top-1rem">
-                        You need to upload a PDF file that the community administrator has signed. If you don't have the
-                        original file, click
-                        <span @click="downloadFile" class="downloadText">download</span>
+                        {{$t('org.config_cla_corp_file')}}
+                        <span @click="downloadFile"
+                              class="downloadText">{{$t('org.config_cla_corp_file_download')}}</span>
                     </div>
                     <div class="margin-top-1rem">
                         <div>
-                            <el-button class="showBox" size="mini">
-                                <input class="inputFile" id="corp_pdf" @change="changeFile" type="file" name="file"
-                                       title="">
-                                choose file
-                            </el-button>
-                            <span class="signatureName">{{this.$store.state.corpFDName}}</span>
+                            <button class="showBox">
+                                <input class="inputFile" id="corp_pdf" @change="changeFile" type="file" name="file">
+                                {{$t('org.config_cla_corp_choose_file')}}
+                            </button>
+                            <span class="signatureName">
+                                {{this.$store.state.corpFDName}}
+                                <svg-icon class="delete-icon" v-if="this.$store.state.corpFDName" @click="deleteFile"
+                                          icon-class="clear"></svg-icon>
+                            </span>
+
+                        </div>
+                        <div class="margin-top-1rem file_size_tips">
+                            {{$t('org.config_cla_corp_file_size',{max_size_kb:this.max_size})}}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="stepBtBox">
-            <el-button size="medium" type="primary" class="stepBt" @click="toPreviousPage">Previous Step</el-button>
-            <el-button size="medium" type="primary" class="stepBt" @click="toNextPage">Next Step</el-button>
+            <button class="step_button" @click="toPreviousPage">{{$t('org.previous_step')}}</button>
+            <button class="step_button" @click="toNextPage">{{$t('org.next_step')}}</button>
         </div>
-        <reTryDialog :message="corpReLoginMsg" :dialogVisible="corpReTryDialogVisible"></reTryDialog>
+        <ReTryDialog :message="reLoginMsg" :dialogVisible="reTryVisible"></ReTryDialog>
+        <ReLoginDialog :dialogVisible="reLoginDialogVisible" :message="reLoginMsg"></ReLoginDialog>
     </el-row>
 
 </template>
 <script>
-    import reTryDialog from '../components/ReTryDialog'
     import * as url from '../until/api'
     import * as until from '../until/until'
     import http from '../until/http'
     import download from 'downloadjs'
+    import ReTryDialog from '../components/ReTryDialog'
+    import ReLoginDialog from '../components/ReLoginDialog'
+
     export default {
         name: "ConfigClaLink",
         components: {
-            reTryDialog
+            ReTryDialog,
+            ReLoginDialog,
         },
         computed: {
+            reTryVisible() {
+                return this.$store.state.reTryDialogVisible
+            },
+            reLoginDialogVisible() {
+                return this.$store.state.orgReLoginDialogVisible
+            },
+            reLoginMsg() {
+                return this.$store.state.dialogMessage
+            },
             cla_link_individual: {
                 get() {
                     return this.$store.state.claLinkIndividual;
@@ -171,12 +188,20 @@
         },
         data() {
             return {
+                max_size: SIGNATURE_PAGE_MAX_SIZE,
                 corp_pdf_name: '',
                 languageOptions: [{value: 'english', label: 'English'}, {value: 'chinese', label: '中文'}],
             }
-        }
-        ,
+        },
         methods: {
+            deleteFile() {
+                let input = document.getElementById('corp_pdf');
+                input.value = '';
+                this.$store.commit('setCorpFDName', '');
+                this.$store.commit('setCorpFD', '');
+                sessionStorage.removeItem('corpFDName');
+                sessionStorage.removeItem('corpFD');
+            },
             init() {
                 this.$store.commit('setIndividualLanguage', '');
                 this.$store.commit('setCorpLanguage', '');
@@ -195,17 +220,56 @@
                 if (this.corpClaLanguageValue) {
                     http({
                         url: `${url.getBlankSignature}/${this.$store.state.corpLanguage}`,
-                        responseType:"blob",
+                        responseType: "blob",
                     }).then(res => {
                         if (res.data) {
                             let time = until.getNowDateToTime();
                             download((new Blob([res.data])), `${this.$store.state.corpLanguage}_blank_signature${time}.pdf`, 'application/pdf');
                         }
                     }).catch(err => {
+                        if (err.data && err.data.hasOwnProperty('data')) {
+                            switch (err.data.data.error_code) {
+                                case 'cla.invalid_token':
+                                    this.$store.commit('setOrgReLogin', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.invalid_token'),
+                                    });
+                                    break;
+                                case 'cla.missing_token':
+                                    this.$store.commit('setOrgReLogin', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.missing_token'),
+                                    });
+                                    break;
+                                case 'cla.unknown_token':
+                                    this.$store.commit('setOrgReLogin', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.unknown_token'),
+                                    });
+                                    break;
+                                case 'cla.system_error':
+                                    this.$store.commit('errorCodeSet', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.system_error'),
+                                    });
+                                    break;
+                                default :
+                                    this.$store.commit('errorCodeSet', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.unknown_error'),
+                                    });
+                                    break;
+                            }
+                        } else {
+                            this.$store.commit('errorCodeSet', {
+                                dialogVisible: true,
+                                dialogMessage: this.$t('tips.system_error'),
+                            })
+                        }
                     })
-                }else {
+                } else {
                     this.$message.closeAll();
-                    this.$message.error('Please select the language of the signature page to be downloaded first');
+                    this.$message.error(this.$t('org.config_cla_download_empty_signature_tips'));
                 }
             },
             changeIndividualLanguage(value) {
@@ -216,28 +280,37 @@
             },
             changeFile() {
                 let formData = new FormData();
-                let fs = document.getElementById('corp_pdf').files;
-                let max_size = 1024 * 1024;
+                let input = document.getElementById('corp_pdf');
+                let fs = input.files;
+                let _size = 1024 * this.max_size;
                 for (let i = 0; i < fs.length; i++) {
                     let d = fs[i];
-                    if (d.size <= max_size) {
-                        if (/.(PDF|pdf)$/.test(d.name)) {
+                    if (/.(PDF|pdf)$/.test(d.name)) {
+                        if (d.size <= _size) {
                             formData.append("files", fs[i]);
+                            this.$store.commit('setCorpFDName', formData.get('files').name);
+                            let reader = new FileReader();
+                            reader.readAsDataURL(formData.get('files'));
+                            reader.onload = () => {
+                                this.$store.commit('setCorpFD', reader.result)
+                            };
                         } else {
-                            alert('上传文件必须是PDF！');
+                            input.value = '';
+                            this.$store.commit('errorCodeSet', {
+                                dialogVisible: true,
+                                dialogMessage: this.$t('tips.file_too_large'),
+                            });
                             return false
                         }
                     } else {
-                        alert('上传文件过大！');
+                        input.value = '';
+                        this.$store.commit('errorCodeSet', {
+                            dialogVisible: true,
+                            dialogMessage: this.$t('tips.not_pdf'),
+                        });
                         return false
                     }
                 }
-                this.$store.commit('setCorpFDName', formData.get('files').name);
-                let reader = new FileReader();
-                reader.readAsDataURL(formData.get('files'));
-                reader.onload = () => {
-                    this.$store.commit('setCorpFD', reader.result)
-                };
             },
             toPreviousPage() {
                 this.$router.replace('/config-email')
@@ -290,14 +363,37 @@
 </script>
 <style lang="less">
     #configTwo {
+        .file_button {
+            font-family: Roboto-Regular, sans-serif;
+            width: 5rem;
+            height: 3rem;
+            border-radius: 1.5rem;
+            border: none;
+            color: white;
+            font-size: 0.8rem;
+            cursor: pointer;
+            background: linear-gradient(to right, #97DB30, #319E55);
+            margin: 1.2rem 0;
+        }
+
+        .file_button:focus {
+            outline: none;
+        }
+
         .signatureName {
             font-size: .8rem;
+            vertical-align: text-top;
+        }
+
+        .delete-icon {
+            cursor: pointer;
+            margin-left: .5rem;
         }
 
         .downloadText {
             text-decoration: underline;
             cursor: pointer;
-            color: #409EFF;
+            color: #319E55;
         }
 
         .inputFile {
@@ -316,6 +412,15 @@
             left: 0;
             z-index: 1;
             margin-right: 1rem;
+            font-family: Roboto-Regular, sans-serif;
+            width: 5rem;
+            height: 2rem;
+            border-radius: 1rem;
+            border: none;
+            color: white;
+            font-size: 0.8rem;
+            cursor: pointer;
+            background: linear-gradient(to right, #97DB30, #319E55);
         }
 
         .stepTitle {
@@ -332,6 +437,10 @@
             .emailInput {
                 cursor: pointer;
             }
+        }
+
+        .file_size_tips {
+            font-size: 0.8rem;
         }
     }
 </style>

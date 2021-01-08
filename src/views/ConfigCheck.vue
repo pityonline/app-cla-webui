@@ -2,18 +2,18 @@
     <div id="configCheck">
         <div class="itemBox">
             <div class="=info-title">
-                ① Organization and repository
+                ① {{$t('org.config_cla_check_org_repo_title')}}
             </div>
             <div class="margin-top-1rem">
                 <el-row :gutter="20">
                     <el-col :span="8">
-                        Organization
+                        {{$t('org.config_cla_check_org_title')}}
                     </el-col>
                     <el-col :span="8">
-                        Organization alias
+                        {{$t('org.config_cla_check_org_alias_title')}}
                     </el-col>
                     <el-col :span="8">
-                        Repository
+                        {{$t('org.config_cla_check_repo_title')}}
                     </el-col>
                 </el-row>
             </div>
@@ -33,34 +33,28 @@
         </div>
         <div class="itemBox">
             <div class="=info-title">
-                ② Email
+                ②{{$t('org.config_cla_check_email_title')}}
             </div>
             <div class="margin-top-1rem">
                 <el-input
                         disabled=""
                         size="medium"
                         class="emailInput"
-                        placeholder="authorized email"
                         v-model="email">
                 </el-input>
             </div>
         </div>
         <div class="itemBox">
             <div class="=info-title">
-                ③ Url of CLA file
-               <el-tooltip class="item" effect="dark"
-                            content="Paste a link to the original data of a CLA in the repository"
-                            placement="right">
-                    <svg-icon icon-class="bangzhu"></svg-icon>
-                </el-tooltip>
+                ③ {{$t('org.config_cla_check_url_title')}}
             </div>
             <div class="margin-top-1rem">
                 <el-row :gutter="20">
                     <el-col :span="18">
-                        Individual CLA url
+                        {{$t('org.config_cla_paste_individual_url')}}
                     </el-col>
                     <el-col :span="6">
-                        Individual CLA language
+                        {{$t('org.config_cla_individual_lang')}}
                     </el-col>
                 </el-row>
             </div>
@@ -79,10 +73,10 @@
             <div class="margin-top-1rem">
                 <el-row :gutter="20">
                     <el-col :span="18">
-                        Corporation CLA url
+                        {{$t('org.config_cla_paste_corp_url')}}
                     </el-col>
                     <el-col :span="6">
-                        Corporation CLA language
+                        {{$t('org.config_cla_corp_lang')}}
                     </el-col>
                 </el-row>
             </div>
@@ -99,7 +93,7 @@
                 </el-row>
             </div>
             <div class="margin-top-1rem">
-                Signature File
+                {{$t('org.config_cla_check_file')}}
             </div>
             <div class="margin-top-half-rem">
                 <el-input disabled="" v-model="corp_pdf_name"></el-input>
@@ -107,31 +101,26 @@
         </div>
         <div class="itemBox">
             <div style="padding: .5rem">
-                <p style="font-size: 1.2rem">④ CLA's Fields
-                    <el-tooltip class="item" effect="dark"
-                                content="The information you want contributors to fill in when they sign the cla.Title and type are required, otherwise the field will fail to be added"
-                                placement="right">
-                        <svg-icon icon-class="bangzhu"></svg-icon>
-                    </el-tooltip>
+                <p style="font-size: 1.2rem">④ {{$t('org.config_cla_check_fields_title')}}
                 </p>
             </div>
             <div style="padding: 0 2rem">
                 <el-row class="margin-top-1rem">
-                    For Individual
+                    {{$t('org.config_cla_individual_metadata')}}
                 </el-row>
                 <div>
                     <el-row class="margin-top-1rem" type="flex" align="middle" :gutter="20">
                         <el-col :span="5">
-                            Title
+                            {{$t('org.config_cla_check_fields_title_title')}}
                         </el-col>
                         <el-col :span="5">
-                            Type
+                            {{$t('org.config_cla_check_fields_type_title')}}
                         </el-col>
                         <el-col :span="5">
-                            Describe
+                            {{$t('org.config_cla_check_fields_describe_title')}}
                         </el-col>
                         <el-col :span="5" style="height: 100%">
-                            Require
+                            {{$t('org.config_cla_check_fields_require_title')}}
                         </el-col>
                     </el-row>
                     <el-row style="padding: 0.5rem 0;" type="flex" align="middle" :gutter="20"
@@ -147,28 +136,29 @@
                             <el-input disabled="" v-model="item.description" size="medium" readonly></el-input>
                         </el-col>
                         <el-col :span="5" style="height: 100%">
-                            <el-checkbox v-model="item.required" disabled="">required</el-checkbox>
+                            <el-checkbox v-model="item.required" disabled="">{{$t('org.config_cla_fields_required')}}
+                            </el-checkbox>
                         </el-col>
                     </el-row>
 
                 </div>
                 <div v-if="this.$store.state.claLinkCorp">
                     <el-row class="margin-top-1rem">
-                        For Corporation
+                        {{$t('org.config_cla_fields_required')}}
                     </el-row>
                     <div>
                         <el-row class="margin-top-1rem" type="flex" align="middle" :gutter="20">
                             <el-col :span="5">
-                                Title
+                                {{$t('org.config_cla_check_fields_title_title')}}
                             </el-col>
                             <el-col :span="5">
-                                Type
+                                {{$t('org.config_cla_check_fields_type_title')}}
                             </el-col>
                             <el-col :span="5">
-                                Describe
+                                {{$t('org.config_cla_check_fields_describe_title')}}
                             </el-col>
                             <el-col :span="5" style="height: 100%">
-                                Require
+                                {{$t('org.config_cla_check_fields_require_title')}}
                             </el-col>
                         </el-row>
                         <el-row style="padding: 0.5rem 0;" type="flex" align="middle" :gutter="20"
@@ -184,7 +174,9 @@
                                 <el-input disabled="" v-model="item.description" size="medium" readonly></el-input>
                             </el-col>
                             <el-col :span="5" style="height: 100%">
-                                <el-checkbox v-model="item.required" disabled="">required</el-checkbox>
+                                <el-checkbox v-model="item.required" disabled="">
+                                    {{$t('org.config_cla_fields_required')}}
+                                </el-checkbox>
                             </el-col>
                         </el-row>
                     </div>
@@ -194,19 +186,36 @@
 
         </div>
         <div class="stepBtBox">
-            <el-button @click="toConfigEmail" size="medium" type="primary" class="stepBt">Previous Step</el-button>
-            <el-button @click="binding" size="medium" type="primary" class="stepBt">Submit</el-button>
+            <button @click="toConfigEmail" class="step_button">{{$t('org.previous_step')}}</button>
+            <button @click="binding" class="step_button">{{$t('org.submit')}}</button>
         </div>
+        <ReLoginDialog :dialogVisible="reLoginDialogVisible" :message="reLoginMsg"></ReLoginDialog>
+        <ReTryDialog :dialogVisible="reTryVisible" :message="reLoginMsg"></ReTryDialog>
     </div>
 </template>
 
 <script>
     import * as url from '../until/api'
     import http from '../until/http'
+    import ReLoginDialog from '../components/ReLoginDialog'
+    import ReTryDialog from '../components/ReTryDialog'
 
     export default {
         name: "ConfigCheck",
+        components: {
+            ReLoginDialog,
+            ReTryDialog
+        },
         computed: {
+            reTryVisible() {
+                return this.$store.state.reTryDialogVisible
+            },
+            reLoginDialogVisible() {
+                return this.$store.state.orgReLoginDialogVisible
+            },
+            reLoginMsg() {
+                return this.$store.state.dialogMessage
+            },
             orgChoose() {
                 return `${this.$store.state.orgChoose}` === 'true';
             },
@@ -262,7 +271,7 @@
         },
         data() {
             return {
-                corpFDName:'signature_page',
+                corpFileName: SIGNATURE_PAGE_NAME,
                 platform: this.$store.state.platform,
                 isVerify: false,
                 previewShow: false,
@@ -313,8 +322,8 @@
                 let corp_pdf = {};
                 let formData = new FormData();
                 if (this.$store.state.corpFD) {
-                    corp_pdf = this.dataURLtoFile(this.$store.state.corpFD, this.corpFDName);
-                    formData.append('org_signature_file',corp_pdf);
+                    corp_pdf = this.dataURLtoFile(this.$store.state.corpFD, this.corpFileName);
+                    formData.append('org_signature_file', corp_pdf);
                 }
                 let obj = {};
                 let corpCla = {};
@@ -369,7 +378,7 @@
                         };
                     }
                 }
-                formData.append('data',JSON.stringify(obj));
+                formData.append('data', JSON.stringify(obj));
                 http({
                     url: url.linkRepository,
                     method: 'post',
@@ -379,8 +388,45 @@
                     this.$message.success('success');
                     this.$router.push('/home')
                 }).catch(err => {
-                    this.$message.closeAll();
-                    this.$message.error(err.data.error_message)
+                    if (err.data && err.data.hasOwnProperty('data')) {
+                        switch (err.data.data.error_code) {
+                            case 'cla.invalid_token':
+                                this.$store.commit('setOrgReLogin', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.invalid_token'),
+                                });
+                                break;
+                            case 'cla.missing_token':
+                                this.$store.commit('setOrgReLogin', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.missing_token'),
+                                });
+                                break;
+                            case 'cla.unknown_token':
+                                this.$store.commit('setOrgReLogin', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.unknown_token'),
+                                });
+                                break;
+                            case 'cla.system_error':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.system_error'),
+                                });
+                                break;
+                            default :
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.unknown_error'),
+                                });
+                                break;
+                        }
+                    } else {
+                        this.$store.commit('errorCodeSet', {
+                            dialogVisible: true,
+                            dialogMessage: this.$t('tips.system_error'),
+                        })
+                    }
                 })
 
             },
@@ -389,6 +435,18 @@
 </script>
 
 <style lang="less">
+    .el-checkbox__input.is-disabled .el-checkbox__inner {
+        cursor: default;
+    }
+
+    .el-checkbox__input.is-disabled .el-checkbox__inner:after {
+        cursor: default;
+    }
+
+    .el-checkbox__input.is-disabled + span.el-checkbox__label {
+        cursor: default;
+    }
+
     #configCla {
         .margin-top-half-rem {
             margin-top: .5rem;
@@ -441,7 +499,6 @@
 
     .el-dropdown-link {
         cursor: pointer;
-        color: #409EFF;
     }
 
     .el-icon-arrow-down {

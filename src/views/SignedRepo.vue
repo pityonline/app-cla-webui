@@ -1,11 +1,11 @@
 <template>
     <div id="signedRepo" :style="section">
         <Header></Header>
-        <el-row>
-            <el-col :offset="5" :span="14">
+        <div>
+            <div id="signedRepo_section">
                 <router-view></router-view>
-            </el-col>
-        </el-row>
+            </div>
+        </div>
         <Footer></Footer>
     </div>
 
@@ -130,6 +130,12 @@
 </script>
 
 <style lang="less">
+    @media screen and (min-width: 1200px){
+        #signedRepo_section{
+            width: 1200px;
+            margin: auto;
+        }
+    }
     #signedRepo {
         display: flex;
         box-sizing: border-box;
@@ -138,6 +144,7 @@
         & > div:nth-of-type(2) {
             flex-grow: 1;
             background-color: #F0F2F5;
+            padding: 0 1rem;
         }
 
         & .tableStyle {

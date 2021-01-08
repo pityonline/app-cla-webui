@@ -1056,7 +1056,9 @@
             border: 1px solid #F3F3F3;
             font-size: 1.2rem;
         }
-
+        .el-input__inner:focus {
+            border-color: #319E55
+        }
         & .el-form-item {
             margin-bottom: 28px
         }

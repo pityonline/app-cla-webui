@@ -814,7 +814,6 @@
 
     .el-dropdown-link {
         cursor: pointer;
-        color: #409EFF;
     }
 
     .el-icon-arrow-down {

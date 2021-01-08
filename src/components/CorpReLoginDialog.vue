@@ -34,7 +34,7 @@
                 this.$store.commit('errorSet', {
                     dialogVisible: false,
                     dialogMessage: '',
-                })
+                });
                 this.$router.replace('/corporationManagerLogin')
 
             },

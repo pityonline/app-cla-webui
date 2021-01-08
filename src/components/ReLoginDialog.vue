@@ -22,7 +22,6 @@
 </template>
 
 <script>
-    import * as until from '../until/until'
     export default {
         name: "ReLoginDialog",
         props: ['dialogVisible', 'message'],
@@ -37,14 +36,8 @@
                 this.$store.commit('errorSet', {
                     dialogVisible: false,
                     dialogMessage: '',
-                })
-                let date = new Date();
-                date.setTime(date.getTime() - 10000);
-                document.cookie = `_mark=; expire=${date.toUTCString()}; Domain=${this.domain}; path=/`;
-                let repoInfo = this.$store.state.repoInfo;
-                let params = repoInfo.repo_id ? `${repoInfo.platform}/${repoInfo.org_id}/${repoInfo.repo_id}` : `${repoInfo.platform}/${repoInfo.org_id}`;
-                let path =`${this.signRouter}/${until.strToBase64(params)}`;
-                this.$router.replace(path)
+                });
+                this.$router.replace('/platformSelect')
 
             },
         },

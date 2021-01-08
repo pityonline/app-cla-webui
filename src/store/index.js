@@ -46,6 +46,7 @@ export default new Vuex.Store({
         reTryDialogVisible: false,
         signSuccessDialogVisible: false,
         signReLoginDialogVisible: false,
+        orgReLoginDialogVisible:false,
         pwdIsChanged: false,
         cla_link: sessionStorage.getItem('cla_link') || undefined,
         metadataType: sessionStorage.getItem('metadataType') || undefined,
@@ -273,12 +274,16 @@ export default new Vuex.Store({
             state.signReLoginDialogVisible = obj.dialogVisible;
             state.dialogMessage = obj.dialogMessage
         },
+        setOrgReLogin(state, obj) {
+            state.orgReLoginDialogVisible = obj.dialogVisible;
+            state.dialogMessage = obj.dialogMessage
+        },
         setCorpToken(state, token) {
             state.access_token = token;
             sessionStorage.setItem('token', token);
         },
         setDomain(state, domain) {
-            state.domain = domain
+            state.domain = domain;
             sessionStorage.setItem('domain', domain)
         },
 

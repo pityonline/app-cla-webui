@@ -2,25 +2,25 @@
     <el-row id="configThree">
         <div class="itemBox">
             <div class="stepTitle">
-                ② Email
+                ② {{$t('org.config_cla_email_title')}}
             </div>
             <div class="margin-top-1rem">
-                Authorize an email to send signed documents to the signer
+                {{$t('org.config_cla_email_authorize')}}
             </div>
             <div class="margin-top-1rem">
                 <el-input
                         readonly=""
                         size="medium"
                         class="emailInput"
-                        placeholder="click to grant authorized email"
+                        :placeholder="$t('org.config_cla_email_placeholder')"
                         @click.native="toAuthorizedEmail()"
                         v-model="email">
                 </el-input>
             </div>
         </div>
         <div class="stepBtBox">
-            <el-button size="medium" type="primary" class="stepBt" @click="toPreviousPage">Previous Step</el-button>
-            <el-button size="medium" type="primary" class="stepBt" @click="toNextPage">Next Step</el-button>
+            <button class="step_button" @click="toPreviousPage">{{$t('org.previous_step')}}</button>
+            <button class="step_button" @click="toNextPage">{{$t('org.next_step')}}</button>
         </div>
         <el-dialog
                 top="5vh"
@@ -28,13 +28,13 @@
                 :visible.sync="emailDialogVisible"
                 width="35%">
             <div>
-                <p class="dialogDesc">You need to select an email address for your organization to contact</p>
+                <p class="dialogDesc">{{$t('org.config_cla_email_platform_select')}}</p>
                 <div>
 
                     <el-row>
                         <el-col :offset="6" :span="12">
                             <el-select
-                                    placeholder="Select email type"
+                                    :placeholder="$t('org.config_cla_email_platform_select_placeholder')"
                                     size="medium"
                                     filterable
                                     v-model="emailType"
@@ -49,31 +49,47 @@
                         </el-col>
                     </el-row>
                 </div>
-                <div style="padding: 0 3rem;color: #409EFF">
-                </div>
-                <div style="padding: 2rem 6rem;text-align: left;font-size: 1.3rem">
-                    <p style="text-align: center">CLA system will...</p>
-                    <ul>
-                        <li>Send the white list management account number to the enterprise through the mailbox</li>
-                        <li>Send PDF signature documents to the signer through this email address</li>
+                <div class="authorize_desc">
+                    <p class="align_center">{{$t('org.config_cla_email_authorize_desc')}}</p>
+                    <ul :class="{word_break:this.lang==='1'}">
+                        <li>{{$t('org.config_cla_email_authorize_desc1')}}</li>
+                        <li>{{$t('org.config_cla_email_authorize_desc2')}}</li>
+                        <li>{{$t('org.config_cla_email_authorize_desc3')}}</li>
                     </ul>
                 </div>
                 <span slot="footer" class="dialog-footer">
-                    <el-button @click="emailDialogVisible = false">Cancel</el-button>
-                    <el-button type="primary" @click="authorizeEmail()">Yes,Let's do this!</el-button>
+                    <button class="cancelBt" @click="emailDialogVisible = false">{{$t('org.cancel_remove')}}</button>
+                    <button class="email_button" @click="authorizeEmail()">{{$t('org.confirm_remove')}}</button>
                 </span>
             </div>
         </el-dialog>
+        <ReLoginDialog :dialogVisible="reLoginDialogVisible" :message="reLoginMsg"></ReLoginDialog>
+        <ReTryDialog :dialogVisible="reTryVisible" :message="reLoginMsg"></ReTryDialog>
     </el-row>
 </template>
 
 <script>
     import * as url from '../until/api'
     import http from '../until/http'
+    import ReLoginDialog from '../components/ReLoginDialog'
+    import ReTryDialog from '../components/ReTryDialog'
 
     export default {
         name: "ConfigThree",
+        components: {
+            ReLoginDialog,
+            ReTryDialog
+        },
         computed: {
+            reTryVisible() {
+                return this.$store.state.reTryDialogVisible
+            },
+            reLoginDialogVisible() {
+                return this.$store.state.orgReLoginDialogVisible
+            },
+            reLoginMsg() {
+                return this.$store.state.dialogMessage
+            },
             isEmail() {
                 return `${this.$store.state.isEmail}` === 'true';
             },
@@ -81,8 +97,10 @@
                 return this.$store.state.email;
             },
         },
+
         data() {
             return {
+                lang: '',
                 emailDialogVisible: false,
                 emailTypeArr: [{value: 'G-Mail', label: 'G-Mail'}],
                 emailType: '',
@@ -117,6 +135,7 @@
                 }
             },
             toAuthorizedEmail() {
+                this.lang = localStorage.getItem('lang');
                 this.emailDialogVisible = true;
             },
             authorizeEmail() {
@@ -132,6 +151,45 @@
                 }).then(res => {
                     window.location.href = res.data.data.url;
                 }).catch(err => {
+                    if (err.data && err.data.hasOwnProperty('data')) {
+                        switch (err.data.data.error_code) {
+                            case 'cla.invalid_token':
+                                this.$store.commit('setOrgReLogin', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.invalid_token'),
+                                });
+                                break;
+                            case 'cla.missing_token':
+                                this.$store.commit('setOrgReLogin', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.missing_token'),
+                                });
+                                break;
+                            case 'cla.unknown_token':
+                                this.$store.commit('setOrgReLogin', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.unknown_token'),
+                                });
+                                break;
+                            case 'cla.system_error':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.system_error'),
+                                });
+                                break;
+                            default :
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.unknown_error'),
+                                });
+                                break;
+                        }
+                    } else {
+                        this.$store.commit('errorCodeSet', {
+                            dialogVisible: true,
+                            dialogMessage: this.$t('tips.system_error'),
+                        })
+                    }
                 })
             },
             changeEmailType(value) {
@@ -142,6 +200,45 @@
                 }).then(res => {
                     this.emailTypeArr = res.data
                 }).catch(err => {
+                    if (err.data && err.data.hasOwnProperty('data')) {
+                        switch (err.data.data.error_code) {
+                            case 'cla.invalid_token':
+                                this.$store.commit('setOrgReLogin', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.invalid_token'),
+                                });
+                                break;
+                            case 'cla.missing_token':
+                                this.$store.commit('setOrgReLogin', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.missing_token'),
+                                });
+                                break;
+                            case 'cla.unknown_token':
+                                this.$store.commit('setOrgReLogin', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.unknown_token'),
+                                });
+                                break;
+                            case 'cla.system_error':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.system_error'),
+                                });
+                                break;
+                            default :
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.unknown_error'),
+                                });
+                                break;
+                        }
+                    } else {
+                        this.$store.commit('errorCodeSet', {
+                            dialogVisible: true,
+                            dialogMessage: this.$t('tips.system_error'),
+                        })
+                    }
                 })
             },
             init() {
@@ -157,14 +254,14 @@
             next(vm => {
                 if (from.path === '/') {
                     let cookie = document.cookie;
-                    if (cookie){
+                    if (cookie) {
                         let cookieArr = cookie.split(';');
                         cookieArr.forEach((item, index) => {
                             let arr = item.split('=');
                             let name = arr[0].trim();
                             vm.$cookie.remove(name, {path: '/'});
                         });
-                    } else{
+                    } else {
                         vm.init();
                     }
                 }
@@ -174,7 +271,42 @@
 </script>
 
 <style lang="less">
+    .el-select-dropdown__item.selected {
+        color: #319E55;
+    }
+
     #configThree {
+        .word_break {
+            word-break: break-all;
+        }
+
+        .align_center {
+            text-align: center;
+        }
+
+        .authorize_desc {
+            padding: 2rem 6rem;
+            text-align: left;
+            font-size: 1.3rem
+        }
+
+        .email_button {
+            font-family: Roboto-Regular, sans-serif;
+            width: 5rem;
+            height: 2rem;
+            border-radius: 1rem;
+            border: none;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            background: linear-gradient(to right, #97DB30, #319E55);
+            margin: 1.2rem 0;
+        }
+
+        .email_button:focus {
+            outline: none;
+        }
+
         .stepTitle {
             font-size: 1.2rem;
             padding: .5rem;

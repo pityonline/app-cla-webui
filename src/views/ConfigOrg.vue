@@ -2,15 +2,15 @@
     <el-row id="configOne">
         <div class="itemBox">
             <div class="stepTitle">
-                ① Choose a organization or repository
+                ① {{$t('org.config_cla_select_org_tile')}}
             </div>
             <div class="margin-top-1rem">
-                Select an organization that needs to configure cla
+                {{$t('org.config_cla_select_org')}}
             </div>
             <el-row class="margin-top-1rem">
                 <el-col>
                     <el-select v-model="orgValue"
-                               placeholder="select organization"
+                               :placeholder="$t('org.config_cla_select_org_placeholder')"
                                style="width: 100%"
                                size="medium"
                                clearable
@@ -27,19 +27,19 @@
                 </el-col>
             </el-row>
             <div class="margin-top-1rem">
-                You need an alias for the organization you choose
+                {{$t('org.config_cla_select_org_alias')}}
             </div>
             <div class="margin-top-1rem">
-                <el-input v-model="org_alias" size="medium" placeholder="input organization alias"></el-input>
+                <el-input v-model="org_alias" size="medium"
+                          :placeholder="$t('org.config_cla_select_org_alias_placeholder')"></el-input>
             </div>
             <div class="margin-top-1rem">
-                If you want to configure CLA for a repository under the organization, please select the repository. If
-                not, please ignore it
+                {{$t('org.config_cla_select_repo')}}
             </div>
             <el-row class="margin-top-1rem">
                 <el-col>
                     <el-select v-model="repositoryValue"
-                               placeholder="select repository"
+                               :placeholder="$t('org.config_cla_select_repo_placeholder')"
                                style="width: 100%"
                                size="medium"
                                clearable=""
@@ -57,25 +57,26 @@
             </el-row>
         </div>
         <div class="orgStepBtBox">
-            <el-button size="medium" type="primary" class="stepBt" @click="toConfigClaLink">Next Step</el-button>
+            <button class="step_button" @click="toConfigClaLink">{{$t('org.next_step')}}</button>
         </div>
-        <reTryDialog :message="corpReLoginMsg" :dialogVisible="corpReTryDialogVisible"></reTryDialog>
+        <ReTryDialog :message="reTryMsg" :dialogVisible="reLoginMsg"></ReTryDialog>
     </el-row>
 </template>
 
 <script>
-    import reTryDialog from '../components/ReTryDialog'
+    import ReTryDialog from '../components/ReTryDialog'
     import * as url from '../until/api'
+
     export default {
         name: "ConfigOne",
         components: {
-            reTryDialog
+            ReTryDialog
         },
         computed: {
-            corpReLoginMsg() {
+            reTryMsg() {
                 return this.$store.state.dialogMessage
             },
-            corpReTryDialogVisible() {
+            reLoginMsg() {
                 return this.$store.state.reTryDialogVisible
             },
             orgOptions() {
@@ -196,6 +197,45 @@
                     });
                     this.$store.commit('setRepositoryOptions', repositoryOptions)
                 }).catch(err => {
+                    if (err.data && err.data.hasOwnProperty('data')) {
+                        switch (err.data.data.error_code) {
+                            case 'cla.invalid_token':
+                                this.$store.commit('setOrgReLogin', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.invalid_token'),
+                                });
+                                break;
+                            case 'cla.missing_token':
+                                this.$store.commit('setOrgReLogin', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.missing_token'),
+                                });
+                                break;
+                            case 'cla.unknown_token':
+                                this.$store.commit('setOrgReLogin', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.unknown_token'),
+                                });
+                                break;
+                            case 'cla.system_error':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.system_error'),
+                                });
+                                break;
+                            default :
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.unknown_error'),
+                                });
+                                break;
+                        }
+                    } else {
+                        this.$store.commit('errorCodeSet', {
+                            dialogVisible: true,
+                            dialogMessage: this.$t('tips.system_error'),
+                        })
+                    }
                 })
             },
             getOrgsInfo() {
@@ -212,7 +252,45 @@
                         this.$store.commit('setOrgOption', orgOptions)
                     }
                 }).catch(err => {
-
+                    if (err.data && err.data.hasOwnProperty('data')) {
+                        switch (err.data.data.error_code) {
+                            case 'cla.invalid_token':
+                                this.$store.commit('setOrgReLogin', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.invalid_token'),
+                                });
+                                break;
+                            case 'cla.missing_token':
+                                this.$store.commit('setOrgReLogin', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.missing_token'),
+                                });
+                                break;
+                            case 'cla.unknown_token':
+                                this.$store.commit('setOrgReLogin', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.unknown_token'),
+                                });
+                                break;
+                            case 'cla.system_error':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.system_error'),
+                                });
+                                break;
+                            default :
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.unknown_error'),
+                                });
+                                break;
+                        }
+                    } else {
+                        this.$store.commit('errorCodeSet', {
+                            dialogVisible: true,
+                            dialogMessage: this.$t('tips.system_error'),
+                        })
+                    }
                 })
             },
             init() {
@@ -239,12 +317,12 @@
         created() {
             this.getOrgsInfo();
         },
-        beforeRouteEnter(to,from,next){
-          next(vm=>{
-              if (from.path === '/') {
-                  vm.init();
-              }
-          })
+        beforeRouteEnter(to, from, next) {
+            next(vm => {
+                if (from.path === '/') {
+                    vm.init();
+                }
+            })
         },
     }
 </script>

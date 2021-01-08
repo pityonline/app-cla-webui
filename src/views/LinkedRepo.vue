@@ -1,30 +1,28 @@
 <template>
     <div id="linkedRepo">
         <div id="configBtDiv">
-            <el-button class="configBt" type="primary"
-                       @click="configCla()">
-                Configure CLA
-            </el-button>
+            <button class="button"
+                    @click="configCla()">
+                {{this.$t('org.configure_bt')}}
+            </button>
         </div>
         <el-tabs v-model="activeName" @tab-click="tabsHandleClick">
-            <el-tab-pane label="Linked Repositories" name="first" style="margin-top: 1rem">
-
+            <el-tab-pane :label="$t('org.linked_tab')" name="first" class="margin-top-1rem">
             </el-tab-pane>
         </el-tabs>
-        <el-row :gutter="20" v-loading.lock="loading" class="table-back"
-                element-loading-text="Loading"
-                element-loading-background="rgba(255, 255, 255, 1)">
+        <el-row :gutter="20" class="table-back">
             <el-col :span="3" class="orgTableStyle tableStyle">
                 <el-table
                         empty-text="No data"
                         :data="orgTableData"
                         align="center"
+                        class="tableClass"
                         @cell-click="clickOrg"
                         :row-class-name="tableRowClassName"
                         style="width: 100%;">
                     <el-table-column
                             prop="Organization"
-                            label="Organization">
+                            :label="$t('org.organization')">
                     </el-table-column>
                 </el-table>
             </el-col>
@@ -32,10 +30,11 @@
                 <el-table
                         empty-text="No data"
                         :data="boundTableData"
+                        class="tableClass"
                         style="width: 100%;">
                     <el-table-column
                             prop="repo_id"
-                            label="Repository">
+                            :label="$t('org.repository')">
                         <template slot-scope="scope">
                             <svg-icon icon-class="repository"/>
                             <span class="pointer hoverUnderline"
@@ -45,13 +44,13 @@
                     </el-table-column>
                     <el-table-column
                             prop="org_email"
-                            label="Email">
+                            :label="$t('corp.email')">
                     </el-table-column>
                     <el-table-column
-                            label="Unlink"
+                            :label="$t('org.unlink')"
                             width="100">
                         <template slot-scope="scope">
-                            <el-tooltip slot="reference" effect="dark" content="unlink"
+                            <el-tooltip slot="reference" effect="dark" :content="$t('org.unlink')"
                                         placement="bottom">
                                 <svg-icon class="pointer" icon-class="delete" @click="unlinkHandleClick(scope)"/>
                             </el-tooltip>
@@ -59,25 +58,25 @@
                     </el-table-column>
                     <el-table-column
                             width="200"
-                            label="Operation">
+                            :label="$t('org.operation')">
                         <template slot-scope="scope">
                             <el-dropdown placement="bottom-start" trigger="hover" @command="menuCommand">
                                     <span class="el-dropdown-link">
                                         <svg-icon icon-class="operation"></svg-icon>
                                     </span>
                                 <el-dropdown-menu slot="dropdown">
-                                    <el-dropdown-item :command="{command:'a',row:scope.row}">Sign</el-dropdown-item>
-                                    <el-dropdown-item :command="{command:'b',row:scope.row}">Copy address
+                                    <el-dropdown-item :command="{command:'a',row:scope.row}">
+                                        {{$t('org.toSign')}}
                                     </el-dropdown-item>
-                                    <el-dropdown-item :command="{command:'c',row:scope.row}">Detail</el-dropdown-item>
+                                    <el-dropdown-item :command="{command:'b',row:scope.row}">
+                                        {{$t('org.copy_address')}}
+                                    </el-dropdown-item>
+                                    <el-dropdown-item :command="{command:'c',row:scope.row}">
+                                        {{$t('org.toDetail')}}
+                                    </el-dropdown-item>
                                 </el-dropdown-menu>
                             </el-dropdown>
                         </template>
-                        <!--<template slot-scope="scope">-->
-                        <!--<el-button size="mini" @click="toSignPage(scope.row)">Sign</el-button>-->
-                        <!--<el-button size="mini" @click="copyAddress(scope.row)">copy address</el-button>-->
-
-                        <!--</template>-->
                     </el-table-column>
                 </el-table>
             </el-col>
@@ -100,22 +99,21 @@
                 :visible.sync="unLinkDialogVisible"
                 width="35%">
             <div>
-                <p class="dialogDesc">Are you sure you want to unlink?</p>
+                <p class="dialogDesc">{{this.$t('org.unlink_p')}}</p>
                 <div style="text-align: center">
                     <svg-icon style="width: 30rem;height: 20rem;margin:0 auto" icon-class="error"></svg-icon>
                 </div>
                 <div style="padding: 0 6rem;text-align: left;font-size: 1.3rem">
-                    <p style="text-align: center">Unlinking will...</p>
+                    <p style="text-align: center">{{this.$t('org.unlink_will')}}</p>
                     <ul>
-                        <li>Remove the CLA assistant webhook in your repository/organization
-                        </li>
-                        <li>Remove the link to your list of contributors</li>
+                        <li>{{this.$t('org.unlink_desc1')}}</li>
+                        <li>{{this.$t('org.unlink_desc2')}}</li>
                     </ul>
                 </div>
 
                 <div class="right">
-                    <el-button @click="unLinkDialogVisible = false">Keep it</el-button>
-                    <el-button type="danger" @click="unLinkRepositoryFun()">Unlink anyway</el-button>
+                    <el-button @click="unLinkDialogVisible = false">{{this.$t('corp.cancel')}}</el-button>
+                    <el-button type="danger" @click="unLinkRepositoryFun()">{{this.$t('org.unlink')}}</el-button>
                 </div>
 
             </div>
@@ -127,7 +125,6 @@
                 :visible.sync="uploadOrgDialogVisible"
                 width="35%">
             <div>
-
                 <div class="left">
                     <el-form v-model="form">
                         <el-form-item label="" label-width="0">
@@ -145,9 +142,10 @@
                                     :limit="1"
                                     :on-exceed="handleExceed"
                                     :file-list="fileList">
-                                <el-button slot="trigger" size="small" type="primary">select file</el-button>
+                                <el-button slot="trigger" size="small" type="primary">{{this.$t('org.select_file')}}
+                                </el-button>
                                 <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">
-                                    upload
+                                    {{this.$t('org.upload')}}
                                 </el-button>
 
                             </el-upload>
@@ -157,66 +155,44 @@
             </div>
 
         </el-dialog>
-        <el-dialog
-                style="background-color: #3C3C3C"
-                title="pdf-reader"
-                top="5vh"
-                :close-on-click-modal="false"
-                :visible.sync="previewOriginalDialogVisible"
-                width="50%">
-            <div id="box">
-                <!--<pdf-->
-                <!--:src="pdfSrc">-->
-                <!--</pdf>-->
-
-                <!--<pdf-->
-                <!--v-for="i in numPages"-->
-                <!--:key="i"-->
-                <!--:src="pdfSrc"-->
-                <!--:page="i">-->
-                <!--</pdf>-->
-
-                <!--<pdfReader-->
-                <!--v-if="docInfo.type === 'pdf'"-->
-                <!--:doctype="docInfo.type"-->
-                <!--:dochref="docInfo.href">-->
-                <!--</pdfReader>-->
-
-                <!--<iframe :src="url"  width="100%" height="100%"></iframe>-->
-            </div>
-        </el-dialog>
-
-        <ReLoginDialog></ReLoginDialog>
+        <ReLoginDialog :dialogVisible="reLoginDialogVisible" :message="reLoginMsg"></ReLoginDialog>
+        <ReTryDialog :dialogVisible="reTryVisible" :message="reLoginMsg"></ReTryDialog>
     </div>
 </template>
 <script>
     import {mapActions} from 'vuex'
     import * as url from '../until/api'
     import * as until from '../until/until'
-    import pdfReader from "@components/PdfReader";
     import pdf from 'vue-pdf'
     import http from '../until/http'
     import ReLoginDialog from '../components/ReLoginDialog'
-    import download from 'downloadjs'
-    // import PDFJS from '../until/pdf/pdf'
+    import ReTryDialog from '../components/ReTryDialog'
+
     export default {
         name: "linkedRepo",
         components: {
-            pdfReader,
             pdf,
             ReLoginDialog,
+            ReTryDialog
         },
         inject: ['setClientHeight'],
         computed: {
+            reLoginDialogVisible() {
+                return this.$store.state.orgReLoginDialogVisible
+            },
+            reTryVisible() {
+                return this.$store.state.reTryDialogVisible
+            },
+            reLoginMsg() {
+                return this.$store.state.dialogMessage
+            },
             address() {
                 return this.$store.state.domain
             },
-
         },
         data() {
             return {
                 copyAddressValue: '',
-                loading: true,
                 organization: '',
                 boundTableData: '',
                 signAddress: '',
@@ -337,7 +313,6 @@
                     }
                 });
                 this.boundTableData = newData;
-                this.loading = false
             },
             clickOrg(row, column, cell, event) {
                 this.organization = row.Organization
@@ -369,9 +344,47 @@
                         }, 20)
                     } else {
                         this.tableData = res.data.data;
-                        this.loading = false;
                     }
                 }).catch(err => {
+                    if (err.data && err.data.hasOwnProperty('data')) {
+                        switch (err.data.data.error_code) {
+                            case 'cla.invalid_token':
+                                this.$store.commit('setOrgReLogin', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.invalid_token'),
+                                });
+                                break;
+                            case 'cla.missing_token':
+                                this.$store.commit('setOrgReLogin', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.missing_token'),
+                                });
+                                break;
+                            case 'cla.unknown_token':
+                                this.$store.commit('setOrgReLogin', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.unknown_token'),
+                                });
+                                break;
+                            case 'cla.system_error':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.system_error'),
+                                });
+                                break;
+                            default :
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.unknown_error'),
+                                });
+                                break;
+                        }
+                    } else {
+                        this.$store.commit('errorCodeSet', {
+                            dialogVisible: true,
+                            dialogMessage: this.$t('tips.system_error'),
+                        })
+                    }
                 })
             },
             async getClaName(org_cla_id) {
@@ -379,13 +392,53 @@
                     let name = '';
                     await http({
                         url: `${url.getClaInfo}/${org_cla_id}/cla`,
-                    }).then(resp => {
-                        name = resp.data.data.name
+                    }).then(res => {
+                        if (res.data && res.data.data && res.data.data.name) {
+                            name = res.data.data.name
+                        }
                     }).catch(err => {
+                        if (err.data && err.data.hasOwnProperty('data')) {
+                            switch (err.data.data.error_code) {
+                                case 'cla.invalid_token':
+                                    this.$store.commit('setOrgReLogin', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.invalid_token'),
+                                    });
+                                    break;
+                                case 'cla.missing_token':
+                                    this.$store.commit('setOrgReLogin', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.missing_token'),
+                                    });
+                                    break;
+                                case 'cla.unknown_token':
+                                    this.$store.commit('setOrgReLogin', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.unknown_token'),
+                                    });
+                                    break;
+                                case 'cla.system_error':
+                                    this.$store.commit('errorCodeSet', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.system_error'),
+                                    });
+                                    break;
+                                default :
+                                    this.$store.commit('errorCodeSet', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.unknown_error'),
+                                    });
+                                    break;
+                            }
+                        } else {
+                            this.$store.commit('errorCodeSet', {
+                                dialogVisible: true,
+                                dialogMessage: this.$t('tips.system_error'),
+                            })
+                        }
                     });
                     return name
                 } else {
-                    this.loading = false;
                 }
 
 
@@ -551,29 +604,59 @@
                 window.open(`https://gitee.com/${repo}`)
             },
             unLinkRepositoryFun() {
-                this.$axios({
-                    url: `/api${url.unLinkRepository}/${this.unlinkId}`,
+                http({
+                    url: `${url.unLinkRepository}/${this.unlinkId}`,
                     method: 'delete',
-                    headers: {
-                        'Token': this.$store.state.access_token,
-                        'Access-Token': this.$store.state.access_token,
-                        'Refresh-Token': this.$store.state.refresh_token,
-                        'User': `${this.platform}/${this.$store.state.user.userName}`
-                    }
-
                 }).then(res => {
                     this.$message.success('success');
                     this.unLinkDialogVisible = false;
                     this.getLinkedRepoList()
                 }).catch(err => {
-                    this.$message.closeAll();
-                    this.$message.error(err.response.data)
+                    if (err.data && err.data.hasOwnProperty('data')) {
+                        switch (err.data.data.error_code) {
+                            case 'cla.invalid_token':
+                                this.$store.commit('setOrgReLogin', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.invalid_token'),
+                                });
+                                break;
+                            case 'cla.missing_token':
+                                this.$store.commit('setOrgReLogin', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.missing_token'),
+                                });
+                                break;
+                            case 'cla.unknown_token':
+                                this.$store.commit('setOrgReLogin', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.unknown_token'),
+                                });
+                                break;
+                            case 'cla.system_error':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.system_error'),
+                                });
+                                break;
+                            default :
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.unknown_error'),
+                                });
+                                break;
+                        }
+                    } else {
+                        this.$store.commit('errorCodeSet', {
+                            dialogVisible: true,
+                            dialogMessage: this.$t('tips.system_error'),
+                        })
+                    }
                 })
             },
             changePage(page) {
             },
             setDomain() {
-                let domain = window.location.href.split('/linkedRepo')[0]
+                let domain = window.location.href.split('/linkedRepo')[0];
                 if (domain === window.location.href) {
                     domain = window.location.href.split('/home')[0]
                 }
@@ -585,6 +668,11 @@
 </script>
 
 <style lang="less">
+    @import "../assets/font/css/Roboto-Bold.css";
+    @import "../assets/font/css/Roboto-Black.css";
+    @import "../assets/font/css/Roboto-Light.css";
+    @import "../assets/font/css/Roboto-Regular.css";
+
     .el-popover {
         min-width: 6rem;
 
@@ -602,9 +690,81 @@
 
     }
 
+    .tableClass {
+        border: 1px solid black;
+        border-radius: 1.5rem;
+    }
+
+    .el-table__body, .el-table__footer, .el-table__header {
+        padding: 0;
+        width: auto;
+    }
+
+    .el-table__body-wrapper {
+        margin: 0 1rem;
+    }
+
+    .el-table__body tr:not(:last-of-type) td {
+        border-bottom: 1px dashed lightgrey;
+    }
+
+    .el-table::before {
+        height: 0;
+    }
+
+
+    .el-table__body-wrapper, .el-table__footer-wrapper, .el-table__header-wrapper {
+        padding: 0;
+        width: auto;
+    }
+
+    .el-table__footer-wrapper, .el-table__header-wrapper {
+        border-bottom: 1px solid black;
+        border-radius: 1.5rem;
+        padding: 0 1rem;
+    }
+
+    .el-tabs__active-bar {
+        background-color: #319E55;
+    }
+
+    .el-tabs__item.is-active {
+        color: #319E55;
+    }
+
+    .el-tabs__item:hover {
+        color: #319E55;
+    }
+
+    .el-tabs__item {
+        font-size: 1rem;
+    }
+
     #linkedRepo {
+        .margin-top-1rem {
+            margin-top: 1rem;
+        }
+
+        .button {
+            font-family: Roboto-Regular, sans-serif;
+            width: 15rem;
+            height: 4rem;
+            border-radius: 2rem;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            background: linear-gradient(to right, #97DB30, #319E55);
+            margin: 1.2rem 0;
+        }
+
+        .button:focus {
+            outline: none;
+        }
+
         .el-table .warning-row {
-            background: #8CC5FF;
+            color: #319E55;
+            font-weight: bold;
         }
 
         .table-back {
@@ -613,8 +773,42 @@
         }
 
         .tableStyle {
-            padding: 3rem 0;
+            margin-bottom: 2rem;
+            padding: 3rem;
             background-color: white;
+            border-radius: 1.5rem;
+        }
+
+        & .cancelBt {
+            width: 5rem;
+            height: 2rem;
+            border-radius: 1rem;
+            border: 1px solid black;
+            color: black;
+            font-size: 1rem;
+            cursor: pointer;
+            background-color: white;
+            margin-left: 1rem;
+        }
+
+        & .cancelBt:focus {
+            outline: none;
+        }
+
+        & .deleteBt {
+            margin-left: 1rem;
+            width: 5rem;
+            height: 2rem;
+            border-radius: 1rem;
+            border: none;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            background: linear-gradient(to right, #FF9D58, #E22424);
+        }
+
+        & .deleteBt:focus {
+            outline: none;
         }
 
         .orgTableStyle {
@@ -628,7 +822,6 @@
 
         .el-dropdown-link {
             cursor: pointer;
-            color: #409EFF;
         }
 
         .el-icon-arrow-down {
@@ -684,9 +877,6 @@
             padding-top: 3rem;
             margin-bottom: 2rem;
 
-            & > .configBt {
-                font-size: 1.2rem;
-            }
         }
     }
 

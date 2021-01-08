@@ -11,13 +11,14 @@ import VueI18n from 'vue-i18n';
 import Lang_Zh from '../public/static/lang/zh-cn'
 import Lang_En from '../public/static/lang/en-us'
 import Cookie from 'js-cookie'
+import Const_config from '../public/static/const-config'
 Vue.use(Cookie);
 
 Vue.prototype.$cookie = Cookie;
 Vue.prototype.$axios = axios;
 Vue.use(ElementUI);
 Vue.use(VueI18n);
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 Vue.config.devtools = true;
 
 const i18n = new VueI18n({

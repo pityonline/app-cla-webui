@@ -6,7 +6,6 @@
                 <router-view></router-view>
             </div>
         </div>
-
         <Footer></Footer>
     </div>
 </template>
@@ -67,6 +66,138 @@
             margin: auto;
         }
     }
+    .loading_class {
+        .el-loading-spinner {
+            i {
+                color: #319E55;
+            }
+        }
+    }
+
+    .el-loading-spinner .el-loading-text {
+        color: #319E55;
+    }
+    .el-dialog {
+        border-radius: 1rem;
+    }
+    .el-button:active {
+        color: #319E55;
+        border-color: #319E55;
+    }
+
+    .el-button:focus, .el-button:hover {
+        color: #319E55;
+    }
+
+    .el-dropdown-menu__item:focus, .el-dropdown-menu__item:not(.is-disabled):hover {
+        color: #319E55;
+    }
+
+    .el-input.is-disabled .el-input__inner {
+        cursor: default;
+    }
+
+    .step_button {
+        font-family: Roboto-Regular, sans-serif;
+        width: 12rem;
+        height: 3rem;
+        border-radius: 1.5rem;
+        border: none;
+        color: white;
+        font-size: 1.2rem;
+        cursor: pointer;
+        background: linear-gradient(to right, #97DB30, #319E55);
+        margin: 1.2rem 0;
+    }
+
+    .step_button:focus {
+        outline: none;
+    }
+
+    .cancelBt {
+        width: 5rem;
+        height: 2rem;
+        border-radius: 1rem;
+        border: 1px solid black;
+        color: black;
+        font-size: 1rem;
+        cursor: pointer;
+        background-color: white;
+        margin-right: 1rem;
+    }
+
+    .cancelBt:focus {
+        outline: none;
+    }
+
+    .el-input__inner {
+        background-color: #F3F3F3;
+        border-radius: 1.25rem;
+        border: 1px solid #F3F3F3;
+        font-size: 1rem;
+    }
+
+    .el-input__inner:focus {
+        border-color: #319E55
+    }
+
+    .el-select .el-input.is-focus .el-input__inner {
+        border-color: #319E55;
+    }
+
+    .el-select .el-input__inner:focus {
+        border-color: #319E55;
+    }
+
+    .tableClass {
+        border: 1px solid black;
+        border-radius: 1.5rem;
+    }
+
+    .el-table__body, .el-table__footer, .el-table__header {
+        padding: 0;
+        width: auto;
+    }
+
+    .el-table__body-wrapper {
+        margin: 0 1rem;
+    }
+
+    .el-table__body tr:not(:last-of-type) td {
+        border-bottom: 1px dashed lightgrey;
+    }
+
+    .el-table::before {
+        height: 0;
+    }
+
+
+    .el-table__body-wrapper, .el-table__footer-wrapper, .el-table__header-wrapper {
+        padding: 0;
+        width: auto;
+    }
+
+    .el-table__footer-wrapper, .el-table__header-wrapper {
+        border-bottom: 1px solid black;
+        border-radius: 1.5rem;
+        padding: 0 1rem;
+    }
+
+    .el-tabs__active-bar {
+        background-color: #319E55;
+    }
+
+    .el-tabs__item.is-active {
+        color: #319E55;
+    }
+
+    .el-tabs__item:hover {
+        color: #319E55;
+    }
+
+    .el-tabs__item {
+        font-size: 1rem;
+    }
 
     .el-table th > .cell {
         word-break: keep-all;
@@ -88,7 +219,6 @@
 
         .el-dropdown-link {
             cursor: pointer;
-            color: #409EFF;
         }
 
         .el-icon-arrow-down {
