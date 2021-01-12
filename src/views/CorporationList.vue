@@ -10,20 +10,24 @@
                             class="tableClass"
                             style="width: 100%;">
                         <el-table-column
+                                min-width="30"
                                 prop="corporation_name"
                                 :label="$t('org.corporation_name')">
                         </el-table-column>
                         <el-table-column
+                                min-width="20"
                                 prop="admin_name"
                                 :label="$t('org.config_cla_field_corp_default_title1')">
                         </el-table-column>
 
                         <el-table-column
+                                min-width="30"
                                 prop="admin_email"
                                 :label="$t('org.to_email')">
                         </el-table-column>
 
-                        <el-table-column>
+                        <el-table-column
+                                min-width="10">
                             <template slot="header" slot-scope="scope">
                                 <el-tooltip effect="dark" :content="$t('org.corp_signed_pdf')" placement="top">
                                     <span>PDF</span>
@@ -53,7 +57,7 @@
                         </el-table-column>
 
                         <el-table-column
-                                width="300"
+                                min-width="10"
                                 :label="$t('org.operation')">
                             <template slot-scope="scope">
                                 <el-dropdown placement="bottom-start" trigger="hover" @command="menuCommand">
@@ -73,7 +77,6 @@
                                 </el-dropdown>
                             </template>
                         </el-table-column>
-
                     </el-table>
                 </div>
             </el-tab-pane>
@@ -86,6 +89,7 @@
                             align="center"
                             style="width: 100%;">
                         <el-table-column
+                                min-width="60"
                                 prop="url"
                                 label="Url">
                             <template slot-scope="scope">
@@ -93,10 +97,12 @@
                             </template>
                         </el-table-column>
                         <el-table-column
+                                min-width="20"
                                 prop="language"
                                 :label="$t('org.toLanguage')">
                         </el-table-column>
                         <el-table-column
+                                min-width="20"
                                 prop=""
                                 :label="$t('org.operation')">
                             <template slot-scope="scope">
@@ -123,6 +129,7 @@
                             class="tableClass"
                             style="width: 100%;">
                         <el-table-column
+                                min-width="40"
                                 prop="url"
                                 label="Url">
                             <template slot-scope="scope">
@@ -130,10 +137,12 @@
                             </template>
                         </el-table-column>
                         <el-table-column
+                                min-width="20"
                                 prop="language"
                                 :label="$t('org.toLanguage')">
                         </el-table-column>
                         <el-table-column
+                                min-width="20"
                                 :label="$t('org.signature')">
                             <template slot-scope="scope">
                                 <el-popover
@@ -154,6 +163,7 @@
                             </template>
                         </el-table-column>
                         <el-table-column
+                                min-width="20"
                                 :label="$t('org.operation')">
                             <template slot-scope="scope">
                                 <el-dropdown placement="bottom-start" trigger="hover">
@@ -244,6 +254,7 @@
 
         </el-dialog>
         <ReTryDialog :dialogVisible="reTryDialogVisible" :message="reLoginMsg"></ReTryDialog>
+        <ReLoginDialog :dialogVisible="reLoginDialogVisible" :message="reLoginMsg"></ReLoginDialog>
     </div>
 
 
@@ -266,6 +277,9 @@
             ReLoginDialog,
         },
         computed: {
+            reLoginDialogVisible() {
+                return this.$store.state.orgReLoginDialogVisible
+            },
             reTryDialogVisible() {
                 return this.$store.state.reTryDialogVisible
             },
@@ -885,7 +899,7 @@
             menuCommand(command) {
                 switch (command.command) {
                     case 'a':
-                        this.createRoot(command.row.email);
+                        this.createRoot(command.row.admin_email);
                         break;
                     case 'b':
                         this.openResendPdf(command.row);
@@ -894,7 +908,7 @@
             },
             createRoot(email) {
                 http({
-                    url: `/api${url.corporationManager}/${this.$store.state.corpItem.link_id}/${email}`,
+                    url: `${url.corporationManager}/${this.$store.state.corpItem.link_id}/${email}`,
                     method: 'put',
                 }).then(res => {
                     this.openSuccessMessage();
@@ -921,7 +935,7 @@
                                 });
                                 break;
                             case 'cla.no_pdf_of_corp':
-                                this.$store.commit('errorSet', {
+                                this.$store.commit('errorCodeSet', {
                                     dialogVisible: true,
                                     dialogMessage: this.$t('tips.no_pdf_of_corp'),
                                 });

@@ -7,6 +7,7 @@ module.exports = {
         empBt: " Sign Employee CLA ",
         individualBt: " Sign Individual CLA ",
         guideTitle: "Signing CLA Guide for",
+        mobileGuideTitle: "Guide for...",
         corpStep1_1: "Click",
         corpStep1_2: "to go to the CLA signing page.",
         corpStep2: "Fill in the information and submit for signature.",

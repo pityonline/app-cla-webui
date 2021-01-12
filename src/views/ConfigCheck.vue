@@ -144,7 +144,7 @@
                 </div>
                 <div v-if="this.$store.state.claLinkCorp">
                     <el-row class="margin-top-1rem">
-                        {{$t('org.config_cla_fields_required')}}
+                        {{$t('org.config_cla_corp_metadata')}}
                     </el-row>
                     <div>
                         <el-row class="margin-top-1rem" type="flex" align="middle" :gutter="20">
@@ -186,7 +186,7 @@
 
         </div>
         <div class="stepBtBox">
-            <button @click="toConfigEmail" class="step_button">{{$t('org.previous_step')}}</button>
+            <button @click="toConfigField" class="step_button">{{$t('org.previous_step')}}</button>
             <button @click="binding" class="step_button">{{$t('org.submit')}}</button>
         </div>
         <ReLoginDialog :dialogVisible="reLoginDialogVisible" :message="reLoginMsg"></ReLoginDialog>
@@ -287,8 +287,8 @@
             }
         },
         methods: {
-            toConfigEmail() {
-                this.$router.push('/config-email');
+            toConfigField() {
+                this.$router.push('/config-fields');
             },
             editMetadata(metadata) {
                 if (metadata) {

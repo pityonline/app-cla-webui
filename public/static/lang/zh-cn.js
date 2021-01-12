@@ -7,6 +7,7 @@ module.exports = {
         empBt: "签署员工CLA",
         individualBt: "签署个人CLA",
         guideTitle: "CLA签署指引",
+        mobileGuideTitle: "C签署指引",
         corpStep1_1: "点击“",
         corpStep1_2: "”进入企业CLA签署页面",
         corpStep2: "填写各项信息，提交签署",

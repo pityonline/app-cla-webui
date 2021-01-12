@@ -28,14 +28,14 @@
                 :visible.sync="emailDialogVisible"
                 width="35%">
             <div>
-                <p class="dialogDesc">{{$t('org.config_cla_email_platform_select')}}</p>
+                <p :class="{word_break:this.lang==='1'}" class="dialogDesc">
+                    {{$t('org.config_cla_email_platform_select')}}</p>
                 <div>
-
                     <el-row>
-                        <el-col :offset="6" :span="12">
+                        <el-col :offset="4" :span="16">
                             <el-select
+                                    class="my-select"
                                     :placeholder="$t('org.config_cla_email_platform_select_placeholder')"
-                                    size="medium"
                                     filterable
                                     v-model="emailType"
                                     @change="changeEmailType">
@@ -49,18 +49,21 @@
                         </el-col>
                     </el-row>
                 </div>
-                <div class="authorize_desc">
-                    <p class="align_center">{{$t('org.config_cla_email_authorize_desc')}}</p>
-                    <ul :class="{word_break:this.lang==='1'}">
-                        <li>{{$t('org.config_cla_email_authorize_desc1')}}</li>
-                        <li>{{$t('org.config_cla_email_authorize_desc2')}}</li>
-                        <li>{{$t('org.config_cla_email_authorize_desc3')}}</li>
-                    </ul>
-                </div>
-                <span slot="footer" class="dialog-footer">
+                <el-row class="authorize_desc">
+                    <el-col :offset="2" :span="20">
+                        <p class="align_center">{{$t('org.config_cla_email_authorize_desc')}}</p>
+                        <ul :class="{word_break:this.lang==='1'}">
+                            <li>{{$t('org.config_cla_email_authorize_desc1')}}</li>
+                            <li>{{$t('org.config_cla_email_authorize_desc2')}}</li>
+                            <li>{{$t('org.config_cla_email_authorize_desc3')}}</li>
+                        </ul>
+                    </el-col>
+
+                </el-row>
+                <div slot="footer" class="dialog-footer">
                     <button class="cancelBt" @click="emailDialogVisible = false">{{$t('org.cancel_remove')}}</button>
                     <button class="email_button" @click="authorizeEmail()">{{$t('org.confirm_remove')}}</button>
-                </span>
+                </div>
             </div>
         </el-dialog>
         <ReLoginDialog :dialogVisible="reLoginDialogVisible" :message="reLoginMsg"></ReLoginDialog>
@@ -276,6 +279,14 @@
     }
 
     #configThree {
+        .my-select {
+            width: 100%;
+        }
+
+        .dialog-footer {
+            text-align: center;
+        }
+
         .word_break {
             word-break: break-all;
         }
@@ -284,9 +295,14 @@
             text-align: center;
         }
 
+        .dialogDesc {
+            font-size: 1.2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
         .authorize_desc {
-            padding: 2rem 6rem;
-            text-align: left;
+            padding: 2rem 0;
             font-size: 1.3rem
         }
 

@@ -19,7 +19,7 @@
                 <div class="margin-top-1rem">
                     <el-row class="margin-top-1rem">
                         <el-col>
-                            <el-input :placeholder="$t('org.config_cla_url_placeholder')" size="medium"
+                            <el-input clearable="" :placeholder="$t('org.config_cla_url_placeholder')" size="medium"
                                       v-model="cla_link_individual">
                             </el-input>
                         </el-col>
@@ -60,7 +60,7 @@
                 <div class="margin-top-1rem">
                     <el-row>
                         <el-col>
-                            <el-input :placeholder="$t('org.config_cla_url_placeholder')" size="medium"
+                            <el-input clearable="" :placeholder="$t('org.config_cla_url_placeholder')" size="medium"
                                       v-model="cla_link_corporation">
                             </el-input>
                         </el-col>

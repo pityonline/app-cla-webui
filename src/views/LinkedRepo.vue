@@ -33,6 +33,7 @@
                         class="tableClass"
                         style="width: 100%;">
                     <el-table-column
+                            min-width="40"
                             prop="repo_id"
                             :label="$t('org.repository')">
                         <template slot-scope="scope">
@@ -43,10 +44,12 @@
                         </template>
                     </el-table-column>
                     <el-table-column
+                            min-width="30"
                             prop="org_email"
                             :label="$t('corp.email')">
                     </el-table-column>
                     <el-table-column
+                            min-width="10"
                             :label="$t('org.unlink')"
                             width="100">
                         <template slot-scope="scope">
@@ -57,7 +60,7 @@
                         </template>
                     </el-table-column>
                     <el-table-column
-                            width="200"
+                            min-width="20"
                             :label="$t('org.operation')">
                         <template slot-scope="scope">
                             <el-dropdown placement="bottom-start" trigger="hover" @command="menuCommand">
@@ -862,7 +865,6 @@
         }
 
         .dialogDesc {
-
             font-size: 1.2rem;
             margin: 2rem 0;
             text-align: center;

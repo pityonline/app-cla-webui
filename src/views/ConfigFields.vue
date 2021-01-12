@@ -20,6 +20,20 @@
                             {{$t('org.config_cla_individual_metadata_desc')}}
                         </div>
                         <div>
+                            <el-row class="margin-top-1rem" type="flex" align="middle" :gutter="20">
+                                <el-col :span="5">
+                                    {{$t('org.config_cla_check_fields_title_title')}}
+                                </el-col>
+                                <el-col :span="5">
+                                    {{$t('org.config_cla_check_fields_type_title')}}
+                                </el-col>
+                                <el-col :span="5">
+                                    {{$t('org.config_cla_check_fields_describe_title')}}
+                                </el-col>
+                                <el-col :span="5" style="height: 100%">
+                                    {{$t('org.config_cla_check_fields_require_title')}}
+                                </el-col>
+                            </el-row>
                             <el-row style="padding: 0.5rem 0;" type="flex" align="middle" :gutter="20"
                                     v-for="(item,index) in individualMetadataArr">
                                 <el-col :span="5">
@@ -34,7 +48,9 @@
                                     <el-input disabled="" v-model="item.description" size="medium" readonly></el-input>
                                 </el-col>
                                 <el-col :span="5" style="height: 100%">
-                                    <el-checkbox v-model="item.required" disabled="">{{$t('org.config_cla_fields_required')}}</el-checkbox>
+                                    <el-checkbox v-model="item.required" disabled="">
+                                        {{$t('org.config_cla_fields_required')}}
+                                    </el-checkbox>
                                 </el-col>
                             </el-row>
 
@@ -65,7 +81,8 @@
                                               :placeholder="$t('org.config_cla_fields_desc_placeholder')"></el-input>
                                 </el-col>
                                 <el-col :span="5" style="height: 100%">
-                                    <el-checkbox v-model="item.required">{{$t('org.config_cla_fields_required')}}</el-checkbox>
+                                    <el-checkbox v-model="item.required">{{$t('org.config_cla_fields_required')}}
+                                    </el-checkbox>
                                 </el-col>
                                 <el-col :span="4">
                                     <button class="add_button" @click="addRow(index)">+</button>
@@ -83,6 +100,20 @@
                         {{$t('org.config_cla_corp_metadata_desc')}}
                     </div>
                     <div>
+                        <el-row class="margin-top-1rem" type="flex" align="middle" :gutter="20">
+                            <el-col :span="5">
+                                {{$t('org.config_cla_check_fields_title_title')}}
+                            </el-col>
+                            <el-col :span="5">
+                                {{$t('org.config_cla_check_fields_type_title')}}
+                            </el-col>
+                            <el-col :span="5">
+                                {{$t('org.config_cla_check_fields_describe_title')}}
+                            </el-col>
+                            <el-col :span="5" style="height: 100%">
+                                {{$t('org.config_cla_check_fields_require_title')}}
+                            </el-col>
+                        </el-row>
                         <el-row style="padding: 0.5rem 0;" type="flex" align="middle" :gutter="20"
                                 v-for="(item,index) in corporationMetadataArr">
                             <el-col :span="5">
@@ -127,7 +158,8 @@
                                           :placeholder="$t('org.config_cla_fields_desc_placeholder')"></el-input>
                             </el-col>
                             <el-col :span="5" style="height: 100%">
-                                <el-checkbox v-model="item.required">{{$t('org.config_cla_fields_required')}}</el-checkbox>
+                                <el-checkbox v-model="item.required">{{$t('org.config_cla_fields_required')}}
+                                </el-checkbox>
                             </el-col>
                             <el-col :span="4">
                                 <button class="add_button" @click="addCorpRow(index)">+</button>
@@ -168,52 +200,51 @@
             return {
                 individualMetadata: [],
                 corpMetadata: [],
-                dataTypeOptions: [{label: this.$t('org.config_cla_field_type_name'), value: 'name'}, {
-                    label: this.$t('org.config_cla_field_type_corporationName'),
+                dataTypeOptions: [{label: 'name', value: 'name'}, {
+                    label: 'corporationName',
                     value: 'corporationName'
-                }, {label: this.$t('org.config_cla_field_type_date'), value: 'date'}, {
-                    label: this.$t('org.config_cla_field_type_telephone'),
+                }, {label: 'date', value: 'date'}, {
+                    label: 'telephone',
                     value: 'telephone'
-                }, {label: this.$t('org.config_cla_field_type_address'), value: 'address'}, {label: this.$t('org.config_cla_field_type_email'), value: 'email'}, {
-                    label: this.$t('org.config_cla_field_type_fax'),
+                }, {label: 'address', value: 'address'}, {label: 'email', value: 'email'}, {
+                    label: 'fax',
                     value: 'fax'
                 },
                 ],
                 individualMetadataArr: [{
-                    title: this.$t('org.config_cla_field_individual_default_title1'),
+                    title: 'Name',
                     type: 'name',
-                    description:  this.$t('org.config_cla_field_individual_default_title1_desc'),
+                    description: 'your name',
                     required: true,
                 }, {
-                    title: this.$t('org.config_cla_field_individual_default_title2'),
+                    title: 'E-Mail',
                     type: 'email',
-                    description:this.$t('org.config_cla_field_individual_default_title2_desc'),
+                    description: 'your email',
                     required: true,
                 },],
                 corporationMetadataArr: [
                     {
-                        title: this.$t('org.config_cla_field_corp_default_title1'),
+                        title: 'Authorized Representative',
                         type: 'authorized',
-                        description: this.$t('org.config_cla_field_corp_default_title1_desc'),
+                        description: 'name of Authorized Representative',
                         required: true,
                     },
                     {
-                        title: this.$t('org.config_cla_field_corp_default_title4'),
+                        title: 'Title',
                         type: 'title',
-                        description:this.$t('org.config_cla_field_corp_default_title4_desc'),
+                        description: 'title of Authorized Representative',
                         required: true,
                     },
                     {
-                        title:this.$t('org.config_cla_field_corp_default_title2'),
+                        title: 'Corporation Name',
                         type: 'corporationName',
-                        description: this.$t('org.config_cla_field_corp_default_title2_desc'),
+                        description: 'corporation name',
                         required: true,
                     },
-
                     {
-                        title: this.$t('org.config_cla_field_corp_default_title3'),
+                        title: 'E-Mail',
                         type: 'email',
-                        description: this.$t('org.config_cla_field_corp_default_title3_desc'),
+                        description: 'corporation email',
                         required: true,
                     },],
                 initIndividualCustomMetadata: [{
@@ -233,12 +264,55 @@
         beforeRouteEnter(to, from, next) {
             next(vm => {
                 if (from.path === '/') {
-                    vm.init();
+                    vm.flashInit();
                 }
             })
         },
         methods: {
             init() {
+                if (this.$store.state.individualLanguage === 'chinese') {
+                    this.individualMetadataArr = [{
+                        title: '姓名',
+                        type: 'name',
+                        description: '你的姓名',
+                        required: true,
+                    }, {
+                        title: '邮箱',
+                        type: 'email',
+                        description: '你的邮箱',
+                        required: true,
+                    },]
+                }
+                if (this.$store.state.corpLanguage === 'chinese') {
+                    this.corporationMetadataArr = [
+                        {
+                            title: '授权代表',
+                            type: 'authorized',
+                            description: '授权代表的姓名',
+                            required: true,
+                        },
+                        {
+                            title: '职位',
+                            type: 'title',
+                            description: '授权代表的职位',
+                            required: true,
+                        },
+                        {
+                            title: '公司名称',
+                            type: 'corporationName',
+                            description: '签署者所在公司名称',
+                            required: true,
+                        },
+                        {
+                            title: '邮箱',
+                            type: 'email',
+                            description: '签署者所在公司的邮箱',
+                            required: true,
+                        },]
+                }
+            },
+            flashInit() {
+                this.init();
                 this.$store.commit('setIndividualMetadata', this.individualMetadataArr);
                 this.$store.commit('setCorpMetadata', this.corporationMetadataArr);
                 this.$store.commit('setIndividualCustomMetadataArr', this.initIndividualCustomMetadata);
@@ -278,7 +352,7 @@
                     }
                 });
                 let individualArr = this.individualMetadataArr.concat(individualMetadata);
-                console.log('individualArr===',individualArr);
+                console.log('individualArr===', individualArr);
                 let corpArr = this.corporationMetadataArr.concat(corpMetadata);
                 for (let i = 0; i < individualArr.length; i++) {
                     for (let j = i + 1; j < individualArr.length; j++) {
@@ -387,6 +461,9 @@
                 this.$store.commit('setCorporationCustomMetadataArr', metadata)
             },
         },
+        created() {
+            this.init();
+        }
     }
 </script>
 

@@ -8,7 +8,7 @@
                         <el-col :offset="3" :span="18" style="height: 100%">
                             <el-row>
                                 <el-col align="center" class="title" style="height: 100%">
-                                    <div class="name mobile_name">
+                                    <div class="name">
                                         <div>
                                             <p><span>C</span>ontributor</p>
                                             <p><span>L</span>icense</p>
@@ -50,354 +50,301 @@
                     <el-row>
                         <el-col>
                             <el-row class="guideTitle">
-                                {{ $t('signType.guideTitle') }}
+                                {{ $t('signType.mobileGuideTitle') }}
                             </el-row>
-                            <el-row>
-                                <el-col :span="8" class="SignTypeCol" :class="{'typeShadow':signType==='corporation'}"
-                                        @click.native="clickSignTypeGuide('corporation')">
-                                    <div class="SignTypeBox">
-                                        <svg-icon icon-class="Enterprise" class="SignTypeIcon"></svg-icon>
-                                        <p>{{ $t('signType.corp') }}</p>
-                                    </div>
-                                    <div v-if="signType==='corporation'" class="coverBox">
-                                    </div>
-                                </el-col>
-                                <el-col :span="8" class="SignTypeCol" :class="{'typeShadow':signType==='employee'}"
-                                        @click.native="clickSignTypeGuide('employee')">
-                                    <div class="SignTypeBox">
-                                        <svg-icon icon-class="Employee" class="SignTypeIcon"></svg-icon>
-                                        <p>{{ $t('signType.emp') }}</p>
-                                    </div>
-                                    <div v-if="signType==='employee'" class="coverBox">
-                                    </div>
-                                </el-col>
-                                <el-col :span="8" class="SignTypeCol" :class="{'typeShadow':signType==='individual'}"
-                                        @click.native="clickSignTypeGuide('individual')">
-                                    <div class="SignTypeBox">
-                                        <svg-icon icon-class="Individual" class="SignTypeIcon"></svg-icon>
-                                        <p>{{ $t('signType.individual') }}</p>
-                                    </div>
-                                    <div v-if="signType==='individual'" class="coverBox">
-                                    </div>
-                                </el-col>
-                            </el-row>
-                            <el-row v-if="signType==='corporation'" class="guideBox">
-                                <div class="stepCoverBox">
-
-                                </div>
+                            <el-row class="guide-border padding-half-1rem">
                                 <el-col>
-                                    <el-row class="stepBox">
-                                        <el-col :offset="10" :span="4">
-                                            <svg-icon class="stepIcon" icon-class="click"></svg-icon>
+                                    <el-row class="pointer" @click.native="clickCorpGuide()" type="flex" align="middle">
+                                        <el-col :offset="1" :span="4">
+                                            <svg-icon icon-class="Enterprise" class="mobile_SignTypeIcon"></svg-icon>
                                         </el-col>
-                                        <el-col :span="10" class="textCol">
-                                            <div class="rightText">
-                                                {{ $t('signType.corpStep1_1') }}<span>{{ $t('signType.corpBt') }}</span>{{
-                                                $t('signType.corpStep1_2') }}
-                                            </div>
+                                        <el-col align="left" :span="14">
+                                            <span class="font-bold">{{ $t('signType.corp') }}</span>
                                         </el-col>
-                                    </el-row>
-                                    <el-row>
-
-                                        <el-col class="lineBox" :offset="10" :span="4">
-                                            <div class="greenLine">
-
-                                            </div>
-                                        </el-col>
-
-                                    </el-row>
-
-                                    <el-row class="stepBox">
-                                        <el-col :span="10" class="textCol">
-                                            <div class="leftText">
-                                                {{ $t('signType.corpStep2') }}
-                                            </div>
-                                        </el-col>
-                                        <el-col class="iconBox" :span="4">
-                                            <svg-icon class="stepIcon" icon-class="sign"></svg-icon>
-                                        </el-col>
-                                        <el-col :span="10">
-                                            <div>
-
-                                            </div>
+                                        <el-col :span="3">
+                                            <svg-icon v-if="corpGuideIsOpen" icon-class="down-arrow"
+                                                      class="mobile_SignTypeIcon_arrow"></svg-icon>
+                                            <svg-icon v-else icon-class="right-arrow"
+                                                      class="mobile_SignTypeIcon_arrow"></svg-icon>
                                         </el-col>
                                     </el-row>
-                                    <el-row>
-
-                                        <el-col class="lineBox" :offset="10" :span="4">
-                                            <div class="greenLine">
-
-                                            </div>
-                                        </el-col>
-
-                                    </el-row>
-                                    <el-row class="stepBox">
-
-                                        <el-col :offset="10" :span="4">
-                                            <svg-icon class="stepIcon" icon-class="send"></svg-icon>
-                                        </el-col>
-                                        <el-col :span="10" class="textCol">
-                                            <div class="rightText">
-                                                {{ $t('signType.corpStep3') }}
-                                            </div>
-                                        </el-col>
-                                    </el-row>
-                                    <el-row>
-
-                                        <el-col class="lineBox" :offset="10" :span="4">
-                                            <div class="greenLine">
-
-                                            </div>
-                                        </el-col>
-
-                                    </el-row>
-                                    <el-row class="stepBox">
-                                        <el-col :span="10" class="textCol">
-                                            <div class="leftText">
-                                                {{ $t('signType.corpStep4') }}
-                                            </div>
-                                        </el-col>
-                                        <el-col :span="4">
-                                            <svg-icon class="stepIcon" icon-class="auth"></svg-icon>
-                                        </el-col>
-                                        <el-col :span="10">
-                                            <div>
-
-                                            </div>
-                                        </el-col>
-                                    </el-row>
-                                    <el-row>
-
-                                        <el-col class="lineBox" :offset="10" :span="4">
-                                            <div class="greenLine">
-
-                                            </div>
-                                        </el-col>
-
-                                    </el-row>
-                                    <el-row class="stepBox">
-
-                                        <el-col :offset="10" :span="4">
-                                            <svg-icon class="stepIcon" icon-class="success"></svg-icon>
-                                        </el-col>
-                                        <el-col :span="10" class="textCol">
-                                            <div class="rightText">
-                                                {{ $t('signType.corpStep5') }}
-                                            </div>
-                                        </el-col>
-                                    </el-row>
-                                    <el-row>
-
-                                        <el-col class="lineBox" :offset="10" :span="4">
-                                            <div class="greenLine">
-
-                                            </div>
-                                        </el-col>
-
-                                    </el-row>
-                                    <el-row class="stepBox">
-                                        <el-col :span="10" class="textCol">
-                                            <div class="leftText">
-                                                {{ $t('signType.corpStep6_1') }}<span @click="toCorpLogin()">{{ $t('signType.admin_platform') }}</span>{{
-                                                $t('signType.corpStep6_2') }}
-                                            </div>
-                                        </el-col>
-                                        <el-col :span="4">
-                                            <svg-icon class="stepIcon" icon-class="manage"></svg-icon>
-                                        </el-col>
-                                        <el-col :span="10">
-                                            <div>
-                                            </div>
+                                    <el-row v-if="corpGuideIsOpen" class="mobile-guideBox padding-bottom-5rem">
+                                        <el-col>
+                                            <el-row class="stepBox">
+                                                <el-col class="iconBox" :offset="1" :span="4">
+                                                    <svg-icon class="stepIcon" icon-class="click"></svg-icon>
+                                                </el-col>
+                                                <el-col :span="19" class="textCol">
+                                                    <div class="rightText padding-left-1rem">
+                                                        {{ $t('signType.corpStep1_1') }}<span>{{ $t('signType.corpBt') }}</span>{{
+                                                        $t('signType.corpStep1_2') }}
+                                                    </div>
+                                                </el-col>
+                                            </el-row>
+                                            <el-row>
+                                                <el-col class="lineBox" :offset="1" :span="4">
+                                                    <div class="greenLine">
+                                                    </div>
+                                                </el-col>
+                                            </el-row>
+                                            <el-row class="stepBox">
+                                                <el-col class="iconBox" :offset="1" :span="4">
+                                                    <svg-icon class="stepIcon" icon-class="sign"></svg-icon>
+                                                </el-col>
+                                                <el-col :span="19" class="textCol">
+                                                    <div class="rightText padding-left-1rem">
+                                                        {{ $t('signType.corpStep2') }}
+                                                    </div>
+                                                </el-col>
+                                            </el-row>
+                                            <el-row>
+                                                <el-col class="lineBox" :offset="1" :span="4">
+                                                    <div class="greenLine">
+                                                    </div>
+                                                </el-col>
+                                            </el-row>
+                                            <el-row class="stepBox">
+                                                <el-col class="iconBox" :offset="1" :span="4">
+                                                    <svg-icon class="stepIcon" icon-class="send"></svg-icon>
+                                                </el-col>
+                                                <el-col :span="19" class="textCol">
+                                                    <div class="rightText padding-left-1rem">
+                                                        {{ $t('signType.corpStep3') }}
+                                                    </div>
+                                                </el-col>
+                                            </el-row>
+                                            <el-row>
+                                                <el-col class="lineBox" :offset="1" :span="4">
+                                                    <div class="greenLine">
+                                                    </div>
+                                                </el-col>
+                                            </el-row>
+                                            <el-row class="stepBox">
+                                                <el-col class="iconBox" :offset="1" :span="4">
+                                                    <svg-icon class="stepIcon" icon-class="auth"></svg-icon>
+                                                </el-col>
+                                                <el-col :span="19" class="textCol">
+                                                    <div class="rightText padding-left-1rem">
+                                                        {{ $t('signType.corpStep4') }}
+                                                    </div>
+                                                </el-col>
+                                            </el-row>
+                                            <el-row>
+                                                <el-col class="lineBox" :offset="1" :span="4">
+                                                    <div class="greenLine">
+                                                    </div>
+                                                </el-col>
+                                            </el-row>
+                                            <el-row class="stepBox">
+                                                <el-col class="iconBox" :offset="1" :span="4">
+                                                    <svg-icon class="stepIcon" icon-class="success"></svg-icon>
+                                                </el-col>
+                                                <el-col :span="19" class="textCol">
+                                                    <div class="rightText padding-left-1rem">
+                                                        {{ $t('signType.corpStep5') }}
+                                                    </div>
+                                                </el-col>
+                                            </el-row>
+                                            <el-row>
+                                                <el-col class="lineBox" :offset="1" :span="4">
+                                                    <div class="greenLine">
+                                                    </div>
+                                                </el-col>
+                                            </el-row>
+                                            <el-row class="stepBox">
+                                                <el-col class="iconBox" :offset="1" :span="4">
+                                                    <svg-icon class="stepIcon" icon-class="manage"></svg-icon>
+                                                </el-col>
+                                                <el-col :span="19" class="textCol">
+                                                    <div class="rightText padding-left-1rem">
+                                                        {{ $t('signType.corpStep6_1') }}<span class="func-link"
+                                                                                              @click="toCorpLogin()">{{ $t('signType.admin_platform') }}</span>{{
+                                                        $t('signType.corpStep6_2') }}
+                                                    </div>
+                                                </el-col>
+                                            </el-row>
                                         </el-col>
                                     </el-row>
                                 </el-col>
                             </el-row>
-                            <el-row v-if="signType==='employee'" class="guideBox">
+                            <el-row class="padding-half-1rem">
                                 <el-col>
-                                    <el-row class="stepBox">
-                                        <el-col :offset="10" :span="4">
-                                            <svg-icon class="stepIcon" icon-class="click"></svg-icon>
+                                    <el-row class="pointer" @click.native="clickEmpGuide()" type="flex" align="middle">
+                                        <el-col :offset="1" :span="4">
+                                            <svg-icon icon-class="Employee" class="mobile_SignTypeIcon"></svg-icon>
                                         </el-col>
-                                        <el-col :span="10" class="textCol">
-                                            <div class="rightText">
-                                                {{ $t('signType.corpStep1_1') }}<span>{{ $t('signType.empBt') }}</span>{{
-                                                $t('signType.corpStep1_2') }}
-                                            </div>
+                                        <el-col align="left" :span="14">
+                                            <span class="font-bold">{{ $t('signType.emp') }}</span>
                                         </el-col>
-                                    </el-row>
-                                    <el-row>
-
-                                        <el-col class="lineBox" :offset="10" :span="4">
-                                            <div class="greenLine">
-
-                                            </div>
-                                        </el-col>
-
-                                    </el-row>
-
-                                    <el-row class="stepBox">
-                                        <el-col :span="10" class="textCol">
-                                            <div class="leftText">
-                                                {{ $t('signType.empStep2') }}
-                                            </div>
-                                        </el-col>
-                                        <el-col class="iconBox" :span="4">
-                                            <svg-icon class="stepIcon" icon-class="sign"></svg-icon>
-                                        </el-col>
-                                        <el-col :span="10">
-                                            <div>
-
-                                            </div>
+                                        <el-col :span="3">
+                                            <svg-icon v-if="employeeGuideIsOpen" icon-class="down-arrow"
+                                                      class="mobile_SignTypeIcon_arrow"></svg-icon>
+                                            <svg-icon v-else icon-class="right-arrow"
+                                                      class="mobile_SignTypeIcon_arrow"></svg-icon>
                                         </el-col>
                                     </el-row>
-                                    <el-row>
-
-                                        <el-col class="lineBox" :offset="10" :span="4">
-                                            <div class="greenLine">
-
-                                            </div>
+                                    <el-row v-if="employeeGuideIsOpen" class="mobile-guideBox padding-bottom-5rem">
+                                        <el-col>
+                                            <el-row class="stepBox">
+                                                <el-col class="iconBox" :offset="1" :span="4">
+                                                    <svg-icon class="stepIcon " icon-class="click"></svg-icon>
+                                                </el-col>
+                                                <el-col :span="19" class="textCol">
+                                                    <div class="rightText padding-left-1rem">
+                                                        {{ $t('signType.corpStep1_1')
+                                                        }}<span>{{ $t('signType.empBt') }}</span>{{
+                                                        $t('signType.corpStep1_2') }}
+                                                    </div>
+                                                </el-col>
+                                            </el-row>
+                                            <el-row>
+                                                <el-col class="lineBox" :offset="1" :span="4">
+                                                    <div class="greenLine">
+                                                    </div>
+                                                </el-col>
+                                            </el-row>
+                                            <el-row class="stepBox">
+                                                <el-col class="iconBox" :offset="1" :span="4">
+                                                    <svg-icon class="stepIcon" icon-class="sign"></svg-icon>
+                                                </el-col>
+                                                <el-col :span="19" class="textCol">
+                                                    <div class="rightText padding-left-1rem">
+                                                        {{ $t('signType.empStep2') }}
+                                                    </div>
+                                                </el-col>
+                                            </el-row>
+                                            <el-row>
+                                                <el-col class="lineBox" :offset="1" :span="4">
+                                                    <div class="greenLine">
+                                                    </div>
+                                                </el-col>
+                                            </el-row>
+                                            <el-row class="stepBox">
+                                                <el-col class="iconBox" :offset="1" :span="4">
+                                                    <svg-icon class="stepIcon" icon-class="send"></svg-icon>
+                                                </el-col>
+                                                <el-col :span="19" class="textCol">
+                                                    <div class="rightText padding-left-1rem">
+                                                        {{ $t('signType.corpStep2') }}
+                                                    </div>
+                                                </el-col>
+                                            </el-row>
+                                            <el-row>
+                                                <el-col class="lineBox" :offset="1" :span="4">
+                                                    <div class="greenLine">
+                                                    </div>
+                                                </el-col>
+                                            </el-row>
+                                            <el-row class="stepBox">
+                                                <el-col class="iconBox" :offset="1" :span="4">
+                                                    <svg-icon class="stepIcon" icon-class="auth"></svg-icon>
+                                                </el-col>
+                                                <el-col :span="19" class="textCol">
+                                                    <div class="rightText padding-left-1rem">
+                                                        {{ $t('signType.empStep4') }}
+                                                    </div>
+                                                </el-col>
+                                            </el-row>
+                                            <el-row>
+                                                <el-col class="lineBox" :offset="1" :span="4">
+                                                    <div class="greenLine">
+                                                    </div>
+                                                </el-col>
+                                            </el-row>
+                                            <el-row class="stepBox">
+                                                <el-col class="iconBox" :offset="1" :span="4">
+                                                    <svg-icon class="stepIcon" icon-class="success"></svg-icon>
+                                                </el-col>
+                                                <el-col :span="19" class="textCol">
+                                                    <div class="rightText padding-left-1rem">
+                                                        {{ $t('signType.empStep5') }}
+                                                    </div>
+                                                </el-col>
+                                            </el-row>
                                         </el-col>
-
                                     </el-row>
-                                    <el-row class="stepBox">
-
-                                        <el-col :offset="10" :span="4">
-                                            <svg-icon class="stepIcon" icon-class="send"></svg-icon>
-                                        </el-col>
-                                        <el-col :span="10" class="textCol">
-                                            <div class="rightText">
-                                                {{ $t('signType.corpStep2') }}
-                                            </div>
-                                        </el-col>
-                                    </el-row>
-                                    <el-row>
-
-                                        <el-col class="lineBox" :offset="10" :span="4">
-                                            <div class="greenLine">
-
-                                            </div>
-                                        </el-col>
-
-                                    </el-row>
-                                    <el-row class="stepBox">
-                                        <el-col :span="10" class="textCol">
-                                            <div class="leftText">
-                                                {{ $t('signType.empStep4') }}
-                                            </div>
-                                        </el-col>
-                                        <el-col :span="4">
-                                            <svg-icon class="stepIcon" icon-class="auth"></svg-icon>
-                                        </el-col>
-                                        <el-col :span="10">
-                                            <div>
-
-                                            </div>
-                                        </el-col>
-                                    </el-row>
-                                    <el-row>
-
-                                        <el-col class="lineBox" :offset="10" :span="4">
-                                            <div class="greenLine">
-
-                                            </div>
-                                        </el-col>
-
-                                    </el-row>
-                                    <el-row class="stepBox">
-
-                                        <el-col :offset="10" :span="4">
-                                            <svg-icon class="stepIcon" icon-class="success"></svg-icon>
-                                        </el-col>
-                                        <el-col :span="10" class="textCol">
-                                            <div class="rightText">
-                                                {{ $t('signType.empStep5') }}
-                                            </div>
-                                        </el-col>
-                                    </el-row>
-
                                 </el-col>
                             </el-row>
-                            <el-row v-if="signType==='individual'" class="guideBox">
+                            <el-row :class="{'border-bottom':!individualGuideIsOpen}"
+                                    class="border-top padding-half-1rem">
                                 <el-col>
-                                    <el-row class="stepBox">
-                                        <el-col :offset="10" :span="4">
-                                            <svg-icon class="stepIcon" icon-class="click"></svg-icon>
+                                    <el-row class="pointer" @click.native="clickIndividualGuide()" type="flex"
+                                            align="middle">
+                                        <el-col :offset="1" :span="4">
+                                            <svg-icon icon-class="Individual" class="mobile_SignTypeIcon"></svg-icon>
                                         </el-col>
-                                        <el-col :span="10" class="textCol">
-                                            <div class="rightText">
-                                                {{ $t('signType.corpStep1_1')
-                                                }}<span>{{ $t('signType.individualBt') }}</span>{{
-                                                $t('signType.corpStep1_2') }}
-                                            </div>
+                                        <el-col align="left" :span="14">
+                                            <span class="font-bold">{{ $t('signType.individual') }}</span>
                                         </el-col>
-                                    </el-row>
-                                    <el-row>
-
-                                        <el-col class="lineBox" :offset="10" :span="4">
-                                            <div class="greenLine">
-
-                                            </div>
-                                        </el-col>
-
-                                    </el-row>
-
-                                    <el-row class="stepBox">
-                                        <el-col :span="10" class="textCol">
-                                            <div class="leftText">
-                                                {{ $t('signType.individualStep2') }}
-                                            </div>
-                                        </el-col>
-                                        <el-col class="iconBox" :span="4">
-                                            <svg-icon class="stepIcon" icon-class="sign"></svg-icon>
-                                        </el-col>
-                                        <el-col :span="10">
-                                            <div>
-
-                                            </div>
+                                        <el-col :span="3">
+                                            <svg-icon v-if="individualGuideIsOpen" icon-class="down-arrow"
+                                                      class="mobile_SignTypeIcon_arrow"></svg-icon>
+                                            <svg-icon v-else icon-class="right-arrow"
+                                                      class="mobile_SignTypeIcon_arrow"></svg-icon>
                                         </el-col>
                                     </el-row>
-                                    <el-row>
-
-                                        <el-col class="lineBox" :offset="10" :span="4">
-                                            <div class="greenLine">
-
-                                            </div>
-                                        </el-col>
-
-                                    </el-row>
-                                    <el-row class="stepBox">
-
-                                        <el-col :offset="10" :span="4">
-                                            <svg-icon class="stepIcon" icon-class="send"></svg-icon>
-                                        </el-col>
-                                        <el-col :span="10" class="textCol">
-                                            <div class="rightText">
-                                                {{ $t('signType.corpStep2') }}
-                                            </div>
-                                        </el-col>
-                                    </el-row>
-                                    <el-row>
-
-                                        <el-col class="lineBox" :offset="10" :span="4">
-                                            <div class="greenLine">
-
-                                            </div>
-                                        </el-col>
-
-                                    </el-row>
-                                    <el-row class="stepBox">
-                                        <el-col :span="10" class="textCol">
-                                            <div class="leftText">
-                                                {{ $t('signType.individualStep4') }}
-                                            </div>
-                                        </el-col>
-                                        <el-col :span="4">
-                                            <svg-icon class="stepIcon" icon-class="success"></svg-icon>
-                                        </el-col>
-                                        <el-col :span="10">
-                                            <div>
-
-                                            </div>
+                                    <el-row v-if="individualGuideIsOpen" class="mobile-guideBox">
+                                        <el-col>
+                                            <el-row class="stepBox">
+                                                <el-col class="iconBox" :offset="1" :span="4">
+                                                    <svg-icon class="stepIcon" icon-class="click"></svg-icon>
+                                                </el-col>
+                                                <el-col :span="19" class="textCol">
+                                                    <div class="rightText padding-left-1rem">
+                                                        {{ $t('signType.corpStep1_1')
+                                                        }}<span>{{ $t('signType.individualBt') }}</span>{{
+                                                        $t('signType.corpStep1_2') }}
+                                                    </div>
+                                                </el-col>
+                                            </el-row>
+                                            <el-row>
+                                                <el-col class="lineBox" :offset="1" :span="4">
+                                                    <div class="greenLine">
+                                                    </div>
+                                                </el-col>
+                                            </el-row>
+                                            <el-row class="stepBox">
+                                                <el-col class="iconBox" :offset="1" :span="4">
+                                                    <svg-icon class="stepIcon" icon-class="sign"></svg-icon>
+                                                </el-col>
+                                                <el-col :span="19" class="textCol">
+                                                    <div class="rightText padding-left-1rem">
+                                                        {{ $t('signType.individualStep2') }}
+                                                    </div>
+                                                </el-col>
+                                            </el-row>
+                                            <el-row>
+                                                <el-col class="lineBox" :offset="1" :span="4">
+                                                    <div class="greenLine">
+                                                    </div>
+                                                </el-col>
+                                            </el-row>
+                                            <el-row class="stepBox">
+                                                <el-col class="iconBox" :offset="1" :span="4">
+                                                    <svg-icon class="stepIcon" icon-class="send"></svg-icon>
+                                                </el-col>
+                                                <el-col :span="19" class="textCol">
+                                                    <div class="rightText padding-left-1rem">
+                                                        {{ $t('signType.corpStep2') }}
+                                                    </div>
+                                                </el-col>
+                                            </el-row>
+                                            <el-row>
+                                                <el-col class="lineBox" :offset="1" :span="4">
+                                                    <div class="greenLine">
+                                                    </div>
+                                                </el-col>
+                                            </el-row>
+                                            <el-row class="stepBox">
+                                                <el-col class="iconBox" :offset="1" :span="4">
+                                                    <svg-icon class="stepIcon" icon-class="success"></svg-icon>
+                                                </el-col>
+                                                <el-col :span="19" class="textCol">
+                                                    <div class="rightText padding-left-1rem">
+                                                        {{ $t('signType.individualStep4') }}
+                                                    </div>
+                                                </el-col>
+                                            </el-row>
                                         </el-col>
                                     </el-row>
                                 </el-col>
@@ -494,7 +441,6 @@
                             </el-row>
                             <el-row v-if="signType==='corporation'" class="guideBox">
                                 <div class="stepCoverBox">
-
                                 </div>
                                 <el-col>
                                     <el-row class="stepBox">
@@ -860,6 +806,9 @@
         },
         data() {
             return {
+                corpGuideIsOpen: false,
+                individualGuideIsOpen: false,
+                employeeGuideIsOpen: false,
                 isMobile: false,
                 base64Params: '',
                 platform: '',
@@ -878,6 +827,15 @@
         },
         methods: {
             ...mapActions(['setLoginTypeAct', 'setRepoInfoAct']),
+            clickIndividualGuide() {
+                this.individualGuideIsOpen = !this.individualGuideIsOpen;
+            },
+            clickEmpGuide() {
+                this.employeeGuideIsOpen = !this.employeeGuideIsOpen;
+            },
+            clickCorpGuide() {
+                this.corpGuideIsOpen = !this.corpGuideIsOpen
+            },
             browserRedirect() {
                 this.isMobile = isMobile();
             },
@@ -1077,9 +1035,7 @@
             this.getRepoInfo();
         },
         mounted() {
-            if (this.isMobile) {
-                until.setMinHeight('mobile_sign', 'mobile_btBox');
-            } else {
+            if (!this.isMobile) {
                 until.setMinHeight('sign', 'btBox');
             }
             this.setClientHeight();
@@ -1123,12 +1079,21 @@
         text-align: center;
         width: 100%;
 
+        .padding-bottom-5rem {
+            padding-bottom: 5rem;
+        }
+
+        #mobile_section {
+            margin-bottom: 5rem;
+        }
+
         .el-dialog {
             border-radius: 1rem;
         }
 
-        display: flex;
-        flex-direction: column;
+        .pointer {
+            cursor: pointer;
+        }
 
         #section {
             flex-grow: 1;
@@ -1145,6 +1110,7 @@
             height: 0;
             padding-bottom: 100%;
             border-radius: 50%;
+            margin: 1rem 0;
             overflow: hidden;
             position: relative;
         }
@@ -1221,7 +1187,6 @@
             color: white;
             font-size: 1.5rem;
             cursor: pointer;
-            /*background: linear-gradient(to right, #97DB30, #319E55);*/
             background-color: lightgrey;
             margin: 1.2rem 0;
         }
@@ -1250,6 +1215,12 @@
             }
         }
 
+        .mobile-guideBox {
+            color: #B5B5B5;
+            font-family: Roboto-Regular, sans-serif;
+            padding-top: 4rem;
+        }
+
         .typeShadow {
             box-shadow: 0 -10px 20px 10px #f3f3f3;
         }
@@ -1273,6 +1244,44 @@
                 z-index: 1;
                 background-color: white;
             }
+        }
+
+        .mobile-guide-type {
+            width: 100%;
+            height: 4rem;
+            line-height: 4rem;
+        }
+
+        .font-bold {
+            font-weight: bold;
+        }
+
+        .border-top {
+            border-top: 1px solid #AAAAAA;
+        }
+
+        .border-bottom {
+            border-bottom: 1px solid #AAAAAA;
+        }
+
+        .padding-half-1rem {
+            padding: .5rem 0;
+        }
+
+        .guide-border {
+            border-top: 1px solid #AAAAAA;
+            border-bottom: 1px solid #AAAAAA;
+        }
+
+        .mobile_SignTypeIcon_arrow {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        .mobile_SignTypeIcon {
+            width: 2rem;
+            height: 2rem;
+            margin: .5rem;
         }
 
         .SignTypeIcon {
@@ -1300,6 +1309,11 @@
         font-size: 0;
     }
 
+    .func-link {
+        cursor: pointer;
+        color: #3CA550;
+    }
+
     .stepBox {
         height: 5rem;
 
@@ -1307,6 +1321,10 @@
             width: 5rem;
             height: 5rem;
         }
+    }
+
+    .padding-left-1rem {
+        padding-left: 1rem;
     }
 
     .rightText {
@@ -1358,9 +1376,6 @@
         text-align: left;
     }
 
-    .mobile_name {
-
-    }
 
     .name {
         font-family: Roboto-Regular, sans-serif;

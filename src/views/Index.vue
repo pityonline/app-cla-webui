@@ -3,7 +3,7 @@
         <el-col class="index" id="transparentDiv" :style="transparentDiv">
             <NewHeader></NewHeader>
             <el-row id="section">
-                <el-col >
+                <el-col>
                     <el-row class="actionBox">
                         <div class="backgroundBox">
                             <img src="../assets/images/backgroundx1.png" alt="">
@@ -53,7 +53,7 @@
         },
         data() {
             return {
-                showGuide:false,
+                showGuide: false,
                 signType: 'corporation',
                 transparentDiv: {
                     height: '',
@@ -77,11 +77,11 @@
                     }
                 })
             },
-            setDomain(){
-                this.$store.commit('setDomain',window.location.href.split('/index')[0])
+            setDomain() {
+                this.$store.commit('setDomain', window.location.href.split('/index')[0])
             },
         },
-        created(){
+        created() {
             this.setDomain()
         },
         mounted() {
@@ -89,11 +89,12 @@
         }
     }
 </script>
-<style  lang="less">
+<style lang="less">
     @import "../assets/font/css/Roboto-Bold.css";
     @import "../assets/font/css/Roboto-Black.css";
     @import "../assets/font/css/Roboto-Light.css";
     @import "../assets/font/css/Roboto-Regular.css";
+
     @media screen and (min-width: 100px) and (max-width: 1200px) {
         #section {
             width: 100%;
@@ -102,7 +103,8 @@
         .backgroundBox {
             width: 66.6%;
             left: 25%;
-            img{
+
+            img {
                 width: 51rem;
             }
         }
@@ -112,52 +114,59 @@
         #section {
             width: 1200px;
             margin: auto;
-
         }
 
         .backgroundBox {
             left: 280px;
         }
     }
+
     .index {
         display: flex;
         flex-direction: column;
         width: 100%;
 
-         #section {
+        #section {
             flex-grow: 1;
             padding: 0 1rem;
         }
-        .guideBox{
-            box-shadow:0 10px 20px 10px #F3F3F3;
+
+        .guideBox {
+            box-shadow: 0 10px 20px 10px #F3F3F3;
             margin-bottom: 5rem;
-            padding-top:4rem;
+            padding-top: 4rem;
             padding-bottom: 10rem;
         }
+
         .typeShadow {
             box-shadow: 0 -10px 20px 10px #F3F3F3;
         }
+
         .SignTypeCol {
             cursor: pointer;
             height: 16rem;
             font-size: 1.5rem;
-            font-family: Roboto-Bold,sans-serif;
+            font-family: Roboto-Bold, sans-serif;
             display: flex;
             justify-content: center;
             flex-direction: column;
         }
+
         .SignTypeIcon {
             width: 5rem;
             height: 5rem;
             margin: 1rem;
         }
-        .SignTypeBox{
+
+        .SignTypeBox {
 
         }
-        .guideTitle{
-            font-size:2.5rem ;
+
+        .guideTitle {
+            font-size: 2.5rem;
             margin: 5rem 0;
         }
+
         .backgroundBox {
             background-repeat: no-repeat;
             position: absolute;
@@ -165,10 +174,12 @@
             top: 7.5rem;
 
         }
+
         .actionBox {
             position: relative;
             height: 45rem;
         }
+
         .title {
             height: 100%;
             display: flex;
@@ -176,24 +187,26 @@
             justify-content: center;
             text-align: left
         }
+
         .name {
             font-family: Roboto-Regular, sans-serif;
             color: #424242;
             font-size: 5rem;
             line-height: 30px;
-            p{
-                span{
+
+            p {
+                span {
                     font-family: Roboto-Bold, sans-serif;
                     font-weight: bold;
                 }
             }
         }
+
         .description {
             font-family: Roboto-Regular, sans-serif;
             font-size: 1.5rem;
         }
     }
-
 
 
 </style>

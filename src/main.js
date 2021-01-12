@@ -18,6 +18,7 @@ Vue.prototype.$cookie = Cookie;
 Vue.prototype.$axios = axios;
 Vue.use(ElementUI);
 Vue.use(VueI18n);
+Vue.use(Const_config);
 Vue.config.productionTip = false;
 Vue.config.devtools = true;
 
