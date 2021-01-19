@@ -16,17 +16,16 @@
                                               :label="item.title"
                                               :required="item.required"
                                               :prop="item.id">
-                                    <el-input v-if="item.type==='email'" :readonly="loginType!=='corporation'"
-                                              v-model="ruleForm[item.id]"
+                                    <el-input v-if="item.type==='email'" :placeholder="$t('signPage.holder',{title:item.title})"
+                                              :readonly="loginType!=='corporation'" v-model="ruleForm[item.id]"
                                               size="small" @blur="setMyForm(item.type,ruleForm[item.id])"></el-input>
                                     <el-input v-else-if="item.type==='platform_id'"
                                               :readonly="loginType!=='corporation'"
                                               v-model="ruleForm[item.id]"
                                               size="small" @blur="setMyForm(item.type,ruleForm[item.id])"></el-input>
-
                                     <el-input v-else-if="item.type==='date'" readonly="" v-model="ruleForm[item.id]"
                                               size="small" @blur="setMyForm(item.type,ruleForm[item.id])"></el-input>
-                                    <el-input v-else v-model="ruleForm[item.id]" size="small"
+                                    <el-input v-else v-model="ruleForm[item.id]" :placeholder="$t('signPage.holder',{title:item.title})" size="small"
                                               @blur="setMyForm(item.type,ruleForm[item.id])"></el-input>
                                 </el-form-item>
                                 <el-form-item
@@ -35,7 +34,8 @@
                                         :required="rules.code[0].required"
                                         prop="code">
 
-                                    <el-input v-model="ruleForm.code" size="small">
+                                    <el-input v-model="ruleForm.code" :placeholder="$t('signPage.verifyCodeHolder')"
+                                              size="small">
                                         <el-button slot="append"
                                                    :disabled="sendBtTextFromLang!==$t('signPage.sendCode')"
                                                    @click="sendCode()">{{sendBtTextFromLang}}
@@ -78,7 +78,7 @@
     import * as url from '../until/api'
     import {mapActions} from 'vuex'
     import http from '../until/sign_http'
-    import axios from '../until/axios'
+    import axios from '../until/_axios'
     import ReLoginDialog from '../components/ReLoginDialog'
     import ReTryDialog from '../components/ReTryDialog'
     import SignSuccessDialog from '../components/SignSuccessDialog'
@@ -487,7 +487,6 @@
                         this.ruleForm = {};
                         this.rules = {};
                         this.fields = [];
-
                         this.$message.closeAll();
                         this.$message.error(this.$t('tips.no_lang', {language: this.lang}))
                     }
@@ -654,7 +653,7 @@
                 for (let i = 0; i < this.signPageData[key].fields.length; i++) {
                     for (let j = i + 1; j < this.signPageData[key].fields.length; j++) {
                         if (Number(this.signPageData[key].fields[i].id) > Number(this.signPageData[key].fields[j].id)) {
-                            let field = this.signPageData[key].fields[i]
+                            let field = this.signPageData[key].fields[i];
                             this.signPageData[key].fields[i] = this.signPageData[key].fields[j]
                             this.signPageData[key].fields[j] = field
                         }
@@ -826,12 +825,6 @@
                 }).catch(err => {
                     if (err.data && err.data.hasOwnProperty('data')) {
                         switch (err.data.data.error_code) {
-                            case 'cla.has_signed':
-                                this.$store.commit('setSignReLogin', {
-                                    dialogVisible: true,
-                                    dialogMessage: this.$t('tips.has_signed'),
-                                });
-                                break;
                             case 'cla.resigned':
                                 this.$store.commit('setSignReLogin', {
                                     dialogVisible: true,
@@ -844,7 +837,7 @@
                                     dialogMessage: this.$t('tips.invalid_parameter'),
                                 });
                                 break;
-                            case 'cla.invalid_token':
+                            case 'cla.expired_token':
                                 this.$store.commit('setSignReLogin', {
                                     dialogVisible: true,
                                     dialogMessage: this.$t('tips.invalid_token'),
@@ -862,28 +855,16 @@
                                     dialogMessage: this.$t('tips.unknown_token'),
                                 });
                                 break;
-                            case 'cla.uncompleted_signing':
+                            case 'cla.unauthorized_token':
                                 this.$store.commit('setSignReLogin', {
                                     dialogVisible: true,
-                                    dialogMessage: this.$t('tips.uncompleted_signing'),
-                                });
-                                break;
-                            case 'cla.no_corp_employee_manager':
-                                this.$store.commit('setSignReLogin', {
-                                    dialogVisible: true,
-                                    dialogMessage: this.$t('tips.no_corp_manager'),
+                                    dialogMessage: this.$t('tips.unauthorized_token'),
                                 });
                                 break;
                             case 'cla.no_employee_manager':
                                 this.$store.commit('setSignReLogin', {
                                     dialogVisible: true,
                                     dialogMessage: this.$t('tips.no_corp_manager'),
-                                });
-                                break;
-                            case 'cla.has_not_signed':
-                                this.$store.commit('setSignReLogin', {
-                                    dialogVisible: true,
-                                    dialogMessage: this.$t('tips.has_not_signed'),
                                 });
                                 break;
                             case 'cla.failed_to_send_email':
@@ -908,6 +889,36 @@
                                 this.$store.commit('errorCodeSet', {
                                     dialogVisible: true,
                                     dialogMessage: this.$t('tips.not_same_corp'),
+                                });
+                                break;
+                            case 'cla.error_parsing_api_body':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.error_parsing_api_body'),
+                                });
+                                break;
+                            case 'cla.unmatched_email':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.unmatched_email'),
+                                });
+                                break;
+                            case 'cla.unmatched_user_id':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.unmatched_user_id'),
+                                });
+                                break;
+                            case 'cla.no_link':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.no_link'),
+                                });
+                                break;
+                            case 'cla.unmatched_cla':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.unmatched_cla'),
                                 });
                                 break;
                             case 'cla.system_error':

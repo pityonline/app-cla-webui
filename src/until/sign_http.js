@@ -5,15 +5,15 @@ let instance = axios.create({
     baseURL: '/api',
 })
 instance.interceptors.request.use(req => {
-    let token = sessionStorage.getItem('sign_access_token')
-    token && (req.headers['Token'] = `${token}`)
+    let token = sessionStorage.getItem('sign_access_token');
+    token && (req.headers['Token'] = `${token}`);
     return req
-}, error => Promise.reject(error))
+}, error => Promise.reject(error));
 instance.interceptors.response.use(response => {
-    response.headers.token && sessionStorage.setItem('sign_access_token', response.headers.token)
+    response.headers.token && sessionStorage.setItem('sign_access_token', response.headers.token);
     return response
 }, error => {
-    let _response = error.response
+    let _response = error.response;
     switch (_response.status) {
         case 401:
         case 403:

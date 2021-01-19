@@ -610,7 +610,7 @@
             },
             getCorporationInfo() {
                 http({
-                    url: `${url.corporation_signing}/${this.$store.state.corpItem.link_id}`,
+                    url: `${url.getCorporationSigning}/${this.$store.state.corpItem.link_id}`,
                 }).then(resp => {
                     this.tableData = resp.data.data;
                 }).catch(err => {

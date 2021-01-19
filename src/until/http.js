@@ -1,5 +1,4 @@
 import axios from 'axios'
-import router from '../router/index'
 let instance = axios.create({
     timeout: 10000,
     baseURL: '/api',

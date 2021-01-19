@@ -1003,7 +1003,7 @@
                 } else if (this.platform === 'github') {
                     if (this.$store.state.loginType === 'individual' || this.$store.state.loginType === 'employee') {
                     } else {
-                        this.$router.push('/signCla')
+                        this.$router.push('/sign-cla')
                     }
                 }
             },

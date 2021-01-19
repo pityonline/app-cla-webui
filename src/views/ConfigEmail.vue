@@ -153,9 +153,8 @@
                         myUrl = url.getAuthEmail;
                         break;
                 }
-                this.$axios({
-                    url: '/api' + myUrl,
-                    headers: {'Token': this.$store.state.access_token},
+                http({
+                    url: myUrl,
                 }).then(res => {
                     window.location.href = res.data.data.url;
                 }).catch(err => {
