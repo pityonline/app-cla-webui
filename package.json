@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@panter/vue-i18next": "^0.15.2",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "downloadjs": "^1.4.7",
     "element-ui": "^2.13.2",

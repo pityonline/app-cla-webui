@@ -35,6 +35,7 @@ module.exports = {
         checkBoxText2: "，并同意在香港通过",
         claSignPlatform: "CLA签署平台",
         checkBoxText3: "处理我的数据",
+        verifyCode:'验证码',
         sendCode: '发送验证码',
         reSendCode: '{second}秒重发',
         sign: '签 署',
@@ -72,6 +73,7 @@ module.exports = {
         invalid_telephone_num: '无效的电话号码',
         not_fill_telephone_num: '请输入公司电话号码',
         not_fill_address: '请输入公司地址',
+        not_fill_fax: '请输入公司传真',
         invalid_email: '无效的电子邮件',
         sending_email: '已向您的电子邮件发送了验证码',
         not_fill_email: '请输入电子邮件',
@@ -106,6 +108,8 @@ module.exports = {
         no_pdf_of_corp: '暂未上传企业签署得PDF文件，请上传后再试',
         not_pdf: '上传的文件必须是 PDF!',
         file_too_large: '上传的文件太大了!',
+        cla_exists: '{lang}协议已存在，请选择其他语言后再试',
+        email_system_error: '邮箱授权失败，请稍后再试',
     },
     header: {
         home: '首页',
@@ -272,6 +276,7 @@ module.exports = {
         config_cla_check_file: '签名文件',
         config_cla_corp_file_size: '文件大小不能超过{max_size_kb}kb',
         signature_file_size:'只能上传pdf/PDF文件，且不超过{max_size_m}M',
-
+        addIndividualCla:'添加个人CLA',
+        addCorpCla:'添加企业CLA',
     },
 };

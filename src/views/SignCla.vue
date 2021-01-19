@@ -19,6 +19,10 @@
                                     <el-input v-if="item.type==='email'" :readonly="loginType!=='corporation'"
                                               v-model="ruleForm[item.id]"
                                               size="small" @blur="setMyForm(item.type,ruleForm[item.id])"></el-input>
+                                    <el-input v-else-if="item.type==='platform_id'"
+                                              :readonly="loginType!=='corporation'"
+                                              v-model="ruleForm[item.id]"
+                                              size="small" @blur="setMyForm(item.type,ruleForm[item.id])"></el-input>
 
                                     <el-input v-else-if="item.type==='date'" readonly="" v-model="ruleForm[item.id]"
                                               size="small" @blur="setMyForm(item.type,ruleForm[item.id])"></el-input>
@@ -27,7 +31,7 @@
                                 </el-form-item>
                                 <el-form-item
                                         v-if="rules.code&&(loginType==='corporation'||loginType==='employee')"
-                                        label="Verify Code"
+                                        :label="$t('signPage.verifyCode')"
                                         :required="rules.code[0].required"
                                         prop="code">
 
@@ -136,11 +140,11 @@
                     this.sendBtText = value
                 }
             },
-            sign_user() {
-                return this.$store.state.sign_user;
-            },
             sign_email() {
                 return this.$store.state.sign_email;
+            },
+            sign_id() {
+                return this.$store.state.sign_id;
             },
         },
         watch: {
@@ -238,6 +242,13 @@
             async verifyAddr(rule, value, callback) {
                 if (!value) {
                     callback(new Error(this.$t('tips.not_fill_address')))
+                } else {
+                    callback();
+                }
+            },
+            async verifyFax(rule, value, callback) {
+                if (!value) {
+                    callback(new Error(this.$t('tips.not_fill_fax')))
                 } else {
                     callback();
                 }
@@ -396,11 +407,11 @@
                 let year, month, day
                 year = date.getFullYear()
                 date.getMonth() < 9 ? month = `0${date.getMonth() + 1}` : month = date.getMonth() + 1;
-                date.getDate() < 10 ? day = `0${date.getDate()}` : day = date.getDate()
+                date.getDate() < 10 ? day = `0${date.getDate()}` : day = date.getDate();
                 for (let item of this.fields) {
                     if (item.type === 'date') {
-                        this.myForm.date = year + '-' + month + '-' + day
-                        Object.assign(this.ruleForm, {[item.id]: year + '-' + month + '-' + day})
+                        this.myForm.date = year + '-' + month + '-' + day;
+                        Object.assign(this.ruleForm, {[item.id]: year + '-' + month + '-' + day});
                         break;
                     }
                 }
@@ -425,7 +436,7 @@
                         } else if (name === 'access_token') {
                             access_token = value;
                         } else if (name === 'sign_user') {
-                            this.$store.commit('setSignUser', value);
+                            this.$store.commit('setSignID', value);
                         } else if (name === 'sign_email') {
                             this.$store.commit('setSignEmail', value);
                         } else if (name === 'error_code') {
@@ -433,12 +444,12 @@
                         }
                         this.$cookie.remove(name, {path: '/'});
                     });
-                    if (error_code === 'unauthorized') {
+                    if (error_code === EMAIL_UNAUTHORIZE) {
                         this.$store.commit('setSignReLogin', {
                             dialogVisible: true,
                             dialogMessage: this.$t('tips.not_authorize_email'),
                         });
-                    } else if (error_code === 'system_error') {
+                    } else if (error_code === SYSTEM_ERROR) {
                         this.$store.commit('setSignReLogin', {
                             dialogVisible: true,
                             dialogMessage: this.$t('tips.not_commit_email'),
@@ -609,21 +620,28 @@
                 })
             },
             getUserInfo() {
-                this.myForm.name = this.sign_user;
                 this.myForm.email = this.sign_email;
-                let setName, setEmail = false;
+                this.myForm.sign_id = this.sign_id;
+                let setName, setEmail, setPlanformID = false;
                 for (let item of this.fields) {
                     if (item.type === 'name') {
                         Object.assign(this.ruleForm, {[item.id]: this.myForm.name});
                         setName = true;
-                        if (setName && setEmail) {
+                        if (setName && setEmail && setPlanformID) {
                             break;
                         }
                     }
                     if (item.type === 'email') {
                         Object.assign(this.ruleForm, {[item.id]: this.myForm.email});
                         setEmail = true;
-                        if (setName && setEmail) {
+                        if (setName && setEmail && setPlanformID) {
+                            break;
+                        }
+                    }
+                    if (item.type === 'platform_id') {
+                        Object.assign(this.ruleForm, {[item.id]: this.myForm.sign_id});
+                        setEmail = true;
+                        if (setName && setEmail && setPlanformID) {
                             break;
                         }
                     }
@@ -726,8 +744,17 @@
                                 trigger: ['blur', 'change']
                             }],
                         })
+                    } else if (item.type === 'fax') {
+                        Object.assign(this.myForm, {fax: ''});
+                        item.required && Object.assign(rules, {
+                            [item.id]: [{
+                                required: item.required,
+                                validator: this.verifyFax,
+                                trigger: ['blur', 'change']
+                            }],
+                        })
                     }
-                })
+                });
                 Object.assign(form, {code: ''});
                 Object.assign(this.myForm, {code: ''});
                 Object.assign(rules, {
@@ -752,6 +779,7 @@
                 if (this.$store.state.loginType === 'individual') {
                     myUrl = `${url.individual_signing}/${this.link_id}/${this.cla_lang}/${this.cla_hash}`;
                     obj = {
+                        id: this.myForm.sign_id,
                         name: this.myForm.name,
                         email: this.myForm.email,
                         info: info,
@@ -769,6 +797,7 @@
                 } else if (this.$store.state.loginType === 'employee') {
                     myUrl = `${url.employee_signing}/${this.link_id}/${this.cla_lang}/${this.cla_hash}`;
                     obj = {
+                        id: this.myForm.sign_id,
                         name: this.myForm.name,
                         email: this.myForm.email,
                         verification_code: this.ruleForm.code,
@@ -798,6 +827,12 @@
                     if (err.data && err.data.hasOwnProperty('data')) {
                         switch (err.data.data.error_code) {
                             case 'cla.has_signed':
+                                this.$store.commit('setSignReLogin', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.has_signed'),
+                                });
+                                break;
+                            case 'cla.resigned':
                                 this.$store.commit('setSignReLogin', {
                                     dialogVisible: true,
                                     dialogMessage: this.$t('tips.has_signed'),
@@ -839,6 +874,12 @@
                                     dialogMessage: this.$t('tips.no_corp_manager'),
                                 });
                                 break;
+                            case 'cla.no_employee_manager':
+                                this.$store.commit('setSignReLogin', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.no_corp_manager'),
+                                });
+                                break;
                             case 'cla.has_not_signed':
                                 this.$store.commit('setSignReLogin', {
                                     dialogVisible: true,
@@ -863,7 +904,6 @@
                                     dialogMessage: this.$t('tips.expired_verification_code'),
                                 });
                                 break;
-
                             case 'cla.not_same_corp':
                                 this.$store.commit('errorCodeSet', {
                                     dialogVisible: true,
@@ -1056,9 +1096,11 @@
             border: 1px solid #F3F3F3;
             font-size: 1.2rem;
         }
+
         .el-input__inner:focus {
             border-color: #319E55
         }
+
         & .el-form-item {
             margin-bottom: 28px
         }

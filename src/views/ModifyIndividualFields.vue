@@ -339,8 +339,6 @@
             box-shadow: 0 0 20px 10px #F3F3F3;
             padding: 2rem;
             margin-bottom: 2rem;
-
-
         }
     }
 </style>

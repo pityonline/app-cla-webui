@@ -34,11 +34,12 @@ export const deleteEmployee = '/v1/employee-signing';                           
 export const getAuthCodeUrl = '/v1/auth/authcodeurl';                               //获取授权登陆的链接   方式get   参数/platform,/purpose
 export const getAuthEmail = '/v1/email/authcodeurl/gmail';                          //邮箱授权             方式get
 export const getEmail = 'https://gitee.com/api/v5/emails';                          //获取授权用户的邮箱   方式get   参数access_token
-export const sendVerifyCode = '/v1/verification-code';                              //给邮箱发送验证码        方式post  参数：/link_id,email
+export const sendVerifyCode = '/v1/verification-code';                              //给邮箱发送验证码       方式post  参数：/link_id,email
 export const uploadSignature = '/v1/org-signature';                                 //上传pdf签名页        方式post  参数：/link_id
 export const downloadSignature = '/v1/org-signature';                               //下载pdf签名页        方式get  参数：/:link_id/:language
 export const getPrivacy = '/v1/getPrivacy';                                         //获取隐私声明          方式get
 export const corporationPdf = '/v1/corporation-pdf';                                //上传pdf签名页        方式patch  参数：/link_id/email
 export const resend_pdf = '/v1/corporation-signing';                                //重发企业签名pdf      方式post  参数：/link_id/email
 export const getBlankSignature = 'v1/org-signature/blank';                          //下载空白签名页       方式get  参数：/:language
+export const addCla = 'v1/cla';                                                     //增加其他语言的CLA     方式post  参数：/:link_id/:apply_to
 

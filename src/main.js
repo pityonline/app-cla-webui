@@ -11,7 +11,8 @@ import VueI18n from 'vue-i18n';
 import Lang_Zh from '../public/static/lang/zh-cn'
 import Lang_En from '../public/static/lang/en-us'
 import Cookie from 'js-cookie'
-import Const_config from '../public/static/const-config'
+import Const_config from '../public/static/const-config';
+import * as until from './until/until'
 Vue.use(Cookie);
 
 Vue.prototype.$cookie = Cookie;
@@ -23,7 +24,7 @@ Vue.config.productionTip = false;
 Vue.config.devtools = true;
 
 const i18n = new VueI18n({
-    locale: 'en-us',
+    locale: until.setI18nLang(),
     messages: {
         'en-us': Lang_En,
         'zh-cn': Lang_Zh

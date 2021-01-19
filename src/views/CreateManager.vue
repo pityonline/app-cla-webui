@@ -3,7 +3,7 @@
         <el-col>
             <p id="tabName">{{$t('header.createManager')}}</p>
             <el-row class="createUserBack">
-                <el-row class="emailRow" gutter="20" v-for="(item,index) in data">
+                <el-row type="flex" align="middle" class="emailRow" gutter="20" v-for="(item,index) in data">
                     <el-col :span="6">
                         <el-input
                                 :placeholder="$t('tips.fill_name')" @blur="setAcount(item.name,index)" clearable=""
@@ -128,7 +128,7 @@
                             });
                             break;
                         } else if (email !== '' && name !== '' && id !== '') {
-                            newManagers.push({name: name, email: email, id: id})
+                            newManagers.push({name: name, email: email, id: id});
                             if (!id.match(/^[a-zA-Z0-9_.]+$/)) {
                                 isCreate = false;
                                 this.$store.commit('errorCodeSet', {
@@ -142,10 +142,10 @@
                     }
                 }
                 if (isCreate) {
-                    for (let i = 0; i < this.data.length; i++) {
+                    for (let i = 0; i < newManagers.length; i++) {
                         let flag = 0;
-                        for (let j = i + 1; j < this.data.length; j++) {
-                            if (this.data[i].email.trim() === this.data[j].email.trim()) {
+                        for (let j = i + 1; j < newManagers.length; j++) {
+                            if (newManagers[i].email.trim() === newManagers[j].email.trim()) {
                                 isCreate = false;
                                 this.$store.commit('errorCodeSet', {
                                     dialogVisible: true,
@@ -154,7 +154,7 @@
                                 flag = 1;
                                 break;
                             }
-                            if (this.data[i].id.trim() === this.data[j].id.trim()) {
+                            if (newManagers[i].id.trim() === newManagers[j].id.trim()) {
                                 isCreate = false;
                                 this.$store.commit('errorCodeSet', {
                                     dialogVisible: true,

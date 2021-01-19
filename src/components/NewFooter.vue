@@ -6,7 +6,7 @@
                     <svg-icon icon-class="github" class="footerIcon"></svg-icon>
                 </div>
                 <div class="box" @click="viewPrivacy">
-                    <span class="copyright">©2020 Draven.Designed by LA-Studio</span>
+                    <span class="copyright">{{this.copyright}}</span>
                 </div>
             </el-col>
         </el-row>
@@ -19,7 +19,9 @@
     export default {
         name: "NewFooter",
         data() {
-            return {}
+            return {
+                copyright:COPYRIGHT,
+            }
         },
         methods: {
             ...mapActions(['viewPrivacy']),

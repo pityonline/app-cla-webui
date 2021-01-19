@@ -46,7 +46,7 @@ export default new Vuex.Store({
         reTryDialogVisible: false,
         signSuccessDialogVisible: false,
         signReLoginDialogVisible: false,
-        orgReLoginDialogVisible:false,
+        orgReLoginDialogVisible: false,
         pwdIsChanged: false,
         cla_link: sessionStorage.getItem('cla_link') || undefined,
         metadataType: sessionStorage.getItem('metadataType') || undefined,
@@ -66,8 +66,19 @@ export default new Vuex.Store({
         claData: JSON.parse(sessionStorage.getItem('claData')) || undefined,
         sign_email: sessionStorage.getItem('sign_email') || undefined,
         sign_user: sessionStorage.getItem('sign_user') || undefined,
+        sign_id: sessionStorage.getItem('sign_id') || undefined,
+        bindType: sessionStorage.getItem('bindType') || undefined,
+        addLang: sessionStorage.getItem('addLang') || undefined,
     },
     mutations: {
+        setAddLang(state, data) {
+            state.addLang = data;
+            sessionStorage.setItem('addLang', data);
+        },
+        setBindType(state, data) {
+            state.bindType = data;
+            sessionStorage.setItem('bindType', data);
+        },
         setSignEmail(state, data) {
             state.sign_email = data;
             sessionStorage.setItem('sign_email', data);
@@ -75,6 +86,10 @@ export default new Vuex.Store({
         setSignUser(state, data) {
             state.sign_user = data;
             sessionStorage.setItem('sign_user', data);
+        },
+        setSignID(state, data) {
+            state.sign_id = data;
+            sessionStorage.setItem('sign_id', data);
         },
         setClaData(state, data) {
             state.claData = data;
@@ -310,7 +325,10 @@ export default new Vuex.Store({
             commit('setLoginType', loginType)
         },
         setPlatformAct({commit}, platform) {
-            commit('setPlatform', platform)
+            let initials = platform.substring(0, 1);
+            let upper = initials.toUpperCase();
+            let end  = platform.substring(1);
+            commit('setPlatform', upper + end)
         },
         setTokenAct({commit}, data) {
             commit('setToken', data);

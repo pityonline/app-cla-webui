@@ -179,12 +179,6 @@
                     this.$store.commit('setCorpLanguage', value)
                 }
             },
-            corpReLoginMsg() {
-                return this.$store.state.dialogMessage
-            },
-            corpReTryDialogVisible() {
-                return this.$store.state.reTryDialogVisible
-            },
         },
         data() {
             return {

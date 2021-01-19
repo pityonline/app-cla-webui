@@ -875,13 +875,13 @@
                                         dialogMessage: this.$t('tips.not_authorize_email'),
                                     });
                                     break;
-                                case 'unauthorized':
+                                case EMAIL_UNAUTHORIZE:
                                     this.$store.commit('errorCodeSet', {
                                         dialogVisible: true,
                                         dialogMessage: this.$t('tips.not_authorize_email'),
                                     });
                                     break;
-                                case 'system_error':
+                                case SYSTEM_ERROR:
                                     this.$store.commit('errorCodeSet', {
                                         dialogVisible: true,
                                         dialogMessage: this.$t('tips.not_commit_email', {platform: this.$store.state.repoInfo.platform}),

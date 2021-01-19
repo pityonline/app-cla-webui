@@ -35,6 +35,7 @@ module.exports = {
         checkBoxText2: "and hereby consent to the processing of my data by",
         claSignPlatform: " CLA signing platform ",
         checkBoxText3: "in Hong Kong.",
+        verifyCode:'Verify Code',
         sendCode: 'send code',
         reSendCode: '{second}s can resend',
         sign: 'SIGN',
@@ -72,6 +73,7 @@ module.exports = {
         invalid_telephone_num: 'An invalid telephone number.',
         not_fill_telephone_num: 'Please enter the telephone number of corporation',
         not_fill_address: 'Please enter the address of corporation',
+        not_fill_fax: 'Please enter the fax of corporation',
         invalid_email: 'An invalid E-mail.',
         sending_email: 'A verification code is sent to your Email.',
         not_fill_email: 'Please enter the Email',
@@ -106,6 +108,8 @@ module.exports = {
         no_pdf_of_corp: 'PDF corporation signed has not been uploaded,please upload and try again',
         not_pdf: 'Upload file must be PDF!',
         file_too_large: 'The uploaded file is too large!',
+        cla_exists: '{lang} agreement already exists. Please choose another language and try again',
+        email_system_error: 'Email authorization failed. Please try again later',
     },
     header: {
         home: 'Home',
@@ -271,6 +275,8 @@ module.exports = {
         config_cla_check_file:'Signature File',
         config_cla_corp_file_size:'File size cannot exceed {max_size_kb}kb',
         signature_file_size:'Only PDF / PDF files can be uploaded, and no more than {max_size_m}M',
+        addIndividualCla:'Add individual CLA',
+        addCorpCla:'Add corporation CLA',
     },
 
 };

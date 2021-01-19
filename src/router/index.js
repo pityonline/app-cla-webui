@@ -89,6 +89,38 @@ const routes = [
                         component: () => import('../views/ConfigCheck.vue')
                     },]
             },
+            {
+                path: '/addIndividualCla',
+                name: 'AddIndividualCla',
+                component: () => import('../views/AddIndividualCla.vue'),
+                children: [
+                    {
+                        path: '/',
+                        redirect: '/addIndividualUrl',
+                    },
+                    {
+                        path: '/addIndividualUrl',
+                        name: 'AddIndividualUrl',
+                        component: () => import('../views/AddIndividualUrl.vue')
+                    },
+                ]
+            },
+            {
+                path: '/addCorpCla',
+                name: 'AddCorpCla',
+                component: () => import('../views/AddCorpCla.vue'),
+                children: [
+                    {
+                        path: '/',
+                        redirect: '/addCorpUrl',
+                    },
+                    {
+                        path: '/addCorpUrl',
+                        name: 'AddCorpUrl',
+                        component: () => import('../views/AddCorpUrl.vue')
+                    },
+                ]
+            }
         ]
     },
     {
@@ -163,7 +195,7 @@ const routes = [
         component: () => import('../views/ErrorPath.vue')
     },
 
-]
+];
 
 const router = new VueRouter({
     mode: 'history',
@@ -190,7 +222,7 @@ router.beforeEach((to, from, next) => {
         sessionStorage.setItem('showHeaderMenu', 'false')
     } else if (to.path === '/home' || to.path === '/linkedRepo' || to.path === '/corporationList' || to.path === '/bind-cla'
         || to.path === '/config-org' || to.path === '/config-cla-link' || to.path === '/config-fields'
-        || to.path === '/config-email' || to.path === '/config-check') {
+        || to.path === '/config-email' || to.path === '/config-check' || to.path === '/addIndividualUrl' || to.path === '/addCorpUrl') {
         sessionStorage.setItem('showHeaderMenu', 'org')
     } else {
         sessionStorage.setItem('showHeaderMenu', 'corp')

@@ -48,56 +48,61 @@
             <div class="=info-title">
                 ③ {{$t('org.config_cla_check_url_title')}}
             </div>
-            <div class="margin-top-1rem">
-                <el-row :gutter="20">
-                    <el-col :span="18">
-                        {{$t('org.config_cla_paste_individual_url')}}
-                    </el-col>
-                    <el-col :span="6">
-                        {{$t('org.config_cla_individual_lang')}}
-                    </el-col>
-                </el-row>
+            <div v-if="this.$store.state.claLinkIndividual">
+                <div class="margin-top-1rem">
+                    <el-row :gutter="20">
+                        <el-col :span="18">
+                            {{$t('org.config_cla_paste_individual_url')}}
+                        </el-col>
+                        <el-col :span="6">
+                            {{$t('org.config_cla_individual_lang')}}
+                        </el-col>
+                    </el-row>
+                </div>
+                <div class="margin-top-half-rem">
+                    <el-row :gutter="20">
+                        <el-col :span="18">
+                            <el-input disabled="" size="medium" v-model="cla_link_individual">
+                            </el-input>
+                        </el-col>
+                        <el-col :span="6">
+                            <el-input disabled="" size="medium" v-model="individualClaLanguageValue">
+                            </el-input>
+                        </el-col>
+                    </el-row>
+                </div>
             </div>
-            <div class="margin-top-half-rem">
-                <el-row :gutter="20">
-                    <el-col :span="18">
-                        <el-input disabled="" size="medium" v-model="cla_link_individual">
-                        </el-input>
-                    </el-col>
-                    <el-col :span="6">
-                        <el-input disabled="" size="medium" v-model="individualClaLanguageValue">
-                        </el-input>
-                    </el-col>
-                </el-row>
+            <div v-if="this.$store.state.claLinkCorp">
+                <div class="margin-top-1rem">
+                    <el-row :gutter="20">
+                        <el-col :span="18">
+                            {{$t('org.config_cla_paste_corp_url')}}
+                        </el-col>
+                        <el-col :span="6">
+                            {{$t('org.config_cla_corp_lang')}}
+                        </el-col>
+                    </el-row>
+                </div>
+                <div class="margin-top-half-rem">
+                    <el-row :gutter="20">
+                        <el-col :span="18">
+                            <el-input disabled="" size="medium" v-model="cla_link_corporation">
+                            </el-input>
+                        </el-col>
+                        <el-col :span="6">
+                            <el-input disabled="" size="medium" v-model="corpClaLanguageValue">
+                            </el-input>
+                        </el-col>
+                    </el-row>
+                </div>
+                <div class="margin-top-1rem">
+                    {{$t('org.config_cla_check_file')}}
+                </div>
+                <div class="margin-top-half-rem">
+                    <el-input disabled="" v-model="corp_pdf_name"></el-input>
+                </div>
             </div>
-            <div class="margin-top-1rem">
-                <el-row :gutter="20">
-                    <el-col :span="18">
-                        {{$t('org.config_cla_paste_corp_url')}}
-                    </el-col>
-                    <el-col :span="6">
-                        {{$t('org.config_cla_corp_lang')}}
-                    </el-col>
-                </el-row>
-            </div>
-            <div class="margin-top-half-rem">
-                <el-row :gutter="20">
-                    <el-col :span="18">
-                        <el-input disabled="" size="medium" v-model="cla_link_corporation">
-                        </el-input>
-                    </el-col>
-                    <el-col :span="6">
-                        <el-input disabled="" size="medium" v-model="corpClaLanguageValue">
-                        </el-input>
-                    </el-col>
-                </el-row>
-            </div>
-            <div class="margin-top-1rem">
-                {{$t('org.config_cla_check_file')}}
-            </div>
-            <div class="margin-top-half-rem">
-                <el-input disabled="" v-model="corp_pdf_name"></el-input>
-            </div>
+
         </div>
         <div class="itemBox">
             <div style="padding: .5rem">
@@ -105,42 +110,44 @@
                 </p>
             </div>
             <div style="padding: 0 2rem">
-                <el-row class="margin-top-1rem">
-                    {{$t('org.config_cla_individual_metadata')}}
-                </el-row>
-                <div>
-                    <el-row class="margin-top-1rem" type="flex" align="middle" :gutter="20">
-                        <el-col :span="5">
-                            {{$t('org.config_cla_check_fields_title_title')}}
-                        </el-col>
-                        <el-col :span="5">
-                            {{$t('org.config_cla_check_fields_type_title')}}
-                        </el-col>
-                        <el-col :span="5">
-                            {{$t('org.config_cla_check_fields_describe_title')}}
-                        </el-col>
-                        <el-col :span="5" style="height: 100%">
-                            {{$t('org.config_cla_check_fields_require_title')}}
-                        </el-col>
+                <div v-if="this.$store.state.claLinkIndividual">
+                    <el-row class="margin-top-1rem">
+                        {{$t('org.config_cla_individual_metadata')}}
                     </el-row>
-                    <el-row style="padding: 0.5rem 0;" type="flex" align="middle" :gutter="20"
-                            v-for="(item,index) in individualMetadata">
-                        <el-col :span="5">
-                            <el-input disabled="" v-model="item.title" size="medium" readonly="">
-                            </el-input>
-                        </el-col>
-                        <el-col :span="5">
-                            <el-input disabled="" v-model="item.type" size="medium" readonly></el-input>
-                        </el-col>
-                        <el-col :span="5">
-                            <el-input disabled="" v-model="item.description" size="medium" readonly></el-input>
-                        </el-col>
-                        <el-col :span="5" style="height: 100%">
-                            <el-checkbox v-model="item.required" disabled="">{{$t('org.config_cla_fields_required')}}
-                            </el-checkbox>
-                        </el-col>
-                    </el-row>
-
+                    <div>
+                        <el-row class="margin-top-1rem" type="flex" align="middle" :gutter="20">
+                            <el-col :span="5">
+                                {{$t('org.config_cla_check_fields_title_title')}}
+                            </el-col>
+                            <el-col :span="5">
+                                {{$t('org.config_cla_check_fields_type_title')}}
+                            </el-col>
+                            <el-col :span="5">
+                                {{$t('org.config_cla_check_fields_describe_title')}}
+                            </el-col>
+                            <el-col :span="5" style="height: 100%">
+                                {{$t('org.config_cla_check_fields_require_title')}}
+                            </el-col>
+                        </el-row>
+                        <el-row style="padding: 0.5rem 0;" type="flex" align="middle" :gutter="20"
+                                v-for="(item,index) in individualMetadata">
+                            <el-col :span="5">
+                                <el-input disabled="" v-model="item.title" size="medium" readonly="">
+                                </el-input>
+                            </el-col>
+                            <el-col :span="5">
+                                <el-input disabled="" v-model="item.type" size="medium" readonly></el-input>
+                            </el-col>
+                            <el-col :span="5">
+                                <el-input disabled="" v-model="item.description" size="medium" readonly></el-input>
+                            </el-col>
+                            <el-col :span="5" style="height: 100%">
+                                <el-checkbox v-model="item.required" disabled="">
+                                    {{$t('org.config_cla_fields_required')}}
+                                </el-checkbox>
+                            </el-col>
+                        </el-row>
+                    </div>
                 </div>
                 <div v-if="this.$store.state.claLinkCorp">
                     <el-row class="margin-top-1rem">
@@ -197,6 +204,7 @@
 <script>
     import * as url from '../until/api'
     import http from '../until/http'
+    import * as until from '../until/until'
     import ReLoginDialog from '../components/ReLoginDialog'
     import ReTryDialog from '../components/ReTryDialog'
 
@@ -268,11 +276,13 @@
             corp_pdf_name() {
                 return this.$store.state.corpFDName
             },
+            platform(){
+               return this.$store.state.platform.toLowerCase()
+            },
         },
         data() {
             return {
                 corpFileName: SIGNATURE_PAGE_NAME,
-                platform: this.$store.state.platform,
                 isVerify: false,
                 previewShow: false,
                 loginType: this.$store.state.loginType,
@@ -288,7 +298,15 @@
         },
         methods: {
             toConfigField() {
-                this.$router.push('/config-fields');
+                if (this.$store.state.bindType === 'add-bind') {
+                    if (this.$store.state.claLinkIndividual) {
+                        this.$router.push('/addIndividualUrl');
+                    } else {
+                        this.$router.push('/addCorpUrl');
+                    }
+                } else {
+                    this.$router.push('/config-fields');
+                }
             },
             editMetadata(metadata) {
                 if (metadata) {
@@ -319,11 +337,97 @@
                 return new File([u8arr], filename, {type: mime});
             },
             binding() {
+                if (this.$store.state.bindType === 'add-bind') {
+                    this.addBinding();
+                } else {
+                    this.newBinding()
+                }
+            },
+            addBinding() {
+                let formData = new FormData();
+                let obj = {};
+                let _url = '';
+                if (this.$store.state.claLinkCorp) {
+                    obj = {
+                        url: this.cla_link_corporation.trim(),
+                        language: this.corpClaLanguageValue,
+                        fields: this.editMetadata(this.corporationMetadata)
+                    };
+                    let corp_pdf = this.dataURLtoFile(this.$store.state.corpFD, this.corpFileName);
+                    formData.append(ORG_SIGNATURE_FILE, corp_pdf);
+                    _url = `${url.addCla}/${this.$store.state.corpItem.link_id}/corporation`;
+                } else {
+                    obj = {
+                        url: this.cla_link_individual.trim(),
+                        language: this.individualClaLanguageValue,
+                        fields: this.editMetadata(this.individualMetadata)
+                    };
+                    _url = `${url.addCla}/${this.$store.state.corpItem.link_id}/individual`;
+                }
+                formData.append('data', JSON.stringify(obj));
+                http({
+                    url: _url,
+                    method: 'post',
+                    data: formData,
+                }).then(res => {
+                    this.$message.closeAll();
+                    this.$message.success('success');
+                    until.clearSession(this);
+                    this.$router.push('/corporationList')
+                }).catch(err => {
+                    if (err.data && err.data.hasOwnProperty('data')) {
+                        switch (err.data.data.error_code) {
+                            case 'cla.invalid_token':
+                                this.$store.commit('setOrgReLogin', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.invalid_token'),
+                                });
+                                break;
+                            case 'cla.missing_token':
+                                this.$store.commit('setOrgReLogin', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.missing_token'),
+                                });
+                                break;
+                            case 'cla.unknown_token':
+                                this.$store.commit('setOrgReLogin', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.unknown_token'),
+                                });
+                                break;
+                            case 'cla.cla_exists':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.cla_exists',{lang:this.$store.state.addLang}),
+                                });
+                                break;
+                            case 'cla.system_error':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.system_error'),
+                                });
+                                break;
+                            default :
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.unknown_error'),
+                                });
+                                break;
+                        }
+                    } else {
+                        this.$store.commit('errorCodeSet', {
+                            dialogVisible: true,
+                            dialogMessage: this.$t('tips.system_error'),
+                        })
+                    }
+                })
+            },
+            newBinding() {
                 let corp_pdf = {};
                 let formData = new FormData();
                 if (this.$store.state.corpFD) {
                     corp_pdf = this.dataURLtoFile(this.$store.state.corpFD, this.corpFileName);
-                    formData.append('org_signature_file', corp_pdf);
+                    formData.append(ORG_SIGNATURE_FILE, corp_pdf);
                 }
                 let obj = {};
                 let corpCla = {};
@@ -435,19 +539,12 @@
 </script>
 
 <style lang="less">
-    .el-checkbox__input.is-disabled .el-checkbox__inner {
-        cursor: default;
-    }
-
-    .el-checkbox__input.is-disabled .el-checkbox__inner:after {
-        cursor: default;
-    }
-
-    .el-checkbox__input.is-disabled + span.el-checkbox__label {
-        cursor: default;
-    }
-
     #configCla {
+        .nextStepBtBox {
+            text-align: right;
+            margin-bottom: 2rem;
+        }
+
         .margin-top-half-rem {
             margin-top: .5rem;
         }

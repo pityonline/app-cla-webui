@@ -1,5 +1,5 @@
 <template>
-    <el-row style="height: 100%">
+    <el-row id="corpManagerLogin" style="height: 100%">
         <el-col align="right" class="formBox">
             <div class="formBack_Box">
                 <div class="formBack">
@@ -146,7 +146,8 @@
                         })
                     }
                 }).catch(err => {
-                    if (err.data&&err.data.hasOwnProperty('data')) {
+                    console.log(err);
+                    if (err.data && err.data.hasOwnProperty('data')) {
                         switch (err.data.data.error_code) {
                             case 'cla.invalid_token':
                                 this.$store.commit('errorSet', {
@@ -172,7 +173,12 @@
                                     dialogMessage: this.$t('tips.id_pwd_err'),
                                 });
                                 break;
-
+                            case 'cla.wrong_id_or_pw':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.id_pwd_err'),
+                                });
+                                break;
                             case 'cla.system_error':
                                 this.$store.commit('errorCodeSet', {
                                     dialogVisible: true,
@@ -187,6 +193,7 @@
                                 break;
                         }
                     } else {
+                        console.log('else');
                         this.$store.commit('errorCodeSet', {
                             dialogVisible: true,
                             dialogMessage: this.$t('tips.system_error'),
@@ -214,88 +221,92 @@
     @import "../assets/font/css/Roboto-Regular.css";
     @import "../assets/font/css/FZLTHJW.css";
 
-    .formBack_Box {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
-    }
-
-    .formBack {
-        width: 18rem;
-        box-shadow: 0 0 20px 10px #F3F3F3;
-        padding: 2rem 2rem 0;
-        background-color: white;
-        border-radius: 1rem;
-
-        & .el-input__inner {
-            height: 3rem;
+    #corpManagerLogin {
+        .formBack_Box {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
         }
 
-        & .el-form-item__label {
-            font-size: 1.2rem;
-        }
-
-        & .el-input__inner {
-            background-color: #F3F3F3;
-            border-radius: 1.5rem;
-            border: 1px solid #F3F3F3;
-            font-size: 1.2rem;
-        }
-
-        & .el-form-item:not(:last-child) {
-            margin-bottom: 1.8rem
-        }
-
-        & .el-form-item:last-child {
-            margin-bottom: -2rem;
-
-        }
-
-    }
-
-    .formBox {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-
-        & .el-dialog {
+        .formBack {
+            width: 18rem;
+            box-shadow: 0 0 20px 10px #F3F3F3;
+            padding: 2rem 2rem 0;
+            background-color: white;
             border-radius: 1rem;
-            text-align: center;
+
+            & .el-input__inner {
+                height: 3rem;
+            }
+
+            & .el-form-item__label {
+                font-size: 1.2rem;
+            }
+
+            & .el-input__inner {
+                background-color: #F3F3F3;
+                border-radius: 1.5rem;
+                border: 1px solid #F3F3F3;
+                font-size: 1.2rem;
+            }
+
+            & .el-form-item:not(:last-child) {
+                margin-bottom: 1.8rem
+            }
+
+            & .el-form-item:last-child {
+                margin-bottom: -2rem;
+
+            }
+
         }
 
-        & .button {
-            font-family: Roboto-Regular, sans-serif;
-            width: 15rem;
-            height: 4rem;
-            border-radius: 2rem;
-            border: none;
-            color: white;
-            font-size: 1.3rem;
+        .formBox {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            & .el-dialog {
+                border-radius: 1rem;
+                text-align: center;
+            }
+
+            & .button {
+                font-family: Roboto-Regular, sans-serif;
+                width: 15rem;
+                height: 4rem;
+                border-radius: 2rem;
+                border: none;
+                color: white;
+                font-size: 1.3rem;
+                cursor: pointer;
+                background: linear-gradient(to right, #97DB30, #319E55);
+            }
+
+            & .button:focus {
+                outline: none;
+            }
+        }
+
+        .pointer {
             cursor: pointer;
-            background: linear-gradient(to right, #97DB30, #319E55);
         }
 
-        & .button:focus {
-            outline: none;
+        #forgetPwd {
+            font-family: FZLTHJW, sans-serif;
+            font-size: 1rem;
+        }
+
+        #forgetPwd:hover {
+            text-decoration: underline;
+
+        }
+
+        .el-form-item__error {
+            font-size: 0.8rem;
         }
     }
 
-    .pointer {
-        cursor: pointer;
-    }
-
-    #forgetPwd {
-        font-family: FZLTHJW, sans-serif;
-        font-size: 1rem;
-    }
-
-    #forgetPwd:hover {
-        text-decoration: underline;
-
-    }
-    .el-form-item__error{
-        font-size: 0.8rem;
-    }
 </style>

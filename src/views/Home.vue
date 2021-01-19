@@ -66,6 +66,62 @@
             margin: auto;
         }
     }
+
+    .el-select-dropdown__item.selected {
+        color: #319E55;
+    }
+
+    .el-checkbox__input.is-disabled .el-checkbox__inner, .el-checkbox__input.is-disabled .el-checkbox__inner::after {
+        cursor: default;
+    }
+
+    .el-checkbox__input.is-disabled + span.el-checkbox__label {
+        cursor: default;
+        color: #C0C4CC;
+    }
+
+    .el-checkbox__label {
+        display: inline-grid;
+        white-space: pre-line;
+        font-size: 1.2rem;
+    }
+
+    .el-checkbox__input.is-checked + .el-checkbox__label {
+        display: inline-grid;
+        white-space: pre-line;
+        color: #606266;
+        font-size: 1.2rem;
+    }
+
+    .el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner {
+        background-color: #3EA650;
+        border-color: #3EA650;
+    }
+
+    .el-checkbox__input.is-focus .el-checkbox__inner {
+        border-color: #3EA650;
+    }
+
+    .el-checkbox__inner {
+        border: 1px solid #3EA650;
+        width: 20px;
+        height: 20px;
+    }
+
+    .el-checkbox__inner:hover {
+        border: 1px solid #3EA650;
+    }
+
+    .el-checkbox__inner:focus {
+        border: 1px solid #3EA650;
+    }
+
+    .el-checkbox__inner:after {
+        height: 10px;
+        left: 7px;
+        top: 2px
+    }
+
     .loading_class {
         .el-loading-spinner {
             i {
@@ -77,9 +133,11 @@
     .el-loading-spinner .el-loading-text {
         color: #319E55;
     }
+
     .el-dialog {
         border-radius: 1rem;
     }
+
     .el-button:active {
         color: #319E55;
         border-color: #319E55;
@@ -201,6 +259,10 @@
 
     .el-table th > .cell {
         word-break: keep-all;
+    }
+
+    .margin-top-1rem {
+        margin-top: 1rem;
     }
 
     #home {

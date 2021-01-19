@@ -1,21 +1,50 @@
 <template>
     <div id="configCla" :style="configClaStyle">
         <div id="section">
-            <div class="pageTitle">Configure CLA</div>
+            <div class="pageTitle">{{title}}</div>
             <router-view></router-view>
         </div>
     </div>
 </template>
 <script>
-    import * as url from '../until/api'
-    import http from '../until/http'
+    import * as until from '../until/until'
     export default {
         name: "ConfigCla",
         inject: ['setClientHeight'],
         data() {
-          return{}
+          return{
+              title:'',
+              configClaStyle: {
+                  height: '',
+              },
+          }
         },
-        methods: {},
+        methods: {
+            setTitle(){
+                if (this.$store.state.bindType === 'add-bind') {
+                    if (this.$store.state.cla_link_corporation) {
+                        this.title=this.$t('org.addCorpCla')
+                    }else{
+                        this.title=this.$t('org.addIndividualCla')
+                    }
+                }else{
+                    this.title=this.$t('org.configure_bt')
+                }
+            },
+            setClientHeight() {
+                this.$nextTick(() => {
+                    document.getElementById("configCla").style.minHeight = '0px';
+                    if (until.getClientHeight() > document.getElementById('configCla').offsetHeight) {
+                        document.getElementById("configCla").style.minHeight = until.getClientHeight() + 'px'
+                    } else {
+                        document.getElementById("configCla").style.minHeight = document.getElementById('configCla').offsetHeight + 'px'
+                    }
+                })
+            },
+        },
+        created(){
+            this.setTitle();
+        },
         updated() {
             this.setClientHeight();
         },

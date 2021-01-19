@@ -180,6 +180,9 @@
         },
         inject: ['setClientHeight'],
         computed: {
+            platform() {
+                return this.$store.state.platform.toLowerCase();
+            },
             reLoginDialogVisible() {
                 return this.$store.state.orgReLoginDialogVisible
             },
@@ -197,13 +200,12 @@
             return {
                 copyAddressValue: '',
                 organization: '',
-                boundTableData: '',
                 signAddress: '',
                 activeName: 'first',
                 clickRow: 0,
                 tableData: [],
                 orgTableData: [],
-
+                boundTableData: [],
                 url: '',
                 signRouter: this.$store.state.signRouter,
                 pdfSrc: '',
@@ -217,9 +219,7 @@
                 fileList: [],
                 previewOriginalDialogVisible: false,
                 uploadOrgDialogVisible: false,
-
                 unlinkId: '',
-                platform: this.$store.state.platform,
                 unLinkDialogVisible: false,
                 tableTotal: 0,
                 currentPage: 1,
@@ -254,47 +254,9 @@
                 }
             },
             clearConfigSession() {
-                this.$store.commit('setOrgOption', []);
-                this.$store.commit('setOrgValue', '');
-                this.$store.commit('setOrgChoose', '');
-                this.$store.commit('setRepositoryOptions', []);
-                this.$store.commit('setRepositoryChoose', '');
-                this.$store.commit('setRepositoryValue', '');
-                this.$store.commit('setOrgAlias', '');
-                this.$store.commit('setIndividualLanguage', '');
-                this.$store.commit('setCorpLanguage', '');
-                this.$store.commit('setClaLinkIndividual', '');
-                this.$store.commit('setClaLinkCorp', '');
-                this.$store.commit('setCorpFDName', '');
-                this.$store.commit('setCorpFD', '');
-                this.$store.commit('setIndividualMetadata', this.individualMetadataArr);
-                this.$store.commit('setCorpMetadata', this.corporationMetadataArr);
-                this.$store.commit('setIndividualCustomMetadataArr', this.initIndividualCustomMetadata);
-                this.$store.commit('setCorporationCustomMetadataArr', this.initCorpCustomMetadata);
-                this.$store.commit('setEmail', '');
-                this.$store.commit('setIsEmail', false);
-                this.$store.commit('setChooseRepo', '');
-                this.$store.commit('setChooseOrg', '');
-                sessionStorage.removeItem('orgOptions');
-                sessionStorage.removeItem('orgValue');
-                sessionStorage.removeItem('orgChoose');
-                sessionStorage.removeItem('orgAlias');
-                sessionStorage.removeItem('repositoryOptions');
-                sessionStorage.removeItem('repositoryChoose');
-                sessionStorage.removeItem('repositoryValue');
-                sessionStorage.removeItem('individualLanguage');
-                sessionStorage.removeItem('corpLanguage');
-                sessionStorage.removeItem('claLinkIndividual');
-                sessionStorage.removeItem('claLinkCorp');
-                sessionStorage.removeItem('corpFDName');
-                sessionStorage.removeItem('corpFD');
-                sessionStorage.removeItem('individualMetadata');
-                sessionStorage.removeItem('corporationMetadata');
-                sessionStorage.removeItem('individualCustomMetadataArr');
-                sessionStorage.removeItem('corporationCustomMetadataArr');
-                sessionStorage.removeItem('email');
-                sessionStorage.removeItem('chooseOrg');
-                sessionStorage.removeItem('chooseRepo');
+                until.clearSession(this);
+                this.$store.commit('setCorpItem', '');
+                sessionStorage.removeItem('corpItem');
             },
             configCla() {
                 this.$router.push('/bind-cla')
@@ -346,7 +308,9 @@
                             }
                         }, 20)
                     } else {
-                        this.tableData = res.data.data;
+                        this.tableData = [];
+                        this.boundTableData = [];
+                        this.orgTableData = [];
                     }
                 }).catch(err => {
                     if (err.data && err.data.hasOwnProperty('data')) {
@@ -467,9 +431,9 @@
             copyAddress(row) {
                 let params = ''
                 if (row.repo_id) {
-                    params = `${row.platform}/${row.org_id}/${row.repo_id}`
+                    params = `${row.platform.toLowerCase()}/${row.org_id}/${row.repo_id}`
                 } else {
-                    params = `${row.platform}/${row.org_id}`
+                    params = `${row.platform.toLowerCase()}/${row.org_id}`
                 }
                 let base64Params = until.strToBase64(params)
                 let url = `${this.address}${this.signRouter}/${base64Params}`
@@ -485,9 +449,9 @@
             toSignPage(row) {
                 let params = ''
                 if (row.repo_id) {
-                    params = `${row.platform}/${row.org_id}/${row.repo_id}`
+                    params = `${row.platform.toLowerCase()}/${row.org_id}/${row.repo_id}`
                 } else {
-                    params = `${row.platform}/${row.org_id}`
+                    params = `${row.platform.toLowerCase()}/${row.org_id}`
                 }
                 let base64Params = until.strToBase64(params)
                 let url = `${this.address}${this.signRouter}/${base64Params}`
@@ -513,61 +477,6 @@
             },
             beforeRemove(file, fileList) {
                 return this.$confirm(`Are you sure you want to remove ${file.name}？`);
-            },
-            converData(data) {
-                data = data.replace(/[\n\r]/g, '');
-                var raw = window.atob(data);
-                var rawLength = raw.length;
-                var array = new Uint8Array(new ArrayBuffer(rawLength));
-                for (var i = 0; i < rawLength; i++) {
-                    array[i] = raw.charCodeAt(i)
-                }
-                return array
-            },
-            showPdfFile(data) {
-                PDFJS.GlobalWorkerOptions.workerSrc = '../until/pdf/pdf.worker.js';
-                var fileContent = this.converData(data);
-                this.previewOriginalDialogVisible = true;
-                // $('#container').show();
-                // $('#pop').empty();
-                let pop = document.getElementById('pop');
-                pop.innerHTML = '';
-                PDFJS.getDocument(fileContent).promise.then(function getPdfHelloWorld(pdf) {
-                    pages = pdf.numPages;
-                    for (var i = 1; i < pdf.numPages; i++) {
-                        var id = 'page-id' + i;
-                        pop.append('<canvas id="' + id + '"></canvas>');
-                        this.showAll(url, i, id)
-                    }
-                })
-            },
-            showAll(url, i, id) {
-                PDFJS.getDocument().then(function getPdfHelloWorld(pdf) {
-                    pdf.getPage(page).then(function getPageHelloWorld(page) {
-                        var scale = 1.0,
-                            viewport = page.getViewport(scale),
-                            canvas = document.getElementById(id),
-                            context = canvas.getContext('2d');
-                        canvas.height = viewport.height;
-                        canvas.width = viewport.width;
-                        var renderContext = {
-                            canvasContext: context,
-                            viewport: viewport
-                        }
-                        page.render(renderContext)
-
-                    })
-
-                })
-            },
-            dataURLtoBlob(dataurl) {
-                var bstr = atob(dataurl)
-                var n = bstr.length;
-                var u8arr = new Uint8Array(n);
-                while (n--) {
-                    u8arr[n] = bstr.charCodeAt(n);
-                }
-                return new Blob([u8arr], {type: 'pdf'});
             },
             getCookieData(resolve) {
                 if (document.cookie) {
@@ -611,6 +520,7 @@
                     url: `${url.unLinkRepository}/${this.unlinkId}`,
                     method: 'delete',
                 }).then(res => {
+                    this.$message.closeAll();
                     this.$message.success('success');
                     this.unLinkDialogVisible = false;
                     this.getLinkedRepoList()

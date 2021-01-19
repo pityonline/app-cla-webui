@@ -131,6 +131,11 @@
                         let value = arr[1].trim();
                         if (name === 'email') {
                             email = value
+                        } else if (name === SYSTEM_ERROR) {
+                            this.$store.commit('errorCodeSet', {
+                                dialogVisible: true,
+                                dialogMessage: this.$t('tips.email_system_error'),
+                            });
                         }
                     });
                     email ? this.$store.commit('setIsEmail', true) : this.$store.commit('setIsEmail', false);
@@ -274,10 +279,6 @@
 </script>
 
 <style lang="less">
-    .el-select-dropdown__item.selected {
-        color: #319E55;
-    }
-
     #configThree {
         .my-select {
             width: 100%;

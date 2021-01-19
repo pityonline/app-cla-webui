@@ -21,21 +21,17 @@
                                         :key="item.value"
                                         :value="item.value"
                                         :label="item.label">
-
                                 </el-option>
                             </el-select>
                         </el-col>
                     </el-row>
-                    <el-row class="marginTop buttonRow">
-                        <el-col align="center">
-                            <div class="buttonBox">
-                                <el-button class="button" type="primary" size="medium" @click="submit">
-                                    {{$t('corp.submit')}}
-                                </el-button>
-                            </div>
-
-                        </el-col>
-                    </el-row>
+                    <div class="marginTop buttonRow">
+                        <div class="buttonBox">
+                            <button class="org-button" @click="submit">
+                                {{$t('corp.submit')}}
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </el-col>
@@ -49,7 +45,7 @@
         name: "OrgSelect",
         computed: {
             orgData() {
-                let data = []
+                let data = [];
                 if (this.$store.state.loginInfo.userInfo.length) {
                     this.$store.state.loginInfo.userInfo.forEach((item, index) => {
                         if (item.repo_id) {
@@ -71,11 +67,12 @@
         methods: {
             ...mapActions(['setLoginInfoAct', 'setCorpTokenAct']),
             changeOrg(value) {
+                this.orgValue = value;
             },
             submit() {
-                let data = JSON.parse(JSON.stringify(this.$store.state.loginInfo))
-                Object.assign(data, {orgValue: this.orgValue})
-                this.setCorpTokenAct(data.userInfo[this.orgValue].token)
+                let data = JSON.parse(JSON.stringify(this.$store.state.loginInfo));
+                Object.assign(data, {orgValue: this.orgValue});
+                this.setCorpTokenAct(data.userInfo[this.orgValue].token);
                 this.setLoginInfoAct(data);
                 if (data.userInfo[this.orgValue].role === 'admin') {
                     this.$router.push('/rootManager')
@@ -88,6 +85,10 @@
 </script>
 
 <style lang="less">
+    .el-select-dropdown__item.selected {
+        color: #319E55;
+    }
+
     .el-select .el-input.is-focus .el-input__inner {
         border-color: #319E55
     }
@@ -110,30 +111,32 @@
 
         .buttonRow {
             position: relative;
+
+            .buttonBox {
+                height: 4rem;
+                position: absolute;
+                left: 50%;
+
+                .org-button {
+                    position: relative;
+                    left: -50%;
+                    top: -2rem;
+                    width: 15rem;
+                    height: 4rem;
+                    border-radius: 2rem;
+                    border: none;
+                    color: white;
+                    font-size: 1.5rem;
+                    cursor: pointer;
+                    background: linear-gradient(to right, #97DB30, #319E55);
+                }
+
+                .org-button:focus {
+                    outline: none;
+                }
+            }
         }
 
-        .buttonBox {
-            position: absolute;
-            left: 50%;
-        }
-
-        .button {
-            position: relative;
-            left: -50%;
-            top: -2rem;
-            width: 15rem;
-            height: 4rem;
-            border-radius: 2rem;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            background: linear-gradient(to right, #97DB30, #319E55);
-        }
-
-        .button:focus {
-            outline: none;
-        }
 
         .formBack_Box {
             width: 100%;
