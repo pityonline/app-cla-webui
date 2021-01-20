@@ -16,5 +16,5 @@ COPY ./deploy/default.conf /etc/nginx/conf.d/
 RUN chmod -R 755 /usr/share/nginx/html
 ENV RUN_USER nginx
 ENV RUN_GROUP nginx
-EXPOSE 8080
+EXPOSE 80
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
