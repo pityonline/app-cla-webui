@@ -276,8 +276,8 @@
             corp_pdf_name() {
                 return this.$store.state.corpFDName
             },
-            platform(){
-               return this.$store.state.platform.toLowerCase()
+            platform() {
+                return this.$store.state.platform.toLowerCase()
             },
         },
         data() {
@@ -398,7 +398,7 @@
                             case 'cla.cla_exists':
                                 this.$store.commit('errorCodeSet', {
                                     dialogVisible: true,
-                                    dialogMessage: this.$t('tips.cla_exists',{lang:this.$store.state.addLang}),
+                                    dialogMessage: this.$t('tips.cla_exists', {lang: this.$store.state.addLang}),
                                 });
                                 break;
                             case 'cla.system_error':
@@ -516,6 +516,12 @@
                                 this.$store.commit('errorCodeSet', {
                                     dialogVisible: true,
                                     dialogMessage: this.$t('tips.system_error'),
+                                });
+                                break;
+                            case 'cla.link_exists':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.link_exists'),
                                 });
                                 break;
                             default :

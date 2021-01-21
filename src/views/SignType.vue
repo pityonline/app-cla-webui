@@ -444,7 +444,7 @@
                                 </div>
                                 <el-col>
                                     <el-row class="stepBox">
-                                        <el-col :offset="10" :span="4">
+                                        <el-col class="iconBox" :offset="10" :span="4">
                                             <svg-icon class="stepIcon" icon-class="click"></svg-icon>
                                         </el-col>
                                         <el-col :span="10" class="textCol">
@@ -490,7 +490,7 @@
                                     </el-row>
                                     <el-row class="stepBox">
 
-                                        <el-col :offset="10" :span="4">
+                                        <el-col class="iconBox" :offset="10" :span="4">
                                             <svg-icon class="stepIcon" icon-class="send"></svg-icon>
                                         </el-col>
                                         <el-col :span="10" class="textCol">
@@ -514,7 +514,7 @@
                                                 {{ $t('signType.corpStep4') }}
                                             </div>
                                         </el-col>
-                                        <el-col :span="4">
+                                        <el-col class="iconBox" :span="4">
                                             <svg-icon class="stepIcon" icon-class="auth"></svg-icon>
                                         </el-col>
                                         <el-col :span="10">
@@ -534,7 +534,7 @@
                                     </el-row>
                                     <el-row class="stepBox">
 
-                                        <el-col :offset="10" :span="4">
+                                        <el-col class="iconBox" :offset="10" :span="4">
                                             <svg-icon class="stepIcon" icon-class="success"></svg-icon>
                                         </el-col>
                                         <el-col :span="10" class="textCol">
@@ -559,7 +559,7 @@
                                                 $t('signType.corpStep6_2') }}
                                             </div>
                                         </el-col>
-                                        <el-col :span="4">
+                                        <el-col class="iconBox" :span="4">
                                             <svg-icon class="stepIcon" icon-class="manage"></svg-icon>
                                         </el-col>
                                         <el-col :span="10">
@@ -572,7 +572,7 @@
                             <el-row v-if="signType==='employee'" class="guideBox">
                                 <el-col>
                                     <el-row class="stepBox">
-                                        <el-col :offset="10" :span="4">
+                                        <el-col class="iconBox" :offset="10" :span="4">
                                             <svg-icon class="stepIcon" icon-class="click"></svg-icon>
                                         </el-col>
                                         <el-col :span="10" class="textCol">
@@ -583,15 +583,11 @@
                                         </el-col>
                                     </el-row>
                                     <el-row>
-
                                         <el-col class="lineBox" :offset="10" :span="4">
                                             <div class="greenLine">
-
                                             </div>
                                         </el-col>
-
                                     </el-row>
-
                                     <el-row class="stepBox">
                                         <el-col :span="10" class="textCol">
                                             <div class="leftText">
@@ -603,22 +599,17 @@
                                         </el-col>
                                         <el-col :span="10">
                                             <div>
-
                                             </div>
                                         </el-col>
                                     </el-row>
                                     <el-row>
-
                                         <el-col class="lineBox" :offset="10" :span="4">
                                             <div class="greenLine">
-
                                             </div>
                                         </el-col>
-
                                     </el-row>
                                     <el-row class="stepBox">
-
-                                        <el-col :offset="10" :span="4">
+                                        <el-col class="iconBox" :offset="10" :span="4">
                                             <svg-icon class="stepIcon" icon-class="send"></svg-icon>
                                         </el-col>
                                         <el-col :span="10" class="textCol">
@@ -628,13 +619,10 @@
                                         </el-col>
                                     </el-row>
                                     <el-row>
-
                                         <el-col class="lineBox" :offset="10" :span="4">
                                             <div class="greenLine">
-
                                             </div>
                                         </el-col>
-
                                     </el-row>
                                     <el-row class="stepBox">
                                         <el-col :span="10" class="textCol">
@@ -642,27 +630,22 @@
                                                 {{ $t('signType.empStep4') }}
                                             </div>
                                         </el-col>
-                                        <el-col :span="4">
+                                        <el-col class="iconBox" :span="4">
                                             <svg-icon class="stepIcon" icon-class="auth"></svg-icon>
                                         </el-col>
                                         <el-col :span="10">
                                             <div>
-
                                             </div>
                                         </el-col>
                                     </el-row>
                                     <el-row>
-
                                         <el-col class="lineBox" :offset="10" :span="4">
                                             <div class="greenLine">
-
                                             </div>
                                         </el-col>
-
                                     </el-row>
                                     <el-row class="stepBox">
-
-                                        <el-col :offset="10" :span="4">
+                                        <el-col class="iconBox" :offset="10" :span="4">
                                             <svg-icon class="stepIcon" icon-class="success"></svg-icon>
                                         </el-col>
                                         <el-col :span="10" class="textCol">
@@ -671,13 +654,12 @@
                                             </div>
                                         </el-col>
                                     </el-row>
-
                                 </el-col>
                             </el-row>
                             <el-row v-if="signType==='individual'" class="guideBox">
                                 <el-col>
                                     <el-row class="stepBox">
-                                        <el-col :offset="10" :span="4">
+                                        <el-col class="iconBox" :offset="10" :span="4">
                                             <svg-icon class="stepIcon" icon-class="click"></svg-icon>
                                         </el-col>
                                         <el-col :span="10" class="textCol">
@@ -689,15 +671,11 @@
                                         </el-col>
                                     </el-row>
                                     <el-row>
-
                                         <el-col class="lineBox" :offset="10" :span="4">
                                             <div class="greenLine">
-
                                             </div>
                                         </el-col>
-
                                     </el-row>
-
                                     <el-row class="stepBox">
                                         <el-col :span="10" class="textCol">
                                             <div class="leftText">
@@ -709,22 +687,17 @@
                                         </el-col>
                                         <el-col :span="10">
                                             <div>
-
                                             </div>
                                         </el-col>
                                     </el-row>
                                     <el-row>
-
                                         <el-col class="lineBox" :offset="10" :span="4">
                                             <div class="greenLine">
-
                                             </div>
                                         </el-col>
-
                                     </el-row>
                                     <el-row class="stepBox">
-
-                                        <el-col :offset="10" :span="4">
+                                        <el-col class="iconBox" :offset="10" :span="4">
                                             <svg-icon class="stepIcon" icon-class="send"></svg-icon>
                                         </el-col>
                                         <el-col :span="10" class="textCol">
@@ -734,13 +707,10 @@
                                         </el-col>
                                     </el-row>
                                     <el-row>
-
                                         <el-col class="lineBox" :offset="10" :span="4">
                                             <div class="greenLine">
-
                                             </div>
                                         </el-col>
-
                                     </el-row>
                                     <el-row class="stepBox">
                                         <el-col :span="10" class="textCol">
@@ -748,12 +718,11 @@
                                                 {{ $t('signType.individualStep4') }}
                                             </div>
                                         </el-col>
-                                        <el-col :span="4">
+                                        <el-col class="iconBox" :span="4">
                                             <svg-icon class="stepIcon" icon-class="success"></svg-icon>
                                         </el-col>
                                         <el-col :span="10">
                                             <div>
-
                                             </div>
                                         </el-col>
                                     </el-row>
@@ -872,7 +841,7 @@
                                 case 'auth_failed':
                                     this.$store.commit('errorCodeSet', {
                                         dialogVisible: true,
-                                        dialogMessage: this.$t('tips.not_authorize_email'),
+                                        dialogMessage: this.$t('tips.refuse_authorize',{platform:this.$store.state.repoInfo.platform}),
                                     });
                                     break;
                                 case EMAIL_UNAUTHORIZE:
@@ -881,10 +850,16 @@
                                         dialogMessage: this.$t('tips.not_authorize_email'),
                                     });
                                     break;
+                                case NO_PUBLIC_EMAIL:
+                                    this.$store.commit('errorCodeSet', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.no_public_email',{platform:this.$store.state.repoInfo.platform}),
+                                    });
+                                    break;
                                 case SYSTEM_ERROR:
                                     this.$store.commit('errorCodeSet', {
                                         dialogVisible: true,
-                                        dialogMessage: this.$t('tips.not_commit_email', {platform: this.$store.state.repoInfo.platform}),
+                                        dialogMessage: this.$t('tips.system_error'),
                                     });
                                     break;
                             }

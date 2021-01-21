@@ -166,6 +166,12 @@
                                     dialogMessage: this.$t('tips.invalid_token'),
                                 });
                                 break;
+                            case 'cla.expired_token':
+                                this.$store.commit('setOrgReLogin', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.invalid_token'),
+                                });
+                                break;
                             case 'cla.missing_token':
                                 this.$store.commit('setOrgReLogin', {
                                     dialogVisible: true,

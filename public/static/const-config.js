@@ -115,5 +115,6 @@ const DATATYPEOPTIONS = [
     value: 'fax'
 },
 ];
-const EMAIL_UNAUTHORIZE = 'email_is_unauthorized';
+const EMAIL_UNAUTHORIZE = 'refuse_to_authorize_email';
+const NO_PUBLIC_EMAIL = 'no_public_email';
 const SYSTEM_ERROR = 'system_error';
