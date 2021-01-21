@@ -1,13 +1,15 @@
-FROM node:alpine as Builder
+FROM node:alpine as NodeEnv
 
 MAINTAINER TommyLike<tommylikehu@gmail.com>
 
 RUN mkdir -p /home/cla-webui
 WORKDIR /home/cla-webui
-COPY . /home/cla-webui
-RUN npm config set registry https://mirrors.huaweicloud.com/repository/npm/
+COPY package.json package-lock.json .npmrc ./
 RUN npm install -g vue && \
     npm install
+
+FROM NodeEnv as Builder
+COPY . ./
 RUN npm run build
 
 FROM nginx:1.19.2
