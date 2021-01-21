@@ -7,8 +7,8 @@ WORKDIR /home/cla-webui
 COPY . /home/cla-webui
 RUN npm config set registry https://mirrors.huaweicloud.com/repository/npm/
 RUN npm install -g vue && \
-    npm install && \
-    npm run build
+    npm install
+RUN npm run build
 
 FROM nginx:1.19.2
 COPY --from=Builder /home/cla-webui/dist /usr/share/nginx/html/
