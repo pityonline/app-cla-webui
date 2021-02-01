@@ -7,7 +7,8 @@
                 <el-col align="right" class="buttonBox">
                     <div id="btBox">
                         <div>
-                            <el-tooltip :content="$t('index.org_bt_tip')" placement="top" effect="light" popper-class="my_tooltip">
+                            <el-tooltip :content="$t('index.org_bt_tip')" placement="top" effect="light"
+                                        popper-class="my_tooltip">
                                 <button class="button" @click="submit('orgManager')">
                                     {{$t('index.org_login')}}
                                 </button>
@@ -15,7 +16,8 @@
 
                         </div>
                         <div>
-                            <el-tooltip :content="$t('index.corp_bt_tip')" placement="bottom" effect="light" popper-class="my_tooltip">
+                            <el-tooltip :content="$t('index.corp_bt_tip')" placement="bottom" effect="light"
+                                        popper-class="my_tooltip">
                                 <button class="button" @click="submit('corporationManager')">
                                     {{$t('index.corp_login')}}
                                 </button>
@@ -31,7 +33,7 @@
 </template>
 <script>
     import {mapActions} from 'vuex'
-    import * as until from '../until/until'
+    import * as util from '../util/util'
 
     export default {
         name: "RepoSelect",
@@ -50,27 +52,22 @@
                     this.$router.push('/signCla')
                 }
             },
-            clearSessionStorage(){
+            clearSessionStorage() {
                 sessionStorage.clear();
             },
         },
-        created(){
+        created() {
             this.clearSessionStorage();
         },
         mounted() {
-            until.setMinHeight('loginType','btBox')
+            util.setMinHeight('loginType', 'btBox')
         }
     }
 </script>
-<style  lang="less">
+<style lang="less">
     @import "../assets/font/css/Roboto-Bold.css";
     @import "../assets/font/css/Roboto-Regular.css";
-    .my_tooltip{
-        font-size: 1rem;
-        width: 30rem;
-        line-height: 2rem;
-        border-radius: 1rem;
-    }
+
     .loginTypeSelect {
         font-family: Roboto-Bold, sans-serif;
 
@@ -79,7 +76,6 @@
             flex-direction: column;
             justify-content: space-between;
         }
-
     }
 
     .buttonBox {
@@ -91,6 +87,7 @@
     .codeBox .el-input__inner {
         border-radius: 4px 0 0 4px;
     }
+
     .button {
         width: 22rem;
         height: 4rem;

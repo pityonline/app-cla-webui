@@ -7,7 +7,7 @@
     </div>
 </template>
 <script>
-    import * as until from '../until/until'
+    import * as util from '../util/util'
     export default {
         name: "ConfigCla",
         inject: ['setClientHeight'],
@@ -34,8 +34,8 @@
             setClientHeight() {
                 this.$nextTick(() => {
                     document.getElementById("configCla").style.minHeight = '0px';
-                    if (until.getClientHeight() > document.getElementById('configCla').offsetHeight) {
-                        document.getElementById("configCla").style.minHeight = until.getClientHeight() + 'px'
+                    if (util.getClientHeight() > document.getElementById('configCla').offsetHeight) {
+                        document.getElementById("configCla").style.minHeight = util.getClientHeight() + 'px'
                     } else {
                         document.getElementById("configCla").style.minHeight = document.getElementById('configCla').offsetHeight + 'px'
                     }

@@ -6,14 +6,14 @@
                 :close-on-press-escape="false"
                 :show-close="false"
                 :close-on-click-modal="false"
-                width="30%">
+                :width="dialogWidth">
             <div class="titleBox" align="middle">
                 <svg-icon icon-class="fail_icon" class="dialogIcon"></svg-icon>
                 <span>{{$t('tips.failedTitle')}}</span>
             </div>
             <el-row>
                 <el-col align="center">
-                    <p class="messageBox">{{message}}</p>
+                    <p class="dialogMessage">{{message}}</p>
                     <button class="dialogBt" @click="clickGoHome()">{{$t('tips.dialogBt')}}</button>
                 </el-col>
             </el-row>
@@ -22,11 +22,20 @@
 </template>
 
 <script>
-    import * as until from '../until/until'
+    import * as util from '../util/util'
 
     export default {
         name: "ReLoginDialog",
         props: ['dialogVisible', 'message'],
+        computed: {
+            dialogWidth() {
+                if (this.IS_MOBILE) {
+                    return '80%'
+                } else {
+                    return '30%'
+                }
+            },
+        },
         data() {
             return {
                 domain: this.$store.state.domain,
@@ -47,9 +56,9 @@
                 let params = repoInfo.repo_id ? `${repoInfo.platform}/${repoInfo.org_id}/${repoInfo.repo_id}` : `${repoInfo.platform}/${repoInfo.org_id}`
                 let path = '';
                 if (sessionStorage.getItem('orgAddress')) {
-                    path = `${this.signRouter}/${until.strToBase64(params)}/${sessionStorage.getItem('orgAddress')}`
+                    path = `${this.signRouter}/${util.strToBase64(params)}/${sessionStorage.getItem('orgAddress')}`
                 } else {
-                    path = `${this.signRouter}/${until.strToBase64(params)}`
+                    path = `${this.signRouter}/${util.strToBase64(params)}`
                 }
 
                 this.$router.replace(path)
@@ -61,9 +70,6 @@
 
 <style lang="less">
     #signReLoginDialog {
-        .messageBox {
-            word-break: keep-all;
-        }
         .dialogBt {
             margin-top: 3rem;
             width: 8rem;
@@ -96,6 +102,9 @@
                 margin-right: .5rem;
             }
 
+            span {
+                font-size: 1rem;
+            }
         }
     }
 

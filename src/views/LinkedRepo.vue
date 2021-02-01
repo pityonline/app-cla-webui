@@ -164,10 +164,10 @@
 </template>
 <script>
     import {mapActions} from 'vuex'
-    import * as url from '../until/api'
-    import * as until from '../until/until'
+    import * as url from '../util/api'
+    import * as util from '../util/util'
     import pdf from 'vue-pdf'
-    import http from '../until/http'
+    import http from '../util/http'
     import ReLoginDialog from '../components/ReLoginDialog'
     import ReTryDialog from '../components/ReTryDialog'
 
@@ -254,7 +254,7 @@
                 }
             },
             clearConfigSession() {
-                until.clearSession(this);
+                util.clearSession(this);
                 this.$store.commit('setCorpItem', '');
                 sessionStorage.removeItem('corpItem');
             },
@@ -411,10 +411,7 @@
                         }
                     });
                     return name
-                } else {
                 }
-
-
             },
             getOrgTableData(data) {
                 let orgData = [];
@@ -441,7 +438,7 @@
                 } else {
                     params = `${row.platform.toLowerCase()}/${row.org_id}`
                 }
-                let base64Params = until.strToBase64(params)
+                let base64Params = util.strToBase64(params)
                 let url = `${this.address}${this.signRouter}/${base64Params}`
                 let copyInput = document.createElement("input");
                 copyInput.value = url;
@@ -453,13 +450,13 @@
                 document.body.removeChild(document.getElementsByClassName('copyInput')[0])
             },
             toSignPage(row) {
-                let params = ''
+                let params = '';
                 if (row.repo_id) {
                     params = `${row.platform.toLowerCase()}/${row.org_id}/${row.repo_id}`
                 } else {
                     params = `${row.platform.toLowerCase()}/${row.org_id}`
                 }
-                let base64Params = until.strToBase64(params)
+                let base64Params = util.strToBase64(params)
                 let url = `${this.address}${this.signRouter}/${base64Params}`
                 window.open(url)
             },
@@ -582,7 +579,6 @@
                 this.$store.commit('setDomain', domain)
             },
         },
-
     }
 </script>
 

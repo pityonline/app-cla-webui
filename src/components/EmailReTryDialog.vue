@@ -1,5 +1,5 @@
 <template>
-    <el-row id="reLoginDialog">
+    <el-row id="emailReTryDialog">
         <el-dialog
                 title=""
                 :visible.sync="dialogVisible"
@@ -13,8 +13,9 @@
             </div>
             <el-row>
                 <el-col align="center">
-                    <p class="dialogMessage">{{message}}</p>
-                    <button class="dialogBt" @click="clickGoHome()">{{$t('tips.dialogBt')}}</button>
+                    <p class="dialogMessage">{{$t('tips.no_public_email_1',{platform:this.$store.state.repoInfo.platform})}}
+                        <a :href="emailSetAddress" target="_blank">{{this.$t('tips.click_here')}}</a>{{emailNotOpenEnd}}</p>
+                    <button class="dialogBt" @click="reTry()">{{$t('tips.dialogBt')}}</button>
                 </el-col>
             </el-row>
         </el-dialog>
@@ -23,9 +24,10 @@
 
 <script>
     export default {
-        name: "ReLoginDialog",
-        props: ['dialogVisible', 'message'],
-        computed: {
+
+        name: "EmailReLoginDialog",
+        props: ['dialogVisible'],
+        computed:{
             dialogWidth() {
                 if (this.IS_MOBILE) {
                     return '80%'
@@ -33,28 +35,38 @@
                     return '30%'
                 }
             },
+            emailNotOpenEnd(){
+                if (this.$store.state.repoInfo.platform.toLowerCase() === 'gitee') {
+                    return this.$t('tips.gitee_no_public_email_2')
+                }else if (this.$store.state.repoInfo.platform.toLowerCase() === 'github') {
+                    return this.$t('tips.github_no_public_email_2')
+                }
+            },
+            emailSetAddress(){
+                if (this.$store.state.repoInfo.platform.toLowerCase() === 'gitee') {
+                    return 'https://gitee.com/profile/emails'
+                }else if (this.$store.state.repoInfo.platform.toLowerCase() === 'github') {
+                    return 'https://github.com/settings/emails'
+                }
+            },
         },
         data() {
             return {
-                domain: this.$store.state.domain,
-                signRouter:this.$store.state.signRouter,
             }
         },
         methods: {
-            clickGoHome() {
-                this.$store.commit('errorSet', {
-                    dialogVisible: false,
-                    dialogMessage: '',
-                });
-                this.$router.replace('/platformSelect')
+            toEmailSet(){
 
+            },
+            reTry() {
+                this.$store.commit('setEmailErr', false)
             },
         },
     }
 </script>
 
-<style  lang="less">
-    #reLoginDialog{
+<style lang="less">
+    #emailReTryDialog{
         .dialogBt {
             margin-top: 3rem;
             width: 8rem;
@@ -66,7 +78,9 @@
             cursor: pointer;
             outline: none;
         }
-
+        a{
+            color: #319E55;
+        }
         .el-dialog__header{
             padding: 0;
         }

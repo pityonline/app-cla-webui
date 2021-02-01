@@ -12,14 +12,14 @@
 </template>
 
 <script>
-    import * as url from '../until/api'
-    import * as until from '../until/until'
+    import * as url from '../util/api'
+    import * as util from '../util/util'
     import Header from '@components/NewHeader'
     import Footer from '@components/NewFooter'
 
     window.onresize = () => {
-        if (until.getClientHeight() > document.getElementById('signedRepo').offsetHeight) {
-            document.getElementById("signedRepo").style.height = until.getClientHeight() + 'px'
+        if (util.getClientHeight() > document.getElementById('signedRepo').offsetHeight) {
+            document.getElementById("signedRepo").style.height = util.getClientHeight() + 'px'
         }
     }
     export default {
@@ -87,8 +87,8 @@
             },
             setClientHeight() {
                 this.$nextTick(() => {
-                    until.getClientHeight() > document.getElementById('signedRepo').offsetHeight ?
-                        this.section.height = until.getClientHeight() + 'px' :
+                    util.getClientHeight() > document.getElementById('signedRepo').offsetHeight ?
+                        this.section.height = util.getClientHeight() + 'px' :
                         this.section.height = document.getElementById('signedRepo').offsetHeight
 
                 })

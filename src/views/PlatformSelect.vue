@@ -49,9 +49,9 @@
 
 <script>
     import {mapActions} from 'vuex'
-    import * as url from '../until/api'
+    import * as url from '../util/api'
     import reTryDialog from '../components/ReTryDialog'
-    import http from '../until/http'
+    import http from '../util/http'
 
     export default {
         name: "PlatformSelect",

@@ -78,10 +78,5 @@ export const setI18nLang = () => {
         return 'en-us'
     }
 };
-export const initialsToUpperCase = (string) => {
-    let initials = string.slice(0, 1);
-    let upper = initials.toUpperCase();
-    return upper + string.slice(1)
 
-};
 

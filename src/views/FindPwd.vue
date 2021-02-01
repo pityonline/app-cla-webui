@@ -14,8 +14,8 @@
 
 <script>
     import Footer from '@components/NewFooter'
-    import * as until from '../until/until'
-    import * as url from '../until/api'
+    import * as util from '../util/util'
+    import * as url from '../util/api'
 
     export default {
         name: "FindPwd",
@@ -35,8 +35,8 @@
             },
             setClientHeight() {
                 this.$nextTick(() => {
-                    until.getClientHeight() > document.getElementById('findPwd').offsetHeight ?
-                        this.findPwdClass.height = until.getClientHeight() + 'px' :
+                    util.getClientHeight() > document.getElementById('findPwd').offsetHeight ?
+                        this.findPwdClass.height = util.getClientHeight() + 'px' :
                         this.findPwdClass.height = document.getElementById('findPwd').offsetHeight
 
                 })
@@ -50,8 +50,8 @@
         }
     }
     window.onresize = () => {
-        if (until.getClientHeight() > document.getElementById('findPwd').offsetHeight) {
-            document.getElementById("findPwd").style.height = until.getClientHeight() + 'px'
+        if (util.getClientHeight() > document.getElementById('findPwd').offsetHeight) {
+            document.getElementById("findPwd").style.height = util.getClientHeight() + 'px'
         }
     }
 </script>

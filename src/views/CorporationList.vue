@@ -7,6 +7,7 @@
                             :empty-text="$t('corp.no_data')"
                             :data="tableData"
                             align="center"
+                            :row-class-name="createdAdmin"
                             class="tableClass"
                             style="width: 100%;">
                         <el-table-column
@@ -19,13 +20,11 @@
                                 prop="admin_name"
                                 :label="$t('org.config_cla_field_corp_default_title1')">
                         </el-table-column>
-
                         <el-table-column
                                 min-width="30"
                                 prop="admin_email"
                                 :label="$t('org.to_email')">
                         </el-table-column>
-
                         <el-table-column
                                 min-width="10">
                             <template slot="header" slot-scope="scope">
@@ -38,7 +37,6 @@
                                         width="80"
                                         trigger="hover"
                                         placement="right">
-
                                     <div class="menuBT">
                                         <el-button @click="uploadClaFile(scope.row)" size="mini">
                                             {{$t('org.upload')}}
@@ -51,11 +49,9 @@
                                         </el-button>
                                     </div>
                                     <svg-icon slot="reference" class="pointer" icon-class="pdf" @click=""/>
-
                                 </el-popover>
                             </template>
                         </el-table-column>
-
                         <el-table-column
                                 min-width="10"
                                 :label="$t('org.operation')">
@@ -265,10 +261,9 @@
 
 </template>
 <script>
-    import * as url from '../until/api'
-    import * as until from '../until/until'
-    import pdfReader from "@components/PdfReader";
-    import http from '../until/http'
+    import * as url from '../util/api'
+    import * as util from '../util/util'
+    import http from '../util/http'
     import pdf from 'vue-pdf'
     import ReLoginDialog from '../components/ReLoginDialog'
     import ReTryDialog from '../components/ReTryDialog'
@@ -277,7 +272,6 @@
     export default {
         name: "CorporationList",
         components: {
-            pdfReader,
             ReTryDialog,
             ReLoginDialog,
         },
@@ -329,6 +323,11 @@
         },
         inject: ['setClientHeight'],
         methods: {
+            createdAdmin(param) {
+                if (param.row.admin_added) {
+                    return 'mark-row'
+                }
+            },
             createCorpCla() {
                 this.$router.push('/addCorpCla');
                 this.setCheckInfo();
@@ -450,7 +449,7 @@
                     responseType: 'blob',
                 }).then(res => {
                     if (res && res.data) {
-                        let time = until.getNowDateToTime();
+                        let time = util.getNowDateToTime();
                         download((new Blob([res.data])), `${this.$store.state.corpItem.org_id}_${row.language}_signature${time}.pdf`, 'application/pdf');
                     } else {
                         this.$store.commit('errorCodeSet', {
@@ -628,6 +627,12 @@
                                     dialogMessage: this.$t('tips.invalid_token'),
                                 });
                                 break;
+                            case 'cla.expired_token':
+                                this.$store.commit('errorSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.invalid_token'),
+                                });
+                                break;
                             case 'cla.missing_token':
                                 this.$store.commit('errorSet', {
                                     dialogVisible: true,
@@ -721,7 +726,7 @@
                     responseType: 'blob',
                 }).then(res => {
                     if (res.data) {
-                        let time = until.getNowDateToTime();
+                        let time = util.getNowDateToTime();
                         download((new Blob([res.data])), `${row.corporation_name}_signature${time}.pdf`, 'application/pdf');
                     } else {
                         this.$store.commit('errorCodeSet', {
@@ -1034,7 +1039,7 @@
             },
         },
         created() {
-            until.clearSession(this);
+            util.clearSession(this);
             this.getCorporationInfo();
         },
         mounted() {
@@ -1187,10 +1192,6 @@
 
         .hoverUnderline:hover {
             text-decoration: underline;
-        }
-
-        .pointer {
-            cursor: pointer;
         }
 
         .disableClass {

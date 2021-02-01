@@ -128,8 +128,8 @@
     </div>
 </template>
 <script>
-    import * as url from '../until/api'
-    import http from '../until/http'
+    import * as url from '../util/api'
+    import http from '../util/http'
     import corpReLoginDialog from '../components/CorpReLoginDialog'
     import reTryDialog from '../components/ReTryDialog'
 

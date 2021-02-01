@@ -124,9 +124,9 @@
 
 </template>
 <script>
-    import * as url from '../until/api'
-    import * as until from '../until/until'
-    import http from '../until/http'
+    import * as url from '../util/api'
+    import * as util from '../util/util'
+    import http from '../util/http'
     import download from 'downloadjs'
     import ReTryDialog from '../components/ReTryDialog'
     import ReLoginDialog from '../components/ReLoginDialog'
@@ -217,7 +217,7 @@
                         responseType: "blob",
                     }).then(res => {
                         if (res.data) {
-                            let time = until.getNowDateToTime();
+                            let time = util.getNowDateToTime();
                             download((new Blob([res.data])), `${this.$store.state.corpLanguage}_blank_signature${time}.pdf`, 'application/pdf');
                         }
                     }).catch(err => {

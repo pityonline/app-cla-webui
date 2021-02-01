@@ -12,11 +12,11 @@
 <script>
     import Header from '@components/NewHeader'
     import Footer from '@components/NewFooter'
-    import * as until from '../until/until'
+    import * as util from '../util/util'
 
     window.onresize = () => {
-        if (until.getClientHeight() > document.getElementById('rootManager').offsetHeight) {
-            document.getElementById("rootManager").style.height = until.getClientHeight() + 'px'
+        if (util.getClientHeight() > document.getElementById('rootManager').offsetHeight) {
+            document.getElementById("rootManager").style.height = util.getClientHeight() + 'px'
         }
     };
     export default {
@@ -44,8 +44,8 @@
         methods: {
             setClientHeight() {
                 this.$nextTick(() => {
-                    until.getClientHeight() > document.getElementById('rootManager').offsetHeight ?
-                        this.section.height = until.getClientHeight() + 'px' :
+                    util.getClientHeight() > document.getElementById('rootManager').offsetHeight ?
+                        this.section.height = util.getClientHeight() + 'px' :
                         this.section.height = document.getElementById('rootManager').offsetHeight
                 })
             },

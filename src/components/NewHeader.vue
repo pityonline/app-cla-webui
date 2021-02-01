@@ -78,8 +78,8 @@
 </template>
 
 <script>
-    import http from '../until/http'
-    import * as url from '../until/api'
+    import http from '../util/http'
+    import * as url from '../util/api'
     export default {
         name: "NewHeader",
         data() {

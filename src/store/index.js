@@ -1,8 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios'
-import * as url from '../until/api'
-
 Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
@@ -42,6 +39,7 @@ export default new Vuex.Store({
             userEmail: sessionStorage.getItem('userEmail') || undefined,
         },
         dialogVisible: false,
+        emailErrVisible: false,
         dialogMessage: '',
         reTryDialogVisible: false,
         signSuccessDialogVisible: false,
@@ -71,6 +69,9 @@ export default new Vuex.Store({
         addLang: sessionStorage.getItem('addLang') || undefined,
     },
     mutations: {
+        setEmailErr(state, data) {
+            state.emailErrVisible = data;
+        },
         setAddLang(state, data) {
             state.addLang = data;
             sessionStorage.setItem('addLang', data);

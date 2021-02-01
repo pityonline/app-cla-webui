@@ -35,13 +35,13 @@
 <script>
     import NewHeader from '@components/NewHeader'
     import NewFooter from '@components/NewFooter'
-    import * as until from '../until/until'
+    import * as util from '../util/util'
     import Select from '@components/Select'
     import {mapActions} from 'vuex'
 
     window.onresize = () => {
-        if (until.getClientHeight() > document.getElementById('transparentDiv').offsetHeight) {
-            document.getElementById("transparentDiv").style.height = until.getClientHeight() + 'px';
+        if (util.getClientHeight() > document.getElementById('transparentDiv').offsetHeight) {
+            document.getElementById("transparentDiv").style.height = util.getClientHeight() + 'px';
         }
     };
     export default {
@@ -72,8 +72,8 @@
             },
             setClientHeight() {
                 this.$nextTick(() => {
-                    if (until.getClientHeight() > document.getElementById('transparentDiv').offsetHeight) {
-                        this.transparentDiv.height = until.getClientHeight() + 'px'
+                    if (util.getClientHeight() > document.getElementById('transparentDiv').offsetHeight) {
+                        this.transparentDiv.height = util.getClientHeight() + 'px'
                     }
                 })
             },
@@ -120,6 +120,7 @@
             left: 280px;
         }
     }
+
     .index {
         display: flex;
         flex-direction: column;

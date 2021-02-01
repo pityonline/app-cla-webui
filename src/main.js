@@ -12,19 +12,20 @@ import Lang_Zh from '../public/static/lang/zh-cn'
 import Lang_En from '../public/static/lang/en-us'
 import Cookie from 'js-cookie'
 import Const_config from '../public/static/const-config';
-import * as until from './until/until'
+import * as util from './util/util'
+import '../src/assets/css/global.css';
+import isMobile from 'is-mobile';
 Vue.use(Cookie);
-
 Vue.prototype.$cookie = Cookie;
 Vue.prototype.$axios = axios;
+Vue.prototype.IS_MOBILE = isMobile();
 Vue.use(ElementUI);
 Vue.use(VueI18n);
 Vue.use(Const_config);
 Vue.config.productionTip = false;
 Vue.config.devtools = true;
-
 const i18n = new VueI18n({
-    locale: until.setI18nLang(),
+    locale: util.setI18nLang(),
     messages: {
         'en-us': Lang_En,
         'zh-cn': Lang_Zh
@@ -35,4 +36,4 @@ new Vue({
     store,
     i18n,
     render: h => h(App)
-}).$mount('#app')
+}).$mount('#app');

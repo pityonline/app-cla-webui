@@ -202,9 +202,9 @@
 </template>
 
 <script>
-    import * as url from '../until/api'
-    import http from '../until/http'
-    import * as until from '../until/until'
+    import * as url from '../util/api'
+    import http from '../util/http'
+    import * as util from '../util/util'
     import ReLoginDialog from '../components/ReLoginDialog'
     import ReTryDialog from '../components/ReTryDialog'
 
@@ -372,7 +372,7 @@
                 }).then(res => {
                     this.$message.closeAll();
                     this.$message.success('success');
-                    until.clearSession(this);
+                    util.clearSession(this);
                     this.$router.push('/corporationList')
                 }).catch(err => {
                     if (err.data && err.data.hasOwnProperty('data')) {

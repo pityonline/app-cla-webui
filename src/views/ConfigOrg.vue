@@ -59,24 +59,31 @@
         <div class="orgStepBtBox">
             <button class="step_button" @click="toConfigClaLink">{{$t('org.next_step')}}</button>
         </div>
-        <ReTryDialog :message="reTryMsg" :dialogVisible="reLoginMsg"></ReTryDialog>
+        <ReTryDialog :message="reTryMsg" :dialogVisible="reTryVisible"></ReTryDialog>
+        <ReLoginDialog :message="reTryMsg" :dialogVisible="orgReLoginVisible"></ReLoginDialog>
     </el-row>
 </template>
 
 <script>
     import ReTryDialog from '../components/ReTryDialog'
-    import * as url from '../until/api'
+    import ReLoginDialog from '../components/ReLoginDialog'
+    import * as url from '../util/api'
+    import _axios from '../util/_axios'
 
     export default {
         name: "ConfigOne",
         components: {
-            ReTryDialog
+            ReTryDialog,
+            ReLoginDialog,
         },
         computed: {
             reTryMsg() {
                 return this.$store.state.dialogMessage
             },
-            reLoginMsg() {
+            orgReLoginVisible() {
+                return this.$store.state.orgReLoginDialogVisible
+            },
+            reTryVisible() {
                 return this.$store.state.reTryDialogVisible
             },
             orgOptions() {
@@ -180,7 +187,7 @@
             },
             getRepositoriesOfOrg(org, org_id) {
                 let obj = {access_token: this.$store.state.platform_token, org: org, page: 1, per_page: 100};
-                this.$axios({
+                _axios({
                     url: `https://gitee.com/api/v5/orgs/${org}/repos`,
                     params: obj,
                 }).then(res => {
@@ -197,50 +204,15 @@
                     });
                     this.$store.commit('setRepositoryOptions', repositoryOptions)
                 }).catch(err => {
-                    if (err.data && err.data.hasOwnProperty('data')) {
-                        switch (err.data.data.error_code) {
-                            case 'cla.invalid_token':
-                                this.$store.commit('setOrgReLogin', {
-                                    dialogVisible: true,
-                                    dialogMessage: this.$t('tips.invalid_token'),
-                                });
-                                break;
-                            case 'cla.missing_token':
-                                this.$store.commit('setOrgReLogin', {
-                                    dialogVisible: true,
-                                    dialogMessage: this.$t('tips.missing_token'),
-                                });
-                                break;
-                            case 'cla.unknown_token':
-                                this.$store.commit('setOrgReLogin', {
-                                    dialogVisible: true,
-                                    dialogMessage: this.$t('tips.unknown_token'),
-                                });
-                                break;
-                            case 'cla.system_error':
-                                this.$store.commit('errorCodeSet', {
-                                    dialogVisible: true,
-                                    dialogMessage: this.$t('tips.system_error'),
-                                });
-                                break;
-                            default :
-                                this.$store.commit('errorCodeSet', {
-                                    dialogVisible: true,
-                                    dialogMessage: this.$t('tips.unknown_error'),
-                                });
-                                break;
-                        }
-                    } else {
-                        this.$store.commit('errorCodeSet', {
-                            dialogVisible: true,
-                            dialogMessage: this.$t('tips.system_error'),
-                        })
-                    }
+                    this.$store.commit('errorCodeSet', {
+                        dialogVisible: true,
+                        dialogMessage: this.$t('tips.system_error'),
+                    })
                 })
             },
             getOrgsInfo() {
                 let obj = {access_token: this.$store.state.platform_token, admin: true, page: 1, per_page: 100};
-                this.$axios({
+                _axios({
                     url: url.getOrgsInfo,
                     params: obj,
                 }).then(res => {
@@ -252,43 +224,10 @@
                         this.$store.commit('setOrgOption', orgOptions)
                     }
                 }).catch(err => {
-                    if (err.data && err.data.hasOwnProperty('data')) {
-                        switch (err.data.data.error_code) {
-                            case 'cla.invalid_token':
-                                this.$store.commit('setOrgReLogin', {
-                                    dialogVisible: true,
-                                    dialogMessage: this.$t('tips.invalid_token'),
-                                });
-                                break;
-                            case 'cla.missing_token':
-                                this.$store.commit('setOrgReLogin', {
-                                    dialogVisible: true,
-                                    dialogMessage: this.$t('tips.missing_token'),
-                                });
-                                break;
-                            case 'cla.unknown_token':
-                                this.$store.commit('setOrgReLogin', {
-                                    dialogVisible: true,
-                                    dialogMessage: this.$t('tips.unknown_token'),
-                                });
-                                break;
-                            case 'cla.system_error':
-                                this.$store.commit('errorCodeSet', {
-                                    dialogVisible: true,
-                                    dialogMessage: this.$t('tips.system_error'),
-                                });
-                                break;
-                            default :
-                                this.$store.commit('errorCodeSet', {
-                                    dialogVisible: true,
-                                    dialogMessage: this.$t('tips.unknown_error'),
-                                });
-                                break;
-                        }
-                    } else {
-                        this.$store.commit('errorCodeSet', {
+                    if (err.status === 401) {
+                        this.$store.commit('setOrgReLogin', {
                             dialogVisible: true,
-                            dialogMessage: this.$t('tips.system_error'),
+                            dialogMessage: this.$t('tips.not_authorize_group'),
                         })
                     }
                 })
@@ -315,7 +254,7 @@
             },
         },
         created() {
-            this.getOrgsInfo();
+            // this.getOrgsInfo();
         },
         beforeRouteEnter(to, from, next) {
             next(vm => {

@@ -18,12 +18,12 @@
 <script>
     import Footer from '../components/NewFooter';
     import Header from '../components/NewHeader'
-    import * as url from '../until/api'
-    import * as until from '../until/until'
+    import * as url from '../util/api'
+    import * as util from '../util/util'
 
     window.onresize = () => {
-        if (until.getClientHeight() > document.getElementById('privacyBox').offsetHeight) {
-            document.getElementById("privacyBox").style.height = until.getClientHeight() + 'px';
+        if (util.getClientHeight() > document.getElementById('privacyBox').offsetHeight) {
+            document.getElementById("privacyBox").style.height = util.getClientHeight() + 'px';
 
         }
     }
@@ -44,8 +44,8 @@
         methods: {
             setClientHeight() {
                 this.$nextTick(() => {
-                    if (until.getClientHeight() > document.getElementById('privacyBox').offsetHeight) {
-                        this.privacyBox.height = until.getClientHeight() + 'px'
+                    if (util.getClientHeight() > document.getElementById('privacyBox').offsetHeight) {
+                        this.privacyBox.height = util.getClientHeight() + 'px'
                     }
                 })
             },
