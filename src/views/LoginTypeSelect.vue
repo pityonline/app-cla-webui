@@ -42,8 +42,11 @@
         },
         methods: {
             ...mapActions(['setLoginTypeAct']),
+            setDomain() {
+                this.$store.commit('setDomain', window.location.href.split('/index')[0])
+            },
             submit(loginType) {
-                this.setLoginTypeAct(loginType)
+                this.setLoginTypeAct(loginType);
                 if (loginType === 'orgManager') {
                     this.$router.push('/platformSelect')
                 } else if (loginType === 'corporationManager') {
@@ -53,7 +56,10 @@
                 }
             },
             clearSessionStorage() {
+                let showHeaderMenu = sessionStorage.getItem('showHeaderMenu');
                 sessionStorage.clear();
+                sessionStorage.setItem('showHeaderMenu',showHeaderMenu);
+                this.setDomain();
             },
         },
         created() {

@@ -27,18 +27,15 @@
 
             <reTryDialog :message="corpReLoginMsg" :dialogVisible="corpReTryDialogVisible"></reTryDialog>
         </el-col>
-
     </el-row>
-
 </template>
 
 <script>
     import * as url from '../util/api'
     import http from '../util/http'
     import {mapActions} from 'vuex'
+    import * as util from '../util/util'
     import reTryDialog from '../components/ReTryDialog'
-
-
     export default {
         name: "RepoSelect",
         components: {
@@ -114,16 +111,16 @@
                     }
                     if (data.length) {
                         new Promise((resolve, reject) => {
-                            let userInfo = {userInfo: data}
-                            Object.assign(userInfo, {userName: userName})
-                            this.setLoginInfoAct(userInfo)
+                            let userInfo = {userInfo: data};
+                            Object.assign(userInfo, {userName: userName});
+                            this.setLoginInfoAct(userInfo);
                             if (data.length > 1) {
                                 this.$router.push('/orgSelect')
                             } else {
-                                this.setCorpTokenAct(data[0].token)
-                                Object.assign(userInfo, {orgValue: 0})
-                                this.$store.commit('setPwdIsChanged', data[0].initial_pw_changed)
-                                this.setLoginInfoAct(userInfo)
+                                this.setCorpTokenAct(data[0].token);
+                                Object.assign(userInfo, {orgValue: 0});
+                                this.$store.commit('setPwdIsChanged', data[0].initial_pw_changed);
+                                this.setLoginInfoAct(userInfo);
                                 if (data[0].initial_pw_changed) {
                                     if (data[0].role === 'admin') {
                                         this.$router.push('/rootManager')
@@ -210,6 +207,9 @@
                     }
                 });
             },
+        },
+        created(){
+            util.clearManagerSession(this);
         },
         mounted() {
             this.setClientHeight()

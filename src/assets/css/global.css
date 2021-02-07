@@ -14,6 +14,12 @@
     line-height: 1.5rem;
 }
 
+.dialogMessageEn {
+    word-break: keep-all;
+    text-align: left;
+    line-height: 1.5rem;
+}
+
 .el-select-dropdown__item.selected {
     color: #319E55;
 }

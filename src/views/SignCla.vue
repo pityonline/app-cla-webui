@@ -7,9 +7,10 @@
                     <p class="contentTitle"><span>{{apply_to}}</span>{{ $t('signPage.claTitle') }}</p>
                     <el-row class="marginTop3rem" id="claBox">
                     </el-row>
-                    <el-row class="marginTop3rem form">
+                    <el-row v-if="cla_lang" class="marginTop3rem form">
                         <el-col>
-                            <el-form v-if="this.IS_MOBILE" :model="ruleForm" :rules="rules" ref="ruleForm" label-position="left"
+                            <el-form v-if="this.IS_MOBILE" :model="ruleForm" :rules="rules" ref="ruleForm"
+                                     label-position="left"
                                      label-width="25%"
                                      class="demo-ruleForm">
                                 <el-form-item v-for="(item,index) in fields"
@@ -36,12 +37,13 @@
                                         :required="rules.code[0].required"
                                         label-width="0"
                                         prop="code">
-                                    <div><span v-if="rules.code[0].required" class="requiredIcon">*</span>{{$t('signPage.verifyCode')}}</div>
+                                    <div><span v-if="rules.code[0].required" class="requiredIcon">*</span>{{$t('signPage.verifyCode')}}
+                                    </div>
                                     <el-input v-model="ruleForm.code" :placeholder="$t('signPage.verifyCodeHolder')"
                                               size="small">
                                     </el-input>
                                 </el-form-item>
-                                <button v-if="this.IS_MOBILE" class="marginTop1rem mobileBt"
+                                <button class="marginTop1rem mobileBt"
                                         type="button"
                                         :disabled="sendBtTextFromLang!==$t('signPage.sendCode')"
                                         @click="sendCode()">{{sendBtTextFromLang}}
@@ -55,8 +57,8 @@
                                     </el-checkbox>
                                 </div>
                                 <el-form-item label-width="0" class="marginTop1rem signBtBox">
-                                    <button  class="mobileBt" type="button"
-                                             @click="submitForm('ruleForm')">
+                                    <button class="mobileBt" type="button"
+                                            @click="submitForm('ruleForm')">
                                         {{$t('signPage.sign')}}
                                     </button>
                                 </el-form-item>
@@ -83,7 +85,7 @@
                                               @blur="setMyForm(item.type,ruleForm[item.id])"></el-input>
                                 </el-form-item>
                                 <el-form-item
-                                        v-if="rules.code&&(loginType==='corporation'||loginType==='employee')&&!this.IS_MOBILE"
+                                        v-if="rules.code&&(loginType==='corporation'||loginType==='employee')"
                                         :label="$t('signPage.verifyCode')"
                                         :required="rules.code[0].required"
                                         prop="code">
@@ -95,20 +97,6 @@
                                         </el-button>
                                     </el-input>
                                 </el-form-item>
-                                <el-form-item
-                                        v-if="rules.code&&(loginType==='corporation'||loginType==='employee')&&this.IS_MOBILE"
-                                        :label="$t('signPage.verifyCode')"
-                                        :required="rules.code[0].required"
-                                        prop="code">
-                                    <el-input v-model="ruleForm.code" :placeholder="$t('signPage.verifyCodeHolder')"
-                                              size="small">
-                                    </el-input>
-                                </el-form-item>
-                                <button v-if="this.IS_MOBILE" class="marginTop1rem mobileBt"
-                                        type="button"
-                                        :disabled="sendBtTextFromLang!==$t('signPage.sendCode')"
-                                        @click="sendCode()">{{sendBtTextFromLang}}
-                                </button>
                                 <div class="borderClass fontSize12"><span class="requiredIcon">*</span>{{$t('signPage.requireText')}}
                                 </div>
                                 <div class="marginTop1rem fontSize12">
@@ -118,11 +106,7 @@
                                     </el-checkbox>
                                 </div>
                                 <el-form-item label-width="0" class="marginTop1rem signBtBox">
-                                    <button v-if="this.IS_MOBILE" class="mobileBt" type="button"
-                                            @click="submitForm('ruleForm')">
-                                        {{$t('signPage.sign')}}
-                                    </button>
-                                    <button v-else class="button" type="button" @click="submitForm('ruleForm')">
+                                    <button class="button" type="button" @click="submitForm('ruleForm')">
                                         {{$t('signPage.sign')}}
                                     </button>
                                 </el-form-item>
@@ -152,6 +136,7 @@
     import ReTryDialog from '../components/ReTryDialog'
     import SignSuccessDialog from '../components/SignSuccessDialog'
     import SignReLoginDialog from '../components/SignReLoginDialog'
+
     export default {
 
         name: "SignType",
@@ -218,16 +203,44 @@
         watch: {
             '$i18n.locale'() {
                 this.cla_lang = '';
-                new Promise(resolve => {
-                    this.getSignPage(resolve);
-                }).then(res => {
-                    this.getNowDate();
-                    if (this.sendBtTextFromLang === 'send code' || this.sendBtTextFromLang === '发送验证码') {
-                        this.sendBtTextFromLang = this.$t('signPage.sendCode')
-                    } else {
-                        this.sendBtTextFromLang = this.$t('signPage.reSendCode', {second: this.second})
+                if (localStorage.getItem('lang') === '0') {
+                    this.lang = 'english'
+                } else if (localStorage.getItem('lang') === '1') {
+                    this.lang = 'chinese'
+                }
+                this.signPageData.forEach((item, index) => {
+                    if (item.language === this.lang) {
+                        this.cla_lang = item.language;
+                        this.value = index;
+                        this.cla_hash = item.cla_hash;
+                        this.setClaText(this.value);
+                        this.fields = this.signPageData[this.value].fields;
+                        if (Object.keys(this.rules).length === 0) {
+                            this.setFieldsData();
+                        }
                     }
                 });
+                this.getUserInfo();
+                if (!this.cla_lang) {
+                    document.getElementById('claBox').innerHTML = '';
+                    this.fields = [];
+                    this.$message.closeAll();
+                    this.$message.error({
+                        message: this.$t('tips.no_lang', {language: this.lang}),
+                        duration: 8000
+                    })
+                }
+                if (this.sendBtTextFromLang === 'send code' || this.sendBtTextFromLang === '发送验证码') {
+                    this.sendBtTextFromLang = this.$t('signPage.sendCode')
+                } else {
+                    this.sendBtTextFromLang = this.$t('signPage.reSendCode', {second: this.second})
+                }
+                this.$refs['ruleForm'] && this.$refs['ruleForm'].fields.forEach(item => {
+                    if (item.validateState === 'error') {
+                        this.$refs['ruleForm'].validateField(item.labelFor)
+                    }
+                });
+
             },
         },
         components: {
@@ -265,7 +278,7 @@
                 myForm: {},
                 rules: {},
                 isRead: false,
-                value: 0,
+                value: '',
                 languageOptions: [{
                     value: 0,
                     label: 'English'
@@ -288,13 +301,12 @@
                 let path = '';
                 if (sessionStorage.getItem('orgAddress')) {
                     path = `${this.signRouter}/${util.strToBase64(params)}/${sessionStorage.getItem('orgAddress')}`
-
                 } else {
                     path = `${this.signRouter}/${util.strToBase64(params)}`
                 }
                 window.open(`${this.domain}${path}`)
             },
-            async verifyTel(rule, value, callback) {
+            async requireVerifyTel(rule, value, callback) {
                 if (value) {
                     let reg = /^1[3456789]\d{9}$/;
                     if (reg.test(value)) {
@@ -304,6 +316,16 @@
                     }
                 } else {
                     callback(new Error(this.$t('tips.not_fill_telephone_num')))
+                }
+            },
+            async verifyTel(rule, value, callback) {
+                if (value) {
+                    let reg = /^1[3456789]\d{9}$/;
+                    if (reg.test(value)) {
+                        callback();
+                    } else {
+                        callback(new Error(this.$t('tips.invalid_telephone_num')))
+                    }
                 }
             },
             async verifyAddr(rule, value, callback) {
@@ -330,10 +352,10 @@
                 }
             },
             async verifyName(rule, value, callback) {
-                if (!value) {
-                    callback(new Error(this.$t('tips.fill_name')))
-                } else {
+                if (value) {
                     callback();
+                } else {
+                    callback(new Error(this.$t('tips.fill_name')))
                 }
             },
             async verifyCorpName(rule, value, callback) {
@@ -471,8 +493,8 @@
             },
             getNowDate() {
                 let date = new Date();
-                let year, month, day
-                year = date.getFullYear()
+                let year, month, day;
+                year = date.getFullYear();
                 date.getMonth() < 9 ? month = `0${date.getMonth() + 1}` : month = date.getMonth() + 1;
                 date.getDate() < 10 ? day = `0${date.getDate()}` : day = date.getDate();
                 for (let item of this.fields) {
@@ -490,7 +512,7 @@
                 if (document.cookie) {
                     let cookieArr = document.cookie.split(';');
                     let access_token, refresh_token, platform_token, _mark, error_code = '';
-                    cookieArr.forEach((item, index) => {
+                    cookieArr.forEach((item) => {
                         let arr = item.split('=');
                         let name = arr[0].trim();
                         let value = arr[1].trim();
@@ -533,16 +555,14 @@
                                 this.cla_lang = item.language;
                                 this.value = index;
                                 this.cla_hash = item.cla_hash;
-                                this.setClaText(index);
+                                this.setClaText(this.value);
+                                this.setFields(this.value);
+                                this.setFieldsData();
                                 resolve('complete')
                             }
                             this.languageOptions.push({value: index, label: item.language})
                         });
                         if (!this.cla_lang) {
-                            document.getElementById('claBox').innerHTML = '';
-                            this.ruleForm = {};
-                            this.rules = {};
-                            this.fields = [];
                             this.$message.closeAll();
                             this.$message.error({
                                 message: this.$t('tips.no_lang', {language: this.lang}),
@@ -728,19 +748,23 @@
                 }
             },
             setClaText(key) {
-                let form = {};
-                let rules = {};
                 document.getElementById('claBox').innerHTML = this.signPageData[key].text;
+            },
+            setFields(key) {
                 for (let i = 0; i < this.signPageData[key].fields.length; i++) {
                     for (let j = i + 1; j < this.signPageData[key].fields.length; j++) {
                         if (Number(this.signPageData[key].fields[i].id) > Number(this.signPageData[key].fields[j].id)) {
                             let field = this.signPageData[key].fields[i];
-                            this.signPageData[key].fields[i] = this.signPageData[key].fields[j]
+                            this.signPageData[key].fields[i] = this.signPageData[key].fields[j];
                             this.signPageData[key].fields[j] = field
                         }
                     }
                 }
                 this.fields = this.signPageData[key].fields;
+            },
+            setFieldsData() {
+                let form = {};
+                let rules = {};
                 this.fields.forEach(item => {
                     Object.assign(form, {[item.id]: ''});
                     if (item.type === 'name') {
@@ -808,13 +832,22 @@
                         })
                     } else if (item.type === 'telephone') {
                         Object.assign(this.myForm, {telephone: ''});
-                        item.required && Object.assign(rules, {
-                            [item.id]: [{
-                                required: item.required,
-                                validator: this.verifyTel,
-                                trigger: ['blur', 'change']
-                            }],
-                        })
+                        if (item.required) {
+                            Object.assign(rules, {
+                                [item.id]: [{
+                                    required: item.required,
+                                    validator: this.requireVerifyTel,
+                                    trigger: ['blur', 'change']
+                                }],
+                            })
+                        } else {
+                            Object.assign(rules, {
+                                [item.id]: [{
+                                    validator: this.verifyTel,
+                                    trigger: ['blur', 'change']
+                                }],
+                            })
+                        }
                     } else if (item.type === 'address') {
                         Object.assign(this.myForm, {address: ''});
                         item.required && Object.assign(rules, {
@@ -1035,7 +1068,7 @@
                         if (this.isRead) {
                             this.signCla();
                         } else {
-                            this.$message.closeAll()
+                            this.$message.closeAll();
                             this.$message.error(this.$t('tips.review_privacy'))
                         }
                     } else {
@@ -1282,9 +1315,11 @@
         display: flex;
         flex-direction: column;
         box-sizing: border-box;
-        .requiredIcon{
+
+        .requiredIcon {
             color: #F56C6C;
         }
+
         & .el-dialog {
             border-radius: 1rem;
         }

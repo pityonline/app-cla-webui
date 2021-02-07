@@ -69,51 +69,48 @@
                         </div>
                         <div>
                             <el-row class="margin-top-1rem" type="flex" align="middle" :gutter="20">
-                                <el-col :span="5">
+                                <el-col :span="6">
                                     {{$t('org.config_cla_check_fields_title_title')}}
                                 </el-col>
-                                <el-col :span="5">
+                                <el-col :span="6">
                                     {{$t('org.config_cla_check_fields_type_title')}}
                                 </el-col>
-                                <el-col :span="5">
+                                <el-col :span="6">
                                     {{$t('org.config_cla_check_fields_describe_title')}}
                                 </el-col>
-                                <el-col :span="5" style="height: 100%">
+                                <el-col :span="6" style="height: 100%">
                                     {{$t('org.config_cla_check_fields_require_title')}}
                                 </el-col>
                             </el-row>
                             <el-row style="padding: 0.5rem 0;" type="flex" align="middle" :gutter="20"
                                     v-for="(item,index) in individualMetadataArr">
-                                <el-col :span="5">
+                                <el-col :span="6">
                                     <el-input disabled="" v-model="item.title" size="medium" readonly="">
-
                                     </el-input>
                                 </el-col>
-                                <el-col :span="5">
+                                <el-col :span="6">
                                     <el-input disabled="" v-model="item.type" size="medium" readonly></el-input>
                                 </el-col>
-                                <el-col :span="5">
+                                <el-col :span="6">
                                     <el-input disabled="" v-model="item.description" size="medium" readonly></el-input>
                                 </el-col>
-                                <el-col :span="5" style="height: 100%">
+                                <el-col :span="6" style="height: 100%">
                                     <el-checkbox v-model="item.required" disabled="">
                                         {{$t('org.config_cla_fields_required')}}
                                     </el-checkbox>
                                 </el-col>
                             </el-row>
-
                         </div>
                         <div>
                             <el-row style="padding: 0.5rem 0;" type="flex" align="middle" :gutter="20"
                                     v-for="(item,index) in individualCustomMetadataArr">
-                                <el-col :span="5">
+                                <el-col :span="6">
                                     <el-input v-model="item.title" size="medium"
                                               :placeholder="$t('org.config_cla_fields_title_placeholder')">
-
                                     </el-input>
                                 </el-col>
-                                <el-col :span="5">
-                                    <el-select style="width: 100%" v-model="item.type"
+                                <el-col :span="6">
+                                    <el-select disabled="" style="width: 100%" v-model="item.type"
                                                :placeholder="$t('org.config_cla_fields_type_placeholder')"
                                                size="medium">
                                         <el-option
@@ -124,17 +121,14 @@
                                         </el-option>
                                     </el-select>
                                 </el-col>
-                                <el-col :span="5" style="height: 100%">
+                                <el-col :span="6" style="height: 100%">
                                     <el-input v-model="item.description" size="medium"
                                               :placeholder="$t('org.config_cla_fields_desc_placeholder')"></el-input>
                                 </el-col>
-                                <el-col :span="5" style="height: 100%">
-                                    <el-checkbox v-model="item.required">{{$t('org.config_cla_fields_required')}}
+                                <el-col :span="6" style="height: 100%">
+                                    <el-checkbox disabled="" v-model="item.required">
+                                        {{$t('org.config_cla_fields_required')}}
                                     </el-checkbox>
-                                </el-col>
-                                <el-col :span="4">
-                                    <button class="add_button" @click="addRow(index)">+</button>
-                                    <button class="deleteBt" @click="myDeleteRow(index)">-</button>
                                 </el-col>
                             </el-row>
                         </div>
@@ -149,7 +143,6 @@
         <ReLoginDialog :dialogVisible="reLoginDialogVisible" :message="reLoginMsg"></ReLoginDialog>
     </div>
 </template>
-
 <script>
     import ReTryDialog from '../components/ReTryDialog'
     import ReLoginDialog from '../components/ReLoginDialog'
@@ -171,11 +164,7 @@
                 return this.$store.state.dialogMessage
             },
             individualCustomMetadataArr() {
-                if (this.$store.state.individualCustomMetadataArr) {
-                    return this.$store.state.individualCustomMetadataArr
-                } else {
-                    return this.initIndividualCustomMetadata;
-                }
+                return this.$store.state.individualCustomMetadataArr
             },
             cla_link_individual: {
                 get() {
@@ -211,13 +200,12 @@
                     this.individualMetadataArr = INDIVIDUALMETADATAARR_EN
                 }
             },
-            init() {
+            individualInit() {
                 this.$store.commit('setIndividualLanguage', '');
                 this.$store.commit('setClaLinkIndividual', '');
                 sessionStorage.removeItem('individualLanguage');
                 sessionStorage.removeItem('claLinkIndividual');
                 this.$store.commit('setIndividualMetadata', this.individualMetadataArr);
-                this.$store.commit('setIndividualCustomMetadataArr', this.initIndividualCustomMetadata);
                 sessionStorage.removeItem('individualMetadata');
                 sessionStorage.removeItem('individualCustomMetadataArr');
             },
@@ -246,7 +234,7 @@
             },
             checkMetadata() {
                 let individualMetadata = [];
-                this.individualCustomMetadataArr.forEach((item) => {
+                this.individualCustomMetadataArr && this.individualCustomMetadataArr.forEach((item) => {
                     if (item.title !== '' && item.type !== '') {
                         individualMetadata.push(item)
                     }
@@ -259,41 +247,13 @@
                         }
                     }
                 }
-                individualMetadata.push({
-                    title: '',
-                    type: '',
-                    description: '',
-                    required: false,
-                });
-
                 this.individualMetadata = individualMetadata;
                 return individualArr
             },
             changeIndividualLanguage(value) {
                 this.initMetadata(value);
-                this.$store.commit('setIndividualLanguage', value)
+                this.$store.commit('setIndividualLanguage', value);
                 this.$store.commit('setAddLang', value)
-            },
-            addRow(index) {
-                let metadata = this.individualCustomMetadataArr;
-                metadata.splice(index + 1, 0, {
-                    title: '',
-                    type: '',
-                    description: '',
-                    required: false,
-                });
-                this.$store.commit('setIndividualCustomMetadataArr', metadata)
-            },
-            myDeleteRow(index) {
-                let metadata = this.individualCustomMetadataArr;
-                if (metadata.length === 1) {
-                    metadata[0].type = '';
-                    metadata[0].title = '';
-                    metadata[0].description = ''
-                } else {
-                    metadata.splice(index, 1);
-                }
-                this.$store.commit('setIndividualCustomMetadataArr', metadata)
             },
         },
         created() {
@@ -302,7 +262,7 @@
         beforeRouteEnter(to, from, next) {
             next(vm => {
                 if (from.path === '/') {
-                    vm.init();
+                    vm.individualInit();
                 }
             })
         },

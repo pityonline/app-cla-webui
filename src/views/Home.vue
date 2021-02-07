@@ -1,5 +1,5 @@
 <template>
-    <div id="home" :style="home">
+    <div id="home">
         <Header></Header>
         <div>
             <div id="section">
@@ -27,9 +27,7 @@
         },
         data() {
             return {
-                home: {
-                    height: '',
-                },
+
             }
         },
         provide() {
@@ -48,8 +46,6 @@
                     }
                 })
             },
-
-
         },
         updated() {
             this.setClientHeight();

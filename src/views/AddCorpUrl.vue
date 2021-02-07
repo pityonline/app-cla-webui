@@ -94,51 +94,49 @@
                         </div>
                         <div>
                             <el-row class="margin-top-1rem" type="flex" align="middle" :gutter="20">
-                                <el-col :span="5">
+                                <el-col :span="6">
                                     {{$t('org.config_cla_check_fields_title_title')}}
                                 </el-col>
-                                <el-col :span="5">
+                                <el-col :span="6">
                                     {{$t('org.config_cla_check_fields_type_title')}}
                                 </el-col>
-                                <el-col :span="5">
+                                <el-col :span="6">
                                     {{$t('org.config_cla_check_fields_describe_title')}}
                                 </el-col>
-                                <el-col :span="5" style="height: 100%">
+                                <el-col :span="6" style="height: 100%">
                                     {{$t('org.config_cla_check_fields_require_title')}}
                                 </el-col>
                             </el-row>
                             <el-row style="padding: 0.5rem 0;" type="flex" align="middle" :gutter="20"
                                     v-for="(item,index) in corporationMetadataArr">
-                                <el-col :span="5">
+                                <el-col :span="6">
                                     <el-input disabled="" v-model="item.title" size="medium" readonly="">
 
                                     </el-input>
                                 </el-col>
-                                <el-col :span="5">
+                                <el-col :span="6">
                                     <el-input disabled="" v-model="item.type" size="medium" readonly></el-input>
                                 </el-col>
-                                <el-col :span="5">
+                                <el-col :span="6">
                                     <el-input disabled="" v-model="item.description" size="medium" readonly></el-input>
                                 </el-col>
-                                <el-col :span="5" style="height: 100%">
+                                <el-col :span="6" style="height: 100%">
                                     <el-checkbox v-model="item.required" disabled="">
                                         {{$t('org.config_cla_fields_required')}}
                                     </el-checkbox>
                                 </el-col>
                             </el-row>
-
                         </div>
                         <div>
                             <el-row style="padding: 0.5rem 0;" type="flex" align="middle" :gutter="20"
                                     v-for="(item,index) in corporationCustomMetadataArr">
-                                <el-col :span="5">
+                                <el-col :span="6">
                                     <el-input v-model="item.title" size="medium"
                                               :placeholder="$t('org.config_cla_fields_title_placeholder')">
-
                                     </el-input>
                                 </el-col>
-                                <el-col :span="5">
-                                    <el-select style="width: 100%" v-model="item.type"
+                                <el-col :span="6">
+                                    <el-select disabled="" style="width: 100%" v-model="item.type"
                                                :placeholder="$t('org.config_cla_fields_type_placeholder')"
                                                size="medium">
                                         <el-option
@@ -149,17 +147,14 @@
                                         </el-option>
                                     </el-select>
                                 </el-col>
-                                <el-col :span="5" style="height: 100%">
+                                <el-col :span="6" style="height: 100%">
                                     <el-input v-model="item.description" size="medium"
                                               :placeholder="$t('org.config_cla_fields_desc_placeholder')"></el-input>
                                 </el-col>
-                                <el-col :span="5" style="height: 100%">
-                                    <el-checkbox v-model="item.required">{{$t('org.config_cla_fields_required')}}
+                                <el-col :span="6" style="height: 100%">
+                                    <el-checkbox disabled="" v-model="item.required">
+                                        {{$t('org.config_cla_fields_required')}}
                                     </el-checkbox>
-                                </el-col>
-                                <el-col :span="4">
-                                    <button class="add_button" @click="addRow(index)">+</button>
-                                    <button class="deleteBt" @click="myDeleteRow(index)">-</button>
                                 </el-col>
                             </el-row>
                         </div>
@@ -199,11 +194,7 @@
                 return this.$store.state.dialogMessage
             },
             corporationCustomMetadataArr() {
-                if (this.$store.state.corporationCustomMetadataArr) {
-                    return this.$store.state.corporationCustomMetadataArr
-                } else {
-                    return this.initCorpCustomMetadata;
-                }
+                return this.$store.state.corporationCustomMetadataArr
             },
             cla_link_corporation: {
                 get() {
@@ -338,13 +329,12 @@
                     this.corporationMetadataArr = CORPORATIONMETADATAARR_EN
                 }
             },
-            init() {
+            corpInit() {
                 this.$store.commit('setCorpLanguage', '');
                 this.$store.commit('setClaLinkCorp', '');
                 sessionStorage.removeItem('corpLanguage');
                 sessionStorage.removeItem('claLinkCorp');
                 this.$store.commit('setCorpMetadata', this.corporationMetadataArr);
-                this.$store.commit('setCorporationCustomMetadataArr', this.initCorpCustomMetadata);
                 sessionStorage.removeItem('corporationMetadata');
                 sessionStorage.removeItem('corporationCustomMetadataArr');
             },
@@ -380,7 +370,7 @@
             },
             checkMetadata() {
                 let corpMetadata = [];
-                this.corporationCustomMetadataArr.forEach((item) => {
+                this.corporationCustomMetadataArr && this.corporationCustomMetadataArr.forEach((item) => {
                     if (item.title !== '' && item.type !== '') {
                         corpMetadata.push(item)
                     }
@@ -393,41 +383,13 @@
                         }
                     }
                 }
-                corpMetadata.push({
-                    title: '',
-                    type: '',
-                    description: '',
-                    required: false,
-                });
-
                 this.corpMetadata = corpMetadata;
                 return corpArr
             },
             changeCorpLanguage(value) {
                 this.initMetadata(value);
-                this.$store.commit('setCorpLanguage', value)
+                this.$store.commit('setCorpLanguage', value);
                 this.$store.commit('setAddLang', value)
-            },
-            addRow(index) {
-                let metadata = this.corporationCustomMetadataArr;
-                metadata.splice(index + 1, 0, {
-                    title: '',
-                    type: '',
-                    description: '',
-                    required: false,
-                });
-                this.$store.commit('setCorporationCustomMetadataArr', metadata)
-            },
-            myDeleteRow(index) {
-                let metadata = this.corporationCustomMetadataArr;
-                if (metadata.length === 1) {
-                    metadata[0].type = '';
-                    metadata[0].title = '';
-                    metadata[0].description = ''
-                } else {
-                    metadata.splice(index, 1);
-                }
-                this.$store.commit('setCorporationCustomMetadataArr', metadata)
             },
         },
         created() {
@@ -436,7 +398,7 @@
         beforeRouteEnter(to, from, next) {
             next(vm => {
                 if (from.path === '/') {
-                    vm.init();
+                    vm.corpInit();
                 }
             })
         },

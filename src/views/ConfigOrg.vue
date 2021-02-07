@@ -136,6 +136,7 @@
                 org: this.$store.state.chooseOrg,
             }
         },
+        inject: ['setClientHeight'],
         methods: {
             toConfigClaLink() {
                 if (this.org && this.org_alias) {
@@ -253,15 +254,15 @@
                 sessionStorage.removeItem('chooseRepo');
             },
         },
-        created() {
-            // this.getOrgsInfo();
-        },
         beforeRouteEnter(to, from, next) {
             next(vm => {
                 if (from.path === '/') {
                     vm.init();
                 }
             })
+        },
+        updated() {
+            this.setClientHeight();
         },
     }
 </script>

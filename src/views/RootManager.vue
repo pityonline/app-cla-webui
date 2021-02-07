@@ -1,5 +1,5 @@
 <template>
-    <div id="rootManager" :style="section">
+    <div id="rootManager">
         <Header></Header>
         <div>
             <div id="rootManager_section">
@@ -32,9 +32,6 @@
         },
         data() {
             return {
-                section: {
-                    height: '',
-                },
                 active: 'first',
             }
         },
@@ -44,9 +41,12 @@
         methods: {
             setClientHeight() {
                 this.$nextTick(() => {
-                    util.getClientHeight() > document.getElementById('rootManager').offsetHeight ?
-                        this.section.height = util.getClientHeight() + 'px' :
-                        this.section.height = document.getElementById('rootManager').offsetHeight
+                    document.getElementById("rootManager").style.minHeight = '0px';
+                    if (util.getClientHeight() > document.getElementById('rootManager').offsetHeight) {
+                        document.getElementById('rootManager').style.minHeight = util.getClientHeight() + 'px'
+                    } else {
+                        document.getElementById('rootManager').style.minHeight = document.getElementById('rootManager').offsetHeight + 'px'
+                    }
                 })
             },
         },

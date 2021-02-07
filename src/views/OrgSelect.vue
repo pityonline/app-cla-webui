@@ -75,9 +75,9 @@
                 this.setCorpTokenAct(data.userInfo[this.orgValue].token);
                 this.setLoginInfoAct(data);
                 if (data.userInfo[this.orgValue].role === 'admin') {
-                    this.$router.push('/rootManager')
+                    this.$router.replace('/rootManager')
                 } else {
-                    this.$router.push('/signedRepo')
+                    this.$router.replace('/signedRepo')
                 }
             },
         },

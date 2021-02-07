@@ -187,6 +187,7 @@
                 languageOptions: [{value: 'english', label: 'English'}, {value: 'chinese', label: '中文'}],
             }
         },
+        inject: ['setClientHeight'],
         methods: {
             deleteFile() {
                 let input = document.getElementById('corp_pdf');
@@ -345,6 +346,9 @@
                     });
                 }
             },
+        },
+        updated() {
+            this.setClientHeight();
         },
         beforeRouteEnter(to, from, next) {
             next(vm => {

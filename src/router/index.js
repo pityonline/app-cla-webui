@@ -227,7 +227,7 @@ router.beforeEach((to, from, next) => {
     } else {
         sessionStorage.setItem('showHeaderMenu', 'corp')
     }
-})
+});
 router.afterEach((to, from, next) => {
     window.scrollTo(0, 0);
 });

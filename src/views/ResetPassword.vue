@@ -86,8 +86,6 @@
                 }
             };
             return {
-                cla_org_id: this.$store.state.loginInfo.cla_org_id,
-                email: this.$store.state.loginInfo.email,
                 ruleForm: {
                     oldPassword: '',
                     newPassword: '',
@@ -115,19 +113,17 @@
             },
             resetPassword() {
                 let obj = {
-                    cla_org_id: this.cla_org_id,
-                    email: this.email,
                     old_password: this.ruleForm.oldPassword,
                     new_password: this.ruleForm.newPassword
-                }
+                };
                 http({
                     url: url.resetPassword,
                     method: 'patch',
                     data: obj,
                 }).then(res => {
-                    this.$store.commit('setPwdIsChanged', true)
-                    this.$message.closeAll()
-                    this.$message.success(this.$t('tips.successTitle'))
+                    this.$store.commit('setPwdIsChanged', true);
+                    this.$message.closeAll();
+                    this.$message.success(this.$t('tips.successTitle'));
                     if (this.$store.state.loginInfo.userInfo[0].role === 'manager') {
                         this.$router.push('/employeeList')
                     } else {

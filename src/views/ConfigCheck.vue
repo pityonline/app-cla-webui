@@ -296,6 +296,7 @@
                 },
             }
         },
+        inject: ['setClientHeight'],
         methods: {
             toConfigField() {
                 if (this.$store.state.bindType === 'add-bind') {
@@ -540,6 +541,9 @@
                 })
 
             },
+        },
+        updated() {
+            this.setClientHeight();
         },
     }
 </script>

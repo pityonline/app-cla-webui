@@ -13,7 +13,7 @@
             </div>
             <el-row>
                 <el-col align="center">
-                    <p class="dialogMessage">{{$t('tips.no_public_email_1',{platform:this.$store.state.repoInfo.platform})}}
+                    <p :class="dialogMessage">{{$t('tips.no_public_email_1',{platform:this.$store.state.repoInfo.platform})}}
                         <a :href="emailSetAddress" target="_blank">{{this.$t('tips.click_here')}}</a>{{emailNotOpenEnd}}</p>
                     <button class="dialogBt" @click="reTry()">{{$t('tips.dialogBt')}}</button>
                 </el-col>
@@ -24,10 +24,16 @@
 
 <script>
     export default {
-
         name: "EmailReLoginDialog",
         props: ['dialogVisible'],
         computed:{
+            dialogMessage() {
+                if (localStorage.getItem('lang') === '0') {
+                    return 'dialogMessageEn'
+                } else if (localStorage.getItem('lang') === '1') {
+                    return 'dialogMessage'
+                }
+            },
             dialogWidth() {
                 if (this.IS_MOBILE) {
                     return '80%'

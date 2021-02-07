@@ -13,7 +13,7 @@
             </div>
             <el-row>
                 <el-col align="center">
-                    <p class="dialogMessage">{{message}}</p>
+                    <p :class="dialogMessage">{{message}}</p>
                     <button class="dialogBt" @click="clickGoHome()">{{$t('tips.dialogBt')}}</button>
                 </el-col>
             </el-row>
@@ -33,10 +33,16 @@
                     return '30%'
                 }
             },
+            dialogMessage() {
+                if (localStorage.getItem('lang') === '0') {
+                    return 'dialogMessageEn'
+                } else if (localStorage.getItem('lang') === '1') {
+                    return 'dialogMessage'
+                }
+            },
         },
         data() {
-            return {
-            }
+            return {}
         },
         methods: {
             clickGoHome() {
@@ -52,7 +58,7 @@
 </script>
 
 <style lang="less">
-    #corpReLoginDialog{
+    #corpReLoginDialog {
         .dialogBt {
             margin-top: 3rem;
             width: 8rem;
@@ -64,17 +70,21 @@
             cursor: pointer;
             outline: none;
         }
-        .el-dialog__header{
+
+        .el-dialog__header {
             padding: 0;
         }
-        .el-dialog__body{
+
+        .el-dialog__body {
             padding: 20px;
         }
+
         .titleBox {
             text-align: left;
             font-size: 1.5rem;
             color: #E22424;
             margin-bottom: 1rem;
+
             .dialogIcon {
                 width: 1.5rem;
                 height: 1.5rem;

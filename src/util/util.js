@@ -36,8 +36,8 @@ export const clearSession = (_this) => {
     _this.$store.commit('setCorpFD', '');
     _this.$store.commit('setIndividualMetadata', INDIVIDUALMETADATAARR_EN);
     _this.$store.commit('setCorpMetadata', CORPORATIONMETADATAARR_EN);
-    _this.$store.commit('setIndividualCustomMetadataArr', INITINDIVIDUALCUSTOMMETADATA);
-    _this.$store.commit('setCorporationCustomMetadataArr', INITCORPCUSTOMMETADATA);
+    _this.$store.commit('setIndividualCustomMetadataArr', []);
+    _this.$store.commit('setCorporationCustomMetadataArr', []);
     _this.$store.commit('setEmail', '');
     _this.$store.commit('setIsEmail', false);
     _this.$store.commit('setChooseRepo', '');
@@ -78,5 +78,19 @@ export const setI18nLang = () => {
         return 'en-us'
     }
 };
+export const clearManagerSession = (_this) => {
+    _this.$store.commit('managerList', '');
+    _this.$store.commit('userLimit', '');
+    _this.$store.commit('token', '');
+    _this.$store.commit('loginInfo', '');
+    _this.$store.commit('pwdIsChanged', '');
+    sessionStorage.removeItem('managerList');
+    sessionStorage.removeItem('userLimit');
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('loginInfo');
+    sessionStorage.removeItem('pwdIsChanged');
+};
+
+
 
 

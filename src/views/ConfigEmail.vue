@@ -100,7 +100,6 @@
                 return this.$store.state.email;
             },
         },
-
         data() {
             return {
                 lang: '',
@@ -109,13 +108,18 @@
                 emailType: '',
             }
         },
+        inject: ['setClientHeight'],
         methods: {
             toPreviousPage() {
-                this.$router.replace('/config-org')
+                this.$router.replace('/config-org').then(route=>{
+                }).catch(err=>{
+                })
             },
             toNextPage() {
                 if (this.email) {
-                    this.$router.replace('/config-cla-link')
+                    this.$router.replace('/config-cla-link').then(route=>{
+                    }).catch(err=>{
+                    })
                 } else {
                     this.$message.closeAll();
                     this.$message.error(this.$t('tips.authorized_email'));
@@ -125,7 +129,7 @@
                 if (document.cookie !== '') {
                     let cookieArr = document.cookie.split(';');
                     let email = '';
-                    cookieArr.forEach((item, index) => {
+                    cookieArr.forEach((item) => {
                         let arr = item.split('=');
                         let name = arr[0].trim();
                         let value = arr[1].trim();
@@ -263,13 +267,16 @@
         created() {
             this.getCookieData();
         },
+        mounted(){
+            this.setClientHeight();
+        },
         beforeRouteEnter(to, from, next) {
             next(vm => {
                 if (from.path === '/') {
                     let cookie = document.cookie;
                     if (cookie) {
                         let cookieArr = cookie.split(';');
-                        cookieArr.forEach((item, index) => {
+                        cookieArr.forEach((item) => {
                             let arr = item.split('=');
                             let name = arr[0].trim();
                             vm.$cookie.remove(name, {path: '/'});

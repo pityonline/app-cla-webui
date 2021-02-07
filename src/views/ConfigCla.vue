@@ -7,7 +7,6 @@
     </div>
 </template>
 <script>
-    import * as util from '../util/util'
     export default {
         name: "ConfigCla",
         inject: ['setClientHeight'],
@@ -30,16 +29,6 @@
                 }else{
                     this.title=this.$t('org.configure_bt')
                 }
-            },
-            setClientHeight() {
-                this.$nextTick(() => {
-                    document.getElementById("configCla").style.minHeight = '0px';
-                    if (util.getClientHeight() > document.getElementById('configCla').offsetHeight) {
-                        document.getElementById("configCla").style.minHeight = util.getClientHeight() + 'px'
-                    } else {
-                        document.getElementById("configCla").style.minHeight = document.getElementById('configCla').offsetHeight + 'px'
-                    }
-                })
             },
         },
         created(){

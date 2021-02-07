@@ -13,7 +13,7 @@
             </div>
             <el-row>
                 <el-col align="center">
-                    <p class="dialogMessage">{{message}}</p>
+                    <p :class="dialogMessage">{{message}}</p>
                     <button class="dialogBt" @click="clickGoHome()">{{$t('tips.dialogBt')}}</button>
                 </el-col>
             </el-row>
@@ -33,6 +33,13 @@
                     return '80%'
                 } else {
                     return '30%'
+                }
+            },
+            dialogMessage() {
+                if (localStorage.getItem('lang') === '0') {
+                    return 'dialogMessageEn'
+                } else if (localStorage.getItem('lang') === '1') {
+                    return 'dialogMessage'
                 }
             },
         },

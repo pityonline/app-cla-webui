@@ -37,9 +37,7 @@
                             <el-row style="padding: 0.5rem 0;" type="flex" align="middle" :gutter="20"
                                     v-for="(item,index) in individualMetadataArr">
                                 <el-col :span="5">
-                                    <el-input disabled="" v-model="item.title" size="medium" readonly="">
-
-                                    </el-input>
+                                    <el-input disabled="" v-model="item.title" size="medium" readonly=""></el-input>
                                 </el-col>
                                 <el-col :span="5">
                                     <el-input disabled="" v-model="item.type" size="medium" readonly></el-input>
@@ -53,7 +51,6 @@
                                     </el-checkbox>
                                 </el-col>
                             </el-row>
-
                         </div>
                         <div>
                             <el-row style="padding: 0.5rem 0;" type="flex" align="middle" :gutter="20"
@@ -61,7 +58,6 @@
                                 <el-col :span="5">
                                     <el-input v-model="item.title" size="medium"
                                               :placeholder="$t('org.config_cla_fields_title_placeholder')">
-
                                     </el-input>
                                 </el-col>
                                 <el-col :span="5">
@@ -140,7 +136,6 @@
                             <el-col :span="5">
                                 <el-input v-model="item.title" size="medium"
                                           :placeholder="$t('org.config_cla_fields_title_placeholder')">
-
                                 </el-input>
                             </el-col>
                             <el-col :span="5">
@@ -216,6 +211,7 @@
                 }
             })
         },
+        inject: ['setClientHeight'],
         methods: {
             init() {
                 if (this.$store.state.individualLanguage === 'chinese') {
@@ -342,7 +338,10 @@
         },
         created() {
             this.init();
-        }
+        },
+        updated() {
+            this.setClientHeight();
+        },
     }
 </script>
 

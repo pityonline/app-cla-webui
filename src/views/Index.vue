@@ -1,6 +1,6 @@
 <template>
     <el-row>
-        <el-col class="index" id="transparentDiv" :style="transparentDiv">
+        <el-col class="index" id="transparentDiv">
             <NewHeader></NewHeader>
             <el-row id="section">
                 <el-col>
@@ -55,9 +55,6 @@
             return {
                 showGuide: false,
                 signType: 'corporation',
-                transparentDiv: {
-                    height: '',
-                },
             }
         },
         provide() {
@@ -72,17 +69,14 @@
             },
             setClientHeight() {
                 this.$nextTick(() => {
+                    document.getElementById("transparentDiv").style.minHeight = '0px';
                     if (util.getClientHeight() > document.getElementById('transparentDiv').offsetHeight) {
-                        this.transparentDiv.height = util.getClientHeight() + 'px'
+                        document.getElementById('transparentDiv').style.minHeight = util.getClientHeight() + 'px'
+                    } else {
+                        document.getElementById('transparentDiv').style.minHeight = document.getElementById('transparentDiv').offsetHeight + 'px'
                     }
                 })
             },
-            setDomain() {
-                this.$store.commit('setDomain', window.location.href.split('/index')[0])
-            },
-        },
-        created() {
-            this.setDomain()
         },
         mounted() {
             this.setClientHeight();
