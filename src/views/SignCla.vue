@@ -1,5 +1,5 @@
 <template>
-    <el-row id="signType">
+    <el-row id="signCla">
         <Header></Header>
         <div id="singCla_section">
             <el-row class="content">
@@ -139,7 +139,7 @@
 
     export default {
 
-        name: "SignType",
+        name: "SignCla",
         computed: {
             loginType() {
                 return this.$store.state.loginType
@@ -1078,8 +1078,11 @@
             },
             setClientHeight() {
                 this.$nextTick(() => {
-                    if (util.getClientHeight() > document.getElementById('signType').offsetHeight) {
-                        document.getElementById('signType').style.minHeight = util.getClientHeight() + 'px'
+                    document.getElementById("signCla").style.minHeight = '0px';
+                    if (util.getClientHeight() > document.getElementById('signCla').offsetHeight) {
+                        document.getElementById("signCla").style.minHeight = util.getClientHeight() + 'px'
+                    } else {
+                        document.getElementById("signCla").style.minHeight = document.getElementById('signCla').offsetHeight + 'px'
                     }
                 })
             },
@@ -1098,11 +1101,14 @@
         ,
         mounted() {
             this.setClientHeight();
-        }
-    }
-    window.onresize = () => {
-        if (util.getClientHeight() > document.getElementById('signType').offsetHeight) {
-            document.getElementById("signType").style.height = util.getClientHeight() + 'px'
+            window.onresize = () => {
+                if (util.getClientHeight() > document.getElementById('signCla').offsetHeight) {
+                    document.getElementById("signCla").style.minHeight = util.getClientHeight() + 'px'
+                }
+            }
+        },
+        destroyed() {
+            window.onresize = null;
         }
     }
 </script>
@@ -1311,7 +1317,7 @@
         font-size: .9rem;
     }
 
-    #signType {
+    #signCla {
         display: flex;
         flex-direction: column;
         box-sizing: border-box;

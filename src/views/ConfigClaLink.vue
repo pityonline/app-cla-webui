@@ -14,7 +14,7 @@
                     {{$t('org.config_cla_paste_individual_url')}}
                 </div>
                 <div class="margin-top-1rem">
-                    {{$t('org.config_cla_individual_url_desc')}}
+                    {{$t('org.config_cla_individual_url_desc',{platform:this.$store.state.platform})}}
                 </div>
                 <div class="margin-top-1rem">
                     <el-row class="margin-top-1rem">
@@ -55,7 +55,7 @@
                     {{$t('org.config_cla_paste_corp_url')}}
                 </div>
                 <div class="margin-top-1rem">
-                    {{$t('org.config_cla_corp_url_desc')}}
+                    {{$t('org.config_cla_corp_url_desc',{platform:this.$store.state.platform})}}
                 </div>
                 <div class="margin-top-1rem">
                     <el-row>

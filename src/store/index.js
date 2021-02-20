@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+
 Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
@@ -38,6 +39,7 @@ export default new Vuex.Store({
             userImg: sessionStorage.getItem('userImg') || undefined,
             userEmail: sessionStorage.getItem('userEmail') || undefined,
         },
+        customVisible: false,
         dialogVisible: false,
         emailErrVisible: false,
         dialogMessage: '',
@@ -53,6 +55,7 @@ export default new Vuex.Store({
         managerList: JSON.parse(sessionStorage.getItem('managerList')) || undefined,
         corpItem: JSON.parse(sessionStorage.getItem('corpItem')) || undefined,
         orgAlias: sessionStorage.getItem('orgAlias') || undefined,
+        repo: sessionStorage.getItem('repo') || undefined,
         claLinkIndividual: sessionStorage.getItem('claLinkIndividual') || undefined,
         claLinkCorp: sessionStorage.getItem('claLinkCorp') || undefined,
         individualMetadata: JSON.parse(sessionStorage.getItem('individualMetadata')) || undefined,
@@ -143,6 +146,10 @@ export default new Vuex.Store({
         setOrgAlias(state, data) {
             state.orgAlias = data;
             sessionStorage.setItem('orgAlias', data);
+        },
+        setRepo(state, data) {
+            state.repo = data;
+            sessionStorage.setItem('repo', data);
         },
         setChooseRepo(state, data) {
             state.chooseRepo = data;
@@ -278,6 +285,10 @@ export default new Vuex.Store({
             state.dialogVisible = obj.dialogVisible;
             state.dialogMessage = obj.dialogMessage
         },
+        setCustomVisible(state, obj) {
+            state.customVisible = obj.dialogVisible;
+            state.dialogMessage = obj.dialogMessage
+        },
         errorCodeSet(state, obj) {
             state.reTryDialogVisible = obj.dialogVisible;
             state.dialogMessage = obj.dialogMessage
@@ -328,7 +339,7 @@ export default new Vuex.Store({
         setPlatformAct({commit}, platform) {
             let initials = platform.substring(0, 1);
             let upper = initials.toUpperCase();
-            let end  = platform.substring(1);
+            let end = platform.substring(1);
             commit('setPlatform', upper + end)
         },
         setTokenAct({commit}, data) {

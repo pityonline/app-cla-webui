@@ -757,14 +757,8 @@
     import {mapActions} from 'vuex'
     import ReTryDialog from '../components/ReTryDialog'
     import EmailReTryDialog from '../components/EmailReTryDialog'
-
-    window.onresize = () => {
-        if (util.getClientHeight() > document.getElementById('transparentDiv').offsetHeight) {
-            document.getElementById("transparentDiv").style.height = util.getClientHeight() + 'px';
-        }
-    }
     export default {
-        name: 'Login',
+        name: 'SignType',
         components: {
             Select,
             NewHeader,
@@ -773,14 +767,14 @@
             EmailReTryDialog,
         },
         computed: {
-            corpBtTooltip(){
-              return  `${this.$t('signType.corpStep1_1')}${this.$t('signType.corpBt')}${this.$t('signType.corpStep1_2')}`
+            corpBtTooltip() {
+                return `${this.$t('signType.corpStep1_1')}${this.$t('signType.corpBt')}${this.$t('signType.corpStep1_2')}`
             },
-            empBtTooltip(){
-               return `${this.$t('signType.empStep1_1')}${this.$t('signType.empBt')}${this.$t('signType.corpStep1_2')}`
+            empBtTooltip() {
+                return `${this.$t('signType.empStep1_1')}${this.$t('signType.empBt')}${this.$t('signType.corpStep1_2')}`
             },
-            individualBtTooltip(){
-               return `${this.$t('signType.individualStep1_1')}${this.$t('signType.individualBt')}${this.$t('signType.corpStep1_2')}`
+            individualBtTooltip() {
+                return `${this.$t('signType.individualStep1_1')}${this.$t('signType.individualBt')}${this.$t('signType.corpStep1_2')}`
             },
             emailReTryDialogVisible() {
                 return this.$store.state.emailErrVisible
@@ -929,82 +923,77 @@
             },
             submit(loginType) {
                 this.setLoginTypeAct(loginType)
-                if (this.platform === 'gitee') {
-                    if (loginType === 'individual' || loginType === 'employee') {
-                        http({
-                            url: `${url.getAuthCodeUrl}/${this.platform}/sign`,
-                        }).then(res => {
-                            window.location.href = res.data.data.url
-                        }).catch(err => {
-                            if (err.data.hasOwnProperty('data')) {
-                                switch (err.data.data.error_code) {
-                                    case 'cla.invalid_parameter':
-                                        let repoInfo = this.$store.state.repoInfo
-                                        let params = repoInfo.repo_id ? `${repoInfo.platform}/${repoInfo.org_id}/${repoInfo.repo_id}` : `${repoInfo.platform}/${repoInfo.org_id}`
-                                        let path = '';
-                                        if (sessionStorage.getItem('orgAddress')) {
-                                            path = `${this.signRouter}/${util.strToBase64(params)}/${sessionStorage.getItem('orgAddress')}`
-                                        } else {
-                                            path = `${this.signRouter}/${util.strToBase64(params)}`
-                                        }
-                                        this.$router.replace(path)
-                                        break;
-                                    case 'cla.invalid_token':
-                                        this.$store.commit('setSignReLogin', {
-                                            dialogVisible: true,
-                                            dialogMessage: this.$t('tips.invalid_token'),
-                                        });
-                                        break;
-                                    case 'cla.missing_token':
-                                        this.$store.commit('setSignReLogin', {
-                                            dialogVisible: true,
-                                            dialogMessage: this.$t('tips.missing_token'),
-                                        });
-                                        break;
-                                    case 'cla.unknown_token':
-                                        this.$store.commit('setSignReLogin', {
-                                            dialogVisible: true,
-                                            dialogMessage: this.$t('tips.unknown_token'),
-                                        });
-                                        break;
-                                    case 'cla.system_error':
-                                        this.$store.commit('errorCodeSet', {
-                                            dialogVisible: true,
-                                            dialogMessage: this.$t('tips.system_error'),
-                                        });
-                                        break;
-                                    default :
-                                        this.$store.commit('errorCodeSet', {
-                                            dialogVisible: true,
-                                            dialogMessage: this.$t('tips.unknown_error'),
-                                        });
-                                        break;
-                                }
-                            } else {
-                                this.$store.commit('errorCodeSet', {
-                                    dialogVisible: true,
-                                    dialogMessage: this.$t('tips.system_error'),
-                                })
+                if (loginType === 'individual' || loginType === 'employee') {
+                    http({
+                        url: `${url.getAuthCodeUrl}/${this.platform}/sign`,
+                    }).then(res => {
+                        window.location.href = res.data.data.url
+                    }).catch(err => {
+                        if (err.data.hasOwnProperty('data')) {
+                            switch (err.data.data.error_code) {
+                                case 'cla.invalid_parameter':
+                                    let repoInfo = this.$store.state.repoInfo;
+                                    let params = repoInfo.repo_id ? `${repoInfo.platform}/${repoInfo.org_id}/${repoInfo.repo_id}` : `${repoInfo.platform}/${repoInfo.org_id}`
+                                    let path = '';
+                                    if (sessionStorage.getItem('orgAddress')) {
+                                        path = `${this.signRouter}/${util.strToBase64(params)}/${sessionStorage.getItem('orgAddress')}`
+                                    } else {
+                                        path = `${this.signRouter}/${util.strToBase64(params)}`
+                                    }
+                                    this.$router.replace(path)
+                                    break;
+                                case 'cla.invalid_token':
+                                    this.$store.commit('setSignReLogin', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.invalid_token'),
+                                    });
+                                    break;
+                                case 'cla.missing_token':
+                                    this.$store.commit('setSignReLogin', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.missing_token'),
+                                    });
+                                    break;
+                                case 'cla.unknown_token':
+                                    this.$store.commit('setSignReLogin', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.unknown_token'),
+                                    });
+                                    break;
+                                case 'cla.system_error':
+                                    this.$store.commit('errorCodeSet', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.system_error'),
+                                    });
+                                    break;
+                                default :
+                                    this.$store.commit('errorCodeSet', {
+                                        dialogVisible: true,
+                                        dialogMessage: this.$t('tips.unknown_error'),
+                                    });
+                                    break;
                             }
-                        })
-                    } else {
-                        this.$router.push('/sign-cla')
-                    }
-                } else if (this.platform === 'github') {
-                    if (this.$store.state.loginType === 'individual' || this.$store.state.loginType === 'employee') {
-                    } else {
-                        this.$router.push('/sign-cla')
-                    }
+                        } else {
+                            this.$store.commit('errorCodeSet', {
+                                dialogVisible: true,
+                                dialogMessage: this.$t('tips.system_error'),
+                            })
+                        }
+                    })
+                } else {
+                    this.$router.push('/sign-cla')
                 }
             },
-
             clickSignTypeGuide(type) {
                 this.signType = type;
             },
             setClientHeight() {
                 this.$nextTick(() => {
+                    document.getElementById("transparentDiv").style.minHeight = '0px';
                     if (util.getClientHeight() > document.getElementById('transparentDiv').offsetHeight) {
-                        this.transparentDiv.height = util.getClientHeight() + 'px'
+                        document.getElementById("transparentDiv").style.minHeight = util.getClientHeight() + 'px'
+                    } else {
+                        document.getElementById("transparentDiv").style.minHeight = document.getElementById('transparentDiv').offsetHeight + 'px'
                     }
                 })
             },
@@ -1028,6 +1017,14 @@
                 util.setMinHeight('sign', 'btBox');
             }
             this.setClientHeight();
+            window.onresize = () => {
+                if (util.getClientHeight() > document.getElementById('transparentDiv').offsetHeight) {
+                    document.getElementById("transparentDiv").style.minHeight = util.getClientHeight() + 'px';
+                }
+            }
+        },
+        destroyed() {
+            window.onresize = null;
         }
     }
 </script>

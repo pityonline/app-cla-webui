@@ -38,21 +38,8 @@
             </div>
             <el-row class="margin-top-1rem">
                 <el-col>
-                    <el-select v-model="repositoryValue"
-                               :placeholder="$t('org.config_cla_select_repo_placeholder')"
-                               style="width: 100%"
-                               size="medium"
-                               clearable=""
-                               filterable
-                               @visible-change="repoVisibleChange"
-                               @change="changeRepository">
-                        <el-option
-                                v-for="item in repositoryOptions"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value">
-                        </el-option>
-                    </el-select>
+                    <el-input v-model="repo" size="medium"
+                              :placeholder="$t('org.config_cla_select_repo_placeholder')"></el-input>
                 </el-col>
             </el-row>
         </div>
@@ -61,12 +48,14 @@
         </div>
         <ReTryDialog :message="reTryMsg" :dialogVisible="reTryVisible"></ReTryDialog>
         <ReLoginDialog :message="reTryMsg" :dialogVisible="orgReLoginVisible"></ReLoginDialog>
+        <CustomDialog :message="reTryMsg" :dialogVisible="customVisible"></CustomDialog>
     </el-row>
 </template>
 
 <script>
     import ReTryDialog from '../components/ReTryDialog'
     import ReLoginDialog from '../components/ReLoginDialog'
+    import CustomDialog from '../components/CustomDialog'
     import * as url from '../util/api'
     import _axios from '../util/_axios'
 
@@ -75,6 +64,7 @@
         components: {
             ReTryDialog,
             ReLoginDialog,
+            CustomDialog,
         },
         computed: {
             reTryMsg() {
@@ -85,6 +75,9 @@
             },
             reTryVisible() {
                 return this.$store.state.reTryDialogVisible
+            },
+            customVisible() {
+                return this.$store.state.customVisible
             },
             orgOptions() {
                 try {
@@ -129,6 +122,14 @@
                     this.$store.commit('setOrgAlias', value)
                 },
             },
+            repo: {
+                get() {
+                    return this.$store.state.repo;
+                },
+                set(value) {
+                    this.$store.commit('setRepo', value)
+                },
+            },
         },
         data() {
             return {
@@ -138,9 +139,40 @@
         },
         inject: ['setClientHeight'],
         methods: {
+            checkRepo(org, repo) {
+                let _url = '';
+                if (this.$store.state.platform === 'Gitee') {
+                    _url = `https://gitee.com/api/v5/repos/${org}/${repo}`
+                } else if (this.$store.state.platform === 'Github') {
+                    _url = `https://api.github.com/repos/${org}/${repo}`
+                }
+                let obj = {access_token: this.$store.state.platform_token};
+                _axios({
+                    url: _url,
+                    params: obj,
+                }).then(res => {
+                    this.$router.replace('/config-email')
+                }).catch(err => {
+                    if (err.status === 404){
+                        this.$store.commit('setCustomVisible', {
+                            dialogVisible: true,
+                            dialogMessage: this.$t('tips.checkRepoMessage'),
+                        })
+                    }else{
+                        this.$store.commit('errorCodeSet', {
+                            dialogVisible: true,
+                            dialogMessage: this.$t('tips.system_error'),
+                        })
+                    }
+                })
+            },
             toConfigClaLink() {
                 if (this.org && this.org_alias) {
-                    this.$router.replace('/config-email')
+                    if (this.repo) {
+                        this.checkRepo(this.org, this.repo);
+                    } else {
+                        this.$router.replace('/config-email')
+                    }
                 } else {
                     this.$store.commit('errorCodeSet', {
                         dialogVisible: true,
@@ -151,11 +183,6 @@
             orgVisibleChange(visible) {
                 if (visible) {
                     this.getOrgsInfo();
-                }
-            },
-            repoVisibleChange(visible) {
-                if (visible && this.org) {
-                    this.getRepositoriesOfOrg(this.org, this.org_id);
                 }
             },
             changeOrg(value) {
@@ -176,20 +203,16 @@
                     this.getRepositoriesOfOrg(this.orgOptions[value].label, this.orgOptions[value].id)
                 }
             },
-            changeRepository(value) {
-                this.$store.commit('setRepositoryValue', value);
-                if (value !== '') {
-                    this.$store.commit('setRepositoryChoose', true);
-                    this.$store.commit('setChooseRepo', this.repositoryOptions[value].label);
-                } else {
-                    this.$store.commit('setRepositoryChoose', false);
-                    this.$store.commit('setChooseRepo', '');
-                }
-            },
             getRepositoriesOfOrg(org, org_id) {
+                let _url = '';
+                if (this.$store.state.platform === 'Gitee') {
+                    _url = `https://gitee.com/api/v5/orgs/${org}/repos`
+                } else if (this.$store.state.platform === 'Github') {
+                    _url = `https://api.github.com/orgs/${org}/repos`
+                }
                 let obj = {access_token: this.$store.state.platform_token, org: org, page: 1, per_page: 100};
                 _axios({
-                    url: `https://gitee.com/api/v5/orgs/${org}/repos`,
+                    url: _url,
                     params: obj,
                 }).then(res => {
                     let repositoryOptions = [];
@@ -212,9 +235,15 @@
                 })
             },
             getOrgsInfo() {
+                let _url = '';
+                if (this.$store.state.platform === 'Gitee') {
+                    _url = url.getGiteeOrgsInfo
+                } else if (this.$store.state.platform === 'Github') {
+                    _url = url.getGithubOrgsInfo
+                }
                 let obj = {access_token: this.$store.state.platform_token, admin: true, page: 1, per_page: 100};
                 _axios({
-                    url: url.getOrgsInfo,
+                    url: _url,
                     params: obj,
                 }).then(res => {
                     if (res.status === 200) {
@@ -241,12 +270,14 @@
                 this.$store.commit('setRepositoryChoose', '');
                 this.$store.commit('setRepositoryValue', '');
                 this.$store.commit('setOrgAlias', '');
+                this.$store.commit('setRepo', '');
                 this.$store.commit('setChooseOrg', '');
                 this.$store.commit('setChooseRepo', '');
                 sessionStorage.removeItem('orgOptions');
                 sessionStorage.removeItem('orgValue');
                 sessionStorage.removeItem('orgChoose');
                 sessionStorage.removeItem('orgAlias');
+                sessionStorage.removeItem('repo');
                 sessionStorage.removeItem('repositoryOptions');
                 sessionStorage.removeItem('repositoryChoose');
                 sessionStorage.removeItem('repositoryValue');
