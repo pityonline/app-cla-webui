@@ -297,5 +297,4 @@ module.exports = {
         addIndividualCla: 'Add individual CLA',
         addCorpCla: 'Add corporation CLA',
     },
-
 };

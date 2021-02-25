@@ -8,31 +8,49 @@ const routes = [
         path: '/',
         name: 'Index',
         redirect: '/index',
+        meta:{
+            title:'index',
+        },
     },
 
     {
         path: '/index',
         component: () => import('../views/Index.vue'),
+        meta:{
+            title:'index',
+        },
         children: [
             {
                 path: '/',
                 name: 'LoginTypeSelect',
+                meta:{
+                    title:'index',
+                },
                 component: () => import('../views/LoginTypeSelect.vue')
             },
 
             {
                 path: '/platformSelect',
                 name: 'PlatformSelect',
-                component: () => import('../views/PlatformSelect.vue')
+                component: () => import('../views/PlatformSelect.vue'),
+                meta:{
+                    title:'platformSelect',
+                },
             },
             {
                 path: '/corporationManagerLogin',
                 name: 'CorporationManagerLogin',
-                component: () => import('../views/CorporationManagerLogin.vue')
+                component: () => import('../views/CorporationManagerLogin.vue'),
+                meta:{
+                    title:'corporationManagerLogin',
+                },
             },
             {
                 path: '/orgSelect',
                 name: 'OrgSelect',
+                meta:{
+                    title:'orgSelect',
+                },
                 component: () => import('../views/OrgSelect.vue')
             },
         ]
@@ -40,32 +58,53 @@ const routes = [
     {
         path: '/home',
         component: () => import('../views/Home.vue'),
+        meta:{
+            title:'home',
+        },
         children: [
             {
                 path: '/',
+                meta:{
+                    title:'linkedRepo',
+                },
                 redirect: '/linkedRepo'
             },
             {
                 path: '/linkedRepo',
                 name: 'LinkedRepo',
+                meta:{
+                    title:'linkedRepo',
+                },
                 component: () => import('../views/LinkedRepo.vue')
             },
             {
                 path: '/corporationList',
                 name: 'CorporationList',
+                meta:{
+                    title:'corporationList',
+                },
                 component: () => import('../views/CorporationList.vue')
             },
             {
                 path: '/bind-cla',
                 component: () => import('../views/ConfigCla.vue'),
+                meta:{
+                    title:'bind-cla',
+                },
                 children: [
                     {
                         path: '/',
                         redirect: '/config-org',
+                        meta:{
+                            title:'bind-cla',
+                        },
                     },
                     {
                         path: '/config-org',
                         name: 'ConfigOrg',
+                        meta:{
+                            title:'bind-cla',
+                        },
                         component: () => import('../views/ConfigOrg.vue')
                     },
                     {
@@ -100,6 +139,9 @@ const routes = [
                     {
                         path: '/addIndividualUrl',
                         name: 'AddIndividualUrl',
+                        meta:{
+                            title:'addIndividualCla',
+                        },
                         component: () => import('../views/AddIndividualUrl.vue')
                     },
                 ]
@@ -115,6 +157,9 @@ const routes = [
                     {
                         path: '/addCorpUrl',
                         name: 'AddCorpUrl',
+                        meta:{
+                            title:'addCorpCla',
+                        },
                         component: () => import('../views/AddCorpUrl.vue')
                     },
                 ]
@@ -132,6 +177,9 @@ const routes = [
             {
                 path: '/employeeList',
                 name: 'EmployeeList',
+                meta:{
+                    title:'employeeList',
+                },
                 component: () => import('../views/EmployeeList.vue'),
             },]
     },
@@ -146,27 +194,42 @@ const routes = [
             {
                 path: '/managerList',
                 name: 'ManagerList',
+                meta:{
+                    title:'managerList',
+                },
                 component: () => import('../views/ManagerList.vue'),
             },
             {
                 path: '/createManager',
                 name: 'CreateManager',
+                meta:{
+                    title:'createManager',
+                },
                 component: () => import('../views/CreateManager.vue'),
             },
             {
                 path: '/resetPassword',
                 name: 'resetPassword',
+                meta:{
+                    title:'resetPassword',
+                },
                 component: () => import('../views/ResetPassword.vue'),
             },]
     },
     {
         path: '/sign/:params',
         name: 'SignType',
+        meta:{
+            title:'sign',
+        },
         component: () => import('../views/SignType.vue')
     },
     {
         path: '/sign/:params/:orgAddress',
         name: 'SignType_back',
+        meta:{
+            title:'sign',
+        },
         component: () => import('../views/SignType.vue')
     },
 
@@ -174,22 +237,34 @@ const routes = [
     {
         path: '/privacy',
         name: 'Privacy',
+        meta:{
+            title:'privacy',
+        },
         component: () => import('../views/Privacy.vue')
     },
 
     {
         path: '/sign-cla',
         name: 'SignCla',
+        meta:{
+            title:'sign-cla',
+        },
         component: () => import('../views/SignCla.vue')
     },
     {
         path: '/findPwd',
         name: 'FindPwd',
+        meta:{
+            title:'findPwd',
+        },
         component: () => import('../views/FindPwd.vue')
     },
     {
         path: '*',
         name: 'ErrorPath',
+        meta:{
+            title:'ErrorPath',
+        },
         component: () => import('../views/ErrorPath.vue')
     },
 
@@ -203,6 +278,9 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
     window.scrollTo(0, 0);
+    if (to.meta.title) {
+        document.title = to.meta.title
+    }
     if (from.path === '/resetPassword') {
         if (to.path === '/corporationManagerLogin') {
             next()
