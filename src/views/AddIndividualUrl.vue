@@ -69,32 +69,32 @@
                         </div>
                         <div>
                             <el-row class="margin-top-1rem" type="flex" align="middle" :gutter="20">
-                                <el-col :span="6">
+                                <el-col :span="5">
                                     {{$t('org.config_cla_check_fields_title_title')}}
                                 </el-col>
-                                <el-col :span="6">
+                                <el-col :span="5">
                                     {{$t('org.config_cla_check_fields_type_title')}}
                                 </el-col>
-                                <el-col :span="6">
+                                <el-col :span="5">
                                     {{$t('org.config_cla_check_fields_describe_title')}}
                                 </el-col>
-                                <el-col :span="6" style="height: 100%">
+                                <el-col :span="5" style="height: 100%">
                                     {{$t('org.config_cla_check_fields_require_title')}}
                                 </el-col>
                             </el-row>
                             <el-row style="padding: 0.5rem 0;" type="flex" align="middle" :gutter="20"
                                     v-for="(item,index) in individualMetadataArr">
-                                <el-col :span="6">
+                                <el-col :span="5">
                                     <el-input disabled="" v-model="item.title" size="medium" readonly="">
                                     </el-input>
                                 </el-col>
-                                <el-col :span="6">
+                                <el-col :span="5">
                                     <el-input disabled="" v-model="item.type" size="medium" readonly></el-input>
                                 </el-col>
-                                <el-col :span="6">
+                                <el-col :span="5">
                                     <el-input disabled="" v-model="item.description" size="medium" readonly></el-input>
                                 </el-col>
-                                <el-col :span="6" style="height: 100%">
+                                <el-col :span="5" style="height: 100%">
                                     <el-checkbox v-model="item.required" disabled="">
                                         {{$t('org.config_cla_fields_required')}}
                                     </el-checkbox>
@@ -104,13 +104,13 @@
                         <div>
                             <el-row style="padding: 0.5rem 0;" type="flex" align="middle" :gutter="20"
                                     v-for="(item,index) in individualCustomMetadataArr">
-                                <el-col :span="6">
+                                <el-col :span="5">
                                     <el-input v-model="item.title" size="medium"
                                               :placeholder="$t('org.config_cla_fields_title_placeholder')">
                                     </el-input>
                                 </el-col>
-                                <el-col :span="6">
-                                    <el-select disabled="" style="width: 100%" v-model="item.type"
+                                <el-col :span="5">
+                                    <el-select :disabled="!add_bind_first" style="width: 100%" v-model="item.type"
                                                :placeholder="$t('org.config_cla_fields_type_placeholder')"
                                                size="medium">
                                         <el-option
@@ -121,14 +121,18 @@
                                         </el-option>
                                     </el-select>
                                 </el-col>
-                                <el-col :span="6" style="height: 100%">
+                                <el-col :span="5" style="height: 100%">
                                     <el-input v-model="item.description" size="medium"
                                               :placeholder="$t('org.config_cla_fields_desc_placeholder')"></el-input>
                                 </el-col>
-                                <el-col :span="6" style="height: 100%">
-                                    <el-checkbox disabled="" v-model="item.required">
+                                <el-col :span="5" style="height: 100%">
+                                    <el-checkbox :disabled="!add_bind_first" v-model="item.required">
                                         {{$t('org.config_cla_fields_required')}}
                                     </el-checkbox>
+                                </el-col>
+                                <el-col v-show="add_bind_first" :span="4">
+                                    <button class="add_button" @click="addRow(index)">+</button>
+                                    <button class="deleteBt" @click="myDeleteRow(index)">-</button>
                                 </el-col>
                             </el-row>
                         </div>
@@ -154,6 +158,9 @@
             ReLoginDialog,
         },
         computed: {
+            add_bind_first() {
+                return this.$store.state.add_bind_first
+            },
             reTryVisible() {
                 return this.$store.state.reTryDialogVisible
             },
@@ -164,7 +171,15 @@
                 return this.$store.state.dialogMessage
             },
             individualCustomMetadataArr() {
-                return this.$store.state.individualCustomMetadataArr
+                if (this.$store.state.add_bind_first) {
+                    if (this.$store.state.individualCustomMetadataArr && this.$store.state.individualCustomMetadataArr.length) {
+                        return this.$store.state.individualCustomMetadataArr
+                    } else {
+                        return this.initIndividualCustomMetadata;
+                    }
+                } else {
+                    return this.$store.state.individualCustomMetadataArr
+                }
             },
             cla_link_individual: {
                 get() {
@@ -189,10 +204,31 @@
                 dataTypeOptions: DATATYPEOPTIONS,
                 languageOptions: [{value: 'english', label: 'English'}, {value: 'chinese', label: '中文'}],
                 individualMetadataArr: INDIVIDUALMETADATAARR_EN,
-                initIndividualCustomMetadata: INITINDIVIDUALCUSTOMMETADATA,
+                initIndividualCustomMetadata: INITCUSTOMMETADATA,
             }
         },
         methods: {
+            addRow(index) {
+                let metadata = this.individualCustomMetadataArr;
+                metadata.splice(index + 1, 0, {
+                    title: '',
+                    type: '',
+                    description: '',
+                    required: false,
+                });
+                this.$store.commit('setIndividualCustomMetadataArr', metadata)
+            },
+            myDeleteRow(index) {
+                let metadata = this.individualCustomMetadataArr;
+                if (metadata.length === 1) {
+                    metadata[0].type = '';
+                    metadata[0].title = '';
+                    metadata[0].description = ''
+                } else {
+                    metadata.splice(index, 1);
+                }
+                this.$store.commit('setIndividualCustomMetadataArr', metadata)
+            },
             initMetadata(lang) {
                 if (lang === 'chinese') {
                     this.individualMetadataArr = INDIVIDUALMETADATAARR_ZH

@@ -240,7 +240,12 @@
                 return this.$store.state.chooseOrg
             },
             orgAlias() {
-                return this.$store.state.orgAlias
+                console.log(this.$store.state.orgAlias);
+                if (this.$store.state.orgAlias) {
+                    return this.$store.state.orgAlias
+                } else {
+                    return this.$store.state.chooseOrg
+                }
             },
             repo() {
                 return this.$store.state.chooseRepo
@@ -371,8 +376,7 @@
                     method: 'post',
                     data: formData,
                 }).then(res => {
-                    this.$message.closeAll();
-                    this.$message.success('success');
+                    util.successMessage(this)
                     util.clearSession(this);
                     this.$router.push('/corporationList')
                 }).catch(err => {
@@ -489,8 +493,7 @@
                     method: 'post',
                     data: formData,
                 }).then(res => {
-                    this.$message.closeAll();
-                    this.$message.success('success');
+                    util.successMessage(this);
                     this.$router.push('/home')
                 }).catch(err => {
                     if (err.data && err.data.hasOwnProperty('data')) {

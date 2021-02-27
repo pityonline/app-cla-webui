@@ -323,13 +323,13 @@
                             case 'cla.missing_token':
                                 this.$store.commit('setOrgReLogin', {
                                     dialogVisible: true,
-                                    dialogMessage: this.$t('tips.invalid_token'),
+                                    dialogMessage: this.$t('tips.missing_token'),
                                 });
                                 break;
                             case 'cla.expired_token':
                                 this.$store.commit('setOrgReLogin', {
                                     dialogVisible: true,
-                                    dialogMessage: this.$t('tips.missing_token'),
+                                    dialogMessage: this.$t('tips.invalid_token'),
                                 });
                                 break;
                             case 'cla.unknown_token':
@@ -464,8 +464,7 @@
             },
             handleSuccess(file, fileList) {
                 this.fileList = []
-                this.$message.closeAll()
-                this.$message.success('success')
+                util.successMessage(this);
                 this.uploadOrgDialogVisible = false
             },
             handleRemove(file, fileList) {
@@ -522,8 +521,7 @@
                     url: `${url.unLinkRepository}/${this.unlinkId}`,
                     method: 'delete',
                 }).then(res => {
-                    this.$message.closeAll();
-                    this.$message.success('success');
+                    util.successMessage(this);
                     this.unLinkDialogVisible = false;
                     this.getLinkedRepoList()
                 }).catch(err => {

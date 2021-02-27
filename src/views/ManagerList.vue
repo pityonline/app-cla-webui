@@ -1,7 +1,5 @@
 <template>
-
     <el-row id="userList">
-
         <el-col>
             <p id="tabName">{{$t('header.manager')}}</p>
             <el-row class="tableBox">
@@ -9,7 +7,6 @@
                     <el-row>
                         <el-col align="left">
                             <button class="button" @click="createManager">{{$t('header.createManager')}}</button>
-                            <!--<button class="button" @click="multipleChoice=true">{{$t('corp.batch')}}</button>-->
                         </el-col>
                     </el-row>
                     <el-row>
@@ -64,29 +61,11 @@
                     </el-row>
                 </el-col>
             </el-row>
-
             <corpReLoginDialog :message="corpReLoginMsg" :dialogVisible="corpReLoginDialogVisible"></corpReLoginDialog>
             <reTryDialog :message="corpReLoginMsg" :dialogVisible="corpReTryDialogVisible"></reTryDialog>
+            <DeleteDialog :deleteVisible="deleteUserVisible" @delete="submitDeleteManager"
+                          @cancel="cancelDeleteManager"></DeleteDialog>
         </el-col>
-
-
-        <el-dialog
-                width="20%"
-                title=""
-                align="center"
-                :show-close="false"
-                :visible.sync="deleteUserVisible">
-            <el-row align="center">
-                {{$t('corp.deleteTips')}}
-            </el-row>
-            <el-row align="center" class="marginTop1rem contentTitle">
-
-                <button class="deleteBt" @click="submit()">{{$t('corp.yes')}}</button>
-                <button class="cancelBt" @click="deleteUserVisible=false">{{$t('corp.no')}}</button>
-            </el-row>
-
-        </el-dialog>
-
     </el-row>
 
 </template>
@@ -95,8 +74,10 @@
     import * as url from '../util/api'
     import {mapActions} from 'vuex'
     import http from '../util/http'
+    import * as util from '../util/util'
     import corpReLoginDialog from '../components/CorpReLoginDialog'
     import reTryDialog from '../components/ReTryDialog'
+    import DeleteDialog from '../components/DeleteDialog'
 
     export default {
         name: "UserList",
@@ -120,7 +101,8 @@
         },
         components: {
             corpReLoginDialog,
-            reTryDialog
+            reTryDialog,
+            DeleteDialog,
         },
         data() {
             return {
@@ -137,6 +119,13 @@
         },
         methods: {
             ...mapActions(['setUserLimitAct']),
+            submitDeleteManager() {
+                this.deleteUserVisible = false;
+                this.deleteManager();
+            },
+            cancelDeleteManager() {
+                this.deleteUserVisible = false;
+            },
             createManager() {
                 this.$router.push('/createManager');
             },
@@ -158,7 +147,6 @@
                     this.emails.push({email: row.email})
                 }
                 this.deleteUserVisible = true
-
             },
             getEmployeeManager() {
                 http({
@@ -210,7 +198,7 @@
                     }
                 })
             },
-            submit() {
+            deleteManager() {
                 let obj = {
                     managers: this.emails
                 };
@@ -219,13 +207,19 @@
                     method: 'delete',
                     data: obj,
                 }).then(res => {
+                    util.successMessage(this);
                     this.getEmployeeManager();
-                    this.deleteUserVisible = false
                 }).catch(err => {
                     if (err.data && err.data.hasOwnProperty('data')) {
                         switch (err.data.data.error_code) {
                             case 'cla.invalid_token':
                                 this.$store.commit('errorSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.invalid_token'),
+                                });
+                                break;
+                            case 'cla.expired_token':
+                                this.$store.commit('setSignReLogin', {
                                     dialogVisible: true,
                                     dialogMessage: this.$t('tips.invalid_token'),
                                 });
@@ -290,43 +284,8 @@
             border-radius: 1.5rem;
         }
 
-        & .marginTop1rem {
-            margin-top: 1rem;
-        }
-
         & .el-dialog {
             border-radius: 1rem;
-        }
-
-        & .cancelBt {
-            width: 5rem;
-            height: 2rem;
-            border-radius: 1rem;
-            border: 1px solid black;
-            color: black;
-            font-size: 1rem;
-            cursor: pointer;
-            background-color: white;
-            margin-left: 1rem;
-        }
-
-        & .cancelBt:focus {
-            outline: none;
-        }
-
-        & .deleteBt {
-            width: 5rem;
-            height: 2rem;
-            border-radius: 1rem;
-            border: none;
-            color: white;
-            font-size: 1rem;
-            cursor: pointer;
-            background: linear-gradient(to right, #FF9D58, #E22424);
-        }
-
-        & .deleteBt:focus {
-            outline: none;
         }
 
         & .button {
@@ -352,7 +311,6 @@
             font-size: 2rem;
             text-align: left;
         }
-
 
         & .el-checkbox__inner {
             border: 1px solid #319E55;

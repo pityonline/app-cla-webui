@@ -79,6 +79,7 @@
             <el-tab-pane :label="$t('org.individual_cla')" name="second" class="margin-top-1rem">
                 <div class="tableStyle">
                     <el-table
+                            v-if="individualClaData.length"
                             :empty-text="$t('corp.no_data')"
                             :data="individualClaData"
                             class="tableClass"
@@ -108,6 +109,9 @@
                                     </span>
                                     <el-dropdown-menu slot="dropdown">
                                         <!--<el-dropdown-item>{{$t('org.modify_field')}}</el-dropdown-item>-->
+                                        <el-dropdown-item @click.native="clickDeleteCla(scope.row,'individual')">
+                                            {{$t('org.delete_cla')}}
+                                        </el-dropdown-item>
                                         <el-dropdown-item @click.native="addIndividualCla(scope.row)">
                                             {{$t('org.add_cla_for_other_language')}}
                                         </el-dropdown-item>
@@ -116,6 +120,7 @@
                             </template>
                         </el-table-column>
                     </el-table>
+                    <el-button v-else @click="createIndividualCla">{{$t('org.addIndividualCla')}}</el-button>
                 </div>
             </el-tab-pane>
             <el-tab-pane :label="$t('org.corporation_cla')" name="third" class="margin-top-1rem">
@@ -172,6 +177,9 @@
                                         <!--<el-dropdown-item>-->
                                         <!--{{$t('org.modify_field')}}-->
                                         <!--</el-dropdown-item>-->
+                                        <el-dropdown-item @click.native="clickDeleteCla(scope.row,'corporation')">
+                                            {{$t('org.delete_cla')}}
+                                        </el-dropdown-item>
                                         <el-dropdown-item @click.native="addCorpCla(scope.row)">
                                             {{$t('org.add_cla_for_other_language')}}
                                         </el-dropdown-item>
@@ -179,13 +187,11 @@
                                 </el-dropdown>
                             </template>
                         </el-table-column>
-
                     </el-table>
                     <el-button v-else @click="createCorpCla">{{$t('org.addCorpCla')}}</el-button>
                 </div>
             </el-tab-pane>
         </el-tabs>
-
         <!--<div class="paginationClass">-->
         <!--<el-pagination-->
         <!--background-->
@@ -234,11 +240,8 @@
                             </el-upload>
                         </el-form-item>
                     </el-form>
-
-
                 </div>
             </div>
-
         </el-dialog>
         <el-dialog
                 top="5vh"
@@ -247,13 +250,13 @@
             <div class="dialogContent">
                 {{$t('org.resend_email_message')}}
                 <div class="dialogBtBox">
-                    <button class="button" @click="resendPDF">{{$t('corp.yes')}}
+                    <button class="button_submit" @click="resendPDF">{{$t('corp.yes')}}
                     </button>
                     <button class="cancelBt" @click="resendEmailDialogVisible=false">{{$t('corp.no')}}</button>
                 </div>
             </div>
-
         </el-dialog>
+        <DeleteDialog :deleteVisible="deleteVisible" @delete="submitDeleteCla" @cancel="cancelDeleteCla"></DeleteDialog>
         <ReTryDialog :dialogVisible="reTryDialogVisible" :message="reLoginMsg"></ReTryDialog>
         <ReLoginDialog :dialogVisible="reLoginDialogVisible" :message="reLoginMsg"></ReLoginDialog>
     </div>
@@ -266,6 +269,7 @@
     import http from '../util/http'
     import ReLoginDialog from '../components/ReLoginDialog'
     import ReTryDialog from '../components/ReTryDialog'
+    import DeleteDialog from '../components/DeleteDialog'
     import download from 'downloadjs'
 
     export default {
@@ -273,6 +277,7 @@
         components: {
             ReTryDialog,
             ReLoginDialog,
+            DeleteDialog,
         },
         computed: {
             platform() {
@@ -290,6 +295,9 @@
         },
         data() {
             return {
+                delete_apply: '',
+                deleteRow: '',
+                deleteVisible: false,
                 file_size: SIGNATURE_FILE_MAX_SIZE,
                 uploadLoading: false,
                 individualClaData: [],
@@ -322,25 +330,102 @@
         },
         inject: ['setClientHeight'],
         methods: {
+            submitDeleteCla() {
+                this.deleteVisible = false;
+                this.deleteCla(this.deleteRow)
+            },
+            cancelDeleteCla() {
+                this.deleteVisible = false;
+            },
+            clickDeleteCla(row, apply_to) {
+                this.delete_apply = apply_to;
+                this.deleteRow = row;
+                this.deleteVisible = true;
+            },
+            deleteCla(row) {
+                http({
+                    url: `${url.delCla}/${this.$store.state.corpItem.link_id}/${this.delete_apply}/${row.language}`,
+                    method: 'delete'
+                }).then(res => {
+                    util.successMessage(this);
+                    this.getIndividualClaInfo()
+                }).catch(err => {
+                    if (err.data && err.data.hasOwnProperty('data')) {
+                        switch (err.data.data.error_code) {
+                            case 'cla.invalid_token':
+                                this.$store.commit('errorSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.invalid_token'),
+                                });
+                                break;
+                            case 'cla.expired_token':
+                                this.$store.commit('setSignReLogin', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.invalid_token'),
+                                });
+                                break;
+                            case 'cla.missing_token':
+                                this.$store.commit('errorSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.missing_token'),
+                                });
+                                break;
+                            case 'cla.unknown_token':
+                                this.$store.commit('errorSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.unknown_token'),
+                                });
+                                break;
+                            case 'cla.cla_is_used':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.cla_is_used'),
+                                });
+                                break;
+                            case 'cla.system_error':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.system_error'),
+                                });
+                                break;
+                            default :
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.unknown_error'),
+                                });
+                                break;
+                        }
+                    } else {
+                        this.$store.commit('errorCodeSet', {
+                            dialogVisible: true,
+                            dialogMessage: this.$t('tips.system_error'),
+                        })
+                    }
+                })
+            },
             createdAdmin(param) {
                 if (param.row.admin_added) {
-                    return 'mark-row'
+                    return 'mark-row-green'
+                } else if (param.row.pdf_uploaded) {
+                    return 'mark-row-orange'
                 }
             },
             createCorpCla() {
-                this.$router.push('/addCorpCla');
+                this.$store.commit('setAddBindFirst', true);
                 this.setCheckInfo();
+                this.$router.push('/addCorpCla');
+            },
+            createIndividualCla() {
+                this.$store.commit('setAddBindFirst', true);
+                this.setCheckInfo();
+                this.$router.push('/addIndividualCla');
             },
             addIndividualCla(row) {
                 this.$router.push('/addIndividualCla');
                 this.setIndividualPD(row)
             },
             setIndividualPD(row) {
-                this.$store.commit('setChooseOrg', this.$store.state.corpItem.org_id);
-                this.$store.commit('setChooseRepo', this.$store.state.corpItem.repo_id);
-                this.$store.commit('setOrgAlias', this.$store.state.corpItem.org_alias);
-                this.$store.commit('setEmail', this.$store.state.corpItem.org_email);
-                this.$store.commit('setBindType', 'add-bind');
+                this.setCheckInfo();
                 if (row.fields.length > 3) {
                     let data = [];
                     row.fields.forEach((item, index) => {
@@ -358,15 +443,15 @@
                 }
             },
             addCorpCla(row) {
-                this.$router.push('/addCorpCla');
                 this.setCorpPD(row)
+                this.$router.push('/addCorpCla');
             },
             setCheckInfo() {
+                this.$store.commit('setBindType', 'add-bind');
                 this.$store.commit('setChooseOrg', this.$store.state.corpItem.org_id);
                 this.$store.commit('setChooseRepo', this.$store.state.corpItem.repo_id);
                 this.$store.commit('setOrgAlias', this.$store.state.corpItem.org_alias);
                 this.$store.commit('setEmail', this.$store.state.corpItem.org_email);
-                this.$store.commit('setBindType', 'add-bind');
             },
             setCorpPD(row) {
                 this.setCheckInfo();
@@ -404,6 +489,12 @@
                         switch (err.data.data.error_code) {
                             case 'cla.invalid_token':
                                 this.$store.commit('errorSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.invalid_token'),
+                                });
+                                break;
+                            case 'cla.expired_token':
+                                this.$store.commit('setSignReLogin', {
                                     dialogVisible: true,
                                     dialogMessage: this.$t('tips.invalid_token'),
                                 });
@@ -806,7 +897,7 @@
                     this.clearFileList();
                     this.uploadLoading.close();
                     this.uploadDialogVisible = false;
-                    this.openSuccessMessage();
+                    util.successMessage(this);
                     this.getCorporationInfo()
                 }).catch(err => {
                     if (err.data && err.data.hasOwnProperty('data')) {
@@ -869,7 +960,7 @@
             beforeUpload(file) {
             },
             handleChange(file, fileList) {
-                let max_size = 2 * 1024 * 1024;
+                let max_size = this.file_size * 1024 * 1024;
                 if (/.(PDF|pdf)$/.test(file.name)) {
                     if (file.size < max_size) {
                         this.fileList.push(file);
@@ -919,10 +1010,6 @@
                 this.resendEmail = email;
                 this.resendEmailDialogVisible = true;
             },
-            openSuccessMessage() {
-                this.$message.closeAll();
-                this.$message.success(this.$t('org.success'));
-            },
             resendPDF() {
                 let email = this.resendEmail;
                 let resend_url = '';
@@ -932,7 +1019,7 @@
                     method: 'post',
                 }).then(res => {
                     this.resendEmailDialogVisible = false;
-                    this.openSuccessMessage();
+                    util.successMessage(this)
                 }).catch(err => {
                     if (err.data && err.data.hasOwnProperty('data')) {
                         switch (err.data.data.error_code) {
@@ -991,7 +1078,7 @@
                     url: `${url.corporationManager}/${this.$store.state.corpItem.link_id}/${email}`,
                     method: 'put',
                 }).then(res => {
-                    this.openSuccessMessage();
+                    util.successMessage(this);
                     this.getCorporationInfo()
                 }).catch(err => {
                     if (err.data && err.data.hasOwnProperty('data')) {
@@ -1066,38 +1153,6 @@
     #corporationList {
         padding-top: 3rem;
 
-        & .button {
-            width: 6rem;
-            height: 2rem;
-            border-radius: 1rem;
-            border: none;
-            color: white;
-            font-size: 1rem;
-            cursor: pointer;
-            background: linear-gradient(to right, #97DB30, #319E55);
-            margin-bottom: 1rem;
-        }
-
-        & .button:focus {
-            outline: none;
-        }
-
-        .cancelBt {
-            width: 6rem;
-            height: 2rem;
-            border-radius: 1rem;
-            border: 1px solid black;
-            color: black;
-            font-size: 1rem;
-            cursor: pointer;
-            background-color: white;
-            margin-left: 1rem;
-        }
-
-        .cancelBt:focus {
-            outline: none;
-        }
-
         .margin-top-1rem {
             margin-top: 1rem;
         }
@@ -1130,18 +1185,6 @@
 
         .dialogBtBox {
             margin-top: 2rem;
-
-            button {
-                width: 4rem;
-            }
-
-            button:nth-of-type(2) {
-                margin-left: 3rem;
-            }
-        }
-
-        .dialogBt {
-
         }
 
         .el-button.is-disabled, .el-button.is-disabled:focus, .el-button.is-disabled:hover {

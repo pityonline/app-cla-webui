@@ -153,21 +153,41 @@
                 }).then(res => {
                     this.$router.replace('/config-email')
                 }).catch(err => {
-                    if (err.status === 404){
-                        this.$store.commit('setCustomVisible', {
-                            dialogVisible: true,
-                            dialogMessage: this.$t('tips.checkRepoMessage'),
-                        })
-                    }else{
-                        this.$store.commit('errorCodeSet', {
-                            dialogVisible: true,
-                            dialogMessage: this.$t('tips.system_error'),
-                        })
+                    switch (err.status) {
+                        case 401:
+                            if (err.data.message === GITEE_CHECK_REPO_401_ERROR_PRIVATE) {
+                                this.$store.commit('setCustomVisible', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.checkRepoMessage'),
+                                });
+                            } else if (err.data.message === GITEE_CHECK_REPO_401_ERROR_TOKEN_EXIST)
+                                this.$store.commit('setOrgReLogin', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.missing_token'),
+                                });
+                            break;
+                        case 403:
+                            this.$store.commit('setOrgReLogin', {
+                                dialogVisible: true,
+                                dialogMessage: this.$t('tips.missing_token'),
+                            });
+                            break;
+                        case 404:
+                            this.$store.commit('setCustomVisible', {
+                                dialogVisible: true,
+                                dialogMessage: this.$t('tips.checkRepoMessage'),
+                            });
+                            break;
+                        default:
+                            this.$store.commit('errorCodeSet', {
+                                dialogVisible: true,
+                                dialogMessage: this.$t('tips.system_error'),
+                            })
                     }
                 })
             },
             toConfigClaLink() {
-                if (this.org && this.org_alias) {
+                if (this.org) {
                     if (this.repo) {
                         this.checkRepo(this.org, this.repo);
                     } else {
@@ -254,11 +274,24 @@
                         this.$store.commit('setOrgOption', orgOptions)
                     }
                 }).catch(err => {
-                    if (err.status === 401) {
-                        this.$store.commit('setOrgReLogin', {
-                            dialogVisible: true,
-                            dialogMessage: this.$t('tips.not_authorize_group'),
-                        })
+                    switch (err.status) {
+                        case 401:
+                            this.$store.commit('setOrgReLogin', {
+                                dialogVisible: true,
+                                dialogMessage: this.$t('tips.not_authorize_group'),
+                            });
+                            break;
+                        case 403:
+                            this.$store.commit('setOrgReLogin', {
+                                dialogVisible: true,
+                                dialogMessage: this.$t('tips.invalid_token'),
+                            });
+                            break;
+                        default:
+                            this.$store.commit('errorCodeSet', {
+                                dialogVisible: true,
+                                dialogMessage: this.$t('tips.system_error'),
+                            })
                     }
                 })
             },

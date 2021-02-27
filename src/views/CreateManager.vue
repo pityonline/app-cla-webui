@@ -43,6 +43,7 @@
 <script>
     import * as url from '../util/api'
     import http from '../util/http'
+    import * as util from '../util/util'
     import corpReLoginDialog from '../components/CorpReLoginDialog'
     import reTryDialog from '../components/ReTryDialog'
 
@@ -201,8 +202,7 @@
                         method: 'post',
                         data: obj,
                     }).then(res => {
-                        this.$message.closeAll()
-                        this.$message.success(this.$t('tips.successTitle'))
+                        util.successMessage(this);
                         setTimeout(() => {
                             this.$router.push('/managerList')
                         }, 500)

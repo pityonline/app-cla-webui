@@ -29,6 +29,7 @@
 <script>
     import * as url from '../util/api'
     import http from '../util/http'
+    import * as util from '../util/util'
     import corpReLoginDialog from '../components/CorpReLoginDialog'
     import reTryDialog from '../components/ReTryDialog'
 
@@ -122,8 +123,7 @@
                     data: obj,
                 }).then(res => {
                     this.$store.commit('setPwdIsChanged', true);
-                    this.$message.closeAll();
-                    this.$message.success(this.$t('tips.successTitle'));
+                    util.successMessage(this);
                     if (this.$store.state.loginInfo.userInfo[0].role === 'manager') {
                         this.$router.push('/employeeList')
                     } else {

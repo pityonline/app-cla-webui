@@ -43,20 +43,20 @@
                                               size="small">
                                     </el-input>
                                 </el-form-item>
-                                <button class="marginTop1rem mobileBt"
+                                <button class="margin-top-1rem mobileBt"
                                         type="button"
                                         :disabled="sendBtTextFromLang!==$t('signPage.sendCode')"
                                         @click="sendCode()">{{sendBtTextFromLang}}
                                 </button>
                                 <div class="borderClass fontSize12"><span style="color: #F56C6C;">*</span>{{$t('signPage.requireText')}}
                                 </div>
-                                <div class="marginTop1rem fontSize12">
+                                <div class="margin-top-1rem fontSize12">
                                     <el-checkbox v-model="isRead"><span>{{$t('signPage.checkBoxText1')}}<span
                                             class="privacy" @click="">{{$t('signPage.privacy')}}</span>{{$t('signPage.checkBoxText2')}}<span
                                             class="privacy" @click="toIndex()">{{$t('signPage.claSignPlatform')}}</span>{{$t('signPage.checkBoxText3')}}</span>
                                     </el-checkbox>
                                 </div>
-                                <el-form-item label-width="0" class="marginTop1rem signBtBox">
+                                <el-form-item label-width="0" class="margin-top-1rem signBtBox">
                                     <button class="mobileBt" type="button"
                                             @click="submitForm('ruleForm')">
                                         {{$t('signPage.sign')}}
@@ -99,13 +99,13 @@
                                 </el-form-item>
                                 <div class="borderClass fontSize12"><span class="requiredIcon">*</span>{{$t('signPage.requireText')}}
                                 </div>
-                                <div class="marginTop1rem fontSize12">
+                                <div class="margin-top-1rem fontSize12">
                                     <el-checkbox v-model="isRead"><span>{{$t('signPage.checkBoxText1')}}<span
                                             class="privacy" @click="">{{$t('signPage.privacy')}}</span>{{$t('signPage.checkBoxText2')}}<span
                                             class="privacy" @click="toIndex()">{{$t('signPage.claSignPlatform')}}</span>{{$t('signPage.checkBoxText3')}}</span>
                                     </el-checkbox>
                                 </div>
-                                <el-form-item label-width="0" class="marginTop1rem signBtBox">
+                                <el-form-item label-width="0" class="margin-top-1rem signBtBox">
                                     <button class="button" type="button" @click="submitForm('ruleForm')">
                                         {{$t('signPage.sign')}}
                                     </button>
@@ -1293,10 +1293,6 @@
 
     .marginTop3rem {
         margin-top: 3rem;
-    }
-
-    .marginTop1rem {
-        margin-top: 1rem;
     }
 
     #claBox {

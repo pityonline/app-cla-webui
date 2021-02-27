@@ -52,17 +52,16 @@
                 <el-row class="authorize_desc">
                     <el-col :offset="2" :span="20">
                         <p class="align_center">{{$t('org.config_cla_email_authorize_desc')}}</p>
-                        <ul :class="{word_break:this.lang==='1'}">
+                        <ul class="align_left" :class="{word_break:this.lang==='1'}">
                             <li>{{$t('org.config_cla_email_authorize_desc1')}}</li>
                             <li>{{$t('org.config_cla_email_authorize_desc2')}}</li>
                             <li>{{$t('org.config_cla_email_authorize_desc3')}}</li>
                         </ul>
                     </el-col>
-
                 </el-row>
                 <div slot="footer" class="dialog-footer">
+                    <button class="button_submit" @click="authorizeEmail()">{{$t('org.confirm_remove')}}</button>
                     <button class="cancelBt" @click="emailDialogVisible = false">{{$t('org.cancel_remove')}}</button>
-                    <button class="email_button" @click="authorizeEmail()">{{$t('org.confirm_remove')}}</button>
                 </div>
             </div>
         </el-dialog>

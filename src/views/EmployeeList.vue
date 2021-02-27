@@ -108,36 +108,27 @@
                 </div>
             </el-tab-pane>
         </el-tabs>
-        <el-dialog
-                width="20%"
-                title=""
-                align="center"
-                :show-close="false"
-                :visible.sync="deleteUserVisible">
-            <el-row align="center">
-                {{$t('corp.deleteTips')}}
-            </el-row>
-            <el-row align="center" class="marginTop1rem contentTitle">
-                <button class="deleteBt" @click="submitDelete()">{{$t('corp.yes')}}</button>
-                <button class="cancelBt" @click="deleteUserVisible=false">{{$t('corp.no')}}</button>
-            </el-row>
-
-        </el-dialog>
         <corpReLoginDialog :message="corpReLoginMsg" :dialogVisible="corpReLoginDialogVisible"></corpReLoginDialog>
         <reTryDialog :message="corpReLoginMsg" :dialogVisible="corpReTryDialogVisible"></reTryDialog>
+        <DeleteDialog :deleteVisible="deleteUserVisible" @delete="submitDeleteEmployee"
+                      @cancel="cancelDeleteEmployee"></DeleteDialog>
     </div>
 </template>
 <script>
     import * as url from '../util/api'
     import http from '../util/http'
+    import * as util from '../util/util'
     import corpReLoginDialog from '../components/CorpReLoginDialog'
     import reTryDialog from '../components/ReTryDialog'
+    import DeleteDialog from '../components/DeleteDialog'
+
 
     export default {
         name: "EmployeeList",
         components: {
             corpReLoginDialog,
-            reTryDialog
+            reTryDialog,
+            DeleteDialog,
         },
         data() {
             return {
@@ -202,7 +193,11 @@
                 this.inactiveCurrentPage = page;
                 this.inactivePageData = this.getInactivePageData()
             },
-            submitDelete() {
+            cancelDeleteEmployee(){
+                this.deleteUserVisible = false;
+            },
+            submitDeleteEmployee() {
+                this.deleteUserVisible = false;
                 let obj = {enabled: this.deleteData.enabled};
                 http({
                     url: `${url.enableEmployee}/${this.deleteData.email}`,
@@ -210,9 +205,7 @@
                     data: obj,
                 }).then(res => {
                     this.getEmployee();
-                    this.deleteUserVisible = false;
-                    this.$message.closeAll();
-                    this.$message.success(this.$t('tips.successTitle'))
+                    util.successMessage(this);
                 }).catch(err => {
                     if (err.data && err.data.hasOwnProperty('data')) {
                         switch (err.data.data.error_code) {
@@ -260,7 +253,7 @@
                     cla_org_id: cla_org_id,
                     email: email,
                     enabled: enabled
-                }
+                };
                 this.deleteUserVisible = true
             },
             changeActive(cla_org_id, email, enabled) {

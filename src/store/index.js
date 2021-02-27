@@ -70,8 +70,13 @@ export default new Vuex.Store({
         sign_id: sessionStorage.getItem('sign_id') || undefined,
         bindType: sessionStorage.getItem('bindType') || undefined,
         addLang: sessionStorage.getItem('addLang') || undefined,
+        add_bind_first: sessionStorage.getItem('add_bind_first') || undefined,
     },
     mutations: {
+        setAddBindFirst(state, data){
+            state.add_bind_first = data;
+            sessionStorage.setItem('add_bind_first', data);
+        },
         setEmailErr(state, data) {
             state.emailErrVisible = data;
         },

@@ -200,8 +200,8 @@
                 dataTypeOptions: DATATYPEOPTIONS,
                 individualMetadataArr: INDIVIDUALMETADATAARR_EN,
                 corporationMetadataArr: CORPORATIONMETADATAARR_EN,
-                initIndividualCustomMetadata: INITINDIVIDUALCUSTOMMETADATA,
-                initCorpCustomMetadata: INITCORPCUSTOMMETADATA,
+                initIndividualCustomMetadata: INITCUSTOMMETADATA,
+                initCorpCustomMetadata: INITCUSTOMMETADATA,
             }
         },
         beforeRouteEnter(to, from, next) {

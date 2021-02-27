@@ -121,6 +121,37 @@
     outline: none;
 }
 
+.button_submit {
+    width: 5rem;
+    height: 2rem;
+    border-radius: 1rem;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    background: linear-gradient(to right, #97DB30, #319E55);
+    margin-bottom: 1rem;
+}
+
+.button_submit:focus {
+    outline: none;
+}
+
+.deleteBt {
+    width: 5rem;
+    height: 2rem;
+    border-radius: 1rem;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    background: linear-gradient(to right, #FF9D58, #E22424);
+}
+
+.deleteBt:focus {
+    outline: none;
+}
+
 .cancelBt {
     width: 5rem;
     height: 2rem;
@@ -130,7 +161,7 @@
     font-size: 1rem;
     cursor: pointer;
     background-color: white;
-    margin-right: 1rem;
+    margin-left: 3rem;
 }
 
 .cancelBt:focus {
@@ -156,8 +187,12 @@
     border-color: #319E55;
 }
 
-.el-table .mark-row {
+.el-table .mark-row-green {
     color: #319E55;
+}
+
+.el-table .mark-row-orange {
+    color: #FF9D58;
 }
 
 .tableClass {
@@ -216,4 +251,8 @@
 
 .margin-top-1rem {
     margin-top: 1rem;
+}
+
+.align_left {
+    text-align: left;
 }
