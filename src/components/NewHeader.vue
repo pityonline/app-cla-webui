@@ -32,7 +32,7 @@
                                     {{$t('header.resetPwd')}}
                                 </div>
                                 <div v-if="loginRole==='corp'&&role==='admin'" @click="handleCommand('f')">
-                                {{$t('header.corpCla')}}
+                                    {{$t('header.corpCla')}}
                                 </div>
                                 <div @click="handleCommand('g')">
                                     {{$t('header.loginOut')}}
@@ -80,6 +80,7 @@
 <script>
     import http from '../util/http'
     import * as url from '../util/api'
+
     export default {
         name: "NewHeader",
         data() {
@@ -102,6 +103,18 @@
             toIndex() {
                 if (this.$route.path === '/corporationManagerLogin' || this.$route.path === '/platformSelect') {
                     this.$router.push('/')
+                } else if (this.$route.path === '/corporationList' || this.$route.path === '/addCorpUrl' || this.$route.path === '/config-check'
+                    || this.$route.path === '/addIndividualUrl' || this.$route.path === '/config-org' || this.$route.path === '/config-email'
+                    || this.$route.path === '/config-cla-link' || this.$route.path === '/config-fields') {
+                    this.$router.push('/linkedRepo')
+                } else if (this.$route.path === '/createManager') {
+                    this.$router.push('/managerList')
+                } else if (this.$route.path === '/resetPassword') {
+                    if (this.$store.state.loginInfo.userInfo[0].role === 'manager') {
+                        this.$router.push('/employeeList')
+                    } else {
+                        this.$router.push('/managerList')
+                    }
                 }
             },
             openOrCloseMenu() {
@@ -163,7 +176,7 @@
                     responseType: 'blob',
                 }).then(res => {
                     if (res && res.data) {
-                        let blob = new Blob([(res.data)], { type: 'application/pdf' });
+                        let blob = new Blob([(res.data)], {type: 'application/pdf'});
                         let url = window.URL.createObjectURL(blob);
                         window.open(`../../static/pdf_source/web/viewer.html?file=${encodeURIComponent(url)}`)
                     }
@@ -282,26 +295,31 @@
 </script>
 
 <style scoped lang="less">
-    @media screen and (min-width:600px) and (max-width:1200px) {
-        .headerBox{
+    @media screen and (max-width: 1200px) {
+        .headerBox {
             width: 100%;
         }
     }
-    @media screen and (min-width:1200px){
-        .headerBox{
+
+    @media screen and (min-width: 1200px) {
+        .headerBox {
             width: 1200px;
             margin: auto;
         }
     }
-    .parentBox{
+
+    .parentBox {
         width: 100%;
         border-bottom: 2px solid #F2F2F2;
+
         .headerBox {
             padding: 0 1rem;
             height: 5.5rem;
-            .box{
+
+            .box {
                 cursor: pointer;
             }
+
             .visible {
                 visibility: hidden;
             }
@@ -366,10 +384,12 @@
                     cursor: pointer;
                     user-select: none;
                 }
+
                 & > div:not(:last-of-type) {
                     border-bottom: 1px solid black;
                 }
             }
+
             .mark {
                 height: 6px;
                 width: 6px;

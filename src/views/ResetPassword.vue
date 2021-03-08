@@ -8,11 +8,13 @@
                               v-model="ruleForm.oldPassword" @keydown.native="pressEnter"></el-input>
                 </el-form-item>
                 <el-form-item label="" prop="newPassword" label-width="0">
-                    <el-input :placeholder="$t('corp.input_new_pwd')" clearable="" type="password"
+                    <el-input :disabled="!haveOldPwd" :placeholder="$t('corp.input_new_pwd')" clearable=""
+                              type="password"
                               v-model="ruleForm.newPassword" @keydown.native="pressEnter"></el-input>
                 </el-form-item>
                 <el-form-item label="" prop="checkPwd" label-width="0">
-                    <el-input :placeholder="$t('corp.input_new_pwd_again')" clearable="" type="password"
+                    <el-input :disabled="!haveNewPwd" :placeholder="$t('corp.input_new_pwd_again')" clearable=""
+                              type="password"
                               v-model="ruleForm.checkPwd" @keydown.native="pressEnter"></el-input>
                 </el-form-item>
                 <el-form-item label-width="0">
@@ -62,18 +64,22 @@
             var validatePass = (rule, value, callback) => {
                 if (value === '') {
                     callback(new Error(this.$t('corp.input_old_pwd')));
-                } else if (value === this.ruleForm.newPassword) {
-                    callback(new Error(this.$t('corp.newPwd_diff_with_oldPwd')));
                 } else {
+                    this.haveOldPwd = true;
                     callback();
                 }
             };
             var validatePass2 = (rule, value, callback) => {
                 if (value === '') {
                     callback(new Error(this.$t('corp.input_new_pwd')));
+                    } else if (value.length < PWD_MIN_LENGTH || value.length > PWD_MAX_LENGTH) {
+                        callback(new Error(this.$t('corp.newPwd_length_err')));
+                    } else if (this.checkIllegalChar(value)) {
+                        callback(new Error(this.$t('corp.newPwd_contains_Illegal_character')));
                 } else if (value === this.ruleForm.oldPassword) {
                     callback(new Error(this.$t('corp.newPwd_diff_with_oldPwd')));
                 } else {
+                    this.haveNewPwd = true;
                     callback();
                 }
             };
@@ -87,6 +93,8 @@
                 }
             };
             return {
+                haveOldPwd: false,
+                haveNewPwd: false,
                 ruleForm: {
                     oldPassword: '',
                     newPassword: '',
@@ -107,6 +115,14 @@
             }
         },
         methods: {
+            checkIllegalChar(str) {
+                for (let char of str) {
+                    if (char.charCodeAt() > PWD_MAX_ASCII || char.charCodeAt() < PWD_MIN_ASCII) {
+                        return true
+                    }
+                }
+                return false
+            },
             pressEnter() {
                 if (event.keyCode === 13) {
                     this.submit('ruleForm')
@@ -150,11 +166,29 @@
                                     dialogMessage: this.$t('tips.unknown_token'),
                                 });
                                 break;
+                            case 'cla.expired_token':
+                                this.$store.commit('errorSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.invalid_token'),
+                                });
+                                break;
 
                             case 'cla.invalid_parameter':
                                 this.$store.commit('errorCodeSet', {
                                     dialogVisible: true,
                                     dialogMessage: this.$t('tips.invalid_parameter'),
+                                });
+                                break;
+                            case 'cla.too_short_or_long_password':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.newPwd_length_err'),
+                                });
+                                break;
+                            case 'cla.invalid_password':
+                                this.$store.commit('errorCodeSet', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.newPwd_contains_Illegal_character'),
                                 });
                                 break;
                             case 'cla.invalid_account_or_pw':

@@ -162,8 +162,8 @@
         .icon_back {
             background-color: white;
             border-radius: 1rem;
-            height: 12.5rem;
-            width: 14rem;
+            height: 12rem;
+            width: 12rem;
             box-shadow: 0 0 20px 10px #F3F3F3;
             display: flex;
             flex-direction: column;
@@ -173,7 +173,7 @@
         }
 
         .button {
-            width: 10rem;
+            width: 9rem;
             height: 4rem;
             border-radius: 2rem;
             border: none;

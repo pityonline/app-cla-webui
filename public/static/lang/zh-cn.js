@@ -25,6 +25,9 @@ module.exports = {
         individualStep2: '同意CLA签署平台对您授权账号的访问授权跳转至个人CLA签署页面',
         individualStep4: '收到个人CLA签署生效的邮件签署完成',
         admin_platform: '超级管理员后台',
+        not_support_corp:'暂不支持企业签署',
+        not_support_emp:'暂不支持员工签署',
+        not_support_individual:'暂不支持个人签署'
     },
     signPage: {
         claTitle: "贡献者许可协议",
@@ -130,6 +133,7 @@ module.exports = {
         link_exists: '该社区已经存在绑定信息',
         checkRepoMessage: '您输入的仓库不属于该组织或者该仓库为私有仓库或者该仓库不存在，是否继续？',
         cla_is_used: '该CLA已经被使用',
+        go_to_sign_employee_cla:'你所在的公司已经签署企业CLA，所以你只能签署员工CLA',
     },
     header: {
         home: '首页',
@@ -170,6 +174,8 @@ module.exports = {
         manager_email_same_with_admin: '不能添加超级管理员为员工管理员',
         select_community: '请选择要管理的社区',
         select_placeholder: '请选择',
+        newPwd_length_err:'新密码长度必须是6-16位',
+        newPwd_contains_Illegal_character:'新密码包含非法字符',
     },
     index: {
         org_login: '开源社区管理员',

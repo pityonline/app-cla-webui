@@ -25,6 +25,9 @@ module.exports = {
         individualStep2: 'Agree to access your authorize account on the CLA signing platform and go to the individual CLA signing page.',
         individualStep4: 'Receive an e-mail indicating that the the CLA is signed and activated.',
         admin_platform: ' Administrator platform ',
+        not_support_corp:'Corporation signing is not supported at the moment',
+        not_support_emp:'Employee signing is not supported at the moment',
+        not_support_individual:'Individual signing is not supported at the moment'
     },
     signPage: {
         claTitle: "Contributor License Agreement",
@@ -130,6 +133,7 @@ module.exports = {
         link_exists: 'Binding information already exists in this community',
         checkRepoMessage: 'The repository you entered does not belong to the organization, or the repository is private or does not exist. Do you want to continue?',
         cla_is_used: 'The cla has been used',
+        go_to_sign_employee_cla:'Your company has signed corporation CLA, so you can only sign employee cla',
     },
     header: {
         home: 'Home',
@@ -170,6 +174,8 @@ module.exports = {
         manager_email_same_with_admin: 'Administrator cannot be added as employee manager',
         select_community: 'Please select the community you want to manage',
         select_placeholder: 'select',
+        newPwd_length_err:'the length of password should be between 6 and 16',
+        newPwd_contains_Illegal_character:'The new password contains illegal characters',
     },
     index: {
         org_login: 'Opensource Community Manager',

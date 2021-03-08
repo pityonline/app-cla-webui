@@ -248,7 +248,7 @@
                 }
             },
             repo() {
-                return this.$store.state.chooseRepo
+                return this.$store.state.repo
             },
             cla_link_individual: {
                 get() {

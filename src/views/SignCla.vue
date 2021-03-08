@@ -542,7 +542,7 @@
             },
             setData(res, resolve) {
                 if (res && res.data.data) {
-                    if (res.data.data.clas) {
+                    if (res.data.data.clas && res.data.data.clas.length) {
                         this.signPageData = res.data.data.clas;
                         this.languageOptions = [];
                         this.link_id = res.data.data.link_id;
@@ -980,6 +980,12 @@
                                 this.$store.commit('setSignReLogin', {
                                     dialogVisible: true,
                                     dialogMessage: this.$t('tips.unauthorized_token'),
+                                });
+                                break;
+                            case 'cla.go_to_sign_employee_cla':
+                                this.$store.commit('setSignReLogin', {
+                                    dialogVisible: true,
+                                    dialogMessage: this.$t('tips.go_to_sign_employee_cla'),
                                 });
                                 break;
                             case 'cla.no_employee_manager':

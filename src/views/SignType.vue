@@ -26,17 +26,20 @@
                                         <el-col align="center" class="buttonBox">
                                             <div id="mobile_btBox">
                                                 <div>
-
-                                                    <button class="mobile_button" @click="submit('corporation')">
+                                                    <button :disabled="!isBindCorpCLA" class="mobile_button"
+                                                            @click="submit('corporation')">
                                                         {{ $t('signType.corpBt') }}
                                                     </button>
                                                 </div>
                                                 <div>
-                                                    <button class="mobile_button" @click="submit('employee')">
+                                                    <button :disabled="!isBindCorpCLA"
+                                                            class="mobile_button"
+                                                            @click="submit('employee')">
                                                         {{ $t('signType.empBt') }}
                                                     </button>
                                                 </div>
-                                                <button class="mobile_button" @click="submit('individual')">
+                                                <button class="mobile_button"
+                                                        @click="submit('individual')">
                                                     {{ $t('signType.individualBt') }}
                                                 </button>
                                             </div>
@@ -385,25 +388,38 @@
                                                 <div>
                                                     <el-tooltip :content="corpBtTooltip" placement="top" effect="light"
                                                                 popper-class="my_tooltip">
-                                                        <button class="button" @click="submit('corporation')">
-                                                            {{ $t('signType.corpBt') }}
-                                                        </button>
+                                                        <div>
+                                                            <button :disabled="!isBindCorpCLA" class="button"
+                                                                    @click="submit('corporation')">
+                                                                {{ $t('signType.corpBt') }}
+                                                            </button>
+                                                        </div>
+
                                                     </el-tooltip>
                                                 </div>
                                                 <div>
                                                     <el-tooltip :content="empBtTooltip" placement="top" effect="light"
                                                                 popper-class="my_tooltip">
-                                                        <button class="button" @click="submit('employee')">
-                                                            {{ $t('signType.empBt') }}
-                                                        </button>
+                                                        <div>
+                                                            <button :disabled="!isBindCorpCLA"
+                                                                    class="button"
+                                                                    @click="submit('employee')">
+                                                                {{ $t('signType.empBt') }}
+                                                            </button>
+                                                        </div>
+
                                                     </el-tooltip>
                                                 </div>
                                                 <el-tooltip :content="individualBtTooltip" placement="top"
                                                             effect="light"
                                                             popper-class="my_tooltip">
-                                                    <button class="button" @click="submit('individual')">
-                                                        {{ $t('signType.individualBt') }}
-                                                    </button>
+                                                    <div>
+                                                        <button class="button"
+                                                                @click="submit('individual')">
+                                                            {{ $t('signType.individualBt') }}
+                                                        </button>
+                                                    </div>
+
                                                 </el-tooltip>
                                             </div>
                                         </el-col>
@@ -753,10 +769,13 @@
     import * as util from '../util/util'
     import * as url from '../util/api'
     import http from '../util/http'
+    import sign_http from '../util/sign_http'
+    import _axios from '../util/_axios'
     import _cookie from 'js-cookie'
     import {mapActions} from 'vuex'
     import ReTryDialog from '../components/ReTryDialog'
     import EmailReTryDialog from '../components/EmailReTryDialog'
+
     export default {
         name: 'SignType',
         components: {
@@ -767,10 +786,18 @@
         },
         computed: {
             corpBtTooltip() {
-                return `${this.$t('signType.corpStep1_1')}${this.$t('signType.corpBt')}${this.$t('signType.corpStep1_2')}`
+                if (this.isBindCorpCLA) {
+                    return `${this.$t('signType.corpStep1_1')}${this.$t('signType.corpBt')}${this.$t('signType.corpStep1_2')}`
+                } else {
+                    return this.$t('signType.not_support_corp')
+                }
             },
             empBtTooltip() {
-                return `${this.$t('signType.empStep1_1')}${this.$t('signType.empBt')}${this.$t('signType.corpStep1_2')}`
+                if (this.isBindCorpCLA) {
+                    return `${this.$t('signType.empStep1_1')}${this.$t('signType.empBt')}${this.$t('signType.corpStep1_2')}`
+                } else {
+                    return this.$t('signType.not_support_emp')
+                }
             },
             individualBtTooltip() {
                 return `${this.$t('signType.individualStep1_1')}${this.$t('signType.individualBt')}${this.$t('signType.corpStep1_2')}`
@@ -790,6 +817,7 @@
         },
         data() {
             return {
+                isBindCorpCLA: false,
                 corpGuideIsOpen: false,
                 individualGuideIsOpen: false,
                 employeeGuideIsOpen: false,
@@ -912,6 +940,7 @@
                                 this.repo = ''
                             }
                             this.setRepoInfoAct({platform: this.platform, org_id: this.org, repo_id: this.repo});
+                            this.getSignPage(this.platform, this.org, this.repo, 'corporation')
                         }
                     } else {
                         this.$router.push({name: 'ErrorPath'})
@@ -920,8 +949,36 @@
                 }
 
             },
+            getSignPage(platform, org_id, repo_id, applyTo) {
+                let _url = '';
+                let _http = '';
+                if
+                (applyTo === 'individual') {
+                    _http = sign_http;
+                } else if (applyTo === 'corporation') {
+                    _http = _axios;
+                }
+                if (repo_id) {
+                    _url = `${url.getSignPage}/${platform}/${org_id}:${repo_id}/${applyTo}`
+                } else {
+                    _url = `${url.getSignPage}/${platform}/${org_id}/${applyTo}`
+                }
+                _http({
+                    url: _url,
+                }).then(res => {
+                    if (res && res.data.data && res.data.data.clas) {
+                        if (res.data.data.clas.length && applyTo === 'individual') {
+                            this.isBindIndividualCLA = true
+                        } else if (res.data.data.clas.length && applyTo === 'corporation') {
+                            this.isBindCorpCLA = true
+                        }
+                    }
+                }).catch(err => {
+                })
+            },
+
             submit(loginType) {
-                this.setLoginTypeAct(loginType)
+                this.setLoginTypeAct(loginType);
                 if (loginType === 'individual' || loginType === 'employee') {
                     http({
                         url: `${url.getAuthCodeUrl}/${this.platform}/sign`,
@@ -1152,8 +1209,13 @@
             margin: 1.2rem 0;
         }
 
-        .mobile_button:focus {
+        .button:focus, .mobile_button:focus {
             outline: none;
+        }
+
+        .button:disabled, .mobile_button:disabled {
+            outline: none;
+            background: #C0C4CC;
         }
 
         .button {
@@ -1167,26 +1229,6 @@
             cursor: pointer;
             background: linear-gradient(to right, #97DB30, #319E55);
             margin: 1.2rem 0;
-        }
-
-        .button:focus {
-            outline: none;
-        }
-
-        .disabledButton {
-            width: 15rem;
-            height: 4rem;
-            border-radius: 2rem;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            background-color: lightgrey;
-            margin: 1.2rem 0;
-        }
-
-        .disabledButton:focus {
-            outline: none;
         }
 
         .guideBox {
